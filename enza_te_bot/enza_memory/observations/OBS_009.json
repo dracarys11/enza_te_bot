@@ -1,0 +1,163 @@
+{
+ "schema_version": 1,
+ "artifact_id": "OBS_009",
+ "artifact_type": "OBSERVATION",
+ "created_at": "2026-09-07T02:39:09Z",
+ "status": "CANDIDATE",
+ "run_id": "WINGRUN_20260907_02",
+ "environment": {
+  "provider": "ZCode IAB",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "viewport": {
+   "width": 1280,
+   "height": 720
+  },
+  "url": {
+   "value": "https://shinycolors.enza.fun/produce",
+   "classification": "FACT",
+   "evidence_ids": ["r03_recover4_winghome_stable.png", "tab_url_read_recover4"]
+  },
+  "title": {
+   "value": "アイドルマスター シャイニーカラーズ",
+   "classification": "FACT",
+   "evidence_ids": ["tab_title_read_recover4"]
+  },
+  "canvas": {
+   "value": "canvas game",
+   "classification": "FACT",
+   "evidence_ids": ["r03_recover4_winghome_stable.png"]
+  },
+  "dom_available": {
+   "value": false,
+   "classification": "FACT",
+   "evidence_ids": ["r03_recover4_winghome_stable.png"]
+  },
+  "accessibility_available": {
+   "value": false,
+   "classification": "FACT",
+   "evidence_ids": ["r03_recover4_winghome_stable.png"]
+  }
+ },
+ "page_state": {
+  "label": "WING_HOME (produce resumed; S1 weeks=1; no dialogue chain, no choice overlay)",
+  "classification": "FACT",
+  "confidence": 0.95,
+  "evidence_ids": ["r03_recover4_winghome_stable.png", "r03_recover4_resume_dialog.png"]
+ },
+ "numeric_observations": [
+  {
+   "field": "season",
+   "value": "1 (W.I.N.G.編 ミドル)",
+   "classification": "FACT"
+  },
+  {
+   "field": "weeks_remaining",
+   "value": "1 (残り 1週)",
+   "classification": "FACT"
+  },
+  {
+   "field": "fan_target_rank_E",
+   "value": "CLEAR stamp visible on ファン人数 counter",
+   "classification": "FACT"
+  },
+  {
+   "field": "fans",
+   "value": "1169 (from 再開 dialog; on-frame counter partially covered by CLEAR stamp)",
+   "classification": "FACT"
+  },
+  {
+   "field": "stamina",
+   "value": "full (green bar)",
+   "classification": "FACT"
+  },
+  {
+   "field": "tension",
+   "value": "normal (smile icon)",
+   "classification": "FACT"
+  },
+  {
+   "field": "resume_dialog_stats",
+   "value": "Vo.417 Da.79 Vi.119 mental105 SP274 fans1169; シナリオ W.I.N.G.編 ミドル シーズン1/残り1週",
+   "classification": "FACT"
+  }
+ ],
+ "screenshot": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome_stable.png",
+ "screenshot_sha256": "11b0b16351d34088e3028004fb8675a4bd5e064999360c0c1e79a9112ea47825",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB)",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "captured_at": "2026-09-07T02:39:09Z",
+  "source_artifact_ids": [],
+  "integrity": {
+   "algorithm": "sha256",
+   "digest": "11b0b16351d34088e3028004fb8675a4bd5e064999360c0c1e79a9112ea47825"
+  }
+ },
+ "evidence_references": [
+  {
+   "evidence_id": "r03_recover4_resume_dialog.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png",
+   "captured_at": "2026-09-07T02:30:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {
+    "algorithm": "sha256",
+    "digest": "57edd710d24b4428cdc32d61bdf021889a0b23b43e42084cceee34b1ced1cb37"
+   }
+  },
+  {
+   "evidence_id": "r03_recover4_winghome.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome.png",
+   "captured_at": "2026-09-07T02:33:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {
+    "algorithm": "sha256",
+    "digest": "7d5b55a09fb4d2425a41b8b054ee227ec7eeefc72bce953eec1cf9e92082cd14"
+   }
+  },
+  {
+   "evidence_id": "r03_recover4_winghome_stable.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome_stable.png",
+   "captured_at": "2026-09-07T02:38:30Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {
+    "algorithm": "sha256",
+    "digest": "11b0b16351d34088e3028004fb8675a4bd5e064999360c0c1e79a9112ea47825"
+   }
+  },
+  {
+   "evidence_id": "tab_url_read_recover4",
+   "kind": "URL_READ",
+   "path": null,
+   "captured_at": "2026-09-07T02:38:30Z",
+   "source": "IAB tab.url -> https://shinycolors.enza.fun/produce",
+   "classification": "FACT",
+   "integrity": {
+    "algorithm": null,
+    "digest": null
+   }
+  },
+  {
+   "evidence_id": "tab_title_read_recover4",
+   "kind": "TITLE_READ",
+   "path": null,
+   "captured_at": "2026-09-07T02:39:09Z",
+   "source": "IAB tab.title -> アイドルマスター シャイニーカラーズ",
+   "classification": "FACT",
+   "integrity": {
+    "algorithm": null,
+    "digest": null
+   }
+  }
+ ],
+ "unknowns": [
+  "exact fan-gap number on WING_HOME counter is covered by the CLEAR stamp on-frame; 1169 fans is FACT from the 再開 dialog instead",
+  "whether the prior session's W8 pre-week dialogue chain had any unconsumed continuation besides the declined promise is UNKNOWN; fresh frames show no active chain"
+ ]
+}

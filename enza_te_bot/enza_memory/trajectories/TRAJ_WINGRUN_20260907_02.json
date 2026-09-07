@@ -1,0 +1,282 @@
+{
+ "schema_version": 1,
+ "artifact_id": "TRAJ_WINGRUN_20260907_02",
+ "artifact_type": "TRAJECTORY",
+ "created_at": "2026-09-07T02:39:09Z",
+ "status": "CANDIDATE",
+ "mission": {
+  "description": "WINGRUN_20260907_02 live WING produce (prior sessions) + interrupted-session recovery to stable WING_HOME boundary (this session, RECOVERY ONLY)",
+  "authority_reference": "enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl (run trajectory of record)",
+  "allowed_scope": [
+   "durable state reconstruction from filesystem",
+   "fresh browser observation",
+   "produce resume via プロデュース再開 dialog",
+   "non-business presentation dismissal (news page back)",
+   "reconciliation persistence at stable boundary"
+  ],
+  "forbidden_scope": [
+   "starting a new produce",
+   "executing the W8 weekly objective",
+   "modifying runtime/policy/Harness",
+   "retrying any prior semantic action"
+  ]
+ },
+ "steps": [
+  {
+   "step_id": "r02_prior_run_boundary",
+   "timestamp": "2026-09-07T01:13:00Z",
+   "provenance": {
+    "classification": "inference",
+    "producer": "ZCode recovery session (durable artifact read)",
+    "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+    "captured_at": "2026-09-07T02:39:09Z",
+    "source_artifact_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl"],
+    "integrity": {"algorithm": null, "digest": null}
+   },
+   "before_observation_id": null,
+   "intent_id": null,
+   "gate_decision_id": null,
+   "permission_id": null,
+   "execution": {
+    "performed": false,
+    "provider_session_id": null,
+    "permission_consumed": false,
+    "result": "NO_ACTION",
+    "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl"]
+   },
+   "after_observation_id": null,
+   "verification": {
+    "result": "UNKNOWN",
+    "independent": false,
+    "evidence_ids": []
+   },
+   "claims": [
+    {
+     "claim": "Prior live sessions committed S1W1..S1W7 (all VOCAL, all gate ALLOW) ending at durable boundary: S1 weeks=1, fans=1169 (E target cleared, rank D), W8 promise TWO_CHOICE declined per fixed policy, W8 weekly action NEVER committed; three screenshot-pipeline stalls recovered via new-tab+reload with server state matching durable each time (failure file iab_screenshot_pipeline_stall_001.json); run left with no run_completion_record and no memory_index entry (session interrupted before closure).",
+     "classification": "INFERENCE",
+     "confidence": 0.85,
+     "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl", "enza_memory/failures/iab_screenshot_pipeline_stall_001.json"]
+    }
+   ],
+   "unknowns": [
+    "last pre-interruption visual evidence (r02_recover3_state.png 09:22 local) shows title/loading; the prior session's exact final UI state before process restart is UNKNOWN",
+    "whether any W8 dialogue-chain line besides the declined promise remained unconsumed server-side is UNKNOWN; fresh frames this session show no active chain"
+   ]
+  },
+  {
+   "step_id": "r02_recover4_durable_recon",
+   "timestamp": "2026-09-07T02:05:00Z",
+   "provenance": {
+    "classification": "session_observed",
+    "producer": "ZCode recovery session",
+    "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+    "captured_at": "2026-09-07T02:39:09Z",
+    "source_artifact_ids": [],
+    "integrity": {"algorithm": null, "digest": null}
+   },
+   "before_observation_id": null,
+   "intent_id": null,
+   "gate_decision_id": null,
+   "permission_id": null,
+   "execution": {
+    "performed": false,
+    "provider_session_id": null,
+    "permission_consumed": false,
+    "result": "NO_ACTION",
+    "evidence_ids": []
+   },
+   "after_observation_id": null,
+   "verification": {
+    "result": "NOT_APPLICABLE",
+    "independent": false,
+    "evidence_ids": []
+   },
+   "claims": [
+    {
+     "claim": "Durable authority reconstructed read-only from filesystem: WINGRUN_20260907_02 identified as the only non-closed run (no run_completion_record); ACTIVE_RUN_ID=WINGRUN_20260907_02; browser tab list was EMPTY at session start (process restart after chat clear) — no game page existed to observe first.",
+     "classification": "FACT",
+     "confidence": 0.95,
+     "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl", "enza_memory/failures/iab_screenshot_pipeline_stall_001.json", "enza_memory/wing_runs/WINGRUN_20260907_01/run_completion_record.json", "enza_memory/wing_runs/WINGRUN_20260906_01/run_completion_record.json"]
+    }
+   ],
+   "unknowns": []
+  },
+  {
+   "step_id": "r02_recover4_reopen_game",
+   "timestamp": "2026-09-07T02:15:00Z",
+   "provenance": {
+    "classification": "session_observed",
+    "producer": "ZCode recovery session",
+    "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+    "captured_at": "2026-09-07T02:39:09Z",
+    "source_artifact_ids": [],
+    "integrity": {"algorithm": null, "digest": null}
+   },
+   "before_observation_id": null,
+   "intent_id": null,
+   "gate_decision_id": null,
+   "permission_id": null,
+   "execution": {
+    "performed": true,
+    "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+    "permission_consumed": false,
+    "result": "ISSUED",
+    "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_lobby.png"]
+   },
+   "after_observation_id": null,
+   "verification": {
+    "result": "VERIFIED",
+    "independent": false,
+    "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_lobby.png"]
+   },
+   "claims": [
+    {
+     "claim": "Game reopened in ZCode IAB at https://shinycolors.enza.fun/home (existing logged-in state; no new produce started); booted through Now Loading to stable MAIN_LOBBY with プロデュース中 (283ステージ, 300/300) visible; auto-opened お知らせ news page dismissed via its back arrow (non-business presentation).",
+     "classification": "FACT",
+     "confidence": 0.95,
+     "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_lobby.png"]
+    }
+   ],
+   "unknowns": []
+  },
+  {
+   "step_id": "r02_recover4_resume_dialog_reconciliation",
+   "timestamp": "2026-09-07T02:30:00Z",
+   "provenance": {
+    "classification": "session_observed",
+    "producer": "ZCode recovery session",
+    "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+    "captured_at": "2026-09-07T02:39:09Z",
+    "source_artifact_ids": [],
+    "integrity": {"algorithm": null, "digest": null}
+   },
+   "before_observation_id": null,
+   "intent_id": null,
+   "gate_decision_id": null,
+   "permission_id": null,
+   "execution": {
+    "performed": true,
+    "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+    "permission_consumed": false,
+    "result": "ISSUED",
+    "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png"]
+   },
+   "after_observation_id": null,
+   "verification": {
+    "result": "VERIFIED",
+    "independent": false,
+    "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png"]
+   },
+   "claims": [
+    {
+     "claim": "プロデュース再開 dialog (server-side state) showed: 【ちゃカワ】園田智代子, Vo.417/Da.79/Vi.119/mental105/SP274, fans 1,169, W.I.N.G.編 ミドル, シーズン1/残り1週 — EXACT match to durable boundary (S1 weeks=1, fans=1169). No week double-committed, no week lost. 再開 clicked to resume the EXISTING run (recovery navigation, not a business action).",
+     "classification": "FACT",
+     "confidence": 0.95,
+     "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png"]
+    }
+   ],
+   "unknowns": []
+  },
+  {
+   "step_id": "r02_recover4_stable_boundary",
+   "timestamp": "2026-09-07T02:38:30Z",
+   "provenance": {
+    "classification": "session_observed",
+    "producer": "ZCode recovery session",
+    "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+    "captured_at": "2026-09-07T02:39:09Z",
+    "source_artifact_ids": [],
+    "integrity": {"algorithm": null, "digest": null}
+   },
+   "before_observation_id": null,
+   "intent_id": null,
+   "gate_decision_id": null,
+   "permission_id": null,
+   "execution": {
+    "performed": false,
+    "provider_session_id": null,
+    "permission_consumed": false,
+    "result": "NO_ACTION",
+    "evidence_ids": []
+   },
+   "after_observation_id": "OBS_009",
+   "verification": {
+    "result": "VERIFIED",
+    "independent": false,
+    "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome_stable.png", "enza_memory/observations/OBS_009.json"]
+   },
+   "claims": [
+    {
+     "claim": "WING_HOME reached and confirmed stable across two frames: Season 1, 残り1週, E-target CLEAR stamp, stamina full, tension normal, no dialogue chain, no choice overlay, URL /produce. Recovery STOPPED here per scope: W8 weekly objective NOT executed.",
+     "classification": "FACT",
+     "confidence": 0.95,
+     "evidence_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome.png", "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome_stable.png"]
+    }
+   ],
+   "unknowns": [
+    "next W8 planner objective is not decided in this recovery session (out of scope)"
+   ]
+  }
+ ],
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB)",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "captured_at": "2026-09-07T02:39:09Z",
+  "source_artifact_ids": ["enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl"],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "evidence_references": [
+  {
+   "evidence_id": "enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl",
+   "kind": "TRACE",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl",
+   "captured_at": null,
+   "source": "durable run trajectory of record (prior sessions)",
+   "classification": "FACT",
+   "integrity": {"algorithm": null, "digest": null}
+  },
+  {
+   "evidence_id": "r03_recover4_lobby.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_lobby.png",
+   "captured_at": "2026-09-07T02:20:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {"algorithm": "sha256", "digest": "84dda21e987c5d088410b8ec8ff042ee80961de1f76e64dfc562bf24be6830da"}
+  },
+  {
+   "evidence_id": "r03_recover4_resume_dialog.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png",
+   "captured_at": "2026-09-07T02:30:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {"algorithm": "sha256", "digest": "57edd710d24b4428cdc32d61bdf021889a0b23b43e42084cceee34b1ced1cb37"}
+  },
+  {
+   "evidence_id": "r03_recover4_winghome.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome.png",
+   "captured_at": "2026-09-07T02:33:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {"algorithm": "sha256", "digest": "7d5b55a09fb4d2425a41b8b054ee227ec7eeefc72bce953eec1cf9e92082cd14"}
+  },
+  {
+   "evidence_id": "r03_recover4_winghome_stable.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome_stable.png",
+   "captured_at": "2026-09-07T02:38:30Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {"algorithm": "sha256", "digest": "11b0b16351d34088e3028004fb8675a4bd5e064999360c0c1e79a9112ea47825"}
+  }
+ ],
+ "unknowns": [
+  "prior sessions' exact interruption moment (between 09:22 local screenshot and process restart) is UNKNOWN; no game-state damage found from fresh server reconciliation"
+ ]
+}
