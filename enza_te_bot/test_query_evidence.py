@@ -21,6 +21,7 @@ class FakeIndex:
 
     def search(self, vector, top_k):
         assert vector.shape == (1, self.d)
+        assert np.linalg.norm(vector[0]) == pytest.approx(1.0, abs=1e-6)
         return self.scores[:, :top_k], self.identifiers[:, :top_k]
 
     def reconstruct_n(self, start, count):
@@ -47,7 +48,9 @@ class FakeEmbedder:
         assert len(paths) == 1
         assert paths[0].name == "query.png"
         assert batch_size == 1
-        return np.array([[1.0, 0.0, 0.0]], dtype="float32")
+        # SigLIP projection features are raw here; query_evidence owns the
+        # final normalization immediately before FAISS search.
+        return np.array([[3.0, 4.0, 0.0]], dtype="float32")
 
 
 def write_index_files(root: Path, rows: list[dict]) -> None:
@@ -170,3 +173,19 @@ def test_top_k_order_follows_faiss_similarity_order(tmp_path):
         "wing_runs/RUN_A/screenshots/a.png",
     ]
     assert [item["similarity"] for item in result["results"]] == pytest.approx([0.99, 0.88])
+
+
+def test_similarity_scores_are_bounded_to_cosine_range(tmp_path):
+    write_index_files(tmp_path, rows())
+    query = tmp_path / "query.png"
+    query.write_bytes(b"image fixture")
+
+    result = query_evidence(
+        tmp_path, query, top_k=1,
+        faiss_module=FakeFaiss(FakeIndex(scores=[1.00005], identifiers=[0])),
+        embedder_factory=FakeEmbedder,
+    )
+
+    similarity = result["results"][0]["similarity"]
+    assert -1.0 <= similarity <= 1.0
+    assert similarity == pytest.approx(1.0)

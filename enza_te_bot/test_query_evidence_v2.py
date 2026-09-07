@@ -37,7 +37,7 @@ class FakeEmbedder:
         return np.array([[3.0, 4.0, 0.0]], dtype="float32")
 
 
-def write_fixture(root: Path) -> Path:
+def write_fixture(root: Path, *, event: dict | None = None) -> Path:
     output = root / "index"
     output.mkdir()
     (output / "image_embeddings.faiss").write_bytes(b"fake")
@@ -48,8 +48,7 @@ def write_fixture(root: Path) -> Path:
     (output / "metadata.jsonl").write_text(
         "".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8"
     )
-    (output / "metadata_enriched.jsonl").write_text(
-        json.dumps({
+    enriched_row = {
             **rows[1],
             "state": {"page": "SCHEDULE"},
             "phase": "S1W8",
@@ -58,7 +57,11 @@ def write_fixture(root: Path) -> Path:
             "failure_type": None,
             "trajectory_ref": "trajectories/run_b.json",
             "observation_ref": "observations/OBS_B.json",
-        }) + "\n",
+        }
+    if event is not None:
+        enriched_row["event"] = event
+    (output / "metadata_enriched.jsonl").write_text(
+        json.dumps(enriched_row) + "\n",
         encoding="utf-8",
     )
     (output / "index_state.json").write_text(json.dumps({
@@ -96,6 +99,54 @@ def test_query_merges_enriched_metadata_by_vector_id(tmp_path):
         "observation_ref": "observations/OBS_B.json",
     }
     assert -1.0 <= item["similarity"] <= 1.0
+
+
+def test_nested_event_result_overrides_legacy_result(tmp_path):
+    query = write_fixture(tmp_path, event={
+        "action": "AUDITION THE LEGEND",
+        "phase": "BATTLE",
+        "result": "オーディション合格 (PASS)",
+        "source": "filename_semantic_trace_match",
+    })
+    result = query_evidence(
+        tmp_path,
+        query,
+        top_k=1,
+        faiss_module=FakeFaiss(),
+        embedder_factory=FakeEmbedder,
+    )
+
+    item = result["results"][0]
+    assert item["event"] == {
+        "action": "AUDITION THE LEGEND",
+        "phase": "BATTLE",
+        "result": "オーディション合格 (PASS)",
+        "state": {"page": "SCHEDULE"},
+        "source": "filename_semantic_trace_match",
+    }
+    assert item["evidence"]["result"] == "オーディション合格 (PASS)"
+    assert {conflict["field"] for conflict in item["event_conflicts"]} == {
+        "action", "phase", "result"
+    }
+
+
+def test_legacy_fields_fallback_into_migrated_event_output(tmp_path):
+    query = write_fixture(tmp_path)
+    item = query_evidence(
+        tmp_path,
+        query,
+        top_k=1,
+        faiss_module=FakeFaiss(),
+        embedder_factory=FakeEmbedder,
+    )["results"][0]
+
+    assert item["event"] == {
+        "action": "VOCAL",
+        "phase": "S1W8",
+        "result": "COMMITTED",
+        "state": {"page": "SCHEDULE"},
+    }
+    assert "event_conflicts" not in item
 
 
 def test_query_remains_backward_compatible_without_enriched_metadata(tmp_path):

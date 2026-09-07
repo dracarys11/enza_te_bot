@@ -14,6 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Iterator, Sequence
 
+from enza_memory.data_paths import hf_hub_offline, resolve_model_source
+
 
 IMAGE_SUFFIXES = frozenset({".png", ".jpg", ".jpeg", ".webp"})
 DEFAULT_MODEL = "google/siglip-base-patch16-224"
@@ -382,8 +384,12 @@ class CudaVisionEmbedder:
         self.image_module = image_module
         self.device = torch.device(f"cuda:{device}")
         self.model_id = model_id
-        self.processor = auto_processor.from_pretrained(model_id)
-        self.model = auto_model.from_pretrained(model_id, torch_dtype=torch.float16).to(self.device).eval()
+        model_source = resolve_model_source(model_id)
+        pretrained_options = {"local_files_only": True} if hf_hub_offline() else {}
+        self.processor = auto_processor.from_pretrained(model_source, **pretrained_options)
+        self.model = auto_model.from_pretrained(
+            model_source, torch_dtype=torch.float16, **pretrained_options
+        ).to(self.device).eval()
         self.gpu_name = torch.cuda.get_device_name(device)
 
     def _normalize(self, features: Any) -> Any:
