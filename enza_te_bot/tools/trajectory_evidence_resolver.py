@@ -22,6 +22,7 @@ class TrajectoryRecord:
     image_refs: set[str] = field(default_factory=set)
     run_ids: set[str] = field(default_factory=set)
     timestamp: datetime | None = None
+    timestamp_text: str | None = None
     action: Any = None
     result: Any = None
     state: Any = None
@@ -75,6 +76,7 @@ def _walk(path: Path, value: Any, inherited: TrajectoryRecord | None = None) -> 
         record.image_refs.update(inherited.image_refs)
         record.run_ids.update(inherited.run_ids)
         record.timestamp = inherited.timestamp
+        record.timestamp_text = inherited.timestamp_text
         record.action = inherited.action
         record.result = inherited.result
         record.state = inherited.state
@@ -87,6 +89,7 @@ def _walk(path: Path, value: Any, inherited: TrajectoryRecord | None = None) -> 
         parsed = _timestamp(value.get(key))
         if parsed:
             record.timestamp = parsed
+            record.timestamp_text = str(value[key])
             break
     record.action = _first(value, ("action", "intent", "selected_action", "emitted_action")) or record.action
     record.result = _first(value, ("result", "outcome", "observed_result", "verification")) or record.result
@@ -157,22 +160,92 @@ def resolve_trajectory(row: dict[str, Any], records: Sequence[TrajectoryRecord])
     return max(candidates, key=lambda record: _match_key(row, record))
 
 
-def enrich_rows(rows: Sequence[dict[str, Any]], records: Sequence[TrajectoryRecord]) -> list[dict[str, Any]]:
+def load_event_records(paths: Sequence[Path]) -> list[TrajectoryRecord]:
+    """Load event-level records from weekly trace and timing JSONL files."""
+
+    records: list[TrajectoryRecord] = []
+    seen: set[Path] = set()
+    for path in paths:
+        path = path.resolve()
+        if path in seen or not path.is_file():
+            continue
+        seen.add(path)
+        try:
+            text = path.read_text(encoding="utf-8")
+            values = ([json.loads(line) for line in text.splitlines() if line.strip()]
+                      if path.suffix.casefold() == ".jsonl" else [json.loads(text)])
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            continue
+        for value in values:
+            if isinstance(value, dict):
+                records.append(next(iter(_walk(path, value))))
+    return records
+
+
+def _event_match_key(row: dict[str, Any], event: TrajectoryRecord) -> tuple[int, int, float, str]:
+    row_time = _timestamp(row.get("timestamp"))
+    exact_timestamp = int(row_time is not None and event.timestamp == row_time)
+    if row_time and event.timestamp:
+        distance = abs((row_time - event.timestamp).total_seconds())
+    else:
+        distance = float("inf")
+    same_run = int(_row_run(row) is not None and _row_run(row) in event.run_ids)
+    # Exact timestamp dominates proximity; same-run is the final fallback.
+    return exact_timestamp, int(distance != float("inf")), -distance, str(same_run) + event.source_path.as_posix()
+
+
+def resolve_event(row: dict[str, Any], events: Sequence[TrajectoryRecord]) -> TrajectoryRecord | None:
+    if not events:
+        return None
+    row_time = _timestamp(row.get("timestamp"))
+    row_run = _row_run(row)
+    image = row.get("image_path", row.get("path"))
+    candidates: list[TrajectoryRecord] = []
+    for event in events:
+        image_match = isinstance(image, str) and any(
+            image == ref or Path(image).name == Path(ref).name for ref in event.image_refs
+        )
+        same_run = row_run is not None and row_run in event.run_ids
+        timestamp_match = row_time is not None and event.timestamp is not None
+        if image_match or same_run or timestamp_match:
+            candidates.append(event)
+    if not candidates:
+        return None
+    return max(candidates, key=lambda event: _event_match_key(row, event))
+
+
+def _event_payload(event: TrajectoryRecord) -> dict[str, Any]:
+    return {
+        "timestamp": event.timestamp_text or (event.timestamp.isoformat() if event.timestamp else None),
+        "phase": event.phase,
+        "action": event.action,
+        "state": event.state,
+        "result": event.result,
+    }
+
+
+def enrich_rows(
+    rows: Sequence[dict[str, Any]],
+    records: Sequence[TrajectoryRecord],
+    events: Sequence[TrajectoryRecord] = (),
+) -> list[dict[str, Any]]:
     output: list[dict[str, Any]] = []
     for row in rows:
         match = resolve_trajectory(row, records)
+        event = resolve_event(row, events)
         enriched = dict(row)
         if match:
             enriched.update({
-                "trajectory_ref": match.source_path.as_posix(),
                 "action": match.action,
                 "result": match.result,
                 "state": match.state,
                 "phase": match.phase,
             })
+            enriched.setdefault("trajectory_ref", match.source_path.as_posix())
         else:
             for key in ("trajectory_ref", "action", "result", "state", "phase"):
                 enriched.setdefault(key, None)
+        enriched["event"] = _event_payload(event) if event else None
         output.append(enriched)
     return output
 
@@ -190,13 +263,24 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
     return rows
 
 
-def resolve_file(metadata: Path, trajectories: Path, wing_runs: Path, output: Path | None = None) -> int:
+def resolve_file(
+    metadata: Path,
+    trajectories: Path,
+    wing_runs: Path,
+    output: Path | None = None,
+    weekly_trace: Path | None = None,
+    timings: Path | None = None,
+) -> int:
     rows = _read_jsonl(metadata)
     records = load_trajectory_records(trajectories, wing_runs)
+    event_paths = [path for path in (weekly_trace, timings) if path is not None]
+    if not event_paths:
+        event_paths = sorted(wing_runs.rglob("weekly_trace.jsonl")) + sorted(wing_runs.rglob("timings.jsonl"))
+    events = load_event_records(event_paths)
     destination = output or metadata
     destination.parent.mkdir(parents=True, exist_ok=True)
     with destination.open("w", encoding="utf-8") as handle:
-        for row in enrich_rows(rows, records):
+        for row in enrich_rows(rows, records, events):
             handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
     return len(rows)
 
@@ -208,13 +292,18 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--metadata", type=Path, default=default_metadata)
     parser.add_argument("--trajectories", type=Path, default=data_root / "trajectories")
     parser.add_argument("--wing-runs", type=Path, default=data_root / "wing_runs")
+    parser.add_argument("--weekly-trace", type=Path)
+    parser.add_argument("--timings", type=Path)
     parser.add_argument("--output", type=Path, help="Separate output; defaults to updating metadata in place")
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
-    count = resolve_file(args.metadata, args.trajectories, args.wing_runs, args.output)
+    count = resolve_file(
+        args.metadata, args.trajectories, args.wing_runs, args.output,
+        weekly_trace=args.weekly_trace, timings=args.timings,
+    )
     print(f"resolved {count} metadata records")
     return 0
 
