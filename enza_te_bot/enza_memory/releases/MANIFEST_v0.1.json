@@ -1,0 +1,40 @@
+{
+  "release_name": "Enza AI Workspace v0.1",
+  "milestone": "WING Agent Reliability Validation",
+  "created_at": "2026-09-07T09:06:37Z",
+  "included_directories": [
+    "enza_memory/wing_runs",
+    "enza_memory/failures",
+    "enza_memory/observations",
+    "enza_memory/reconciliations",
+    "enza_memory/runtime_contracts",
+    "enza_memory/migration/regression_mining",
+    "ai_decisions",
+    "test_data",
+    "docs"
+  ],
+  "included_artifact_classes": [
+    "runtime contracts",
+    "reconciliation reports",
+    "regression tests",
+    "evidence datasets",
+    "validation reports"
+  ],
+  "excluded_directories": [
+    ".git",
+    ".venv",
+    ".pytest_cache",
+    "__pycache__",
+    "logs",
+    "config_backups",
+    "temporary files",
+    "live browser or game session state"
+  ],
+  "archive_files": [
+    "enza_ai_workspace_export.zip",
+    "enza_wing_runtime_bundle.tar.gz"
+  ],
+  "runtime_changed": false,
+  "business_policy_changed": false,
+  "game_contact": false
+}
