@@ -38,6 +38,8 @@ except ModuleNotFoundError as error:
 
 SIMILARITY_EPSILON = 1e-4
 ENRICHED_METADATA_FILE = "metadata_enriched.jsonl"
+EVENT_FIELDS = ("action", "phase", "state", "result", "source")
+EVIDENCE_FIELDS = ("trajectory_ref", "observation_ref", "failure_type")
 
 
 def _load_faiss() -> Any:
@@ -110,6 +112,43 @@ def _optional_reference(row: dict[str, Any], field: str, related_field: str) -> 
     return related or None
 
 
+def resolve_evidence_contract(metadata: dict[str, Any]) -> dict[str, Any]:
+    """Resolve enriched metadata into the event/evidence/provenance contract.
+
+    Nested ``event`` values are authoritative.  Legacy top-level fields remain
+    valid fallbacks so older metadata can be queried without migration.
+    """
+    nested_event = metadata.get("event")
+    if not isinstance(nested_event, dict):
+        nested_event = {}
+
+    event = {
+        field: nested_event[field] if field in nested_event else metadata.get(field)
+        for field in EVENT_FIELDS
+    }
+    evidence = {field: metadata.get(field) for field in EVIDENCE_FIELDS}
+
+    conflicts: list[dict[str, Any]] = []
+    for field in EVENT_FIELDS:
+        if field in nested_event and field in metadata and nested_event[field] != metadata[field]:
+            conflicts.append({
+                "field": field,
+                "legacy": metadata[field],
+                "event": nested_event[field],
+            })
+
+    return {
+        "event": event,
+        "evidence": evidence,
+        "provenance": {"conflicts": conflicts},
+    }
+
+
+def _event_value(row: dict[str, Any], field: str) -> Any:
+    """Return an event field when present, otherwise its legacy top-level value."""
+    return resolve_evidence_contract(row)["event"][field]
+
+
 def _evidence_package(row: dict[str, Any], similarity: float) -> dict[str, Any]:
     return {
         "image_path": row.get("image_path", row.get("path")),
@@ -119,8 +158,8 @@ def _evidence_package(row: dict[str, Any], similarity: float) -> dict[str, Any]:
         "trajectory": _optional_reference(row, "trajectory", "related_trajectories"),
         "failure": _optional_reference(row, "failure", "related_failures"),
         "observation": _optional_reference(row, "observation", "related_observations"),
-        "phase": row.get("phase"),
-        "state": row.get("state"),
+        "phase": _event_value(row, "phase"),
+        "state": _event_value(row, "state"),
     }
 
 
@@ -144,10 +183,10 @@ def _load_enriched_metadata(root: Path, base_rows: dict[int, dict[str, Any]]) ->
 
 def _evidence_v2(row: dict[str, Any]) -> dict[str, Any]:
     return {
-        "state": row.get("state"),
-        "phase": row.get("phase"),
-        "action": row.get("action"),
-        "result": row.get("result"),
+        "state": _event_value(row, "state"),
+        "phase": _event_value(row, "phase"),
+        "action": _event_value(row, "action"),
+        "result": _event_value(row, "result"),
         "failure_type": row.get("failure_type"),
         "trajectory_ref": row.get("trajectory_ref"),
         "observation_ref": row.get("observation_ref"),
@@ -194,7 +233,20 @@ def query_evidence(
         similarity = max(-1.0, min(1.0, similarity))
         package = _evidence_package(row, similarity)
         if enriched_by_vector is not None:
+            contract = resolve_evidence_contract(row)
+            # Keep the established v2 evidence shape for consumers that read
+            # event fields from it, while exposing the migrated contract next
+            # to it. Values still come from the authoritative nested event.
             package["evidence"] = _evidence_v2(row)
+            package["event"] = {
+                field: contract["event"][field]
+                for field in ("action", "phase", "result", "state")
+            }
+            if contract["event"]["source"] is not None:
+                package["event"]["source"] = contract["event"]["source"]
+            package["provenance"] = contract["provenance"]
+            if contract["provenance"]["conflicts"]:
+                package["event_conflicts"] = contract["provenance"]["conflicts"]
         results.append(package)
     return {"query_image": str(query_image), "results": results}
 
