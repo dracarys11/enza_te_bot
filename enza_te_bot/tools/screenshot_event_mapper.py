@@ -13,7 +13,9 @@ from typing import Any, Iterable, Sequence
 
 
 TIMESTAMP_PATTERN = re.compile(r"(?<!\d)(20\d{6})[_-](\d{6})(?!\d)")
-SEMANTIC_TOKENS = frozenset({"pass", "fail", "battle", "audition", "choice"})
+SEMANTIC_TOKENS = frozenset({
+    "legend", "pass", "fail", "battle", "audition", "choice", "schedule", "lesson",
+})
 
 
 @dataclass
@@ -68,8 +70,12 @@ def _candidate(source: Path, value: dict[str, Any]) -> EventCandidate:
         if timestamp:
             break
     phase = _first(value, ("phase", "room", "page", "substate", "boundary"))
-    action = _first(value, ("action", "intent", "selected_action", "emitted_action"))
-    result = _first(value, ("result", "outcome", "observed_result", "verification"))
+    action = _first(value, (
+        "action", "decision", "action_flow", "intent", "selected_action", "emitted_action",
+    ))
+    result = _first(value, (
+        "result", "action_result", "outcome", "observed_result", "verification", "battle_result",
+    ))
     return EventCandidate(
         source=source,
         run_ids=_run_ids(value, source),
@@ -116,11 +122,18 @@ def _filename_semantics(row: dict[str, Any]) -> set[str]:
     image = row.get("image_path", row.get("path", ""))
     name = Path(image).stem.casefold() if isinstance(image, str) else ""
     tokens = {token for token in re.split(r"[^a-z0-9]+", name) if token}
-    return tokens & SEMANTIC_TOKENS
+    labels: set[str] = set()
+    for token in tokens:
+        for semantic in SEMANTIC_TOKENS:
+            if token == semantic or token.startswith(semantic):
+                labels.add(semantic)
+    return labels
 
 
 def _candidate_semantics(candidate: EventCandidate) -> set[str]:
-    text = candidate.text
+    text = json.dumps(
+        [candidate.phase, candidate.action, candidate.result], ensure_ascii=False
+    ).casefold()
     labels: set[str] = set()
     if any(token in text for token in ("pass", "success", "突破", "commit")):
         labels.add("pass")
@@ -132,14 +145,49 @@ def _candidate_semantics(candidate: EventCandidate) -> set[str]:
         labels.add("audition")
     if "choice" in text or "選択" in text:
         labels.add("choice")
+    if "schedule" in text or "スケジュール" in text:
+        labels.add("schedule")
+    if "lesson" in text or "レッスン" in text:
+        labels.add("lesson")
+    if "legend" in text:
+        labels.add("legend")
     return labels
 
 
 def _semantic_payload(labels: set[str]) -> dict[str, Any]:
-    phase = "BATTLE" if "battle" in labels else "AUDITION" if "audition" in labels else "CHOICE" if "choice" in labels else None
-    action = "AUDITION" if "audition" in labels or "battle" in labels else "CHOICE" if "choice" in labels else None
+    phase = (
+        "BATTLE" if "battle" in labels
+        else "AUDITION" if "audition" in labels
+        else "CHOICE" if "choice" in labels
+        else "SCHEDULE" if "schedule" in labels
+        else "LESSON" if "lesson" in labels
+        else None
+    )
+    action = (
+        "AUDITION" if "audition" in labels or "battle" in labels or "legend" in labels
+        else "CHOICE" if "choice" in labels
+        else "LESSON" if "lesson" in labels
+        else None
+    )
     result = "PASS" if "pass" in labels else "FAIL" if "fail" in labels else None
     return {"phase": phase, "action": action, "result": result, "source": "screenshot_filename"}
+
+
+def _semantic_match_score(labels: set[str], candidate: EventCandidate, image_stem: str) -> int:
+    candidate_labels = _candidate_semantics(candidate)
+    if "pass" in labels and "pass" not in candidate_labels:
+        return 0
+    if "fail" in labels and "fail" not in candidate_labels:
+        return 0
+    overlap = labels & candidate_labels
+    if not overlap:
+        return 0
+    score = len(overlap) * 10
+    if image_stem and image_stem in candidate.text:
+        score += 100
+    if candidate.source.name == "weekly_trace.jsonl":
+        score += 20
+    return score
 
 
 def resolve_screenshot_event(row: dict[str, Any], candidates: Sequence[EventCandidate]) -> dict[str, Any] | None:
@@ -149,15 +197,23 @@ def resolve_screenshot_event(row: dict[str, Any], candidates: Sequence[EventCand
     pool = same_run or list(candidates)
 
     if labels:
-        semantic_matches = [candidate for candidate in pool if labels & _candidate_semantics(candidate)]
+        image = row.get("image_path", row.get("path", ""))
+        image_stem = Path(image).stem.casefold() if isinstance(image, str) else ""
+        semantic_matches = [
+            candidate for candidate in pool
+            if _semantic_match_score(labels, candidate, image_stem) > 0
+        ]
         if semantic_matches:
-            chosen = min(semantic_matches, key=lambda candidate: abs((_parse_timestamp(row.get("timestamp")) or candidate.timestamp or datetime.min.replace(tzinfo=timezone.utc)) - (candidate.timestamp or datetime.min.replace(tzinfo=timezone.utc))))
+            chosen = max(
+                semantic_matches,
+                key=lambda candidate: _semantic_match_score(labels, candidate, image_stem),
+            )
             payload = _semantic_payload(labels)
             payload.update({
                 "phase": chosen.phase or payload["phase"],
                 "action": chosen.action or payload["action"],
                 "result": chosen.result or payload["result"],
-                "source": chosen.source.as_posix(),
+                "source": "filename_semantic_trace_match",
             })
             return payload
         return _semantic_payload(labels)
