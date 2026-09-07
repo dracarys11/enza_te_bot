@@ -16,6 +16,7 @@ try:
         INDEX_DIRECTORY,
         METADATA_FILE,
         STATE_FILE,
+        l2_normalize,
         load_metadata,
         resolve_data_root,
     )
@@ -29,9 +30,13 @@ except ModuleNotFoundError as error:
         INDEX_DIRECTORY,
         METADATA_FILE,
         STATE_FILE,
+        l2_normalize,
         load_metadata,
         resolve_data_root,
     )
+
+
+SIMILARITY_EPSILON = 1e-4
 
 
 def _load_faiss() -> Any:
@@ -65,6 +70,8 @@ def load_evidence_index(root: Path, *, faiss_module: Any | None = None) -> tuple
     if not rows:
         raise RuntimeError(f"index metadata is missing or empty: {metadata_path}")
     state = _load_state(output / STATE_FILE)
+    if state.get("normalization") != "l2_float32":
+        raise RuntimeError("index normalization is unverified; rebuild the index")
 
     faiss = faiss_module or _load_faiss()
     index = faiss.read_index(str(faiss_path))
@@ -73,6 +80,14 @@ def load_evidence_index(root: Path, *, faiss_module: Any | None = None) -> tuple
     expected_dimension = state.get("embedding_dimension")
     if expected_dimension is not None and int(index.d) != int(expected_dimension):
         raise RuntimeError("FAISS index dimension differs from index state; rebuild the index")
+    try:
+        stored_vectors = index.reconstruct_n(0, int(index.ntotal))
+    except (AttributeError, RuntimeError) as error:
+        raise RuntimeError("FAISS index does not expose vectors for normalization validation") from error
+    import numpy as np
+    stored_norms = np.linalg.norm(np.asarray(stored_vectors, dtype="float32"), axis=1)
+    if not np.isfinite(stored_norms).all() or not np.allclose(stored_norms, 1.0, atol=SIMILARITY_EPSILON):
+        raise RuntimeError("stored image embeddings are not L2 normalized; rebuild the index")
 
     rows_by_vector: dict[int, dict[str, Any]] = {}
     for offset, row in enumerate(rows):
@@ -102,6 +117,8 @@ def _evidence_package(row: dict[str, Any], similarity: float) -> dict[str, Any]:
         "timestamp": row.get("timestamp"),
         "trajectory": _optional_reference(row, "trajectory", "related_trajectories"),
         "failure": _optional_reference(row, "failure", "related_failures"),
+        "observation": _optional_reference(row, "observation", "related_observations"),
+        "phase": row.get("phase"),
         "state": row.get("state"),
     }
 
@@ -123,7 +140,7 @@ def query_evidence(
 
     index, rows_by_vector, state = load_evidence_index(root, faiss_module=faiss_module)
     embedder = embedder_factory(str(state["model_id"]), device=device)
-    vector = embedder.embed_images([query_image], batch_size=1)
+    vector = l2_normalize(embedder.embed_images([query_image], batch_size=1))
     if getattr(vector, "ndim", None) != 2 or vector.shape[0] != 1 or vector.shape[1] != int(index.d):
         raise RuntimeError("query embedding shape does not match the FAISS index")
 
@@ -136,7 +153,11 @@ def query_evidence(
         row = rows_by_vector.get(identifier)
         if row is None:
             raise RuntimeError(f"FAISS returned unknown vector_id: {identifier}")
-        results.append(_evidence_package(row, float(score)))
+        similarity = float(score)
+        if similarity > 1.0 + SIMILARITY_EPSILON or similarity < -1.0 - SIMILARITY_EPSILON:
+            raise RuntimeError(f"similarity outside cosine bounds: {similarity}")
+        similarity = max(-1.0, min(1.0, similarity))
+        results.append(_evidence_package(row, similarity))
     return {"query_image": str(query_image), "results": results}
 
 

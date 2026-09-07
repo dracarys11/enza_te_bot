@@ -67,7 +67,7 @@ def record(path: str, digest: str) -> ImageRecord:
 def test_incremental_update_appends_only_new_images():
     current = [record("a.png", "a"), record("b.png", "b")]
     existing = [{"path": "a.png", "sha256": "a", "vector_id": 0}]
-    state = {"model_id": "model"}
+    state = {"model_id": "model", "normalization": "l2_float32"}
 
     mode, pending = update_mode(current, existing, model_id="model", state=state, index_total=1)
 
@@ -76,13 +76,14 @@ def test_incremental_update_appends_only_new_images():
 
 
 def test_changed_removed_or_inconsistent_data_rebuilds():
-    state = {"model_id": "model"}
+    state = {"model_id": "model", "normalization": "l2_float32"}
     existing = [{"path": "a.png", "sha256": "old", "vector_id": 0}]
     current = [record("a.png", "new")]
     assert update_mode(current, existing, model_id="model", state=state, index_total=1)[0] == "rebuild"
     assert update_mode([], existing, model_id="model", state=state, index_total=1)[0] == "rebuild"
     assert update_mode(current, existing, model_id="other", state=state, index_total=1)[0] == "rebuild"
     assert update_mode(current, existing, model_id="model", state=state, index_total=2)[0] == "rebuild"
+    assert update_mode(current, existing, model_id="model", state={"model_id": "model"}, index_total=1)[0] == "rebuild"
 
 
 def test_related_evidence_change_refreshes_metadata_without_reembedding():
@@ -98,7 +99,8 @@ def test_related_evidence_change_refreshes_metadata_without_reembedding():
         "vector_id": 0,
     }]
 
-    mode, pending = update_mode(current, existing, model_id="model", state={"model_id": "model"}, index_total=1)
+    state = {"model_id": "model", "normalization": "l2_float32"}
+    mode, pending = update_mode(current, existing, model_id="model", state=state, index_total=1)
 
     assert mode == "metadata"
     assert pending == []

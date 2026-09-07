@@ -23,6 +23,10 @@ class FakeIndex:
         assert vector.shape == (1, self.d)
         return self.scores[:, :top_k], self.identifiers[:, :top_k]
 
+    def reconstruct_n(self, start, count):
+        assert (start, count) == (0, self.ntotal)
+        return np.eye(3, dtype="float32")
+
 
 class FakeFaiss:
     def __init__(self, index):
@@ -57,6 +61,7 @@ def write_index_files(root: Path, rows: list[dict]) -> None:
         "model_id": "local-siglip",
         "embedding_dimension": 3,
         "image_count": len(rows),
+        "normalization": "l2_float32",
     }), encoding="utf-8")
 
 
@@ -111,6 +116,8 @@ def test_metadata_lookup_returns_evidence_package(tmp_path):
         "timestamp": "2026-09-07T01:00:00Z",
         "trajectory": "trajectories/a.json",
         "failure": "failures/a.json",
+        "observation": None,
+        "phase": None,
         "state": {"phase": "BATTLE", "auto_value": "OFF", "interactability": "ENABLED"},
     }]
 
@@ -130,6 +137,8 @@ def test_missing_optional_fields_return_null(tmp_path):
     assert result["timestamp"] is None
     assert result["trajectory"] is None
     assert result["failure"] is None
+    assert result["observation"] is None
+    assert result["phase"] is None
     assert result["state"] is None
 
 

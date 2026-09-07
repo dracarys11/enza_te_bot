@@ -34,6 +34,9 @@ class ImageRecord:
     timestamp_source: str
     related_trajectories: tuple[str, ...]
     related_failures: tuple[str, ...]
+    related_observations: tuple[str, ...] = ()
+    phase: str | None = None
+    state: dict[str, Any] | None = None
 
 
 @dataclass(frozen=True)
@@ -42,6 +45,7 @@ class ReferenceDocument:
     kind: str | None
     text: str
     timestamps_by_image: dict[str, tuple[str, ...]]
+    values: tuple[Any, ...]
 
 
 def utc_now() -> str:
@@ -87,6 +91,8 @@ def _document_kind(relative: Path) -> str | None:
     name = relative.name.casefold()
     if "failures" in lowered or "failure" in name or "incident" in name:
         return "failure"
+    if "observations" in lowered or "observation" in name or name.startswith("obs_"):
+        return "observation"
     if "trajectories" in lowered or "trajectory" in name or name == "timings.jsonl":
         return "trajectory"
     return None
@@ -138,6 +144,7 @@ def _parse_document(path: Path, root: Path) -> ReferenceDocument | None:
         kind=_document_kind(relative),
         text=text,
         timestamps_by_image={key: tuple(sorted(items)) for key, items in timestamps.items()},
+        values=tuple(values),
     )
 
 
@@ -162,6 +169,16 @@ def _source_run(relative: Path) -> str | None:
     return None
 
 
+def _is_primary_observation_image(value: dict[str, Any], relative: Path) -> bool:
+    for key in ("screenshot", "preclick_screenshot", "postclick_screenshot"):
+        candidate = value.get(key)
+        if not isinstance(candidate, str):
+            continue
+        if candidate == relative.as_posix() or Path(candidate).name == relative.name:
+            return True
+    return False
+
+
 def _filename_timestamp(name: str) -> str | None:
     match = TIMESTAMP_PATTERN.search(name)
     if not match:
@@ -174,10 +191,17 @@ def _related_documents(
     relative: Path,
     source_run: str | None,
     documents: Sequence[ReferenceDocument],
-) -> tuple[tuple[str, ...], tuple[str, ...], str | None]:
+) -> tuple[
+    tuple[str, ...], tuple[str, ...], tuple[str, ...], str | None,
+    str | None, str | None, dict[str, Any] | None,
+]:
     trajectories: set[str] = set()
     failures: set[str] = set()
+    observations: set[str] = set()
     timestamps: set[str] = set()
+    run_ids: set[str] = set()
+    phases: set[str] = set()
+    states: dict[str, dict[str, Any]] = {}
     relative_text = relative.as_posix()
     for document in documents:
         if relative_text not in document.text and relative.name not in document.text:
@@ -188,8 +212,41 @@ def _related_documents(
             trajectories.add(document.path)
         elif document.kind == "failure":
             failures.add(document.path)
+        elif document.kind == "observation":
+            observations.add(document.path)
+            for value in document.values:
+                if not isinstance(value, dict):
+                    continue
+                run_id = value.get("run_id")
+                if isinstance(run_id, str) and run_id:
+                    run_ids.add(run_id)
+                if not _is_primary_observation_image(value, relative):
+                    continue
+                state: dict[str, Any] = {}
+                for key in ("page_state", "state", "room", "substate", "auto_value", "interactability"):
+                    if key in value and value[key] is not None:
+                        state[key] = value[key]
+                if state:
+                    states[json.dumps(state, ensure_ascii=False, sort_keys=True)] = state
+                phase = value.get("phase")
+                if not isinstance(phase, str):
+                    page_state = value.get("page_state")
+                    if isinstance(page_state, dict):
+                        phase = page_state.get("label")
+                    elif isinstance(value.get("room"), str):
+                        phase = value["room"]
+                if isinstance(phase, str) and phase:
+                    phases.add(phase)
         timestamps.update(document.timestamps_by_image.get(relative.name, ()))
-    return tuple(sorted(trajectories)), tuple(sorted(failures)), min(timestamps) if timestamps else None
+    return (
+        tuple(sorted(trajectories)),
+        tuple(sorted(failures)),
+        tuple(sorted(observations)),
+        min(timestamps) if timestamps else None,
+        next(iter(run_ids)) if len(run_ids) == 1 else None,
+        next(iter(phases)) if len(phases) == 1 else None,
+        next(iter(states.values())) if len(states) == 1 else None,
+    )
 
 
 def build_image_records(root: Path) -> list[ImageRecord]:
@@ -198,7 +255,10 @@ def build_image_records(root: Path) -> list[ImageRecord]:
     for path in discover_images(root):
         relative = path.relative_to(root)
         source_run = _source_run(relative)
-        trajectories, failures, evidence_timestamp = _related_documents(relative, source_run, documents)
+        trajectories, failures, observations, evidence_timestamp, related_run, phase, state = _related_documents(
+            relative, source_run, documents
+        )
+        source_run = source_run or related_run
         filename_timestamp = _filename_timestamp(path.name)
         if evidence_timestamp:
             timestamp, timestamp_source = evidence_timestamp, "related_evidence"
@@ -215,6 +275,9 @@ def build_image_records(root: Path) -> list[ImageRecord]:
             timestamp_source=timestamp_source,
             related_trajectories=trajectories,
             related_failures=failures,
+            related_observations=observations,
+            phase=phase,
+            state=state,
         ))
     return records
 
@@ -243,7 +306,12 @@ def update_mode(
 ) -> tuple[str, list[ImageRecord]]:
     if not existing:
         return "rebuild", list(records)
-    if not state or state.get("model_id") != model_id or index_total != len(existing):
+    if (
+        not state
+        or state.get("model_id") != model_id
+        or state.get("normalization") != "l2_float32"
+        or index_total != len(existing)
+    ):
         return "rebuild", list(records)
     existing_by_path = {str(row.get("path")): row for row in existing}
     current_by_path = {record.path: record for record in records}
@@ -261,9 +329,30 @@ def update_mode(
         or row.get("timestamp_source") != current_by_path[path].timestamp_source
         or row.get("related_trajectories") != list(current_by_path[path].related_trajectories)
         or row.get("related_failures") != list(current_by_path[path].related_failures)
+        or row.get("related_observations") != list(current_by_path[path].related_observations)
+        or row.get("phase") != current_by_path[path].phase
+        or row.get("state") != current_by_path[path].state
         for path, row in existing_by_path.items()
     )
     return ("metadata", []) if metadata_changed else ("noop", [])
+
+
+def l2_normalize(vectors: Any) -> Any:
+    """Return finite, non-zero row vectors normalized in float32."""
+    import numpy as np
+
+    array = np.asarray(vectors, dtype="float32")
+    if array.ndim != 2:
+        raise ValueError("embedding vectors must be a two-dimensional array")
+    if not np.isfinite(array).all():
+        raise ValueError("embedding vectors contain non-finite values")
+    norms = np.linalg.norm(array, axis=1, keepdims=True)
+    if np.any(norms <= 1e-12):
+        raise ValueError("embedding vectors contain a zero-length row")
+    normalized = array / norms
+    if not np.allclose(np.linalg.norm(normalized, axis=1), 1.0, atol=1e-5):
+        raise RuntimeError("failed to L2-normalize embedding vectors")
+    return normalized
 
 
 def _load_ml_dependencies() -> tuple[Any, Any, Any, Any]:
@@ -298,6 +387,7 @@ class CudaVisionEmbedder:
         self.gpu_name = torch.cuda.get_device_name(device)
 
     def _normalize(self, features: Any) -> Any:
+        features = features.float()
         return features / features.norm(p=2, dim=-1, keepdim=True).clamp_min(1e-12)
 
     def embed_images(self, paths: Sequence[Path], *, batch_size: int) -> Any:
@@ -314,14 +404,15 @@ class CudaVisionEmbedder:
             with self.torch.inference_mode(), self.torch.autocast(device_type="cuda", dtype=self.torch.float16):
                 features = self.model.get_image_features(**inputs)
             batches.append(self._normalize(features).float().cpu().numpy())
-        return np.concatenate(batches, axis=0) if batches else np.empty((0, 0), dtype="float32")
+        vectors = np.concatenate(batches, axis=0) if batches else np.empty((0, 0), dtype="float32")
+        return l2_normalize(vectors) if len(vectors) else vectors
 
     def embed_text(self, text: str) -> Any:
         inputs = self.processor(text=[text], padding="max_length", return_tensors="pt")
         inputs = {key: value.to(self.device) for key, value in inputs.items()}
         with self.torch.inference_mode(), self.torch.autocast(device_type="cuda", dtype=self.torch.float16):
             features = self.model.get_text_features(**inputs)
-        return self._normalize(features).float().cpu().numpy()
+        return l2_normalize(self._normalize(features).cpu().numpy())
 
 
 def _read_state(path: Path) -> dict[str, Any] | None:
@@ -404,7 +495,9 @@ def build_index(root: Path, *, model_id: str, batch_size: int, device: int) -> d
         existing = []
         pending = list(records)
         index = None
-    vectors = embedder.embed_images([root / record.path for record in pending], batch_size=batch_size)
+    vectors = l2_normalize(embedder.embed_images(
+        [root / record.path for record in pending], batch_size=batch_size
+    ))
     dimension = int(vectors.shape[1])
     if index is None:
         index = faiss.IndexFlatIP(dimension)
@@ -412,7 +505,9 @@ def build_index(root: Path, *, model_id: str, batch_size: int, device: int) -> d
         mode = "rebuild"
         existing = []
         pending = list(records)
-        vectors = embedder.embed_images([root / record.path for record in pending], batch_size=batch_size)
+        vectors = l2_normalize(embedder.embed_images(
+            [root / record.path for record in pending], batch_size=batch_size
+        ))
         dimension = int(vectors.shape[1])
         index = faiss.IndexFlatIP(dimension)
     index.add(vectors)
@@ -441,8 +536,10 @@ def build_index(root: Path, *, model_id: str, batch_size: int, device: int) -> d
     os.replace(index_temporary, faiss_path)
     _write_jsonl_atomic(metadata_path, rows)
     state_payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "model_id": model_id,
+        "normalization": "l2_float32",
+        "metric": "inner_product_cosine",
         "embedding_dimension": dimension,
         "image_count": len(rows),
         "gpu": embedder.gpu_name,
