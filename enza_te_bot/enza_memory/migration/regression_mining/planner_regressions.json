@@ -1,0 +1,209 @@
+{
+ "artifact_type": "PLANNER_REGRESSION_CORPUS",
+ "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+ "created_at": "2026-09-06T23:30:00Z",
+ "status": "MINED_EVIDENCE_CORPUS — regression-case design ONLY. Business policy was NOT modified.",
+ "core_distinction_requested": "LOCAL_ACTION_ALLOWED != GLOBAL_WEEK_OBJECTIVE. A local risk gate passing (e.g. VOCAL failure_rate=0) proves the action's local risk is permitted; it never proves the planner should select that action for the week.",
+ "primary_review_target": "WINGRUN_20260905_01 (S4 planning failure: TE target 500000 missed at 419414)",
+ "cases": [
+  {
+   "id": "PLR-001",
+   "title": "S4 route deadline model omitted complete remaining-route-step budget",
+   "run": "WINGRUN_20260905_01",
+   "local_evidence_that_was_true": "VOCAL failure_rate reads fresh and 0% in S4W1/W2; stamina full; weeks 8 > min_required_wins(4) + margin(1)",
+   "global_week_objective_violated": "TE gap 388850 with max eligible reward 100000 required 4 wins + failure margin within 8 weeks; the +1 margin budgeted ONE failure but not the complete remaining route steps per remaining week",
+   "observed_outcome": "3 preparation VOCAL weeks; route started at weeks=5 boundary leaving 5 THE LEGEND attempts; results PASS/FAIL/PASS/PASS/FAIL = 3 wins < 4; TE FAILED",
+   "postmortem_classification": "Policy/planning failure — primary preventable cause (docs/wingrun_20260905_01_postmortem.md)",
+   "required_regression": "policy must compare fresh remaining_weeks against complete remaining_required_route_steps (including retry budget for expected failures); route deadline computed from fresh season+week-bound evidence only",
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "docs/wingrun_20260905_01_postmortem.md",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/final_summary.json#s4",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/s4_route_activation.json"
+   ]
+  },
+  {
+   "id": "PLR-002",
+   "title": "No execution-boundary invariant rejected low-priority training at/after route latest safe start",
+   "run": "WINGRUN_20260905_01",
+   "local_evidence_that_was_true": "third S4 VOCAL had failure_rate 0% and adequate stamina — locally allowed",
+   "global_week_objective_violated": "weeks-6 VOCAL consumed the last additional attempt budget (postmortem-safe route start was fresh S4 weeks=6; the number 6 is run-specific, not a global constant)",
+   "observed_outcome": "first irreversible preventable decision; only five attempts remained, two failed",
+   "required_regression": "at/after the declared route deadline boundary, the next route action must replace low-priority training; goal execution independently rejects a forged low-priority action conflicting with an attached deadline; unknown boundary → NEED_MORE_OBSERVATION, never inferred from one run",
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "docs/wingrun_20260905_01_postmortem.md#preventable-point",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S4W3"
+   ]
+  },
+  {
+   "id": "PLR-003",
+   "title": "Trace week-label contamination (weeks=1 record error)",
+   "run": "WINGRUN_20260905_01",
+   "local_evidence_that_was_true": "STOP trace entry written during battle freeze",
+   "global_week_objective_violated": "week-state reporting integrity: unsupported weeks_remaining=1 claim contaminated reconciliation",
+   "observed_outcome": "s4_reconciliation forced weeks=5 with explicit conflict_cause note; artifact later marked SUPERSEDED_BY_FINAL_RUN_EVIDENCE",
+   "required_regression": "week labels require provenance-matching fresh boundary; a record that conflicts with observed boundary must be quarantined, not reconciled-by-override; trace schema must separate pre-action week from post-action week",
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/s4_reconciliation.json",
+    "docs/wingrun_20260905_01_postmortem.md#timeline"
+   ]
+  },
+  {
+   "id": "PLR-004",
+   "title": "Untaught business choice resolved by operator (いいよ)",
+   "run": "WINGRUN_20260905_01 (S1W5)",
+   "local_evidence_that_was_true": "UNKNOWN_BUSINESS_CHOICE correctly stopped the run",
+   "global_week_objective_violated": "none at stop-time — but the operator-supplied いいよ was logged with choice_audit=RUN_LOCAL 待审计 and produced a persistent 約束 (promise) flag influencing later weeks",
+   "observed_outcome": "promise badge appeared S1W7, deferred S1W8; planner had no model of promise consequences",
+   "required_regression": "operator-resolved choices must enter a taught-choice review pipeline before any future autonomous reuse; PROMISE_TRUE_BUSINESS_CHOICE subtype requires handler ownership distinct from fast-forward",
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#week5+week7",
+    "enza_memory/migration/python_click_migration/event_occurrence/event_type_profiles.json#PROMISE_STORY"
+   ]
+  },
+  {
+   "id": "PLR-005",
+   "title": "Endgame futility not surfaced (0906 S3 weeks 4→1 VOCAL with unreachable gap)",
+   "run": "WINGRUN_20260906_01",
+   "local_evidence_that_was_true": "VOCAL trouble 0% every week; gap decreased ~1000-1200/week",
+   "global_week_objective_violated": "target gap 31744→28336 with 1 week remaining was mathematically unreachable via VOCAL; planner continued VOCAL without flagging futility",
+   "observed_outcome": "honest final record: TARGET NOT MET (22672/50000), rank D; scenario concluded normally",
+   "required_regression": "when projected maximum gain over remaining weeks < remaining gap, planner must emit ENDGAME_FUTILE notification and seek operator decision; silent continuation is a reporting regression even when each local action is risk-permitted",
+   "severity": "P2",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/run_completion_record.json#season_flow_S3_final_weeks",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/checkpoint.json#fan_gap_to_target"
+   ],
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "action": "MERGED_INTO_PLR-011",
+    "note": "historical case preserved; PLR-011 adds the strongest durable negative example (0906 S3) and pins the required regression explicitly",
+    "severity_history": "was P2, promoted P0 via merge"
+   }
+  },
+  {
+   "id": "PLR-006",
+   "title": "S3 start-prep missed at season entry, recovered late at week 4",
+   "run": "WINGRUN_20260906_01",
+   "local_evidence_that_was_true": "skill acquisition itself succeeded 5/5 (operator-selected nodes)",
+   "global_week_objective_violated": "S3 weeks=8 fresh HOME must check S3_START_PREP_DONE first; prep executed at week 4 wasted 3 weeks of stat ceiling benefits",
+   "observed_outcome": "s3_start_prep_record: COMPLETED_LATE (MISSED_AT_S3_ENTRY_RECOVERED_AT_WEEK4); future_run_rule recorded",
+   "required_regression": "fresh-season HOME boundary must evaluate prep prerequisites before weekly loop; prep-late detection",
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json"
+   ]
+  },
+  {
+   "id": "PLR-007",
+   "title": "Local risk gate semantics: failure_rate=0 proves permission, not optimality",
+   "run": "WINGRUN_20260905_01 / WINGRUN_20260906_01",
+   "local_evidence_that_was_true": "VOCAL_FAILURE_RATE_GATE: value 0 <= 2 → VOCAL_ALLOWED executed correctly (first live execution S3W6 27% correctly blocked → REST)",
+   "global_week_objective_violated": "the gate is a necessary-condition check only; using 'gate passed' as the reason for choosing VOCAL in a route-critical week is the exact LOCAL_ACTION_ALLOWED != GLOBAL_WEEK_OBJECTIVE confusion",
+   "observed_outcome": "S4 preparation weeks 1-3 all cited fresh 0% reads as decision support while the route deadline was being consumed",
+   "required_regression": "decision trace must record which rule CONSUMED the week (business objective) separately from which gates PERMITTED it (risk); a week whose permit-evidence is only a risk gate must be flagged PLANNER_JUSTIFICATION_WEAK",
+   "severity": "P0",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S4W1",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/vocal_failure_gate_record.json"
+   ]
+  },
+  {
+   "id": "PLR-008",
+   "title": "Detector HOLD treated as validated (business_choice detector)",
+   "run": "WINGVAL_20260905_01",
+   "local_evidence_that_was_true": "discriminating evidence for 3-card advice vs 2-card business choice accumulated (+1 REPEATED_EVIDENCE)",
+   "global_week_objective_violated": "dual_check_choice_encountered=false in the validation run — absence of 2-card instances is NOT detector validation; detector status correctly stayed HOLD",
+   "observed_outcome": "no failure, but a planner consuming 'detector validated' from this run would violate honesty rules",
+   "required_regression": "detector promotion requires a positive 2-card instance under the new policy, not clean weeks; status HOLD must block business-choice automation",
+   "severity": "P2",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGVAL_20260905_01/business_choice_validation.json",
+    "enza_memory/wing_runs/WINGVAL_20260905_01/final_summary.json#business_choice_detector"
+   ]
+  },
+  {
+   "id": "PLR-009",
+   "title": "S4 fan totals occluded by Congratulation banner (estimate drift)",
+   "run": "WINGRUN_20260905_01",
+   "local_evidence_that_was_true": "banner present on HOME",
+   "global_week_objective_violated": "planning inputs used estimates (~112000+, ~113000+ 推定) instead of fresh exact fans; exact gap planning degraded",
+   "observed_outcome": "planner switched to week-count-based planning (correct fallback), but the estimates were recorded in trace as planning observations",
+   "required_regression": "occluded planning field → planner must record UNREADABLE and use a defined fallback, never interpolate estimates into gap math; schedule page offers a fresh fan read when HOME banner occludes",
+   "severity": "P2",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S4W1+S4W2+S4W3"
+   ]
+  },
+  {
+   "id": "PLR-010",
+   "title": "Planner candidate rules with confidence 0.0 must not be promoted by adjacent successes",
+   "run": "cross-run (ai_decisions/planner_rules_candidate.json)",
+   "local_evidence_that_was_true": "season_2_required_audition / season_3_audition / season_4_audition candidates existed with confidence 0.0 and blocked_by unknowns",
+   "global_week_objective_violated": "any promotion path that lets adjacent VOCAL successes raise blocked candidate confidence would convert unverified strategy into executable policy",
+   "observed_outcome": "candidates remained CANDIDATE_ONLY; S4 behavior ultimately came from operator prompt authority, not from candidate rules",
+   "required_regression": "promotion of planner candidates requires the evidence class the unknown registry demands (e.g. planner_season4_large_auditions); success counts from other rules must not leak",
+   "severity": "P1",
+   "already_covered_by_test": "yes",
+   "new_test_candidate": false,
+   "evidence_refs": [
+    "ai_decisions/planner_rules_candidate.json",
+    "ai_decisions/unknown_registry_candidate.json#confirmed_knowledge"
+   ]
+  },
+  {
+   "id": "PLR-011",
+   "title": "S3 repeated VOCAL with fresh failure_rate=0 finished 22,672/50,000 and S4 was never reached (quiet futility variant)",
+   "run": "WINGRUN_20260906_01 (S3 weeks 4→1, plus S1/S2 recovered weeks)",
+   "local_evidence_that_was_true": "every remaining S3 week read fresh トラブル率 0% (risk_gate_allows(VOCAL) true on every decision); VOCAL executed cleanly each week (trouble 0%); all local postconditions verified (weeks-1, fresh HOME)",
+   "global_week_objective_violated": "planner_selects(VOCAL) repeated while the 50,000-fan target required ~+31744 fans over 4 weeks; realized VOCAL gain ~1000-1200/week made the target mathematically unreachable from the S3W4 boundary onward; no route/fan-target check ever overrode the default VOCAL selection; S4 (and any rescue route) was never reached",
+   "observed_outcome": "S3 finished 22,672/50,000 (rank D, gap 27,328); scenario concluded normally with おふたりは立派 ending; honest TARGET NOT MET recorded",
+   "required_regression": "risk_gate_allows(VOCAL) must NOT imply planner_selects(VOCAL). Planner objective selection must separately satisfy route/fan-target logic: (a) projected maximum gain over remaining weeks vs remaining gap (futility check), (b) route prerequisites/flags before default selection, (c) explicit ENDGAME_FUTILE operator escalation when unreachable. A week whose selection justification is only a risk gate is PLANNER_JUSTIFICATION_WEAK (PLR-007 trace separation applies).",
+   "severity": "P0",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "added_by": "RC-004",
+    "merges": "PLR-005",
+    "evidence_refs": [
+     "enza_memory/wing_runs/WINGRUN_20260906_01/run_completion_record.json#season_flow_S3_final_weeks",
+     "enza_memory/wing_runs/WINGRUN_20260906_01/run_completion_record.json#final_fans=22672",
+     "enza_memory/wing_runs/WINGRUN_20260906_01/checkpoint.json#fan_gap_to_target=27328",
+     "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl (S3 weeks 4→1 VOCAL, trouble 0, gap 31744→28336)"
+    ]
+   },
+   "relation_to_0905_variant": "WINGRUN_20260905_01 (PLR-001/002) is the deadline variant: route consumed by preparation. WINGRUN_20260906_01 (PLR-011) is the quiet-futility variant: no deadline pressure, gate simply passed every week while the objective was unreachable. Two independent runs, one root distinction: LOCAL_ACTION_ALLOWED != GLOBAL_WEEK_OBJECTIVE."
+  }
+ ],
+ "summary": {
+  "total_cases": 11,
+  "P0": 4,
+  "P1": 3,
+  "P2": 2,
+  "P1_policy_note": 1,
+  "key_principle": "VOCAL failure_rate=0 (local, replicated, risk-permitting) appears as true local evidence in PLR-001/002/005/007 — each time the global week objective required route/audition/escalation logic the local gate cannot supply. PLR-011 (added 2026-09-06 reconciliation) is the strongest negative example: fresh failure_rate=0 every week yet S3 ended 22,672/50,000 with S4 never reached."
+ },
+ "reconciliation_note": "2026-09-06 reconciliation: PLR-011 added (merges PLR-005); PLR-005 preserved with merge marker. Business policy NOT modified."
+}

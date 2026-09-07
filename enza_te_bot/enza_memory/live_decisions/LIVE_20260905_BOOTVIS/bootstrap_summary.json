@@ -1,0 +1,18 @@
+{
+  "session_id": "LIVE_20260905_BOOTVIS",
+  "mode": "BOOTSTRAP_VISUAL_MODE",
+  "screenshots_total": 2,
+  "native_vision_observations": 2,
+  "reused_previous_frames": 0,
+  "agy_calls_this_mode": 0,
+  "unknown_count": 0,
+  "page_sequence": [
+    {"frame_id": "boot_f01", "url": "https://shinycolors.enza.fun/produceReady", "page_class": "PRODUCE_MENU", "confidence": 0.90, "dwell": "2026-09-05T05:07:24Z"},
+    {"frame_id": "boot_f02", "url": "https://shinycolors.enza.fun/home", "page_class": "HOME", "confidence": 0.95, "dwell": "2026-09-05T05:07:59Z"}
+  ],
+  "agy_escalation_nodes": [
+    "HOME field projection (season/weeks_remaining/fan_gap 精确数字) — canonical evidence 必须走 AGY pipeline",
+    "produceReady 与 produceMain 等近似页面在 coarse classification 无法区分时"
+  ],
+  "notes": "agy CLI OAuth 登录已在代理 HTTPS_PROXY=127.0.0.1:7897 下修复；Frame pipeline (LIVE2F_20260905R2) 在 AGY 调用阶段被外部终止，未产生 canonical AGY artifact，未 resume。"
+}

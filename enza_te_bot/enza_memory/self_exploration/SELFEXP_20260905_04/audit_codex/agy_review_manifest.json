@@ -1,0 +1,10 @@
+{
+  "required":false,
+  "historical_review_status":"AGY_REVIEW_INCOMPLETE",
+  "historical_review_reason":"RESULT_NOT_RECOVERABLE",
+  "historical_review_promotion":"NONE",
+  "retry_prohibited":true,
+  "reason":"SELFEXP_04 supplies explicit WING labels and six closed-loop transitions; remaining ambiguity is control geometry, which AGY visual review cannot promote to executable geometry.",
+  "unique_screenshot_limit":6,
+  "review_items":[]
+}

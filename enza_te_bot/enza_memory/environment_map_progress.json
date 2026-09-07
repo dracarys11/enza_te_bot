@@ -1,0 +1,111 @@
+{
+  "map_id": "environment_map_progress",
+  "updated_at": "2026-09-03T06:30:00Z",
+  "usage_status": "environment mapping dataset ONLY. NOT training data, NOT executable policy.",
+  "flow": "W.I.N.G. first production preparation",
+  "known_states": {
+    "HOME": {
+      "url": "/home",
+      "mapped_in": [
+        "prior user_reported sessions",
+        "bootstrap OBS 20260903"
+      ],
+      "first_hand": true,
+      "exits_known": [
+        "プロデュース nav -> /produceReady"
+      ]
+    },
+    "PRODUCE_SELECTION": {
+      "url": "/produceReady",
+      "mapped_in": "OBS_20260903060500 + earlier 1D artifacts",
+      "first_hand": true,
+      "exits_known": [
+        "次へ -> UNIT_FORMATION (verified this session)",
+        "back arrow -> produce-mode modal/help region (verified earlier, anomaly record)"
+      ]
+    },
+    "UNIT_FORMATION": {
+      "url": "/produceReady (URL unchanged)",
+      "mapped_in": "OBS_20260903060520",
+      "first_hand": true,
+      "exits_known": [
+        "次へ -> ITEM_SELECTION (verified this session)"
+      ],
+      "unexplored": [
+        "idol card inspection",
+        "support/deck sub-screens"
+      ]
+    },
+    "ITEM_SELECTION": {
+      "url": "/produceReady (URL unchanged)",
+      "mapped_in": "OBS_20260903060545",
+      "first_hand": true,
+      "exits_known": [
+        "次へ -> WING_CONFIRMATION_DIALOG (verified this session)"
+      ],
+      "unexplored": [
+        "item selection semantics (selection forbidden this pass)"
+      ]
+    },
+    "WING_CONFIRMATION_DIALOG": {
+      "url": "/produceReady (URL unchanged)",
+      "mapped_in": "OBS_20260903060610",
+      "first_hand": true,
+      "exits_known": [
+        "confirm -> UNKNOWN (forbidden: resource consumption; user_reported error 9000)",
+        "cancel -> presumed back to ITEM_SELECTION, UNTESTED"
+      ],
+      "note": "production start prompt with consume information; held open at session end",
+      "structure_mapped": "OBS_20260903063000 (title プロデュース開始, W.I.N.G.編 tag, idol portrait, consume text block, キャンセル + プロデュース開始 buttons)",
+      "structure_confidence": "0.9 button/title labels; 0.7 consume text characters",
+      "cancel_behavior": "UNTESTED — not authorized in Phase 1E-continue",
+      "stability": "dialog held unchanged ~24 minutes"
+    }
+  },
+  "unmapped_states": [
+    "FIRST_PRODUCTION_STATE",
+    "WEEK_STATUS_STATE",
+    "LESSON_SELECTION_STATE",
+    "AUDITION_SELECTION_STATE",
+    "RESULT_STATE",
+    "G.R.A. flow",
+    "特化プロデュース flow",
+    "difficulty selection (ビギナー/ミドル/マスター) semantics"
+  ],
+  "edge_summary": [
+    {
+      "from": "PRODUCE_SELECTION",
+      "via": "次へ",
+      "to": "UNIT_FORMATION",
+      "verified": "PASS (n=1)"
+    },
+    {
+      "from": "UNIT_FORMATION",
+      "via": "次へ",
+      "to": "ITEM_SELECTION",
+      "verified": "PASS (n=1)"
+    },
+    {
+      "from": "ITEM_SELECTION",
+      "via": "次へ",
+      "to": "WING_CONFIRMATION_DIALOG",
+      "verified": "PASS (n=1)"
+    },
+    {
+      "from": "WING_CONFIRMATION_DIALOG",
+      "via": "confirm",
+      "to": "UNKNOWN",
+      "verified": "never tested (forbidden)"
+    }
+  ],
+  "environment_findings": [
+    "URL stays /produceReady across all four prep states — state signal is visual only (reinforces F3 with n=4 more)",
+    "all three 次へ transitions were pure navigation; consumption gating is at the confirm dialog (first-hand, upgrades H3)"
+  ],
+  "counts": {
+    "states_mapped_total": 5,
+    "edges_verified": 3,
+    "observations_this_phase": 5,
+    "actions_this_phase": 3
+  }
+}

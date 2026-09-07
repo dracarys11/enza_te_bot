@@ -1,0 +1,10 @@
+{
+  "run_id": "WINGVAL_20260905_01",
+  "dual_check_choice_encountered": false,
+  "detector_status": "HOLD (维持)",
+  "discriminating_evidence": [
+    {"observed":"三选项 advice 选择 (楽しくやろう/いつも通り/元気いっぱい), vB_after 页面","implication":"多选项卡存在两种形态: 3卡=advice(可按授权处理) vs 2卡=BUSINESS_CHOICE(必须STOP)","rule_update_candidate":"detector 需同时检查卡数量==2 与双✓结构; 3卡advice不属于BUSINESS_CHOICE"},
+    {"prior_evidence":"WINGRUN_20260905_01 wk5 いいよ/ごめん 双卡(2次: 智代子请求+S2 ビジュアル请求)"}
+  ],
+  "conclusion": "2卡 detector 未见新实例; 3卡advice 与 2卡choice 的判别证据 +1 (REPEATED_EVIDENCE)"
+}

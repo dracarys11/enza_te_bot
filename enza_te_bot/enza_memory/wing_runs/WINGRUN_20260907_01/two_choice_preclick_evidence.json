@@ -1,0 +1,80 @@
+{
+ "artifact_type": "TWO_CHOICE_PRECLICK_EVIDENCE",
+ "run_id": "WINGRUN_20260907_01",
+ "captured_at": "2026-09-07",
+ "viewport": "1280x720 (ZCode IAB)",
+ "layout_family": "TWO",
+ "layout_identity": "TWO_CHOICE_LAYOUT_V1 — two simultaneous ✓-cornered option cards over dialogue",
+ "options": [
+  {
+   "index": 1,
+   "text": "いいよ",
+   "text_color_region": "left",
+   "border": "green",
+   "badge": "green check bottom-right",
+   "box_px": {
+    "x1": 62,
+    "y1": 160,
+    "x2": 418,
+    "y2": 340
+   },
+   "box_norm": {
+    "x1": 0.0484,
+    "y1": 0.2222,
+    "x2": 0.3266,
+    "y2": 0.4722
+   },
+   "center_px": {
+    "x": 240,
+    "y": 250
+   }
+  },
+  {
+   "index": 2,
+   "text": "ごめん",
+   "text_color_region": "right",
+   "border": "pink",
+   "badge": "pink check bottom-right",
+   "box_px": {
+    "x1": 850,
+    "y1": 160,
+    "x2": 1205,
+    "y2": 340
+   },
+   "box_norm": {
+    "x1": 0.6641,
+    "y1": 0.2222,
+    "x2": 0.9414,
+    "y2": 0.4722
+   },
+   "center_px": {
+    "x": 1027,
+    "y": 250
+   }
+  }
+ ],
+ "event_context": {
+  "week": "S1W5 post-lesson home dialogue",
+  "speaker": "智代子",
+  "line": "今週にレッスンさせてください！",
+  "family": "PROMISE_EVENT (いいよ/ごめん)"
+ },
+ "all_options_visible": true,
+ "occlusion": "none",
+ "background_state": "scene not dimmed; textbox visible below cards",
+ "geometry_status": "GEOMETRY_CAPTURED (first pre-click true two-choice full frame of project)",
+ "screenshot": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_S1W5.png",
+ "screenshot_sha256": "75c65ce01eef74504f757a038ad126090ea93cd05de061375425268fce4a595d",
+ "provenance": "session_observed",
+ "classification": "FACT",
+ "note": "pre-click frame; selection NOT yet executed at capture time",
+ "execution": {
+  "policy": "wing_business_choice_fixed TWO_CHOICE (contains ごめん -> ごめん, FIXED_DECLINE)",
+  "action": "clicked ごめん (index 2) at px (1027,250)",
+  "authority": "ACTIVE policy + layout certain + both options fully visible + fresh INPUT frame",
+  "post_click": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_POSTCLICK_S1W5.png",
+  "post_click_response": "智代子「うっ……だ、だめですか？ わかりました、仕方ないです……！」",
+  "verified_transition": true,
+  "autonomous_decline_execution_count": "n=1 (first project-wide autonomous ごめん execution)"
+ }
+}

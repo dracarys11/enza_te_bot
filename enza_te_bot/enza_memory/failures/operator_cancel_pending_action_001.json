@@ -1,0 +1,39 @@
+{
+ "failure_id": "operator_cancel_pending_action_001",
+ "trajectory_reference": "TRAJ_WINGRUN_20260907_01 step 9",
+ "phase": "S1W6 lesson 決定 post-click wait",
+ "timestamp_approx": "2026-09-07T00:00:00Z",
+ "occurrences": 1,
+ "intent": "execute S1W6 VOCAL lesson (schedule page -> 決定) and wait through lesson/result animation",
+ "grounding_method": {
+  "method": "決定 button (1175,660) verified on fresh schedule frame",
+  "estimated_target": "決定",
+  "precision_claim": "button identity certain (frame-level)"
+ },
+ "action": {
+  "performed": "cua.click(1175,660) then 25s wait — JS cell CANCELLED by operator mid-wait"
+ },
+ "observed_result": {
+  "new_state": "at pause: POST_LESSON_EVENT_DIALOGUE (プロデューサー「おはよう智代子、何書いてるんだ？」) per PAUSE_STATE_FRESH.png",
+  "evidence": [
+   "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/PAUSE_STATE_FRESH.png"
+  ],
+  "provenance": "session_observed"
+ },
+ "verification": {
+  "expected_state": "post-lesson settle/event chain (same family as W2-W5)",
+  "comparison": "consistent with lesson having fired; week counter NOT visible in dialogue frame",
+  "result": "UNKNOWN_OUTCOME_COMPONENTS: weeks_remaining, lesson numbers, remaining chain length"
+ },
+ "classification": "UNKNOWN_STATE (bounded — pending action cannot fully reconcile until fresh top-bar observation on resume)",
+ "recovery": "RESUME PROTOCOL: no further clicks until fresh stable observation of top status bar; reconcile S1W6 commit (残り週 should read 2 if committed); then continue W7/W8 audition weeks",
+ "note": "recorded per protocol: a session must not downgrade an interruption to 'recovered, no record'",
+ "resolution_20260907": {
+  "reconciled": true,
+  "method": "fresh dialogue advance (no business action repeated) -> stable HOME",
+  "outcome": "W6 consumed: weeks 3->2 fresh-confirmed; post-lesson chain ran (Perfect Communication) and a new PROMISE two-choice was declined per fixed policy (n=2)",
+  "evidence": [
+   "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/recovery_06_home_check.png"
+  ]
+ }
+}

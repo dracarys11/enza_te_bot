@@ -1,0 +1,14 @@
+{
+  "session_id": "SELFEXP_20260905_03",
+  "mode": "SELF_EXPLORATION_MODE",
+  "started": "2026-09-05T05:54:00Z",
+  "ended": "2026-09-05T05:58:30Z",
+  "screenshots_total": 8,
+  "actions_total": 12,
+  "valid_transitions": 7,
+  "new_pages": 2,
+  "agy_calls": 0,
+  "stop_reasons": ["KNOWHOW_SELECTION stage 强制要求选择 1 本ノウハウブック才能推进 (決定 钮禁用), 触发停止条件: 需要选择/消耗道具才能继续"],
+  "wizard_stage_sequence": ["PRODUCE_SELECTION","UNIT_FORMATION","KNOWHOW_SELECTION","[STOP]","UNIT_FORMATION","PRODUCE_SELECTION"],
+  "item_selection_reached": false
+}

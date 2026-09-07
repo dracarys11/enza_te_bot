@@ -1,0 +1,56 @@
+{
+  "scenario": "WING",
+  "scenario_scope": "WING",
+  "season_goals": {
+    "S1": {
+      "fan_target": null,
+      "audition_requirements": [],
+      "priority": ["VOCAL default (CONFIRMED, home_policy.py season_1_default_vocal)", "final actionable week: gap<=0 → VOCAL; gap>300 → AUDITION; 0<gap<=300 → NEEDS_VOCAL_FAN_GAIN (CONFIRMED code, but 'final actionable week' detection itself is an external flag)"],
+      "source_files": ["home_policy.py", "ai_decisions/planner_rules_candidate.json", "ai_decisions/unknown_registry_candidate.json"],
+      "confidence": 0.7,
+      "unknowns": ["planner_season1_near_end_threshold (conf 0.0)", "planner_season1_low_stamina", "in-season fan target value not in memory (observed あと999人 at week1)"]
+    },
+    "S2": {
+      "fan_target": null,
+      "audition_requirements": [{"rule": "required 10000 audition once, else VOCAL", "status": "CANDIDATE conf 0.5, blocked_by planner_season2_audition_eligibility"}],
+      "priority": ["VOCAL default (CONFIRMED home_policy season_2_default_vocal)", "weeks==1 & gap>0 → AUDITION (CONFIRMED season_2_final_week_fan_gap)", "weeks==1 & gap<=0 → VOCAL"],
+      "source_files": ["home_policy.py", "ai_decisions/unknown_registry_candidate.json"],
+      "confidence": 0.6,
+      "unknowns": ["planner_season2_audition_eligibility (0.0)", "completion_audition_success_meaning (0.0)"]
+    },
+    "S3": {
+      "fan_target": null,
+      "audition_requirements": [{"order": "40000 then 50000", "status": "CONFIRMED season3_audition.py required_reward", "locks": {"50000": "unlocked at 50000 fans", "100000": "unlocked at 100000 fans"}}],
+      "priority": ["AUDITION 40k if pending (CONFIRMED code)", "if 50k pending and fans<50000 → VOCAL build, else AUDITION 50k (CONFIRMED code)", "then stamina adequate → VOCAL else REST (CONFIRMED code)", "SKILL priority exists only as CANDIDATE (planner_season3_skill_goals 0.0), not executable"],
+      "source_files": ["home_policy.py", "season3_audition.py", "config.json(ROIs)"],
+      "confidence": 0.7,
+      "unknowns": ["planner_season3_skill_goals (0.0)", "completion flag commit requires explicit result evidence (CONFIRMED rule)"]
+    },
+    "S4": {
+      "fan_target": null,
+      "audition_requirements": [{"rule": "large auditions (100k) priority then VOCAL", "status": "CANDIDATE conf 0.0 blocked_by planner_season4_large_auditions"}],
+      "priority": [],
+      "source_files": ["home_policy.py", "ai_decisions/unknown_registry_candidate.json"],
+      "confidence": 0.0,
+      "unknowns": ["home_policy.py returns ROUTE_STATE_REQUIRED for S4 — GLOBAL UNKNOWN unless route state supplied"]
+    }
+  },
+  "global_rules": [
+    "Planner only at fresh verified HOME (CONFIRMED conf 1.0)",
+    "Outputs limited to VOCAL/REST/SKILL/AUDITION (CONFIRMED conf 1.0)",
+    "HOME fan indicator = fan_gap_to_target (remaining to target), not total fans (CONFIRMED migrate_home_fan_gap.py)",
+    "stamina min_start_fill 0.15 ROI convention (CONFIRMED config.json)",
+    "Commit audition flags only on explicit result evidence (CONFIRMED season3_audition.py)",
+    "battle_auto_on named action exists (CONFIRMED conf 1.0) but auto-on usage is CANDIDATE 0.4",
+    "config.json run_state.season3 40k/50k completed flags are STALE from a previous run — this run starts S3 flags false (CONFLICT RECORDED)"
+  ],
+  "room_sops_available": ["VOCAL", "REST", "SKILL", "AUDITION — all CANDIDATE_ONLY, exit criterion FRESH_VERIFIED_HOME, shared handlers dialogue/continue/choice (+speed for audition)"],
+  "known_controls": ["wing_schedule(プロデュース SCHEDULE, UNKNOWN_RISK)", "wing_rest(休む, COMMIT)", "dialogue_skip(SKIP)", "bottom entries 振り返り/流行確認 UNKNOWN"],
+  "unresolved_business_rules": [
+    "S4 route state entirely unresolved",
+    "lesson/audition in-room flow: lesson minigame handling NOT in memory (room_shared_handler_matrix 0.2)",
+    "whether every vocal cycle consumes exactly one week (VOCAL room unknown)",
+    "audition eligibility/selection when multiple auditions visible"
+  ],
+  "run_scope_expectation": "S1-S3 executable per policy; S4 = GLOBAL UNKNOWN → WING_RUN_STOPPED_FAIL_CLOSED expected at S4 entry unless route state provided"
+}

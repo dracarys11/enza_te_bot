@@ -1,0 +1,75 @@
+{
+ "schema_version": 1,
+ "artifact_id": "cold_start_event_policy",
+ "artifact_type": "COLD_START_EVENT_POLICY",
+ "created_at": "2026-09-06T08:00:00Z",
+ "status": "INITIALIZED_CANDIDATE",
+ "provenance": {
+  "classification": "inference",
+  "producer": "ZCode (Environment Agent)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T08:00:00Z",
+  "source_artifact_ids": [
+   "event_occurrences.jsonl",
+   "../../wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+   "../../wing_runs/WINGRUN_20260906_01/timings.jsonl"
+  ],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "contexts": {
+  "POST_WEEK_ACTION": {
+   "wait_policy_ms": {
+    "min": 8000,
+    "note": "natural auto-lesson ~8000ms; events appear after completion"
+   },
+   "candidate_events": [
+    {
+     "event": "MORNING_3CHOICE",
+     "empirical_probability": 0.1333,
+     "layout_family": "THREE_CHOICE_LAYOUT_V1",
+     "safe_probe_region": null,
+     "geometry": "UNKNOWN"
+    },
+    {
+     "event": "TWO_CHOICE",
+     "empirical_probability": 0.1,
+     "layout_family": "TWO_CHOICE_LAYOUT_V1",
+     "safe_probe_region": null,
+     "geometry": "UNKNOWN"
+    },
+    {
+     "event": "PERSONAL_STORY",
+     "empirical_probability": 0.0667,
+     "layout_family": "STORY_TEXTBOX_LAYOUT_V1",
+     "safe_probe_region": {
+      "box_norm": [
+       0.1758,
+       0.7361,
+       0.8086,
+       0.9722
+      ]
+     }
+    },
+    {
+     "event": "SUPPORT_CARD_STORY",
+     "empirical_probability": 0.0333,
+     "layout_family": "STORY_TEXTBOX_LAYOUT_V1",
+     "safe_probe_region": {
+      "box_norm": [
+       0.1758,
+       0.7361,
+       0.8086,
+       0.9722
+      ]
+     }
+    }
+   ],
+   "probe_order": "choice-overlay detect > story textbox > SKIP badge",
+   "forbidden": "no blind textbox tap without choice-absence check"
+  }
+ },
+ "usage": "OBSERVATION PRIOR and PROBE ORDER only — never a business behavior input"
+}

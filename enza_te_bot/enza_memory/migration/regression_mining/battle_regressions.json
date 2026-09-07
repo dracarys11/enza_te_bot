@@ -1,0 +1,134 @@
+{
+  "artifact_type": "BATTLE_REGRESSION_CORPUS",
+  "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+  "created_at": "2026-09-06T23:30:00Z",
+  "status": "MINED_EVIDENCE_CORPUS — regression-case design ONLY. NOT executable policy.",
+  "sample_inventory": {
+    "independent_live_battle_instances": 11,
+    "by_type": {
+      "S1_FINAL_AUDITION": {"instances": 1, "results": {"PASS": 1}},
+      "S2_FINAL_AUDITION": {"instances": 1, "results": {"PASS": 1}},
+      "S3_40K": {"instances": 3, "results": {"FAIL": 1, "UNKNOWN_EVIDENCE_LOSS": 1, "PASS": 1}},
+      "S3_50K": {"instances": 1, "results": {"PASS": 1}},
+      "THE_LEGEND": {"instances": 5, "results": {"PASS": 3, "FAIL": 2}}
+    },
+    "note": "Counts are battle instances, not independent sessions. THE LEGEND repeatability is scoped to THE LEGEND only."
+  },
+  "paired_regression_cases": [
+    {
+      "id": "BTR-001",
+      "pair": "AUTO OFF + DISABLED(dimmed, ANIMATION phase) + current epoch → NO CLICK",
+      "precondition": "battle in idol-dance animation; Auto visible but dimmed",
+      "required_behavior": "no semantic click; wait for INPUT_READY",
+      "observed_violations": 3,
+      "observed_consequence_of_violation": "clicks had no effect (frozen battle inspection, 0905 S4)",
+      "positive_reference_frames": ["VRB02_025 (Auto dimmed during animation)", "gate_auto_verify.png", "s4_leg1_auto_check*.png"],
+      "severity": "P0",
+      "already_covered_by_test": "partial",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json"]
+    },
+    {
+      "id": "BTR-002",
+      "pair": "AUTO OFF + ENABLED + INPUT_READY → CLICK ONCE → fresh verify ON",
+      "precondition": "INPUT_READY phase, current control epoch, value OFF, interactability ENABLED",
+      "required_behavior": "exactly one click; consume frame; fresh verify AUTO_ON",
+      "observed_successes": 4,
+      "failure_modes": ["double toggle if post-click verify skipped (S3 40k repeated-click lesson: 点击后必须 fresh read 避免重复点击抵消)"],
+      "positive_reference_frames": ["gate_input_ready_check1.png", "s4_leg1_auto_check3.png", "resume_check.png"],
+      "severity": "P0",
+      "already_covered_by_test": "partial",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json#auto.contract", "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/audition_speed_handler_record.json"]
+    },
+    {
+      "id": "BTR-003",
+      "pair": "AUTO ON → NO ACTION",
+      "precondition": "fresh read shows AUTO_ON",
+      "required_behavior": "no Auto/speed/card clicks; battle wait",
+      "observed_violations": 2,
+      "observed_consequence_of_violation": "speed clicks after Auto ON had no effect; X2 held (AUTO_LOCKS_SPEED_ORDERING)",
+      "severity": "P0",
+      "already_covered_by_test": "no",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/policies/audition_battle_speed_handler.json#ordering_rule"]
+    },
+    {
+      "id": "BTR-004",
+      "pair": "SPEED DISPLAY → NOT CLICKABLE (display-only)",
+      "precondition": "OFF/X2/X3 badge read in top-right ROI x∈[0.87,0.95] y∈[0.03,0.10]",
+      "required_behavior": "display read only; toggle control ungrounded (HOLD); no click on badge",
+      "observed_violations": ">=2",
+      "observed_consequence_of_violation": "X2 badge clicks did not reach X3 (S3 50k); x3 path never reached in any battle",
+      "test_matrix_status": {"x3_zero_clicks": "NOT_YET_OBSERVED", "x2_one_click_to_x3": "OBSERVED (OFF→click→X2)", "x1_two_clicks": "NOT_YET_OBSERVED", "unknown_stop": "NOT_YET_OBSERVED", "no_stale_reuse": "PASS"},
+      "severity": "P0",
+      "already_covered_by_test": "partial",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/policies/audition_battle_speed_handler.json#test_matrix", "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#VRB02_028"]
+    },
+    {
+      "id": "BTR-005",
+      "pair": "RESULT PASS → COMMIT PASS (explicit evidence only)",
+      "precondition": "explicit 合格 evidence: やったぁ dialogue, ランクアップ, rank screen, exact fan delta",
+      "required_behavior": "commit flag (e.g. audition_40k_completed=true) then advance",
+      "observed_successes": 6,
+      "positive_examples": ["S3 40k: やったぁ + はづきランクアップ + アイドルランクC", "S3 50k: pass + exact fans 58270→108270 (+50000 整)", "S1 final: PASS 60星1位", "THE LEGEND #3/#4: オーディション合格 + evidence screenshots"],
+      "severity": "P0",
+      "already_covered_by_test": "partial",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/result_commit_examples.json", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl"]
+    },
+    {
+      "id": "BTR-006",
+      "pair": "RESULT FAIL → COMMIT FAIL (NO_SUCCESS)",
+      "precondition": "explicit オーディション不合格 evidence",
+      "required_behavior": "commit NO_SUCCESS; week consumed; retry/replan from fresh state; fan effect +0",
+      "observed_successes": 3,
+      "positive_examples": ["THE LEGEND #2/#5 failures with explicit evidence legend_battle2_fail.png / legend_battle5_fail.png", "S3 40k first attempt 落选 (私じゃダメなのかな)"],
+      "severity": "P1",
+      "already_covered_by_test": "partial",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/result_commit_examples.json#THE_LEGEND_FAIL"]
+    },
+    {
+      "id": "BTR-007",
+      "pair": "UNKNOWN RESULT → NO COMMIT",
+      "precondition": "result evidence advanced/lost/unreadable",
+      "required_behavior": "commit nothing; flag stays false; replan from fresh state",
+      "observed_instances": 2,
+      "positive_examples": ["S3 40k retry: result dialogue advanced by script before capture → flag remained false", "S4 semifinal: scene SKIP consumed week without explicit match result → no WIN"],
+      "severity": "P0",
+      "already_covered_by_test": "partial",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/result_commit_examples.json#S3_40K_RESULT_EVIDENCE_LOSS+#SEMIFINAL_SCENE_SKIP"]
+    },
+    {
+      "id": "BTR-008",
+      "pair": "PAUSE_OVERLAY → RESUME → new control epoch",
+      "precondition": "pause/effect overlay open (accidental 暂停 panel in S3 40k retry)",
+      "required_behavior": "exclusive handler ownership; 再開 click; invalidate AUTO/SPEED/turn/card; fresh reobserve",
+      "observed_instances": 1,
+      "severity": "P1",
+      "already_covered_by_test": "no",
+      "new_test_candidate": true,
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json#chain8", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S3_40k_retry2_unexpected"]
+    },
+    {
+      "id": "BTR-009",
+      "pair": "MANUAL CARD FALLBACK (emergency only)",
+      "precondition": "Auto ungrounded mid-battle; battle frozen at TURN1",
+      "required_behavior": "HOLD as production policy; manual card selection is RUN_LOCAL_EMERGENCY_FALLBACK only (mechanism partially unknown; manual Vo-card selection did not advance turn in frozen inspection)",
+      "observed_instances": 1,
+      "severity": "P2",
+      "already_covered_by_test": "no",
+      "new_test_candidate": false,
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json#manual_card_fallback", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#AUDITION_IN_PROGRESS"]
+    }
+  ],
+  "cross_battle_invariants": [
+    "speed state may persist between battles — fresh read required every battle entry (frozen inspection: battle opened at X2 from previous battle)",
+    "resume/restart invalidates local battle state (new epoch)",
+    "OFF display is X1 (speed handler note)",
+    "battle controls outside 1280x720 UNKNOWN"
+  ]
+}

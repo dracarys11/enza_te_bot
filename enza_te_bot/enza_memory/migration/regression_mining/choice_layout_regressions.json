@@ -1,0 +1,61 @@
+{
+  "artifact_type": "CHOICE_LAYOUT_REGRESSION_CORPUS",
+  "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+  "created_at": "2026-09-06T23:30:00Z",
+  "status": "MINED_EVIDENCE_CORPUS — regression-case design ONLY. NOT executable policy.",
+  "taxonomy_rule": "LAYOUT_FAMILY and EVENT_CONTEXT are independent required fields (systemic bug class E). A choice handler is selected by BOTH; neither alone is sufficient.",
+  "layout_families": [
+    {
+      "layout_family": "THREE_CHOICE_LAYOUT_V1",
+      "visual_identity": "three selectable cards, staggered layout; selected option carries check badge (VRB02_018)",
+      "contexts": [
+        {"context": "MORNING", "instances": "0906 S1W3 choco研究 (timed, middle OK); 0906 S1W5 (SKIP 選択肢まで stops at choice, middle OK); 0905 S1W6チョコ活动 advice; counted 5 MORNING_3CHOICE occurrences in 34 eligible weeks (rate 0.1471, LOW_SAMPLE_COUNT)"},
+        {"context": "LESSON_ADVICE", "instances": "0905 S1W6 (粉/绿/橙, green chosen by operator authorization, Excellent!!); WINGVAL vB (楽しくやろう/いつも通り/元気いっぱい, いつも通り chosen); 0905 S3W7 (fixed middle)"},
+        {"context": "AUDITION_ADVICE", "instances": "0905 S4 THE LEGEND #3/#4/#5 pre-battle advice (チョコを渡す middle, 3x); 0905 S1W9 pre-audition advice"},
+        {"context": "OTHER/WEEK_3CHOICE", "instances": "0905 S4W3 latter-half 3-choice (middle)"}
+      ],
+      "geometry_replication": {
+        "success_count": 8,
+        "fail_count": 0,
+        "cross_session": true,
+        "canonical_box": "UNKNOWN (single-frame option-box captured in event_occurrence; cross-event replication of geometry still required — blind_fast_candidate blocker)",
+        "frames": ["rf_ec1_three_choice_present", "rf_ec2_middle_selected", "rf_ec3_post_choice", "VRB02_018 (staggered + middle check badge)"]
+      },
+      "policy": "fixed middle option (option_index=2), no semantic analysis, no AGY (wing_business_choice_fixed_policy THREE_CHOICE)",
+      "evidence_refs": ["enza_memory/policies/wing_business_choice_fixed_policy.json", "enza_memory/migration/python_click_migration/event_occurrence/event_probability_summary.json#MORNING_3CHOICE", "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#category_counts.MORNING_3CHOICE=4"]
+    },
+    {
+      "layout_family": "TWO_CHOICE_LAYOUT_V1",
+      "visual_identity": "two dual-✓-badge option cards while dialogue remains; choice-overlap-textbox hazard (VRB02_015)",
+      "contexts": [
+        {"context": "PROMISE", "instances": "0905 S1W5 智代子レッスン请求 いいよ/ごめん → operator-resolved いいよ (promise created, deferred S1W8); PROMISE_STORY rate 0.0294 (n=1, subtypes not separable)"},
+        {"context": "REQUEST_DECLINE (ごめん fixed)", "instances": "0905 S2 transition (ビジュアルレッスン请求 → ごめん); 0905 S2W5 (taught answer); 0905 S2W6 (fixed policy first auto execution PASS); 0906 S1W3 + S1W4 (ごめん OK); TWO_CHOICE rate 0.0882 (3/34 eligible) + additional"},
+        {"context": "LESSON_ADVICE (2-card shape)", "instances": "0906 S1W4 いいよ/ごめん (ごめん OK)"}
+      ],
+      "geometry_replication": {
+        "success_count": 4,
+        "fail_count": 0,
+        "cross_session": true,
+        "canonical_box": "UNKNOWN — option box geometry NEVER captured (blind_fast_candidate blocker); click region unknown; VISUAL_BOX_OBSERVED only in control matrix"
+      },
+      "policy": "ごめん present → ごめん (FIXED_DECLINE); no ごめん → STOP=UNKNOWN_TWO_CHOICE; unsupported two-card shape must STOP",
+      "evidence_refs": ["enza_memory/policies/wing_business_choice_fixed_policy.json#rules.TWO_CHOICE", "enza_memory/migration/python_click_migration/event_occurrence/event_type_profiles.json#TWO_CHOICE"]
+    },
+    {
+      "layout_family": "UNKNOWN_CARD_LAYOUT",
+      "visual_identity": "any option count != 2/3, uncertain count, occluded options, middle not clickable",
+      "policy": "STOP=UNKNOWN_BUSINESS_CHOICE (fail-closed)",
+      "observed_instance": "0905 S1W5 pre-policy: memory had no taught choice → GLOBAL_UNKNOWN → STOP RUN (correct behavior, NRG-014)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl#UNKNOWN_BUSINESS_CHOICE"]
+    }
+  ],
+  "regression_cases": [
+    {"id": "CLR-001", "severity": "P0", "case": "layout/context separation: AUDITION_ADVICE 3-card must not be labeled MORNING_3CHOICE; handler selection requires both fields", "already_covered_by_test": "no", "new_test_candidate": true, "evidence_refs": ["enza_memory/migration/python_click_migration/review_batches/v0_2/zcode_audit/systemic_bug_classes.json#E"]},
+    {"id": "CLR-002", "severity": "P0", "case": "2-card shape must be checked for dual-✓ structure + ごめん before any selection; 3-card advice handler must never fire on a 2-card frame", "already_covered_by_test": "yes", "new_test_candidate": false, "evidence_refs": ["enza_memory/policies/wing_business_choice_fixed_policy.json#guard"]},
+    {"id": "CLR-003", "severity": "P1", "case": "CHOICE_OVERLAP_HAZARD: 2-choice cards overlap textbox region; safe-textbox tap must be forbidden while cards present (separation present on all reviewed choice frames — must stay a regression)", "already_covered_by_test": "partial", "new_test_candidate": true, "evidence_refs": ["enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#VRB02_015"]},
+    {"id": "CLR-004", "severity": "P1", "case": "timed morning choice: bounded fast handler required (time limit observed); SKIP 選択肢まで stops at choice and must not overshoot", "already_covered_by_test": "no", "new_test_candidate": true, "evidence_refs": ["enza_memory/policies/harness_invariant_candidates_20260905.json#TIMED_CHOICE_PREFERS_BOUNDED_FAST_HANDLER", "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W5"]},
+    {"id": "CLR-005", "severity": "P2", "case": "middle-card clickability must be verified before selection; middle-not-clickable → STOP (policy OTHER branch)", "already_covered_by_test": "no", "new_test_candidate": true},
+    {"id": "CLR-006", "severity": "P2", "case": "choice geometry replication: THREE_CHOICE single-frame box exists; TWO_CHOICE box never captured — new_test_candidate: capture-on-first-sight requirement before fast-path promotion", "already_covered_by_test": "no", "new_test_candidate": true, "evidence_refs": ["enza_memory/migration/python_click_migration/event_occurrence/event_probability_summary.json#blind_fast_candidates"]}
+  ],
+  "empirical_rates_disclaimer": "All event rates (MORNING_3CHOICE 0.1471, TWO_CHOICE 0.0882, PROMISE 0.0294, PERSONAL_STORY 0.0882, SUPPORT_CARD_STORY 0.0294 over 34 eligible weeks) are RAW_EMPIRICAL_RATE with ELIGIBILITY_MODEL=UNKNOWN — observation priors only, never business inputs."
+}

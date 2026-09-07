@@ -1,0 +1,188 @@
+{
+  "updated_at": "2026-09-06T11:00:00Z",
+  "current_mainline": {
+    "scenario": "W.I.N.G.",
+    "evidence_baseline": "enza_memory/self_exploration/SELFEXP_20260905_04",
+    "active_run": null,
+    "latest_run": "enza_memory/wing_runs/WINGRUN_20260906_01",
+    "runtime_status": {
+      "S1": "CLEAR — continuation after S1W6 recovered from crash-session evidence",
+      "S2": "CLEAR — recovered from crash-session evidence",
+      "S3": "COMPLETE — final four weeks executed under weekly policy",
+      "S4": "NOT REACHED — S3 fan target missed; scenario concluded normally"
+    },
+    "blockers": [
+      "BUSINESS_CHOICE_DETECTION: 2-card detector promotion evidence 积累中; unsupported choice shapes 仍 fail-closed（业务答案已由 operator fixed policy 固定: enza_memory/policies/wing_business_choice_fixed_policy.json）",
+      "controls production promotion incomplete (CONTROLS_PRODUCTION_EXECUTABLE=NO)"
+    ]
+  },
+  "runs": [
+    {
+      "id": "SELFEXP_20260905_01",
+      "type": "SELF_EXPLORATION",
+      "scenario_scope": "GENERIC",
+      "status": "COMPLETED",
+      "path": "enza_memory/self_exploration/SELFEXP_20260905_01",
+      "primary": false,
+      "resume_file": null,
+      "superseded_by": null,
+      "note": "generic nav/page/control memory; historical supporting evidence"
+    },
+    {
+      "id": "SELFEXP_20260905_02",
+      "type": "SELF_EXPLORATION",
+      "scenario_scope": "GENERIC_PRODUCE",
+      "status": "FAIL_CLOSED",
+      "path": "enza_memory/self_exploration/SELFEXP_20260905_02",
+      "primary": false,
+      "resume_file": null,
+      "superseded_by": "enza_memory/self_exploration/SELFEXP_20260905_03",
+      "note": "tab lock discovery: wizard tabs locked before stage commit"
+    },
+    {
+      "id": "SELFEXP_20260905_03",
+      "type": "SELF_EXPLORATION",
+      "scenario_scope": "GENERIC_PRODUCE",
+      "status": "COMPLETED",
+      "path": "enza_memory/self_exploration/SELFEXP_20260905_03",
+      "primary": false,
+      "resume_file": null,
+      "superseded_by": null,
+      "note": "produce wizard 4-stage model; KNOWHOW stage OUT_OF_SCOPE_FOR_WING"
+    },
+    {
+      "id": "SELFEXP_20260905_04",
+      "type": "SELF_EXPLORATION",
+      "scenario_scope": "WING",
+      "status": "COMPLETED",
+      "path": "enza_memory/self_exploration/SELFEXP_20260905_04",
+      "primary": true,
+      "resume_file": null,
+      "superseded_by": null,
+      "note": "PRIMARY WING ENTRY EVIDENCE: HOME→W.I.N.G.→WING_HOME week1"
+    },
+    {
+      "id": "WINGRUN_20260905_01",
+      "type": "WING_RUN",
+      "scenario_scope": "WING",
+      "status": "COMPLETED_ABANDONED",
+      "path": "enza_memory/wing_runs/WINGRUN_20260905_01",
+      "primary": true,
+      "resume_file": null,
+      "resume_allowed": false,
+      "te_result": "FAILED",
+      "semifinal_result": "UNKNOWN",
+      "superseded_by": null,
+      "note": "S4 final: #1 PASS, #2 FAIL, #3 PASS, #4 PASS, #5 FAIL → 3 PASS / 2 FAIL; S4 end fans 414414; final evaluation fans 419414 (+5000 source UNKNOWN); semifinal result UNKNOWN; operator executed 諦める give-up → フェスアイドル誕生; run closed with no active resume point"
+    },
+    {
+      "id": "WINGRUN_20260906_01",
+      "type": "WING_RUN",
+      "scenario_scope": "WING",
+      "status": "COMPLETED_TARGET_NOT_MET",
+      "runtime_status": "MAIN_LOBBY_IDLE / CLOSED",
+      "path": "enza_memory/wing_runs/WINGRUN_20260906_01",
+      "primary": true,
+      "resume_file": null,
+      "resume_allowed": false,
+      "resume_point": null,
+      "recovery_class": "UNREGISTERED_RUN_CONTINUATION",
+      "recovery_artifact": "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json",
+      "superseded_by": null,
+      "result": "WING scenario completed normally; S3 target not met (22,672/50,000); fes idol 【ちゃカワ】園田智代子 C+ born; returned to main lobby",
+      "note": "Original persistence gap was recovered and the run later completed. Completion is recorded in run_completion_record.json and the terminal main-lobby state in timings.jsonl; this run has no valid resume point."
+    },
+    {
+      "id": "WINGVAL_20260905_01",
+      "type": "PROMOTION_EVIDENCE",
+      "scenario_scope": "WING",
+      "status": "COMPLETED",
+      "path": "enza_memory/wing_runs/WINGVAL_20260905_01",
+      "primary": true,
+      "resume_file": null,
+      "superseded_by": null,
+      "note": "VOCAL loop cross-session PASS; NO_AGY normal week PASS; geometry STABLE"
+    },
+    {
+      "id": "LIVE_20260905_122533",
+      "type": "LIVE_2FRAME",
+      "scenario_scope": "NONE",
+      "status": "FAIL_CLOSED",
+      "path": "enza_memory/live_decisions/LIVE_20260905_122533",
+      "primary": false,
+      "resume_file": null,
+      "superseded_by": null,
+      "note": "agy OAuth timeout → AGY_COMMAND_FAILURE, no retry (prohibited)"
+    },
+    {
+      "id": "LIVE_20260905_BOOTVIS",
+      "type": "BOOTSTRAP_VISUAL",
+      "scenario_scope": "NONE",
+      "status": "COMPLETED",
+      "path": "enza_memory/live_decisions/LIVE_20260905_BOOTVIS",
+      "primary": false,
+      "resume_file": null,
+      "superseded_by": null,
+      "note": "coarse visual bootstrap; agy OAuth repaired via proxy 127.0.0.1:7897"
+    }
+  ],
+  "distillation": {
+    "path": "enza_memory/wing_runs/WINGRUN_20260905_01/distillation",
+    "promotion_audit": "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/promotion_audit",
+    "promoted": [
+      "interruption dual-channel detection",
+      "stable WING_HOME entry identity",
+      "weeks_remaining-1 as ROOM_COMPLETION_EVIDENCE (S1 scope)"
+    ],
+    "held": [
+      "VOCAL normal-week loop (now PROMOTION_EVIDENCE_READY per WINGVAL, pending re-audit)",
+      "BUSINESS_CHOICE dual-check detection (2nd instance found in WINGRUN resume; pending re-audit)"
+    ]
+  },
+  "validation": {
+    "path": "enza_memory/wing_runs/WINGVAL_20260905_01",
+    "normal_week_no_agy": "PASS",
+    "control_geometry": "STABLE",
+    "vocal_loop_cross_session": "PASS"
+  },
+  "historical_superseded": [
+    {
+      "path": "enza_memory/environment_map_progress.json",
+      "superseded_by": "enza_memory/wing_state_graph_v2.json"
+    },
+    {
+      "path": "enza_memory/wing_state_graph_v2.json",
+      "note": "audit/benchmark only, NOT executable policy; partially superseded by SELFEXP_03/04 first-hand evidence"
+    },
+    {
+      "path": "test_data/ob003/LIVE2F_*",
+      "note": "AGY dispatch evidence; AGY_DISPATCHED != AGY_RESULT_AVAILABLE; retry prohibited"
+    },
+    {
+      "path": "enza_memory/wing_runs/WINGRUN_20260905_01/s4_reconciliation.json",
+      "note": "TE reachability superseded by actual outcome: route FAILED (3/4 successes, 419,414 fans)"
+    }
+  ],
+  "startup_discipline": [
+    "Read README.md → Runtime / Learning Artifact Index",
+    "Read enza_memory/artifact_registry.json",
+    "Resolve current_mainline and active_run",
+    "Read the registry-listed checkpoint / strategy / trace / distillation",
+    "Do not discover runtime truth from historical sessions unless referenced by the registry"
+  ],
+  "runtime_patch_20260905": {
+    "stamina_guard": "SUPERSEDED_BY_OPERATOR_POLICY — 旧 hard stamina REST guard (STAMINA_TOO_LOW_FOR_VOCAL/REST_REQUIRED_BY_STAMINA_GUARD) 已从 home_policy.py 移除; 0.50 仅保留为 LOW_STAMINA_WARNING (attention trigger), 非 business decision",
+    "fast_handlers": "wing_fast_handlers.py (morning_three_choice / promise_dialogue 纯决策函数)",
+    "speed_handler": "enza_memory/policies/audition_battle_speed_handler.json (前轮已建)",
+    "fixed_choice_policy": "enza_memory/policies/wing_business_choice_fixed_policy.json",
+    "harness_candidates": "enza_memory/policies/harness_invariant_candidates_20260905.json (CANDIDATES_ONLY)",
+    "tests": "test_home_policy.py (15) + test_wing_fast_handlers.py (12) = 27 OK",
+    "authoritative_rule": {
+      "LOW_STAMINA": "WARNING_ONLY",
+      "VOCAL_FAILURE_RATE_GATE": "failure_rate > 2 → DO_NOT_START_VOCAL → BACK → fresh WING_HOME → REST; <= 2 → VOCAL_ALLOWED (严格大于)",
+      "unknown_failure_rate": "low stamina → fail closed (REST preferred); 否则 NEED_MORE_OBSERVATION/escalation; stale → rejected, 不得当 0%"
+    }
+  },
+  "s4_route_evidence": "enza_memory/wing_runs/WINGRUN_20260905_01/s4_route_policy.json",
+  "execution_budget_profile": "enza_memory/policies/zcode_execution_budget_profile.json"
+}

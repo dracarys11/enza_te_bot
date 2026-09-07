@@ -1,0 +1,20 @@
+{
+ "policy_id": "vocal_risk_gate_hard",
+ "status": "ACTIVE (operator-specified HARD execution gate; issued 2026-09-07 recovery instruction)",
+ "scenario_scope": "WING weekly VOCAL lesson selection",
+ "source": "operator_instruction_20260907 (RECOVER CURRENT LIVE RUN — STRICT RISK GATE)",
+ "rules": {
+  "precondition": "planner has already selected VOCAL as the weekly objective before entering SCHEDULE",
+  "trouble_rate_lte_2pct": "VOCAL may be executed",
+  "trouble_rate_gt_2pct": "DO NOT execute VOCAL -> click BACK -> fresh HOME -> select REST -> complete REST -> return fresh HOME",
+  "trouble_rate_unknown": "STOP / NEED_MORE_OBSERVATION"
+ },
+ "authority": "HARD gate; no reinterpretation; baseline-VOCAL is NOT a default objective; weekly objectives belong to the planner",
+ "evidence_origin": "S1W6 live incident: VOCAL executed at trouble_rate 92% (see failures/s1w6_vocal_executed_above_risk_gate_001.json)",
+ "provenance": {
+  "classification": "user_reported",
+  "producer": "operator",
+  "confidence_cap": 0.5,
+  "note": "operator policy is binding as instruction; provenance stays user_reported per honesty rules until independently reviewed"
+ }
+}

@@ -1,0 +1,71 @@
+{
+  "review_id": "memory_review_v2",
+  "reviewed_at": "2026-09-03T05:55:00Z",
+  "reviewer_input": "AGY Memory Governance Audit findings",
+  "scope": "memory quality only. No runtime code, environment behavior, or gameplay knowledge modified.",
+
+  "changed_items": [
+    "policies/learned_constraints.json — restructured v2: rules split into evidence_supported_findings (F#) / hypotheses (H#) / unknowns_formerly_rules (U#) / behavioral_reference_not_policy (R#); every finding carries evidence refs + provenance + scope",
+    "trajectories/zcode_baseline_001.json — every step now has FACT / INFERENCE / UNKNOWN blocks + evidence_refs; usage_status banner added (evaluation benchmark only); confidence values labeled as declared estimates",
+    "failures/canvas_misclick_001.json — restructured into audit-required chain: intent -> grounding_method -> action -> observed_result -> verification -> unknown_cause -> future_caution; occurrences:1 recorded; policy links re-pointed at v2 IDs"
+  ],
+
+  "preserved_items": [
+    "failures/canvas_misclick_001.json retained in full (improved structure, nothing removed)",
+    "trajectories/zcode_baseline_001.json all 7 steps and all verified transitions retained",
+    "audit_comparison_hooks retained (risk appetite / verification skipping / overconfidence / anomaly handling)",
+    "observations/OBS001.json untouched (already VISIBLE_ONLY-compliant)",
+    "honest split session_observed vs user_reported retained and strengthened"
+  ],
+
+  "downgraded_claims": [
+    {
+      "was": "C3: 'Canvas click error tolerance is ±15px' (stated as rule)",
+      "now": "U1: exact tolerance UNKNOWN. One canvas click produced unexpected navigation (n=1); possible causes coordinate mismatch / hitbox uncertainty / state-transition timing; no measurement ever performed",
+      "reason": "unsupported precision — the ±15px figure was an a-priori guess, not evidence"
+    },
+    {
+      "was": "E3: 'modal appears on first visit per session'",
+      "now": "H1: hypothesis, UNVERIFIED (n=1, and the counter-evidence is itself user_reported)",
+      "reason": "single occurrence, trigger never isolated"
+    },
+    {
+      "was": "C4: 次へ may initialize produce session (presented as constraint)",
+      "now": "H3: hypothesis based entirely on user_reported error-9000 account; no first-hand evidence",
+      "reason": "user_reported cannot be promoted to constraint"
+    },
+    {
+      "was": "C1 'fresh screenshot before any click' stated as evidence-backed rule",
+      "now": "U2 + R2: time-lapse is a plausible contributing factor (unisolated); the practice is kept as baseline behavior reference, not a proven tolerance",
+      "reason": "correlation in n=1 failure, no controlled evidence"
+    },
+    {
+      "was": "trajectory steps 6-7 content treated as quasi-facts",
+      "now": "FACT lists emptied for user_reported steps; content moved to INFERENCE with confidence ≤0.5 and 'no evidence available' markers",
+      "reason": "provenance rule: user_reported must not be promoted"
+    }
+  ],
+
+  "new_unknowns": [
+    "exact canvas click tolerance (U1) — requires a calibration pass",
+    "modal appearance trigger conditions (H1)",
+    "true cause of the mis-fire in F2 (H2 candidate causes never isolated)",
+    "resource effect of 次へ (H3) — requires planner-authorized test",
+    "whether DOM unavailability is permanent or runtime-specific (F1 scope limited to observed passes)",
+    "declared confidence values are uncalibrated — no reliability curve exists yet"
+  ],
+
+  "approved_usage": [
+    "evaluation benchmark: compare future agent trajectories against baseline behavior (verification coverage, contract adherence, anomaly handling)",
+    "failure analysis: single well-documented canvas mis-fire case with detection and recovery",
+    "observation calibration: VISIBLE_ONLY schema and FACT/INFERENCE/UNKNOWN separation as template"
+  ],
+
+  "blocked_usage": [
+    "ground truth training data (declared confidences uncalibrated; single-session, single-occurrence events)",
+    "executable policy (v2 items are findings/hypotheses/references, not verified rules)",
+    "automatic strategy source (no gameplay knowledge created or validated; 次へ semantics remain UNKNOWN)"
+  ],
+
+  "principle_applied": "lower-confidence memory preferred over false precise memory; no missing evidence invented"
+}

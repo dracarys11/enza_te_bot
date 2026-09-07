@@ -1,0 +1,7 @@
+{
+  "screenshot":"screenshots/w6_after_skip.png",
+  "wing_home_grounded":"YES",
+  "evidence_status":"SUPPORTED",
+  "fields":{"scenario":"WING","season":"シーズン1","weeks_remaining":8,"fan_target":"あと999人(Eランク)","stamina":"270/300","main_controls":["プロデュース(SCHEDULE)","休む","振り返り","流行確認","ホームに戻る"],"dialogue":false,"overlay":false},
+  "basis":"Trace w6 after SKIP is MATCHED and page_memory records the same coarse fields."
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "artifact_id": "TRAJ_GEMINI_V1_AGY_EXTRACTION_001",
+  "artifact_type": "TRAJECTORY",
+  "created_at": "2026-09-04T10:48:57+08:00",
+  "status": "CANDIDATE",
+  "mission": {
+    "description": "Independent AGY Gemini Vision v1 extraction from one stored screenshot",
+    "authority_reference": "user request in Codex session on 2026-09-04",
+    "allowed_scope": [
+      "read skills/gemini_vision/SKILL.md",
+      "read the specified source_screenshot.png",
+      "write one vision_output.json",
+      "perform structural contract validation"
+    ],
+    "forbidden_scope": [
+      "read existing provider extraction outputs or benchmark reports",
+      "run a benchmark",
+      "modify runtime",
+      "execute an environment action"
+    ]
+  },
+  "steps": [
+    {
+      "step_id": "GEMINI_V1_AGY_EXTRACTION_001_STEP_01",
+      "timestamp": "2026-09-04T10:48:57+08:00",
+      "provenance": {
+        "classification": "session_observed",
+        "producer": "AGY Vision Provider (gemini-3.8-flash-medium)",
+        "provider_session_id": "staffer-mtmc9eqti; continuation staffer-mtmcsjnj6",
+        "captured_at": "2026-09-04T10:48:57+08:00",
+        "source_artifact_ids": ["OBS_20260903065025_P2_s7_training_settings"],
+        "integrity": {"algorithm": "sha256", "digest": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723"}
+      },
+      "before_observation_id": "OBS_20260903065025_P2_s7_training_settings",
+      "intent_id": null,
+      "gate_decision_id": null,
+      "permission_id": null,
+      "execution": {"performed": false, "provider_session_id": null, "permission_consumed": false, "result": "NO_ACTION", "evidence_ids": []},
+      "after_observation_id": null,
+      "verification": {"result": "VERIFIED_AFTER_SCHEMA_CORRECTION", "independent": false, "evidence_ids": ["EVID_GEMINI_V1_AGY_OUTPUT"]},
+      "claims": [
+        {"claim_id": "GEMINI_V1_AGY_EXTRACTION_001_C01", "classification": "FACT", "confidence": 1.0, "statement": "The final artifact parsed as JSON, passed the requested structural schema and forbidden-field checks, and contained 123 text regions, 52 interaction candidates, 0 numeric regions, 6 overlay regions, and 3 uncertainty records.", "evidence_ids": ["EVID_GEMINI_V1_AGY_OUTPUT"]}
+      ],
+      "unknowns": [
+        "capture.frame_id and capture.screenshot_digest were not available and remain explicitly UNKNOWN.",
+        "No cross-provider comparison or benchmark was run."
+      ]
+    }
+  ],
+  "provenance": {
+    "classification": "session_observed",
+    "producer": "AGY Vision Provider (gemini-3.8-flash-medium)",
+    "provider_session_id": "staffer-mtmc9eqti; continuation staffer-mtmcsjnj6",
+    "captured_at": "2026-09-04T10:48:57+08:00",
+    "source_artifact_ids": ["OBS_20260903065025_P2_s7_training_settings"],
+    "integrity": {"algorithm": null, "digest": null}
+  },
+  "evidence_references": [
+    {
+      "evidence_id": "EVID_GEMINI_V1_AGY_SCREENSHOT",
+      "kind": "SCREENSHOT",
+      "path": "test_data/ob003/OBS_20260903065025_P2_s7_training_settings/source_screenshot.png",
+      "captured_at": null,
+      "source": "stored OB-003 source screenshot",
+      "classification": "FACT",
+      "integrity": {"algorithm": "sha256", "digest": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723"}
+    },
+    {
+      "evidence_id": "EVID_GEMINI_V1_AGY_OUTPUT",
+      "kind": "OTHER",
+      "path": "test_data/gemini_v1/OBS_20260903065025_P2_s7_training_settings/vision_output.json",
+      "captured_at": "2026-09-04T10:48:57+08:00",
+      "source": "independent AGY Gemini Vision v1 extraction",
+      "classification": "FACT",
+      "integrity": {"algorithm": "sha256", "digest": "b0f3ae84afd63266401e51deef3717efbb1805b6fcf750e7ad233cacec263c65"}
+    }
+  ],
+  "unknowns": [
+    "The source PNG did not provide a trusted capture frame identifier or screenshot digest field."
+  ]
+}

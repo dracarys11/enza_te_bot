@@ -1,0 +1,8 @@
+{
+  "sessions":["SELFEXP_20260905_01","SELFEXP_20260905_02","SELFEXP_20260905_03","SELFEXP_20260905_04"],
+  "confirmed":["SELFEXP_04 explicit W.I.N.G. identity","SELFEXP_04 six matched entry transitions","SELFEXP_04 WING_HOME"],
+  "superseded_for_wing_scope":["SELFEXP_01 generic PRODUCE_MENU/WORK_ACTIVITY claims","SELFEXP_02 tab-lock interpretation","SELFEXP_03 KNOWHOW_SELECTION as WING stage"],
+  "unresolved":["SELFEXP_02 no-op cause (disabled vs geometry vs overlay)","SELFEXP_03 KNOWHOW scenario identity outside WING"],
+  "out_of_scope":["say Halo/ファン感謝祭/G.R.A.D. scenario paths"],
+  "counts":{"confirmed":3,"superseded":3,"unresolved":2,"out_of_scope":1}
+}

@@ -1,0 +1,56 @@
+{
+  "handler": "AUDITION_BATTLE_SPEED",
+  "status": "ACTIVE procedure (operator-specified)",
+  "scenario_scope": "WING",
+  "source_state": "AUDITION_BATTLE",
+  "viewport_signature": "1280x720 (唯一已验 viewport)",
+  "attention_roi": {
+    "normalized_region": "top-right corner, x∈[0.87,0.95], y∈[0.03,0.10]",
+    "pixel_region_1280x720": [
+      1114,
+      22,
+      1216,
+      72
+    ],
+    "local_visual_anchor": "倍速 indicator 文本 (OFF/2倍速/3倍速), 紧邻 Auto 按钮右侧, 暂停按钮左侧",
+    "read_method": "coarse native vision 截取 ROI 文本, 禁全屏 OCR, 禁 AGY"
+  },
+  "separate_states": {
+    "battle_auto_state": "ON | OFF | UNKNOWN (ROI: Auto 按钮 x∈[0.79,0.85])",
+    "battle_speed_state": "X1 | X2 | X3 | UNKNOWN"
+  },
+  "state_machine": {
+    "max_toggle_attempts": 3,
+    "flow": [
+      "fresh read Speed FIRST (进入 battle 后必读, 禁止沿用上次状态)",
+      "Speed != X3 → click speed control → fresh read → 重复至 X3 或超限(max 3)",
+      "Speed == X3 后 → fresh read Auto; Auto OFF → click once → fresh read ON",
+      "battle wait → result verify"
+    ],
+    "click_target": "speed control 本体 (1166,47) @1280x720",
+    "notes": [
+      "点击一次不必然 +1 档, 必须每次 fresh read",
+      "OFF 显示视为 X1"
+    ]
+  },
+  "test_matrix": {
+    "x3_zero_clicks": "NOT_YET_OBSERVED",
+    "x2_one_click_to_x3": "OBSERVED (WINGRUN S1 audition: OFF→点击→2倍速; x3 段未观察)",
+    "x1_two_clicks": "NOT_YET_OBSERVED",
+    "unknown_stop": "NOT_YET_OBSERVED",
+    "no_stale_reuse": "PASS (每次进 battle fresh read 已为既有纪律)"
+  },
+  "evidence_tier": "PARTIAL_IMPLEMENTED (x2→click 路径有 run 证据; x3/x1/UNKNOWN 路径待运行时观察)",
+  "ordering_rule": {
+    "rule": "SPEED_FIRST_THEN_AUTO — 进入 battle 后必须先设置倍速至 X3，再开 Auto；Auto ON 后倍速控件锁定不可再改",
+    "evidence": "S3 50k audition live finding: Auto ON 后点击倍速无效果(2次尝试保持2倍速)",
+    "correct_sequence": [
+      "1. fresh read Speed (ROI: 倍速 indicator)",
+      "2. Speed != X3 → toggle Speed → fresh read (bounded 3)",
+      "3. Speed == X3 → fresh read Auto",
+      "4. Auto OFF → click Auto once → fresh read",
+      "5. battle wait → result verify"
+    ],
+    "wrong_sequence_superseded": "先 Auto 后 Speed (旧流程, 已证实失败)"
+  }
+}

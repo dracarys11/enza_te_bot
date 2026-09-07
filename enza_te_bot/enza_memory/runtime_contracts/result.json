@@ -1,0 +1,195 @@
+{
+  "contract_version": "0.2.1",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): T-02 OK-anchor rule added; 2026-09-07 evidence delta CONTRACT_EVIDENCE_DELTA_20260907: recovered_historical_frames + PERSIST-1 re-check; metadata only",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract. RESULT SCENE != RESULT COMMITTED: presentation advance is perception/control; committing PASS/FAIL requires explicit evidence (RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE).",
+  "scenario_scope": "WING lesson result, audition result, season result overlays and result dialogues, 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "RESULT",
+    "subtypes": [
+      {
+        "subtype": "VOCAL_RESULT (RANKUP/統計演出)",
+        "anchors": [
+          "RANKUP/統計 overlay",
+          "+Vo/+SP/+fan green bubbles",
+          "blurred schedule-card background"
+        ],
+        "knowledge_tier": "REPEATED_EVIDENCE"
+      },
+      {
+        "subtype": "AUDITION_RESULT (PASS/FAIL)",
+        "anchors": [
+          "やったぁ / オーディション不合格 dialogues",
+          "rank-up frames"
+        ],
+        "knowledge_tier": "REPEATED_EVIDENCE (both outcomes observed)"
+      },
+      {
+        "subtype": "RESULT_DIALOGUE",
+        "anchors": [
+          "textbox over presentation"
+        ],
+        "knowledge_tier": "REPEATED_EVIDENCE"
+      }
+    ],
+    "must_not_require": "reading in-animation numbers (they refresh across frames; exact reads belong to fresh HOME)",
+    "identity_status": "VERIFIED_EVIDENCE"
+  },
+  "ENTRY_CONDITIONS": [
+    "DECIDE-driven lesson/audition completed and presentation began",
+    "fresh identity of subtype before any advance",
+    "no protected business choice pending"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "result subtype",
+      "explicit outcome evidence class: EXPLICIT_PASS | EXPLICIT_FAIL | UNKNOWN (e.g. やったぁ, オーディション不合格, rank delta)",
+      "fan delta where readable on fresh stable frame",
+      "advance-cycle owner (SKIP badge / textbox / center tap)",
+      "bounded advance cycle position"
+    ],
+    "commit_rule": "capture and classify explicit result → commit or preserve UNKNOWN → only then advance presentation (ordering invariant)"
+  },
+  "SUBSTATES": [
+    {
+      "substate": "RESULT_OVERLAY_ANIMATION",
+      "evidence": "center tap after wait, 4/4"
+    },
+    {
+      "substate": "RESULT_DIALOGUE",
+      "evidence": "textbox advance"
+    },
+    {
+      "substate": "RESULT_COMMITTED",
+      "evidence": "flag semantics per result_commit_examples"
+    }
+  ],
+  "VISIBLE_CONTROLS": [
+    {
+      "control": "ADVANCE cycle",
+      "geometry_1280x720": {
+        "sequence": [
+          [
+            1218,
+            53
+          ],
+          [
+            640,
+            610
+          ],
+          [
+            640,
+            350
+          ]
+        ]
+      },
+      "success_fail": "6/0",
+      "visible_status": "VERIFIED_EVIDENCE (replicated 2/2 in independent validation; RESULT:OK is acted on ONLY with a confirmed OK visual anchor — record NOT_VISIBLE_NO_OK_ANCHOR when absent, precedent VRB02_033)"
+    },
+    {
+      "control": "SKIP badge",
+      "geometry": "see dialogue.json",
+      "visible_status": "VERIFIED_EVIDENCE in this cycle"
+    },
+    {
+      "control": "textbox",
+      "geometry": "see dialogue.json",
+      "visible_status": "VERIFIED_EVIDENCE"
+    }
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "result SCENE visible != result COMMITTED. MEDIUM authority: advance requires fresh RESULT identity + no protected choice + bounded cycle; commit requires explicit evidence.",
+    "advance": "authorized after explicit result evidence captured (or classified UNKNOWN and preserved)",
+    "animation_center_tap": "clicks during unfinished animation were observed NO_EFFECT — wait then tap",
+    "commit_authority": "perception never commits; the executor commits only EXPLICIT_PASS/EXPLICIT_FAIL classes; UNKNOWN cannot commit progress"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/classify outcome evidence class",
+    "bounded advance cycle (SKIP → textbox → center) after capture",
+    "wait during animation"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "advance before explicit result capture (RESULT_EVIDENCE_LOSS)",
+    "committing completion flags from derived expectation (POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE)",
+    "unbounded advance taps"
+  ],
+  "POSTCONDITIONS": {
+    "lesson_result": "fresh WING_HOME with weeks_remaining-1",
+    "audition_pass": "flag committed true; fan delta observable on fresh HOME",
+    "audition_fail": "flag stays false; week consumed; retry/replan from fresh state",
+    "unknown": "flag stays false; advance proceeds but result remains UNKNOWN"
+  },
+  "EXIT_CONDITIONS": [
+    "advance cycle → fresh WING_HOME / season transition / next result state"
+  ],
+  "FAILURE_MODES": [
+    {
+      "mode": "RESULT_EVIDENCE_LOSS",
+      "class": "COMMIT_VIOLATION",
+      "evidence": "S3_40K first attempt + S3 semifinal scene"
+    },
+    {
+      "mode": "PREMATURE_ADVANCE_CLICK",
+      "class": "NO_EFFECT",
+      "evidence": "animation not finished"
+    },
+    {
+      "mode": "CHOICE_INTERRUPTS_RESULT",
+      "class": "INTERRUPTION",
+      "evidence": "probe order: choice first"
+    }
+  ],
+  "RECOVERY": [
+    "evidence lost → result stays UNKNOWN, flag uncommitted; never infer WIN from subsequent scene labels",
+    "advance cycle stuck → fresh subtype re-observation, bounded retry"
+  ],
+  "PERSISTENCE_BOUNDARY": "durable result record (evidence class + provenance) before advance; part of week flush",
+  "MIGRATION_STATUS": {
+    "ADVANCE": "NEEDS_FRESH_VISUAL_BOX (15/17, shadow-ready; REPLICATED per-cycle)",
+    "per_phase_boxes": "UNKNOWN",
+    "terminal_condition_detector": "BLOCKED for Python",
+    "AUDITION_RESULT_EVIDENCE": "EXPLICIT PASS and FAIL banner frames both RECOVERED_DURABLE (recovered_historical_frames/result/); advance/commit rules unchanged"
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/distilled/result_commit_examples.json",
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json",
+    "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/page_identity_distillation.json"
+  ],
+  "evidence_delta_source": [
+    "HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY",
+    "RUN_STATE_CONTAMINATION_FIX"
+  ],
+  "EVIDENCE_DELTA": {
+    "delta_id": "CONTRACT_EVIDENCE_DELTA_20260907",
+    "EXPLICIT_PASS_VISUAL_EVIDENCE": {
+      "status": "YES (RECOVERED_DURABLE)",
+      "frames": [
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_235640_dc58a91a_review_result.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_144018_38712583_pass_announce.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_231324_38712583_pass_announce.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_160536_38712583_pass_result.png"
+      ],
+      "note": "オーディション合格 golden banner frame; やったぁ celebration dialogue with pink OK anchor"
+    },
+    "EXPLICIT_FAIL_VISUAL_EVIDENCE": {
+      "status": "YES (RECOVERED_DURABLE)",
+      "frames": [
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_234041_dc58a91a_review_result.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_155304_38712583_fail_state.png"
+      ],
+      "note": "オーディション不合格 blue banner frame; post-fail dialogue"
+    },
+    "RESULT_ANNOUNCE_PREAMBLE": {
+      "status": "RECOVERED_DURABLE — 审查员 pre-announcement dialogue frames; NOT outcome evidence",
+      "frames": [
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_143944_38712583_pass_announce.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/result/20260905_235012_dc58a91a_review_result.png"
+      ]
+    },
+    "RESULT_PAGE_REPLICATION": "REPLICATED (visual) — announce preamble -> PASS/FAIL banner -> celebration/post-fail dialogue -> settle/reward flow observed across 2+ historical sessions; 20 result-class frames recovered",
+    "boundary": "result scene != business commit — commit authority still requires explicit PASS/FAIL evidence captured fresh; recovered frames are historical artifacts (RECOVERED_REVIEW_PENDING), not fresh captures"
+  }
+}

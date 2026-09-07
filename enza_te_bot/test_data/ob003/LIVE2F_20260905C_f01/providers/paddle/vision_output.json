@@ -1,0 +1,631 @@
+{
+  "source_image": "logs/live_2frame_20260905/canonical_home_frame.png",
+  "method": "PaddleOCR",
+  "text_regions": [
+    {
+      "id": "paddle_001",
+      "text": "NEW!!",
+      "bbox": [
+        715,
+        0,
+        68,
+        22
+      ],
+      "confidence": 0.999783
+    },
+    {
+      "id": "paddle_002",
+      "text": "Member590a",
+      "bbox": [
+        55,
+        14,
+        159,
+        32
+      ],
+      "confidence": 0.999982
+    },
+    {
+      "id": "paddle_003",
+      "text": "435,504",
+      "bbox": [
+        383,
+        18,
+        78,
+        24
+      ],
+      "confidence": 0.999991
+    },
+    {
+      "id": "paddle_004",
+      "text": "11,437",
+      "bbox": [
+        533,
+        18,
+        65,
+        23
+      ],
+      "confidence": 0.999997
+    },
+    {
+      "id": "paddle_005",
+      "text": "+",
+      "bbox": [
+        609,
+        12,
+        36,
+        38
+      ],
+      "confidence": 0.817326
+    },
+    {
+      "id": "paddle_006",
+      "text": "1,047,330",
+      "bbox": [
+        708,
+        19,
+        92,
+        22
+      ],
+      "confidence": 0.999993
+    },
+    {
+      "id": "paddle_007",
+      "text": "Lv.42",
+      "bbox": [
+        869,
+        15,
+        60,
+        27
+      ],
+      "confidence": 0.999903
+    },
+    {
+      "id": "paddle_008",
+      "text": "「しましょう",
+      "bbox": [
+        949,
+        16,
+        115,
+        26
+      ],
+      "confidence": 0.999186
+    },
+    {
+      "id": "paddle_009",
+      "text": "3",
+      "bbox": [
+        1193,
+        10,
+        21,
+        25
+      ],
+      "confidence": 0.999989
+    },
+    {
+      "id": "paddle_010",
+      "text": "NEW!!",
+      "bbox": [
+        27,
+        54,
+        69,
+        27
+      ],
+      "confidence": 0.999824
+    },
+    {
+      "id": "paddle_011",
+      "text": "iiLNEW!!",
+      "bbox": [
+        158,
+        73,
+        110,
+        25
+      ],
+      "confidence": 0.783391
+    },
+    {
+      "id": "paddle_012",
+      "text": "CATENA",
+      "bbox": [
+        611,
+        84,
+        80,
+        44
+      ],
+      "confidence": 0.998595
+    },
+    {
+      "id": "paddle_013",
+      "text": "お知らせ",
+      "bbox": [
+        28,
+        110,
+        65,
+        23
+      ],
+      "confidence": 0.998661
+    },
+    {
+      "id": "paddle_014",
+      "text": "V.x.ε.8.",
+      "bbox": [
+        157,
+        113,
+        82,
+        27
+      ],
+      "confidence": 0.92677
+    },
+    {
+      "id": "paddle_015",
+      "text": "リリース記念CP",
+      "bbox": [
+        130,
+        135,
+        108,
+        21
+      ],
+      "confidence": 0.977379
+    },
+    {
+      "id": "paddle_016",
+      "text": "2",
+      "bbox": [
+        74,
+        147,
+        22,
+        27
+      ],
+      "confidence": 0.999997
+    },
+    {
+      "id": "paddle_017",
+      "text": "プレゼント",
+      "bbox": [
+        27,
+        189,
+        68,
+        26
+      ],
+      "confidence": 0.925343
+    },
+    {
+      "id": "paddle_018",
+      "text": "3",
+      "bbox": [
+        1215,
+        182,
+        46,
+        47
+      ],
+      "confidence": 0.525506
+    },
+    {
+      "id": "paddle_019",
+      "text": "おっかれ",
+      "bbox": [
+        1093,
+        188,
+        47,
+        20
+      ],
+      "confidence": 0.749664
+    },
+    {
+      "id": "paddle_020",
+      "text": "S3Tす",
+      "bbox": [
+        1094,
+        205,
+        45,
+        14
+      ],
+      "confidence": 0.406455
+    },
+    {
+      "id": "paddle_021",
+      "text": "はっき",
+      "bbox": [
+        1084,
+        228,
+        36,
+        18
+      ],
+      "confidence": 0.559215
+    },
+    {
+      "id": "paddle_022",
+      "text": "ジュエル",
+      "bbox": [
+        32,
+        239,
+        57,
+        19
+      ],
+      "confidence": 0.992956
+    },
+    {
+      "id": "paddle_023",
+      "text": "セール中",
+      "bbox": [
+        31,
+        254,
+        59,
+        17
+      ],
+      "confidence": 0.997873
+    },
+    {
+      "id": "paddle_024",
+      "text": "ショップ",
+      "bbox": [
+        30,
+        271,
+        58,
+        23
+      ],
+      "confidence": 0.990909
+    },
+    {
+      "id": "paddle_025",
+      "text": "NEW!!",
+      "bbox": [
+        27,
+        300,
+        69,
+        25
+      ],
+      "confidence": 0.999827
+    },
+    {
+      "id": "paddle_026",
+      "text": "メニュ",
+      "bbox": [
+        29,
+        349,
+        52,
+        26
+      ],
+      "confidence": 0.955092
+    },
+    {
+      "id": "paddle_027",
+      "text": "9",
+      "bbox": [
+        76,
+        389,
+        18,
+        21
+      ],
+      "confidence": 0.999983
+    },
+    {
+      "id": "paddle_028",
+      "text": "ミッション",
+      "bbox": [
+        27,
+        432,
+        60,
+        22
+      ],
+      "confidence": 0.997644
+    },
+    {
+      "id": "paddle_029",
+      "text": "プロデューサーは、アイドルを",
+      "bbox": [
+        21,
+        470,
+        253,
+        24
+      ],
+      "confidence": 0.999875
+    },
+    {
+      "id": "paddle_030",
+      "text": "やる気にさせる天才かもね",
+      "bbox": [
+        21,
+        496,
+        217,
+        20
+      ],
+      "confidence": 0.999667
+    },
+    {
+      "id": "paddle_031",
+      "text": "風心止",
+      "bbox": [
+        1096,
+        482,
+        126,
+        66
+      ],
+      "confidence": 0.79319
+    },
+    {
+      "id": "paddle_032",
+      "text": "しっか",
+      "bbox": [
+        1034,
+        515,
+        75,
+        40
+      ],
+      "confidence": 0.776717
+    },
+    {
+      "id": "paddle_033",
+      "text": "その白で",
+      "bbox": [
+        1119,
+        519,
+        105,
+        50
+      ],
+      "confidence": 0.879908
+    },
+    {
+      "id": "paddle_034",
+      "text": "結華",
+      "bbox": [
+        18,
+        551,
+        42,
+        25
+      ],
+      "confidence": 0.999075
+    },
+    {
+      "id": "paddle_035",
+      "text": "ガシャ",
+      "bbox": [
+        75,
+        606,
+        23,
+        52
+      ],
+      "confidence": 0.923127
+    },
+    {
+      "id": "paddle_036",
+      "text": "NEW!!",
+      "bbox": [
+        415,
+        606,
+        69,
+        27
+      ],
+      "confidence": 0.999629
+    },
+    {
+      "id": "paddle_037",
+      "text": "NEW!!",
+      "bbox": [
+        649,
+        608,
+        70,
+        26
+      ],
+      "confidence": 0.999916
+    },
+    {
+      "id": "paddle_038",
+      "text": "3",
+      "bbox": [
+        829,
+        605,
+        21,
+        25
+      ],
+      "confidence": 0.999988
+    },
+    {
+      "id": "paddle_039",
+      "text": "はづきさん出現",
+      "bbox": [
+        997,
+        610,
+        123,
+        20
+      ],
+      "confidence": 0.998787
+    },
+    {
+      "id": "paddle_040",
+      "text": "2/13",
+      "bbox": [
+        14,
+        620,
+        45,
+        22
+      ],
+      "confidence": 0.999994
+    },
+    {
+      "id": "paddle_041",
+      "text": "まステっク",
+      "bbox": [
+        159,
+        628,
+        109,
+        33
+      ],
+      "confidence": 0.748954
+    },
+    {
+      "id": "paddle_042",
+      "text": "1日1回無料",
+      "bbox": [
+        398,
+        633,
+        97,
+        25
+      ],
+      "confidence": 0.99966
+    },
+    {
+      "id": "paddle_043",
+      "text": "超成功発生中",
+      "bbox": [
+        509,
+        632,
+        108,
+        27
+      ],
+      "confidence": 0.999965
+    },
+    {
+      "id": "paddle_044",
+      "text": "3",
+      "bbox": [
+        652,
+        648,
+        16,
+        15
+      ],
+      "confidence": 0.555747
+    },
+    {
+      "id": "paddle_045",
+      "text": "プロデュース",
+      "bbox": [
+        999,
+        640,
+        118,
+        32
+      ],
+      "confidence": 0.994362
+    },
+    {
+      "id": "paddle_046",
+      "text": "フェス",
+      "bbox": [
+        1154,
+        640,
+        69,
+        30
+      ],
+      "confidence": 0.999264
+    },
+    {
+      "id": "paddle_047",
+      "text": "コレクション",
+      "bbox": [
+        175,
+        654,
+        75,
+        24
+      ],
+      "confidence": 0.756665
+    },
+    {
+      "id": "paddle_048",
+      "text": "ガシャ",
+      "bbox": [
+        409,
+        667,
+        70,
+        33
+      ],
+      "confidence": 0.995215
+    },
+    {
+      "id": "paddle_049",
+      "text": "アイドル",
+      "bbox": [
+        523,
+        668,
+        81,
+        30
+      ],
+      "confidence": 0.926824
+    },
+    {
+      "id": "paddle_050",
+      "text": "営業",
+      "bbox": [
+        776,
+        667,
+        54,
+        32
+      ],
+      "confidence": 0.998482
+    },
+    {
+      "id": "paddle_051",
+      "text": "283ステージ",
+      "bbox": [
+        866,
+        663,
+        121,
+        28
+      ],
+      "confidence": 0.999154
+    },
+    {
+      "id": "paddle_052",
+      "text": "CIRYOTOTEUUE",
+      "bbox": [
+        164,
+        675,
+        103,
+        13
+      ],
+      "confidence": 0.5013
+    },
+    {
+      "id": "paddle_053",
+      "text": "Pデスク・ミニゲーム",
+      "bbox": [
+        627,
+        674,
+        113,
+        25
+      ],
+      "confidence": 0.993028
+    },
+    {
+      "id": "paddle_054",
+      "text": "300/300",
+      "bbox": [
+        1013,
+        673,
+        80,
+        18
+      ],
+      "confidence": 0.999988
+    },
+    {
+      "id": "paddle_055",
+      "text": "20/20",
+      "bbox": [
+        1145,
+        672,
+        54,
+        18
+      ],
+      "confidence": 0.999959
+    },
+    {
+      "id": "paddle_056",
+      "text": "+0",
+      "bbox": [
+        1202,
+        673,
+        29,
+        16
+      ],
+      "confidence": 0.994206
+    }
+  ],
+  "metadata": {
+    "provider": "Paddle",
+    "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+    "skill_version": "not_applicable",
+    "case_id": "LIVE2F_20260905C_f01",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "2566c84e5a03f045df6f28bbea048a9048a93b3492a3e9aa9124a10558aa5f76",
+    "created_at": "2026-09-05T05:09:59+00:00"
+  }
+}

@@ -1,0 +1,280 @@
+{
+ "artifact_type": "MISSING_VISUAL_EVIDENCE_REGISTRY",
+ "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+ "created_at": "2026-09-06T23:30:00Z",
+ "status": "MINED_EVIDENCE_CORPUS. Coordinates were never used to fabricate image evidence; every gap below is declared MISSING_FRAME / MISSING_EVIDENCE, not synthesized.",
+ "entries": [
+  {
+   "id": "MVE-001",
+   "category": "SKILL_BOARD",
+   "region": "ACTIONABLE_NODE",
+   "priority": "P0",
+   "evidence_refs": "live_csm_015..019",
+   "reason": "0906 source frame was not durably persisted",
+   "source": "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#missing_source_reviews VRB02_M01",
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "PARTIALLY_RECOVERED",
+    "note": "45-frame recovery covers board states incl. rf_sb_acquire_confirm_dialog (CONFIRM_OK dialog identity); the specific click-source frames for live_csm_015..019 remain absent — narrow residual, fold into next skill session",
+    "historical_designation_preserved": true
+   }
+  },
+  {
+   "id": "MVE-002",
+   "category": "SKILL_BOARD",
+   "region": "LOCKED_NODE_HAZARD",
+   "priority": "P0",
+   "evidence_refs": "live_csm_020",
+   "reason": "locked-node misclick record exists; source frame absent",
+   "source": "VRB02_M02",
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "RECOVERED_VISUAL_EVIDENCE",
+    "review_status": "RECOVERED_REVIEW_PENDING",
+    "supersedes": "MISSING_FRAME (historical mining designation, preserved above)",
+    "recovered_from": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "historical_designation_preserved": true,
+    "recovered_frame": "rf_sb_g1_misclick_590_145",
+    "probe_class": "WRONG_NODE_PROBE",
+    "reconciliation_note": "click (590,145): selected adjacent LOCKED node (Vo♪ SP:30) instead of intended gold node; ring moved, no purchase"
+   },
+   "current_status": "SUPERSEDED_BY_RECOVERED_VISUAL_EVIDENCE"
+  },
+  {
+   "id": "MVE-003",
+   "category": "SKILL_BOARD",
+   "region": "LOCKED_NODE_HAZARD",
+   "priority": "P0",
+   "evidence_refs": "live_csm_021",
+   "reason": "locked-node misclick record exists; source frame absent",
+   "source": "VRB02_M03",
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "RECOVERED_VISUAL_EVIDENCE",
+    "review_status": "RECOVERED_REVIEW_PENDING",
+    "supersedes": "MISSING_FRAME (historical mining designation, preserved above)",
+    "recovered_from": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "historical_designation_preserved": true,
+    "recovered_frame": "rf_sb_g2_misclick_585_200",
+    "probe_class": "LOCKED_NODE_PROBE",
+    "reconciliation_note": "click (585,200/205): Vocal100%UP locked (未解放) panel; NO_EFFECT"
+   },
+   "current_status": "SUPERSEDED_BY_RECOVERED_VISUAL_EVIDENCE"
+  },
+  {
+   "id": "MVE-004",
+   "category": "SKILL_BOARD",
+   "region": "LOCKED_NODE_HAZARD",
+   "priority": "P0",
+   "evidence_refs": "live_csm_022",
+   "reason": "locked-node misclick record exists; source frame absent",
+   "source": "VRB02_M04",
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "RECOVERED_VISUAL_EVIDENCE",
+    "review_status": "RECOVERED_REVIEW_PENDING",
+    "supersedes": "MISSING_FRAME (historical mining designation, preserved above)",
+    "recovered_from": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "historical_designation_preserved": true,
+    "recovered_frame": "rf_sb_g3_misclick_465_115",
+    "probe_class": "LOCKED_NODE_PROBE",
+    "reconciliation_note": "click (465,115): Vocal240%UP locked at the time; NO_EFFECT (later purchasable after chain unlock)"
+   },
+   "current_status": "SUPERSEDED_BY_RECOVERED_VISUAL_EVIDENCE"
+  },
+  {
+   "id": "MVE-005",
+   "category": "SKILL_BOARD",
+   "region": "LOCKED_NODE_HAZARD",
+   "priority": "P0",
+   "evidence_refs": "live_csm_023",
+   "reason": "off-board/dead-zone misclick record exists; source frame absent",
+   "source": "VRB02_M05",
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "RECOVERED_VISUAL_EVIDENCE",
+    "review_status": "RECOVERED_REVIEW_PENDING",
+    "supersedes": "MISSING_FRAME (historical mining designation, preserved above)",
+    "recovered_from": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "historical_designation_preserved": true,
+    "recovered_frame": "rf_sb_g4_misclick_645_205",
+    "probe_class": "DEAD_ZONE_NO_PURCHASE",
+    "reconciliation_note": "click (645,205): off-board empty space, panel closed; NO_EFFECT"
+   },
+   "current_status": "SUPERSEDED_BY_RECOVERED_VISUAL_EVIDENCE"
+  },
+  {
+   "id": "MVE-006",
+   "category": "SKILL_BOARD",
+   "region": "ACQUIRE_BUTTON",
+   "priority": "P1",
+   "evidence_refs": "live_csm_015..019",
+   "reason": "click evidence exists; visual box/source frame absent",
+   "source": "VRB02_M06",
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "PARTIALLY_RECOVERED",
+    "note": "45-frame recovery covers board states incl. rf_sb_acquire_confirm_dialog (CONFIRM_OK dialog identity); the specific click-source frames for live_csm_015..019 remain absent — narrow residual, fold into next skill session",
+    "historical_designation_preserved": true
+   }
+  },
+  {
+   "id": "MVE-007",
+   "category": "SKILL_BOARD",
+   "region": "CONFIRM_OK",
+   "priority": "P1",
+   "evidence_refs": "live_csm_015..019",
+   "reason": "acquire and OK conflated in point evidence; source frame absent",
+   "source": "VRB02_M07",
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "PARTIALLY_RECOVERED",
+    "note": "45-frame recovery covers board states incl. rf_sb_acquire_confirm_dialog (CONFIRM_OK dialog identity); the specific click-source frames for live_csm_015..019 remain absent — narrow residual, fold into next skill session",
+    "historical_designation_preserved": true
+   }
+  },
+  {
+   "id": "MVE-008",
+   "category": "SKILL_BOARD",
+   "region": "NAVIGATION_CONTROL",
+   "priority": "P1",
+   "evidence_refs": "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json",
+   "reason": "navigation geometry has no durable source frame",
+   "source": "VRB02_M08"
+  },
+  {
+   "id": "MVE-009",
+   "category": "SUPPORT_CARD_STORY",
+   "region": "STORY_LAYOUT",
+   "priority": "P1",
+   "evidence_refs": "event ev_* (event_occurrences.jsonl)",
+   "reason": "story layout lacks durable source frame",
+   "source": "VRB02_M09"
+  },
+  {
+   "id": "MVE-010",
+   "category": "CONTROL_GEOMETRY",
+   "region": "normalized visual_box for all core taught controls",
+   "priority": "P1",
+   "reason": "no core control has normalized visual_box/proven_click_box evidence; only HOME:SCHEDULE and SCHEDULE:VOCAL captured fresh boxes 2026-09-06; the rest are point-only",
+   "source": [
+    "enza_memory/migration/python_click_migration/distilled/python_migration_readiness.json#top_blockers",
+    "enza_memory/migration/python_click_migration/migration_status.json#CONTROL_GROUNDING_BLOCKERS"
+   ]
+  },
+  {
+   "id": "MVE-011",
+   "category": "VIEWPORT",
+   "region": "left/top, DPR, Retina mapping, browser zoom",
+   "priority": "P1",
+   "reason": "MAC_CURRENT_V1 verified left/top=0 for tab viewport 1280x720 on 2026-09-06, but DPR/zoom/window separation remain UNKNOWN; other viewports unvalidated",
+   "source": [
+    "enza_memory/migration/python_click_migration/viewport_profiles.json#unknowns",
+    "enza_memory/migration/python_click_migration/migration_status.json#viewport_validation"
+   ]
+  },
+  {
+   "id": "MVE-012",
+   "category": "AUDITION_BATTLE",
+   "region": "speed toggle clickable region (true toggle control vs X2 badge)",
+   "priority": "P0",
+   "reason": "badge is display-only; real toggle never grounded; x3 path never observed",
+   "source": [
+    "enza_memory/policies/audition_battle_speed_handler.json#test_matrix",
+    "enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json#preserved_unknowns"
+   ]
+  },
+  {
+   "id": "MVE-013",
+   "category": "CHOICE",
+   "region": "TWO_CHOICE option-box geometry",
+   "priority": "P1",
+   "reason": "option box geometry never captured — blind-fast blocker; THREE_CHOICE has single-frame box only",
+   "source": "enza_memory/migration/python_click_migration/event_occurrence/event_probability_summary.json#blind_fast_candidates"
+  },
+  {
+   "id": "MVE-014",
+   "category": "RESULT",
+   "region": "semifinal match result",
+   "priority": "P1",
+   "reason": "permanently UNKNOWN — scene skipped without explicit result; cannot be recovered retroactively",
+   "source": "enza_memory/wing_runs/WINGRUN_20260905_01/final_summary.json#uncertainties"
+  },
+  {
+   "id": "MVE-015",
+   "category": "RESULT",
+   "region": "+5000 fan delta source (final evaluation vs S4 end)",
+   "priority": "P2",
+   "reason": "source UNKNOWN; preserved as uncertainty, never inferred",
+   "source": "enza_memory/wing_runs/WINGRUN_20260905_01/final_summary.json#uncertainties"
+  },
+  {
+   "id": "MVE-016",
+   "category": "SKILL_REPLACEMENT",
+   "region": "commit frame for transactions T3/T4",
+   "priority": "P2",
+   "reason": "post-commit board read exists but commit frame itself not individually identified",
+   "source": "enza_memory/migration/python_click_migration/recovered_frames/replacement_visual_sequence.json#T3,T4"
+  },
+  {
+   "id": "MVE-017",
+   "category": "ABANDON",
+   "region": "long-press 諦める automation semantics",
+   "priority": "P2",
+   "reason": "recorded success was operator-assisted; automated long-press behavior UNKNOWN",
+   "source": "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#ABANDON:LONG_PRESS"
+  },
+  {
+   "id": "MVE-018",
+   "category": "STATE_IDENTITY",
+   "region": "UNKNOWN_SELECTION_OVERLAY_073000 / UNIDENTIFIED_SKILL_RELATED_PANEL",
+   "priority": "P2",
+   "reason": "titles never read; identity preserved UNKNOWN (coordinate-only facts)",
+   "source": [
+    "enza_memory/state_hierarchy_review_001.json#unknowns_added U5,U7"
+   ]
+  },
+  {
+   "id": "MVE-019",
+   "category": "WEEK_EVIDENCE",
+   "region": "per-event timestamps + frame identifiers for crash-recovered weeks (0906 S1W7→S2W8, S2→S3 transition instant)",
+   "priority": "P1",
+   "reason": "not durably persisted before crash; recovery classified events but original frame identity is unrecoverable",
+   "source": "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json#unknowns"
+  },
+  {
+   "id": "MVE-020",
+   "category": "EVENT",
+   "region": "event eligibility models for all event types",
+   "priority": "P2",
+   "reason": "all empirical rates have ELIGIBILITY_MODEL=UNKNOWN; denominators exclude crashed/operator-reconciled weeks",
+   "source": "enza_memory/migration/python_click_migration/event_occurrence/event_probability_summary.json#eligibility_model"
+  },
+  {
+   "id": "MVE-021",
+   "category": "S3_TRANSITION",
+   "region": "stable S3 HOME boundary at crash instant",
+   "priority": "P2",
+   "reason": "crash session captured no stable S3 HOME; S2→S3 transition marked SESSION_TRANSCRIPT_CONFIRMED + DERIVED chain link",
+   "source": "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json#recovered_events[12]"
+  },
+  {
+   "id": "MVE-022",
+   "category": "SHADOW_PIPELINE",
+   "region": "geometry-complete frames",
+   "priority": "P2",
+   "reason": "shadow review v0_1: only 10/38 frames geometry-complete; 28 incomplete; would_click match rate 0.5263",
+   "source": "enza_memory/migration/python_click_migration/review_batches/shadow_v0_1/summary.json#metrics"
+  },
+  {
+   "id": "MVE-023",
+   "category": "BATTLE",
+   "region": "AUTO cross-session replication under epoch/actionable-phase contract",
+   "priority": "P1",
+   "reason": "4 successes all in WINGRUN_20260905_01 epochs; needs more replication (readiness REPLICATION=2)",
+   "source": "enza_memory/migration/python_click_migration/distilled/python_migration_readiness.json#AUDITION_BATTLE:AUTO"
+  }
+ ],
+ "count": 23,
+ "reconciliation_note": "2026-09-06 reconciliation: MVE-002..005 superseded by recovered visual evidence (rf_sb_g1..g4); MVE-001/006/007 partially recovered. Original entries preserved above; see regression_reconciliation.json."
+}

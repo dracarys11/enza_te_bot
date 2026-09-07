@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "artifact": "planner_rules_candidate",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "invocation_boundary": "FRESH_VERIFIED_HOME_ONLY",
+  "input_schema": {
+    "season": {"source": "HOME_OBSERVATION", "required": true},
+    "weeks_remaining": {"source": "HOME_OBSERVATION", "required": true},
+    "stamina_adequate": {"source": "HOME_OBSERVATION", "required": true},
+    "fan_progress": {"source": "HOME_OBSERVATION_OR_DETERMINISTIC_DERIVATION", "required": true},
+    "audition_flags": {"source": "PERSISTENT_VERIFIED_STATE", "required": true},
+    "skill_flags": {"source": "PERSISTENT_VERIFIED_STATE", "required": true},
+    "fixed_goals": {"source": "STATIC_CONFIGURATION", "required": true}
+  },
+  "allowed_outputs": ["VOCAL", "REST", "SKILL", "AUDITION"],
+  "confirmed": [
+    {"id": "home_only", "rule": "Invoke the planner only at fresh verified HOME."},
+    {"id": "output_set", "rule": "Return exactly one allowed high-level objective or no decision when required facts are unreadable."}
+  ],
+  "candidates": [
+    {"id": "season_1_default", "priority": 20, "condition": {"season": 1}, "decision": "VOCAL", "confidence": 0.5},
+    {"id": "season_1_end_unmet", "priority": 10, "condition": {"season": 1, "near_season_end": true, "fan_target_achieved": false}, "decision": "AUDITION", "confidence": 0.0, "blocked_by": ["planner_season1_near_end_threshold"]},
+    {"id": "season_2_rest", "priority": 10, "condition": {"season": 2, "stamina_adequate": false}, "decision": "REST", "confidence": 0.5},
+    {"id": "season_2_required_audition", "priority": 20, "condition": {"season": 2, "audition_flags.required_10000_completed": false}, "decision": "AUDITION", "confidence": 0.0, "blocked_by": ["planner_season2_audition_eligibility", "completion_audition_success_meaning"]},
+    {"id": "season_2_default", "priority": 30, "condition": {"season": 2}, "decision": "VOCAL", "confidence": 0.5},
+    {"id": "season_3_rest", "priority": 10, "condition": {"season": 3, "stamina_adequate": false}, "decision": "REST", "confidence": 0.5},
+    {"id": "season_3_skill", "priority": 20, "condition": {"season": 3, "skill_flags.required_pending": true}, "decision": "SKILL", "confidence": 0.0, "blocked_by": ["planner_season3_skill_goals", "state_skill_flag_schema"]},
+    {"id": "season_3_audition", "priority": 30, "condition": {"season": 3, "audition_flags.required_pending": true}, "decision": "AUDITION", "confidence": 0.0, "blocked_by": ["planner_season3_audition_goals", "completion_audition_success_meaning"]},
+    {"id": "season_3_default", "priority": 40, "condition": {"season": 3}, "decision": "VOCAL", "confidence": 0.5},
+    {"id": "season_4_audition", "priority": 10, "condition": {"season": 4, "audition_flags.required_large_pending": true}, "decision": "AUDITION", "confidence": 0.0, "blocked_by": ["planner_season4_large_auditions"]},
+    {"id": "season_4_default", "priority": 20, "condition": {"season": 4}, "decision": "VOCAL", "confidence": 0.5}
+  ],
+  "unknowns": [
+    "planner_season1_near_end_threshold",
+    "planner_season1_low_stamina",
+    "planner_season2_audition_eligibility",
+    "planner_season3_skill_goals",
+    "planner_season3_audition_goals",
+    "planner_season4_large_auditions",
+    "planner_season4_low_stamina",
+    "planner_unavailable_objective_fallback"
+  ],
+  "forbidden": ["click logic", "coordinates", "UI transitions", "room execution", "automatic candidate promotion"]
+}

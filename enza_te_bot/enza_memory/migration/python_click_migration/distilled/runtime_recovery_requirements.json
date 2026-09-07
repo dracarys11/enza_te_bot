@@ -1,0 +1,19 @@
+{
+  "artifact_type":"PYTHON_RUNTIME_RECOVERY_REQUIREMENTS",
+  "generated_at":"2026-09-06T06:22:51Z",
+  "authority_order":["fresh stable state observation","raw durable event with screenshot/tool provenance","checkpoint","artifact registry","derived summary"],
+  "durable_boundaries":[
+    {"boundary":"completed week","requirement":"flush action, result, fresh post-state, weeks/fan provenance before another week-consuming action"},
+    {"boundary":"season transition","requirement":"flush old result, then fresh new season/weeks HOME before policy re-evaluation"},
+    {"boundary":"risky long batch","requirement":"flush pre-batch checkpoint and estimated execution budget"},
+    {"boundary":"handoff/session end","requirement":"flush terminal/current state and explicit resume authority"}
+  ],
+  "crash_recovery_classes":["LIVE_SCREEN_CONFIRMED","SESSION_TRANSCRIPT_CONFIRMED","DERIVED","UNKNOWN"],
+  "recovery_rules":[
+    "Fresh state supersedes a stale summary but does not rewrite raw history.",
+    "Recovered transcript events must be stored separately and never forged into original live trace timestamps.",
+    "UNKNOWN intermediate facts remain UNKNOWN even when a later boundary is fresh-confirmed.",
+    "Persistence failure is fail-closed: do not start the next transaction until durable write succeeds."
+  ],
+  "live_example":{"run":"WINGRUN_20260906_01","failure":"PERSISTENCE_DURABILITY_FAILURE","last_raw":"S1W6 complete, weeks=2","fresh_recovery":"S3 start, weeks=8","recovery_artifact":"enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json"}
+}

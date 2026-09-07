@@ -1,0 +1,18 @@
+{
+  "session_id": "SELFEXP_20260905_01",
+  "mode": "SELF_EXPLORATION_MODE",
+  "started": "2026-09-05T05:33:00Z",
+  "ended": "2026-09-05T05:38:00Z",
+  "screenshots_total": 15,
+  "actions_total": 13,
+  "valid_transitions": 11,
+  "new_pages": 3,
+  "new_controls": 8,
+  "agy_calls": 0,
+  "unknown_count": 0,
+  "stop_reasons": [],
+  "page_sequence": ["HOME","PRODUCE_MENU","HOME","IDOL_PORTAL","IDOL_LIST+TUTORIAL_OVERLAY","IDOL_LIST","IDOL_PORTAL","HOME","WORK_ACTIVITY","WORK_ACTIVITY+TUTORIAL_OVERLAY","WORK_ACTIVITY","HOME","MENU_OVERLAY","HOME"],
+  "mismatches": [{"step_id":"step9","detail":"首次访问 WORK_ACTIVITY 延迟触发 営業について 1/6 教程弹窗，拦截返回；关闭后重试成功"}],
+  "risky_controls_recorded_not_clicked": ["営業完了","一括営業","一括完了","差し入れ作成","次へ(produce commit)","トレーニング/特訓入口"],
+  "next_recommended_exploration": "PRODUCE_MENU 内部流程（ユニット編成/アイテム選択 tab 均为准备步骤，次へ 前可退出），以及 トレーニング/特訓 入口页的观察（进入菜单层面确认是否消耗，先不确认执行）"
+}

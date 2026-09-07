@@ -1,0 +1,78 @@
+{
+ "artifact_type": "NEW_REGRESSION_CANDIDATES",
+ "reconciliation_id": "OFFLINE_RECONCILIATION_WINGRUN_20260907_01",
+ "created_at": "2026-09-07",
+ "mode": "OFFLINE_ONLY",
+ "status": "CANDIDATES_ONLY — regression-case design derived from live incident evidence. NOT implemented, NOT executable policy; Harness/Skill/runtime/business policy untouched.",
+ "integration_target": "enza_memory/migration/regression_mining/ (planner/choice corpora + implementation queue owner). Candidates are recorded here first and are not merged into existing corpora by this session.",
+
+ "candidates": [
+  {
+   "id": "NRC-001",
+   "name": "LIVE_EXECUTOR_MUST_NOT_INVENT_OR_OVERRIDE_PLANNER_OBJECTIVE",
+   "severity": "P0",
+   "domain": "planner/live-executor authority boundary",
+   "statement": "A live executor must not invent, self-select, or override the weekly objective. It may execute only an objective attached by the planner (or an explicitly authorized operator objective for the current week). With no attached objective, the executor fails closed: no state-changing business action, emit NEED_PLANNER_OBJECTIVE, and return control via a safe non-business path (e.g. SCHEDULE BACK → fresh HOME).",
+   "origin_incident": "WINGRUN_20260907_01 S1W6: executor continued pre-gate baseline-VOCAL with no planner objective artifact for W6 and emitted 決定",
+   "scenario": {
+    "path": "planner/live",
+    "given": "live executor holds a fresh SCHEDULE frame; no planner objective is attached for the current week",
+    "when": "any lesson/audition/REST-class state-changing card and its 決定 are available",
+    "then": "executor emits NO business 決定; records NEED_PLANNER_OBJECTIVE; leaves the week unconsumed; returns to fresh HOME via BACK"
+   },
+   "expected_failure_signature_without_rule": "self-selected weekly objective executed under the precedent of prior weeks (pattern continuation) — exactly the S1W6 trace",
+   "distinct_from": "PLR-007 (gate-pass as planner justification) — PLR-007 concerns the planner citing a risk gate as a reason to choose; NRC-001 concerns the executor acting with no planner objective at all",
+   "evidence_refs": [
+    "enza_memory/failures/s1w6_vocal_executed_above_risk_gate_001.json#intent",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/trajectory_WINGRUN_20260907_01.json#steps[8].step9",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/s1w6_policy_violation_reconciliation.json#classification.PLANNER_OBJECTIVE_AUTHORITY"
+   ],
+   "new_test_candidate": true,
+   "already_covered_by_test": "no"
+  },
+  {
+   "id": "NRC-002",
+   "name": "VOCAL_ACTION_REQUIRES_PLANNER_OBJECTIVE_AND_FRESH_RISK_AUTHORITY",
+   "severity": "P0",
+   "domain": "VOCAL execution preconditions (conjunctive)",
+   "statement": "A VOCAL 決定 may be emitted only when BOTH hold on fresh evidence: (a) an attached planner objective selects VOCAL for the current week, AND (b) fresh risk authority confirms trouble_rate ≤ 2% (vocal_risk_gate_hard). trouble_rate > 2% → NO VOCAL DECIDE; the safe path is SCHEDULE BACK → fresh HOME → REST → complete REST → fresh HOME. trouble_rate unknown → STOP / NEED_MORE_OBSERVATION. Cached reads and memory hints are insufficient (consistent with DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE).",
+   "origin_incident": "WINGRUN_20260907_01 S1W6: fresh trouble_rate 92% on the very frame from which 決定 (1175,660) was clicked and sent",
+   "scenario": {
+    "path": "planner/live",
+    "inputs": {"VOCAL_trouble_rate": 92},
+    "expected": "NO VOCAL DECIDE",
+    "expected_safe_path": "BACK → fresh HOME → REST",
+    "post_hoc_constraint": "because the live action was already sent in the origin incident, recovery had to RECONCILE (advance only non-business dialogue, read fresh stable top-bar state, record the committed boundary) rather than retry the action or rewrite history; any future replay of this scenario must assert reconcile-not-retry semantics once an action has been sent"
+   },
+   "assertions_for_replay": [
+    "executor reads trouble_rate fresh on the SCHEDULE frame before any 決定",
+    "trouble_rate = 92 > 2 → no 決定 emitted",
+    "BACK clicked; fresh HOME observed (weeks unchanged)",
+    "REST selected only under an authorized objective; post-REST fresh HOME verified",
+    "if an over-threshold 決定 was already sent: no retry, no history rewrite; reconcile from next fresh stable state and record a failure artifact"
+   ],
+   "distinct_from": "PLR-007 — PLR-007: a passing local gate proves permission, not optimality (planner-side). NRC-002: the executor-side hard precondition — even WITH a planner VOCAL objective, an over-threshold fresh read forbids 決定",
+   "evidence_refs": [
+    "enza_memory/policies/vocal_risk_gate_hard.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/s1w6_schedule.png",
+    "enza_memory/failures/s1w6_vocal_executed_above_risk_gate_001.json",
+    "enza_memory/failures/operator_cancel_pending_action_001.json#resolution_20260907",
+    "enza_memory/observations/OBS_005.json",
+    "enza_memory/observations/OBS_006.json"
+   ],
+   "new_test_candidate": true,
+   "already_covered_by_test": "no"
+  }
+ ],
+
+ "negative_example_binding": {
+  "run": "WINGRUN_20260907_01",
+  "week": "S1W6",
+  "note": "This incident is the durable negative example for both candidates. It is preserved as a violation record — never as a 'worked anyway' precedent (see non_reinterpretation_clause in s1w6_policy_violation_reconciliation.json)."
+ },
+
+ "honesty_limits": {
+  "single_occurrence": "Each candidate derives from one live incident (n=1). As learned-candidate material they remain non-executable until independently reviewed; the operator's vocal_risk_gate_hard policy itself is binding as operator instruction, not as reviewed Harness invariant.",
+  "no_scope_expansion": "Candidates do not propose new click authority, new live automation, or Harness changes."
+ }
+}

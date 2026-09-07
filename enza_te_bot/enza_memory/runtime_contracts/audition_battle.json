@@ -1,0 +1,222 @@
+{
+  "contract_version": "0.2.1",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): STALE-C durable frames VRB02_025-029, LEAK-08 stale speed coordinate superseded; 2026-09-07 evidence delta CONTRACT_EVIDENCE_DELTA_20260907: recovered_historical_frames + PERSIST-1 re-check; metadata only; 2026-09-07 AUTO_VISUAL_AUTHORITY_CORRECTION (BATTLE_VISUAL_AUTHORITY_METADATA_CORRECTED_20260907): VRB02_027 relabeled ANIMATION_WITH_AUTO_ON_VISIBLE, interactability not visually separable, click causality not frame-verified — runtime unchanged",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract distilled from 11 live battle instances. NOT executable policy. CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME and epoch invariants are binding harness invariants.",
+  "scenario_scope": "WING audition battle, 1280x720; 11 independent battle instances (S1 final 1, S2 final 1, S3_40K 3, S3_50K 1, THE_LEGEND 5)",
+  "ROOM_IDENTITY": {
+    "room_id": "AUDITION_BATTLE",
+    "identity_anchors_required": [
+      "battle screen with top-right control cluster: 暫停 / Auto / 倍速 indicator (OFF/2倍速/3倍速 text)",
+      "attention ROI (speed): x∈[0.87,0.95], y∈[0.03,0.10] → pixels [1114,22,1216,72]",
+      "Auto ROI: x∈[0.79,0.85]"
+    ],
+    "identity_source": "layout_role, REPEATED_EVIDENCE",
+    "identity_status": "VERIFIED_EVIDENCE (phase-level)"
+  },
+  "ENTRY_CONDITIONS": [
+    "fresh battle identity after advice dialogue bridge",
+    "control epoch established: entering battle (or resuming from pause) starts a NEW control epoch — all local AUTO/SPEED/turn/card observations invalidated",
+    "fresh read of Speed AND Auto on entry (禁止沿用上次状态)"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "phases": [
+      {
+        "phase": "ANIMATION",
+        "authority": "AUTO may be visible but dimmed; semantic clicks forbidden"
+      },
+      {
+        "phase": "INPUT_READY",
+        "authority": "AUTO value + interactability observable; one current-epoch action allowed"
+      },
+      {
+        "phase": "RESULT",
+        "authority": "capture explicit PASS/FAIL before advancing"
+      },
+      {
+        "phase": "UNKNOWN",
+        "authority": "STOP; no blind AUTO/SPEED/card action"
+      }
+    ],
+    "fresh_fields": [
+      "battle_phase",
+      "control_epoch_id",
+      "battle_auto_state: ON|OFF|UNKNOWN (value)",
+      "auto_interactability: ENABLED|DISABLED|UNKNOWN (separate field)",
+      "battle_speed_state: X1|X2|X3|UNKNOWN (OFF displays as X1)",
+      "turn/card context (invalidate on epoch change)"
+    ],
+    "invariant": "INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE — Auto OFF + DISABLED is not actionable"
+  },
+  "SUBSTATES": [
+    {
+      "substate": "INPUT_READY_AUTO_OFF_ENABLED",
+      "evidence": "4 successful single-click ON transitions; 4 negative samples (3 ANIMATION dimmed, 1 pre-INPUT_READY)"
+    },
+    {
+      "substate": "PAUSE_OVERLAY",
+      "evidence": "1 resume sample; resume resets AUTO/SPEED/turn/card state → new epoch"
+    },
+    {
+      "substate": "RESULT_PENDING",
+      "evidence": "result contract SUPPORTED"
+    }
+  ],
+  "VISIBLE_CONTROLS": [
+    {
+      "control": "AUTO",
+      "geometry": "box observed in screenshots, PROVEN region NOT normalized; ROI x∈[0.79,0.85]",
+      "success_fail": "4/4",
+      "visible_status": "VERIFIED_WITH_PHASE_GUARDS"
+    },
+    {
+      "control": "SPEED_DISPLAY (OFF/X2/X3 badge)",
+      "geometry": "box observed; display-only",
+      "success_fail": "0/0 as control",
+      "visible_status": "DISPLAY_ONLY — clicks did not change X2 (hazard: WRONG_TARGET)"
+    },
+    {
+      "control": "SPEED toggle 本体",
+      "geometry_note": "historical coordinate (1166,47) SUPERSEDED_BY_F05 — display-only badge finding; true toggle control ungrounded; do NOT use as executor input (LVT-01)",
+      "success_fail": "OFF→X2 observed once; X3 path NOT_OBSERVED",
+      "visible_status": "HOLD — toggle clickable region UNKNOWN"
+    },
+    {
+      "control": "PAUSE_RESUME (再開)",
+      "geometry": "box observed, region not normalized",
+      "success_fail": "1/0",
+      "visible_status": "NEEDS_MORE_REPLICATION"
+    }
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "VISIBLE != AUTHORIZED. Auto visible during ANIMATION had NO_EFFECT 3 times. Value OFF != actionable (AUTO contract below).",
+    "AUTO": "AUTHORIZED only for: INPUT_READY + current epoch + AUTO_OFF + ENABLED + one-frame action ownership → click exactly once → consume frame → fresh verify AUTO_ON. Duplicate toggle CANCELS.",
+    "SPEED": "HOLD — display is read-only; toggle control not independently grounded. Speed handler state machine (SPEED_FIRST_THEN_AUTO, bounded 3 toggles) is ACTIVE operator procedure with PARTIAL evidence tier; x3_zero_clicks / x1_two_clicks / unknown_stop paths NOT_YET_OBSERVED.",
+    "ORDERING": "SPEED_FIRST_THEN_AUTO — Auto ON locks the speed control (live: 2 post-ON speed clicks ineffective). Held Harness candidate CONTROL_ORDERING_DEPENDENCY_MUST_BE_RESPECTED.",
+    "PAUSE_RESUME": "MEDIUM authority only with exclusive handler ownership; new epoch after resume",
+    "MANUAL_CARD": "HOLD — RUN_LOCAL_EMERGENCY_FALLBACK classification only; no production auto-click"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe phase/value/interactability/epoch (always)",
+    "single guarded AUTO click per epoch when OFF+ENABLED at INPUT_READY",
+    "fresh speed read via coarse ROI vision (no full-screen OCR, no AGY)",
+    "click 再開 on fresh pause overlay with exclusive ownership",
+    "capture result evidence"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "semantic AUTO/SPEED/card clicks during ANIMATION or DIALOGUE_TRANSITION",
+    "clicking the X2/X3 display badge as a toggle",
+    "reusing AUTO/SPEED state across pause/resume or new battle (epoch invalidation)",
+    "advance before explicit PASS/FAIL capture",
+    "blind actions during UNKNOWN phase"
+  ],
+  "POSTCONDITIONS": {
+    "AUTO_click": "fresh AUTO_ON in same current epoch; battle progresses",
+    "RESUME": "fresh AUDITION_BATTLE + new control epoch; all local control observations invalidated",
+    "RESULT": "explicit PASS/FAIL evidence captured and classified BEFORE any advance"
+  },
+  "EXIT_CONDITIONS": [
+    "RESULT captured → advance cycle → RESULT room / HOME weeks-1 (audition consumes the final actionable week)"
+  ],
+  "FAILURE_MODES": [
+    {
+      "mode": "AUTO_NO_EFFECT_ANIMATION",
+      "class": "DISABLED_CONTROL",
+      "evidence": "3 clicks dimmed"
+    },
+    {
+      "mode": "AUTO_NO_EFFECT_DIALOGUE_TRANSITION",
+      "class": "NO_EFFECT",
+      "evidence": "1 early click"
+    },
+    {
+      "mode": "DOUBLE_TOGGLE_CANCEL",
+      "class": "UNDO"
+    },
+    {
+      "mode": "STALE_STATE_AFTER_RESUME",
+      "class": "STALE_STATE",
+      "evidence": "harness invariant"
+    },
+    {
+      "mode": "SPEED_BADGE_CLICK_INEFFECTIVE",
+      "class": "WRONG_TARGET",
+      "evidence": "X2 unchanged after repeated clicks"
+    },
+    {
+      "mode": "RESULT_EVIDENCE_LOSS",
+      "class": "COMMIT_VIOLATION",
+      "evidence": "S3_40K: advance before capture → flag uncommitted; semifinal scene skipped without WIN evidence"
+    }
+  ],
+  "RECOVERY": [
+    "NO_EFFECT click: re-observe phase, wait for INPUT_READY, do not spam",
+    "pause overlay appears: stop all battle control assumptions, handle overlay, new epoch",
+    "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG — a failed/unknown battle action never commits progress",
+    "battle wait → fresh result verify; UNKNOWN result stays UNKNOWN"
+  ],
+  "PERSISTENCE_BOUNDARY": "flush battle attempt + explicit result (PASS/FAIL/UNKNOWN) with screenshot provenance before advancing; audition result is a durable boundary",
+  "MIGRATION_STATUS": {
+    "durable_frames": "VRB02_025 (ANIMATION phase context; Auto OFF-appearance only — DISABLED interactability NOT visually established) / VRB02_026 (AUTO value visible at annotated INPUT_READY — ENABLED NOT visually established; annotation overlay color is reviewer markup, not control visual evidence) / VRB02_027 (ANIMATION_WITH_AUTO_ON_VISIBLE — Appeal Start context; AUTO_VALUE=ON retained; INPUT_READY NOT claimed) / VRB02_028 (BATTLE_ACTIVE, WOULD_NOT_CLICK_SPEED_DISPLAY) / VRB02_029 (INPUT_READY_CANDIDATE, actionability unresolved) — value-level visual evidence YES for OFF and ON; interactability/phase-authority NOT visually separable from these frames; HAS_ACTION_AUTHORITY YES (runtime rule, not frame-derived), HAS_POSTCONDITION YES (rule; static frames do NOT verify click causality), HAS_CROSS_SESSION_REPLICATION NO; +17 recovered historical frames (recovered_historical_frames/battle/) — HAS_DURABLE_VISUAL_FRAME YES extended, CROSS_SESSION_VISUAL_REPLICATION YES (visual-level only)",
+    "AUTO": "NEEDS_MORE_REPLICATION (cross-session epoch replication missing; LVT-02); historical visual ON/OFF pairs exist but interactability cross-session stays NEEDS_MORE_REPLICATION",
+    "SPEED_DISPLAY": "CONTROL_GROUNDING_BLOCKED as control (read detector SUPPORTED)",
+    "SPEED_TOGGLE": "HOLD",
+    "PAUSE_RESUME": "NEEDS_MORE_REPLICATION (11/17, n=1)",
+    "semi_final_final_battles": "UNKNOWN — S1/S2 final auditions observed (1 each), semifinal scene result evidence was lost (SKIP advanced without WIN evidence); no separate semifinal/final control contract exists",
+    "outside_1280x720": "UNKNOWN"
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json",
+    "enza_memory/policies/audition_battle_speed_handler.json",
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json",
+    "enza_memory/migration/python_click_migration/distilled/result_commit_examples.json",
+    ".agent-harness/GATES.md audition control-state invariants"
+  ],
+  "evidence_delta_source": [
+    "HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY",
+    "RUN_STATE_CONTAMINATION_FIX"
+  ],
+  "EVIDENCE_DELTA": {
+    "delta_id": "CONTRACT_EVIDENCE_DELTA_20260907",
+    "HAS_DURABLE_VISUAL_FRAME": "YES (extended) — 17 additional battle frames recovered from historical ZCode sessions (0905 Phase-A explore + 0905 WINGRUN resume + crash-recovery session), durable under recovered_historical_frames/battle/",
+    "CROSS_SESSION_VISUAL_REPLICATION": "YES at visual level — battle control cluster (Auto ON/OFF, 倍速, pause, TURN, card rail) observed across >=3 distinct historical sessions and 2 distinct game days; all frames tool-result artifacts, review_status=RECOVERED_REVIEW_PENDING",
+    "battle_frame_classes": {
+      "auto_toggle": 7,
+      "speed": 3,
+      "manual_input": 4,
+      "state": 3,
+      "input_ready": 1,
+      "stuck_frame_negative": 1
+    },
+    "key_frames": {
+      "INPUT_READY_gate": "enza_memory/migration/python_click_migration/recovered_historical_frames/battle/20260905_230910_38712583_input_ready.png",
+      "stuck_negative": "enza_memory/migration/python_click_migration/recovered_historical_frames/battle/20260905_230232_38712583_stuck_frame.png",
+      "auto_on_post_click_visual": "enza_memory/migration/python_click_migration/recovered_historical_frames/battle/20260905_143803_38712583_auto_toggle.png"
+    }
+  },
+  "EVIDENCE_DELTA_SEPARATION": {
+    "AUTO_INTERACTABILITY_CROSS_SESSION": "UNCHANGED — NEEDS_MORE_REPLICATION; historical Auto ON/OFF frames are visual states only, they do NOT by themselves grant click authority across sessions (no fresh interaction replay)",
+    "AUTO_POST_CLICK_VERIFICATION": "UNCHANGED — historical frames include pre/post-click visual pairs, but verification authority still requires fresh in-session re-observe per epoch",
+    "SPEED_ACTIONABILITY": "UNCHANGED — speed indicator states visible in recovered frames; SPEED_TOGGLE stays HOLD",
+    "rule": "visual evidence of a control state never auto-promotes action authority"
+  },
+  "AUTO_VISUAL_AUTHORITY_CORRECTION": {
+    "correction_id": "BATTLE_VISUAL_AUTHORITY_METADATA_CORRECTED_20260907",
+    "trigger": "independent visual authority review of VRB02_025/026/027 appearance claims (annotation overlay color is NOT control visual evidence)",
+    "AUTO_OFF_VISUAL_EVIDENCE": "YES (value text OFF pixel-observed; unchanged)",
+    "AUTO_ON_VISUAL_EVIDENCE": "YES (value text ON observed; unchanged)",
+    "AUTO_OFF_ENABLED_EVIDENCE": "PARTIAL / NOT_VISUALLY_ESTABLISHED — VRB02_026 Auto appearance alone does not establish ENABLED",
+    "AUTO_OFF_DISABLED_EVIDENCE": "PARTIAL / NOT_VISUALLY_ESTABLISHED — VRB02_025 dimmed appearance alone does not establish DISABLED (the ANIMATION no-effect click samples remain valid behavioral evidence, independent of appearance)",
+    "AUTO_INTERACTABILITY_VISUAL_SEPARABLE": "NO — still frames do not separate value from interactability; interactability stays a fresh-observation field (INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE)",
+    "VRB02_027_PHASE_CORRECTION": "frame shows Appeal Start / animation with Auto ON visible — relabeled INPUT_READY_AUTO_ON → ANIMATION_WITH_AUTO_ON_VISIBLE; INPUT_READY evidence and AUTO interactability evidence are recorded separately and neither is claimed by this frame",
+    "AUTO_ON_VALUE_VISUALLY_OBSERVED": "YES",
+    "AUTO_CLICK_CAUSALLY_VERIFIED": "NO — static ON frames (incl. pre/post-click visual pairs) do not verify click causality; requires same-epoch before/action/after provenance with fresh in-session re-observe (see EVIDENCE_DELTA_SEPARATION.AUTO_POST_CLICK_VERIFICATION)",
+    "SPEED_AXIS": "SPEED_DISPLAY_OFF observed; SPEED_DISPLAY_2X observed; SPEED_X3 NOT_ESTABLISHED; SPEED_ACTIONABILITY UNKNOWN; SPEED_CONTROL HOLD — no click authority is derived from button appearance or display readings",
+    "STUCK_AXIS": "STUCK_VISUAL_STATE != ACTION_FAILURE and STUCK_VISUAL_STATE != RETRY_AUTHORITY — a single frozen frame does not prove the previous semantic action failed; bounded re-observation and fresh phase/epoch reconciliation (Batch-4 requirement, NRH-001) remain mandatory before any further action",
+    "runtime_status": "current runtime (audition_control_epoch.py auto_action) already requires INPUT_READY + AUTO OFF + AUTO_INTERACTABILITY ENABLED before CLICK_AUTO — this evidence correction changes no runtime requirement",
+    "RUNTIME_CHANGE_REQUIRED": "NO",
+    "v0_3_batch_note": "review_batches/v0_3 manifest labels (VRB02_025 DISABLED_CONTROL_HAZARD / VRB02_026 ACTIONABLE_CONTROL / VRB02_027 phase INPUT_READY_AUTO_ON) are superseded by this correction; the v0_3 manifest is left unedited (manifest_sha256-bound, REVIEW_PENDING snapshot, annotated PNG overlays immutable) — downstream consumers must apply this correction"
+  }
+}

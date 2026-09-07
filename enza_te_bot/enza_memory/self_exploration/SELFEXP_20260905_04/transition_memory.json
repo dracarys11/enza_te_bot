@@ -1,0 +1,11 @@
+{
+  "scenario_scope": "WING",
+  "transitions": [
+    {"source_state":"PRODUCE_SELECTION(特化)","control_id":"ikusei_category_tab","target_state":"PRODUCE_SELECTION_IKUSEI","times_successful":1,"example_steps":["w1"]},
+    {"source_state":"PRODUCE_SELECTION_IKUSEI","control_id":"wizard_forward_next","target_state":"UNIT_FORMATION","times_successful":1,"example_steps":["w2"]},
+    {"source_state":"UNIT_FORMATION","control_id":"wizard_forward_next","target_state":"ITEM_SELECTION","times_successful":1,"example_steps":["w3"]},
+    {"source_state":"ITEM_SELECTION","control_id":"wizard_commit_kettei","target_state":"FINAL_CONFIRM_MODAL","times_successful":1,"example_steps":["w4"]},
+    {"source_state":"FINAL_CONFIRM_MODAL","control_id":"produce_start_commit","target_state":"WING_INTRO_DIALOGUE(/produce)","times_successful":1,"example_steps":["w5"]},
+    {"source_state":"WING_INTRO_DIALOGUE","control_id":"dialogue_skip","target_state":"WING_HOME","times_successful":1,"example_steps":["w6"]}
+  ]
+}

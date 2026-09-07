@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "artifact_id": "python_click_migration_viewport_profiles",
+  "artifact_type": "VIEWPORT_PROFILES",
+  "created_at": "2026-09-06T06:32:32Z",
+  "status": "CANDIDATE",
+  "provenance": {
+    "classification": "inference",
+    "producer": "ZCode (Environment Agent)",
+    "provider_session_id": null,
+    "captured_at": "2026-09-06T06:32:32Z",
+    "source_artifact_ids": [
+      "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json",
+      "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl"
+    ],
+    "integrity": {
+      "algorithm": null,
+      "digest": null
+    }
+  },
+  "profiles": {
+    "MAC_CURRENT_V1": {
+      "profile_id": "MAC_CURRENT_V1",
+      "os": "darwin (arm64)",
+      "browser": "ZCode browser-use (Chromium-based)",
+      "game_viewport": {
+        "left": 0,
+        "top": 0,
+        "width": 1280,
+        "height": 720
+      },
+      "device_pixel_ratio": "UNKNOWN",
+      "browser_zoom": "UNKNOWN",
+      "browser_window_geometry": "UNKNOWN (not separated from game viewport in prior captures)",
+      "normalization_contract": "nx = (x - left) / width; ny = (y - top) / height, all in game-viewport space",
+      "evidence": {
+        "viewport_signature_in_prior_runs": "1280x720 @ /produce",
+        "classification": "FACT",
+        "note": "All prior taught coordinates (e.g. (150,600), (1185,660), (1218,53)) fall inside a 1280x720 viewport-relative space and were used successfully at that signature."
+      },
+      "unknowns": [
+        "left/top are assumed 0,0 because prior captures were viewport-relative; a fresh live capture separating browser chrome from game viewport has NOT yet confirmed this",
+        "device pixel ratio and Retina mapping not re-verified in this session",
+        "only 1280x720 validated; other viewports CONTROL_GEOMETRY_UNVALIDATED (per WINGVAL_20260905_01 caveat)"
+      ]
+    }
+  },
+  "active_profile_id": "MAC_CURRENT_V1",
+  "rules": [
+    "Long-term click memory stores normalized game-viewport coordinates only.",
+    "Raw screen coordinates are per-run debug provenance, never authoritative.",
+    "Never auto-scale geometry across viewport profiles; new profile requires re-teaching (WINGVAL guard)."
+  ]
+}

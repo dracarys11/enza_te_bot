@@ -1,0 +1,22 @@
+{
+  "scenario_scope": "WING",
+  "normal_week_budget": {
+    "screenshots": 1,
+    "coarse_page_checks": 2,
+    "field_reads": ["weeks_remaining", "season"],
+    "agy_calls": 0,
+    "note": "唯一必要截图 = 周末 fresh HOME 验证帧(读 weeks/fan_gap); schedule/room/result 全程可盲操作(fixed coords), 演出帧无需读取"
+  },
+  "final_week_budget": {
+    "screenshots": 1,
+    "field_reads": ["weeks_remaining==1?", "fan_gap_to_target(精读)", "stamina"],
+    "note": "只有策略规则真正消费 fan_gap/stamina 的周才需要精读"
+  },
+  "new_page_budget": {"screenshots": 2, "coarse_page_checks": 2, "note": "新页面 identity + control 定位各一帧"},
+  "unknown_budget": {"screenshots": 3, "escalation": "BUSINESS_CHOICE/UNKNOWN page → 截图留存 + 停止, 不自动处置"},
+  "waste_found": [
+    "run 中对 VOCAL_RESULT 演出帧拍了全量截图并读取数字 — 数字会随后续帧刷新, 属无效读取",
+    "对话逐行推进时每 1-2 行截一帧 — 可改为每 3-5 次点击截一帧检测终点",
+    "W1 对 schedule 页做了全量观察 — 之后均为同一稳定页, 复用即可"
+  ]
+}

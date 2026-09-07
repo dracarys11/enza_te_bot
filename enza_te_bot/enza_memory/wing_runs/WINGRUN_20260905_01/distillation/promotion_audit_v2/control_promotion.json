@@ -1,0 +1,12 @@
+{
+  "status":"PROMOTE_WITH_GUARDS",
+  "validated_viewport":"1280x720 @ /produce",
+  "controls":[
+    {"id":"WING_HOME.produce_schedule","support":"2/2 cross-session","anchor":"SCHEDULE calendar + プロデュース bottom-left"},
+    {"id":"SCHEDULE.vocal_card","support":"2/2 cross-session","anchor":"pink ボーカルレッスン card"},
+    {"id":"SCHEDULE.confirm","support":"2/2 cross-session","anchor":"pink 決定 bottom-right"},
+    {"id":"RESULT.advance/interruption_cycle","support":"2/2 cross-session","anchor":"result overlay / dialogue type"}
+  ],
+  "mandatory_guards":["fresh source_state","viewport signature valid","local anchor valid","coordinate/bbox in bounds","post-action expected transition verified"],
+  "other_viewports":"CONTROL_GEOMETRY_UNVALIDATED; HOLD/re-teach; never auto-scale"
+}

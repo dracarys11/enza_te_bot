@@ -1,0 +1,92 @@
+{
+  "artifact_type": "REMAINING_LIVE_EVIDENCE_TARGETS",
+  "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+  "created_at": "2026-09-07T00:20:00Z",
+  "status": "REDUCED TARGET LIST. Cross-checked against the 45 recovered frames (recovered_frame_manifest.jsonl) and the v0.3 review batch. None of these targets has been executed; each requires its own explicit authorization and LIVE_DEBUG_GATE record at run time.",
+  "removed_targets": [
+    {
+      "original_rank": 2,
+      "original_target": "SKILL_BOARD node/ACQUIRE/CONFIRM_OK durable source frames",
+      "verdict": "REMOVED_SATISFIED_IN_PART",
+      "basis": "45-frame recovery from sess_a87f3588-8212-4de7-b9ad-319825b4509e now covers: locked-node + dead-zone misclick source frames (rf_sb_g1..g4 ↔ live_csm_020..023), acquire confirm dialog (rf_sb_acquire_confirm_dialog), acquired/owned states, progressive-unlock chain, zoom/region views, and the full SKILL_REPLACEMENT slot/confirm set (10 frames)",
+      "residual": "(a) offline: complete RECOVERED_REVIEW_PENDING review of the 45 frames; (b) narrow live residual: click-source frames for live_csm_015..019 (ACTIONABLE_NODE/ACQUIRE positive-path) remain absent — fold into any future operator-authorized skill session, do not spend a dedicated run"
+    },
+    {
+      "original_rank": 4,
+      "original_target": "normalized visual boxes for RESULT:ADVANCE, SCHEDULE:AUDITION, DIALOGUE:SAFE_TEXTBOX, SEASON_TRANSITION:SKIP/NEXT",
+      "verdict": "NARROWED",
+      "basis": "DIALOGUE:SAFE_TEXTBOX partially covered by 4 recovered dialogue frames + live_csm_029 three-choice box; remaining controls unchanged",
+      "residual_target": "see LVT-03"
+    }
+  ],
+  "actual_next_live_evidence_targets": [
+    {
+      "id": "LVT-01",
+      "target": "speed toggle true control (X2→X3 transition) grounded at INPUT_READY with fresh ROI frames",
+      "closes": ["MVE-012", "BTR-004 x3 test paths"],
+      "proposed_risk": "LEVEL_1_BOUNDED_SAFE_UI (speed change only)",
+      "priority": 1
+    },
+    {
+      "id": "LVT-02",
+      "target": "AUDITION_BATTLE:AUTO cross-session replication (>=2 new battles) with per-sample phase/value/interactability records",
+      "closes": ["MVE-023", "BTR-002 replication gap"],
+      "proposed_risk": "LEVEL_1_BOUNDED_SAFE_UI",
+      "priority": 2
+    },
+    {
+      "id": "LVT-03",
+      "target": "normalized visual boxes for RESULT:ADVANCE, SCHEDULE:AUDITION, SEASON_TRANSITION:SKIP/NEXT on fresh stable frames (DIALOGUE:SAFE_TEXTBOX resolved by recovery)",
+      "closes": ["MVE-010 residual"],
+      "proposed_risk": "LEVEL_0_OBSERVE_ONLY",
+      "priority": 3
+    },
+    {
+      "id": "LVT-04",
+      "target": "TWO_CHOICE option-box geometry capture on first future 2-card instance",
+      "closes": ["MVE-013", "CLR-006"],
+      "proposed_risk": "LEVEL_0_OBSERVE_ONLY then policy-approved click",
+      "priority": 4
+    },
+    {
+      "id": "LVT-05",
+      "target": "durable-flush fail-closed drill: one week executed with simulated checkpoint-write failure — next transaction must be refused",
+      "closes": ["NRG-013"],
+      "proposed_risk": "offline simulation first; LEVEL_0 live confirmation only",
+      "priority": 5
+    },
+    {
+      "id": "LVT-06",
+      "target": "pause/resume control-epoch invalidation replication (second sample)",
+      "closes": ["BTR-008", "T17"],
+      "proposed_risk": "LEVEL_1_BOUNDED_SAFE_UI",
+      "priority": 6
+    },
+    {
+      "id": "LVT-07",
+      "target": "viewport/DPR/zoom separation capture (browser chrome vs game viewport; non-1280x720 probe if ever reachable)",
+      "closes": ["MVE-011", "NRG-023 residual"],
+      "proposed_risk": "LEVEL_0_OBSERVE_ONLY",
+      "priority": 7
+    },
+    {
+      "id": "LVT-08",
+      "target": "SEASON_TRANSITION full frame sequence incl. stable next-season HOME + flush boundary (next season end)",
+      "closes": ["MVE-021", "T19"],
+      "proposed_risk": "LEVEL_1_BOUNDED_SAFE_UI",
+      "priority": 8
+    },
+    {
+      "id": "LVT-09",
+      "target": "fresh-season prep-gate observation (weeks=8 HOME, prep-status check before weekly loop)",
+      "closes": ["PLR-006", "SBR-006"],
+      "proposed_risk": "LEVEL_0_OBSERVE_ONLY",
+      "priority": 9
+    }
+  ],
+  "offline_next_steps_not_live": [
+    "complete RECOVERED_REVIEW_PENDING review of 45 recovered frames",
+    "rebuild review batch v0_4 (v0_3 missing_source_reviews M01..M09 stale w.r.t. recovery)",
+    "implement READY_TO_IMPLEMENT queue (regression_implementation_queue.json)"
+  ]
+}

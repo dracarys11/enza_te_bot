@@ -1,0 +1,9 @@
+{
+  "run_id": "WINGVAL_20260905_01",
+  "weeks": [
+    {"id":"vA","season":2,"weeks_before":6,"weeks_after":5,"loop":"WING_HOME→SCHEDULE→VOCAL→RESULT→WING_HOME","controls_guards":"每控件前 fresh 截图核锚点","result":"COMPLETE","fan_gap_delta":-576,"agy_calls":0},
+    {"id":"vB","season":2,"weeks_before":5,"weeks_after":4,"loop":"同上 + 三选项 advice interruption(选いつも通り)","result":"COMPLETE","fan_gap_delta":-480,"agy_calls":0}
+  ],
+  "note": "S1 已随上一 run 结束; 本轮在 S2 正常周验证 — normal-week loop 与 season 无关(weeks>1→VOCAL 规则相同), 记录为 season 映射差异",
+  "vocal_loop_cross_session": "PASS (2 独立周, 跨 2 session, 全控件 fresh guard 下 100% 成功)"
+}

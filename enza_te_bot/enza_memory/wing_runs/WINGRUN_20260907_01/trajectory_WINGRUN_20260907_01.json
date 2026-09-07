@@ -1,0 +1,135 @@
+{
+ "schema_version": 1,
+ "artifact_id": "TRAJ_WINGRUN_20260907_01",
+ "artifact_type": "TRAJECTORY",
+ "created_at": "2026-09-07T00:00:00Z",
+ "status": "CANDIDATE",
+ "mission": "LIVE Evidence Acquisition + Safe WING Execution (operator mission; new produce run after closed WINGRUN_20260906_01)",
+ "execution_surface": {
+  "provider": "ZCode built-in browser (IAB)",
+  "viewport": "1280x720",
+  "external_chrome_started": false,
+  "cdp_used": false,
+  "note": "operator redirected session from external Chrome to ZCode built-in browser at session start"
+ },
+ "run_id": "WINGRUN_20260907_01",
+ "steps": [
+  {
+   "step": 1,
+   "action": "open game in ZCode IAB; title TOUCH TO START -> お知らせ -> MAIN_LOBBY_IDLE (プロデュース 300/300 free)",
+   "provenance": "session_observed",
+   "verification": "fresh screenshots; FACT"
+  },
+  {
+   "step": 2,
+   "action": "produce wizard: 育成プロデュース + W.I.N.G編 + ミドル (replicating 0906 flow); ユニット2; no items; 1倍; スタミナ300->270 開始",
+   "provenance": "session_observed",
+   "verification": "fresh screenshots at each wizard page; FACT"
+  },
+  {
+   "step": 3,
+   "action": "opening scene SKIP -> direct jump WING_HOME (fast-path replicated); S1 残り8週",
+   "provenance": "session_observed",
+   "verification": "fresh screenshot; FACT"
+  },
+  {
+   "step": 4,
+   "action": "S1W1 VOCAL lesson; weeks 8->7; fans 999->967; Vo 116",
+   "provenance": "session_observed",
+   "verification": "fresh home frame; FACT"
+  },
+  {
+   "step": 5,
+   "action": "S1W2 VOCAL lesson + support event (果穂 イカ/タコ debate, NO choice overlay, SP+10); SKIP settled directly; weeks 7->6; fans 967->715",
+   "provenance": "session_observed",
+   "verification": "fresh frames; FACT"
+  },
+  {
+   "step": 6,
+   "action": "S1W3 VOCAL lesson (trouble 0%) + 2 no-choice support events (めぐる/灯織; 真乃 walk, メンタル+10); weeks 6->5; fans 715->589",
+   "provenance": "session_observed",
+   "verification": "fresh frames; FACT; anomaly: clicks outran text-typing once"
+  },
+  {
+   "step": 7,
+   "action": "S1W4 VOCAL lesson (trouble 4%); weeks 5->4; fans 589->466",
+   "provenance": "session_observed",
+   "verification": "fresh home frame; FACT"
+  },
+  {
+   "step": 8,
+   "action": "S1W5 VOCAL lesson (trouble 27%) + choco advice event with THREE_CHOICE_LAYOUT_V1 (middle clicked per fixed policy, SP+10) + クルー no-choice event (技+10) + TRUE TWO_CHOICE PROMISE いいよ/ごめん -> clicked ごめん (FIXED_DECLINE); weeks 4->3",
+   "provenance": "session_observed",
+   "verification": "PRIORITY-1 EVIDENCE: TWO_CHOICE pre-click full frame + post-click frame + decline response text; three-choice per-event capture also taken; FACT",
+   "evidence": [
+    "enza_memory/wing_runs/WINGRUN_20260907_01/two_choice_preclick_evidence.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_S1W5.png",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_POSTCLICK_S1W5.png"
+   ]
+  },
+  {
+   "step": 9,
+   "action": "S1W6: schedule opened (VOCAL Lv.3 Excellent!!, トラブル率92%, Vo C/306, SP 82); 決定 clicked; tool call CANCELLED by operator during post-click wait",
+   "provenance": "session_observed",
+   "verification": "PARTIAL: click fired (post-lesson event dialogue now running per PAUSE_STATE_FRESH.png); week counter UNKNOWN; INFERENCE: lesson likely completed"
+  },
+  {
+   "step": 10,
+   "action": "RECOVERY (operator mission: reconcile interrupted S1W6 only): advanced post-lesson dialogue via TEXTBOX (no SKIP present), Perfect Communication result, PROMISE two-choice いいよ/ごめん appeared -> captured 2nd pre-click full frame + clicked ごめん per fixed policy (verified decline response), reached stable HOME",
+   "provenance": "session_observed",
+   "verification": "fresh frames; W6_CONSUMED=YES (weeks 3->2 top-bar read); FACT"
+  },
+  {
+   "step": 11,
+   "action": "POLICY INCIDENT recorded: S1W6 VOCAL executed at trouble_rate 92% (operator HARD GATE violation; gate issued post-hoc). Operator VOCAL risk gate persisted as ACTIVE policy artifact vocal_risk_gate_hard.json. No automatic REST (superseded by reconcile-only instruction); next objective reserved for Python planner. STOP at boundary.",
+   "provenance": "session_observed + user_reported (gate)",
+   "verification": "failure file + policy file written; handoff marked"
+  },
+  {
+   "step": 12,
+   "action": "RISK-GATE RECOVERY (operator re-issue): at already-reconciled fresh HOME (weeks=2) executed REST per the only authorized objective; rest lead-in dialogue advanced, rest event (冬優子) SKIPped, fresh post-rest HOME verified",
+   "provenance": "session_observed",
+   "verification": "weeks 2->1 fresh top-bar; stamina partially recovered; FACT",
+   "note": "no additional week run after REST; STOP at boundary"
+  },
+  {
+   "step": 13,
+   "action": "PLANNER->RISK-GATE->EXECUTOR live verification: fresh HOME (weeks=1, fan_gap=220) -> home_policy.decide_home -> PLANNER_OBJECTIVE=NEEDS_VOCAL_FAN_GAIN (no gates) -> home_tick returns UNSUPPORTED_DECISION fail-closed -> no action executed, no invention, STOP at boundary",
+   "provenance": "session_observed + local planner invocation",
+   "verification": "pure-logic wiring check with zero clicks; FACT",
+   "evidence": "enza_memory/wing_runs/WINGRUN_20260907_01/planner_risk_wiring_verification.json"
+  },
+  {
+   "step": 14,
+   "action": "NGVG WIRING VERIFICATION: planner NEEDS_VOCAL_FAN_GAIN -> mapped VOCAL intent (phase-1 NEED_MORE_OBSERVATION, not UNSUPPORTED) -> SCHEDULE fresh trouble_rate=8 -> phase-2 RISK_GATE_BLOCKED -> wiring-generated REST recovery executed (no 決定 click; BACK -> HOME -> 休む)",
+   "provenance": "session_observed + local planner/wiring invocation",
+   "verification": "fresh frames + pure-logic gate checks; FACT"
+  },
+  {
+   "step": 15,
+   "action": "Final week (REST) settle -> season end: explicit FAIL (はづき 目標未達), rank screen 780/1000-E, プロデュース評価 (親愛度6 SP+6), フェスアイドル誕生 (SP83 forfeited per explicit dialog), 総合評価 F+, clear rewards, ノウハウブック -> MAIN_LOBBY_IDLE (produce slot 289/300 regen)",
+   "provenance": "session_observed",
+   "verification": "fresh frames; run closed"
+  }
+ ],
+ "handoff": {
+  "state": "RUN COMPLETE — main lobby idle; produce slot regenerating (289/300); fes idol born",
+  "tab": "iab-tab:3b70c547-16ab-4e67-88cb-d186c30b4605 marked handoff",
+  "resume": "no active run; any new produce requires a new run + operator mission"
+ },
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB)",
+  "provider_session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+  "captured_at": "2026-09-07T00:00:00Z",
+  "source_artifact_ids": [
+   "OBS_002",
+   "OBS_003",
+   "OBS_004"
+  ],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ }
+}

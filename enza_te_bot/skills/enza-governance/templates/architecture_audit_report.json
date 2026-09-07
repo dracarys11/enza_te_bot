@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "report_type": "ARCHITECTURE_AUDIT",
+  "status": "DRAFT",
+  "reviewed_artifacts": [],
+  "reviewed_changes": [],
+  "preserved_invariants": [],
+  "violations": [],
+  "risks": [],
+  "recommended_fixes": [],
+  "unresolved_unknown_refs": [],
+  "code_modified": false
+}

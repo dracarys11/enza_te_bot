@@ -1,0 +1,2 @@
+{"frame_id":"boot_f01","page_class":"PRODUCE_MENU","confidence":0.90,"visual_source":"zcode_native","reused_previous_frame":false,"why_new_screenshot":"first frame of bootstrap session; ambient UI state showed /produceReady after auth repair","decision":"OBSERVE_ONLY","needs_agy":false}
+{"frame_id":"boot_f02","page_class":"HOME","confidence":0.95,"visual_source":"zcode_native","reused_previous_frame":false,"why_new_screenshot":"direct URL navigation to /home completed; page-level transition","decision":"OBSERVE_ONLY","needs_agy":false}

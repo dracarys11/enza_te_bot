@@ -1,0 +1,329 @@
+{
+  "observation_id": "VOBS_20260903052210",
+  "geometry_space": "original_viewport",
+  "schema": "GroundedElement v0.1",
+  "elements": [
+    {
+      "element_id": "e01",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        1200.0,
+        18.0,
+        80.0,
+        57.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "UNKNOWN",
+      "text_evidence": [],
+      "visual_confidence": 0.96,
+      "grounding_confidence": 0.96,
+      "provenance": {
+        "visual": "gemini",
+        "text": null
+      }
+    },
+    {
+      "element_id": "e02",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        831.0,
+        80.0,
+        177.0,
+        44.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_006",
+          "text": "育成プロデュース",
+          "confidence": 0.999576,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.97,
+      "grounding_confidence": 0.97,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    },
+    {
+      "element_id": "e03",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        1007.0,
+        80.0,
+        190.0,
+        44.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_007",
+          "text": "特化プロデュース",
+          "confidence": 0.999244,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.97,
+      "grounding_confidence": 0.97,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    },
+    {
+      "element_id": "e04",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        80.0,
+        405.0,
+        36.0,
+        50.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "UNKNOWN",
+      "text_evidence": [],
+      "visual_confidence": 0.95,
+      "grounding_confidence": 0.95,
+      "provenance": {
+        "visual": "gemini",
+        "text": null
+      }
+    },
+    {
+      "element_id": "e05",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        480.0,
+        405.0,
+        37.0,
+        50.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "UNKNOWN",
+      "text_evidence": [],
+      "visual_confidence": 0.95,
+      "grounding_confidence": 0.95,
+      "provenance": {
+        "visual": "gemini",
+        "text": null
+      }
+    },
+    {
+      "element_id": "e06",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        169.0,
+        410.0,
+        263.0,
+        44.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_015",
+          "text": "攻略動画①(外部サイト)",
+          "confidence": 0.905282,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.97,
+      "grounding_confidence": 0.905282,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    },
+    {
+      "element_id": "e07",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        585.0,
+        334.0,
+        196.0,
+        82.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_010",
+          "text": "ビギナー",
+          "confidence": 0.999851,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.91,
+      "grounding_confidence": 0.91,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    },
+    {
+      "element_id": "e08",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        774.0,
+        334.0,
+        191.0,
+        82.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_011",
+          "text": "ミドル",
+          "confidence": 0.999953,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.91,
+      "grounding_confidence": 0.91,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    },
+    {
+      "element_id": "e09",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        965.0,
+        334.0,
+        194.0,
+        82.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_012",
+          "text": "マスター",
+          "confidence": 0.99978,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.91,
+      "grounding_confidence": 0.91,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    },
+    {
+      "element_id": "e10",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        1152.0,
+        344.0,
+        53.0,
+        60.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "UNKNOWN",
+      "text_evidence": [],
+      "visual_confidence": 0.94,
+      "grounding_confidence": 0.94,
+      "provenance": {
+        "visual": "gemini",
+        "text": null
+      }
+    },
+    {
+      "element_id": "e11",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        20.0,
+        623.0,
+        77.0,
+        78.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "UNKNOWN",
+      "text_evidence": [],
+      "visual_confidence": 0.98,
+      "grounding_confidence": 0.98,
+      "provenance": {
+        "visual": "gemini",
+        "text": null
+      }
+    },
+    {
+      "element_id": "e12",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        126.0,
+        623.0,
+        166.0,
+        78.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "UNKNOWN",
+      "text_evidence": [],
+      "visual_confidence": 0.98,
+      "grounding_confidence": 0.98,
+      "provenance": {
+        "visual": "gemini",
+        "text": null
+      }
+    },
+    {
+      "element_id": "e13",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        899.0,
+        623.0,
+        166.0,
+        78.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_024",
+          "text": "研修設定",
+          "confidence": 0.999936,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.99,
+      "grounding_confidence": 0.99,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    },
+    {
+      "element_id": "e14",
+      "source_observation_id": "VOBS_20260903052210",
+      "bbox": [
+        1092.0,
+        623.0,
+        166.0,
+        78.0
+      ],
+      "geometry_space": "original_viewport",
+      "text_evidence_status": "MATCHED",
+      "text_evidence": [
+        {
+          "text_region_id": "paddle_025",
+          "text": "次へ",
+          "confidence": 0.996718,
+          "source": "paddle"
+        }
+      ],
+      "visual_confidence": 0.99,
+      "grounding_confidence": 0.99,
+      "provenance": {
+        "visual": "gemini",
+        "text": "paddle"
+      }
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "summary_kind": "DERIVED_SUMMARY",
+  "authoritative_source": "weekly_trace.jsonl and referenced screenshots",
+  "raw_weekly_trace_remains_truth": true,
+  "seasons": {
+    "1": {
+      "season": 1,
+      "start_weeks": 8,
+      "actions": {
+        "VOCAL": 8,
+        "REST": 0,
+        "SKILL": 0,
+        "AUDITION": 1
+      },
+      "fan_progress": {
+        "start_gap": 999,
+        "rank_target": "E(1000人)",
+        "final_fans": 3584,
+        "target_met": true
+      },
+      "auditions": [
+        {
+          "name": "とどけ！オトメ★ファンファーレ",
+          "difficulty": 3,
+          "reward": "+3000",
+          "result": "PASS(60星1位, Auto)"
+        }
+      ],
+      "mandatory_targets_met": true,
+      "strategy_deviations": [
+        {
+          "type": "UNKNOWN_BUSINESS_CHOICE",
+          "week": 5,
+          "detail": "智代子レッスン请求 → いいよ (操作员授权)",
+          "consequence": "約束事件, 后顺延"
+        },
+        {
+          "type": "LESSON_ADVICE",
+          "week": 6,
+          "detail": "无 taught rule, 选 green/top 项",
+          "consequence": "Excellent!!"
+        },
+        {
+          "type": "AUDITION_SELECTION",
+          "week": 9,
+          "detail": "memory 无 S1 audition 目录, 按 reward/eligibility evidence 选 #3",
+          "consequence": "PASS"
+        }
+      ],
+      "unknowns": [
+        "advice 选项效果差异未量化"
+      ],
+      "season_result": "CLEAR"
+    },
+    "2": {
+      "season": 2,
+      "start_weeks": 8,
+      "actions": {
+        "VOCAL": 7,
+        "REST": 0,
+        "SKILL": 0,
+        "AUDITION": 1
+      },
+      "fan_progress": {
+        "start_gap": 6416,
+        "rank_target": "C",
+        "final": "rank C 达成(ランクアップ)",
+        "fans_at_S3_start_gap": 33650
+      },
+      "auditions": [
+        {
+          "name": "たちワイド アイドル一番！",
+          "difficulty": 8,
+          "reward": "+10000",
+          "result": "PASS(Auto, 40星1位)"
+        }
+      ],
+      "mandatory_targets_met": true,
+      "strategy_deviations": [
+        {
+          "type": "BUSINESS_CHOICE",
+          "detail": "ビジュアルレッスン请求×2 → ごめん(1次 taught/1次固定策略)",
+          "consequence": "无负面"
+        },
+        {
+          "type": "THREE_CHOICE",
+          "detail": "audition advice → 中间项(固定策略)",
+          "consequence": "PASS"
+        }
+      ],
+      "unknowns": [],
+      "season_result": "CLEAR"
+    },
+    "3": {
+      "season": 3,
+      "start_weeks": 8,
+      "actions": {
+        "VOCAL": 5,
+        "REST": 1,
+        "SKILL": 0,
+        "AUDITION": 2
+      },
+      "fan_progress": {
+        "start_gap": 33650,
+        "rank_target": "C(50000)",
+        "fans_at_end": 111150,
+        "target_met": true,
+        "50k_milestone": true
+      },
+      "auditions": [
+        {
+          "name": "SPOT LIGHT (+40000)",
+          "result": "FAIL(第1次)→PASS(第2次 retry)",
+          "flag_committed": "audition_40k_completed=true (rank C 画面证据)"
+        },
+        {
+          "name": "踊れども嬉々号 (+50000)",
+          "result": "PASS(Auto)",
+          "flag_committed": "audition_50k_completed=true (整数增量+ランクアップ)"
+        }
+      ],
+      "mandatory_targets_met": true,
+      "strategy_deviations": [
+        {
+          "type": "VOCAL_FAILURE_RATE_GATE",
+          "week": 6,
+          "detail": "トラブル率27% → BACK+REST (gate 首次 live 执行 PASS)"
+        },
+        {
+          "type": "THREE_CHOICE",
+          "detail": "2次 advice → 固定中间项"
+        },
+        {
+          "type": "BUSINESS_CHOICE",
+          "detail": "ビジュアル请求 2次 → ごめん(固定策略)"
+        }
+      ],
+      "unknowns": [
+        "S3 季末三次審査以对话形式直接过渡, 无 battle"
+      ],
+      "season_result": "CLEAR"
+    },
+    "4": {
+      "season": 4,
+      "start_weeks": 8,
+      "actions": {
+        "VOCAL": 3,
+        "REST": 0,
+        "SKILL": 0,
+        "AUDITION": 5
+      },
+      "auditions": [
+        {
+          "id": "THE_LEGEND_1",
+          "result": "PASS"
+        },
+        {
+          "id": "THE_LEGEND_2",
+          "result": "FAIL"
+        },
+        {
+          "id": "THE_LEGEND_3",
+          "result": "PASS"
+        },
+        {
+          "id": "THE_LEGEND_4",
+          "result": "PASS"
+        },
+        {
+          "id": "THE_LEGEND_5",
+          "result": "FAIL"
+        }
+      ],
+      "the_legend_summary": {
+        "pass_count": 3,
+        "fail_count": 2
+      },
+      "fan_progress": {
+        "fans_at_s4_end": 414414,
+        "true_end_target": 500000,
+        "target_met": false
+      },
+      "semifinal_result": "UNKNOWN",
+      "season_result": "ENDED",
+      "te_result": "FAILED"
+    }
+  }
+}

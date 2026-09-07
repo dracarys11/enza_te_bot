@@ -1,0 +1,18 @@
+{
+ "obs_id": "OBS_003",
+ "artifact_type": "OBSERVATION",
+ "run_id": "WINGRUN_20260907_01",
+ "room": "CHOICE (TWO_CHOICE_LAYOUT_V1)",
+ "substate": "TWO_CHOICE_BUSINESS / PROMISE_EVENT",
+ "identity_anchors": [
+  "two simultaneous ✓-cornered cards",
+  "いいよ green / ごめん pink",
+  "over post-lesson home dialogue"
+ ],
+ "evidence_detail": "enza_memory/wing_runs/WINGRUN_20260907_01/two_choice_preclick_evidence.json",
+ "preclick_screenshot": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_S1W5.png",
+ "postclick_screenshot": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_POSTCLICK_S1W5.png",
+ "policy_applied": "ごめん (FIXED_DECLINE)",
+ "provenance": "session_observed",
+ "classification": "FACT"
+}

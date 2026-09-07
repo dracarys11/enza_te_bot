@@ -1,0 +1,66 @@
+{
+ "artifact_type": "TWO_CHOICE_PRECLICK_EVIDENCE_2",
+ "run_id": "WINGRUN_20260907_01",
+ "occurrence": "2nd true two-choice of run (post-W6-interrupt reconciliation)",
+ "viewport": "1280x720 (ZCode IAB)",
+ "layout_family": "TWO",
+ "options": [
+  {
+   "index": 1,
+   "text": "いいよ",
+   "border": "green",
+   "badge": "green check bottom-right",
+   "box_px": {
+    "x1": 62,
+    "y1": 155,
+    "x2": 418,
+    "y2": 340
+   },
+   "box_norm": {
+    "x1": 0.0484,
+    "y1": 0.2153,
+    "x2": 0.3266,
+    "y2": 0.4722
+   },
+   "center_px": {
+    "x": 240,
+    "y": 248
+   }
+  },
+  {
+   "index": 2,
+   "text": "ごめん",
+   "border": "pink",
+   "badge": "pink check bottom-right",
+   "box_px": {
+    "x1": 850,
+    "y1": 155,
+    "x2": 1205,
+    "y2": 340
+   },
+   "box_norm": {
+    "x1": 0.6641,
+    "y1": 0.2153,
+    "x2": 0.9414,
+    "y2": 0.4722
+   },
+   "center_px": {
+    "x": 1027,
+    "y": 248
+   }
+  }
+ ],
+ "event_context": {
+  "speaker": "智代子",
+  "line": "今週にボーカルレッスンをやらせてください！",
+  "family": "PROMISE_EVENT (いいよ/ごめん)",
+  "note": "occurs after W6 lesson+Perfect Communication chain; request refers to the upcoming week"
+ },
+ "background_state": "scene dimmed this occurrence (W5 occurrence was undimmed — rendering variance noted)",
+ "all_options_visible": true,
+ "screenshot": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_W7PROMISE.png",
+ "screenshot_sha256": "d53e5eec3bb008c414e7f6649241df9a887b54c41f83411b6f635b12a0c44a0a",
+ "provenance": "session_observed",
+ "classification": "FACT",
+ "policy_to_apply": "wing_business_choice_fixed TWO_CHOICE -> ごめん (FIXED_DECLINE)"
+}

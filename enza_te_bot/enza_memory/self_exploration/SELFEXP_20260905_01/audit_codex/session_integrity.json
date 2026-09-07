@@ -1,0 +1,19 @@
+{
+  "session_id": "SELFEXP_20260905_01",
+  "session_integrity": "WARN",
+  "trace_steps": 13,
+  "step_ids_unique_contiguous": true,
+  "timestamps_monotonic": true,
+  "all_screenshot_references_exist": true,
+  "executed_actions_with_after_evidence": "13/13",
+  "transition_result_counts": {"MATCHED": 12, "MISMATCH": 1},
+  "summary_claims": {"screenshots_total": 15, "actions_total": 13, "valid_transitions": 11, "new_pages": 3, "new_controls": 8},
+  "recomputed": {"screenshot_files": 16, "actions": 13, "matched": 12, "mismatched": 1, "page_classes": 6},
+  "issues": [
+    "summary screenshots_total=15 but 16 screenshot files are referenced/present (step1 has before and settled images)",
+    "summary valid_transitions=11 but raw trace has 12 MATCHED results",
+    "summary new_pages=3 while trace introduces PRODUCE_MENU, IDOL_PORTAL, IDOL_LIST, WORK_ACTIVITY and MENU_OVERLAY",
+    "summary new_controls=8 while control_memory contains 9 records",
+    "step9 is an explicit MISMATCH and must not be promoted as a direct return transition"
+  ]
+}

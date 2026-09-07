@@ -1,0 +1,26 @@
+{
+  "artifact_type": "RESULT_COMMIT_REGRESSION_CORPUS",
+  "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+  "created_at": "2026-09-06T23:30:00Z",
+  "status": "MINED_EVIDENCE_CORPUS — regression-case design ONLY. NOT executable policy.",
+  "verifier_rule": "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS. RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE. POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE.",
+  "ordering": "capture and classify explicit result → commit or preserve UNKNOWN → only then advance presentation",
+  "cases": [
+    {"id": "RCR-001", "case": "THE_LEGEND_FAIL commit", "evidence": "explicit オーディション不合格 screenshots #2 and #5", "commit": "NO_SUCCESS", "fan_effect": "+0 for confirmed failures", "postcondition": "HOME weeks-1; retry/replan from fresh state", "severity": "P1", "already_covered_by_test": "partial", "new_test_candidate": true},
+    {"id": "RCR-002", "case": "S3_40K_FIRST_FAIL commit", "evidence": "explicit failure dialogue (落选)", "commit": "audition_40k_completed remains false", "postcondition": "week consumed; route remains pending", "severity": "P1", "already_covered_by_test": "partial", "new_test_candidate": true},
+    {"id": "RCR-003", "case": "S3_40K_RESULT_EVIDENCE_LOSS", "evidence": "result dialogue advanced before capture (script mis-skip)", "commit": "none; result UNKNOWN", "postcondition": "flag remains false despite week transition; lesson: battle 后先截图再推进", "severity": "P0", "already_covered_by_test": "partial", "new_test_candidate": true},
+    {"id": "RCR-004", "case": "S3_40K_EXPLICIT_PASS commit", "evidence": "やったぁ + はづきランクアップ + rank C screen", "commit": "audition_40k_completed=true", "postcondition": "route advances", "severity": "P1", "already_covered_by_test": "partial", "new_test_candidate": true},
+    {"id": "RCR-005", "case": "S3_50K_EXPLICIT_PASS commit", "evidence": "explicit pass + exact fans 58270→108270 (+50000 exact)", "commit": "audition_50k_completed=true", "postcondition": "route advances", "severity": "P1", "already_covered_by_test": "partial", "new_test_candidate": true},
+    {"id": "RCR-006", "case": "SEMIFINAL_SCENE_SKIP", "evidence": "scene advanced to next label (次は決勝) but no explicit match result", "commit": "no WIN; semifinal result UNKNOWN permanently", "postcondition": "week consumed by scene; TE route lost one opportunity", "severity": "P0", "already_covered_by_test": "no", "new_test_candidate": true},
+    {"id": "RCR-007", "case": "S4_BELOW_500K final evaluation", "evidence": "S4 end fans 414414 (rank screen); final evaluation 419414", "commit": "TE success=false", "unknown": "source of +5000 remains UNKNOWN — final summary records it as uncertainty rather than inferring", "severity": "P2", "already_covered_by_test": "no", "new_test_candidate": true},
+    {"id": "RCR-008", "case": "VOCAL week commit via weeks decrement", "evidence": "fresh HOME weeks_remaining-1 (weeks-=1 is the week-completion criterion, promotion candidate 5 of 0905 distillation)", "commit": "week consumed", "postcondition": "fan gap delta read at fresh HOME, never from presentation frames (presentation numbers refresh between frames)", "severity": "P1", "already_covered_by_test": "yes", "new_test_candidate": false},
+    {"id": "RCR-009", "case": "POST_TIMEOUT transaction reconciliation", "evidence": "S3W1 0906: screenshot hung after SCHEDULE:VOCAL click while week committed (8→7); operator fresh visual evidence reconciled", "commit": "week committed (operator-reconciled, NOT counted toward autonomous detector replication)", "postcondition": "runtime candidate POST_TIMEOUT_STATE_MUST_BE_RECONCILED_BEFORE_RETRYING_PENDING_ACTION recorded; harness NOT changed", "severity": "P0", "already_covered_by_test": "partial", "new_test_candidate": true},
+    {"id": "RCR-010", "case": "SP forfeit at produce end (standard flow)", "evidence": "0906: SP 223 forfeited at フェスアイドル誕生", "commit": "run closed; SP loss accepted as standard flow (recorded, not inferred)", "severity": "P3", "already_covered_by_test": "no", "new_test_candidate": false}
+  ],
+  "cross_cutting_guards": [
+    "fan delta alone is not commit evidence (unknown sources exist: 落选 audition small fan gain 待复验; +5000 UNKNOWN)",
+    "presentation-frame numbers must never be committed; fresh HOME is the canonical read point",
+    "audition FAIL also consumes 1 week (THE LEGEND #2: weeks 4→3, fans unchanged) — week accounting must handle FAIL weeks",
+    "occluded fields (Congratulation banner) must be recorded UNREADABLE, not estimated"
+  ]
+}

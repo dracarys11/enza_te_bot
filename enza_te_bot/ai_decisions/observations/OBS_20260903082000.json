@@ -1,0 +1,32 @@
+{
+  "observation_id": "OBS_20260903082000",
+  "timestamp": "2026-09-03T08:20:00Z",
+  "environment": {
+    "url": "https://shinycolors.enza.fun/produce"
+  },
+  "state": {
+    "label": "UNKNOWN_WHITE_SELECTION_OVERLAY (identity UNKNOWN — title NOT read)",
+    "classification": "UNKNOWN",
+    "confidence": 0.3
+  },
+  "FACT": [
+    "white full-screen panel with idol-card grid (full screenshot)",
+    "red 戻る button bottom-left (073000 frame of same layout)",
+    "state changed from TRAINING_SETTINGS(0750) to this overlay WITHOUT any intervening click — change trigger UNKNOWN",
+    "zoom crops for title reading were omitted from operator visual input (media budget) — title text NOT READ"
+  ],
+  "INFERENCE": [
+    "same layout family as OBS_20260903073000; plausibly unit/support selection view"
+  ],
+  "UNKNOWN": [
+    "overlay identity (title never read)",
+    "how it opened without a click (timeout? delayed effect of corrected 決定 click at 0749?)",
+    "relation to prep flow"
+  ],
+  "provenance": {
+    "screenshot": "ai_decisions/observations/screenshots/OBS_20260903082000_P2R_fresh_state.png",
+    "operator": "ZCode",
+    "interaction_count_delta": 0,
+    "disclosure": "channel limitation disclosed in wing_state_graph_v2.json — descriptions under omitted media must not be fabricated"
+  }
+}

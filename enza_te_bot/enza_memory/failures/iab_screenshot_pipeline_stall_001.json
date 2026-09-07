@@ -1,0 +1,33 @@
+{
+ "failure_id": "iab_screenshot_pipeline_stall_001",
+ "trajectory_reference": "TRAJ_WINGRUN_20260907_02 (S1W2)",
+ "phase": "S1W2 schedule open, post-click capture",
+ "timestamp_approx": "2026-09-07T00:00:00Z",
+ "occurrences": 3,
+ "intent": "screenshot the schedule page after clicking スケジュール",
+ "grounding_method": {
+  "method": "n/a (capture failure)",
+  "estimated_target": "n/a",
+  "precision_claim": "none"
+ },
+ "action": {
+  "performed": "tab.screenshot after schedule click"
+ },
+ "observed_result": {
+  "new_state": "3 consecutive capture timeouts/busy errors on tab 3b70c547; tab responsive via title/url reads",
+  "evidence": [
+   "tool error receipts in session"
+  ],
+  "provenance": "session_observed"
+ },
+ "verification": {
+  "expected_state": "schedule page image",
+  "comparison": "no image obtainable",
+  "result": "SCREENSHOT_TIMEOUT (pipeline wedged, not page failure)"
+ },
+ "classification": "ENVIRONMENT_TOOL_FAILURE",
+ "recovery": "new IAB tab -> game reload (再読み込み) -> title -> resume via プロデュース再開 (server state S1 weeks=7 matched durable state exactly) -> WING_HOME; no game-state damage; week NOT double-committed",
+ "note": "TIMEOUT != ACTION_FAILED honored; S1W2 決定 was never clicked, so no reconcile ambiguity",
+ "second_occurrence": "S1W8 home dialogue advance; same recovery path (new tab + reload + 再開); server state matched durable both times",
+ "third_occurrence": "post-reload home observation (ambient URL /home); same new-tab recovery path"
+}

@@ -1,0 +1,61 @@
+{
+ "phase": "1E",
+ "updated_at": "2026-09-03T06:06:10Z",
+ "observations_collected": 4,
+ "limit": 50,
+ "states_mapped": [
+  {
+   "state": "PRODUCE_SELECTION",
+   "obs": "OBS_20260903060500",
+   "first_hand": true
+  },
+  {
+   "state": "UNIT_FORMATION",
+   "obs": "OBS_20260903060520",
+   "first_hand": true
+  },
+  {
+   "state": "ITEM_SELECTION",
+   "obs": "OBS_20260903060545",
+   "first_hand": true
+  },
+  {
+   "state": "WING_CONFIRMATION_DIALOG",
+   "obs": "OBS_20260903060610",
+   "first_hand": true
+  }
+ ],
+ "states_pending": [
+  "FIRST_PRODUCTION_STATE",
+  "WEEK_STATUS_STATE",
+  "LESSON_SELECTION_STATE",
+  "AUDITION_SELECTION_STATE",
+  "RESULT_STATE"
+ ],
+ "transitions": [
+  {
+   "from": "PRODUCE_SELECTION",
+   "to": "UNIT_FORMATION",
+   "action": "次へ",
+   "result": "PASS"
+  },
+  {
+   "from": "UNIT_FORMATION",
+   "to": "ITEM_SELECTION",
+   "action": "次へ",
+   "result": "PASS"
+  },
+  {
+   "from": "ITEM_SELECTION",
+   "to": "WING_CONFIRMATION_DIALOG",
+   "action": "次へ",
+   "result": "PASS (boundary)"
+  }
+ ],
+ "interactions": 3,
+ "verification_coverage": "3/3",
+ "anomalies": 0,
+ "stopped": true,
+ "stop_reason": "resource-consumption confirmation boundary reached; confirm forbidden by Phase 1E contract",
+ "current_state": "WING_CONFIRMATION_DIALOG (held, untouched)"
+}

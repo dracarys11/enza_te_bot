@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "artifact": "architecture_contract",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "system_invariant": {
+    "strategic_state": "HOME",
+    "planner_invocation": "FRESH_VERIFIED_HOME_ONLY",
+    "execution_state": "INSIDE_EXACTLY_ONE_ROOM",
+    "success_boundary": "OBJECTIVE_VERIFIED_AND_FRESH_HOME_VERIFIED",
+    "failure_boundaries": ["FAILED", "UNKNOWN"],
+    "cycle": ["VERIFY_HOME", "READ_HOME_FACTS", "CHOOSE_OBJECTIVE", "EXECUTE_ONE_ROOM", "VERIFY_FRESH_HOME", "COMMIT"]
+  },
+  "planner_contract": {
+    "inputs": ["season", "weeks_remaining", "stamina_adequate", "fan_progress", "audition_flags", "skill_flags", "fixed_goals"],
+    "outputs": ["VOCAL", "REST", "SKILL", "AUDITION"],
+    "forbidden": ["clicks", "coordinates", "UI state handling", "room transitions", "completion commits"]
+  },
+  "room_contract": {
+    "interface": "Room.execute(objective)",
+    "outputs": ["SUCCESS_HOME", "FAILED", "UNKNOWN"],
+    "rooms": ["VOCAL_ROOM", "REST_ROOM", "SKILL_ROOM", "AUDITION_ROOM"],
+    "lifecycle": ["REQUIRE_VERIFIED_HOME", "ENTER_ROOM", "EXECUTE_OBJECTIVE", "HANDLE_ALLOWED_TRANSITIONS", "VERIFY_OBJECTIVE", "RETURN_HOME", "VERIFY_FRESH_HOME"],
+    "forbidden": ["season strategy", "objective selection", "hidden planning"]
+  },
+  "state_hierarchy": {
+    "strategic": ["HOME"],
+    "rooms": ["VOCAL_ROOM", "REST_ROOM", "SKILL_ROOM", "AUDITION_ROOM"],
+    "transitions": ["DIALOGUE", "CONTINUE", "CHOICE", "RESULT", "ANIMATION"],
+    "rule": "Transition states are executor observations, never planner decisions."
+  },
+  "vision_contract": {
+    "owns": ["HOME detection", "HOME facts", "room progress observations", "fresh HOME verification"],
+    "forbidden": ["objective selection", "strategy inference", "completion flag commits"]
+  },
+  "state_safety": {
+    "commit_rule": "Completion flags commit only after objective evidence and SUCCESS_HOME.",
+    "unknown_rule": "UNKNOWN never becomes SUCCESS and never commits state."
+  },
+  "knowledge_ownership": [
+    {"knowledge": "Season strategy", "owner": "Planner"},
+    {"knowledge": "Click coordinates", "owner": "Executor"},
+    {"knowledge": "HOME detection", "owner": "Vision"},
+    {"knowledge": "Room progress", "owner": "Executor"},
+    {"knowledge": "Completion flags", "owner": "Persistent state"},
+    {"knowledge": "Unknown handling", "owner": "Safety layer"},
+    {"knowledge": "Demo evidence", "owner": "Offline governance"}
+  ],
+  "migration_priority": [
+    {"order": 1, "room": "REST_ROOM", "reason": "Smallest HOME-to-HOME objective surface."},
+    {"order": 2, "room": "VOCAL_ROOM", "reason": "Existing bounded execution and HOME verification provide the strongest reusable path."},
+    {"order": 3, "room": "SKILL_ROOM", "reason": "Existing skill mechanics need a normalized HOME return."},
+    {"order": 4, "room": "AUDITION_ROOM", "reason": "Entry, target, battle, result, and cleanup remain distributed across multiple paths."}
+  ],
+  "implementation_roadmap": [
+    {"phase": 1, "name": "Architecture freeze", "goal": "Approve boundaries and keep candidate knowledge non-executable."},
+    {"phase": 2, "name": "Planner replacement", "goal": "Use one HOME-only deterministic planner after unknowns are resolved."},
+    {"phase": 3, "name": "Room normalization", "goal": "Normalize REST, VOCAL, SKILL, and AUDITION to the common lifecycle."},
+    {"phase": 4, "name": "Remove duplicated paths", "goal": "Retire duplicate orchestration only after verified parity."}
+  ]
+}

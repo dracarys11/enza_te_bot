@@ -1,0 +1,250 @@
+{
+  "artifact_type": "CANONICAL_TRANSITION_CORPUS",
+  "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+  "created_at": "2026-09-06T23:30:00Z",
+  "status": "MINED_EVIDENCE_CORPUS — regression-design ONLY. NOT executable policy.",
+  "counting_rule": "replication_count is the conservative minimum supported by cited durable artifacts. independent_runs counts distinct run_ids; independent_sessions counts distinct ZCode session_ids where determinable. Operator-reconciled frames (e.g. WINGRUN_20260906_01 timings line 8) are included as week-level outcomes but flagged NOT autonomous-detector replication. confidence ∈ {HIGH, MEDIUM, LOW} reflects replication + hazard knowledge.",
+  "transitions": [
+    {
+      "id": "T01",
+      "state_a": "HOME", "action": "CLICK SCHEDULE (150,600)", "state_b": "SCHEDULE",
+      "replication_count": 7, "independent_runs": ["WINGRUN_20260905_01", "WINGVAL_20260905_01", "WINGRUN_20260906_01"], "independent_sessions": ">=3",
+      "positive_samples": 7, "negative_samples": 0,
+      "failure_modes": ["blind continuation taps after transition can hit a new-page control"],
+      "confidence": "HIGH",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json#chain1", "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json"]
+    },
+    {
+      "id": "T02",
+      "state_a": "SCHEDULE", "action": "CLICK VOCAL card (360,500) after fresh failure_rate<=2 gate", "state_b": "SCHEDULE:CANDIDATE_SELECTED",
+      "replication_count": 6, "independent_runs": ["WINGRUN_20260905_01", "WINGVAL_20260905_01", "WINGRUN_20260906_01"], "independent_sessions": ">=3",
+      "positive_samples": 6, "negative_samples": 0,
+      "failure_modes": ["schedule sub-tab may reopen on audition page — verify lesson tab/card before click (observed S4W1)"],
+      "confidence": "HIGH",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#SCHEDULE:VOCAL", "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json"]
+    },
+    {
+      "id": "T03",
+      "state_a": "SCHEDULE:CANDIDATE_SELECTED", "action": "CLICK 決定 (1185,660)", "state_b": "RESULT/LESSON_TRANSITION",
+      "replication_count": 6, "independent_runs": 3, "independent_sessions": ">=3",
+      "positive_samples": 6, "negative_samples": 1,
+      "failure_modes": ["DECIDE before schedule fully loaded: NO_EFFECT, retry after load succeeded"],
+      "confidence": "HIGH_WITH_ACTIONABLE_PHASE_GUARD",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#SCHEDULE:DECIDE", "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W4"]
+    },
+    {
+      "id": "T04",
+      "state_a": "RESULT", "action": "ADVANCE cycle (SKIP 1218,53 → textbox 640,610 → center 640,350, bounded)", "state_b": "HOME (weeks-1)",
+      "replication_count": 6, "independent_runs": 3, "independent_sessions": ">=3",
+      "positive_samples": 6, "negative_samples": 0,
+      "failure_modes": ["advancing before explicit result capture caused RESULT_EVIDENCE_LOSS (S3 40k retry, semifinal)"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#RESULT:ADVANCE", "enza_memory/wing_runs/WINGVAL_20260905_01/latency_validation.json#advance_cycle_to_home_ms=25995"]
+    },
+    {
+      "id": "T05",
+      "state_a": "HOME (post-lesson VOCAL week)", "action": "VOCAL week loop complete", "state_b": "HOME weeks-1",
+      "replication_count": ">=20 executed VOCAL weeks (0905 S1 x8 + S2 + S3 + S4 prep x3 + WINGVAL x2 + 0906 S1 x6 + S3 x3)", "independent_runs": 3, "independent_sessions": ">=4",
+      "positive_samples": ">=20", "negative_samples": 2,
+      "failure_modes": ["support/communication dialogue interruptions (handled)", "over-tap opens 振り返り", "UNKNOWN_BUSINESS_CHOICE stop (S1W5 0905)", "screenshot wedge mid-week (S2W1 0905)"],
+      "confidence": "HIGH",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl", "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl", "enza_memory/wing_runs/WINGVAL_20260905_01/normal_week_validation.json"]
+    },
+    {
+      "id": "T06",
+      "state_a": "SCHEDULE", "action": "fresh failure_rate>2 → CLICK BACK (57,660)", "state_b": "HOME",
+      "replication_count": 1, "independent_runs": ["WINGRUN_20260905_01"], "independent_sessions": 1,
+      "positive_samples": 1, "negative_samples": 0,
+      "failure_modes": ["stale/UNKNOWN failure rate must not be treated as zero"],
+      "confidence": "LOW",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#SCHEDULE:BACK", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S3W6_REST"]
+    },
+    {
+      "id": "T07",
+      "state_a": "HOME", "action": "REST (休む)", "state_b": "HOME weeks-1 (stamina recovered ~70%)",
+      "replication_count": 1, "independent_runs": ["WINGRUN_20260905_01"], "independent_sessions": 1,
+      "positive_samples": 1, "negative_samples": 0,
+      "failure_modes": [],
+      "confidence": "LOW",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#HOME:REST"]
+    },
+    {
+      "id": "T08",
+      "state_a": "DIALOGUE", "action": "TAP SAFE_TEXTBOX (640,610)", "state_b": "DIALOGUE advanced | next state",
+      "replication_count": 35, "independent_runs": ["WINGRUN_20260905_01", "WINGRUN_20260906_01 crash session"], "independent_sessions": ">=2",
+      "positive_samples": 35, "negative_samples": 0,
+      "failure_modes": ["terminal tap crosses into HOME control (FURIKAERI)", "bottom-right chevron NO_EFFECT", "business choice can interrupt"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json#chain4", "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#DIALOGUE:SAFE_TEXTBOX"]
+    },
+    {
+      "id": "T09",
+      "state_a": "DIALOGUE", "action": "CLICK SKIP (1218,53) on SUPPORT_EVENT_DIALOGUE / known transition", "state_b": "next transition state | choice stop-point | HOME",
+      "replication_count": 5, "independent_runs": 3, "independent_sessions": ">=2",
+      "positive_samples": 5, "negative_samples": 0,
+      "failure_modes": ["SKIP on login dialogue opened お知らせ overlay (causality UNKNOWN, live_ttm_009)", "semifinal scene SKIP consumed business week without result evidence"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#SEASON_TRANSITION:SKIP", "enza_memory/migration/python_click_migration/migration_status.json#hazard_regions", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S4_END"]
+    },
+    {
+      "id": "T10",
+      "state_a": "DIALOGUE (早送りx4 OFF visible)", "action": "CLICK 早送り框 → ON → fresh progress check", "state_b": "DIALOGUE auto-advancing",
+      "replication_count": 1, "independent_runs": ["WINGRUN_20260905_01"], "independent_sessions": 1,
+      "positive_samples": 1, "negative_samples": 0,
+      "failure_modes": ["if no progress after ON → fall back to textbox; if dual-✓ cards appear → BUSINESS_CHOICE STOP"],
+      "confidence": "LOW",
+      "evidence_refs": ["enza_memory/policies/wing_dialogue_fastforward_rule.json", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S1W7"]
+    },
+    {
+      "id": "T11",
+      "state_a": "CHOICE:THREE_CARD", "action": "CLICK middle option (operator fixed policy)", "state_b": "dialogue/lesson/audition continues",
+      "replication_count": 8, "independent_runs": ["WINGRUN_20260905_01", "WINGVAL_20260905_01", "WINGRUN_20260906_01 crash session"], "independent_sessions": ">=3",
+      "positive_samples": 8, "negative_samples": 0,
+      "failure_modes": ["must not conflate with 2-card BUSINESS_CHOICE"],
+      "confidence": "HIGH",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json#chain5", "enza_memory/policies/wing_business_choice_fixed_policy.json"]
+    },
+    {
+      "id": "T12",
+      "state_a": "CHOICE:TWO_CARD (ごめん present)", "action": "CLICK ごめん", "state_b": "dialogue exits/continues; request deferred",
+      "replication_count": 4, "independent_runs": ["WINGRUN_20260905_01", "WINGRUN_20260906_01"], "independent_sessions": ">=2",
+      "positive_samples": 4, "negative_samples": 0,
+      "failure_modes": ["unsupported two-card shape (no ごめん) must STOP=UNKNOWN_TWO_CHOICE", "いいよ case (0905 S1W5) was operator-resolved, never autonomous"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/policies/wing_business_choice_fixed_policy.json", "enza_memory/wing_runs/WINGVAL_20260905_01/business_choice_validation.json"]
+    },
+    {
+      "id": "T13",
+      "state_a": "SCHEDULE:AUDITION_TAB", "action": "select candidate → 決定", "state_b": "AUDITION_ADVICE → AUDITION_BATTLE",
+      "replication_count": 10, "independent_runs": ["WINGRUN_20260905_01", "WINGRUN_20260906_01 crash session"], "independent_sessions": ">=2",
+      "positive_samples": 10, "negative_samples": 0,
+      "failure_modes": ["candidate pagination/location varies", "visible candidate may be locked (決定 pink = eligibility evidence)"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json#chain6"]
+    },
+    {
+      "id": "T14",
+      "state_a": "AUDITION_BATTLE:INPUT_READY (AUTO OFF + ENABLED, current epoch)", "action": "CLICK AUTO once", "state_b": "AUDITION_BATTLE:AUTO_ON (fresh verified)",
+      "replication_count": 4, "independent_runs": ["WINGRUN_20260905_01 (main + recovery epochs)"], "independent_sessions": ">=2",
+      "positive_samples": 4, "negative_samples": 4,
+      "failure_modes": ["ANIMATION dimmed x3 clicks no-effect", "dialogue-transition early click no-effect", "double-toggle risk if post-click verify skipped", "pause/resume invalidates state"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json#auto", "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json"]
+    },
+    {
+      "id": "T15",
+      "state_a": "AUDITION_BATTLE:ANIMATION (AUTO dimmed) or DIALOGUE_TRANSITION", "action": "CLICK AUTO", "state_b": "AUDITION_BATTLE (NO CHANGE)",
+      "replication_count": 4, "independent_runs": ["WINGRUN_20260905_01"], "independent_sessions": 1,
+      "positive_samples": 0, "negative_samples": 4,
+      "failure_modes": ["visibility != authority; clicks wasted, none harmful but prove guard necessity"],
+      "confidence": "HIGH (as negative guard evidence)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl", "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#VRB02_025"]
+    },
+    {
+      "id": "T16",
+      "state_a": "AUDITION_BATTLE:AUTO_ON", "action": "CLICK speed control (1166,47)", "state_b": "NO CHANGE (X2 held) — speed locked after Auto ON",
+      "replication_count": 1, "independent_runs": ["WINGRUN_20260905_01"], "independent_sessions": 1,
+      "positive_samples": 0, "negative_samples": 2,
+      "failure_modes": ["SPEED_FIRST_THEN_AUTO ordering violation; clicks after Auto ON have no effect"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl#AUTO_LOCKS_SPEED_ORDERING", "enza_memory/policies/audition_battle_speed_handler.json"]
+    },
+    {
+      "id": "T17",
+      "state_a": "AUDITION_BATTLE:PAUSE_OVERLAY", "action": "CLICK 再開", "state_b": "AUDITION_BATTLE fresh (NEW control epoch; AUTO/SPEED/turn/card invalidated)",
+      "replication_count": 1, "independent_runs": ["WINGRUN_20260905_01"], "independent_sessions": 1,
+      "positive_samples": 1, "negative_samples": 0,
+      "failure_modes": ["resume may reset/reinitialize local control state"],
+      "confidence": "LOW",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json#chain8", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S3_40k_retry2"]
+    },
+    {
+      "id": "T18",
+      "state_a": "AUDITION_BATTLE:RESULT", "action": "capture explicit 合格/不合格 evidence, THEN advance", "state_b": "RESULT committed (PASS flag / NO_SUCCESS) → HOME weeks-1",
+      "replication_count": 11, "independent_runs": ["WINGRUN_20260905_01"], "independent_sessions": ">=2",
+      "positive_samples": 11, "negative_samples": 2,
+      "failure_modes": ["advance-before-capture → evidence loss → UNKNOWN (flag stays false)", "week consumed even on FAIL"],
+      "confidence": "HIGH",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json#sample_inventory", "enza_memory/migration/python_click_migration/distilled/result_commit_examples.json"]
+    },
+    {
+      "id": "T19",
+      "state_a": "SEASON_RESULT", "action": "SKIP/NEXT through known transition frames", "state_b": "next-season HOME (fresh, weeks=8)",
+      "replication_count": 5, "independent_runs": ["WINGRUN_20260905_01 (S1→S2, S2→S3, S3→S4)", "WINGRUN_20260906_01 (S1→S2, S2→S3 crash-adjacent)"], "independent_sessions": ">=3",
+      "positive_samples": 5, "negative_samples": 1,
+      "failure_modes": ["long transition exceeds tool cell", "crash before persistence flush (0906 S2→S3)", "scene skip can consume a business week (semifinal)"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json#chain10", "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json"]
+    },
+    {
+      "id": "T20",
+      "state_a": "HOME:SKILL_BOARD entry (振り返り)", "action": "select AVAILABLE node → ACQUIRE → OK (740,525)", "state_b": "SKILL_BOARD:ACQUIRED (SP-cost deducted, node owned)",
+      "replication_count": 17, "independent_runs": ["WINGRUN_20260906_01"], "independent_sessions": 1,
+      "positive_samples": 17, "negative_samples": ">=4 (locked-node clicks: ring moves, no purchase)",
+      "failure_modes": ["locked node click = NO purchase", "off-board/dead-zone misclicks", "INSUFFICIENT_SP termination (SP 23 < 45)", "display-scale drift 0.9/1.1"],
+      "confidence": "MEDIUM (single session, no cross-session replication)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json", "enza_memory/migration/python_click_migration/recovered_frames/skill_board_visual_sequence.json", "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#missing_source_reviews"]
+    },
+    {
+      "id": "T21",
+      "state_a": "SKILL_BOARD:REPLACEMENT_REQUIRED", "action": "slot select (bottom-up among ORIGINAL skills) → 選択 → confirm OK", "state_b": "SKILL_REPLACEMENT:POST_COMMIT (skill swapped, SP deducted)",
+      "replication_count": 4, "independent_runs": ["WINGRUN_20260906_01"], "independent_sessions": 1,
+      "positive_samples": 4, "negative_samples": 1,
+      "failure_modes": ["T2: operator corrected target mid-transaction (never replace just-learned skill)", "confirm OK geometry varies per dialog layout (740,525)-(740,635) — must re-read per frame"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/recovered_frames/replacement_visual_sequence.json"]
+    },
+    {
+      "id": "T22",
+      "state_a": "HOME (main lobby)", "action": "produce entry wizard: プロデュース→育成→ミドル→unit→no items→開始 (+stamina confirm)", "state_b": "WING_HOME S1 weeks=8 (opening scene SKIP → direct WING_HOME)",
+      "replication_count": 2, "independent_runs": ["WINGRUN_20260905_01", "WINGRUN_20260906_01"], "independent_sessions": 2,
+      "positive_samples": 2, "negative_samples": 0,
+      "failure_modes": ["prep wizard stages locked until committed via 次へ (SELFEXP_02 tab clicks no-effect)", "KNOWHOW_SELECTION requires book selection (決定 disabled)", "tutorial overlays intercept clicks"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#PRODUCE_ENTRY", "enza_memory/self_exploration/SELFEXP_20260905_02/summary.json", "enza_memory/self_exploration/cross_session_audit.json"]
+    },
+    {
+      "id": "T23",
+      "state_a": "END OF PRODUCE (weeks=0)", "action": "ENDING presentation flow (evaluation → fes idol born → rewards → main lobby) OR operator abandon (ホームに戻る・諦める + long-press 諦める)", "state_b": "MAIN_LOBBY idle (produce slot free)",
+      "replication_count": 2, "independent_runs": 2, "independent_sessions": 2,
+      "positive_samples": 2, "negative_samples": 0,
+      "failure_modes": ["abandon long-press is irreversible and was operator-assisted", "SP forfeited (223 in 0906)", "+5000 fan delta source UNKNOWN"],
+      "confidence": "LOW",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/final_summary.json", "enza_memory/wing_runs/WINGRUN_20260906_01/run_completion_record.json"]
+    },
+    {
+      "id": "T24",
+      "state_a": "ANY", "action": "durable flush at transaction boundary", "state_b": "PERSISTED checkpoint",
+      "replication_count": ">=34 week boundaries + 5 season boundaries", "independent_runs": 3, "independent_sessions": ">=4",
+      "positive_samples": ">=39", "negative_samples": 1,
+      "failure_modes": ["PERSISTENCE_DURABILITY_FAILURE: raw timings stopped at S1W6 while game advanced to S3 start; crash before sync (WINGRUN_20260906_01)"],
+      "confidence": "HIGH (positive) / HIGH (negative as guard evidence)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json", "enza_memory/migration/python_click_migration/distilled/runtime_recovery_requirements.json"]
+    },
+    {
+      "id": "T25",
+      "state_a": "SCHEDULE (loaded)", "action": "CLICK (985,663) as dialogue-advance intent", "state_b": "サポートスキル panel opened (WRONG_TARGET)",
+      "replication_count": 2, "independent_runs": ["WINGRUN_20260906_01 (S1W1 + S1W6)"], "independent_sessions": 1,
+      "positive_samples": 0, "negative_samples": 2,
+      "failure_modes": ["coordinate is SUPPORT_SKILL button, not dialogue advance; repeated across sessions"],
+      "confidence": "HIGH (negative)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W1+S1W6", "enza_memory/migration/python_click_migration/migration_status.json#hazard_regions"]
+    },
+    {
+      "id": "T26",
+      "state_a": "HOME (post-lesson dialogue just ended)", "action": "extra blind textbox tap", "state_b": "FURIKAERI view opened (OVER_TAP)",
+      "replication_count": 1, "independent_runs": ["WINGRUN_20260906_01"], "independent_sessions": 1,
+      "positive_samples": 0, "negative_samples": 1,
+      "failure_modes": ["dialogue ends in <=4 taps; tap #5+ lands near (205,655) 振り返り"],
+      "confidence": "MEDIUM",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W1", "enza_memory/migration/python_click_migration/distilled/hazard_map.json#OVER_TAP"]
+    }
+  ],
+  "summary_counts": {
+    "transitions_total": 26,
+    "positive_dominant": 21,
+    "negative_only": 3,
+    "boundary_infrastructure": 2,
+    "cross_session_replicated": ["T01", "T02", "T03", "T04", "T05", "T08", "T09", "T11", "T12", "T13", "T14", "T18", "T19", "T22", "T23", "T24"]
+  }
+}

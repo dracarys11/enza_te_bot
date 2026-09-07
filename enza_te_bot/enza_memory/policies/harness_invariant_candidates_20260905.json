@@ -1,0 +1,39 @@
+{
+  "recorded": "2026-09-05",
+  "status": "CANDIDATES_ONLY — not promoted into .agent-harness/HARNESS.md",
+  "candidates": [
+    {
+      "id": "CONSUMPTIVE_ACTION_REQUIRES_FRESH_RESOURCE_GUARD",
+      "evidence": "S1/W7 low-stamina VOCAL finding; home_policy.py apply_vocal_stamina_guard",
+      "tier": "SUPERSEDED_CANDIDATE",
+      "note": "不得基于旧 hard stamina rule promotion; proxy heuristic 已被 DIRECT_RISK_SIGNAL_OVERRIDES_PROXY_RESOURCE_HEURISTIC 取代"
+    },
+    {
+      "id": "TIMED_CHOICE_PREFERS_BOUNDED_FAST_HANDLER",
+      "evidence": "morning 3-choice time limit; wing_fast_handlers.morning_three_choice",
+      "tier": "CANDIDATE"
+    },
+    {
+      "id": "INTERRUPTION_FAST_PATH_MUST_NOT_OVERRIDE_BUSINESS_CHOICE",
+      "evidence": "promise 見送 fast path precedence rule; wing_fast_handlers.promise_dialogue",
+      "tier": "CANDIDATE"
+    },
+    {
+      "id": "DIRECT_RISK_SIGNAL_OVERRIDES_PROXY_RESOURCE_HEURISTIC",
+      "evidence": "failure-rate gate supersedes stamina heuristic for VOCAL; home_policy.py apply_vocal_risk_guard",
+      "tier": "CANDIDATE"
+    },
+    {
+      "id": "CONSUMPTIVE_ACTION_REQUIRES_FRESH_RISK_EVIDENCE",
+      "assessment": "升级评估: 值得进入 Harness — 已有 2 层证据(stamina guard + failure-rate gate)同构, 建议下一次 promotion audit 一并审理",
+      "tier": "CANDIDATE"
+    },
+    {
+      "id": "BATCH_EXECUTION_MUST_RESPECT_MEASURED_TOOL_LATENCY",
+      "statement": "任何多动作执行 batch 的声明超时必须基于实测工具延迟总和(含隐性成本)加显式等待与截图保留, 不得只统计显式等待; 超预算必须预拆 batch",
+      "tier": "CANDIDATE",
+      "evidence": "timeout_debug_report.json: cua.click 隐性 ~5s/次导致 burst cell 超时 2 例",
+      "note": "具体数值 (5s/30s/120s) 属 runtime profile, 不进 Harness"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "artifact": "demo_metadata_schema",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "purpose": "Describe provenance and completeness metadata for a passive demonstration package.",
+  "source_artifacts": [
+    "ai_decisions/architecture_contract.json",
+    "ai_decisions/room_sop_candidates.json",
+    "ai_decisions/unknown_registry_candidate.json"
+  ],
+  "package_layout": {
+    "metadata": "metadata.json",
+    "episode": "episode.jsonl",
+    "screenshots": "screenshots/",
+    "raw_events": "optional raw input evidence retained separately from normalized steps"
+  },
+  "fields": {
+    "demo_id": {
+      "type": "string",
+      "required": true,
+      "description": "Stable identifier for this recording package."
+    },
+    "demo_name": {
+      "type": "string",
+      "required": true,
+      "description": "Human-supplied label; it is not a strategy or executable objective."
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "allowed": ["RECORDING", "COMPLETED", "FAILED"],
+      "description": "Recorder lifecycle status."
+    },
+    "started_at": {
+      "type": "timestamp",
+      "required": true,
+      "description": "Wall-clock provenance timestamp."
+    },
+    "ended_at": {
+      "type": "timestamp|null",
+      "required": true,
+      "description": "Set only when the recorder exits or fails."
+    },
+    "recorder_version": {
+      "type": "string",
+      "required": true,
+      "description": "Recorder implementation identifier used for reproducibility."
+    },
+    "application_identity": {
+      "type": "object",
+      "required": true,
+      "fields": ["target_identity", "url_or_origin", "window_identity"],
+      "description": "Evidence of the observed application/window; not a command target."
+    },
+    "game_window": {
+      "type": "object|null",
+      "required": true,
+      "fields": ["left", "top", "width", "height", "coordinate_space"],
+      "description": "Observed window geometry and coordinate-space provenance."
+    },
+    "counts": {
+      "type": "object",
+      "required": false,
+      "fields": ["raw_events", "normalized_interactions", "decision_points", "screenshots"]
+    },
+    "evidence_refs": {
+      "type": "object",
+      "required": true,
+      "fields": ["episode", "screenshots", "trace_or_log"],
+      "description": "Relative references inside the package or repository evidence tree."
+    },
+    "error": {
+      "type": "object|null",
+      "required": true,
+      "fields": ["class", "message", "timestamp"],
+      "description": "Required for FAILED sessions; must not be hidden by a partial episode."
+    },
+    "human_annotations": {
+      "type": "array",
+      "required": false,
+      "description": "Explicit human notes kept separate from recorder facts and never auto-promoted."
+    }
+  },
+  "completeness_rules": [
+    "RECORDING is not a compilable demonstration.",
+    "FAILED or missing-footer packages are incomplete and must be refused by compilers by default.",
+    "COMPLETED proves capture integrity only; it does not prove strategy correctness or production readiness.",
+    "Metadata may identify evidence provenance but may not assert an unobserved objective, policy, or success condition."
+  ],
+  "knowledge_status": {
+    "direct_capture": "FACT only when the corresponding event/observation reference exists.",
+    "action_mapping": "INFERENCE unless a configured control match is uniquely evidenced.",
+    "human_explanation": "PROVISIONAL until reviewed.",
+    "missing_or_conflicting": "UNKNOWN; preserve the gap rather than filling it."
+  },
+  "promotion": {
+    "automatic": false,
+    "compiler_default": "read-only candidate output",
+    "required_human_review": true
+  }
+}

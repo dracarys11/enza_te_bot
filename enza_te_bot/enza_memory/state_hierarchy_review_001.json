@@ -1,0 +1,74 @@
+{
+  "review_id": "state_hierarchy_review_001",
+  "reviewed_at": "2026-09-03T08:05:00Z",
+  "trigger": "Phase 2.5 audit: check whether 研修設定 / 振り返り / 技能树 / 技能解放 were incorrectly merged into one state",
+  "method": "re-inspection of screenshot evidence + full-text scan of enza_memory/ and ai_decisions/observations/ (no runtime changes)",
+
+  "state_hierarchy_review": {
+    "verified_parent_screens": [
+      { "state": "PRODUCE_PREP_FLOW (/produce)", "evidence": "URL + screenshots; contains PRODUCE_SELECTION/UNIT_FORMATION/ITEM_SELECTION steps (breadcrumb-verified)" },
+      { "state": "TRAINING_SETTINGS (研修設定 overlay)", "evidence": "overlay title text 研修設定 directly read (OBS_20260903065025); 3 stat columns 0/20; 決定 button" }
+    ],
+    "verified_overlays": [
+      { "state": "WING_CONFIRMATION_DIALOG", "parent": "PRODUCE_PREP_FLOW", "nav": "ITEM_SELECTION --次へ--> dialog --キャンセル--> PRODUCE_SELECTION (both edges first-hand)" },
+      { "state": "UNKNOWN_SELECTION_OVERLAY_073000", "parent": "PRODUCE_PREP_FLOW", "nav": "--戻る--> prep flow (first-hand); content: white panel, idol-card grid with numbers, 編成を初期化 + 戻る buttons", "label_status": "UNLABELED — earlier memory_index called it 'support-selection overlay' WITHOUT proof" }
+    ],
+    "disputed_state": {
+      "recorded_label": "TRAINING_SETTINGS + 'skill-entry sub-panel'",
+      "recorded_in": ["OBS_20260903071000 (state label)", "canvas_grounding_calibration_001 (F5/F6 wording)", "memory_index terminal_state", "DT_20260903070000_007 transition_record"],
+      "actual_evidence": "after + click: stat counter incremented AND a panel appeared listing entries with レベル labels and + buttons (2 occurrences: ボーカル, ダンス)",
+      "problem": "the panel was merged INTO the TRAINING_SETTINGS state label on coordinate-transition evidence only. Candidate identities NOT distinguished: (a) 技能解放 selection list (choose skill to unlock with the allocated point), (b) 技能树 view, (c) generic help/detail sub-panel of 研修設定. These are semantically DIFFERENT states for the planner, and the records do not prove which one it is. Panel title text was never read/recorded."
+    },
+    "never_observed": [
+      "振り返り (reflection) — zero occurrences in any record; correctly NOT claimed anywhere (verified by full-text scan). Legacy code (reflection_board.py etc.) refers to it but no session evidence exists."
+    ]
+  },
+
+  "incorrect_or_overreaching_state_mappings": [
+    {
+      "id": "M1",
+      "file": "ai_decisions/observations/OBS_20260903071000.json",
+      "claim": "state label 'TRAINING_SETTINGS with vocal skill sub-panel open'",
+      "problem": "merges an unidentified panel into the parent state; panel identity unproven",
+      "action": "DOWNGRADED: state label changed to 'TRAINING_SETTINGS + UNIDENTIFIED_PANEL (skill-related, identity UNKNOWN)'"
+    },
+    {
+      "id": "M2",
+      "file": "enza_memory/policies/canvas_grounding_calibration_001.json",
+      "claim": "F5/F6 wording 'skill-entry panel' as if its identity were known",
+      "problem": "only the COORDINATE behavior is proven (auto-opens on +); the panel's semantic identity (技能解放 vs 技能树 vs other) is not",
+      "action": "DOWNGRADED: wording annotated — 'panel identity UNKNOWN; only open-on-allocate behavior is evidence-backed'"
+    },
+    {
+      "id": "M3",
+      "file": "enza_memory/memory_index.json (phase2 session + phase25 session entries)",
+      "claim": "'exit unknown support-selection overlay' and terminal_state 'ダンス skill panel open'",
+      "problem": "'support-selection' is an unproven inference stated as description; 'skill panel' inherits M2's ambiguity",
+      "action": "DOWNGRADED to UNKNOWN_SELECTION_OVERLAY_073000 and UNIDENTIFIED_SKILL_RELATED_PANEL"
+    }
+  ],
+
+  "downgraded_claims_principle": "any claim whose only support is 'clicked coordinate X, panel Y appeared' is a COORDINATE fact, not a STATE fact; state labels require independently read identity evidence (title text, layout role, or verified round-trip navigation)",
+
+  "unknowns_added": [
+    "U5: identity of the post-allocation panel (技能解放 / 技能树 / other) — coordinates known, semantics not proven",
+    "U6: whether the panel blocks 決定 by being OPEN, or by an incomplete required skill SELECTION (F6 stays, mechanism UNKNOWN)",
+    "U7: identity of UNKNOWN_SELECTION_OVERLAY_073000 (support member? unit edit? other) — only its 戻る exit is verified",
+    "U8: whether 振り返り (reflection) is reachable in this flow at all — never observed"
+  ],
+
+  "affected_memory_files": [
+    "ai_decisions/observations/OBS_20260903071000.json (patched)",
+    "enza_memory/policies/canvas_grounding_calibration_001.json (annotated)",
+    "enza_memory/memory_index.json (patched)",
+    "enza_memory/decision_traces/DT_20260903070000_007.json (patched)",
+    "enza_memory/failures/canvas_misclick_002.json (resolution wording inherits M2 note)"
+  ],
+
+  "recommended_schema_changes": [
+    "SC1: state labels for overlays must carry an identity_source field: 'title_text_read' | 'roundtrip_verified' | 'coordinate_only'; coordinate_only labels must be prefixed UNIDENTIFIED_",
+    "SC2: separate observed_screen (geometry/URL facts) from semantic_state (named game state); a screenshot artifact maps 1:1 to observed_screen, semantic_state is always an inference with confidence",
+    "SC3: panel/modal records need parent_screen + open_trigger + close_action fields so sub-panels cannot be silently merged into parents",
+    "SC4: never_observed list should be maintained explicitly in environment_map_progress.json to prevent legacy-code concepts (e.g., 振り返り) from leaking into state labels without evidence"
+  ]
+}

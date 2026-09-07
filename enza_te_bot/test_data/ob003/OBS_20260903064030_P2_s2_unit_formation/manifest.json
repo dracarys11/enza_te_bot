@@ -1,0 +1,17 @@
+{
+  "case_id": "OBS_20260903064030_P2_s2_unit_formation",
+  "source": {
+    "file": "source_screenshot.png",
+    "sha256": "6224c0b605b1aba2fd24957d379bf6ea316f1a60bcb9206f770a33619f009f65"
+  },
+  "providers": [
+    {"name": "Paddle", "artifact": "providers/paddle/vision_output.json"},
+    {"name": "Gemini", "artifact": "providers/gemini/v1/vision_output.json"}
+  ],
+  "unresolved_artifacts": [
+    {
+      "artifact": "agent_vision_output.json",
+      "reason": "provider_model_and_skill_not_recorded"
+    }
+  ]
+}

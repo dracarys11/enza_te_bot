@@ -1,0 +1,70 @@
+{
+  "artifact_type": "STABLE_TRANSITION_CHAINS",
+  "generated_at": "2026-09-06T06:22:51Z",
+  "count": 10,
+  "chains": [
+    {
+      "chain":"WING_HOME -> SCHEDULE -> SCHEDULE_PAGE",
+      "replication_count":7,"sessions":["WINGRUN_20260905_01","WINGVAL_20260905_01"],"success_rate":1.0,
+      "known_failure_modes":["state transition followed by blind taps can hit a new-page control"],
+      "required_fresh_checks":["WING_HOME identity","1280x720 viewport","SCHEDULE anchor","post-click SCHEDULE loaded"]
+    },
+    {
+      "chain":"SCHEDULE -> VOCAL -> selected -> DECIDE -> lesson/result -> WING_HOME weeks-1",
+      "replication_count":7,"sessions":["WINGRUN_20260905_01","WINGVAL_20260905_01","WINGRUN_20260906_01 recovery chain"],"success_rate":1.0,
+      "known_failure_modes":["DECIDE before schedule load: NO_EFFECT","support/dialogue interruption","over-tap opens FURIKAERI"],
+      "required_fresh_checks":["fresh failure_rate<=2","VOCAL anchor","DECIDE enabled","result/dialogue ownership","fresh HOME weeks decrement"],
+      "evidence_note":"The seventh week-level completion is timings line 8, operator-reconciled from fresh visual evidence; it is not counted as autonomous detector/control replication."
+    },
+    {
+      "chain":"SCHEDULE fresh risk>2 -> BACK -> fresh WING_HOME -> REST -> WING_HOME weeks-1",
+      "replication_count":1,"sessions":["WINGRUN_20260905_01"],"success_rate":1.0,
+      "known_failure_modes":["stale/UNKNOWN failure rate must not be treated as zero"],
+      "required_fresh_checks":["risk ROI current","BACK returns HOME","REST authority still current","post-REST HOME and stamina recovery"]
+    },
+    {
+      "chain":"KNOWN_DIALOGUE -> SAFE_TEXTBOX -> next dialogue/choice/HOME",
+      "replication_count":35,"sessions":["WINGRUN_20260905_01","WINGRUN_20260906_01 crash session"],"success_rate":null,
+      "known_failure_modes":["terminal tap crosses into HOME control","bottom-right chevron no-effect","business choice can interrupt"],
+      "required_fresh_checks":["textbox still visible","no choice cards","one frame owner","fresh state after bounded taps"],
+      "rate_note":"35 individual advances were recorded, but terminal-condition outcomes were not logged per tap; a chain success rate cannot be computed honestly."
+    },
+    {
+      "chain":"KNOWN_THREE_CHOICE -> MIDDLE -> dialogue/lesson/audition continues",
+      "replication_count":8,"sessions":["WINGRUN_20260905_01","WINGVAL_20260905_01","WINGRUN_20260906_01 crash session"],"success_rate":1.0,
+      "known_failure_modes":["three-card advice may be confused with two-card business choice"],
+      "required_fresh_checks":["known context","option_count==3","middle card selectable","post-choice progress"]
+    },
+    {
+      "chain":"AUDITION_SELECTION -> target candidate -> DECIDE -> ADVICE -> AUDITION_BATTLE",
+      "replication_count":10,"sessions":["WINGRUN_20260905_01","WINGRUN_20260906_01 crash session"],"success_rate":1.0,
+      "known_failure_modes":["candidate pagination/location varies","visible candidate may be locked","route-specific selection"],
+      "required_fresh_checks":["exact candidate identity","eligibility","enabled DECIDE","fresh battle identity"]
+    },
+    {
+      "chain":"INPUT_READY + AUTO_OFF + ENABLED -> click once -> fresh AUTO_ON -> battle progresses",
+      "replication_count":4,"sessions":["WINGRUN_20260905_01 main/recovery epochs"],"success_rate":1.0,
+      "known_failure_modes":["ANIMATION/DIALOGUE no-effect","double toggle","state invalid after pause/resume"],
+      "required_fresh_checks":["current control epoch","INPUT_READY","value OFF","interactability enabled","post-click ON"]
+    },
+    {
+      "chain":"PAUSE_OVERLAY -> RESUME -> fresh AUDITION_BATTLE -> new control epoch",
+      "replication_count":1,"sessions":["WINGRUN_20260905_01"],"success_rate":1.0,
+      "known_failure_modes":["resume can reset AUTO/SPEED/turn/card state"],
+      "required_fresh_checks":["overlay anchor","RESUME control","battle identity after dismissal","invalidate all local control observations"]
+    },
+    {
+      "chain":"THE_LEGEND selection -> battle -> explicit PASS/FAIL -> fresh HOME weeks-1",
+      "replication_count":5,"sessions":["WINGRUN_20260905_01"],"success_rate":1.0,
+      "known_failure_modes":["battle outcome may be FAIL","result must be captured before advance"],
+      "required_fresh_checks":["THE LEGEND identity/eligibility","battle result evidence","fresh HOME weeks decrement","fan delta only after PASS"],
+      "scope_limit":"THE LEGEND only; does not prove repeatability of other audition types"
+    },
+    {
+      "chain":"SEASON_RESULT -> SKIP/NEXT -> fresh next-season HOME -> durable reconciliation",
+      "replication_count":3,"sessions":["WINGRUN_20260905_01","WINGRUN_20260906_01 crash/recovery chain"],"success_rate":1.0,
+      "known_failure_modes":["long transition exceeds tool cell","crash before persistence flush","scene skip may lose result evidence"],
+      "required_fresh_checks":["result committed first","known transition identity","fresh season/weeks HOME","durable flush before next action"]
+    }
+  ]
+}

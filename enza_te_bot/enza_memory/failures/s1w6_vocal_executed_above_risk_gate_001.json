@@ -1,0 +1,32 @@
+{
+ "failure_id": "s1w6_vocal_executed_above_risk_gate_001",
+ "trajectory_reference": "TRAJ_WINGRUN_20260907_01 steps 9-10",
+ "phase": "S1W6 schedule execution",
+ "timestamp_approx": "2026-09-07T00:00:00Z",
+ "occurrences": 1,
+ "intent": "continue baseline-VOCAL weekly execution (pre-gate run policy)",
+ "grounding_method": {
+  "method": "fresh schedule frame read; トラブル率 92% badge clearly visible on s1w6_schedule.png",
+  "estimated_target": "VOCAL 決定",
+  "precision_claim": "button identity certain"
+ },
+ "action": {
+  "performed": "cua.click on 決定 (1175,660) while fresh VOCAL trouble_rate = 92%"
+ },
+ "observed_result": {
+  "new_state": "lesson executed; W6 committed 3->2; post-lesson chain + PROMISE two-choice declined per fixed policy",
+  "evidence": [
+   "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/s1w6_schedule.png",
+   "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/recovery_06_home_check.png"
+  ],
+  "provenance": "session_observed"
+ },
+ "verification": {
+  "expected_state": "under operator HARD GATE (issued after the fact): trouble_rate > 2% -> must NOT execute VOCAL",
+  "comparison": "executed anyway (gate did not exist at click time but was violated as soon as declared; operator classifies it as policy violation — recorded as such without reinterpretation)",
+  "result": "POLICY_VIOLATION_CONFIRMED_BY_OPERATOR"
+ },
+ "classification": "POLICY_REQUIRED",
+ "recovery": "W6 already consumed; state reconciled fresh (weeks 3->2); no action repeated; next weekly objective NOT executed — reserved for Python planner",
+ "note": "historical trace preserved unmodified; this file records the incident only"
+}

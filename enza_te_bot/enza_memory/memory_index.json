@@ -1,0 +1,1037 @@
+{
+ "index_version": 1,
+ "updated_at": "2026-09-07",
+ "protocol": "enza_memory/MEMORY_PROTOCOL.md",
+ "sessions": [
+  {
+   "session_id": "sess_cbf7e500_20260903",
+   "date": "2026-09-03",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Environment bootstrap",
+    "Phase 1D observation provider / capture / dataset / calibration",
+    "Phase 9 long-horizon navigation (HOME -> PRODUCE_SELECTION)",
+    "Phase 1D-3 ActionIntent proposal (not executed)",
+    "Phase 1D-4 ActionGate replay (DENIED)",
+    "Agent memory baseline generation"
+   ],
+   "interaction_count": 3,
+   "verification_coverage": "3/3 actions followed by fresh observation",
+   "gate_outcomes": [
+    "1D-4: DENIED (no contract, stale obs, confidence below threshold)"
+   ],
+   "anomalies": [
+    "PRODUCE_MODE_INFO_MODAL -> HELP_OVERLAY mis-click (cause UNKNOWN)"
+   ],
+   "files": {
+    "trajectories": [
+     "trajectories/zcode_baseline_001.json"
+    ],
+    "failures": [
+     "failures/canvas_misclick_001.json"
+    ],
+    "policies": [
+     "policies/learned_constraints.json"
+    ],
+    "observations": [
+     "observations/OBS001.json"
+    ],
+    "external_evidence": [
+     "ai_decisions/observations/OBS_20260903050735.json",
+     "ai_decisions/observations/OBS_20260903051530.json",
+     "ai_decisions/observations/OBS_20260903051530_unavailable_states.json",
+     "ai_decisions/observations/OBS_20260903052210.json",
+     "ai_decisions/observations/OBS_20260903053145.json"
+    ]
+   },
+   "terminal_state": "PRODUCE_SELECTION at https://shinycolors.enza.fun/produceReady (held at boundary, 次へ not clicked)"
+  },
+  {
+   "session_id": "sess_cbf7e500_20260903_v2audit",
+   "date": "2026-09-03",
+   "agent": "ZCode (Memory Maintainer role)",
+   "missions": [
+    "AGY memory governance audit remediation (offline, no environment contact)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "n/a (no actions)",
+   "gate_outcomes": [],
+   "anomalies": [],
+   "files": {
+    "changed": [
+     "policies/learned_constraints.json (v2 restructure: findings/hypotheses/unknowns)",
+     "trajectories/zcode_baseline_001.json (per-step FACT/INFERENCE/UNKNOWN + evidence binding)",
+     "failures/canvas_misclick_001.json (audit structure, nothing removed)"
+    ],
+    "created": [
+     "memory_review_v2.json"
+    ]
+   },
+   "terminal_state": "PRODUCE_SELECTION at https://shinycolors.enza.fun/produceReady (unchanged, untouched)"
+  },
+  {
+   "session_id": "sess_cbf7e500_20260903_1E_mapping",
+   "date": "2026-09-03",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Phase 1E environment mapping: WING first production flow to consumption boundary"
+   ],
+   "interaction_count": 3,
+   "verification_coverage": "3/3 actions verified by fresh screenshot",
+   "gate_outcomes": [
+    "contract attached (Phase 1E planner instruction)"
+   ],
+   "anomalies": [],
+   "resource_consumption": 0,
+   "files": {
+    "trajectories": [
+     "trajectories/enza_1e_environment_mapping_001.json"
+    ],
+    "created": [
+     "exploration_summary.json",
+     "environment_map_progress.json"
+    ],
+    "external_evidence": [
+     "OBS_20260903060500",
+     "OBS_20260903060520",
+     "OBS_20260903060545",
+     "OBS_20260903060610 (screenshots in ai_decisions/observations/screenshots/)"
+    ],
+    "decision_traces": [
+     "decision_traces/DT_20260903060510_001.json",
+     "decision_traces/DT_20260903060535_002.json",
+     "decision_traces/DT_20260903060600_003.json",
+     "decision_traces/index.json"
+    ]
+   },
+   "terminal_state": "WING_CONFIRMATION_DIALOG held open (unconfirmed, uncanceled) at /produceReady"
+  },
+  {
+   "session_id": "sess_cbf7e500_20260903_phase2_prototype",
+   "date": "2026-09-03",
+   "agent": "ZCode (Environment Agent, Phase 2 prototype)",
+   "missions": [
+    "Phase 2 prototype runner: HOME->Produce->WING prep->Vocal baseline->(first season held)"
+   ],
+   "interaction_count": 3,
+   "verification_coverage": "3/3 (1 PASS, 1 PASS, 1 ANOMALY)",
+   "anomalies": [
+    "canvas_misclick_002: vocal+ probe click hit skill entry after session interruption; vocal=1/20 uncommitted"
+   ],
+   "resource_consumption": 0,
+   "files": {
+    "trajectories": [
+     "trajectories/enza_phase2_prototype_001.json"
+    ],
+    "failures": [
+     "failures/canvas_misclick_002.json"
+    ],
+    "decision_traces": [
+     "decision_traces/DT_20260903064950_005.json",
+     "decision_traces/DT_20260903065015_006.json",
+     "decision_traces/DT_20260903070000_007.json"
+    ],
+    "external_evidence": [
+     "OBS_20260903065000",
+     "OBS_20260903065025",
+     "OBS_20260903071000"
+    ]
+   },
+   "terminal_state": "TRAINING_SETTINGS overlay at /produce: vocal=1/20, skill panel open, 決定 NOT pressed (allocation uncommitted)"
+  },
+  {
+   "session_id": "sess_cbf7e500_20260903_phase25_calibration",
+   "date": "2026-09-03",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Phase 2.5 canvas grounding calibration (次へ/+/決定/キャンセル)",
+    "recovery: exit UNKNOWN_SELECTION_OVERLAY_073000 (identity unproven) via 戻る"
+   ],
+   "interaction_count": 8,
+   "anomalies": [
+    "決定 gated by open UNIDENTIFIED_SKILL_RELATED_PANEL (F6)"
+   ],
+   "resource_consumption": 0,
+   "files": {
+    "policies": [
+     "policies/canvas_grounding_calibration_001.json"
+    ],
+    "failures_updated": [
+     "failures/canvas_misclick_002.json (root cause resolved)"
+    ],
+    "screenshots": [
+     "CAL_20260903074500",
+     "CAL_20260903074530",
+     "CAL_20260903074600",
+     "CAL_20260903074630",
+     "CAL_20260903074730",
+     "CAL_20260903074830",
+     "CAL_20260903074930"
+    ]
+   },
+   "terminal_state": "研修設定 overlay at /produce: vocal=1/20, dance=1/20, UNIDENTIFIED_SKILL_RELATED_PANEL open, 決定 gated/uncommitted"
+  },
+  {
+   "session_id": "sess_cbf7e500_20260903_wing_graph_rebuild",
+   "date": "2026-09-03",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "read reconciliation memory",
+    "rebuild corrected WING state graph from evidence"
+   ],
+   "interaction_count": 0,
+   "files": {
+    "created": [
+     "wing_state_graph_v2.json",
+     "ai_decisions/observations/OBS_20260903082000.json"
+    ]
+   },
+   "terminal_state": "UNKNOWN_WHITE_SELECTION_OVERLAY at /produce (title unread, no clicks, held)"
+  },
+  {
+   "session_id": "sess_codex_20260904_ob003_gemini_extraction",
+   "date": "2026-09-04",
+   "agent": "Codex (Gemini Vision extraction evaluator)",
+   "missions": [
+    "independent raw visual-fact extraction from three stored OB-003 screenshots"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "3/3 generated JSON artifacts parsed; forbidden semantic/action field scan passed; no independent visual comparison performed",
+   "gate_outcomes": [
+    "perception extraction only; no action candidate, authorization, or execution"
+   ],
+   "anomalies": [],
+   "files": {
+    "trajectories": [
+     "trajectories/ob003_gemini_extraction_001.json"
+    ],
+    "created": [
+     "test_data/ob003/OBS_20260903063000_1E_s5_dialog_full/gemini_output.json",
+     "test_data/ob003/OBS_20260903064030_P2_s2_unit_formation/gemini_output.json",
+     "test_data/ob003/OBS_20260903064050_P2_s3_after_back1/gemini_output.json"
+    ],
+    "source_screenshots": [
+     "ai_decisions/observations/screenshots/OBS_20260903063000_1E_s5_dialog_full.png",
+     "ai_decisions/observations/screenshots/OBS_20260903064030_P2_s2_unit_formation.png",
+     "ai_decisions/observations/screenshots/OBS_20260903064050_P2_s3_after_back1.png"
+    ]
+   },
+   "terminal_state": "offline OB-003 extraction completed; no environment action performed"
+  },
+  {
+   "session_id": "sess_agy_20260904_ob003_training_extraction",
+   "date": "2026-09-04",
+   "agent": "AGY Vision Provider (gemini-3.8-flash-medium)",
+   "missions": [
+    "independent gemini_vision_v2 raw extraction from OBS_20260903065025_P2_s7_training_settings.png"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "generated artifact parsed; VisionObservation validation and forbidden-field scan passed; no benchmark run",
+   "gate_outcomes": [
+    "perception extraction only; no action candidate, authorization, or execution"
+   ],
+   "anomalies": [],
+   "files": {
+    "trajectories": [
+     "trajectories/ob003_agy_vision_extraction_001.json"
+    ],
+    "created": [
+     "test_data/ob003/OBS_20260903065025_P2_s7_training_settings/agy_vision_output.json"
+    ],
+    "source_screenshots": [
+     "ai_decisions/observations/screenshots/OBS_20260903065025_P2_s7_training_settings.png"
+    ]
+   },
+   "terminal_state": "offline AGY extraction completed; no environment action performed"
+  },
+  {
+   "session_id": "sess_agy_20260904_gemini_v1_training_extraction",
+   "date": "2026-09-04",
+   "agent": "AGY Vision Provider (gemini-3.8-flash-medium)",
+   "missions": [
+    "independent gemini-vision v0.1 raw extraction from the specified stored training-settings screenshot"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "final artifact parsed; structural VisionObservation contract and forbidden-field checks passed; no benchmark run",
+   "gate_outcomes": [
+    "perception extraction only; no action candidate, authorization, or execution"
+   ],
+   "anomalies": [
+    "initial AGY output used legacy field shapes and failed current contract validation; same provider conversation corrected it before delivery"
+   ],
+   "files": {
+    "trajectories": [
+     "trajectories/gemini_v1_agy_extraction_001.json"
+    ],
+    "failures": [
+     "failures/gemini_v1_schema_mismatch_001.json"
+    ],
+    "created": [
+     "test_data/gemini_v1/OBS_20260903065025_P2_s7_training_settings/vision_output.json"
+    ],
+    "source_screenshots": [
+     "test_data/ob003/OBS_20260903065025_P2_s7_training_settings/source_screenshot.png"
+    ]
+   },
+   "terminal_state": "offline AGY Gemini Vision v1 extraction completed; no environment action performed"
+  },
+  {
+   "session_id": "sess_agy_20260904_gemini_v1_1_training_extraction",
+   "date": "2026-09-04",
+   "agent": "AGY Vision Provider (gemini-3.8-flash-medium)",
+   "missions": [
+    "independent gemini-vision v1.1 extraction from the specified stored training-settings screenshot"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "AGY completion reported and output path existence checked; artifact content not read; evaluator and benchmark not run",
+   "gate_outcomes": [
+    "perception extraction only; no action authorization or execution"
+   ],
+   "anomalies": [
+    "initial provider job timed out; same AGY conversation resumed and completed"
+   ],
+   "files": {
+    "trajectories": [
+     "trajectories/gemini_v1_1_agy_extraction_001.json"
+    ],
+    "failures": [
+     "failures/gemini_v1_1_agy_timeout_001.json"
+    ],
+    "created": [
+     "test_data/gemini_v1_1/OBS_20260903065025_P2_s7_training_settings/vision_outputv1.1.json"
+    ],
+    "source_screenshots": [
+     "test_data/ob003/OBS_20260903065025_P2_s7_training_settings/source_screenshot.png"
+    ]
+   },
+   "terminal_state": "offline AGY Gemini Vision v1.1 extraction completed; output not evaluated"
+  },
+  {
+   "session_id": "sess_agy_20260904_gemini_v2_provider_extraction",
+   "date": "2026-09-04",
+   "agent": "AGY Vision Provider (gemini-3.8-flash-medium)",
+   "missions": [
+    "independent gemini_vision_v2 extraction to the case-local Gemini v2 provider path"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "artifact parsed; VisionObservation schema, required metadata, source digest, and forbidden-field scan passed; no comparison benchmark run",
+   "gate_outcomes": [
+    "perception extraction only; no action, decision, strategy, authorization, or execution"
+   ],
+   "anomalies": [
+    "initial provider job timed out after 20 minutes; same AGY conversation resumed and completed"
+   ],
+   "files": {
+    "trajectories": [
+     "trajectories/gemini_v2_agy_extraction_001.json"
+    ],
+    "failures": [
+     "failures/gemini_v2_agy_timeout_001.json"
+    ],
+    "created": [
+     "test_data/ob003/OBS_20260903065025_P2_s7_training_settings/legacy_artifacts/provider_routing_pre_integrity/gemini_v2_vision_output.json"
+    ],
+    "source_screenshots": [
+     "test_data/ob003/OBS_20260903065025_P2_s7_training_settings/source_screenshot.png"
+    ]
+   },
+   "terminal_state": "offline independent Gemini v2 extraction completed and structurally validated"
+  },
+  {
+   "session_id": "LIVE_20260905_122533",
+   "timestamp": "2026-09-05T12:29:58",
+   "kind": "live_observation_only",
+   "result": "LIVE_STOPPED_FAIL_CLOSED",
+   "stop_reason": "CDP_TARGET_INVALID (zero shinycolors.enza.fun tabs in controlled Chrome)",
+   "files": [
+    "enza_memory/live_decisions/LIVE_20260905_122533/decision_trace.jsonl"
+   ],
+   "game_interactions": 0,
+   "agy_calls": 0,
+   "notes": "drift finding recorded: bridge now persists Paddle artifact before AGY dispatch (failure-path invariant changed; retry requires fresh case_id)"
+  },
+  {
+   "session_id": "sess_click_migration_setup_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Initialize python_click_migration memory infrastructure (no environment contact)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "n/a (no actions; all JSON validated offline)",
+   "gate_outcomes": [],
+   "anomalies": [],
+   "files": {
+    "created": [
+     "migration/python_click_migration/README.md",
+     "migration/python_click_migration/viewport_profiles.json",
+     "migration/python_click_migration/control_regions.json",
+     "migration/python_click_migration/click_samples.jsonl",
+     "migration/python_click_migration/transient_timing.jsonl",
+     "migration/python_click_migration/migration_status.json"
+    ]
+   },
+   "terminal_state": "n/a (offline setup). Click-migration memory seeded from prior-session records (WINGVAL_20260905_01, WINGRUN_20260905/06); all entries CANDIDATE, no environment contact this session."
+  },
+  {
+   "session_id": "sess_a87f3588_live_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Continue WINGRUN_20260906_01 live (S3 weekly loop)",
+    "Operator-reconciled week commit 8->7 (screenshot pipeline hang)",
+    "Click migration live capture (HOME:SCHEDULE / SCHEDULE:VOCAL / BACK / REST / FURIKAERI boxes)",
+    "S3_START_PREP late recovery: 振り返り skill spend x5 (SP 548->408)",
+    "Event occurrence memory bootstrap + historical backfill"
+   ],
+   "interaction_count": 30,
+   "verification_coverage": "all clicks followed by fresh screenshot verification except operator-reconciled 8->7 commit",
+   "gate_outcomes": [],
+   "anomalies": [
+    "SCREENSHOT_TIMEOUT_AFTER_TRANSACTION_PROGRESS (twice; reconciled via operator evidence / later fresh frames)",
+    "S3 start prep missed at season entry, recovered late at week 4",
+    "skill board coordinate probing: 4 stray node selections (harmless, locked nodes/empty space)"
+   ],
+   "files": {
+    "created": [
+     "wing_runs/WINGRUN_20260906_01/operator_reconcile_20260906_s3w1.json",
+     "wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json",
+     "migration/python_click_migration/event_occurrence/ (6 files)"
+    ],
+    "updated": [
+     "wing_runs/WINGRUN_20260906_01/checkpoint.json",
+     "wing_runs/WINGRUN_20260906_01/timings.jsonl",
+     "migration/python_click_migration/control_regions.json",
+     "migration/python_click_migration/click_samples.jsonl",
+     "migration/python_click_migration/transient_timing.jsonl",
+     "migration/python_click_migration/migration_status.json",
+     "policies/learned_constraints.json (runtime candidate C1)"
+    ]
+   },
+   "terminal_state": "S3 weeks=4, WING_HOME... (skill board open at session pause), SP 408, fan gap 31744; S3_START_PREP=COMPLETED_LATE"
+  },
+  {
+   "session_id": "sess_a87f3588_skillboard_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Skill board progressive unlock (LEFT complete, RIGHT advanced)",
+    "Replacement flow learning (4 replacements, operator bottom-up policy)",
+    "Weekly loop continuation S3",
+    "WING scenario completion: S3 final weeks + season end + fes idol birth"
+   ],
+   "interaction_count": 65,
+   "verification_coverage": "all acquisitions/replacements fresh-verified via SP deltas and board state",
+   "anomalies": [
+    "coordinate calibration misses on zoomed-out board (~8 harmless locked-node selections)",
+    "one zone deviation (bottom-center Visual2.5倍 acquired before zone rule clarified)"
+   ],
+   "files": {
+    "created": [
+     "wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json",
+     "wing_runs/WINGRUN_20260906_01/run_completion_record.json"
+    ],
+    "updated": [
+     "wing_runs/WINGRUN_20260906_01/checkpoint.json",
+     "wing_runs/WINGRUN_20260906_01/timings.jsonl",
+     "artifact_registry.json",
+     "migration/python_click_migration/control_regions.json",
+     "migration/python_click_migration/click_samples.jsonl",
+     "migration/python_click_migration/event_occurrence/event_occurrences.jsonl",
+     "migration/python_click_migration/event_occurrence/event_click_regions.json",
+     "migration/python_click_migration/event_occurrence/event_probability_summary.json",
+     "migration/python_click_migration/migration_status.json"
+    ]
+   },
+   "terminal_state": "RUN CLOSED: WING produce complete (target not met 22,672/50,000), fes idol born, main lobby idle"
+  },
+  {
+   "session_id": "sess_a87f3588_vrb02_audit_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Independent live-executor audit of visual review batch v0.2 (38 annotated frames)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline audit; no game contact",
+   "gate_outcomes": [],
+   "anomalies": [],
+   "files": {
+    "created": [
+     "migration/python_click_migration/review_batches/v0_2/zcode_audit/ (5 artifacts)"
+    ]
+   },
+   "terminal_state": "audit complete: 38 reviewed, 4 P0 (005/006/012/017), 2 P1, 8 P2, 24 PASS; HARNESS_CHANGE_REQUIRED=NO"
+  },
+  {
+   "session_id": "sess_offline_stale_ref_audit_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (offline audit session)",
+   "missions": [
+    "Exhaustive stale & superseded knowledge reference audit (offline only; no environment observation, no action, no AGY, no Harness/Skill change)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline file audit; no game contact; all output JSON validated with python3 -m json.tool",
+   "gate_outcomes": [],
+   "anomalies": [],
+   "files": {
+    "created": [
+     "audits/stale_reference_audit/stale_references.json",
+     "audits/stale_reference_audit/runtime_reachable_stale_refs.json",
+     "audits/stale_reference_audit/test_contamination.json",
+     "audits/stale_reference_audit/historical_raw_safe_to_keep.json",
+     "audits/stale_reference_audit/audit_report.md"
+    ],
+    "modified": [
+     "memory_index.json (this entry)"
+    ],
+    "referenced": [
+     "enza_memory/artifact_registry.json",
+     "home_policy.py",
+     "test_home_policy.py",
+     "config.json run_state.season3",
+     "README.md Current Mainline / Active Runs",
+     "enza_memory/policies/audition_battle_speed_handler.json",
+     "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/control_distillation.json",
+     "audition_control_epoch.py + test_audition_control_epoch.py",
+     "enza_memory/migration/python_click_migration/event_occurrence/*",
+     "blind_interaction_policy.py",
+     "enza_memory/migration/python_click_migration/control_regions.json"
+    ]
+   },
+   "terminal_state": "AUDIT COMPLETE: 12 findings (P0=1 F-01 home_policy.py S3 stamina->REST; P1=7; P2=4), 10 historical-raw safe-to-keep entries, 10 false positives dismissed; RUNTIME_CHANGED=NO; STALE_SUPERSEDED_REFERENCE_AUDIT_COMPLETE"
+  },
+  {
+   "session_id": "sess_a87f3588_v03_build_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Apply ZCode v0.2 audit fixes and build visual review batch v0.3"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline build; no game contact; self-audit six counters all zero",
+   "anomalies": [],
+   "files": {
+    "created": [
+     "migration/python_click_migration/review_batches/v0_3/ (builder + 38 annotated + 38 original + manifest + sheet + summary)"
+    ]
+   },
+   "terminal_state": "v0.3 built: integrity PASS, self-audit clean, REVIEW_PENDING, no promotion"
+  },
+  {
+   "session_id": "OFFLINE_REGRESSION_MINING_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (offline forensic / regression miner)",
+   "missions": [
+    "Exhaustive historical regression mining for the enza Python migration: read all live evidence and distill a STATE->OBSERVATION->DECISION->CONTROL->POSTCONDITION golden/regression corpus"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline read-only mining; no game contact, no AGY, no live automation; 96 source artifacts reviewed in full/part + inventories (439 logs, 76 tests, 71 observation artifacts, 18 memory-index sessions)",
+   "anomalies": [],
+   "files": {
+    "created": [
+     "migration/regression_mining/canonical_states.json",
+     "migration/regression_mining/canonical_transitions.json",
+     "migration/regression_mining/negative_regressions.json",
+     "migration/regression_mining/planner_regressions.json",
+     "migration/regression_mining/skill_board_regressions.json",
+     "migration/regression_mining/choice_layout_regressions.json",
+     "migration/regression_mining/battle_regressions.json",
+     "migration/regression_mining/result_commit_regressions.json",
+     "migration/regression_mining/missing_visual_evidence.json",
+     "migration/regression_mining/regression_priority.json",
+     "migration/regression_mining/mining_report.md"
+    ]
+   },
+   "gate_outcomes": "AUDIT/RESEARCH mode; no production source edited; no runtime/business-policy/Harness/Skill change; no raw evidence mutated; all 10 new JSON artifacts pass python3 -m json.tool",
+   "terminal_state": "ENZA_HISTORICAL_REGRESSION_MINING_COMPLETE: 13 canonical states (+3 extensions), 26 transitions, 27 negative regressions, 10 planner regressions, 68 total cases (P0 x24 / P1 x19 / P2 x19 / P3 x6), 23 missing-visual-evidence entries, 20 P0 + 15 P1 new test candidates"
+  },
+  {
+   "session_id": "sess_room_contract_distillation_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Distill all learned rooms into Python-ready contracts (offline; no environment contact)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "n/a (offline distillation; all 12 JSON artifacts validated with python3 -m json.tool)",
+   "anomalies": [],
+   "files": {
+    "created": [
+     "enza_memory/runtime_contracts/home.json",
+     "enza_memory/runtime_contracts/schedule.json",
+     "enza_memory/runtime_contracts/dialogue.json",
+     "enza_memory/runtime_contracts/choice.json",
+     "enza_memory/runtime_contracts/audition_selection.json",
+     "enza_memory/runtime_contracts/audition_battle.json",
+     "enza_memory/runtime_contracts/result.json",
+     "enza_memory/runtime_contracts/skill_board.json",
+     "enza_memory/runtime_contracts/skill_replacement.json",
+     "enza_memory/runtime_contracts/season_transition.json",
+     "enza_memory/runtime_contracts/ending.json",
+     "enza_memory/runtime_contracts/room_contract_index.json",
+     "enza_memory/runtime_contracts/distillation_report.md"
+    ]
+   },
+   "gate_outcomes": "AUDIT/RESEARCH distillation; no production source, Harness, Skill, or business-policy change; no environment contact (MEMORY_PROTOCOL environment-contact-exempt, index updated for artifact traceability)",
+   "terminal_state": "PYTHON_ROOM_CONTRACT_DISTILLATION_COMPLETE: 11 room contracts + index + report; all PARTIAL; python-ready shadow candidates only; production_ready_controls empty"
+  },
+  {
+   "session_id": "OFFLINE_RECONCILIATION_20260906",
+   "date": "2026-09-07",
+   "agent": "ZCode (offline forensic / regression miner)",
+   "missions": [
+    "Reconcile historical regression mining with newly recovered evidence (45 recovered frames, v0.3 review, stale_reference_audit)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline read-only; no game contact, no AGY; existing test suite inspected for ALREADY_COVERED triage",
+   "anomalies": [],
+   "files": {
+    "created": [
+     "migration/regression_mining/regression_reconciliation.json",
+     "migration/regression_mining/regression_implementation_queue.json",
+     "migration/regression_mining/remaining_live_evidence_targets.json",
+     "migration/regression_mining/reconciliation_report.md"
+    ],
+    "updated_with_reconciliation_overlays": [
+     "migration/regression_mining/missing_visual_evidence.json (MVE-002..005 superseded by rf_sb_g1..g4)",
+     "migration/regression_mining/skill_board_regressions.json (SBR-001 + visual_negative_cases VNC-001..003)",
+     "migration/regression_mining/negative_regressions.json (NRG-020 visually grounded)",
+     "migration/regression_mining/planner_regressions.json (PLR-011 added, merges PLR-005)"
+    ]
+   },
+   "gate_outcomes": "AUDIT/RESEARCH mode; no runtime/business-policy/Harness/Skill change; raw evidence untouched; all JSON artifacts pass python3 -m json.tool",
+   "terminal_state": "REGRESSION_MINING_RECONCILED_WITH_CURRENT_EVIDENCE: live_csm_020..023 no longer MISSING_FRAME (RECOVERED_VISUAL_EVIDENCE/RECOVERED_REVIEW_PENDING); 3 visual negative cases promoted; PLR-011 (risk_gate_allows != planner_selects, 0906 S3 22,672/50,000, S4 never reached); NRG-013 preserved; TOP20 triaged 12 READY / 7 ALREADY_COVERED / 1 WAITING_VISUAL / 1 WAITING_POLICY; live targets reduced 10 -> 9"
+  },
+  {
+   "session_id": "sess_contract_offline_audit_20260906",
+   "date": "2026-09-06",
+   "agent": "ZCode (Offline Contract Auditor)",
+   "missions": [
+    "Audit and reconcile enza_memory/runtime_contracts/ against latest evidence (coverage matrix, v0_3 batch, recovered frames, regression mining, stale reference audit)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline audit; 11/11 contracts schema-validated programmatically (14/14 fields); 7 output JSONs parse-clean; no contract file rewritten (reconciliation overlays only)",
+   "anomalies": [],
+   "files": {
+    "created": [
+     "enza_memory/runtime_contracts/reconciliation_glm/contract_schema_validation.json",
+     "enza_memory/runtime_contracts/reconciliation_glm/contract_evidence_reconciliation.json",
+     "enza_memory/runtime_contracts/reconciliation_glm/perception_policy_leaks.json",
+     "enza_memory/runtime_contracts/reconciliation_glm/transition_audit.json",
+     "enza_memory/runtime_contracts/reconciliation_glm/persistence_audit.json",
+     "enza_memory/runtime_contracts/reconciliation_glm/control_readiness.json",
+     "enza_memory/runtime_contracts/reconciliation_glm/shadow_ready_rooms.json",
+     "enza_memory/runtime_contracts/reconciliation_glm/reconciliation_report.md"
+    ]
+   },
+   "gate_outcomes": "OFFLINE_ONLY; no game/AGY contact; no runtime/business-policy/Harness/Skill change; no shadow executor implemented; no real clicks; raw evidence untouched",
+   "terminal_state": "PYTHON_ROOM_CONTRACT_OFFLINE_AUDIT_COMPLETE: schema 11/11 valid; 6 stale claims (A-F); LEAK-03 P1 + 3 borderline; transitions 8 consistent / T-01 T-05 P1; PERSIST-1 (F-03) P1, P0=0; SHADOW_READY rooms HOME/SCHEDULE/RESULT/SEASON_TRANSITION (contingent on frame state detector); PYTHON_READY_CANDIDATE controls 8; HOLDs preserved (speed toggle, semifinal/final, long-press abandon, event eligibility); PRODUCTION_READY_CONTROLS 0"
+  },
+  {
+   "session_id": "IMPLEMENTATION_PLANNING_20260907",
+   "date": "2026-09-07",
+   "agent": "ZCode (offline implementation planner / regression triage)",
+   "missions": [
+    "Prioritize READY_TO_IMPLEMENT regression cases into batches for a Codex-style executor"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline only; code inspection of goal_execution.py, home_policy.py, audition_control_epoch.py, shadow_executor/, main.py, tests (no environment contact, no AGY)",
+   "anomalies": [
+    "queue staleness found: PLR-001/002 already implemented+tested (goal_execution.validate_goal_deadline + 10 tests) — downgraded to verify-only",
+    "PLR-011 partially covered already (home_policy S3 branch fixed + selection-vs-permission test exists); residual = futility projection",
+    "F-07 still stale in audition_control_epoch.py (speed_action CLICK_SPEED default)"
+   ],
+   "files": {
+    "created": [
+     "migration/regression_mining/implementation_planning/implementation_priority.json",
+     "migration/regression_mining/implementation_planning/implementation_batches.json",
+     "migration/regression_mining/implementation_planning/pre_live_blockers.json",
+     "migration/regression_mining/implementation_planning/redundant_cases.json",
+     "migration/regression_mining/implementation_planning/code_area_mapping.json",
+     "migration/regression_mining/implementation_planning/implementation_plan.md"
+    ]
+   },
+   "gate_outcomes": "planning only; no runtime/business-policy/Harness/Skill change; all JSON pass json.tool",
+   "terminal_state": "REGRESSION_IMPLEMENTATION_PLAN_READY: 16 READY cases -> 8 batches, 4 MUST_FIX_BEFORE_NEXT_LIVE, 8 redundancy findings"
+  },
+  {
+   "session_id": "sess_contract_reconciliation_writeback_20260907",
+   "date": "2026-09-07",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Apply CONTRACT_OFFLINE_AUDIT_20260906 reconciliation overlays into the 11 room contracts + index (offline write-back; contracts are memory artifacts, not runtime/policy/Harness/Skill)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline; all 12 contract JSONs + 7 audit JSONs re-validated with python3 -m json.tool after edits; 14-field schema + v0.2 version check PASS programmatically",
+   "anomalies": [
+    "self-correction: LEAK-06 initially misattributed the business_rule key to choice.json — actually in evidence file event_click_regions.json; leaks artifact corrected, choice.json gains badge_semantics split"
+   ],
+   "files": {
+    "updated": [
+     "enza_memory/runtime_contracts/choice.json (v0.2: three-axis replication, badge_semantics split, NEEDS_DETECTOR)",
+     "enza_memory/runtime_contracts/schedule.json (v0.2: threshold de-embedded, PLR-011 note)",
+     "enza_memory/runtime_contracts/skill_board.json (v0.2: RAW/NORMALIZED/CROSS_SCALE/CROSS_SESSION axes, color=prior signal + purchase-chain authority, zoom narrowed)",
+     "enza_memory/runtime_contracts/skill_replacement.json (v0.2: four-axis geometry)",
+     "enza_memory/runtime_contracts/audition_battle.json (v0.2: VRB02_025-029 durable frames, F-05 coordinate superseded)",
+     "enza_memory/runtime_contracts/dialogue.json (v0.2: SKIP > FAST_FORWARD > TEXTBOX ranking, choice-owner suppression, CHOICE_OWNER_NOT_RESPECTED)",
+     "enza_memory/runtime_contracts/home.json (v0.2: FURIKAERI NEEDS_REPLICATION)",
+     "enza_memory/runtime_contracts/result.json (v0.2: OK-anchor rule / NOT_VISIBLE_NO_OK_ANCHOR)",
+     "enza_memory/runtime_contracts/season_transition.json (v0.2: transition-frame no-projection rule)",
+     "enza_memory/runtime_contracts/ending.json (v0.2: DERIVED_SUMMARY_CONFIRMED + F-03 config purge in persistence boundary)",
+     "enza_memory/runtime_contracts/audition_selection.json (v0.2: version only)",
+     "enza_memory/runtime_contracts/room_contract_index.json (v0.2: reconciliation pointer + refreshed key_controls)",
+     "enza_memory/runtime_contracts/reconciliation_glm/perception_policy_leaks.json (LEAK-06 location correction)"
+    ]
+   },
+   "gate_outcomes": "OFFLINE_ONLY; no game/AGY contact; no runtime/business-policy/Harness/Skill change; raw evidence untouched; audit artifacts remain provenance of record",
+   "terminal_state": "CONTRACT_RECONCILIATION_WRITEBACK_COMPLETE: contracts v0.2 consistent with evidence_coverage_matrix / v0_3 / recovered frames / regression mining / stale audit; HOLDs unchanged (speed toggle, semifinal/final, long-press abandon, event eligibility); PRODUCTION_READY_CONTROLS still 0"
+  },
+  {
+   "session_id": "sess_contract_audit_verification_20260907",
+   "date": "2026-09-07",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Independent offline verification pass of CONTRACT_OFFLINE_AUDIT_20260906: audit the 11 v0.2 room contracts against the latest evidence (evidence_coverage_matrix 40 rows, python_readiness_matrix, control_regions, review_batches/v0_3, recovered_frame_manifest 45 frames, regression_mining T01-T26 + BTR/CLR/SBR/NRG/PLR corpora, distilled/*, referenced policies); record residual stale claims as reconciliation overlays; no contract file edited"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "all 12 contract JSONs + 8 reconciliation_glm artifacts re-validated with python3 -m json.tool; focus checkpoints (3-choice non-single-frame, skill-board raw/normalized/cross-scale, battle durable-frame/authority/postcondition/cross-session, dialogue SKIP>FAST_FORWARD>TEXTBOX, choice-owner textbox suppression, speed HOLD, semifinal/final UNKNOWN, long-press abandon BLOCKED, event eligibility UNKNOWN) each verified in the v0.2 contract text; fast-forward execution evidence independently confirmed in WINGRUN_20260905_01 weekly_trace.jsonl L8 (S1W7)",
+   "anomalies": [
+    "concurrent-write observation: contract files changed v0.1->v0.2 (sess_contract_reconciliation_writeback_20260907, mtimes 00:17-00:20) while this session was reading them; handled by re-reading current disk state before verifying — no writes to contracts from this session",
+    "STALE-G (P2): dialogue.json v0.2 still says fast-forward 'zero click evidence'; durable evidence holds exactly 1 validated execution (weekly_trace S1W7; canonical_transitions T10 positive_samples=1) — HOLD at n=1 unchanged, wording stale",
+    "STALE-H (P1): choice.json v0.2 still carries 2-choice '3/3' and PROMISE_EVENT 'FIXED_DECLINE ごめん' as evidence; latest corpus: 4/0 cross-session (T12), observed PROMISE n=1 was operator-resolved いいよ, ごめん is policy-only (MODEL_GATE fact/policy conflation)",
+    "STALE-I (P2): skill_board.json v0.2 VISIBLE_CONTROLS 'acquire/confirm UNKNOWN normalized' vs control_regions.json fresh normalized boxes (single-session, no authority change)",
+    "count fixes: evidence_coverage_matrix is 40 rows (was written 32); recovered_frame_manifest DIALOGUE frames = 4 (was written 5)"
+   ],
+   "files": {
+    "updated": [
+     "enza_memory/runtime_contracts/reconciliation_glm/contract_schema_validation.json (verification_pass_20260907 block; STALE-G rationale corrected)",
+     "enza_memory/runtime_contracts/reconciliation_glm/contract_evidence_reconciliation.json (source counts fixed; STALE-G/STALE-H/STALE-I appended)",
+     "enza_memory/runtime_contracts/reconciliation_glm/transition_audit.json (post_audit_resolution_20260907: T-01..T-05 verified resolved; residuals listed)",
+     "enza_memory/runtime_contracts/reconciliation_glm/persistence_audit.json (post_audit_resolution_20260907: PERSIST-1 resolved; T24 reinforcement)",
+     "enza_memory/runtime_contracts/reconciliation_glm/control_readiness.json (FAST_FORWARD_RIGHT row: execution evidence = 1, HOLD retained)",
+     "enza_memory/runtime_contracts/reconciliation_glm/shadow_ready_rooms.json (DIALOGUE upgraded to SHADOW_READY after verified T-01 resolution; CHOICE LEAK-06 marked resolved; summary refreshed)",
+     "enza_memory/runtime_contracts/reconciliation_glm/reconciliation_report.md (section 8 verification pass + final block)",
+     "enza_memory/memory_index.json (this entry)"
+    ]
+   },
+   "gate_outcomes": "OFFLINE_ONLY; no game/AGY contact; no runtime/business-policy/Harness/Skill change; raw evidence untouched; contract files NOT modified (residuals recorded as overlays in reconciliation_glm only)",
+   "terminal_state": "PYTHON_ROOM_CONTRACT_OFFLINE_AUDIT_COMPLETE: 11/11 v0.2 contracts validated against latest evidence; all task checkpoints hold; residual stale claims STALE-G/H/I recorded as overlays; SHADOW_READY rooms HOME/SCHEDULE/RESULT/SEASON_TRANSITION/DIALOGUE (contingent on CROSS:FRAME_STATE_DETECTOR); PYTHON_READY_CANDIDATES 8 controls; PRODUCTION_READY 0; RUNTIME_CHANGED NO"
+  },
+  {
+   "session_id": "sess_zcode_skill_board_detector_calibration_20260907",
+   "date": "2026-09-07",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Finish skill-board detector calibration from the aborted Codex session (offline; no live interaction, no AGY, no business-policy/Harness changes)",
+    "45-frame batch evaluation loop for observe_skill_board/observe_replacement",
+    "Fix SELECTED false positive (pink icon art vs selection ring) with structural annulus evidence",
+    "Fix ACQUIRED false positives (solid cyan UI chips) while keeping the cyan-ring owned-node positive; bright-yellow/gold ownership stays UNKNOWN (colour is not authority)",
+    "Negative regressions: pink!=SELECTED, gold/cyan!=ACQUIRED, SP23<45 fails closed, rf_sb_g1..g4 (live_csm_020..023) fail closed under full policy authorization",
+    "Generate skill-board detector review batch skill_board_v0_4"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline only; test_skill_board_detector_calibration.py 11/11 PASS; adjacent suites (test_python_shadow_executor, test_visual_review_v03, test_review_batch_room_identity, test_harness_live_invariants, test_known_failure_baseline) 36/36 PASS; 45/45 recovered frames re-evaluated pre/post fix; confusion summary SELECTED TP=4/FP=0/FN=0(TN=37,UNKNOWN=4), ACQUIRED TP=1/FP=0 with 3 recorded owned nodes left UNKNOWN, SP 10/10 correct on full frames, replacement 9/9 on recoverable frames, g1..g4 fail closed",
+   "anomalies": [
+    "pre-calibration detector had colour-only FP classes (pink icon->SELECTED risk; 3 solid-cyan dialogue chips->ACQUIRED actual) - recorded as failures/skill_board_detector_color_fp_001.json and fixed",
+    "known recall gaps left honest UNKNOWN: bright-yellow SP:0 owned nodes (rf_sb_d1 575,235; rf_rp_t2_post_commit 585,50) and cyan-owned rf_sb_f6 930,320 produce no ACQUIRED claim (candidate extractor never proposes them); f3 selection ring lies outside its 810x180 crop"
+   ],
+   "files": {
+    "updated": [
+     "shadow_executor/skill_board.py (_annulus radial evidence; SELECTED/ACQUIRED structural gates in _node_visual)"
+    ],
+    "created": [
+     "test_skill_board_detector_calibration.py",
+     "enza_memory/failures/skill_board_detector_color_fp_001.json",
+     "enza_memory/migration/python_click_migration/review_batches/skill_board_v0_4/ (build_review_batch.py, 45 annotated+original frames, review_manifest.jsonl, review_sheet.md, review_summary.json, calibration_confusion_summary.json)",
+     "/tmp/skill_board_detector_eval.json (session-scratch 45-frame eval; durable copy of confusion summary in skill_board_v0_4)"
+    ]
+   },
+   "gate_outcomes": {
+    "known_selected_fp": 0,
+    "known_acquired_fp": 0,
+    "sp23_lt_45_regression": "PASS",
+    "replacement_regressions": "PASS",
+    "live_csm_020_023_fail_closed": "YES",
+    "real_clicks": 0,
+    "runtime_changed": "YES (detector only)",
+    "business_policy_changed": "NO",
+    "harness_changed": "NO"
+   }
+  },
+  {
+   "session_id": "sess_historical_frame_integration_20260907",
+   "date": "2026-09-07",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "Integrate 86 recovered historical frames into current evidence baseline (offline; no game contact, no AGY, no detector built, no raw PNG modified)"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "offline; manifest validated programmatically (86/86 exist, sha1 match, 1280x720); 12 frames pixel-verified by direct image read; all 10 integration JSONs pass python3 -m json.tool",
+   "anomalies": [
+    "6/12 spot-checked frames mislabeled at pixel level (4/4 TWO_OPTION are post-choice HOME or 3-choice; 1/4 40K is advice 3-choice) -> NRH-003",
+    "5 dc58a91a frames run-conflict corrected by content to WINGRUN_20260906_01 (same-session two-run continuation, consistent with crash backfill)",
+    "plus5000 fan clue: fes-idol confirm background shows fans 419,414 pre-birth (bounds the delta to final-evaluation stage; source still UNKNOWN)"
+   ],
+   "files": {
+    "created": [
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/historical_frame_evidence_map.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/battle_reconciliation.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/result_reconciliation.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/choice_reconciliation.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/audition_selection_reconciliation.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/semifinal_final_reconciliation.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/ending_reconciliation.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/new_negative_regressions.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/coverage_delta.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/live_target_delta.json",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/integration_report.md"
+    ]
+   },
+   "gate_outcomes": "OFFLINE_ONLY; no runtime/business-policy/Harness/Skill change; historical snapshots untouched; contracts v0.2 untouched (integration files are the contract-facing deltas for the next pass); no detector implemented",
+   "terminal_state": "HISTORICAL_VISUAL_EVIDENCE_INTEGRATED: semifinal page identity ESTABLISHED / result UNKNOWN; final still MISSING/UNKNOWN; explicit pass+fail detector-grade frames verified; TWO_CHOICE layout corpus still 0 (LVT-04 dedicated); AUTO cross-run narrowed to opportunistic; 6 new negative regression candidates (NRH-001..006); 16 saturated targets; PRODUCTION_READY remains 0"
+  },
+  {
+   "session_id": "sess_concurrent_reconciliation_repair_20260907",
+   "date": "2026-09-07",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "NARROW concurrent-reconciliation repair: reconcile reconciliation_glm artifacts (authored against the 11/11-v0.2 snapshot) with the concurrent v0.2.1 update from sess_historical_frame_integration_20260907 (6 room contracts + index, CONTRACT_EVIDENCE_DELTA_20260907: 86 recovered historical frames + run_state contamination fix); preserve all v0.2.1 evidence deltas; resolve STALE-G/H/I; no full re-audit"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "exact contract_version read per file from current tree (v0.2.1: choice/audition_selection/audition_battle/result/season_transition/ending + index; v0.2: home/schedule/dialogue/skill_board/skill_replacement); v0.2.1 deltas verified against recovered_historical_frames manifest (86 frames, 4 sessions, sha1-bound) + integration_report; run_state fix verified read-only in current tree (config.json no closed-run season3 flags; artifact_registry current_mainline.active_run=null; run_state.py fail-closed on closed-run resume); all 12 contract JSONs + 8 reconciliation artifacts re-validated with python3 -m json.tool",
+   "anomalies": [
+    "mixed-version baseline confirmed and recorded: earlier reconciliation artifacts stated 11/11 v0.2 (authoring snapshot); CURRENT_CONTRACT_BASELINE is MIXED v0.2.1 x6 + index / v0.2 x5",
+    "STALE-G RESOLVED: dialogue.json metadata patched in place (v0.2 kept) — FAST_FORWARD execution evidence = 1 validated execution (S1W7 weekly_trace L8; T10 positive_samples=1); HOLD retained at n=1",
+    "STALE-H RESOLVED: choice.json metadata patched in place (v0.2.1 kept) — occurrence count 3/34 eligible weeks separated from selection replication 4/0 cross-session and geometry NONE; PROMISE observed execution = いいよ operator-resolved n=1 separated from policy rule FIXED_DECLINE ごめん (zero autonomous executions)",
+    "STALE-I RESOLVED: skill_board.json metadata patched in place (v0.2 kept) — acquire/confirm normalized boxes exist (control_regions.json, single-session); geometry evidence != purchase authority",
+    "PERSIST-1 marked RESOLVED_BY_RUN_STATE_PATCH (contamination unreachable in current tree); invariant retained"
+   ],
+   "files": {
+    "updated": [
+     "enza_memory/runtime_contracts/dialogue.json (STALE-G metadata correction; version stays 0.2)",
+     "enza_memory/runtime_contracts/choice.json (STALE-H axis separation; version stays 0.2.1)",
+     "enza_memory/runtime_contracts/skill_board.json (STALE-I geometry metadata; version stays 0.2)",
+     "enza_memory/runtime_contracts/reconciliation_glm/contract_schema_validation.json (current_tree_version_check_20260907; snapshot note)",
+     "enza_memory/runtime_contracts/reconciliation_glm/contract_evidence_reconciliation.json (concurrent_v021_reconciliation_repair block; delta preservation; STALE-G/H/I resolution)",
+     "enza_memory/runtime_contracts/reconciliation_glm/transition_audit.json (residuals closed; v0.2.1 note; semifinal split verified)",
+     "enza_memory/runtime_contracts/reconciliation_glm/persistence_audit.json (PERSIST-1 RESOLVED_BY_RUN_STATE_PATCH with current-tree evidence)",
+     "enza_memory/runtime_contracts/reconciliation_glm/control_readiness.json (v021_delta_overlay; ENDING/RESULT flags refreshed; no classification changes)",
+     "enza_memory/runtime_contracts/reconciliation_glm/shadow_ready_rooms.json (version note; ENDING anchors refreshed)",
+     "enza_memory/runtime_contracts/reconciliation_glm/reconciliation_report.md (section 9 + repair final block)",
+     "enza_memory/memory_index.json (this entry)"
+    ]
+   },
+   "gate_outcomes": "OFFLINE_ONLY; no game/AGY contact; no runtime/business-policy/Harness/Skill change; raw evidence untouched; no v0.2.1 contract downgraded; contract patches were factual-metadata-only (versions intentionally not normalized)",
+   "terminal_state": "ROOM_CONTRACT_CONCURRENT_RECONCILIATION_REPAIRED: mixed-version reconciliation complete; v0.2.1 deltas preserved; STALE-G/H/I resolved; PERSIST-1 resolved by run_state patch; PRODUCTION_READY 0; RUNTIME_CHANGED NO"
+  },
+  {
+   "session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+   "date": "2026-09-07",
+   "run_id": "WINGRUN_20260907_01",
+   "mission": "LIVE evidence acquisition + safe WING execution via ZCode BUILT-IN browser (operator redirected from external Chrome; no CDP, no external Chrome launch)",
+   "surface": "ZCode IAB, viewport 1280x720, canvas game (DOM snapshot empty; CUA coordinate path + screenshots)",
+   "interactions": "approx 60+ game clicks across ~40 cells; zero screenshot hangs",
+   "progress": {
+    "produce_started": true,
+    "scenario": "W.I.N.G編 ミドル unit2 no-items",
+    "weeks_committed": [
+     "S1W1 8->7",
+     "S1W2 7->6",
+     "S1W3 6->5",
+     "S1W4 5->4",
+     "S1W5 4->3",
+     "S1W6 PENDING_RECONCILE (決定 fired, cancelled mid-wait)"
+    ]
+   },
+   "verification_coverage": "fresh stable-frame screenshot before/after every business click; no blind retries; timeout/interrupt reconciled per protocol",
+   "evidence_highlights": {
+    "TWO_CHOICE_pre_post_click": "PRIORITY 1 CAPTURED (S1W5 PROMISE いいよ/ごめん; first project pre-click true two-choice full frame; geometry normalized boxes recorded; autonomous ごめん execution n=1 with decline response)",
+    "THREE_CHOICE_per_event_capture": "choco advice event S1W5 (middle policy execution SP+10)",
+    "no_choice_support_events": "S1W2/S1W3 chains replicate no-choice settle pattern (SP+10/メンタル+10/技+10)",
+    "SKIP_stops_at_choice": "consistent with historical fact (選択肢までSKIP badge observed on choice-bearing chain)",
+    "FINAL_PAGE": "NOT_REACHED_YET (expected W7/W8 audition weeks)",
+    "AUTO_interactability": "NOT_YET_OBSERVED (audition not entered)",
+    "PAUSE_RESUME": "not captured (no safe natural opportunity yet)",
+    "SKILL_BOARD": "not entered (no visible entry on WING_HOME this run; not hunted to preserve run)"
+   },
+   "files": {
+    "updated": [
+     "enza_memory/observations/OBS_002.json",
+     "enza_memory/observations/OBS_003.json",
+     "enza_memory/observations/OBS_004.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/ (timings.jsonl, trajectory, two_choice_preclick_evidence.json, 50+ screenshots)",
+     "enza_memory/failures/tap_cadence_outran_text_typing_001.json",
+     "enza_memory/failures/operator_cancel_pending_action_001.json",
+     "enza_memory/memory_index.json (this entry)"
+    ]
+   },
+   "gate_outcomes": "LIVE (operator-authorized evidence mission); business choices executed only under ACTIVE fixed policy (3-choice middle; 2-choice ごめん); no code/policy/Harness changes",
+   "terminal_state": "PAUSED_MID_S1W6_EVENT_CHAIN: weeks_remaining UNKNOWN at pause; resume requires fresh top-bar reconciliation before any click"
+  },
+  {
+   "session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+   "date": "2026-09-07",
+   "continuation_of": "WINGRUN_20260907_01",
+   "mission": "RECOVER/RECONCILE interrupted S1W6 only (operator strict risk gate + reconcile-only instruction)",
+   "interactions": "dialogue TEXTBOX advances + 1 PROMISE two-choice decline (ごめん, policy n=2); zero business schedule actions",
+   "verification_coverage": "fresh frame before/after each interaction; top bar read at stable HOME",
+   "evidence_highlights": {
+    "TWO_CHOICE_2nd_occurrence": "pre-click full frame + post-click (Promise for upcoming week declined)",
+    "W6_CONSUMED": "YES (3->2 fresh top-bar)",
+    "POLICY_INCIDENT": "VOCAL at 92% recorded as violation; operator HARD GATE persisted as vocal_risk_gate_hard.json",
+    "REST": "NOT executed (superseded — planner-owned objective)"
+   },
+   "files": {
+    "updated": [
+     "enza_memory/wing_runs/WINGRUN_20260907_01/ (trajectory, timings, two_choice_preclick_evidence_2.json, screenshots recovery_*/TWO_CHOICE_*W7PROMISE*)",
+     "enza_memory/observations/OBS_005.json",
+     "enza_memory/failures/s1w6_vocal_executed_above_risk_gate_001.json",
+     "enza_memory/failures/operator_cancel_pending_action_001.json (resolution appended)",
+     "enza_memory/policies/vocal_risk_gate_hard.json",
+     "enza_memory/memory_index.json (this entry)"
+    ]
+   },
+   "gate_outcomes": "reconcile-only; no weekly objective executed; no REST; no W7 entry",
+   "terminal_state": "STOPPED_AT_BOUNDARY: WING_HOME_IDLE S1 weeks=2"
+  },
+  {
+   "session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+   "date": "2026-09-07",
+   "continuation_of": "WINGRUN_20260907_01",
+   "mission": "STRICT RISK GATE recovery: REST executed as the only authorized objective after >2% VOCAL rejection",
+   "interactions": "休む click + rest dialogue advance + SKIP rest event; zero lesson/audition actions",
+   "verification_coverage": "fresh pre-check frame; fresh post-rest top-bar read",
+   "evidence_highlights": {
+    "REST_EXECUTED": "YES (weeks 2->1)",
+    "POST_REST_HOME": "YES",
+    "ADDITIONAL_WEEKS_RUN": 0
+   },
+   "files": {
+    "updated": [
+     "enza_memory/wing_runs/WINGRUN_20260907_01/ (trajectory step 12, timings, OBS_006, screenshots rest_*)",
+     "enza_memory/memory_index.json (this entry)"
+    ]
+   },
+   "gate_outcomes": "recovery-only; VOCAL hard gate respected; no additional week after REST",
+   "terminal_state": "STOPPED_AT_BOUNDARY: WING_HOME_IDLE S1 weeks=1 post-REST"
+  },
+  {
+   "session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+   "date": "2026-09-07",
+   "continuation_of": "WINGRUN_20260907_01",
+   "mission": "Live verify planner -> risk gate -> executor wiring (no code change, no AGY, no invented objective)",
+   "interactions": "0 game clicks; 1 fresh HOME screenshot; local .venv planner + wiring pure-logic invocation",
+   "verification_coverage": "planner output recorded from fresh observation; executor refusal verified fail-closed",
+   "evidence_highlights": {
+    "PLANNER_OBJECTIVE": "NEEDS_VOCAL_FAN_GAIN (explicit; PYTHON_PLANNER)",
+    "WIRING_GAP_FOUND": "S1 final week 0<gap<=300 objective has no executor mapping -> UNSUPPORTED_DECISION fail-closed",
+    "VOCAL_GATE": "NOT_APPLICABLE (objective != VOCAL; path not entered; no bypass)",
+    "WEEK_COMPLETED": false
+   },
+   "files": {
+    "updated": [
+     "enza_memory/wing_runs/WINGRUN_20260907_01/planner_risk_wiring_verification.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/trajectory (step 13)",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/timings.jsonl",
+     "enza_memory/observations/OBS_007.json",
+     "enza_memory/memory_index.json (this entry)"
+    ]
+   },
+   "gate_outcomes": "verification-only; fail-closed respected; no policy violation",
+   "terminal_state": "STOPPED_AT_BOUNDARY: WING_HOME_IDLE S1 weeks=1; objective non-executable without code/policy owner decision"
+  },
+  {
+   "session_id": "sess_af4f8100-5441-4fee-87cd-eb1ba04dc50c",
+   "date": "2026-09-07",
+   "continuation_of": "WINGRUN_20260907_01",
+   "mission": "OFFLINE reconcile of live incident evidence: TRUE TWO_CHOICE first complete live evidence + S1W6 VOCAL planner/risk authority violation; regression candidates + coverage delta packaged in isolated offline_reconciliation/ directory",
+   "interactions": "zero game interactions — offline artifact review only (digest recomputation, JSON re-derivation, image inspection, offline pixel probe); paused live session untouched",
+   "verification_coverage": "8 evidence screenshots digest-verified; TWO_CHOICE recorded geometry probed offline (<=6px agreement); all normalized values re-derived; all new JSON parsed",
+   "evidence_highlights": {
+    "TWO_CHOICE_LAYOUT_VISUAL_CORPUS": "NOW NONZERO",
+    "TWO_CHOICE_GEOMETRY": "LIVE_CAPTURED",
+    "PROMISE_AUTONOMOUS_GOMEN_EXECUTION": "n=1 (S1W5 first project-wide; 2 cumulative in-run declines)",
+    "S1W6_TROUBLE_RATE": "92% fresh on-frame vs authoritative 2% (vocal_risk_gate_hard)",
+    "VOCAL_DECIDE_EMITTED": "YES",
+    "POLICY_VIOLATION_CONFIRMED": "YES",
+    "W6_COMPLETION_CLAIMED": "NO"
+   },
+   "files": {
+    "created": [
+     "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/two_choice_live_evidence_reconciliation.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/s1w6_policy_violation_reconciliation.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/new_regression_candidates.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/coverage_delta.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/live_run_incident_report.md"
+    ],
+    "updated": [
+     "enza_memory/memory_index.json (this entry)"
+    ],
+    "explicitly_unmodified": "all raw run artifacts, observations, failures, policies, Harness/Skill, runtime, regression_mining corpora (proposed patches recorded inside coverage_delta.json only)"
+   },
+   "gate_outcomes": "AUDIT-mode offline reconciliation; LIVE_BROWSER_TOUCHED=NO; RUNTIME/BUSINESS_POLICY/HARNESS unchanged; new regression candidates NRC-001/NRC-002 recorded as design-only (n=1 origin, non-executable until independent review)",
+   "terminal_state": "WINGRUN_20260907_01_OFFLINE_INCIDENT_RECONCILED; paused live run control state untouched (weeks=1 post-REST handoff preserved)"
+  },
+  {
+   "session_id": "sess_battle_visual_authority_correction_20260907",
+   "date": "2026-09-07",
+   "agent": "ZCode (Environment Agent)",
+   "missions": [
+    "NARROW battle evidence metadata correction after independent visual authority review of VRB02_025/026/027: correct appearance-based interactability/phase/causality overclaims in derived battle evidence, coverage delta, and contract metadata only; no full battle re-audit, no raw PNG change, no runtime/policy/Harness/Skill change"
+   ],
+   "interaction_count": 0,
+   "verification_coverage": "battle_reconciliation.json, v0_3 review manifest battle entries (VRB02_025-029 regions/phases), audition_battle.json (v0.2.1 incl. concurrent EVIDENCE_DELTA_SEPARATION), coverage_delta.json AUTO_TOGGLE row, new_negative_regressions NRH-001 read; runtime gate verified read-only in audition_control_epoch.py auto_action (INPUT_READY + AUTO OFF + AUTO_INTERACTABILITY ENABLED required before CLICK_AUTO) => RUNTIME_CHANGE_REQUIRED=NO; all touched JSON re-validated with python3 -m json.tool",
+   "anomalies": [
+    "VRB02_027 phase label INPUT_READY_AUTO_ON wrong: frame is Appeal Start / animation with Auto ON visible — relabeled ANIMATION_WITH_AUTO_ON_VISIBLE; INPUT_READY and AUTO interactability evidence recorded separately, neither claimed by the frame",
+    "AUTO_OFF+ENABLED and AUTO_OFF+DISABLED NOT_VISUALLY_ESTABLISHED from still frames (VRB02_025/026 appearance insufficient; annotation overlay color is reviewer markup, not control evidence); AUTO_INTERACTABILITY_VISUALLY_SEPARABLE=NO",
+    "AUTO_CLICK_CAUSALLY_VERIFIED=NO — static ON frames (incl. pre/post-click visual pairs) do not verify causality; same-epoch before/action/after provenance required",
+    "STUCK_VISUAL_STATE != ACTION_FAILURE and != RETRY_AUTHORITY added to NRH-001 guards (Batch-4 fresh reconciliation requirement retained)",
+    "concurrent modification observed: audition_battle.json gained EVIDENCE_DELTA_SEPARATION from another session while this task ran; corrections layered on top without conflict"
+   ],
+   "files": {
+    "updated": [
+     "enza_memory/runtime_contracts/audition_battle.json (durable_frames VRB02_025/026/027 relabels + AUTO_VISUAL_AUTHORITY_CORRECTION block; version stays 0.2.1)",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/battle_reconciliation.json (AUTO_ON value-level YES; INPUT_READY/ANIMATION/STUCK verdict refinements; auto_visual_authority_correction block; anti-promotion guards extended)",
+     "enza_memory/migration/python_click_migration/recovered_historical_frames/integration/coverage_delta.json (AUTO_TOGGLE row: value evidence up, interactability not visually separable, postcondition rule-vs-causality split)",
+     "enza_memory/runtime_contracts/reconciliation_glm/control_readiness.json (AUTO_TOGGLE overlay + row correction; classification unchanged)",
+     "enza_memory/runtime_contracts/reconciliation_glm/contract_evidence_reconciliation.json (STALE-C correction_20260907 marker)",
+     "enza_memory/runtime_contracts/reconciliation_glm/reconciliation_report.md (section 10 + correction final block)",
+     "enza_memory/memory_index.json (this entry)"
+    ],
+    "explicitly_unmodified": [
+     "enza_memory/migration/python_click_migration/review_batches/v0_3/ (manifest_sha256-bound REVIEW_PENDING snapshot; immutable annotated overlays; labels superseded downstream)",
+     "all raw PNGs (v0_3 originals + recovered_historical_frames)",
+     "runtime code (audition_control_epoch.py read-only), business policy, Harness/Skill"
+    ]
+   },
+   "gate_outcomes": "OFFLINE_ONLY; no game/AGY contact; no runtime/business-policy/Harness/Skill change; RUNTIME_CHANGE_REQUIRED=NO (runtime gate already requires INPUT_READY + AUTO OFF + AUTO_INTERACTABILITY ENABLED)",
+   "terminal_state": "BATTLE_VISUAL_AUTHORITY_METADATA_CORRECTED"
+  },
+  {
+   "session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+   "date": "2026-09-07",
+   "continuation_of": "WINGRUN_20260907_01",
+   "mission": "Live verify NEEDS_VOCAL_FAN_GAIN -> VOCAL executor -> fresh risk gate wiring",
+   "interactions": "schedules open (trouble read only, no 決定), BACK, REST executed, season-end presentation advanced, fes idol birth confirmed, returned to lobby",
+   "verification_coverage": "planner objective matched; mapping verified (phase-1 NEED_MORE_OBSERVATION); fresh trouble read; phase-2 BLOCK verdict honored; counterfactual ALLOW path verified",
+   "evidence_highlights": {
+    "WIRING": "NEEDS_VOCAL_FAN_GAIN -> VOCAL intent; UNSUPPORTED_DECISION NO",
+    "RISK_GATE": "fresh 8% > 2% -> BLOCK honored (no 決定 click)",
+    "RECOVERY": "REST executed (wiring-generated objective)",
+    "RUN_CLOSED": "season end explicit FAIL; fes idol F+ born; lobby terminal"
+   },
+   "files": {
+    "updated": [
+     "enza_memory/wing_runs/WINGRUN_20260907_01/run_completion_record.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/trajectory (steps 14-15)",
+     "enza_memory/wing_runs/WINGRUN_20260907_01/timings.jsonl",
+     "enza_memory/observations/OBS_008.json",
+     "enza_memory/memory_index.json (this entry)"
+    ]
+   },
+   "gate_outcomes": "verification + gate recovery; no policy violation; run closed cleanly",
+   "terminal_state": "MAIN_LOBBY_IDLE — WINGRUN_20260907_01 COMPLETE"
+  }
+ ]
+}

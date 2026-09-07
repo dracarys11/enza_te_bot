@@ -1,0 +1,31 @@
+{
+ "failure_id": "tap_cadence_outran_text_typing_001",
+ "trajectory_reference": "TRAJ_WINGRUN_20260907_01 step 6",
+ "phase": "S1W3 support event dialogue (真乃 walk scene)",
+ "timestamp_approx": "2026-09-07T00:00:00Z",
+ "occurrences": 1,
+ "intent": "advance dialogue by textbox taps",
+ "grounding_method": {
+  "method": "fixed textbox body point (640,610), VERIFIED_EVIDENCE geometry",
+  "estimated_target": "SAFE_TEXTBOX center",
+  "precision_claim": "hitbox verified by 35/0 historical + in-session successes"
+ },
+ "action": {
+  "performed": "3 consecutive cua.click at (640,610) with 2.1s gaps"
+ },
+ "observed_result": {
+  "new_state": "dialogue advanced only ~1 line in 3 clicks (clicks consumed as text-complete during typing animation)",
+  "evidence": [
+   "s1w3_event2_dlg3.png vs s1w3_event2_dlg6.png"
+  ],
+  "provenance": "session_observed"
+ },
+ "verification": {
+  "expected_state": "advance 3 lines",
+  "comparison": "text changed only once",
+  "result": "NO_WRONG_ACTION — no mis-click, no state damage"
+ },
+ "classification": "ACTION_EFFECT_FAILURE (minor, recovered)",
+ "recovery": "slowed cadence: wait >=2.5s or confirm text finished before next tap; later chains used 選択肢まで/normal SKIP to converge",
+ "candidate_constraint": "PROVISIONAL: textbox tap cadence must respect per-line text-typing duration on IAB surface (~<3s); not yet independently reviewed"
+}

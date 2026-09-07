@@ -1,0 +1,50 @@
+{
+ "schema_version": 1,
+ "artifact_id": "event_timing_profiles",
+ "artifact_type": "EVENT_TIMING_PROFILES",
+ "created_at": "2026-09-06T08:00:00Z",
+ "status": "CANDIDATE",
+ "provenance": {
+  "classification": "inference",
+  "producer": "ZCode (Environment Agent)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T08:00:00Z",
+  "source_artifact_ids": [
+   "event_occurrences.jsonl",
+   "../../wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+   "../../wing_runs/WINGRUN_20260906_01/timings.jsonl"
+  ],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "boundary_timing": {
+  "POST_WEEK_ACTION_WINDOW": {
+   "trigger_boundary": "lesson/result completion -> HOME return",
+   "observed": "events (story/choice) appear after lesson auto-completes, before actionable HOME",
+   "natural_lesson_duration_ms": "~8000 (0906 S1W1 cutin->home auto lesson)",
+   "time_to_first_actionable_control_ms": "UNKNOWN per event type",
+   "confidence": "LOW"
+  },
+  "WEEK_START_MORNING_EVENT": {
+   "trigger_boundary": "WEEK_START -> MORNING_3CHOICE -> actionable",
+   "observed_samples": 0,
+   "note": "historical 3-choices were logged as post-action; whether any were morning-type at week start is UNRESOLVED — timing model empty"
+  },
+  "REST_DIALOGUE": {
+   "trigger_boundary": "HOME:REST click -> dialogue scene -> textbox taps -> HOME",
+   "observed_ms": "textbox tap interval ~2000ms worked; total scene a few taps",
+   "confidence": "MEDIUM"
+  }
+ },
+ "probe_order_recommendation": {
+  "context": "POST_WEEK_ACTION return-to-HOME window",
+  "order": [
+   "detect choice overlay FIRST (blocks everything; middle/gomen rule)",
+   "then story textbox advance",
+   "then SKIP badge if result-type presentation"
+  ],
+  "rationale": "choice overlay overlaps textbox region — must be distinguished before any textbox tap"
+ }
+}

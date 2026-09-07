@@ -1,0 +1,158 @@
+{
+ "schema_version": 1,
+ "artifact_id": "event_click_regions",
+ "artifact_type": "EVENT_CLICK_REGIONS",
+ "created_at": "2026-09-06T08:00:00Z",
+ "status": "CANDIDATE",
+ "provenance": {
+  "classification": "inference",
+  "producer": "ZCode (Environment Agent)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T08:00:00Z",
+  "source_artifact_ids": [
+   "event_occurrences.jsonl",
+   "../../wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+   "../../wing_runs/WINGRUN_20260906_01/timings.jsonl"
+  ],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "layout_families": {
+  "STORY_TEXTBOX_LAYOUT_V1": {
+   "status": "REPLICATED_CANDIDATE",
+   "evidence": [
+    "0905/0906 runs: dialogue textbox taps advance story (many samples)",
+    "0906 S3 REST week: textbox (640,620) advanced 智代子 dialogue"
+   ],
+   "textbox_box_norm": {
+    "x1": 0.1758,
+    "y1": 0.7361,
+    "x2": 0.8086,
+    "y2": 0.9722
+   },
+   "textbox_box_screen_debug": [
+    225,
+    530,
+    1035,
+    700
+   ],
+   "preferred_click_point_norm": {
+    "x": 0.5,
+    "y": 0.8611
+   },
+   "note": "textbox geometry visually stable across story/REST/result dialogues at 1280x720; normalized replication across independent frames still accumulating",
+   "hazard": "TEXTBOX REGION OVERLAPS NOTHING in plain dialogue, but choice overlays replace/cover this area — NEVER blind-tap textbox when a choice may be present (PLAIN_DIALOGUE vs CHOICE_PRESENT must be distinguished first)"
+  },
+  "STORY_SKIP_LAYOUT_V1": {
+   "status": "CLICK_VALIDATED_SINGLE_CONTEXT",
+   "skip_badge_box_norm": {
+    "x1": 0.9266,
+    "y1": 0.0278,
+    "x2": 0.9828,
+    "y2": 0.1222
+   },
+   "skip_badge_box_screen_debug": [
+    1186,
+    20,
+    1258,
+    88
+   ],
+   "preferred_click_point_norm": {
+    "x": 0.9523,
+    "y": 0.0736
+   },
+   "contexts_validated": [
+    "RESULT advance cycle (2/2 prior sessions)",
+    "in-lesson dialogue SKIP (0906 S1W5/S1W6)"
+   ],
+   "hazard": "SKIP on /home ログインボーナス dialogue opened お知らせ overlay (0906, causality UNKNOWN live_ttm_009) — /home login SKIP is NOT promoted"
+  },
+  "THREE_CHOICE_LAYOUT_V1": {
+   "status": "CLICK_VALIDATED_WITH_BOX (single frame)",
+   "observed_frame": "2026-09-06 S3W4 智代子 audition story 3-choice @1280x720",
+   "option_boxes_screen": {
+    "left": {
+     "box": [
+      65,
+      165,
+      415,
+      340
+     ],
+     "center": [
+      240,
+      250
+     ],
+     "border_color": "pink",
+     "text": "ファンはなんて言ってた？"
+    },
+    "middle": {
+     "box": [
+      460,
+      45,
+      810,
+      225
+     ],
+     "center": [
+      635,
+      135
+     ],
+     "border_color": "green_with_check_badge",
+     "text": "智代子が落ち着くスタイルは？"
+    },
+    "right": {
+     "box": [
+      850,
+      160,
+      1200,
+      345
+     ],
+     "center": [
+      1025,
+      250
+     ],
+     "border_color": "orange",
+     "text": "本当は気づいてるんじゃないか？"
+    }
+   },
+   "option_boxes_norm": {
+    "left": {
+     "x1": 0.0508,
+     "y1": 0.2292,
+     "x2": 0.3242,
+     "y2": 0.4722
+    },
+    "middle": {
+     "x1": 0.3594,
+     "y1": 0.0625,
+     "x2": 0.6328,
+     "y2": 0.3125
+    },
+    "right": {
+     "x1": 0.6641,
+     "y1": 0.2222,
+     "x2": 0.9375,
+     "y2": 0.4792
+    }
+   },
+   "middle_click_point_norm": {
+    "x": 0.4961,
+    "y": 0.1875
+   },
+   "business_rule": "middle (CONFIRMED again this frame — middle carried the ✓ badge)",
+   "staggered_layout": true,
+   "note": "options are vertically staggered (middle raised); middle identified by green border + check badge; single-frame geometry — needs cross-event replication",
+   "blind_fast_candidate": "conditional — YES if layout detector confirms staggered-3 + check badge; wrong-click cost low"
+  },
+  "TWO_CHOICE_LAYOUT_V1": {
+   "status": "GEOMETRY_UNKNOWN",
+   "business_rule": "含ごめん -> ごめん (multi-run CONFIRMED)",
+   "option_boxes_norm": "UNKNOWN"
+  },
+  "PROMISE_LAYOUT_V1": {
+   "status": "NOT_YET_OBSERVED_AS_LAYOUT"
+  }
+ },
+ "per_event_capture_rule": "on each future event: capture EVENT_PAGE_VISUAL_REGION + ACTIONABLE_CONTROL_BOX before the business click; append to event_occurrences and reference here"
+}

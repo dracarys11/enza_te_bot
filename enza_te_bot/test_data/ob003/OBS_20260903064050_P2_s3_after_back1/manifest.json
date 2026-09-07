@@ -1,0 +1,17 @@
+{
+  "case_id": "OBS_20260903064050_P2_s3_after_back1",
+  "source": {
+    "file": "source_screenshot.png",
+    "sha256": "2e80cd0cf6f15cf8e8a7839e9e3a871446c0c34d6f200093e6673a3f99a120eb"
+  },
+  "providers": [
+    {"name": "Paddle", "artifact": "providers/paddle/vision_output.json"},
+    {"name": "Gemini", "artifact": "providers/gemini/v1/vision_output.json"}
+  ],
+  "unresolved_artifacts": [
+    {
+      "artifact": "agent_vision_output.json",
+      "reason": "provider_model_and_skill_not_recorded"
+    }
+  ]
+}

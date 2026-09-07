@@ -1,0 +1,311 @@
+{
+  "metadata": {
+    "provider": "paddle",
+    "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+    "skill_version": "not_applicable",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "2e80cd0cf6f15cf8e8a7839e9e3a871446c0c34d6f200093e6673a3f99a120eb",
+    "created_at": "2026-09-04T01:00:41+08:00"
+  },
+  "source_image": "ai_decisions/observations/screenshots/OBS_20260903064050_P2_s3_after_back1.png",
+  "method": "PaddleOCR",
+  "text_regions": [
+    {
+      "id": "paddle_001",
+      "text": "プロデュース選択",
+      "bbox": [
+        51,
+        21,
+        201,
+        29
+      ],
+      "confidence": 0.999228
+    },
+    {
+      "id": "paddle_002",
+      "text": "プロデュース選択",
+      "bbox": [
+        487,
+        25,
+        164,
+        24
+      ],
+      "confidence": 0.998372
+    },
+    {
+      "id": "paddle_003",
+      "text": "ユニット編成",
+      "bbox": [
+        752,
+        25,
+        125,
+        24
+      ],
+      "confidence": 0.997909
+    },
+    {
+      "id": "paddle_004",
+      "text": "アイテム選択",
+      "bbox": [
+        991,
+        25,
+        126,
+        24
+      ],
+      "confidence": 0.999571
+    },
+    {
+      "id": "paddle_005",
+      "text": "プロデュースの種類",
+      "bbox": [
+        634,
+        85,
+        179,
+        30
+      ],
+      "confidence": 0.999775
+    },
+    {
+      "id": "paddle_006",
+      "text": "育成プロデュース",
+      "bbox": [
+        846,
+        87,
+        153,
+        24
+      ],
+      "confidence": 0.999576
+    },
+    {
+      "id": "paddle_007",
+      "text": "特化プロデュース",
+      "bbox": [
+        1015,
+        86,
+        159,
+        28
+      ],
+      "confidence": 0.999592
+    },
+    {
+      "id": "paddle_008",
+      "text": "W.I.N.G.",
+      "bbox": [
+        795,
+        215,
+        265,
+        83
+      ],
+      "confidence": 0.994845
+    },
+    {
+      "id": "paddle_009",
+      "text": "Wonder.Idol.Nova.Grandprix.",
+      "bbox": [
+        741,
+        291,
+        355,
+        25
+      ],
+      "confidence": 0.999879
+    },
+    {
+      "id": "paddle_010",
+      "text": "ビギナー",
+      "bbox": [
+        637,
+        353,
+        122,
+        39
+      ],
+      "confidence": 0.999851
+    },
+    {
+      "id": "paddle_011",
+      "text": "ミドル",
+      "bbox": [
+        838,
+        356,
+        94,
+        34
+      ],
+      "confidence": 0.999953
+    },
+    {
+      "id": "paddle_012",
+      "text": "マスター",
+      "bbox": [
+        1008,
+        352,
+        124,
+        39
+      ],
+      "confidence": 0.99978
+    },
+    {
+      "id": "paddle_013",
+      "text": "W.I.N.G.編",
+      "bbox": [
+        225,
+        368,
+        140,
+        32
+      ],
+      "confidence": 0.999806
+    },
+    {
+      "id": "paddle_014",
+      "text": "B",
+      "bbox": [
+        79,
+        403,
+        40,
+        52
+      ],
+      "confidence": 0.495432
+    },
+    {
+      "id": "paddle_015",
+      "text": "攻略動画①(外部サイト)",
+      "bbox": [
+        202,
+        416,
+        214,
+        25
+      ],
+      "confidence": 0.905282
+    },
+    {
+      "id": "paddle_016",
+      "text": "ファン感謝祭",
+      "bbox": [
+        764,
+        462,
+        368,
+        97
+      ],
+      "confidence": 0.873378
+    },
+    {
+      "id": "paddle_017",
+      "text": "283プロダクション",
+      "bbox": [
+        870,
+        469,
+        162,
+        21
+      ],
+      "confidence": 0.995974
+    },
+    {
+      "id": "paddle_018",
+      "text": "レッスンやお仕事、オーディションを通してアイドルを",
+      "bbox": [
+        75,
+        492,
+        450,
+        20
+      ],
+      "confidence": 0.998902
+    },
+    {
+      "id": "paddle_019",
+      "text": "プロデュースできます。ファンを集めて各シーズン目標",
+      "bbox": [
+        76,
+        515,
+        450,
+        21
+      ],
+      "confidence": 0.99932
+    },
+    {
+      "id": "paddle_020",
+      "text": "を達成し、W.I.N.G.優勝を目指しましょう！",
+      "bbox": [
+        75,
+        540,
+        364,
+        20
+      ],
+      "confidence": 0.976923
+    },
+    {
+      "id": "paddle_021",
+      "text": "~Thanks Flapping Day!!~",
+      "bbox": [
+        811,
+        551,
+        256,
+        24
+      ],
+      "confidence": 0.998046
+    },
+    {
+      "id": "paddle_022",
+      "text": "オート",
+      "bbox": [
+        170,
+        632,
+        76,
+        30
+      ],
+      "confidence": 0.993387
+    },
+    {
+      "id": "paddle_023",
+      "text": "G.R",
+      "bbox": [
+        799,
+        632,
+        111,
+        72
+      ],
+      "confidence": 0.999839
+    },
+    {
+      "id": "paddle_024",
+      "text": "研修設定",
+      "bbox": [
+        922,
+        643,
+        119,
+        33
+      ],
+      "confidence": 0.999936
+    },
+    {
+      "id": "paddle_025",
+      "text": "次へ",
+      "bbox": [
+        1139,
+        638,
+        72,
+        43
+      ],
+      "confidence": 0.996718
+    },
+    {
+      "id": "paddle_026",
+      "text": "プロデュース",
+      "bbox": [
+        138,
+        657,
+        143,
+        31
+      ],
+      "confidence": 0.999533
+    },
+    {
+      "id": "paddle_027",
+      "text": "Grand.Repute.AuDition.",
+      "bbox": [
+        828,
+        704,
+        164,
+        14
+      ],
+      "confidence": 0.999966
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "case_name": "insufficient evidence",
+  "mode": "decision",
+  "observation": "test_data/ob001/fused_observation.json",
+  "user_goal": "打开菜单",
+  "target_text_options": ["菜单"],
+  "expected": {
+    "candidate_id": "AC_UNKNOWN",
+    "target_element_id": null,
+    "action_type": "UNKNOWN",
+    "evidence": [
+      "missing evidence: no GroundedElement has text evidence in ['菜单']"
+    ],
+    "confidence": 0.0
+  }
+}

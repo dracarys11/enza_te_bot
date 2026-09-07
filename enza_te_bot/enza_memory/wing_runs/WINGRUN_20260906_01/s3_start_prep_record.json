@@ -1,0 +1,51 @@
+{
+ "artifact_type": "S3_START_PREP_RECORD",
+ "run_id": "WINGRUN_20260906_01",
+ "written_at": "2026-09-06T08:00:00Z",
+ "status": "COMPLETED_LATE",
+ "reason": "MISSED_AT_S3_ENTRY_RECOVERED_AT_WEEK4",
+ "season": 3,
+ "week_at_execution": 4,
+ "flow": "HOME -> 振り返り -> skill panel acquire x5 -> (board continues, session paused) ",
+ "skills_acquired": [
+  {
+   "name": "Vocal上限UP",
+   "effect": "Vocal上限+50",
+   "sp_cost": 10,
+   "note": "operator-selected node"
+  },
+  {
+   "name": "Vocal上限UP",
+   "effect": "Vocal上限+50",
+   "sp_cost": 20
+  },
+  {
+   "name": "Vocal上限UP",
+   "effect": "Vocal上限+50",
+   "sp_cost": 30
+  },
+  {
+   "name": "Vocal&メンタル上限UP",
+   "effect": "Vocal&メンタル上限+100",
+   "sp_cost": 40
+  },
+  {
+   "name": "Vocal240%UP",
+   "effect": "条件3ターン以降/確率30%/最大1回",
+   "sp_cost": 40
+  }
+ ],
+ "sp_before": 548,
+ "sp_after": 408,
+ "operator_policy_applied": "优先上限 (s4_route_operator_hints rules 1-3) + operator live direction: progressive unlock chain from top-left, acquire operator-selected node first",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run",
+  "provider_session_id": "sess_a87f3588-8212-4de7-b9ad-319825b4509e"
+ },
+ "future_run_rule": "S3 weeks=8 fresh HOME must check S3_START_PREP_DONE first; NO -> 振り返り skill prep before weekly loop",
+ "unknowns": [
+  "remaining board unlock chain continues; more SP available (408)",
+  "SP/week accumulation rate not yet modeled"
+ ]
+}

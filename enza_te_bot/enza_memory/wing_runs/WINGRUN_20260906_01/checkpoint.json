@@ -1,0 +1,43 @@
+{
+ "run_id": "WINGRUN_20260906_01",
+ "checkpoint_type": "RECOVERED_ACTIVE_CHECKPOINT",
+ "updated_at": "2026-09-06T11:00:00Z",
+ "recovery_class": "UNREGISTERED_RUN_CONTINUATION",
+ "run_closed": true,
+ "resume_allowed": false,
+ "runtime_status": "COMPLETED",
+ "resume_state": null,
+ "season": 3,
+ "weeks_remaining": 0,
+ "current_page": "MAIN_LOBBY",
+ "observed_page_label": "MAIN_LOBBY_IDLE",
+ "s3_week_executed": true,
+ "evidence_provenance": {
+  "season": "FRESH_LIVE_CONFIRMED",
+  "weeks_remaining": "FRESH_LIVE_CONFIRMED",
+  "current_page": "FRESH_LIVE_CONFIRMED",
+  "sp": "FRESH_LIVE_CONFIRMED"
+ },
+ "fresh_boundary_evidence": {
+  "session_id": "sess_d81c3e7a-f197-451c-b788-ccbb38bab9e9",
+  "screenshot": "/Users/koents/.zcode/cli/artifacts/sess_d81c3e7a-f197-451c-b788-ccbb38bab9e9/call_3cf4afa4e4ff4f879c9c9364-tool-result-770a1396-703c-4dcf-bfad-71c8ef3ef10e.png",
+  "screenshot_sha256": "a209ef85ba5fd051ca7593dce7fe734bf7f823120038af8224be079fff8c9fd3"
+ },
+ "last_original_persisted_boundary": {
+  "season": 1,
+  "completed_week": "S1W6",
+  "weeks_remaining": 2,
+  "source": "timings.jsonl line 7"
+ },
+ "recovery_artifact": "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json",
+ "raw_timings": "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl",
+ "raw_timings_mutated": false,
+ "next_safe_operation": "None for this run. It is closed and must not be resumed; a new produce requires a new run and explicit operator mission.",
+ "s3_start_prep": "COMPLETED_LATE (see s3_start_prep_record.json)",
+ "sp": 223,
+ "fan_gap_to_target": 27328,
+ "note": "scenario ended (target not met); next operation requires fresh operator mission (new produce or other)",
+ "skill_board": "LEFT complete; RIGHT chain advanced to 220%UP; termination INSUFFICIENT_SP",
+ "terminal_state": "MAIN_LOBBY_IDLE (produce slot free 300/300, fes idol born)",
+ "mission_cleared": "フェスアイドルを誕生させよう"
+}

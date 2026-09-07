@@ -1,0 +1,27 @@
+{
+  "artifact_type": "PRE_LIVE_BLOCKERS",
+  "planning_session": "IMPLEMENTATION_PLANNING_20260907",
+  "created_at": "2026-09-07T01:00:00Z",
+  "rule": "MUST_FIX_BEFORE_NEXT_LIVE = a case whose absence can corrupt business state or lose run data during a normal live run. SHOULD_FIX = strongly reduces risk or cost but a disciplined run can compensate manually. CAN_WAIT = gated behind features/layers that are themselves not live yet.",
+  "must_fix_before_next_live": [
+    {"id": "NRG-010", "why": "screenshot-hang mid-transaction happened twice; without reconcile-before-retry the executor may double-consume a week", "batch": "CODEX_BATCH_4"},
+    {"id": "NRG-013", "why": "persistence gap already cost 12 recovered events; a crash without boundary flush loses the run resume authority", "batch": "CODEX_BATCH_3"},
+    {"id": "NRG-009", "why": "advance-before-capture permanently destroyed result evidence twice; audition flags drive all later planning", "batch": "CODEX_BATCH_5"},
+    {"id": "PLR-011 + PLR-007", "why": "planner objective/risk-gate separation: without futility surfacing the planner can silently waste a season (0906); decision-trace separation is its audit trail", "batch": "CODEX_BATCH_1"}
+  ],
+  "should_fix_before_next_live": [
+    {"id": "RCR-006", "why": "scene-skip week consumption is rare (1 occurrence) but irreversible; a run with operator attention can avoid SKIP on business frames", "batch": "CODEX_BATCH_5"},
+    {"id": "NRG-026", "why": "evidence-in-flush upgrades recovery quality; recovery itself works via backfill today", "batch": "CODEX_BATCH_3 (same patch as NRG-013)"},
+    {"id": "NRG-012", "why": "tab release forces session re-resolve; annoying but recoverable manually", "batch": "CODEX_BATCH_3"},
+    {"id": "NRG-021/SBR-002", "why": "replacement fires only on 5th skill acquisition; if the next run does skill prep, this becomes MUST_FIX for that session; otherwise wait", "batch": "CODEX_BATCH_8"},
+    {"id": "F-03 (config flag isolation)", "why": "stale closed-run S3 flags would silently skip both required auditions on a fresh run — hygiene half of durability batch", "batch": "CODEX_BATCH_3"}
+  ],
+  "can_wait": [
+    {"id": "PLR-001/PLR-002", "why": "already implemented + tested; verification batch is belt-and-braces", "batch": "CODEX_BATCH_2"},
+    {"id": "NRG-004/NRG-008", "why": "battle executor integration does not exist yet; F-07 cleanup (B6) must land before it does, but no live run touches battle Auto until then", "batch": "CODEX_BATCH_6"},
+    {"id": "NRG-015", "why": "choice handlers are shadow-level until the dialogue executor integrates; current live behavior uses taught coords with fail-closed STOP", "batch": "CODEX_BATCH_7"},
+    {"id": "VNC-001/002/003", "why": "skill-board shadow detectors; live skill sessions are operator-directed today", "batch": "CODEX_BATCH_8"},
+    {"id": "CLR-004", "why": "still WAITING_FOR_VISUAL_REVIEW (45-frame review pending)", "batch": "not scheduled"}
+  ],
+  "summary": {"MUST_FIX": 4, "SHOULD_FIX": 5, "CAN_WAIT": 5}
+}

@@ -1,0 +1,13 @@
+{
+  "scenario": "WING",
+  "scope": "WING",
+  "evidence_status": "SUPPORTED",
+  "promotion": "PROMOTE_CANDIDATE",
+  "evidence": [
+    {"step": "w1", "screenshot": "screenshots/w1_ikusei_tab.png", "visible_labels": ["W.I.N.G.", "Wonder.Idol.Nova.Grandprix.", "W.I.N.G.編", "育成プロデュース"]},
+    {"step": "w2", "screenshot": "screenshots/w2_after_next_wing.png", "page_class": "UNIT_FORMATION"},
+    {"step": "w6", "screenshot": "screenshots/w6_wing_home_week1.png", "page_class": "WING_HOME"}
+  ],
+  "other_visible_scenarios": ["283プロダクション ファン感謝祭", "G.R.A.D.入口"],
+  "basis": "Explicit scenario labels and a closed-loop path to WING_HOME; not inferred from URL continuity."
+}

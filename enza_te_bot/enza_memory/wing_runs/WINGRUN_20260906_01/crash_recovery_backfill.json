@@ -1,0 +1,224 @@
+{
+  "artifact_type": "CRASH_RECOVERY_BACKFILL",
+  "notice": "THIS IS RECOVERED SESSION EVIDENCE, NOT ORIGINAL REAL-TIME RAW TRACE",
+  "run_id": "WINGRUN_20260906_01",
+  "recovery_class": "UNREGISTERED_RUN_CONTINUATION",
+  "recovery_time": "2026-09-06T06:22:51Z",
+  "source_session": {
+    "session_id": "sess_dc58a91a-3828-4ce5-be48-36531c4c7833",
+    "transcript": "/Users/koents/.zcode/cli/rollout/model-io-sess_dc58a91a-3828-4ce5-be48-36531c4c7833.jsonl",
+    "transcript_sha256": "4870cc1b228640d62fe1d3571a8a89308278d82205e67dc07e49c3d2f1e8fa69",
+    "artifacts": "/Users/koents/.zcode/cli/artifacts/sess_dc58a91a-3828-4ce5-be48-36531c4c7833"
+  },
+  "fresh_recovery_session": {
+    "session_id": "sess_d81c3e7a-f197-451c-b788-ccbb38bab9e9",
+    "transcript": "/Users/koents/.zcode/cli/rollout/model-io-sess_d81c3e7a-f197-451c-b788-ccbb38bab9e9.jsonl",
+    "transcript_sha256": "99ab32bd65578d8721e308c5a9ae610dce920337fe96690dc7ff5118de8799cb",
+    "stable_home_screenshot": "/Users/koents/.zcode/cli/artifacts/sess_d81c3e7a-f197-451c-b788-ccbb38bab9e9/call_3cf4afa4e4ff4f879c9c9364-tool-result-770a1396-703c-4dcf-bfad-71c8ef3ef10e.png",
+    "stable_home_screenshot_sha256": "a209ef85ba5fd051ca7593dce7fe734bf7f823120038af8224be079fff8c9fd3"
+  },
+  "original_raw_evidence": {
+    "path": "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl",
+    "sha256_before_backfill": "f96fa992e498e3946bf798c84fd2af4d0f92e8a84660c954adf612bd6ec395c2",
+    "mutated_by_recovery": false
+  },
+  "last_persisted_boundary": {
+    "evidence_class": "LIVE_SCREEN_CONFIRMED",
+    "source": "timings.jsonl line 7",
+    "season": 1,
+    "completed_week": "S1W6",
+    "weeks_remaining": 2,
+    "action": "VOCAL",
+    "fan_gap_to_target": 651
+  },
+  "fresh_live_boundary": {
+    "evidence_class": "LIVE_SCREEN_CONFIRMED",
+    "season": 3,
+    "weeks_remaining": 8,
+    "current_page": "WING_HOME",
+    "observed_page_label": "PRODUCE_HOME",
+    "stable": true,
+    "s3_week_executed": false,
+    "authority": "fresh recovery-session screenshot",
+    "screenshot_sha256": "a209ef85ba5fd051ca7593dce7fe734bf7f823120038af8224be079fff8c9fd3"
+  },
+  "recovered_events": [
+    {
+      "sequence": 1,
+      "event": "S1W7_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 2,
+      "action": "VOCAL",
+      "after_weeks_remaining": 1,
+      "fan_gap_before": 651,
+      "fan_gap_after": 525,
+      "evidence": "crash transcript messages 372-391 and embedded browser observations"
+    },
+    {
+      "sequence": 2,
+      "event": "S1_FINAL_ACTIONABLE_WEEK_COMPLETE",
+      "alias": "S1W8",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 1,
+      "action": "AUDITION",
+      "result": "PASS",
+      "resulting_state": "S1_CLEAR",
+      "evidence": "crash transcript messages 391-414 and embedded audition/result observations"
+    },
+    {
+      "sequence": 3,
+      "event": "S1_TO_S2_TRANSITION_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "resulting_state": "S2_START",
+      "season": 2,
+      "weeks_remaining": 8,
+      "fan_gap_to_target": 6525,
+      "evidence": "crash transcript messages 414-445 and embedded S2 HOME observation"
+    },
+    {
+      "sequence": 4,
+      "event": "S2W1_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 8,
+      "action": "VOCAL",
+      "after_weeks_remaining": 7,
+      "fan_gap_before": 6525,
+      "fan_gap_after": 6187,
+      "evidence": "crash transcript messages 445-452 and embedded browser observations"
+    },
+    {
+      "sequence": 5,
+      "event": "S2W2_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 7,
+      "action": "VOCAL",
+      "after_weeks_remaining": 6,
+      "fan_gap_after": 5903,
+      "evidence": "crash transcript messages 452-471 and embedded browser observations"
+    },
+    {
+      "sequence": 6,
+      "event": "S2W3_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 6,
+      "action": "VOCAL",
+      "after_weeks_remaining": 5,
+      "fan_gap_after": 5619,
+      "evidence": "crash transcript messages 471-478 and embedded browser observations"
+    },
+    {
+      "sequence": 7,
+      "event": "S2W4_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 5,
+      "action": "VOCAL",
+      "after_weeks_remaining": 4,
+      "fan_gap_after": 5335,
+      "evidence": "crash transcript messages 478-496 and embedded browser observations"
+    },
+    {
+      "sequence": 8,
+      "event": "S2W5_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 4,
+      "action": "VOCAL",
+      "after_weeks_remaining": 3,
+      "fan_gap_after": 4768,
+      "evidence": "crash transcript messages 496-509 and embedded browser observations; transient skill-board misnavigation was not counted as a week"
+    },
+    {
+      "sequence": 9,
+      "event": "S2W6_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 3,
+      "action": "VOCAL",
+      "after_weeks_remaining": 2,
+      "fan_gap_after": 4264,
+      "evidence": "crash transcript messages 509-515 and embedded browser observations"
+    },
+    {
+      "sequence": 10,
+      "event": "S2W7_COMPLETE",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 2,
+      "action": "VOCAL",
+      "after_weeks_remaining": 1,
+      "fan_gap_after": 3256,
+      "evidence": "crash transcript messages 515-521 and embedded browser observations"
+    },
+    {
+      "sequence": 11,
+      "event": "S2_FINAL_ACTIONABLE_WEEK_COMPLETE",
+      "alias": "S2W8",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "before_weeks_remaining": 1,
+      "action": "AUDITION",
+      "result": "PASS",
+      "resulting_state": "S2_CLEAR",
+      "evidence": "crash transcript messages 521-556 and embedded audition/result observations"
+    },
+    {
+      "sequence": 12,
+      "event": "S2_TO_S3_TRANSITION_IN_PROGRESS_AT_CRASH",
+      "evidence_class": "SESSION_TRANSCRIPT_CONFIRMED",
+      "resulting_state": "S2_END_CUTSCENE",
+      "evidence": "crash transcript status messages 556, 560, 566, and 572; no stable S3 HOME boundary was captured by the crash session"
+    },
+    {
+      "sequence": 13,
+      "event": "SESSION_RECOVERY_CHAIN_LINK",
+      "evidence_class": "DERIVED",
+      "inference": "The fresh S3 start boundary is the continuation of the crash session's S2-to-S3 transition.",
+      "basis": [
+        "single PRODUCE_ENTRY in the crash transcript",
+        "crash endpoint at S2-to-S3 transition",
+        "fresh environment at unconsumed S3 start",
+        "no evidence of abandon or a second produce entry"
+      ]
+    },
+    {
+      "sequence": 14,
+      "event": "S3_START_FRESH_BOUNDARY_CONFIRMED",
+      "evidence_class": "LIVE_SCREEN_CONFIRMED",
+      "season": 3,
+      "weeks_remaining": 8,
+      "current_page": "WING_HOME",
+      "observed_page_label": "PRODUCE_HOME",
+      "s3_week_executed": false,
+      "evidence": "fresh recovery session stable screenshot call_3cf4afa4e4ff4f879c9c9364"
+    }
+  ],
+  "evidence_classification": {
+    "LIVE_SCREEN_CONFIRMED": 12,
+    "SESSION_TRANSCRIPT_CONFIRMED": 1,
+    "DERIVED": 1,
+    "UNKNOWN": 0
+  },
+  "unknowns": [
+    "Original per-event wall-clock timestamps for recovered weeks were not durably persisted.",
+    "Original frame identifiers for recovered weeks were not durably persisted.",
+    "The exact instant at which the S2-to-S3 transition became stable is not present in the crash session.",
+    "Cross-season fan-count semantics are not used as run-identity evidence."
+  ],
+  "diagnosis": {
+    "classification": "PERSISTENCE_DURABILITY_FAILURE",
+    "game_state_mismatch": false,
+    "facts": [
+      "The ZCode session continued live execution after the last durable timings.jsonl write.",
+      "The game/server state advanced through S1 end and S2.",
+      "enza_memory persistence lagged or was absent for those completed events.",
+      "The session crashed before persistence synchronization."
+    ]
+  },
+  "durability_recommendation": {
+    "runtime_change_implemented": false,
+    "recommended": true,
+    "required_durable_boundaries": [
+      "after every completed week",
+      "after every season transition reaches a fresh stable state",
+      "before a risky long execution burst",
+      "before handoff or session end"
+    ],
+    "recommendation": "Make the durable event/checkpoint write part of each transaction completion boundary, and refuse the next week-consuming action until that write succeeds."
+  }
+}

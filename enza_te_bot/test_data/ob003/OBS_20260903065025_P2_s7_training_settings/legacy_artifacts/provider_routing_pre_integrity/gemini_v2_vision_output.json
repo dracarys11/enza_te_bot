@@ -1,0 +1,2840 @@
+{
+  "metadata": {
+    "provider": "Gemini",
+    "model": "gemini-3.8-flash-medium",
+    "skill_version": "gemini_vision_v2",
+    "case_id": "OBS_20260903065025_P2_s7_training_settings",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723",
+    "created_at": "2026-09-04T12:02:10+08:00"
+  },
+  "observation_id": "OBS_20260903065025_P2_s7_training_settings",
+  "capture": {
+    "timestamp": "2026-09-04T12:02:10+08:00",
+    "frame_id": "OBS_20260903065025_P2_s7_training_settings",
+    "screenshot_digest": "sha256:900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723"
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "text_regions": [
+    {
+      "id": "t1",
+      "text": "振り返り",
+      "bbox": [
+        70,
+        27,
+        78,
+        22
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t2",
+      "text": "SP",
+      "bbox": [
+        136,
+        114,
+        30,
+        30
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t3",
+      "text": "4",
+      "bbox": [
+        282,
+        120,
+        16,
+        24
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t4",
+      "text": "所持スキル",
+      "bbox": [
+        150,
+        180,
+        108,
+        24
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t5",
+      "text": "パッシブスキルの削除を有効",
+      "bbox": [
+        66,
+        279,
+        236,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t10",
+      "text": "Vo.",
+      "bbox": [
+        542,
+        168,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t11",
+      "text": "上限⇧",
+      "bbox": [
+        535,
+        203,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t12",
+      "text": "SP: 10",
+      "bbox": [
+        530,
+        235,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t13",
+      "text": "Vo.",
+      "bbox": [
+        464,
+        98,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t14",
+      "text": "上限⇧",
+      "bbox": [
+        457,
+        134,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t15",
+      "text": "SP: 20",
+      "bbox": [
+        452,
+        166,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t16",
+      "text": "Vo.",
+      "bbox": [
+        620,
+        98,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t17",
+      "text": "SP: 20",
+      "bbox": [
+        608,
+        166,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t18",
+      "text": "Vo.",
+      "bbox": [
+        386,
+        28,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t19",
+      "text": "SP: 30",
+      "bbox": [
+        374,
+        96,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t20",
+      "text": "Vo.",
+      "bbox": [
+        542,
+        18,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t21",
+      "text": "SP: 30",
+      "bbox": [
+        530,
+        86,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t22",
+      "text": "Vo.",
+      "bbox": [
+        308,
+        98,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t23",
+      "text": "上限⇧",
+      "bbox": [
+        301,
+        134,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t24",
+      "text": "SP: 30",
+      "bbox": [
+        296,
+        166,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t25",
+      "text": "Vo.",
+      "bbox": [
+        308,
+        18,
+        48,
+        40
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "t26",
+      "text": "上限⇧",
+      "bbox": [
+        301,
+        54,
+        62,
+        24
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "t27",
+      "text": "SP: 40",
+      "bbox": [
+        296,
+        86,
+        72,
+        22
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t28",
+      "text": "SP: 40",
+      "bbox": [
+        452,
+        26,
+        72,
+        22
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t29",
+      "text": "Vo.",
+      "bbox": [
+        698,
+        168,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t30",
+      "text": "Vi.",
+      "bbox": [
+        682,
+        186,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t31",
+      "text": "SP: 20",
+      "bbox": [
+        686,
+        235,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t32",
+      "text": "Vo.",
+      "bbox": [
+        698,
+        98,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t33",
+      "text": "上限⇧",
+      "bbox": [
+        691,
+        134,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t34",
+      "text": "SP: 30",
+      "bbox": [
+        686,
+        166,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t35",
+      "text": "Vo.",
+      "bbox": [
+        698,
+        18,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t36",
+      "text": "上限⇧",
+      "bbox": [
+        691,
+        54,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t37",
+      "text": "SP: 40",
+      "bbox": [
+        686,
+        86,
+        72,
+        22
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t38",
+      "text": "Vo.",
+      "bbox": [
+        776,
+        98,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t39",
+      "text": "SP: 30",
+      "bbox": [
+        764,
+        166,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t40",
+      "text": "Vo.",
+      "bbox": [
+        776,
+        168,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t41",
+      "text": "Vi.",
+      "bbox": [
+        760,
+        186,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t42",
+      "text": "SP: 40",
+      "bbox": [
+        764,
+        235,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t43",
+      "text": "Vo.",
+      "bbox": [
+        854,
+        98,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t44",
+      "text": "SP: 40",
+      "bbox": [
+        842,
+        166,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t45",
+      "text": "SP: 50",
+      "bbox": [
+        764,
+        76,
+        72,
+        22
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t46",
+      "text": "Vo.",
+      "bbox": [
+        854,
+        18,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t47",
+      "text": "Vi.",
+      "bbox": [
+        838,
+        36,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t48",
+      "text": "SP: 50",
+      "bbox": [
+        842,
+        76,
+        72,
+        22
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t49",
+      "text": "Vo.",
+      "bbox": [
+        776,
+        308,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t50",
+      "text": "上限⇧",
+      "bbox": [
+        769,
+        344,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t51",
+      "text": "SP: 15",
+      "bbox": [
+        764,
+        376,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t52",
+      "text": "Vo.",
+      "bbox": [
+        854,
+        238,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t53",
+      "text": "上限⇧",
+      "bbox": [
+        847,
+        274,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t54",
+      "text": "SP: 25",
+      "bbox": [
+        842,
+        306,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t55",
+      "text": "Vo.",
+      "bbox": [
+        854,
+        378,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t56",
+      "text": "SP: 25",
+      "bbox": [
+        842,
+        446,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t57",
+      "text": "Vo.",
+      "bbox": [
+        932,
+        238,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t58",
+      "text": "上限⇧",
+      "bbox": [
+        925,
+        274,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t59",
+      "text": "SP: 35",
+      "bbox": [
+        920,
+        306,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t60",
+      "text": "Vo.",
+      "bbox": [
+        932,
+        308,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t61",
+      "text": "SP: 35",
+      "bbox": [
+        920,
+        376,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t62",
+      "text": "Vo.",
+      "bbox": [
+        932,
+        449,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t63",
+      "text": "SP: 35",
+      "bbox": [
+        920,
+        517,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t64",
+      "text": "Vo.",
+      "bbox": [
+        1010,
+        168,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t65",
+      "text": "上限⇧",
+      "bbox": [
+        1003,
+        204,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t66",
+      "text": "SP: 45",
+      "bbox": [
+        998,
+        236,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t67",
+      "text": "Vo.",
+      "bbox": [
+        1010,
+        308,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t68",
+      "text": "SP: 45",
+      "bbox": [
+        998,
+        376,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t69",
+      "text": "SP: 45",
+      "bbox": [
+        998,
+        517,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t70",
+      "text": "Vo.",
+      "bbox": [
+        1010,
+        519,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t71",
+      "text": "SP: 45",
+      "bbox": [
+        998,
+        587,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t72",
+      "text": "Vi.",
+      "bbox": [
+        686,
+        449,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t73",
+      "text": "SP: 20",
+      "bbox": [
+        686,
+        517,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t74",
+      "text": "Vo.",
+      "bbox": [
+        776,
+        519,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t75",
+      "text": "SP: 30",
+      "bbox": [
+        764,
+        587,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t76",
+      "text": "Da.",
+      "bbox": [
+        698,
+        589,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t77",
+      "text": "SP: 30",
+      "bbox": [
+        686,
+        657,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t78",
+      "text": "SP: 40",
+      "bbox": [
+        764,
+        695,
+        72,
+        22
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t79",
+      "text": "All",
+      "bbox": [
+        854,
+        589,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t80",
+      "text": "SP: 40",
+      "bbox": [
+        842,
+        657,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t81",
+      "text": "Vo.",
+      "bbox": [
+        932,
+        659,
+        48,
+        40
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t82",
+      "text": "SP: 50",
+      "bbox": [
+        920,
+        700,
+        72,
+        20
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t83",
+      "text": "All",
+      "bbox": [
+        698,
+        659,
+        48,
+        40
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t84",
+      "text": "SP: 40",
+      "bbox": [
+        686,
+        700,
+        72,
+        20
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t85",
+      "text": "Vo.",
+      "bbox": [
+        854,
+        668,
+        26,
+        20
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "t86",
+      "text": "Da.",
+      "bbox": [
+        838,
+        688,
+        26,
+        20
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "t87",
+      "text": "Vi.",
+      "bbox": [
+        870,
+        688,
+        26,
+        20
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "t88",
+      "text": "上限⇧",
+      "bbox": [
+        847,
+        708,
+        60,
+        12
+      ],
+      "confidence": 0.5
+    },
+    {
+      "id": "t89",
+      "text": "Vo.",
+      "bbox": [
+        542,
+        449,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t90",
+      "text": "Da.",
+      "bbox": [
+        526,
+        467,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t91",
+      "text": "SP: 20",
+      "bbox": [
+        530,
+        517,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t92",
+      "text": "Da.",
+      "bbox": [
+        464,
+        519,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t93",
+      "text": "SP: 30",
+      "bbox": [
+        452,
+        587,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t94",
+      "text": "Vo.",
+      "bbox": [
+        542,
+        589,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t95",
+      "text": "SP: 30",
+      "bbox": [
+        530,
+        657,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t96",
+      "text": "Vo.",
+      "bbox": [
+        386,
+        519,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t97",
+      "text": "Da.",
+      "bbox": [
+        370,
+        537,
+        30,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t98",
+      "text": "SP: 40",
+      "bbox": [
+        374,
+        587,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t99",
+      "text": "Vo.",
+      "bbox": [
+        464,
+        589,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t100",
+      "text": "SP: 40",
+      "bbox": [
+        452,
+        657,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t101",
+      "text": "Vo.",
+      "bbox": [
+        308,
+        659,
+        30,
+        24
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t102",
+      "text": "Da.",
+      "bbox": [
+        292,
+        677,
+        30,
+        24
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t103",
+      "text": "SP: 50",
+      "bbox": [
+        296,
+        700,
+        72,
+        20
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t104",
+      "text": "SP: 50",
+      "bbox": [
+        374,
+        700,
+        72,
+        20
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t105",
+      "text": "Da.",
+      "bbox": [
+        542,
+        659,
+        48,
+        40
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t106",
+      "text": "SP: 40",
+      "bbox": [
+        530,
+        700,
+        72,
+        20
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t107",
+      "text": "Vo.",
+      "bbox": [
+        464,
+        668,
+        48,
+        40
+      ],
+      "confidence": 0.6
+    },
+    {
+      "id": "t108",
+      "text": "Vo.",
+      "bbox": [
+        464,
+        308,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t109",
+      "text": "SP: 20",
+      "bbox": [
+        452,
+        376,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t110",
+      "text": "Vo.",
+      "bbox": [
+        464,
+        238,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t111",
+      "text": "上限⇧",
+      "bbox": [
+        457,
+        274,
+        62,
+        24
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t112",
+      "text": "SP: 30",
+      "bbox": [
+        452,
+        306,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t113",
+      "text": "Vo.",
+      "bbox": [
+        464,
+        378,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t114",
+      "text": "SP: 30",
+      "bbox": [
+        452,
+        446,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t115",
+      "text": "Vo.",
+      "bbox": [
+        386,
+        378,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t116",
+      "text": "SP: 40",
+      "bbox": [
+        374,
+        446,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t117",
+      "text": "SP: 40",
+      "bbox": [
+        374,
+        350,
+        72,
+        22
+      ],
+      "confidence": 0.9
+    },
+    {
+      "id": "t118",
+      "text": "SP: 50",
+      "bbox": [
+        296,
+        350,
+        72,
+        22
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "t119",
+      "text": "Vo.",
+      "bbox": [
+        308,
+        378,
+        48,
+        40
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t120",
+      "text": "SP: 50",
+      "bbox": [
+        296,
+        446,
+        72,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t121",
+      "text": "上限⇧",
+      "bbox": [
+        301,
+        114,
+        62,
+        24
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "t122",
+      "text": "SP: 40",
+      "bbox": [
+        296,
+        134,
+        72,
+        22
+      ],
+      "confidence": 0.7
+    },
+    {
+      "id": "t123",
+      "text": "SP: 40",
+      "bbox": [
+        374,
+        260,
+        72,
+        22
+      ],
+      "confidence": 0.7
+    }
+  ],
+  "interaction_candidates": [
+    {
+      "id": "e1",
+      "bbox": [
+        15,
+        620,
+        80,
+        85
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white",
+        "content_hint": "back_arrow"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "e2",
+      "bbox": [
+        365,
+        17,
+        40,
+        40
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white",
+        "content_hint": "question_mark"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "e3",
+      "bbox": [
+        15,
+        104,
+        110,
+        122
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "pink",
+        "content_hint": "character_thumbnail"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "e4",
+      "bbox": [
+        130,
+        168,
+        168,
+        48
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white",
+        "content_hint": "owned_skills"
+      },
+      "linked_text_ids": [
+        "t4"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "e5",
+      "bbox": [
+        13,
+        268,
+        42,
+        42
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "cyan",
+        "content_hint": "checkmark"
+      },
+      "linked_text_ids": [
+        "t5"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "e6",
+      "bbox": [
+        1193,
+        226,
+        69,
+        68
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white",
+        "content_hint": "zoom_in"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "e7",
+      "bbox": [
+        1193,
+        426,
+        69,
+        68
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white",
+        "content_hint": "zoom_out"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "e_av1",
+      "bbox": [
+        604,
+        320,
+        70,
+        76
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "cyan",
+        "content_hint": "avatar"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "e_av2",
+      "bbox": [
+        577,
+        268,
+        53,
+        54
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white",
+        "content_hint": "avatar"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "e_av3",
+      "bbox": [
+        648,
+        268,
+        54,
+        54
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white",
+        "content_hint": "avatar"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "e_av4",
+      "bbox": [
+        538,
+        330,
+        54,
+        55
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white",
+        "content_hint": "avatar"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "e_av5",
+      "bbox": [
+        684,
+        332,
+        45,
+        53
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white",
+        "content_hint": "avatar"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "e_av6",
+      "bbox": [
+        578,
+        395,
+        52,
+        53
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white",
+        "content_hint": "avatar"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "e_av7",
+      "bbox": [
+        648,
+        395,
+        53,
+        53
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white",
+        "content_hint": "avatar"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_nnw_root",
+      "bbox": [
+        515,
+        149,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "white",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t10",
+        "t11",
+        "t12"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nnw_1",
+      "bbox": [
+        437,
+        80,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t13",
+        "t14",
+        "t15"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nnw_2",
+      "bbox": [
+        593,
+        80,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t16",
+        "t17"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nnw_3",
+      "bbox": [
+        359,
+        10,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t18",
+        "t19"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nnw_4",
+      "bbox": [
+        515,
+        0,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t20",
+        "t21"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nnw_5",
+      "bbox": [
+        281,
+        80,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t22",
+        "t23",
+        "t24"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nnw_6",
+      "bbox": [
+        281,
+        0,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot",
+        "visibility": "partially_occluded"
+      },
+      "linked_text_ids": [
+        "t25",
+        "t26",
+        "t27"
+      ],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_nnw_7",
+      "bbox": [
+        437,
+        0,
+        102,
+        70
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t28"
+      ],
+      "interaction_confidence": 0.9
+    },
+    {
+      "id": "h_nne_root",
+      "bbox": [
+        671,
+        149,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "white",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t29",
+        "t30",
+        "t31"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nne_1",
+      "bbox": [
+        671,
+        80,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t32",
+        "t33",
+        "t34"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nne_2",
+      "bbox": [
+        671,
+        0,
+        102,
+        95
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t35",
+        "t36",
+        "t37"
+      ],
+      "interaction_confidence": 0.9
+    },
+    {
+      "id": "h_nne_3",
+      "bbox": [
+        749,
+        80,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t38",
+        "t39"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nne_4",
+      "bbox": [
+        749,
+        149,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t40",
+        "t41",
+        "t42"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nne_5",
+      "bbox": [
+        827,
+        80,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t43",
+        "t44"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_nne_6",
+      "bbox": [
+        749,
+        0,
+        102,
+        95
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t45"
+      ],
+      "interaction_confidence": 0.9
+    },
+    {
+      "id": "h_nne_7",
+      "bbox": [
+        827,
+        0,
+        102,
+        95
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t46",
+        "t47",
+        "t48"
+      ],
+      "interaction_confidence": 0.9
+    },
+    {
+      "id": "h_ene_root",
+      "bbox": [
+        749,
+        290,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "white",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t49",
+        "t50",
+        "t51"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_1",
+      "bbox": [
+        827,
+        220,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t52",
+        "t53",
+        "t54"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_2",
+      "bbox": [
+        827,
+        360,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t55",
+        "t56"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_3",
+      "bbox": [
+        905,
+        220,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t57",
+        "t58",
+        "t59"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_4",
+      "bbox": [
+        905,
+        290,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t60",
+        "t61"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_5",
+      "bbox": [
+        905,
+        431,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t62",
+        "t63"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_6",
+      "bbox": [
+        983,
+        150,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t64",
+        "t65",
+        "t66"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_7",
+      "bbox": [
+        983,
+        290,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "rainbow",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t67",
+        "t68"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_8",
+      "bbox": [
+        983,
+        431,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t69"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ene_9",
+      "bbox": [
+        983,
+        501,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t70",
+        "t71"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_sse_root",
+      "bbox": [
+        671,
+        431,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "white",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t72",
+        "t73"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_sse_1",
+      "bbox": [
+        749,
+        501,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t74",
+        "t75"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_sse_2",
+      "bbox": [
+        671,
+        571,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t76",
+        "t77"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_sse_3",
+      "bbox": [
+        749,
+        641,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "padlock"
+      },
+      "linked_text_ids": [
+        "t78"
+      ],
+      "interaction_confidence": 0.9
+    },
+    {
+      "id": "h_sse_4",
+      "bbox": [
+        827,
+        571,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t79",
+        "t80"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_sse_5",
+      "bbox": [
+        905,
+        641,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t81",
+        "t82"
+      ],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_sse_6",
+      "bbox": [
+        671,
+        641,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t83",
+        "t84"
+      ],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_sse_7",
+      "bbox": [
+        827,
+        660,
+        102,
+        60
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot",
+        "visibility": "partially_occluded"
+      },
+      "linked_text_ids": [
+        "t85",
+        "t86",
+        "t87",
+        "t88"
+      ],
+      "interaction_confidence": 0.6
+    },
+    {
+      "id": "h_ssw_root",
+      "bbox": [
+        515,
+        431,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "white",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t89",
+        "t90",
+        "t91"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ssw_1",
+      "bbox": [
+        437,
+        501,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t92",
+        "t93"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ssw_2",
+      "bbox": [
+        515,
+        571,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t94",
+        "t95"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ssw_3",
+      "bbox": [
+        359,
+        501,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t96",
+        "t97",
+        "t98"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ssw_4",
+      "bbox": [
+        437,
+        571,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t99",
+        "t100"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_ssw_5",
+      "bbox": [
+        281,
+        641,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t101",
+        "t102",
+        "t103"
+      ],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_ssw_6",
+      "bbox": [
+        359,
+        641,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "padlock"
+      },
+      "linked_text_ids": [
+        "t104"
+      ],
+      "interaction_confidence": 0.9
+    },
+    {
+      "id": "h_ssw_7",
+      "bbox": [
+        515,
+        641,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t105",
+        "t106"
+      ],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_ssw_8",
+      "bbox": [
+        437,
+        660,
+        102,
+        60
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot",
+        "visibility": "partially_occluded"
+      },
+      "linked_text_ids": [
+        "t107"
+      ],
+      "interaction_confidence": 0.6
+    },
+    {
+      "id": "h_wnw_root",
+      "bbox": [
+        437,
+        290,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "white",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t108",
+        "t109"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_wnw_1",
+      "bbox": [
+        437,
+        220,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t110",
+        "t111",
+        "t112"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_wnw_2",
+      "bbox": [
+        437,
+        360,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t113",
+        "t114"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_wnw_3",
+      "bbox": [
+        359,
+        360,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t115",
+        "t116"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_wnw_4",
+      "bbox": [
+        359,
+        290,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gold",
+        "content_hint": "skill_slot",
+        "visibility": "partially_occluded"
+      },
+      "linked_text_ids": [
+        "t117"
+      ],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_wnw_5",
+      "bbox": [
+        281,
+        290,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "padlock",
+        "visibility": "partially_occluded"
+      },
+      "linked_text_ids": [
+        "t118"
+      ],
+      "interaction_confidence": 0.85
+    },
+    {
+      "id": "h_wnw_6",
+      "bbox": [
+        281,
+        360,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot"
+      },
+      "linked_text_ids": [
+        "t119",
+        "t120"
+      ],
+      "interaction_confidence": 0.95
+    },
+    {
+      "id": "h_wnw_7",
+      "bbox": [
+        281,
+        150,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot",
+        "visibility": "partially_occluded"
+      },
+      "linked_text_ids": [
+        "t121",
+        "t122"
+      ],
+      "interaction_confidence": 0.6
+    },
+    {
+      "id": "h_wnw_8",
+      "bbox": [
+        359,
+        220,
+        102,
+        118
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "gray",
+        "content_hint": "skill_slot",
+        "visibility": "partially_occluded"
+      },
+      "linked_text_ids": [
+        "t123"
+      ],
+      "interaction_confidence": 0.6
+    },
+    {
+      "id": "h_empty_l1",
+      "bbox": [
+        124,
+        290,
+        104,
+        120
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "purple",
+        "content_hint": "empty_slot"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.3
+    },
+    {
+      "id": "h_empty_l2",
+      "bbox": [
+        124,
+        431,
+        104,
+        120
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "purple",
+        "content_hint": "empty_slot"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.3
+    },
+    {
+      "id": "h_empty_r1",
+      "bbox": [
+        1060,
+        150,
+        104,
+        120
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "purple",
+        "content_hint": "empty_slot"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.3
+    },
+    {
+      "id": "h_empty_r2",
+      "bbox": [
+        1060,
+        290,
+        104,
+        120
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "purple",
+        "content_hint": "empty_slot"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.3
+    },
+    {
+      "id": "h_empty_r3",
+      "bbox": [
+        1060,
+        431,
+        104,
+        120
+      ],
+      "appearance": {
+        "shape": "hexagon",
+        "color_hint": "purple",
+        "content_hint": "empty_slot"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.3
+    }
+  ],
+  "numeric_regions": [],
+  "overlay_regions": [
+    {
+      "id": "o1",
+      "bbox": [
+        0,
+        87,
+        305,
+        160
+      ],
+      "linked_text_ids": [
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "blocked_element_ids": [
+        "h_wnw_7",
+        "h_wnw_8"
+      ]
+    },
+    {
+      "id": "o2",
+      "bbox": [
+        0,
+        260,
+        326,
+        58
+      ],
+      "linked_text_ids": [
+        "t5"
+      ],
+      "blocked_element_ids": [
+        "h_wnw_4",
+        "h_wnw_5"
+      ]
+    }
+  ],
+  "uncertainties": [
+    {
+      "bbox": [
+        827,
+        660,
+        102,
+        60
+      ],
+      "reason": "text_clipped_by_viewport_edge: clipped at bottom"
+    },
+    {
+      "bbox": [
+        437,
+        660,
+        102,
+        60
+      ],
+      "reason": "text_clipped_by_viewport_edge: clipped at bottom"
+    },
+    {
+      "bbox": [
+        359,
+        641,
+        102,
+        79
+      ],
+      "reason": "text_clipped_by_viewport_edge: bottom text clipped"
+    },
+    {
+      "bbox": [
+        749,
+        641,
+        102,
+        79
+      ],
+      "reason": "text_clipped_by_viewport_edge: bottom text clipped"
+    },
+    {
+      "bbox": [
+        281,
+        641,
+        102,
+        79
+      ],
+      "reason": "text_clipped_by_viewport_edge: bottom text clipped"
+    },
+    {
+      "bbox": [
+        671,
+        641,
+        102,
+        79
+      ],
+      "reason": "text_clipped_by_viewport_edge: bottom text clipped"
+    },
+    {
+      "bbox": [
+        905,
+        641,
+        102,
+        79
+      ],
+      "reason": "text_clipped_by_viewport_edge: bottom text clipped"
+    },
+    {
+      "bbox": [
+        281,
+        150,
+        102,
+        118
+      ],
+      "reason": "occluded_by_overlay: behind profile card"
+    },
+    {
+      "bbox": [
+        359,
+        220,
+        102,
+        118
+      ],
+      "reason": "occluded_by_overlay: behind profile card"
+    },
+    {
+      "bbox": [
+        359,
+        290,
+        102,
+        118
+      ],
+      "reason": "occluded_by_overlay: behind checkbox bar"
+    },
+    {
+      "bbox": [
+        281,
+        290,
+        102,
+        118
+      ],
+      "reason": "occluded_by_overlay: padlock behind checkbox bar"
+    },
+    {
+      "bbox": [
+        281,
+        0,
+        102,
+        118
+      ],
+      "reason": "occluded_by_overlay: partially occluded by question mark button"
+    },
+    {
+      "bbox": [
+        124,
+        290,
+        104,
+        120
+      ],
+      "reason": "low_contrast_text: decorative empty hex"
+    },
+    {
+      "bbox": [
+        124,
+        431,
+        104,
+        120
+      ],
+      "reason": "low_contrast_text: decorative empty hex"
+    },
+    {
+      "bbox": [
+        1060,
+        150,
+        104,
+        120
+      ],
+      "reason": "low_contrast_text: decorative empty hex"
+    },
+    {
+      "bbox": [
+        1060,
+        290,
+        104,
+        120
+      ],
+      "reason": "low_contrast_text: decorative empty hex"
+    },
+    {
+      "bbox": [
+        1060,
+        431,
+        104,
+        120
+      ],
+      "reason": "low_contrast_text: decorative empty hex"
+    }
+  ],
+  "detection_failures": []
+}

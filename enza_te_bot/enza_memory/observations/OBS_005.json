@@ -1,0 +1,114 @@
+{
+ "schema_version": 1,
+ "artifact_id": "OBS_005",
+ "artifact_type": "OBSERVATION",
+ "created_at": "2026-09-07T00:00:00Z",
+ "status": "CANDIDATE",
+ "run_id": "WINGRUN_20260907_01",
+ "environment": {
+  "provider": "ZCode IAB",
+  "provider_session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+  "viewport": {
+   "width": 1280,
+   "height": 720
+  },
+  "url": {
+   "value": "https://shinycolors.enza.fun/produce",
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "title": {
+   "value": "アイドルマスター シャイニーカラーズ",
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "canvas": {
+   "value": "canvas game",
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "dom_available": {
+   "value": false,
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "accessibility_available": {
+   "value": false,
+   "classification": "FACT",
+   "evidence_ids": []
+  }
+ },
+ "page_state": {
+  "label": "WING_HOME_IDLE (S1 weeks=2)",
+  "classification": "FACT",
+  "confidence": 0.95,
+  "evidence_ids": [
+   "recovery_06_home_check.png"
+  ]
+ },
+ "numeric_observations": [
+  {
+   "field": "season",
+   "value": 1,
+   "classification": "FACT"
+  },
+  {
+   "field": "weeks_remaining",
+   "value": 2,
+   "classification": "FACT",
+   "note": "W6 consumed 3->2 fresh-confirmed"
+  },
+  {
+   "field": "fans_to_next_rank",
+   "value": 220,
+   "classification": "FACT"
+  },
+  {
+   "field": "stamina",
+   "value": "near-empty (red)",
+   "classification": "FACT"
+  },
+  {
+   "field": "mental",
+   "value": "purple/exhausted face",
+   "classification": "FACT"
+  },
+  {
+   "field": "sp",
+   "value": null,
+   "classification": "UNKNOWN",
+   "note": "SP counter not on HOME; last schedule read 82"
+  }
+ ],
+ "screenshot": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/recovery_06_home_check.png",
+ "screenshot_sha256": "5dde5362528a30efab8b88bd20b35ad74344972a46f965caea0497577d831658",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB)",
+  "provider_session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+  "captured_at": "2026-09-07T00:00:00Z",
+  "source_artifact_ids": [],
+  "integrity": {
+   "algorithm": "sha256",
+   "digest": "5dde5362528a30efab8b88bd20b35ad74344972a46f965caea0497577d831658"
+  }
+ },
+ "evidence_references": [
+  {
+   "evidence_id": "recovery_06_home_check.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/recovery_06_home_check.png",
+   "captured_at": "2026-09-07T00:00:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {
+    "algorithm": "sha256",
+    "digest": "5dde5362528a30efab8b88bd20b35ad74344972a46f965caea0497577d831658"
+   }
+  }
+ ],
+ "unknowns": [
+  "SP current value on HOME",
+  "exact fan total (only remaining-to-rank visible)"
+ ]
+}

@@ -1,0 +1,167 @@
+{
+  "artifact_type": "TRANSITION_AUDIT",
+  "audit_id": "CONTRACT_OFFLINE_AUDIT_20260906",
+  "generated_at": "2026-09-06T23:59:00Z",
+  "mode": "OFFLINE_ONLY",
+  "audit_dimensions": ["entry_evidence", "exit_evidence", "fresh_observation_requirement", "previous_room_inventory_invalidation", "overlay_ownership"],
+  "transitions": [
+    {
+      "transition": "HOME -> SCHEDULE",
+      "contracts": ["home.json", "schedule.json"],
+      "entry_evidence": "OK — fresh WING_HOME identity + viewport + anchor before SCHEDULE click (home ACTION_AUTHORITY)",
+      "exit_evidence": "OK — postcondition 'fresh SCHEDULE page loaded' with title anchors; slow-load NO_EFFECT hazard guarded (schedule ENTRY_CONDITIONS)",
+      "fresh_observation": "OK — page-loaded check required; blind coordinate click forbidden",
+      "inventory_invalidation": "OK — implicit via 'never continue blind taps after state transition' (hazard_map)",
+      "overlay_ownership": "OK — event dialogue may wrap the transition; ownership passes to DIALOGUE/CHOICE",
+      "verdict": "CONSISTENT (7/7 chain replication)",
+      "conflicts": []
+    },
+    {
+      "transition": "SCHEDULE -> HOME (BACK)",
+      "contracts": ["schedule.json", "home.json"],
+      "entry_evidence": "PARTIAL — BACK authorized only in gated back-to-rest chain with fresh risk evidence; single replication (n=1) flagged",
+      "exit_evidence": "OK — 'fresh WING_HOME before REST'",
+      "fresh_observation": "OK",
+      "inventory_invalidation": "OK",
+      "overlay_ownership": "OK",
+      "verdict": "CONSISTENT but NEEDS_REPLICATION (coverage matrix 11/17-style; LVT does not cover BACK directly)",
+      "conflicts": []
+    },
+    {
+      "transition": "DIALOGUE -> parent room (return)",
+      "contracts": ["dialogue.json"],
+      "entry_evidence": "OK — subtype classification + choice-absence check before textbox tap (probe order)",
+      "exit_evidence": "OK — 'dialogue ends → HOME/RESULT/lesson' with textbox-disappearance stop",
+      "fresh_observation": "OK — per-tap guarded",
+      "inventory_invalidation": "CONFLICT (T-01): dialogue.json says textbox is the primary advance and only forbids blind bursts; v0_3 DIALOGUE_ACTION_PRIORITY establishes SKIP > FAST_FORWARD > TEXTBOX, and CHOICE_PRESENT frames show the parent's textbox VISIBLE but authority SUPPRESSED by the choice overlay owner (VRB02_015/016/018). The contract expresses this as CHOICE_OVERLAP_HAZARD (physical), which understates the ownership mechanism",
+      "overlay_ownership": "CONFLICT — same as T-01; owner must be choice overlay, not 'overlap region'",
+      "verdict": "CONFLICT_T-01 (P1)",
+      "conflicts": [
+        {"id": "T-01", "class": "AUTHORITY_MODEL_CONFLICT", "contract_claim": "textbox primary; choice overlap = hazard", "evidence_claim": "SKIP > FAST_FORWARD > TEXTBOX; choice owner suppresses textbox authority (visible != authorized)", "resolution_direction": "rewrite dialogue ACTION_AUTHORITY to ranked fallback + owner suppression; rename failure mode to CHOICE_OWNER_NOT_RESPECTED"}
+      ]
+    },
+    {
+      "transition": "CHOICE -> DIALOGUE (choice resolution returns to wrapped flow)",
+      "contracts": ["choice.json", "dialogue.json"],
+      "entry_evidence": "OK — layout_family + event_context both required before handler selection (CLR-001)",
+      "exit_evidence": "OK — 'choice accepted; dialogue/lesson/battle proceeds' with verified_transition",
+      "fresh_observation": "OK — full-visibility + selectability evidence",
+      "inventory_invalidation": "OK — after resolution, wrapped room re-observes",
+      "overlay_ownership": "OK — choice overlay owns frame while present; parent textbox suppressed",
+      "verdict": "CONSISTENT; geometry replication understated (STALE-A)",
+      "conflicts": []
+    },
+    {
+      "transition": "AUDITION_SELECTION -> AUDITION_BATTLE (via advice dialogue)",
+      "contracts": ["audition_selection.json", "audition_battle.json"],
+      "entry_evidence": "PARTIAL — battle entry requires fresh identity + NEW control epoch + fresh Speed/Auto read (battle ENTRY_CONDITIONS); selection side requires candidate+enabled DECIDE",
+      "exit_evidence": "OK — 'advice dialogue then AUDITION_BATTLE' 10/10",
+      "fresh_observation": "OK — cross_battle_invariant: speed may persist between battles, fresh read mandatory",
+      "inventory_invalidation": "OK — epoch invalidates AUTO/SPEED/turn/card",
+      "overlay_ownership": "PARTIAL — advice dialogue bridge: choice.json covers advice contexts; battle contract assumes arrival post-advice; the bridge frame inventory is thin (AUDITION_ADVICE 3 frames in v0_3)",
+      "verdict": "CONSISTENT (single-session caveat: 10/10 in 0905 only, 0906 had zero auditions — cross-session replication gap flagged by coverage matrix)",
+      "conflicts": []
+    },
+    {
+      "transition": "AUDITION_BATTLE -> RESULT",
+      "contracts": ["audition_battle.json", "result.json"],
+      "entry_evidence": "OK — RESULT phase authority: capture explicit PASS/FAIL BEFORE advancing (battle EXIT_CONDITIONS + result ENTRY_CONDITIONS)",
+      "exit_evidence": "OK — advance cycle → RESULT/HOME weeks-1",
+      "fresh_observation": "OK — fresh battle wait → result verify",
+      "inventory_invalidation": "OK — battle control observations die with epoch",
+      "overlay_ownership": "CONFLICT (T-02): battle.json and result.json both describe the result advance cycle, with different primary anchors (battle: 'RESULT captured → advance cycle'; result: SKIP→textbox→center sequence with VRB02_024/030/031 recommending RESULT:ADVANCE and 033 NOT_VISIBLE_NO_OK_ANCHOR). The contracts are compatible but the OK-anchor rule (RESULT:OK rendered only with confirmed OK anchor) is absent from result.json",
+      "verdict": "MINOR_OVERLAP_T-02 (P2)",
+      "conflicts": [
+        {"id": "T-02", "class": "INVENTORY_OVERLAP", "contract_claim": "result.json ADVANCE cycle [SKIP, textbox, center]", "evidence_claim": "v0_3: RESULT:OK requires confirmed OK anchor; VRB02_033 phantom OK removed", "resolution_direction": "add ok_anchor:false handling + NOT_VISIBLE_NO_OK_ANCHOR enum to result.json VISIBLE_CONTROLS"}
+      ]
+    },
+    {
+      "transition": "RESULT -> HOME",
+      "contracts": ["result.json", "home.json"],
+      "entry_evidence": "OK — weeks_remaining-1 decrement on fresh HOME as week-completion criterion",
+      "exit_evidence": "OK",
+      "fresh_observation": "OK — fresh HOME required (POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE)",
+      "inventory_invalidation": "OK — in-animation numbers must not be read (must_not_require)",
+      "overlay_ownership": "OK — choice may interrupt; probe order handles",
+      "verdict": "CONSISTENT (BTR-005/006/007)",
+      "conflicts": []
+    },
+    {
+      "transition": "HOME -> SKILL_BOARD (振り返り entry)",
+      "contracts": ["home.json", "skill_board.json"],
+      "entry_evidence": "CONFLICT (T-03): home.json keeps FURIKAERI as 'CONTROL_GROUNDING_BLOCKED / INTENTIONAL_AUTHORITY_HOLD, only accidental activation evidence'; coverage matrix now scores FURIKAERI_ENTRY 15 (VISUAL 3, GEOMETRY 2, AUTHORITY 2 'operator-directed skill prep; safe at S-start') with validated session + white-puff postcondition. home.json's REST geometry stays UNKNOWN (correct) but FURIKAERI understates current evidence",
+      "exit_evidence": "OK — 'FURIKAERI_SKILL board opens' (board entry frame rf_sb_a1 + live_csm_015)",
+      "fresh_observation": "OK — fresh SP read + consumptive-action guard",
+      "inventory_invalidation": "PARTIAL — board scale drift (0.9/1.1) requires per-frame geometry; not stated as invalidation rule in skill_board.json",
+      "overlay_ownership": "OK",
+      "verdict": "CONFLICT_T-03 (P2)",
+      "conflicts": [
+        {"id": "T-03", "class": "STALE_EVIDENCE_CLAIM", "contract_claim": "FURIKAERI blocked/hold, accidental-only", "evidence_claim": "1 validated intentional session + frames + 0 accidental entries since; still single-session", "resolution_direction": "upgrade home.json FURIKAERI to NEEDS_REPLICATION (single-session) while keeping operator-authorization gate; do NOT promote to python-ready"}
+      ]
+    },
+    {
+      "transition": "SKILL_BOARD -> SKILL_REPLACEMENT (auto-trigger on 5th acquisition)",
+      "contracts": ["skill_board.json", "skill_replacement.json"],
+      "entry_evidence": "PARTIAL — replacement.json documents the pending-ring trigger; coverage matrix LIMIT_4_DETECTOR has GEOMETRY 0 + 'trigger predicate (slots_full) not formalized as detector' (NEEDS_DETECTOR)",
+      "exit_evidence": "OK — commit verified via SP delta/board state 4/4",
+      "fresh_observation": "OK — fresh slot list",
+      "inventory_invalidation": "OK — post-commit board read is authoritative",
+      "overlay_ownership": "OK — confirm dialog owns frame; cancel safe",
+      "verdict": "CONSISTENT with detector gap",
+      "conflicts": []
+    },
+    {
+      "transition": "SKILL_REPLACEMENT -> SKILL_BOARD (return)",
+      "contracts": ["skill_replacement.json", "skill_board.json"],
+      "entry_evidence": "OK — rf_rp_t3_post_board_read anchors the return",
+      "exit_evidence": "OK",
+      "fresh_observation": "OK — fresh board read after commit",
+      "inventory_invalidation": "OK",
+      "overlay_ownership": "OK",
+      "verdict": "CONSISTENT (single-session caveat)",
+      "conflicts": []
+    },
+    {
+      "transition": "SEASON_TRANSITION -> HOME (fresh next-season)",
+      "contracts": ["season_transition.json", "home.json"],
+      "entry_evidence": "OK — old-season result committed or preserved UNKNOWN before transition; known-type guard for SKIP/NEXT",
+      "exit_evidence": "OK — fresh next-season HOME (season number + weeks=8 + fan gap) observed",
+      "fresh_observation": "OK — scene advance never substitutes for fresh HOME evidence",
+      "inventory_invalidation": "OK — season flags re-evaluated on fresh state; S3_START_PREP check at weeks=8 (LVT-09)",
+      "overlay_ownership": "PARTIAL — transition frames render NO semantic regions (VRB02_006/022/036 rule); season_transition.json does not state this transition-frame no-projection rule",
+      "verdict": "MINOR_GAP_T-04 (P2)",
+      "conflicts": [
+        {"id": "T-04", "class": "MISSING_RULE", "contract_claim": "(absent)", "evidence_claim": "TRANSITION frames render no semantic regions (v0_3 self-audit rule transition_semantic_control_count=0)", "resolution_direction": "add to season_transition.json OBSERVATION_SCHEMA: TRANSIENT frames carry no semantic control inventory"}
+      ]
+    },
+    {
+      "transition": "ENDING -> MAIN_HOME (run closure to lobby)",
+      "contracts": ["ending.json", "home.json"],
+      "entry_evidence": "PARTIAL — ending identity anchors from run record only; sess_a87 ending frames NOT RECOVERED (coverage matrix: call_607-613 unrecovered)",
+      "exit_evidence": "OK — fresh MAIN_LOBBY_IDLE with produce slot free + completion record flushed",
+      "fresh_observation": "OK",
+      "inventory_invalidation": "PARTIAL — closed-run flags persisting in live config (F-03) is the same class; ending.json does not mention config-state cleanup on closure",
+      "overlay_ownership": "OK",
+      "verdict": "EVIDENCE_DOWNGRADE_T-05 (P1)",
+      "conflicts": [
+        {"id": "T-05", "class": "PERSISTENCE/EVIDENCE_CLASS", "contract_claim": "session_observed evidence chain", "evidence_claim": "ending frames unrecovered; derived-summary-only", "resolution_direction": "mark ending.json evidence DERIVED_SUMMARY_CONFIRMED + add F-03 closed-run config cleanup to PERSISTENCE_BOUNDARY"}
+      ]
+    }
+  ],
+  "summary": {
+    "consistent": 8,
+    "conflicts": ["T-01 (P1 dialogue authority model)", "T-03 (P2 FURIKAERI stale)", "T-05 (P1 ending evidence class)"],
+    "minor": ["T-02 (P2 result OK-anchor enum)", "T-04 (P2 transition no-projection rule)"]
+  },
+  "post_audit_resolution_20260907": {
+    "note": "verification pass after sess_contract_reconciliation_writeback_20260907 applied the overlays into contract v0.2; each resolution re-verified against the current contract files",
+    "T-01": "RESOLVED — dialogue.json v0.2 carries ranked authority SKIP > FAST_FORWARD_RIGHT > TEXTBOX, choice_owner_suppression, and FAILURE_MODES CHOICE_OWNER_NOT_RESPECTED (CLR-003 physical overlap preserved)",
+    "T-02": "RESOLVED — result.json v0.2 adds OK-anchor rule / NOT_VISIBLE_NO_OK_ANCHOR handling",
+    "T-03": "RESOLVED — home.json v0.2 upgrades FURIKAERI to NEEDS_REPLICATION while keeping the operator-authorization gate",
+    "T-04": "RESOLVED — season_transition.json v0.2 adds the transition-frame no-projection rule",
+    "T-05": "RESOLVED — ending.json v0.2 marks evidence DERIVED_SUMMARY_CONFIRMED and adds the F-03 closed-run config purge to PERSISTENCE_BOUNDARY",
+    "residuals_open": [],
+    "concurrent_v021_note": "after this artifact was authored, sess_historical_frame_integration_20260907 patched 6 room contracts + index to v0.2.1 (recovered_historical_frames + run_state fix). CURRENT_CONTRACT_BASELINE is MIXED (0.2.1 x6 + index; 0.2 x5) — the formerly-listed residuals STALE-G/STALE-H were resolved by the concurrent-reconciliation repair (2026-09-07, metadata patches in dialogue.json v0.2 / choice.json v0.2.1; see contract_evidence_reconciliation.json). Version-mix conclusions in audit-time text referring to '11/11 v0.2' describe the authoring snapshot, not the current tree.",
+    "semifinal_split_verified": "season_transition v0.2.1 encodes SEMIFINAL_PAGE_IDENTITY=VISUALLY_SUPPORTED (2 pixel-confirmed frames) with SEMIFINAL_RESULT_SEMANTICS=UNKNOWN and the rule 'page identity must not imply WIN'; FINAL identity MISSING / result UNKNOWN — consistent with transition T19 negative precedent (scene SKIP without result evidence)"
+  }
+}

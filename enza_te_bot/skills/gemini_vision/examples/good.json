@@ -1,0 +1,46 @@
+{
+  "observation_id": "",
+  "capture": {
+    "timestamp": "",
+    "frame_id": "",
+    "screenshot_digest": ""
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "text_regions": [
+    {
+      "id": "t1",
+      "text": "ホーム",
+      "bbox": [
+        40,
+        30,
+        160,
+        60
+      ],
+      "confidence": 0.96
+    }
+  ],
+  "interaction_candidates": [
+    {
+      "id": "e1",
+      "bbox": [
+        180,
+        290,
+        180,
+        70
+      ],
+      "appearance": {
+        "color_hint": "pink",
+        "shape": "rounded_rect"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.91
+    }
+  ],
+  "numeric_regions": [],
+  "overlay_regions": [],
+  "uncertainties": [],
+  "detection_failures": []
+}

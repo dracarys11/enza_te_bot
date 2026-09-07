@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "artifact": "unknown_registry_candidate",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "purpose": "Track missing knowledge required before deterministic HOME-centric execution.",
+  "confidence_definition": "current_confidence is confidence that a complete deterministic answer is presently supported, from 0.0 to 1.0.",
+  "source_artifacts": [
+    {"name": "architecture_contract.json", "workspace_status": "PRESENT", "available_source": "workspace artifact", "materialized_from": "conversation proposal"},
+    {"name": "planner_rules_candidate.json", "workspace_status": "PRESENT", "available_source": "workspace artifact", "materialized_from": "conversation proposal"},
+    {"name": "room_sop_candidates.json", "workspace_status": "PRESENT", "available_source": "workspace artifact", "materialized_from": "conversation proposal"},
+    {"name": "aidecision_candidates.json", "workspace_status": "PRESENT", "available_source": "workspace artifact"}
+  ],
+  "confirmed_knowledge": [
+    {"id": "confirmed_home_only_strategic_state", "category": "planner", "description": "HOME is the only strategic decision state.", "confidence": 1.0},
+    {"id": "confirmed_planner_objectives", "category": "planner", "description": "Planner output is limited to VOCAL, REST, SKILL, or AUDITION.", "confidence": 1.0},
+    {"id": "confirmed_single_room_cycle", "category": "room", "description": "Each planner decision authorizes exactly one room objective.", "confidence": 1.0},
+    {"id": "confirmed_fresh_home_commit", "category": "completion", "description": "Success and persistent-state commit require fresh verified HOME.", "confidence": 1.0},
+    {"id": "confirmed_unknown_fail_closed", "category": "state", "description": "UNKNOWN cannot commit completion or authorize another planner decision.", "confidence": 1.0},
+    {"id": "confirmed_season1_produce_transition", "category": "room", "description": "Two independent Season 1 decisions support HOME to PRODUCE_MENU through produce_start.", "confidence": 1.0, "evidence_count": 2},
+    {"id": "confirmed_battle_auto_action", "category": "room", "description": "Seven independent occurrences identify battle_auto_on as a named battle action.", "confidence": 1.0, "evidence_count": 7}
+  ],
+  "candidate_knowledge": [
+    {"id": "candidate_season1_policy", "category": "planner", "description": "Season 1 defaults to VOCAL and may use AUDITION near season end when the fan target is unmet.", "current_confidence": 0.5, "executable": false},
+    {"id": "candidate_season2_policy", "category": "planner", "description": "Season 2 completes the required 10000 audition once, otherwise uses VOCAL, and rests when stamina requires.", "current_confidence": 0.5, "executable": false},
+    {"id": "candidate_season3_policy", "category": "planner", "description": "Season 3 prioritizes required SKILL, then required auditions, then VOCAL, with REST for insufficient stamina.", "current_confidence": 0.5, "executable": false},
+    {"id": "candidate_season4_policy", "category": "planner", "description": "Season 4 prioritizes required large auditions and otherwise uses VOCAL.", "current_confidence": 0.5, "executable": false},
+    {"id": "candidate_four_room_lifecycle", "category": "room", "description": "Each room should execute one supplied objective and return SUCCESS_HOME, FAILED, or UNKNOWN.", "current_confidence": 0.5, "executable": false},
+    {"id": "candidate_season1_home_produce_start", "category": "planner", "description": "Two Season 1 HOME decisions selected produce_start with adequate stamina and an unmet fan target.", "current_confidence": 0.5, "evidence_confidence": 1.0, "policy_confidence": 0.5, "independent_occurrences": 2, "executable": false},
+    {"id": "candidate_audition_battle_auto_on", "category": "room", "description": "Seven battle occurrences selected battle_auto_on.", "current_confidence": 0.4, "evidence_confidence": 1.0, "policy_confidence": 0.4, "independent_occurrences": 7, "executable": false}
+  ],
+  "unresolved_unknowns": [
+    {
+      "id": "planner_season1_near_end_threshold",
+      "category": "planner",
+      "description": "The exact Season 1 weeks_remaining threshold for near season end is unknown.",
+      "why_it_matters": "VOCAL versus AUDITION cannot be selected deterministically when the fan target is unmet.",
+      "required_evidence": "A human-authored rule or reviewed HOME decision demonstrations for every relevant late-season week.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "planner_season1_low_stamina",
+      "category": "planner",
+      "description": "Season 1 behavior when stamina is insufficient is unknown.",
+      "why_it_matters": "The default policy may choose an objective that should be preceded by REST.",
+      "required_evidence": "A human rule or Season 1 HOME demonstration with insufficient stamina.",
+      "priority": "medium",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "planner_season2_audition_eligibility",
+      "category": "planner",
+      "description": "Eligibility and timing for the required Season 2 10000 audition are unknown.",
+      "why_it_matters": "The planner could select an unavailable audition or delay a required objective.",
+      "required_evidence": "Season 2 HOME observations and demonstrations before, during, and after the 10000 audition becomes available.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "planner_season3_skill_goals",
+      "category": "planner",
+      "description": "The required Season 3 skill objectives and their order are unknown.",
+      "why_it_matters": "SKILL cannot receive a deterministic fixed objective.",
+      "required_evidence": "Human-authored required-skill list plus demonstrations showing each objective and verified completion.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "planner_season3_audition_goals",
+      "category": "planner",
+      "description": "The complete Season 3 audition targets, order, and eligibility rules are not fully validated.",
+      "why_it_matters": "AUDITION cannot receive a deterministic target after SKILL work.",
+      "required_evidence": "Reviewed HOME observations, fixed target list, and complete demonstrations for every required Season 3 audition.",
+      "priority": "high",
+      "current_confidence": 0.2
+    },
+    {
+      "id": "planner_season4_large_auditions",
+      "category": "planner",
+      "description": "Season 4 large audition targets, order, and eligibility are unknown.",
+      "why_it_matters": "The planner cannot identify which AUDITION objective has priority.",
+      "required_evidence": "Human-authored Season 4 target list and HOME-to-HOME demonstrations for each target.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "planner_season4_low_stamina",
+      "category": "planner",
+      "description": "Season 4 behavior when stamina is insufficient is unknown.",
+      "why_it_matters": "The planner lacks a deterministic REST rule for this condition.",
+      "required_evidence": "A human rule or Season 4 HOME demonstration with insufficient stamina.",
+      "priority": "medium",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "planner_unavailable_objective_fallback",
+      "category": "planner",
+      "description": "The response when a required objective is pending but unavailable is unknown.",
+      "why_it_matters": "The planner cannot safely select a fallback without inventing strategy.",
+      "required_evidence": "Human-authored fallback rules and HOME observations where required objectives are unavailable.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "vision_home_fan_semantics",
+      "category": "vision",
+      "description": "It is unresolved whether the reliable HOME input is fan_count, fan_target, or fan_gap_to_target.",
+      "why_it_matters": "Planner fan conditions cannot be evaluated from ambiguous or invented values.",
+      "required_evidence": "Repeated labeled HOME observations across seasons with independently verified fan values and target status.",
+      "priority": "high",
+      "current_confidence": 0.3
+    },
+    {
+      "id": "vision_vocal_result_anchor",
+      "category": "vision",
+      "description": "A reliable VOCAL_RESULT observation is absent from the analyzed demonstration.",
+      "why_it_matters": "VOCAL completion cannot be distinguished reliably from animation or unrelated transitions.",
+      "required_evidence": "A clean vocal demonstration with labeled result observations, screenshots, and transition trace through HOME.",
+      "priority": "high",
+      "current_confidence": 0.2
+    },
+    {
+      "id": "vision_rest_progress_anchors",
+      "category": "vision",
+      "description": "No demonstrated REST progress or result anchors are established.",
+      "why_it_matters": "REST cannot prove that its objective executed before HOME reappears.",
+      "required_evidence": "A complete REST demonstration with labeled observations, screenshots, and trace from HOME to fresh HOME.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "vision_skill_exit_anchor",
+      "category": "vision",
+      "description": "The skill-room exit and return-to-HOME observations are not established.",
+      "why_it_matters": "SKILL cannot close its lifecycle or report SUCCESS_HOME reliably.",
+      "required_evidence": "A complete skill demonstration with labeled post-purchase, exit, transition, and fresh HOME observations.",
+      "priority": "high",
+      "current_confidence": 0.2
+    },
+    {
+      "id": "vision_audition_result_categories",
+      "category": "vision",
+      "description": "The relationship among battle completion, AUDITION_RESULT, result dialogue, season result, and HOME is not fully resolved.",
+      "why_it_matters": "AUDITION may commit too early or fail to recognize a valid result path.",
+      "required_evidence": "Complete audition traces with labeled screenshots and observations for each distinct result path.",
+      "priority": "high",
+      "current_confidence": 0.3
+    },
+    {
+      "id": "room_vocal_home_to_home",
+      "category": "room",
+      "description": "A clean, uninterrupted VOCAL lifecycle from verified HOME to fresh HOME is not demonstrated.",
+      "why_it_matters": "The room's intermediate transitions and exit proof cannot be finalized.",
+      "required_evidence": "One or more complete vocal demonstrations with named action, result, transition handlers, and final HOME trace.",
+      "priority": "high",
+      "current_confidence": 0.4
+    },
+    {
+      "id": "room_rest_home_to_home",
+      "category": "room",
+      "description": "The REST lifecycle and intermediate transitions are unknown.",
+      "why_it_matters": "A HOME-to-HOME state label alone cannot prove rest occurred.",
+      "required_evidence": "A complete REST demonstration including before HOME values, room progress, result, and fresh HOME values.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "room_skill_operation_scope",
+      "category": "room",
+      "description": "It is unknown whether one SKILL cycle performs one operation or all eligible required operations.",
+      "why_it_matters": "The room cannot know when its supplied objective is complete.",
+      "required_evidence": "Human-authored scope rule plus demonstrations with multiple available skill operations.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "room_audition_target_to_home",
+      "category": "room",
+      "description": "No complete validated AUDITION lifecycle exists for every required target.",
+      "why_it_matters": "Target selection, battle, result handling, and HOME return cannot be composed deterministically.",
+      "required_evidence": "A separate complete HOME-to-HOME demonstration and trace for every required audition target and result path.",
+      "priority": "high",
+      "current_confidence": 0.3
+    },
+    {
+      "id": "room_shared_handler_matrix",
+      "category": "room",
+      "description": "The exact dialogue, continue, speed, and fixed-choice handlers allowed in each room are not fully validated.",
+      "why_it_matters": "Over-broad handling risks unauthorized transitions; under-broad handling causes avoidable stops.",
+      "required_evidence": "Reviewed room traces identifying each handler occurrence, its room context, expected result, and retry bound.",
+      "priority": "medium",
+      "current_confidence": 0.3
+    },
+    {
+      "id": "state_audition_flag_schema",
+      "category": "state",
+      "description": "The complete audition flag set and season-reset behavior are unknown.",
+      "why_it_matters": "Required auditions may repeat or be skipped after process restart or season change.",
+      "required_evidence": "Human-approved flag definitions plus traces showing when every flag is committed and reset.",
+      "priority": "high",
+      "current_confidence": 0.2
+    },
+    {
+      "id": "state_skill_flag_schema",
+      "category": "state",
+      "description": "The required skill flags, granularity, and season-reset behavior are unknown.",
+      "why_it_matters": "The planner cannot determine whether required SKILL work remains.",
+      "required_evidence": "Human-approved skill-goal list and traces linking verified skill effects to flag commits.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "completion_audition_success_meaning",
+      "category": "completion",
+      "description": "It is unknown whether an audition is complete on entry, battle resolution, result display, or victory.",
+      "why_it_matters": "Persistent audition flags cannot be committed safely.",
+      "required_evidence": "Human definition plus success and failure demonstrations showing the authoritative completion evidence.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "completion_vocal_effect",
+      "category": "completion",
+      "description": "The required proof of vocal completion and one-week consumption is not fully validated.",
+      "why_it_matters": "A return to HOME could be associated with an incomplete or unrelated transition.",
+      "required_evidence": "Clean vocal traces with result evidence and consistent before/after HOME week observations.",
+      "priority": "high",
+      "current_confidence": 0.3
+    },
+    {
+      "id": "completion_rest_effect",
+      "category": "completion",
+      "description": "It is unknown whether REST success requires verified stamina improvement or another effect beyond fresh HOME.",
+      "why_it_matters": "The system could report successful rest without evidence that rest occurred.",
+      "required_evidence": "REST demonstrations with before/after stamina observations and an authoritative human completion rule.",
+      "priority": "high",
+      "current_confidence": 0.0
+    },
+    {
+      "id": "completion_skill_effect",
+      "category": "completion",
+      "description": "The complete set of acceptable SKILL completion effects is unknown beyond observed resource decrease.",
+      "why_it_matters": "Some valid skill operations may be rejected or unverified operations may be committed.",
+      "required_evidence": "Demonstrations for each required skill type with before/after resource, flag, or result evidence.",
+      "priority": "high",
+      "current_confidence": 0.2
+    },
+    {
+      "id": "completion_season_transition_boundary",
+      "category": "completion",
+      "description": "The required handling when a room crosses a season-result or season-clear transition before HOME is not fully specified.",
+      "why_it_matters": "The executor may stop before HOME or commit a room against the wrong season context.",
+      "required_evidence": "Complete cross-season traces through result states to the next fresh HOME, with human confirmation of commit timing.",
+      "priority": "medium",
+      "current_confidence": 0.2
+    }
+  ]
+}

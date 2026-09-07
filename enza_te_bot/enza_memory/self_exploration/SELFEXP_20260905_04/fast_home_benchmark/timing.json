@@ -1,0 +1,6 @@
+{
+  "season_weeks":{"state_detection_ms":333.163,"field_projection_ms":668.558,"total_observation_ms":1003.679},
+  "full_fields":{"state_detection_ms":342.938,"field_projection_ms":205.301,"total_observation_ms":550.185},
+  "units":"ms",
+  "target_season_weeks_under_2000ms":true
+}

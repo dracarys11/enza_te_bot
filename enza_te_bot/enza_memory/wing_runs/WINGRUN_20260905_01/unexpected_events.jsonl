@@ -1,0 +1,4 @@
+{"event":"support_event_dialogue","week":3,"detail":"サポート☆イベント(夏葉)剧情, SKIP 可跳过, 无业务选择","severity":"LOCAL_TRANSIENT_HANDLED"}
+{"event":"communication_dialogue_no_skip","week":4,"detail":"智代子交流剧情无 SKIP 按钮, 需点击对话框逐行推进(点击 640,610 有效)","severity":"LOCAL_TRANSIENT_HANDLED"}
+{"event":"UNKNOWN_BUSINESS_CHOICE","week":5,"detail":"智代子: 二週間後にレッスンさせてください！ 选项 [いいよ]/[ごめん]; memory(aidecision_candidates.json 等)无 taught choice; 阻塞型 modal","severity":"GLOBAL_UNKNOWN","action":"STOP RUN"}
+{"event": "AUTO_LOCKS_SPEED_ORDERING", "battle": "S3 50k audition", "detail": "Auto ON 后 2 次点击倍速(1166,47)均无效, 保持2倍速; 结论: 必须先倍速后Auto", "severity": "HANDLER_ORDERING_FIX", "policy_updated": "enza_memory/policies/audition_battle_speed_handler.json"}

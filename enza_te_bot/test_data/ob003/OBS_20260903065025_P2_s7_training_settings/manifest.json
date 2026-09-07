@@ -1,0 +1,94 @@
+{
+  "case_id": "OBS_20260903065025_P2_s7_training_settings",
+  "source": {
+    "file": "source_screenshot.png",
+    "sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723"
+  },
+  "providers": [
+    {
+      "name": "Paddle",
+      "artifact": "providers/paddle/vision_output.json",
+      "artifact_sha256": "853863fb2d4e1534c5a133596df498ea7d3dffc109ae3862858ee9ad8f6ae362",
+      "provider": "Paddle",
+      "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+      "skill_version": "not_applicable",
+      "screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723"
+    },
+    {
+      "name": "AGY",
+      "artifact": "providers/agy/gemini_vision_v1/vision_output.json",
+      "artifact_sha256": "d10333832e997804197a62cb301e72aaf9025a1a71df0a6cfad06de071f49329",
+      "provider": "AGY",
+      "model": "gemini-3.8-flash-medium",
+      "skill_version": "gemini_vision_v1",
+      "screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723",
+      "provenance": {
+        "trajectory": "enza_memory/trajectories/gemini_v1_agy_extraction_001.json",
+        "session_reference": "staffer-mtmc9eqti; continuation staffer-mtmcsjnj6"
+      }
+    },
+    {
+      "name": "AGY",
+      "artifact": "providers/agy/gemini_vision_v1_1/vision_output.json",
+      "artifact_sha256": "049d63a31779877fcd8a536348dd7b0a67d333db9699d00aaa838d1cf97fb779",
+      "provider": "AGY",
+      "model": "gemini-3.8-flash-medium",
+      "skill_version": "gemini_vision_v1_1",
+      "screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723",
+      "provenance": {
+        "trajectory": "enza_memory/trajectories/gemini_v1_1_agy_extraction_001.json",
+        "session_reference": "945c2d86-541b-46a0-ab74-de9f8c742615; jobs staffer-mtmd9d6pf and staffer-mtmdpliye"
+      }
+    },
+    {
+      "name": "AGY",
+      "artifact": "providers/agy/gemini_vision_v2/vision_output.json",
+      "artifact_sha256": "1b018c4e10567ab2848457966c8e12fd0f7b0ef9af22c12de5cc79fa96201495",
+      "provider": "AGY",
+      "model": "gemini-3.8-flash-medium",
+      "skill_version": "gemini_vision_v2",
+      "screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723",
+      "provenance": {
+        "trajectory": "enza_memory/trajectories/gemini_v2_agy_extraction_001.json",
+        "session_reference": "fdd2001d-be50-4c67-87b1-97b0c8bc42e7; jobs staffer-mtmfgkovf and staffer-mtmg6rfs6"
+      }
+    }
+  ],
+  "unresolved_artifacts": [],
+  "historical_artifacts": [
+    {
+      "artifact": "agy_vision_output.json",
+      "artifact_sha256": "edfbd79032c582cb279adc6066e495c430b875028c68b1c750c9f558c92da0e2",
+      "reason": "additional_historical_agy_v2_run_not_selected_as_canonical",
+      "provenance": {
+        "trajectory": "enza_memory/trajectories/ob003_agy_vision_extraction_001.json",
+        "session_reference": "staffer-mtmawh3ft"
+      }
+    },
+    {
+      "artifact": "paddle_reference.json",
+      "artifact_sha256": "709fde303f6b45e14ba0d93112257f598aef93f1c9fd0e5343e3209608bb561c",
+      "canonical_artifact": "providers/paddle/vision_output.json"
+    },
+    {
+      "artifact": "vision_outputv1.1.json",
+      "artifact_sha256": "3fc2c1722e166f73c82348c99ab584eda55fbc71c41de79a96e927231fe092e7",
+      "canonical_artifact": "providers/agy/gemini_vision_v1_1/vision_output.json"
+    },
+    {
+      "artifact": "legacy_artifacts/provider_routing_pre_integrity/agy_unversioned_vision_output.json",
+      "artifact_sha256": "d10333832e997804197a62cb301e72aaf9025a1a71df0a6cfad06de071f49329",
+      "canonical_artifact": "providers/agy/gemini_vision_v1/vision_output.json"
+    },
+    {
+      "artifact": "legacy_artifacts/provider_routing_pre_integrity/gemini_v1_1_vision_output.json",
+      "artifact_sha256": "ee4048d054c8aa3839f2fdfd4fe198cae18baa307cb77db38e9d922187b6cc9b",
+      "canonical_artifact": "providers/agy/gemini_vision_v1_1/vision_output.json"
+    },
+    {
+      "artifact": "legacy_artifacts/provider_routing_pre_integrity/gemini_v2_vision_output.json",
+      "artifact_sha256": "037c9fe964af7b902492c318e90720edbd886cc283c437260addd77a0f065eec",
+      "canonical_artifact": "providers/agy/gemini_vision_v2/vision_output.json"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "contract_version": "0.2",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): LEAK-01 threshold de-embedded, PLR-011 gate-vs-objective separation noted",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract distilled from live memory evidence. NOT executable policy. VISIBLE != AUTHORIZED enforced below.",
+  "scenario_scope": "WING produce, MAC_CURRENT_V1 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "SCHEDULE",
+    "identity_anchors_required": [
+      "URL == /produce",
+      "top-left title スケジュール選択",
+      "lesson/work card grid (6 cards)",
+      "bottom-right 決定",
+      "left-side オーディション entry"
+    ],
+    "identity_source": "url_plus_layout (REPEATED_EVIDENCE)",
+    "must_not_require": ["per-card OCR (only ボーカル card position)", "AGY"],
+    "identity_status": "VERIFIED_EVIDENCE"
+  },
+  "ENTRY_CONDITIONS": [
+    "arrived from fresh WING_HOME via SCHEDULE click",
+    "page freshly loaded: a slow load produced a DECIDE NO_EFFECT sample — never accept pre-load state",
+    "optional transient: Now Loading / event dialogue may precede the selection page"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "failure_rate (risk) — required by policy gate before VOCAL; stale/UNKNOWN risk must NOT be treated as zero (DIRECT_RISK_SIGNAL_OVERRIDES_PROXY_RESOURCE_HEURISTIC)",
+      "selected candidate (決定 badge on card)",
+      "決定 enabled/pink state (value and interactability separate)",
+      "active sub-tab (lesson vs audition tab can retain prior page)"
+    ],
+    "forbidden": "perception must not choose the business target; it only reports card identity/eligibility evidence"
+  },
+  "SUBSTATES": [
+    {"substate": "SCHEDULE_LOADED", "evidence": "REPEATED_EVIDENCE"},
+    {"substate": "CANDIDATE_SELECTED_AND_PAGE_LOADED", "evidence": "REPEATED_EVIDENCE"},
+    {"substate": "SCHEDULE_LOADING", "evidence": "NO_EFFECT sample on DECIDE during load", "status": "TRANSIENT, not actionable"}
+  ],
+  "VISIBLE_CONTROLS": [
+    {"control": "VOCAL card", "geometry_1280x720": {"x": 360, "y": 500, "normalized": {"x": 0.2813, "y": 0.6944}}, "visual_identity": "pink ボーカルレッスン card; content level drifts (Lv.1→Lv.4) but position/border stable", "success_fail": "6/0", "visible_status": "VERIFIED_EVIDENCE"},
+    {"control": "AUDITION entry", "geometry": "UNKNOWN (left-side オーディション; stable click region unknown)", "success_fail": "10/0 semantic uses via route policy, geometry ungrounded", "visible_status": "VISIBLE_ONLY"},
+    {"control": "SUPPORT_SKILL button", "geometry_1280x720": {"x": 985, "y": 663, "normalized": {"x": 0.7695, "y": 0.9208}}, "visible_status": "VISIBLE_HAZARD — dialogue-advance intent landed here twice"},
+    {"control": "BACK arrow", "geometry_1280x720": {"x": 57, "y": 660, "normalized": {"x": 0.0445, "y": 0.9167}}, "success_fail": "1/0", "visible_status": "VERIFIED_EVIDENCE, replication=1"},
+    {"control": "DECIDE (決定)", "geometry_1280x720": {"x": 1185, "y": 660, "normalized": {"x": 0.9258, "y": 0.9167}}, "success_fail": "6/1 (the 1 = no-effect during slow load)", "visible_status": "VERIFIED_EVIDENCE"}
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "VISIBLE != AUTHORIZED; enabled pink anchor required for DECIDE (CONTROL_ACTION_REQUIRES_ACTIONABLE_PHASE).",
+    "VOCAL": "authorized only after: fresh loaded page + fresh action-specific risk evidence read (numeric threshold owned by business policy, NOT embedded here) + card anchor present; risk_gate_allows must NOT imply planner_selects (PLR-011: 0906 S3 passed the gate every week yet the global objective failed permanently)",
+    "DECIDE": "authorized only after: page loaded + candidate selected + pink enabled anchor observed; never click from coordinate alone",
+    "AUDITION": "VISIBLE != AVAILABLE. Business route authorization and candidate identity resolution live in policy; control geometry ungrounded → Python authority HOLD",
+    "BACK": "authorized only under gated BACK_TO_REST chain with fresh risk evidence (n=1 chain)"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/classify cards, risk ROI, tab state",
+    "click VOCAL with fresh failure_rate gate",
+    "click DECIDE with actionable-phase guard",
+    "click BACK within authorized back-to-rest chain",
+    "emit shadow-test predictions without clicking (all controls)"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "click SUPPORT_SKILL as transient skip",
+    "click DECIDE before page-load/selected/enabled evidence",
+    "treat stale risk as pass",
+    "click AUDITION without policy route authorization"
+  ],
+  "POSTCONDITIONS": {
+    "VOCAL_click": "VOCAL selected, 決定 becomes actionable",
+    "DECIDE_click": "lesson or audition transition begins (lesson cut-in ~2500ms, then presentation ~8000ms)",
+    "BACK_click": "fresh WING_HOME before REST",
+    "week_consumed_chain": "VOCAL→DECIDE→result→fresh HOME weeks-1: 7 replications, success_rate 1.0"
+  },
+  "EXIT_CONDITIONS": [
+    "DECIDE → RESULT (lesson) or AUDITION_SELECTION (audition route)",
+    "BACK → HOME",
+    "event dialogue interruption may wrap the room (see dialogue.json)"
+  ],
+  "FAILURE_MODES": [
+    {"mode": "DECIDE_NO_EFFECT_ON_SLOW_LOAD", "class": "NO_EFFECT", "evidence": "hazard_map"},
+    {"mode": "WRONG_TARGET_SUPPORT_SKILL", "class": "WRONG_TARGET", "evidence": "(985,663) hit twice"},
+    {"mode": "SUB_TAB_STATE_RETAINED", "class": "STALE_STATE", "evidence": "schedule sub-tab may reopen on audition page"},
+    {"mode": "RISK_UNKNOWN_TREATED_AS_ZERO", "class": "POLICY_BYPASS", "evidence": "stable chain guard"}
+  ],
+  "RECOVERY": [
+    "NO_EFFECT on DECIDE: re-observe after load, retry once with fresh enabled anchor (retry succeeded in evidence)",
+    "wrong-target landing: fresh identity check, exit via unambiguous affordance (BACK), never continue burst"
+  ],
+  "PERSISTENCE_BOUNDARY": "none inside room; week flush happens after return-to-HOME verifies weeks decrement",
+  "MIGRATION_STATUS": {
+    "VOCAL": "NEEDS_FRESH_VISUAL_BOX (16/17, shadow-ready)",
+    "DECIDE": "NEEDS_FRESH_VISUAL_BOX (16/17, shadow-ready; REPLICATED status in migration_status.json)",
+    "BACK": "NEEDS_MORE_REPLICATION (12/17, n=1 chain)",
+    "AUDITION_entry": "NEEDS_FRESH_VISUAL_BOX (12/17)",
+    "SUPPORT_SKILL": "OBSERVED_HAZARD_ONLY"
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json",
+    "enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json",
+    "enza_memory/migration/python_click_migration/distilled/hazard_map.json",
+    "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/control_distillation.json",
+    "enza_memory/policies/harness_invariant_candidates_20260905.json"
+  ]
+}

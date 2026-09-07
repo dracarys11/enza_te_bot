@@ -1,0 +1,150 @@
+{
+  "contract_version": "0.2.1",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): claims confirmed current (single-run 0905 gap already stated; no changes beyond version); 2026-09-07 evidence delta CONTRACT_EVIDENCE_DELTA_20260907: recovered_historical_frames + PERSIST-1 re-check; metadata only",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract. Route/target selection is BUSINESS POLICY (s4_route_operator_hints + planner) and is referenced only. Eligibility evidence is perception, not authorization.",
+  "scenario_scope": "WING audition schedule list (S1/S2/S3), 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "AUDITION_SELECTION",
+    "identity_anchors_required": [
+      "audition schedule page reached via SCHEDULE room audition entry",
+      "candidate card list with name/reward/eligibility",
+      "enabled pink 決定 bottom-right"
+    ],
+    "identity_source": "layout_role, repeated live use (10 successful candidate selections + 10 DECIDE selections)",
+    "identity_status": "PARTIAL — canonical anchors never formalized into a page schema"
+  },
+  "ENTRY_CONDITIONS": [
+    "fresh SCHEDULE page with audition route selected by policy",
+    "candidate list loaded (pagination exists; location varies by page/route)"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "candidate identity (exact name)",
+      "reward/target description",
+      "eligibility evidence (locked/ineligible candidates visible but NOT selectable)",
+      "candidate page number",
+      "決定 enabled state"
+    ],
+    "note": "candidate visibility does not imply eligibility; eligibility rules are game-internal and UNMODELED — real event/target eligibility is UNKNOWN; policy supplies target, perception reports evidence"
+  },
+  "SUBSTATES": [
+    {
+      "substate": "AUDITION_LIST",
+      "evidence": "10/10 selections"
+    },
+    {
+      "substate": "TARGET_CANDIDATE_SELECTED",
+      "evidence": "10/10"
+    },
+    {
+      "substate": "ADVICE_DIALOGUE_BRIDGE",
+      "evidence": "selection → advice dialogue → battle chain 10/10"
+    }
+  ],
+  "VISIBLE_CONTROLS": [
+    {
+      "control": "CANDIDATE card",
+      "geometry": "UNKNOWN (box visible in screenshots, never normalized; candidate-stability route-specific)",
+      "success_fail": "10/0",
+      "visible_status": "VISIBLE_ONLY, geometry ungrounded"
+    },
+    {
+      "control": "DECIDE (決定)",
+      "geometry": "UNKNOWN (box observed, canonical region unknown)",
+      "success_fail": "10/0",
+      "visible_status": "VISIBLE_ONLY, geometry ungrounded"
+    }
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "VISIBLE candidate != AVAILABLE candidate; visible 決定 label != enabled 決定 (evidence matrix: 'visible label alone does not prove enabled/actionable').",
+    "candidate_click": "authorized only with: fresh list + exact target identity + eligibility evidence + route policy authorization",
+    "decide_click": "authorized only with: fresh candidate selected + enabled observed + route authorization current",
+    "route_policy": "AUDITION_SELECTION DECIDE readiness 14/17 (GEOMETRY=1) — authority depends on business route, not on visibility"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/list/box candidates",
+    "click policy-authorized eligible candidate",
+    "click DECIDE after selection + enabled evidence",
+    "emit shadow predictions without clicking"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "click locked/ineligible candidate",
+    "click DECIDE without selection+enabled evidence",
+    "assume candidate position stable across pages/routes",
+    "choose audition targets inside perception (policy territory)"
+  ],
+  "POSTCONDITIONS": {
+    "decide": "advice dialogue then AUDITION_BATTLE; chain success 10/10"
+  },
+  "EXIT_CONDITIONS": [
+    "DECIDE → advice dialogue → AUDITION_BATTLE",
+    "back out via unverified path (戻る semantics UNKNOWN here)"
+  ],
+  "FAILURE_MODES": [
+    {
+      "mode": "CANDIDATE_PAGINATION_DRIFT",
+      "class": "WRONG_TARGET",
+      "evidence": "location changes by page and route"
+    },
+    {
+      "mode": "LOCKED_CANDIDATE_VISIBLE",
+      "class": "DISABLED_CONTROL"
+    },
+    {
+      "mode": "DECIDE_DIMMED",
+      "class": "DISABLED_CONTROL"
+    }
+  ],
+  "RECOVERY": [
+    "identity unresolved → STOP, re-observe fresh list; never click by remembered position",
+    "eligibility unknown → treat as NOT eligible (fail-closed)"
+  ],
+  "PERSISTENCE_BOUNDARY": "record audition attempt intent before DECIDE (week-consuming transaction); flush after result commit",
+  "MIGRATION_STATUS": {
+    "CANDIDATE": "CONTROL_GROUNDING_BLOCKED (unchanged; raw frames now recovered, normalization still pending)",
+    "DECIDE": "NEEDS_FRESH_VISUAL_BOX (unchanged; 決定 visible in recovered frames but unnormalized)",
+    "excluded_from_migration_bundle": true,
+    "UNKNOWN": [
+      "canonical page anchors",
+      "pagination controls",
+      "real eligibility rules",
+      "audition types other than observed ones"
+    ],
+    "canonical_page_anchors": "PARTIAL — page layout visually replicated across historical sessions; schema formalization pending"
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json",
+    "enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json",
+    "enza_memory/migration/python_click_migration/distilled/python_migration_bundle_v0_1.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/battle_runtime_distillation.json"
+  ],
+  "evidence_delta_source": [
+    "HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY",
+    "RUN_STATE_CONTAMINATION_FIX"
+  ],
+  "EVIDENCE_DELTA": {
+    "delta_id": "CONTRACT_EVIDENCE_DELTA_20260907",
+    "page_visual_identity": "RECOVERED_DURABLE — audition schedule page fully visible in 16 recovered frames: candidate card (name/reward/eligibility/難易度), 決定 pink bottom-right, 振り返る, pagination arrows+dots, side tabs (レッスン&お仕事 / オーディション)",
+    "recovery_classes": {
+      "40k": 4,
+      "50k": 4,
+      "THE_LEGEND": 4,
+      "list_navigation": 4
+    },
+    "key_frames": {
+      "40k_card": "enza_memory/migration/python_click_migration/recovered_historical_frames/audition_selection/20260905_154928_38712583_40k.png",
+      "50k": "enza_memory/migration/python_click_migration/recovered_historical_frames/audition_selection/20260905_162521_38712583_50k.png",
+      "the_legend": "enza_memory/migration/python_click_migration/recovered_historical_frames/audition_selection/20260905_170508_38712583_the_legend.png",
+      "list": "enza_memory/migration/python_click_migration/recovered_historical_frames/audition_selection/20260905_143500_38712583_list.png"
+    },
+    "NOT_ELEVATED": [
+      "planner business policy",
+      "eligibility rules",
+      "reward priors — visual +?? bubbles are display-only"
+    ],
+    "geometry_status": "RAW frame evidence present; normalized control boxes still not captured — CANDIDATE/DECIDE grounding status unchanged"
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "source_image": "logs/live_2frame_20260905/frame1_viewport.png",
+  "method": "PaddleOCR",
+  "text_regions": [
+    {
+      "id": "paddle_001",
+      "text": "SKIP",
+      "bbox": [
+        1189,
+        55,
+        63,
+        30
+      ],
+      "confidence": 0.999985
+    },
+    {
+      "id": "paddle_002",
+      "text": "ログインボーナズ",
+      "bbox": [
+        227,
+        128,
+        700,
+        119
+      ],
+      "confidence": 0.910088
+    },
+    {
+      "id": "paddle_003",
+      "text": "CLEAR!!",
+      "bbox": [
+        99,
+        291,
+        104,
+        51
+      ],
+      "confidence": 0.992411
+    },
+    {
+      "id": "paddle_004",
+      "text": "CLEAR!!",
+      "bbox": [
+        244,
+        292,
+        101,
+        47
+      ],
+      "confidence": 0.999616
+    },
+    {
+      "id": "paddle_005",
+      "text": "CLEAR!!",
+      "bbox": [
+        388,
+        292,
+        100,
+        47
+      ],
+      "confidence": 0.999624
+    },
+    {
+      "id": "paddle_006",
+      "text": "CLEAR!!",
+      "bbox": [
+        529,
+        291,
+        102,
+        50
+      ],
+      "confidence": 0.9255
+    },
+    {
+      "id": "paddle_007",
+      "text": "SILVER TICKET",
+      "bbox": [
+        812,
+        324,
+        72,
+        32
+      ],
+      "confidence": 0.99935
+    },
+    {
+      "id": "paddle_008",
+      "text": "TRAINING",
+      "bbox": [
+        813,
+        332,
+        106,
+        50
+      ],
+      "confidence": 0.999988
+    },
+    {
+      "id": "paddle_009",
+      "text": "x300",
+      "bbox": [
+        725,
+        392,
+        66,
+        30
+      ],
+      "confidence": 0.997031
+    },
+    {
+      "id": "paddle_010",
+      "text": "x1",
+      "bbox": [
+        898,
+        395,
+        31,
+        25
+      ],
+      "confidence": 0.993486
+    },
+    {
+      "id": "paddle_011",
+      "text": "x1000",
+      "bbox": [
+        999,
+        392,
+        76,
+        30
+      ],
+      "confidence": 0.992183
+    },
+    {
+      "id": "paddle_012",
+      "text": "プロデューサ一就任から2,711日経過",
+      "bbox": [
+        311,
+        515,
+        445,
+        28
+      ],
+      "confidence": 0.973663
+    },
+    {
+      "id": "paddle_013",
+      "text": "2750日記念まであと39日",
+      "bbox": [
+        379,
+        548,
+        316,
+        25
+      ],
+      "confidence": 0.999842
+    },
+    {
+      "id": "paddle_014",
+      "text": "x1000",
+      "bbox": [
+        827,
+        585,
+        78,
+        30
+      ],
+      "confidence": 0.997373
+    },
+    {
+      "id": "paddle_015",
+      "text": "はづき",
+      "bbox": [
+        450,
+        674,
+        114,
+        44
+      ],
+      "confidence": 0.99944
+    }
+  ],
+  "metadata": {
+    "provider": "Paddle",
+    "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+    "skill_version": "not_applicable",
+    "case_id": "LIVE2F_20260905_f01",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "263535061e7b455fd1cf73669213121d5a0c29847d401b5b5daa02bf64cf9be1",
+    "created_at": "2026-09-05T04:37:05+00:00"
+  }
+}

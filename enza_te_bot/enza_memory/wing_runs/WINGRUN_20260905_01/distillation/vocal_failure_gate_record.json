@@ -1,0 +1,14 @@
+{
+  "candidate_rule": "VOCAL_FAILURE_RATE_GATE",
+  "classification": "OPERATOR_SPECIFIED_POLICY",
+  "threshold": "failure_rate > 2 → REST(back); <= 2 → VOCAL",
+  "stamina_semantics": {
+    "lt_0.50": "LOW_STAMINA_WARNING / RISK_SIGNAL (RUN_LOCAL_EVIDENCE, 不构成 REST_REQUIRED)",
+    "read_required": "low stamina 时 failure_rate 读取为必选"
+  },
+  "implementation": [
+    "home_policy.py apply_vocal_risk_guard",
+    "wing_fast_handlers.py VOCAL_FAILURE_ROI/parse_failure_rate_percent/vocal_failure_roi_status/SCHEDULE_BACK_TO_REST_PATH"
+  ],
+  "observation_budget": "正常 VOCAL 周仅新增 1 次局部 ROI read; 无全屏 OCR/AGY"
+}

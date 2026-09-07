@@ -1,0 +1,56 @@
+{
+  "artifact_type": "REDUNDANT_OR_MERGEABLE_CASES",
+  "planning_session": "IMPLEMENTATION_PLANNING_20260907",
+  "created_at": "2026-09-07T01:00:00Z",
+  "redundant_or_mergeable": [
+    {
+      "type": "ALREADY_IMPLEMENTED_IN_CODE",
+      "cases": ["PLR-001", "PLR-002"],
+      "finding": "regression_implementation_queue.json marked these READY_TO_IMPLEMENT, but goal_execution.py already has validate_goal_deadline + route_capacity_from_state, home_policy.py has the S4 deadline branch, and test_route_deadline_policy.py already has 10 tests including test_execution_boundary_rejects_forged_low_priority_goal and retry-budget cases. Downgraded to VERIFY_ONLY (CODEX_BATCH_2).",
+      "action": "no new logic; add the 0905 multi-failure fixture only"
+    },
+    {
+      "type": "ALREADY_IMPLEMENTED_IN_CODE",
+      "cases": ["PLR-011 (partial: selection-vs-permission)"],
+      "finding": "home_policy.py S3 branch (F-01 fix) already returns unconditional VOCAL with warning-only stamina, and test_planner_objective_is_not_replaced_by_vocal_risk_authorization already pins risk_gate_allows != planner_selects for the S3 milestone path. The remaining NEW work is only the futility/projection check + decision-trace field split.",
+      "action": "CODEX_BATCH_1 covers the residual; do not re-implement the existing guard"
+    },
+    {
+      "type": "SAME_GUARD_COVERS_BOTH",
+      "cases": ["NRG-021", "SBR-002"],
+      "finding": "NRG-021 (never replace just-learned skill) and SBR-002 (replacement target validation) describe one guard: forget-slot must be an ORIGINAL bottom-up skill with confirm-dialog identity check.",
+      "action": "merged into CODEX_BATCH_8 as a single test set"
+    },
+    {
+      "type": "SAME_GUARD_COVERS_BOTH",
+      "cases": ["NRG-009", "RCR-006"],
+      "finding": "Both are the same ordering contract on the result handler: classify explicit evidence → commit/UNKNOWN → advance. RCR-006 (scene-skip) is the advance-side consequence.",
+      "action": "one module + one test file (CODEX_BATCH_5)"
+    },
+    {
+      "type": "SAME_GUARD_COVERS_BOTH",
+      "cases": ["NRG-013", "NRG-026", "NRG-012"],
+      "finding": "One durability boundary family: flush content (event+evidence ref+digest), flush failure fail-closed, and session-loss fail-closed share the same checkpoint helper and test harness.",
+      "action": "single CODEX_BATCH_3"
+    },
+    {
+      "type": "TEST_EXISTS_NEEDS_INTEGRATION_ONLY",
+      "cases": ["NRG-024", "NRG-016", "NRG-001", "NRG-002", "NRG-006", "NRG-007", "NRG-023"],
+      "finding": "Already triaged ALREADY_COVERED in reconciliation; listed here to prevent re-creation: commit-evidence pins (test_season3_audition, test_goal_execution), overlay/hazard/viewport (test_python_shadow_executor), burst guard (test_blind_interaction_policy), speed holds (test_harness_live_invariants, test_audition_battle_identity).",
+      "action": "keep green; no new tests"
+    },
+    {
+      "type": "ARTIFACT_DUPLICATION",
+      "cases": ["PLR-005", "PLR-011"],
+      "finding": "PLR-005 (mining) and the newly added PLR-011 (reconciliation) described the same 0906 futility defect at different severity; already merged with PLR-005 preserved as historical.",
+      "action": "none — merge already recorded in planner_regressions.json"
+    },
+    {
+      "type": "ARTIFACT_DUPLICATION",
+      "cases": ["VNC-001/002/003", "NRG-020"],
+      "finding": "NRG-020 (negative regression) and the three promoted visual cases describe the same locked/dead-zone probe defects; NRG-020 now links to VNC ids.",
+      "action": "single implementation (CODEX_BATCH_8); artifacts cross-reference instead of duplicating"
+    }
+  ],
+  "net_effect": "16 READY entries reduce to 8 execution batches; 2 of them are verify-only; 3 test-file merges replace 6 would-be duplicates"
+}

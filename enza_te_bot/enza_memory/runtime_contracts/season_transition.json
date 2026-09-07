@@ -1,0 +1,148 @@
+{
+  "contract_version": "0.2.1",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): T-04 transition-frame no-projection rule added; 2026-09-07 evidence delta CONTRACT_EVIDENCE_DELTA_20260907: recovered_historical_frames + PERSIST-1 re-check; metadata only",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract. Transition SCENE advance != season COMMITTED: fresh next-season HOME is the only commit evidence (POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE).",
+  "scenario_scope": "WING season end/start scenes (S1→S2, S2→S3 observed; S3→end observed), 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "SEASON_TRANSITION",
+    "identity_anchors_required": [
+      "scene/dialogue frames between old-season result and fresh next-season HOME",
+      "SKIP badge visible on scene frames",
+      "次へ/OK controls on transition result screens"
+    ],
+    "identity_source": "layout_role, 3 season-transition completions + opening-scene SKIP observation",
+    "identity_status": "PARTIAL — frame types enumerated only partially"
+  },
+  "ENTRY_CONDITIONS": [
+    "old season result committed (or explicitly preserved UNKNOWN) BEFORE entering transition",
+    "fresh frame identity of transition subtype",
+    "tool cell budget checked — long transitions exceed a single cell"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "TRANSIENT frames carry NO semantic control inventory (transition-frame no-projection rule; VRB02_006/022/036 render zero semantic regions)",
+      "transition subtype (scene SKIP-able / result NEXT-able / loading)",
+      "SKIP visibility and business-choice absence",
+      "next-season HOME anchors (season number, weeks=8 fresh, fan gap reset semantics)",
+      "durable flush completion"
+    ]
+  },
+  "SUBSTATES": [
+    {
+      "substate": "OPENING_SCENE_SKIP",
+      "evidence": "direct jump to WING_HOME observed once (duration not recorded)"
+    },
+    {
+      "substate": "KNOWN_TRANSIENT_DIALOGUE",
+      "evidence": "SKIP 5/5 successes"
+    },
+    {
+      "substate": "KNOWN_TRANSITION_RESULT",
+      "evidence": "NEXT 4/4 successes"
+    },
+    {
+      "substate": "NEXT_SEASON_HOME_PENDING_RECONCILE",
+      "evidence": "fresh S2_START / S3_START boundaries (8 weeks) observed"
+    }
+  ],
+  "VISIBLE_CONTROLS": [
+    {
+      "control": "SKIP",
+      "geometry": "box observed (0.9266-0.9828, 0.0278-0.1222 norm); canonical box UNKNOWN",
+      "success_fail": "5/0",
+      "visible_status": "VERIFIED_EVIDENCE"
+    },
+    {
+      "control": "NEXT (次へ/OK)",
+      "geometry": "box observed, normalized region UNKNOWN",
+      "success_fail": "4/0",
+      "visible_status": "VERIFIED_EVIDENCE"
+    }
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "SKIP visible != SKIP authorized for unknown transition types. MEDIUM authority: transition type MUST be known before SKIP (semifinal scene SKIP advanced route without explicit result evidence — negative precedent).",
+    "SKIP": "authorized only on fresh known transition/dialogue identity + no business choice",
+    "NEXT": "HIGH authority only for known transition screens with expected next season/state known",
+    "advance_presentation": "never substitutes for fresh next-season HOME evidence"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/classify transition frames",
+    "SKIP on known scene types",
+    "NEXT on known transition result screens",
+    "wait through long transitions (split tool cells)"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "SKIP on unknown scene types (semifinal/final uncertainty)",
+    "committing season flag from scene labels alone",
+    "starting next week transaction before durable flush + fresh HOME"
+  ],
+  "POSTCONDITIONS": {
+    "transition_complete": "fresh next-season HOME (season number + weeks_remaining=8 + fan gap) observed and durably flushed"
+  },
+  "EXIT_CONDITIONS": [
+    "fresh next-season WING_HOME → HOME room",
+    "run end → ENDING room"
+  ],
+  "FAILURE_MODES": [
+    {
+      "mode": "TRANSITION_EXCEEDS_TOOL_CELL",
+      "class": "TOOL_TIMEOUT",
+      "evidence": "crash during S2→S3; long transitions must split cells"
+    },
+    {
+      "mode": "SCENE_SKIP_LOSING_RESULT_EVIDENCE",
+      "class": "EVIDENCE_LOSS",
+      "evidence": "S3 semifinal scene"
+    },
+    {
+      "mode": "PERSISTENCE_GAP_AT_SEASON_BOUNDARY",
+      "class": "PERSISTENCE",
+      "evidence": "S1W6→S3 crash backfill"
+    },
+    {
+      "mode": "MORNING_S3_START_PREP_MISSED",
+      "class": "SEQUENCE_MISS",
+      "evidence": "S3_START_PREP missed at season entry, recovered late at week 4"
+    }
+  ],
+  "RECOVERY": [
+    "crash mid-transition: fresh stable state supersedes stale checkpoint; link derived chains must stay marked DERIVED/SESSION_TRANSCRIPT_CONFIRMED, never upgraded to live timestamps",
+    "S3_START_PREP check at fresh S3 weeks=8 HOME before weekly loop (future_run_rule in s3_start_prep_record)"
+  ],
+  "PERSISTENCE_BOUNDARY": "season transition is a durable boundary: flush old-season result, then fresh new-season HOME with provenance before policy re-evaluation; refuse next transaction on flush failure",
+  "MIGRATION_STATUS": {
+    "SKIP": "NEEDS_FRESH_VISUAL_BOX (13/17)",
+    "NEXT": "NEEDS_FRESH_VISUAL_BOX (13/17, HAZARD_KNOWN=1)",
+    "semi_final_final_transitions": "SEMIFINAL_PAGE_IDENTITY=VISUALLY_SUPPORTED (2 recovered frames); SEMIFINAL_RESULT_SEMANTICS=UNKNOWN (no explicit result evidence); FINAL=UNKNOWN",
+    "frame_inventory": "PARTIAL"
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json",
+    "enza_memory/migration/python_click_migration/distilled/runtime_recovery_requirements.json",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json",
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json"
+  ],
+  "evidence_delta_source": [
+    "HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY",
+    "RUN_STATE_CONTAMINATION_FIX"
+  ],
+  "EVIDENCE_DELTA": {
+    "delta_id": "CONTRACT_EVIDENCE_DELTA_20260907",
+    "SEMIFINAL_PAGE_IDENTITY": "VISUALLY_SUPPORTED — W.I.N.G. 準決勝 HOME/banner frames recovered (W.I.N.G. 準決勝!! top-bar badge + 準決勝ライブ schedule entry)",
+    "semifinal_frames": [
+      "enza_memory/migration/python_click_migration/recovered_historical_frames/season/20260906_000937_dc58a91a_semifinal.png",
+      "enza_memory/migration/python_click_migration/recovered_historical_frames/season/20260906_000953_dc58a91a_semifinal.png"
+    ],
+    "SEMIFINAL_RESULT_SEMANTICS": "UNKNOWN — no explicit semifinal result evidence in recovered set; WIN must not be inferred from page identity",
+    "rule": "page identity != result semantics; result commit still requires explicit PASS/FAIL evidence per result.json",
+    "NOT_ELEVATED": [
+      "semifinal WIN derivation",
+      "final (決勝) page identity — not in recovered set"
+    ]
+  },
+  "SUBSTATES_APPEND": null
+}

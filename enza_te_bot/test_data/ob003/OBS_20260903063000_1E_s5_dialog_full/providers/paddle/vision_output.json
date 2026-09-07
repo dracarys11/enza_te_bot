@@ -1,0 +1,180 @@
+{
+  "metadata": {
+    "provider": "Paddle",
+    "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+    "skill_version": "not_applicable",
+    "case_id": "OBS_20260903063000_1E_s5_dialog_full",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "101e9265cce4e0d403ffd93c96f28cb6a6a2e70035fa1f0ccaca494074f795a6",
+    "created_at": "2026-09-04T01:00:56+08:00"
+  },
+  "source_image": "ai_decisions/observations/screenshots/OBS_20260903063000_1E_s5_dialog_full.png",
+  "method": "PaddleOCR",
+  "text_regions": [
+    {
+      "id": "paddle_001",
+      "text": "ユニット編成",
+      "bbox": [
+        50,
+        20,
+        153,
+        32
+      ],
+      "confidence": 0.999138
+    },
+    {
+      "id": "paddle_002",
+      "text": "プロデュース選択",
+      "bbox": [
+        487,
+        25,
+        164,
+        24
+      ],
+      "confidence": 0.998952
+    },
+    {
+      "id": "paddle_003",
+      "text": "ユニット編成",
+      "bbox": [
+        751,
+        25,
+        125,
+        24
+      ],
+      "confidence": 0.99555
+    },
+    {
+      "id": "paddle_004",
+      "text": "アイテム選択",
+      "bbox": [
+        991,
+        25,
+        126,
+        24
+      ],
+      "confidence": 0.999301
+    },
+    {
+      "id": "paddle_005",
+      "text": "ユニット編成について",
+      "bbox": [
+        189,
+        80,
+        320,
+        38
+      ],
+      "confidence": 0.999444
+    },
+    {
+      "id": "paddle_006",
+      "text": "1/7",
+      "bbox": [
+        1127,
+        73,
+        83,
+        46
+      ],
+      "confidence": 0.901913
+    },
+    {
+      "id": "paddle_007",
+      "text": "ユ",
+      "bbox": [
+        26,
+        89,
+        32,
+        27
+      ],
+      "confidence": 0.778227
+    },
+    {
+      "id": "paddle_008",
+      "text": "プロデュースアイドルとサポートアイドルで、ユニットを組みましょう",
+      "bbox": [
+        209,
+        156,
+        890,
+        28
+      ],
+      "confidence": 0.99766
+    },
+    {
+      "id": "paddle_009",
+      "text": "プロデュースアイドル1人",
+      "bbox": [
+        86,
+        219,
+        239,
+        27
+      ],
+      "confidence": 0.992363
+    },
+    {
+      "id": "paddle_010",
+      "text": "サポートアイドル5人(ゲスト1人)",
+      "bbox": [
+        444,
+        219,
+        317,
+        27
+      ],
+      "confidence": 0.970276
+    },
+    {
+      "id": "paddle_011",
+      "text": "プロデュース",
+      "bbox": [
+        970,
+        339,
+        199,
+        46
+      ],
+      "confidence": 0.958054
+    },
+    {
+      "id": "paddle_012",
+      "text": "開始",
+      "bbox": [
+        1026,
+        377,
+        102,
+        55
+      ],
+      "confidence": 0.997114
+    },
+    {
+      "id": "paddle_013",
+      "text": "ゲストに配置したサポートアイドルは、",
+      "bbox": [
+        182,
+        501,
+        434,
+        25
+      ],
+      "confidence": 0.997387
+    },
+    {
+      "id": "paddle_014",
+      "text": "ライブに参加できないので注意しましょう",
+      "bbox": [
+        626,
+        501,
+        469,
+        25
+      ],
+      "confidence": 0.988779
+    },
+    {
+      "id": "paddle_015",
+      "text": "閉じる",
+      "bbox": [
+        600,
+        580,
+        85,
+        37
+      ],
+      "confidence": 0.999905
+    }
+  ]
+}

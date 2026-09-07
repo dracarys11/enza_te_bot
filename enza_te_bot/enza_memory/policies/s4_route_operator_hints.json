@@ -1,0 +1,16 @@
+{
+  "policy_id": "s4_route_operator_hints",
+  "status": "CANDIDATE (operator hints, 部分截断)",
+  "scenario_scope": "WING",
+  "recorded": "2026-09-05",
+  "rules": [
+    {"rule": "Vocal 练到 MAX 后要点技能点", "confidence": "operator direct"},
+    {"rule": "技能点优先升级「上限」(数值上限提升)", "confidence": "operator direct"},
+    {"rule": "技能点入口在「振り返り」(S4 HOME 右下入口)", "confidence": "operator direct, 消息在'振..'处截断"}
+  ],
+  "notes": [
+    "当前 run SP 已积累 521 未消费 — 与该规则吻合(应该花掉)",
+    "消息截断, 詳細(上限具体指 Vo/Da/Vi 哪个上限、技能树结构)待 operator 补充或 runtime 观察 振り返り 页面",
+    "不据此自动消费 SP; 消费动作需单独授权(可能不可逆)"
+  ]
+}

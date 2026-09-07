@@ -1,0 +1,15 @@
+{
+  "inspected": "2026-09-05T15:02:34Z",
+  "frame": "screenshots/frozen_battle_inspect.png",
+  "FRESH_SPEED_STATE": "X2 (粉色 2倍速 badge 显示中)",
+  "FRESH_AUTO_STATE": "OFF (灰色暗淡样式, 与可点击时的黑色/ON 粉色明显不同)",
+  "OVERLAY": "none (无暂停/效果/技能面板)",
+  "SPEED_CONTROL_GROUNDED": "PARTIAL — 2倍速 badge 为 display-only; 真实 toggle 控件在当前帧不可辨识(badge 处点击历史上曾生效于 倍速OFF→2倍速, 但 X2→X3 未证实)",
+  "AUTO_CONTROL_GROUNDED": "YES (位置可辨识) BUT 当前呈 DIMMED 状态 — 疑似在非玩家输入阶段(idols 舞蹈动画播放中)被禁用",
+  "ACTUAL_ORDERING": "UNKNOWN — 本场 battle 无一次成功的 speed 或 auto 操作: 唯一一次 Auto 点击发生在 advice→对话过渡期(无效); 恢复后 3 次点击均落在动画播放阶段(dimmed 控件)",
+  "S4_AUTO_FAILURE_CAUSE": "ORDERING_VIOLATION(首击在对话期无效) + CONTROL_DISABLED_DURING_ANIMATION(恢复后 dimmed) — 组合成因; 核心新知识: Auto 可点窗口 = 玩家输入等待阶段(卡片待选/静止), 动画播放阶段控件 dimmed 不可点",
+  "additional_findings": [
+    "速度状态疑似跨 battle 持久化: 本场开局即 2倍速(上一场 S3 50k 结束时为 2倍速), 推翻'每场重置 OFF'假设",
+    "正确恢复程序: 等 idols 静止(玩家输入等待帧, Auto 变为可点样式) → 点 Auto → fresh read → 若需调速则在进入下一 battle 前于对话/准备阶段定位 speed toggle"
+  ]
+}

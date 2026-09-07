@@ -1,0 +1,15 @@
+{
+  "scenario_scope": "WING",
+  "controls": [
+    {"control_id":"ikusei_category_tab","page_class":"PRODUCE_SELECTION","label":"育成プロデュース","approx_region":"top-right","risk_class":"SAFE_NAVIGATION","times_successful":1},
+    {"control_id":"wizard_forward_next","page_class":"PRODUCE_SELECTION/UNIT_FORMATION","label":"次へ","approx_region":"bottom-right","risk_class":"SAFE_STAGE_ADVANCE","times_successful":2},
+    {"control_id":"wizard_commit_kettei","page_class":"ITEM_SELECTION","label":"決定","approx_region":"bottom-right","risk_class":"SAFE_STAGE_ADVANCE(触发最终确认)","times_successful":1},
+    {"control_id":"produce_start_commit","page_class":"FINAL_CONFIRM_MODAL","label":"プロデュース開始","approx_region":"modal-right","risk_class":"FINAL_COMMIT","times_successful":1},
+    {"control_id":"dialogue_skip","page_class":"WING_INTRO_DIALOGUE","label":"SKIP","approx_region":"top-right","risk_class":"SAFE_NAVIGATION","times_successful":1},
+    {"control_id":"difficulty_subtabs","page_class":"PRODUCE_SELECTION_IKUSEI","label":"ビギナー/ミドル/マスター","approx_region":"wing-card","risk_class":"REVERSIBLE_LOCAL(影响WING build, 未执行)","times_successful":0},
+    {"control_id":"stamina_rate_tabs","page_class":"ITEM_SELECTION","label":"1倍/2倍/3倍","approx_region":"bottom-center","risk_class":"COMMIT(消耗倍率, 保持1倍未动)","times_successful":0},
+    {"control_id":"wing_schedule","page_class":"WING_HOME","label":"プロデュース(SCHEDULE)","approx_region":"bottom-left","risk_class":"UNKNOWN_RISK(进入周排程, 本轮未点)","times_successful":0},
+    {"control_id":"wing_rest","page_class":"WING_HOME","label":"休む","approx_region":"bottom-center","risk_class":"COMMIT(消耗周数, 禁止)","times_successful":0},
+    {"control_id":"wing_home_back","page_class":"WING_HOME","label":"ホームに戻る","approx_region":"right","risk_class":"UNKNOWN_RISK(退出确认未验证)","times_successful":0}
+  ]
+}

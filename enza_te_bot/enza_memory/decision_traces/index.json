@@ -1,0 +1,19 @@
+{
+  "decision_traces_for": "enza_1e_environment_mapping_001",
+  "updated_at": "2026-09-03T06:20:00Z",
+  "count": 4,
+  "traces": [
+    "DT_20260903060510_001",
+    "DT_20260903060535_002",
+    "DT_20260903060600_003",
+    "DT_20260903063000_004"
+  ],
+  "failures": 0,
+  "verification_results": [
+    "PASS",
+    "PASS",
+    "PASS (boundary)",
+    "PASS (passive)"
+  ],
+  "usage_status": "audit/benchmarking ONLY. NOT executable policy, NOT training data."
+}

@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "provider": "agent_vision",
+    "model": "UNKNOWN",
+    "skill_version": "not_applicable",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "101e9265cce4e0d403ffd93c96f28cb6a6a2e70035fa1f0ccaca494074f795a6",
+    "created_at": "2026-09-04T01:02:32+08:00"
+  },
+  "observation_id": "AGENT_VISION_OBS_20260903063000_DIALOG",
+  "source_note": "agent direct vision extraction from OBS_20260903063000_1E_s5_dialog_full.png; no external vision model output consulted",
+  "text_regions": [
+    {"text": "ユニット編成", "bbox": [55, 28, 145, 32], "confidence": 0.95},
+    {"text": "プロデュース選択", "bbox": [490, 28, 165, 26], "confidence": 0.9},
+    {"text": "ユニット編成", "bbox": [765, 28, 120, 26], "confidence": 0.9},
+    {"text": "アイテム選択", "bbox": [1010, 28, 120, 26], "confidence": 0.9},
+    {"text": "ユニット編成について", "bbox": [200, 88, 290, 35], "confidence": 0.96},
+    {"text": "1/7", "bbox": [1135, 80, 70, 40], "confidence": 0.96},
+    {"text": "プロデュースアイドルとサポートアイドルで、ユニットを組みましょう", "bbox": [195, 160, 900, 32], "confidence": 0.94},
+    {"text": "プロデュースアイドル1人", "bbox": [90, 220, 240, 30], "confidence": 0.93},
+    {"text": "サポートアイドル5人（ゲスト1人）", "bbox": [450, 222, 310, 28], "confidence": 0.92},
+    {"text": "プロデュース開始", "bbox": [985, 340, 180, 80], "confidence": 0.93},
+    {"text": "ゲストに配置したサポートアイドルは、ライブに参加できないので注意しましょう", "bbox": [185, 495, 900, 30], "confidence": 0.93},
+    {"text": "閉じる", "bbox": [605, 585, 90, 32], "confidence": 0.96}
+  ],
+  "interaction_candidates": [
+    {"bbox": [410, 565, 80, 72], "linked_text": [], "visual_description": "dark rounded square with white left arrow, bottom-left of dialog"},
+    {"bbox": [555, 565, 165, 72], "linked_text": ["閉じる"], "visual_description": "white rounded button"},
+    {"bbox": [795, 565, 80, 72], "linked_text": [], "visual_description": "dark rounded square with white right arrow, bottom-right of dialog"},
+    {"bbox": [975, 270, 200, 200], "linked_text": ["プロデュース開始"], "visual_description": "large pink circular button with wings emblem on the right side of the dialog"},
+    {"bbox": [55, 60, 1170, 600], "linked_text": ["ユニット編成について", "1/7"], "visual_description": "modal dialog container covering most of the screen; underlying page is dimmed behind it"}
+  ],
+  "uncertainties": [
+    {"reason": "character cards inside the dialog carry tiny Lv.1 labels and icons, not reliably readable", "bbox": [390, 255, 440, 220]},
+    {"reason": "underlying page controls (including a pink button bottom-right) are partially occluded by the modal dialog", "bbox": [0, 60, 1280, 660]},
+    {"reason": "dialog pagination implies 6 more pages whose content is not visible in this frame", "bbox": [1135, 80, 70, 40]}
+  ]
+}

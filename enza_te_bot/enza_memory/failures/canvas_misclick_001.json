@@ -1,0 +1,53 @@
+{
+  "failure_id": "canvas_misclick_001",
+  "trajectory_reference": "enza_zcode_baseline_001 step 2",
+  "phase": "Phase 9 / 1D session, produceReady info modal",
+  "timestamp_approx": "2026-09-03T05:0x:00Z",
+  "occurrences": 1,
+
+  "intent": "dismiss the produce-mode info modal by clicking its 閉じる (close) button — dismiss-only action class, no selection",
+
+  "grounding_method": {
+    "method": "visual estimate from screenshot; no DOM/accessibility grounding (unavailable); no calibration",
+    "estimated_target": "閉じる at viewport ~(640, 622)",
+    "precision_claim": "none — exact hitbox UNKNOWN"
+  },
+
+  "action": { "performed": "single cua.click at (640, 622)" },
+
+  "observed_result": {
+    "new_state": "HELP_OVERLAY (ヘルプ: プロデュース W.I.N.G. topic list)",
+    "url": "https://shinycolors.enza.fun/produceReady (unchanged)",
+    "evidence": [
+      "post-action screenshot (session artifact, Phase 9 pass)",
+      "URL read before/after: identical /produceReady"
+    ],
+    "provenance": "session_observed"
+  },
+
+  "verification": {
+    "expected_state": "produce selection screen (プロデュース選択)",
+    "comparison": "fresh screenshot vs expected — mismatch detected immediately",
+    "result": "ANOMALY detected, reported, not silently retried",
+    "recovery": "clicked explicit back-arrow affordance of the help page -> PRODUCE_SELECTION (PASS, verified by screenshot)",
+    "recovery_cost": "one extra interaction; no observed state damage"
+  },
+
+  "unknown_cause": {
+    "classification": "WRONG_TARGET_OR_STALE_STATE — exact cause UNKNOWN",
+    "candidate_causes": [
+      "coordinate mismatch: actual hitbox differed from visual estimate",
+      "hitbox uncertainty: button position estimated from pixels without calibration",
+      "state-transition timing: modal may have auto-dismissed before the click landed, exposing an underlying help affordance"
+    ],
+    "isolated_variables": "none — n=1, no controlled experiment"
+  },
+
+  "future_caution": [
+    "treat click coordinates derived from any pre-action screenshot as unverified until a calibration exists",
+    "after a failed/unexpected click, re-observe before any further action; prefer visually unambiguous, isolated affordances for recovery",
+    "URL is not state proof: this failure occurred at an unchanged URL"
+  ],
+
+  "policy_links": ["policies/learned_constraints.json#F2", "#F3", "#U1", "#U2", "#R2"]
+}

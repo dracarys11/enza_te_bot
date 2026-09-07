@@ -1,0 +1,17 @@
+{
+  "case_name": "grounded click candidate",
+  "mode": "decision",
+  "observation": "test_data/ob001/fused_observation.json",
+  "user_goal": "点击下一步",
+  "target_text_options": ["次へ"],
+  "expected": {
+    "candidate_id": "AC_001",
+    "target_element_id": "e14",
+    "action_type": "CLICK",
+    "evidence": [
+      "text evidence: 次へ",
+      "visual evidence: interaction candidate e14"
+    ],
+    "confidence": 0.99
+  }
+}

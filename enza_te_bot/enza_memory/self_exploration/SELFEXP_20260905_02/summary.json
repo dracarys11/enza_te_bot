@@ -1,0 +1,23 @@
+{
+  "session_id": "SELFEXP_20260905_02",
+  "mode": "SELF_EXPLORATION_MODE",
+  "started": "2026-09-05T05:45:00Z",
+  "ended": "2026-09-05T05:48:00Z",
+  "screenshots_total": 4,
+  "actions_total": 3,
+  "valid_transitions": 1,
+  "new_pages": 0,
+  "new_controls": 0,
+  "agy_calls": 0,
+  "stop_reasons": [
+    "连续 2 次 action 结果与预期不一致（ユニット編成 tab 两次点击均无反应），按规则 STOP"
+  ],
+  "finding": "PRODUCE_MENU 顶部 ユニット編成/アイテム選択 tab 在 プロデュース選択 未提交前不可交互（向导式流程锁）。要触达这两个页面必须先经过 次へ(COMMIT, 本轮禁止)。两条准备分支在当前约束下不可探索。",
+  "risk_classification": {
+    "SAFE_NAVIGATION": ["bottom_nav_produce(HOME)"],
+    "REVERSIBLE_LOCAL": [],
+    "COMMIT": ["次へ (PRODUCE_MENU 右下)", "オートプロデュース", "成長詳細(待定 UNKNOWN_RISK)"],
+    "UNKNOWN_RISK": ["成長詳細", "プロデュース攻略法"]
+  },
+  "next_recommended_exploration": "本轮结论改变了计划：ユニット編成/アイテム選択 在 produce 向导外不可达。下一轮建议探索 HOME 其他低风险分支（プレゼント/ミッション/お知らせ 等只读页面），或正式授权后走 produce 次へ 链。"
+}

@@ -1,0 +1,17 @@
+{
+  "review_type":"minimal_visual_audit",
+  "status":"AGY_REVIEW_INCOMPLETE",
+  "reason":"RESULT_NOT_RECOVERABLE",
+  "promotion":"NONE",
+  "historical":true,
+  "retry_prohibited":true,
+  "sessions":["SELFEXP_20260905_01","SELFEXP_20260905_02","SELFEXP_20260905_03"],
+  "unique_screenshot_limit":6,
+  "review_items":[
+    {"review_id":"WING-01","question":"Are the PRODUCE_MENU top tabs visibly disabled/locked, or could the two no-op clicks be geometry/overlay/disabled-state ambiguity?","screenshots":["SELFEXP_20260905_02/screenshots/t1_after_produce_menu.png","SELFEXP_20260905_02/screenshots/t2b_after_unit_formation.png"],"zcode_claim":"ユニット編成/アイテム選択 are locked before 次へ","codex_assessment":"CONFLICT; no-op after two clicks is insufficient to identify cause","why_agy_needed":"independent visual check of tab affordance/highlight/disabled styling"},
+    {"review_id":"WING-02","question":"Does the clean stage screenshot identify UNIT_FORMATION as a distinct page, and is it merely generic produce UI?","screenshots":["SELFEXP_20260905_03/screenshots/s3_unit_formation_clean.png"],"zcode_claim":"UNIT_FORMATION wizard stage","codex_assessment":"page supported, WING scope unproven","why_agy_needed":"verify visible stage identity without inferring scenario"},
+    {"review_id":"WING-03","question":"Does the clean stage screenshot identify KNOWHOW_SELECTION, and is there any visible WING-specific evidence?","screenshots":["SELFEXP_20260905_03/screenshots/s5_knowhow_clean.png"],"zcode_claim":"KNOWHOW_SELECTION stage 3 of WING preparation","codex_assessment":"stage supported, scenario scope UNKNOWN_SCOPE","why_agy_needed":"check whether screenshot contains explicit WING identity rather than generic produce labels"},
+    {"review_id":"WING-04","question":"Are the tutorial screens transient overlays over the parent produceReady page?","screenshots":["SELFEXP_20260905_03/screenshots/s1_after_next.png","SELFEXP_20260905_03/screenshots/s4_after_next_knowhow.png"],"zcode_claim":"UNIT_FORMATION/KNOWHOW_SELECTION + tutorial overlay","codex_assessment":"likely interruption model; visual confirmation needed","why_agy_needed":"verify overlay bounds and parent page visibility"},
+    {"review_id":"WING-05","question":"Does PRODUCE_SELECTION visibly identify WING, or only a generic produce entry?","screenshots":["SELFEXP_20260905_03/screenshots/s1_before_produce_selection.png"],"zcode_claim":"PRODUCE_SELECTION in WING wizard","codex_assessment":"generic produce evidence only","why_agy_needed":"test for explicit WING/scenario marker"}
+  ]
+}

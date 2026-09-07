@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "provider": "gemini",
+    "model": "UNKNOWN",
+    "skill_version": "v1",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "2e80cd0cf6f15cf8e8a7839e9e3a871446c0c34d6f200093e6673a3f99a120eb",
+    "created_at": "2026-09-04T01:14:27+08:00"
+  },
+  "observation_id": "OBS_20260903064050_P2_s3_after_back1",
+  "text_regions": [
+    {"id": "gemini_t01", "text": "プロデュース選択", "bbox": [52, 25, 225, 31], "confidence": 0.99},
+    {"id": "gemini_t02", "text": "プロデュース選択", "bbox": [488, 27, 181, 25], "confidence": 0.99},
+    {"id": "gemini_t03", "text": "ユニット編成", "bbox": [754, 27, 166, 25], "confidence": 0.98},
+    {"id": "gemini_t04", "text": "アイテム選択", "bbox": [997, 27, 158, 25], "confidence": 0.98},
+    {"id": "gemini_t05", "text": "プロデュースの種類", "bbox": [636, 90, 179, 26], "confidence": 0.99},
+    {"id": "gemini_t06", "text": "育成プロデュース", "bbox": [850, 90, 153, 26], "confidence": 0.99},
+    {"id": "gemini_t07", "text": "特化プロデュース", "bbox": [1017, 90, 166, 26], "confidence": 0.99},
+    {"id": "gemini_t08", "text": "W.I.N.G.", "bbox": [764, 229, 327, 64], "confidence": 0.99},
+    {"id": "gemini_t09", "text": "Wonder.Idol.Nova.Grandprix.", "bbox": [745, 293, 351, 28], "confidence": 0.97},
+    {"id": "gemini_t10", "text": "ビギナー", "bbox": [642, 356, 128, 40], "confidence": 0.99},
+    {"id": "gemini_t11", "text": "ミドル", "bbox": [807, 356, 118, 40], "confidence": 0.99},
+    {"id": "gemini_t12", "text": "マスター", "bbox": [997, 356, 129, 40], "confidence": 0.99},
+    {"id": "gemini_t13", "text": "W.I.N.G.編", "bbox": [228, 372, 140, 32], "confidence": 0.99},
+    {"id": "gemini_t14", "text": "攻略動画①(外部サイト)", "bbox": [181, 415, 232, 26], "confidence": 0.99},
+    {"id": "gemini_t15", "text": "レッスンやお仕事、オーディションを通してアイドルを", "bbox": [76, 494, 478, 23], "confidence": 0.97},
+    {"id": "gemini_t16", "text": "プロデュースできます。ファンを集めて各シーズン目標", "bbox": [76, 518, 478, 23], "confidence": 0.97},
+    {"id": "gemini_t17", "text": "を達成し、W.I.N.G.優勝を目指しましょう！", "bbox": [76, 542, 405, 23], "confidence": 0.97},
+    {"id": "gemini_t18", "text": "283プロダクション", "bbox": [871, 470, 195, 24], "confidence": 0.93},
+    {"id": "gemini_t19", "text": "ファン感謝祭", "bbox": [764, 498, 360, 61], "confidence": 0.95},
+    {"id": "gemini_t20", "text": "~Thanks Flapping Day!!~", "bbox": [830, 558, 266, 23], "confidence": 0.92},
+    {"id": "gemini_t21", "text": "オートプロデュース", "bbox": [155, 638, 105, 48], "confidence": 0.99},
+    {"id": "gemini_t22", "text": "G.R", "bbox": [786, 640, 132, 62], "confidence": 0.77},
+    {"id": "gemini_t23", "text": "研修設定", "bbox": [924, 643, 119, 34], "confidence": 0.99},
+    {"id": "gemini_t24", "text": "次へ", "bbox": [1143, 646, 73, 38], "confidence": 0.99}
+  ],
+  "interaction_candidates": [
+    {"id": "gemini_e01", "bbox": [1201, 14, 79, 58], "appearance": {"shape": "rounded_rect", "color_hint": "light_gray", "content_hint": "four_square_glyph"}, "linked_text_ids": [], "interaction_confidence": 0.95},
+    {"id": "gemini_e02", "bbox": [831, 81, 177, 43], "appearance": {"shape": "rounded_rect", "color_hint": "pink"}, "linked_text_ids": ["gemini_t06"], "interaction_confidence": 0.98},
+    {"id": "gemini_e03", "bbox": [1007, 81, 190, 43], "appearance": {"shape": "rounded_rect", "color_hint": "light_gray"}, "linked_text_ids": ["gemini_t07"], "interaction_confidence": 0.98},
+    {"id": "gemini_e04", "bbox": [584, 188, 660, 237], "appearance": {"shape": "rounded_rect", "color_hint": "blue_gradient", "content_hint": "large_illustrated_panel"}, "linked_text_ids": ["gemini_t08", "gemini_t09", "gemini_t10", "gemini_t11", "gemini_t12"], "interaction_confidence": 0.88},
+    {"id": "gemini_e05", "bbox": [600, 338, 183, 75], "appearance": {"shape": "segment", "color_hint": "mint"}, "linked_text_ids": ["gemini_t10"], "interaction_confidence": 0.93},
+    {"id": "gemini_e06", "bbox": [773, 338, 191, 75], "appearance": {"shape": "segment", "color_hint": "blue"}, "linked_text_ids": ["gemini_t11"], "interaction_confidence": 0.95},
+    {"id": "gemini_e07", "bbox": [957, 338, 185, 75], "appearance": {"shape": "segment", "color_hint": "pink"}, "linked_text_ids": ["gemini_t12"], "interaction_confidence": 0.93},
+    {"id": "gemini_e08", "bbox": [1141, 338, 62, 75], "appearance": {"shape": "segment", "color_hint": "light_gray", "content_hint": "information_glyph"}, "linked_text_ids": [], "interaction_confidence": 0.90},
+    {"id": "gemini_e09", "bbox": [82, 411, 32, 40], "appearance": {"shape": "chevron", "color_hint": "white", "content_hint": "left_chevron"}, "linked_text_ids": [], "interaction_confidence": 0.90},
+    {"id": "gemini_e10", "bbox": [169, 410, 256, 40], "appearance": {"shape": "rounded_rect", "color_hint": "pink"}, "linked_text_ids": ["gemini_t14"], "interaction_confidence": 0.97},
+    {"id": "gemini_e11", "bbox": [483, 411, 31, 40], "appearance": {"shape": "chevron", "color_hint": "white", "content_hint": "right_chevron"}, "linked_text_ids": [], "interaction_confidence": 0.90},
+    {"id": "gemini_e12", "bbox": [614, 449, 592, 143], "appearance": {"shape": "rounded_rect", "color_hint": "cream", "content_hint": "large_illustrated_panel"}, "linked_text_ids": ["gemini_t18", "gemini_t19", "gemini_t20"], "interaction_confidence": 0.92},
+    {"id": "gemini_e13", "bbox": [20, 624, 78, 77], "appearance": {"shape": "rounded_rect", "color_hint": "light_lavender", "content_hint": "left_arrow"}, "linked_text_ids": [], "interaction_confidence": 0.98},
+    {"id": "gemini_e14", "bbox": [126, 624, 166, 77], "appearance": {"shape": "rounded_rect", "color_hint": "light_lavender"}, "linked_text_ids": ["gemini_t21"], "interaction_confidence": 0.98},
+    {"id": "gemini_e15", "bbox": [628, 610, 577, 110], "appearance": {"shape": "rounded_rect", "color_hint": "cream", "content_hint": "partially_clipped_illustrated_panel"}, "linked_text_ids": ["gemini_t22"], "interaction_confidence": 0.82},
+    {"id": "gemini_e16", "bbox": [899, 624, 166, 77], "appearance": {"shape": "rounded_rect", "color_hint": "light_lavender"}, "linked_text_ids": ["gemini_t23"], "interaction_confidence": 0.99},
+    {"id": "gemini_e17", "bbox": [1093, 624, 165, 77], "appearance": {"shape": "rounded_rect", "color_hint": "pink"}, "linked_text_ids": ["gemini_t24"], "interaction_confidence": 0.99}
+  ],
+  "numeric_regions": [],
+  "overlay_regions": [],
+  "uncertainties": [
+    {"bbox": [628, 610, 577, 110], "reason": "lower illustrated panel and its fine text are clipped by the bottom viewport edge"},
+    {"bbox": [610, 606, 598, 114], "reason": "multiple lower controls overlap the vertically clipped content region"},
+    {"bbox": [613, 449, 594, 143], "reason": "pastel banner text has low contrast against a bright patterned background"}
+  ]
+}

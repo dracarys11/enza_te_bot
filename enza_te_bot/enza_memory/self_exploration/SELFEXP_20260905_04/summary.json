@@ -1,0 +1,16 @@
+{
+  "session_id": "SELFEXP_20260905_04",
+  "scenario_scope": "WING",
+  "started": "2026-09-05T06:02:00Z",
+  "ended": "2026-09-05T06:06:00Z",
+  "screenshots_total": 7,
+  "actions_total": 9,
+  "valid_transitions": 6,
+  "agy_calls": 0,
+  "wing_entry_success": true,
+  "final_state": "WING_HOME week1 (stopped per instructions, no training/rest/audition performed)",
+  "out_of_scope_findings": [
+    {"finding":"say \"Halo\"編 / ファン感謝祭 / G.R.A.D.","promotion":"OUT_OF_SCOPE"},
+    {"finding":"KNOWHOW_SELECTION stage","promotion":"OUT_OF_SCOPE (NOT_APPLICABLE_TO_WING)"}
+  ]
+}

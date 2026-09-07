@@ -1,0 +1,268 @@
+{
+  "source_image": "logs/live_2frame_20260905/frame1_retry_viewport.png",
+  "method": "PaddleOCR",
+  "text_regions": [
+    {
+      "id": "paddle_001",
+      "text": "プロデュース選択",
+      "bbox": [
+        51,
+        21,
+        201,
+        29
+      ],
+      "confidence": 0.999125
+    },
+    {
+      "id": "paddle_002",
+      "text": "プロデュース選択",
+      "bbox": [
+        486,
+        25,
+        166,
+        24
+      ],
+      "confidence": 0.999264
+    },
+    {
+      "id": "paddle_003",
+      "text": "ユニット編成",
+      "bbox": [
+        750,
+        25,
+        126,
+        24
+      ],
+      "confidence": 0.997254
+    },
+    {
+      "id": "paddle_004",
+      "text": "アイテム選択",
+      "bbox": [
+        991,
+        25,
+        127,
+        24
+      ],
+      "confidence": 0.999309
+    },
+    {
+      "id": "paddle_005",
+      "text": "プロデュースの種類",
+      "bbox": [
+        634,
+        85,
+        179,
+        30
+      ],
+      "confidence": 0.999436
+    },
+    {
+      "id": "paddle_006",
+      "text": "育成プロデュース",
+      "bbox": [
+        847,
+        87,
+        152,
+        24
+      ],
+      "confidence": 0.999553
+    },
+    {
+      "id": "paddle_007",
+      "text": "特化プロデュース",
+      "bbox": [
+        1015,
+        86,
+        156,
+        24
+      ],
+      "confidence": 0.999418
+    },
+    {
+      "id": "paddle_008",
+      "text": "Shining.To.Evo",
+      "bbox": [
+        757,
+        135,
+        149,
+        25
+      ],
+      "confidence": 0.988067
+    },
+    {
+      "id": "paddle_009",
+      "text": "ng.Performers",
+      "bbox": [
+        914,
+        139,
+        147,
+        22
+      ],
+      "confidence": 0.998364
+    },
+    {
+      "id": "paddle_010",
+      "text": "san\"Halo\"",
+      "bbox": [
+        679,
+        187,
+        472,
+        145
+      ],
+      "confidence": 0.765256
+    },
+    {
+      "id": "paddle_011",
+      "text": "ユニットを越えて協カしながらアイドルの新たなポテンシャルを引き",
+      "bbox": [
+        611,
+        339,
+        560,
+        20
+      ],
+      "confidence": 0.980282
+    },
+    {
+      "id": "paddle_012",
+      "text": "say \"Halo\"編",
+      "bbox": [
+        211,
+        368,
+        168,
+        35
+      ],
+      "confidence": 0.999338
+    },
+    {
+      "id": "paddle_013",
+      "text": "出しましょう！アドバイスをもらい新たなチームとの合同練習で能力",
+      "bbox": [
+        612,
+        362,
+        559,
+        20
+      ],
+      "confidence": 0.997464
+    },
+    {
+      "id": "paddle_014",
+      "text": "を高め、目指せファイナルライブ成功！",
+      "bbox": [
+        611,
+        386,
+        322,
+        20
+      ],
+      "confidence": 0.998295
+    },
+    {
+      "id": "paddle_015",
+      "text": "プロデュース攻略法",
+      "bbox": [
+        176,
+        420,
+        238,
+        28
+      ],
+      "confidence": 0.999569
+    },
+    {
+      "id": "paddle_016",
+      "text": "ユニットを越えて協カしながらアイドルの新たなポテン",
+      "bbox": [
+        75,
+        492,
+        450,
+        20
+      ],
+      "confidence": 0.99916
+    },
+    {
+      "id": "paddle_017",
+      "text": "シャルを引き出しましょう！アドバイスをもらい新たな",
+      "bbox": [
+        75,
+        515,
+        452,
+        21
+      ],
+      "confidence": 0.992702
+    },
+    {
+      "id": "paddle_018",
+      "text": "チームとの合同練習で能力を高め、目指せファイナルラ",
+      "bbox": [
+        75,
+        540,
+        448,
+        17
+      ],
+      "confidence": 0.995296
+    },
+    {
+      "id": "paddle_019",
+      "text": "イブ成功！",
+      "bbox": [
+        74,
+        562,
+        89,
+        22
+      ],
+      "confidence": 0.996799
+    },
+    {
+      "id": "paddle_020",
+      "text": "オート",
+      "bbox": [
+        169,
+        630,
+        79,
+        33
+      ],
+      "confidence": 0.992981
+    },
+    {
+      "id": "paddle_021",
+      "text": "成長詳細",
+      "bbox": [
+        919,
+        642,
+        126,
+        37
+      ],
+      "confidence": 0.999615
+    },
+    {
+      "id": "paddle_022",
+      "text": "次へ",
+      "bbox": [
+        1139,
+        639,
+        75,
+        43
+      ],
+      "confidence": 0.997232
+    },
+    {
+      "id": "paddle_023",
+      "text": "プロデュース",
+      "bbox": [
+        136,
+        656,
+        144,
+        31
+      ],
+      "confidence": 0.986301
+    }
+  ],
+  "metadata": {
+    "provider": "Paddle",
+    "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+    "skill_version": "not_applicable",
+    "case_id": "LIVE2F_20260905R_f01",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "ed1e811e019fc15326388813c8c69e557591998b196adcd7d7ab56320aa2a639",
+    "created_at": "2026-09-05T04:57:59+00:00"
+  }
+}

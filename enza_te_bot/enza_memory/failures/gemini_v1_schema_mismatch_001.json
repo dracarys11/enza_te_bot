@@ -1,0 +1,37 @@
+{
+  "failure_id": "gemini_v1_schema_mismatch_001",
+  "trajectory_reference": "TRAJ_GEMINI_V1_AGY_EXTRACTION_001 step GEMINI_V1_AGY_EXTRACTION_001_STEP_01",
+  "occurrences": 1,
+  "intent": "emit a Gemini Vision v1 extraction conforming to the current VisionObservation contract",
+  "grounding_method": "AGY Vision Provider using skills/gemini_vision/SKILL.md and the specified stored screenshot",
+  "action": "offline extraction only; no environment action",
+  "observed_result": {
+    "effect": "The first artifact was valid JSON but failed structural validation: capture identifiers were empty, standalone numeric regions lacked max_value, interaction fields used the legacy shape/confidence layout, and uncertainties lacked bbox.",
+    "evidence": ["EVID_GEMINI_V1_AGY_OUTPUT"],
+    "provenance": "session_observed"
+  },
+  "verification": {
+    "expected": "current VisionObservation-compatible artifact",
+    "result": "initial criterion violated; corrected by the same AGY conversation and revalidated"
+  },
+  "unknown_cause": {
+    "classification": "CONTRACT_VERSION_MISMATCH",
+    "candidate_causes": [
+      "Gemini Vision v1 skill examples encode an older interaction-candidate field layout",
+      "The provider did not normalize missing capture metadata or non-ratio numerics to the current contract"
+    ]
+  },
+  "state_now": "resolved offline; final artifact is structurally valid and no benchmark was run",
+  "future_caution": [
+    "validate every provider artifact against the current VisionObservation contract before accepting it",
+    "keep missing source metadata explicitly UNKNOWN and propagate uncertainty",
+    "do not encode standalone visible numbers as numeric_regions when the contract requires value/max_value pairs"
+  ],
+  "policy_links": [],
+  "resolution": {
+    "resolved_at": "2026-09-04T10:48:57+08:00",
+    "root_cause": "legacy v1 output shape did not fully match the current VisionObservation validator",
+    "reclassified_as": "provider contract-normalization defect corrected before delivery",
+    "lesson_update": "v1 extraction artifacts require a current-contract validation pass without changing their visual claims"
+  }
+}

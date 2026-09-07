@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "artifact": "demo_evidence_contract",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "purpose": "Define how demonstration observations, human actions, transitions, and effects remain auditable without becoming runtime rules.",
+  "source_artifacts": [
+    "ai_decisions/architecture_contract.json",
+    "ai_decisions/room_sop_candidates.json",
+    "ai_decisions/unknown_registry_candidate.json"
+  ],
+  "evidence_record": {
+    "observation": ["timestamp", "screenshot_ref", "application_identity", "window_geometry", "state_evidence", "numeric_observations", "detector_sources"],
+    "human_action": ["timestamp", "input_type", "normalized_target", "raw_event_refs", "named_action_match", "mapping_confidence"],
+    "effect_evidence": ["post_observation_ref", "state_transition", "frame_change", "numeric_change", "stability_window", "failure_reason"],
+    "step_linkage": "Observation before event -> human action -> post observation -> effect evidence; references must be explicit."
+  },
+  "knowledge_lifecycle": {
+    "FACT": {
+      "meaning": "Directly captured evidence with valid provenance and no unresolved contradiction.",
+      "examples": ["a click occurred inside the observed window", "a screenshot was saved", "HOME was detected at a timestamp"]
+    },
+    "INFERENCE": {
+      "meaning": "Derived offline relationship supported by evidence but not directly observed as a semantic fact.",
+      "examples": ["a unique click matched a configured action box", "two clicks form one stabilized interaction"]
+    },
+    "PROVISIONAL": {
+      "meaning": "Human or compiler hypothesis awaiting review or additional demonstrations.",
+      "examples": ["a click likely represents a strategic choice", "a repeated pattern may be reusable"]
+    },
+    "UNKNOWN": {
+      "meaning": "Missing, ambiguous, conflicting, or unstable evidence.",
+      "rule": "Unknown evidence blocks deterministic promotion; it is never silently converted to a fact."
+    }
+  },
+  "safety_constraints": [
+    "Evidence collection is passive and must not inject UI actions.",
+    "A detected state describes the observation; it does not authorize a click or select a strategy.",
+    "A named-action match is not equivalent to an effect-verified or committed action.",
+    "Strategic intent, thresholds, retries, and completion policy require explicit human review or separate confirmed artifacts.",
+    "Protected/risky screens remain evidence requiring explicit annotation; generic continuation is not inferred."
+  ],
+  "evidence_quality": {
+    "required_for_replay_candidate": ["complete_pre_post_pair", "stable_observation", "action_provenance", "effect_or_failure_evidence", "human_review"],
+    "insufficient_alone": ["raw_click_stream", "single screenshot", "unlabeled UNKNOWN_CLICK", "elapsed time", "one unreviewed demonstration"],
+    "conflict_rule": "If numeric, state, or visual evidence conflicts, retain both references and mark the step UNKNOWN."
+  },
+  "trajectory_compatibility": {
+    "episode": "A bounded human demonstration package with provenance and terminal status.",
+    "step": "One normalized interaction plus linked before/after observations.",
+    "action_result": "Observed issuance, destination evidence, effect evidence, committed=false by default for demos.",
+    "failure": "Typed or structured stop reason with screenshot/trace references."
+  },
+  "promotion": {
+    "automatic": false,
+    "required_sequence": ["ANNOTATION", "COMPILE", "VERIFY", "PROMOTE"],
+    "production_config_mutation": "forbidden by this contract"
+  },
+  "open_unknowns": [
+    {
+      "id": "evidence_to_strategy_mapping",
+      "status": "UNKNOWN",
+      "description": "Interaction evidence alone does not establish the policy that selected an action.",
+      "required_evidence": "Explicit SOP or reviewed decision-point annotations."
+    },
+    {
+      "id": "effect_authority_by_workflow",
+      "status": "UNKNOWN",
+      "description": "The authoritative completion effect differs by workflow and cannot be generalized from a recorder trace.",
+      "required_evidence": "Workflow-specific reviewed completion evidence."
+    }
+  ]
+}

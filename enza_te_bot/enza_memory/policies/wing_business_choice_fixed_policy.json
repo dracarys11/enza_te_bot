@@ -1,0 +1,19 @@
+{
+  "policy_id": "wing_business_choice_fixed",
+  "status": "ACTIVE (operator-specified business policy)",
+  "scenario_scope": "WING",
+  "source": "operator_instruction_20260905",
+  "precedence": {
+    "higher_than": ["candidate taught-choice memory", "run-local historical choice", "generic dialogue fallback"],
+    "lower_than": ["page identity / choice-count uncertainty", "screenshot unavailable", "control geometry invalid"]
+  },
+  "rules": {
+    "TWO_CHOICE": "if options contain ごめん → choose ごめん; else STOP=UNKNOWN_TWO_CHOICE",
+    "THREE_CHOICE": "choose middle option (option_index=2); no semantic analysis; no AGY",
+    "OTHER": "STOP=UNKNOWN_BUSINESS_CHOICE (option count !=2/3, uncertain count, unknown structure, occluded options, middle not clickable)",
+    "PROMISE_EVENT": "いいよ/ごめん → fixed ごめん (FIXED_DECLINE); no pending promise; no strategy change"
+  },
+  "detector": "detect choice → count options → apply fixed policy (replaces 'BUSINESS_CHOICE 一律 STOP')",
+  "trace_format": {"choice_type":"TWO_CHOICE|THREE_CHOICE","visible_options":[],"policy":"DECLINE_IF_GOMEN|MIDDLE_OF_THREE","selected_option":"","selection_index":0,"result":"","verified_transition":true},
+  "guard": "执行前确认: choice 类型、全部 option 可见、目标 option 可点; 感知不确定仍 fail-closed"
+}

@@ -1,0 +1,328 @@
+{
+ "artifact_type": "PYTHON_READINESS_MATRIX",
+ "generated_at": "2026-09-06T22:30:00+08:00",
+ "PYTHON_READY_CONTROLS": [],
+ "note": "no control reaches full PYTHON_READY under the stable-multi-frame-box rule (migration_status rule preserved); classifications below order the shadow-test queue",
+ "controls": [
+  {
+   "control": "SCHEDULE:VOCAL",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 19,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "HOME:SCHEDULE",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 18,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "DIALOGUE:SAFE_TEXTBOX",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 18,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "RESULT:ADVANCE_CYCLE",
+   "python_readiness": "NEEDS_DETECTOR",
+   "score_total": 18,
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ]
+  },
+  {
+   "control": "SCHEDULE:DECIDE",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 17,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "DIALOGUE:SKIP_CONTROL",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 17,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "SKILL_BOARD:WHITE_NODE_BUY",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 16,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "SEASON_TRANSITION:NEXT",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 16,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "SEASON_TRANSITION:START_PREP",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 16,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "HOME:FURIKAERI_ENTRY",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 15,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "CHOICE:MIDDLE_OPTION",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 15,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "SKILL_BOARD:ENTRY_OVERVIEW",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 15,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "SEASON_TRANSITION:OK_SKIP",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 15,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "SKILL_REPLACEMENT:SLOT_SELECT",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 14,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "SKILL_REPLACEMENT:CONFIRM_OK",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 14,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "CROSS:TRANSIENT_TIMING",
+   "python_readiness": "NEEDS_DETECTOR",
+   "score_total": 13,
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ]
+  },
+  {
+   "control": "SCHEDULE:AUDITION_ENTRY",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 12,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "AUDITION_SELECTION:CANDIDATE_SELECT",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 12,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "AUDITION_SELECTION:DECIDE",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 12,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "SKILL_BOARD:NO_CLICK",
+   "python_readiness": "NEEDS_DETECTOR",
+   "score_total": 12,
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ]
+  },
+  {
+   "control": "SKILL_BOARD:ZOOM_CONTROLS",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 12,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "HOME:REST",
+   "python_readiness": "NEEDS_GEOMETRY",
+   "score_total": 11,
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ]
+  },
+  {
+   "control": "SCHEDULE:BACK",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 11,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "CHOICE:GOMEN_OPTION",
+   "python_readiness": "BUSINESS_UNKNOWN",
+   "score_total": 11,
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ]
+  },
+  {
+   "control": "SKILL_BOARD:STOP_RULE",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 11,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "ENDING:GIVE_UP",
+   "python_readiness": "BUSINESS_UNKNOWN",
+   "score_total": 11,
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ]
+  },
+  {
+   "control": "AUDITION_BATTLE:AUTO_TOGGLE",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 10,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "ENDING:BIRTH_OK",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 10,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "ENDING:ADVANCE_CYCLE",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 9,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "ENDING:IDENTITY_RECORD",
+   "python_readiness": "NEEDS_VISUAL_FRAME",
+   "score_total": 9,
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ]
+  },
+  {
+   "control": "AUDITION_BATTLE:PAUSE_RESUME",
+   "python_readiness": "NEEDS_REPLICATION",
+   "score_total": 8,
+   "gaps": [
+    "single-session/single-context evidence only"
+   ]
+  },
+  {
+   "control": "SKILL_REPLACEMENT:LIMIT_4_DETECTOR",
+   "python_readiness": "NEEDS_DETECTOR",
+   "score_total": 8,
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ]
+  },
+  {
+   "control": "CROSS:VIEWPORT_DPR",
+   "python_readiness": "NEEDS_GEOMETRY",
+   "score_total": 8,
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ]
+  },
+  {
+   "control": "DIALOGUE:AFSOUSHI_X4",
+   "python_readiness": "NEEDS_GEOMETRY",
+   "score_total": 7,
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ]
+  },
+  {
+   "control": "AUDITION_BATTLE:SPEED_DISPLAY",
+   "python_readiness": "NEEDS_GEOMETRY",
+   "score_total": 7,
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ]
+  },
+  {
+   "control": "SCHEDULE:SUPPORT_SKILL",
+   "python_readiness": "BUSINESS_UNKNOWN",
+   "score_total": 6,
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ]
+  },
+  {
+   "control": "RESULT:PASS_FAIL_DETECTOR",
+   "python_readiness": "BUSINESS_UNKNOWN",
+   "score_total": 5,
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ]
+  },
+  {
+   "control": "CROSS:FRAME_STATE_DETECTOR",
+   "python_readiness": "NEEDS_DETECTOR",
+   "score_total": 4,
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ]
+  },
+  {
+   "control": "AUDITION_BATTLE:ADVICE_OR_CARD",
+   "python_readiness": "BUSINESS_UNKNOWN",
+   "score_total": 2,
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ]
+  },
+  {
+   "control": "CHOICE:ANY",
+   "python_readiness": "BUSINESS_UNKNOWN",
+   "score_total": 0,
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "exploration_id": "enza_1e_environment_mapping_001",
+ "ended_at": "2026-09-03T06:06:10Z",
+ "mission_result": "BOUNDARY_REACHED — mapped produce-prep flow PRODUCE_SELECTION -> UNIT_FORMATION -> ITEM_SELECTION -> WING_CONFIRMATION_DIALOG, all first-hand, zero anomalies, zero resource actions",
+ "stop_condition_fired": "pending resource consumption (production-start confirm dialog observed, not executed)",
+ "key_findings": [
+  "F5 (new, session_observed): all three 次へ transitions were pure navigation with no consumption prompt; URL stayed /produceReady across 4 states — strongest evidence yet for F3",
+  "F6 (new, session_observed): consumption is gated behind an explicit confirm dialog at the end of the prep flow — partially resolves H3",
+  "declared-confidence clicks from fresh screenshots succeeded 3/3 this session (n=3; no calibration yet)"
+ ],
+ "artifacts": {
+  "observations": [
+   "OBS_20260903060500",
+   "OBS_20260903060520",
+   "OBS_20260903060545",
+   "OBS_20260903060610"
+  ],
+  "trajectory": "enza_memory/trajectories/enza_1e_environment_mapping_001.json",
+  "progress": "environment_map_progress.json"
+ },
+ "usage": "environment mapping / benchmarking / failure analysis ONLY. NOT training data. NOT executable policy."
+}

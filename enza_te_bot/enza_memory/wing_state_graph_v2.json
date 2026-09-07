@@ -1,0 +1,89 @@
+{
+  "graph_id": "wing_state_graph_v2",
+  "generated_at": "2026-09-03T08:25:00Z",
+  "basis": ["reconciliations/phase1e_r_evidence_reconciliation.json (authoritative)", "zcode_baseline_001", "enza_phase2_prototype_001", "canvas_grounding_calibration_001", "state_hierarchy_review_001", "fresh OBS_20260903082000"],
+  "explicitly_not_used_as_ground_truth": ["environment_map_progress.json", "exploration_summary.json"],
+  "usage_status": "corrected WING preparation state graph — audit/benchmark ONLY. NOT executable policy.",
+
+  "operator_channel_limitation_DISCLOSED": {
+    "finding": "several screenshot emissions this session were omitted from the operator's visual input due to host media-budget limits ('Media omitted from provider request'); descriptions produced under omission are UNRELIABLE and are the leading candidate root cause for the 1E mislabels that AGY reversed",
+    "rule_going_forward": "if a screenshot/crop is omitted from visual input, the observation MUST record 'title not read, identity UNKNOWN' — fabricating a description is forbidden"
+  },
+
+  "nodes": [
+    {
+      "id": "HOME",
+      "evidence": "URL /home + bottom nav (baseline step 1, session_observed)",
+      "identity_source": "url_plus_layout",
+      "FACT": ["URL /home", "produce nav button visible"],
+      "INFERENCE": ["HOME office screen"],
+      "UNKNOWN": []
+    },
+    {
+      "id": "PRODUCE_SELECTION_WING",
+      "evidence": "OBS_20260903065000, CAL_20260903074500/074630",
+      "identity_source": "repeated_layout_recognition (W.I.N.G. banner + ビギナー highlight + 次へ/研修設定/オートプロデュース)",
+      "FACT": ["URL /produceReady or /produce (URL varied between passes — reason UNKNOWN)", "three bottom-right controls repeatedly present", "cancel-roundtrip from the 074600 dialog landed here (n=1)"],
+      "INFERENCE": ["produce mode/difficulty selection screen", "ビギナー selected (highlight)"],
+      "UNKNOWN": ["why URL differed (/produceReady vs /produce) between visits", "difficulty switch semantics"]
+    },
+    {
+      "id": "UNIT_FORMATION_TUTORIAL_MODAL",
+      "evidence": "AGY reinspection of OBS_20260903060545/060610/063000 frames: ユニット編成について (1/7)",
+      "identity_source": "screenshot_reinspection_by_audit",
+      "FACT": ["tutorial modal titled ユニット編成について, page 1 of 7, covered the prep screen across at least 3 frames spanning ~25 minutes"],
+      "INFERENCE": ["first-visit tutorial for unit formation", "my 次へ clicks during 1E did NOT advance the flow; they acted on/behind this modal (effect unknown)"],
+      "UNKNOWN": ["modal pagination behavior (never observed beyond 1/7)", "dismissal affordance and its location", "what screen lies under it (likely unit formation, unproven)"]
+    },
+    {
+      "id": "LOADING_TRANSITION",
+      "evidence": "AGY reinspection of OBS_20260903060520",
+      "FACT": ["Now Loading overlay visible after first 次へ"],
+      "UNKNOWN": ["destination (never captured post-loading in 1E)"]
+    },
+    {
+      "id": "UNKNOWN_WHITE_SELECTION_OVERLAY",
+      "evidence": "OBS_20260903073000 (exited via 戻る to PRODUCE_SELECTION_WING), OBS_20260903082000 (current)",
+      "identity_source": "coordinate_only — title text NEVER read (073000: not attempted; 082000: crop omitted from operator visual input)",
+      "FACT": ["white panel with idol-card grid and numeric values", "red 戻る bottom-left + 編成を初期化 visible (073000 frame)", "reappeared at 082000 WITHOUT any click between 0750 and 0820 — meaning some state change occurred unobserved (timeout? delayed effect of the corrected 決定 click? UNKNOWN)"],
+      "INFERENCE": ["plausibly the unit/support member selection view of the formation step"],
+      "UNKNOWN": ["identity (title not read)", "how it opened without a click", "relation to PRODUCE_SELECTION_WING and to 研修設定"]
+    },
+    {
+      "id": "TRAINING_SETTINGS_OVERLAY (研修設定)",
+      "evidence": "OBS_20260903065025, CAL_20260903074730",
+      "identity_source": "title_text_read (研修設定 header read live at 065025 pass)",
+      "FACT": ["three stat columns ボーカル/ダンス/ビジュアル with N/20 counters, −/+ controls", "決定 button", "allocation persists (vocal=1/20 survived ~40min across navigation)"],
+      "INFERENCE": ["pre-production training allocation screen (Vocal baseline target)"],
+      "UNKNOWN": ["whether allocation is committed only via 決定", "UNIDENTIFIED_SKILL_RELATED_PANEL identity (U5) and 決定 gating mechanism (U6)"]
+    },
+    {
+      "id": "WING_CONFIRMATION_DIALOG",
+      "evidence": "NONE SURVIVING — original claims superseded by AGY reinspection (0610, 063000 were the tutorial modal)",
+      "identity_source": "none",
+      "FACT": [],
+      "INFERENCE": ["a production-start confirmation dialog probably exists somewhere in the flow (user_reported Phase 9 + my CAL_20260903074600 pass, the latter not yet audited and now suspect)"],
+      "UNKNOWN": ["whether this dialog was EVER actually reached first-hand", "CAL_20260903074600's dialog identity (possibly also the tutorial modal) — UNRECONCILED"]
+    },
+    {
+      "id": "ITEM_SELECTION / UNIT_FORMATION (as screens)",
+      "evidence": "NONE SURVIVING — labels superseded (0520=loading, 0545=tutorial modal)",
+      "identity_source": "none",
+      "FACT": [],
+      "INFERENCE": ["prep flow steps exist (breadcrumb text seen on PRODUCE_SELECTION_WING: プロデュース選択/ユニット編成/アイテム選択)"],
+      "UNKNOWN": ["both states remain UNVERIFIED first-hand"]
+    }
+  ],
+
+  "edges": [
+    { "from": "HOME", "via": "プロデュース nav click (1025,667)", "to": "LOADING → PRODUCE_SELECTION_WING region", "status": "VERIFIED (n=1, baseline step 1)" },
+    { "from": "PRODUCE_SELECTION_WING", "via": "次へ (1170,670)", "to": "UNKNOWN", "status": "UNVERIFIED — every follow-up frame was superseded (loading/tutorial); destination never captured" },
+    { "from": "dialog@CAL_074600", "via": "キャンセル (510,640)", "to": "PRODUCE_SELECTION_WING", "status": "coordinate-verified roundtrip (n=1) but dialog identity UNRECONCILED" },
+    { "from": "UNKNOWN_WHITE_SELECTION_OVERLAY", "via": "戻る (65,678)", "to": "PRODUCE_SELECTION_WING", "status": "VERIFIED (n=1)" },
+    { "from": "PRODUCE_SELECTION_WING", "via": "研修設定 (980,670)", "to": "TRAINING_SETTINGS_OVERLAY", "status": "VERIFIED (n=1, title read)" },
+    { "from": "TRAINING_SETTINGS_OVERLAY", "via": "+ per column", "to": "counter+1 AND UNIDENTIFIED_SKILL_RELATED_PANEL", "status": "coordinate-verified (n=2)" },
+    { "from": "TRAINING_SETTINGS_OVERLAY", "via": "決定", "to": "no observed effect (gated)", "status": "GATED, mechanism UNKNOWN" }
+  ],
+
+  "conclusion": "The verified graph is much smaller than previously claimed: HOME → produce region (VERIFIED); 研修設定 branch (VERIFIED); white-overlay 戻る exit (VERIFIED). The three-step prep traversal and the confirmation boundary were NEVER first-hand verified — they were tutorial-modal misreads, now superseded. First-hand WING_CONFIRMATION_DIALOG: 0 verified observations."
+}

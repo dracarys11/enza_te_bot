@@ -1,0 +1,48 @@
+{
+  "artifact_type":"BATTLE_RUNTIME_DISTILLATION",
+  "generated_at":"2026-09-06T06:22:51Z",
+  "phases":[
+    {"phase":"ANIMATION","controls":"AUTO may be visible but dimmed/disabled; semantic clicks forbidden"},
+    {"phase":"INPUT_READY","controls":"AUTO value and enabled state can be observed; one current-epoch action allowed"},
+    {"phase":"RESULT","controls":"capture explicit PASS/FAIL before advancing"},
+    {"phase":"UNKNOWN","controls":"STOP; no blind AUTO/SPEED/card action"}
+  ],
+  "auto": {
+    "contract":"INPUT_READY + current epoch + AUTO_OFF + ENABLED -> click exactly once -> consume frame -> fresh verify AUTO_ON",
+    "value_interactability_separate":true,
+    "supported_success_samples":4,
+    "negative_samples":4,
+    "negative_contexts":["dialogue transition","ANIMATION dimmed x3"],
+    "pause_resume_rule":"new epoch invalidates AUTO state",
+    "status":"SUPPORTED_WITH_PHASE_AND_EPOCH_GUARDS"
+  },
+  "speed": {
+    "state_detector":"SUPPORTED for OFF/X2/X3 display read",
+    "display_is_control":false,
+    "toggle_control":"HOLD; clickable region UNKNOWN",
+    "x3_handler":"PARTIAL",
+    "evidence":["OFF->X2 observed in S1/S2","X2 badge clicks did not reach X3 in S3 50k","state may persist between battles","must reobserve after pause/resume"]
+  },
+  "pause_resume": {
+    "samples":1,
+    "status":"NEEDS_MORE_REPLICATION",
+    "required_effect":"resume -> fresh battle -> new control epoch -> invalidate AUTO/SPEED/turn/selected card"
+  },
+  "result": {
+    "contract":"explicit PASS/FAIL evidence only; evidence loss remains UNKNOWN and cannot commit progress",
+    "status":"SUPPORTED"
+  },
+  "sample_inventory": {
+    "independent_live_battle_instances":11,
+    "by_type": {
+      "S1_FINAL_AUDITION":{"instances":1,"results":{"PASS":1}},
+      "S2_FINAL_AUDITION":{"instances":1,"results":{"PASS":1}},
+      "S3_40K":{"instances":3,"results":{"FAIL":1,"UNKNOWN_EVIDENCE_LOSS":1,"PASS":1}},
+      "S3_50K":{"instances":1,"results":{"PASS":1}},
+      "THE_LEGEND":{"instances":5,"results":{"PASS":3,"FAIL":2}}
+    },
+    "note":"Counts are battle instances, not independent sessions. THE LEGEND repeatability is scoped to THE LEGEND only."
+  },
+  "manual_card_fallback":{"status":"HOLD","classification":"RUN_LOCAL_EMERGENCY_FALLBACK","production_auto_click":false},
+  "preserved_unknowns":["speed toggle geometry","X3 transition control","manual card selection policy","battle control behavior outside 1280x720"]
+}

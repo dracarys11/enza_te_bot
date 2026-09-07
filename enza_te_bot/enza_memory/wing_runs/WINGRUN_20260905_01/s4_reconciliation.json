@@ -1,0 +1,30 @@
+{
+  "task": "Reconcile S4 Week-State Conflict",
+  "status": "SUPERSEDED_BY_FINAL_RUN_EVIDENCE",
+  "usage": "HISTORICAL_AUDIT_ARTIFACT_ONLY",
+  "superseded_truth": {
+    "S4": "ENDED",
+    "the_legend_results": {
+      "pass": 3,
+      "fail": 2
+    },
+    "te_result": "FAILED",
+    "run_status": "COMPLETED_ABANDONED",
+    "s4_end_fans": 414414,
+    "final_evaluation_fans": 419414,
+    "semifinal_result": "UNKNOWN",
+    "fan_delta_5000_source": "UNKNOWN"
+  },
+  "historical_scope": {
+    "last_verified_pre_battle_weeks": 5,
+    "current_battle_weeks_at_that_time": "UNKNOWN",
+    "unsupported_claim": "weeks_remaining=1",
+    "note": "This artifact predates the completed S4 run and must not supply current resume state or TE reachability."
+  },
+  "historical_te_reachability_assessment": {
+    "value": "YES_CONDITIONAL",
+    "current_authority": false,
+    "superseded_by": "actual S4 outcome: 3 PASS / 2 FAIL and TE FAILED"
+  },
+  "authoritative_source": "weekly_trace.jsonl final S4 entries and referenced screenshots"
+}

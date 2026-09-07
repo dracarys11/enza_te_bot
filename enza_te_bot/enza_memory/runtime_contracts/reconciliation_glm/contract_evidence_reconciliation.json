@@ -1,0 +1,147 @@
+{
+  "artifact_type": "CONTRACT_EVIDENCE_RECONCILIATION",
+  "audit_id": "CONTRACT_OFFLINE_AUDIT_20260906",
+  "generated_at": "2026-09-06T23:59:00Z",
+  "mode": "OFFLINE_ONLY; raw evidence untouched (RAW_EVIDENCE_CHANGED: NO); contract files NOT rewritten in this audit — corrections recorded here as reconciliation overlays",
+  "primary_sources": [
+    "enza_memory/migration/python_click_migration/evidence_coverage_matrix.json (40 rows, per-flag scoring)",
+    "enza_memory/migration/python_click_migration/review_batches/v0_3/ (review_summary, review_manifest 38 frames, zcode_reaudit 13/13 PASS)",
+    "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames: 28 skill_board/FURIKAERI_SKILL, 10 replacement, 4 dialogue, 3 event_choice)",
+    "enza_memory/migration/regression_mining/ (choice/battle/skill_board corpora, canonical_transitions T01..T26, regression_reconciliation RC-001..006)",
+    "enza_memory/audits/stale_reference_audit/ (F-01..F-12)"
+  ],
+  "stale_claims": [
+    {
+      "id": "STALE-A",
+      "contract": "choice.json",
+      "claim_in_contract": "THREE_CHOICE_LAYOUT_V1 geometry_status: 'CLICK_VALIDATED_SINGLE_FRAME (S3W4 2026-09-06); option boxes norm captured' and 'single-frame geometry; cross-event replication required'",
+      "current_evidence": "45-frame recovery + v0_3 batch split replication into three independent axes:",
+      "reconciled_axes": {
+        "layout_replication": "REPLICATED — 3-frame recovered chain (rf_ec1_three_choice_present / rf_ec2_middle_selected / rf_ec3_post_choice) + VRB02_018 annotated (staggered layout, middle green border + check badge); live_csm_029 carries the only captured visual_box_norm",
+        "event_context_replication": "REPLICATED — 8 successes / 0 fails across LESSON_ADVICE, AUDITION_ADVICE (THE LEGEND #3/#4/#5), MORNING, OTHER contexts; layout_family and event_context are independent required fields (systemic bug class E; F-08 corrected the MORNING_3CHOICE overreach)",
+        "cross_session_replication": "REPLICATED — 0905 and 0906 sessions both produced 3-choice successes"
+      },
+      "residual": "canonical normalized box is still a single captured instance (live_csm_029); cross-context geometry instance capture rule (per_event_capture_rule) remains in force",
+      "severity": "P1 (contract understated replication; would mis-prioritize shadow work)"
+    },
+    {
+      "id": "STALE-B",
+      "contract": "skill_board.json + skill_replacement.json",
+      "claim_in_contract": "MIGRATION_STATUS: all controls 'CONTROL_GROUNDING_BLOCKED for Python (no normalized boxes; coordinate-probing only)'; 'zero normalized geometry'",
+      "current_evidence": "28 skill-board + 10 replacement recovered frames (sess_a87f3588) bound to live_csm_015..028; RC-001 superseded the historical MISSING_FRAME designations for live_csm_020..023",
+      "reconciled_axes": {
+        "RAW_GEOMETRY_EVIDENCE": "YES — click_point_norm recorded for node misclicks (csm_020..023), zoom controls, slot column (x≈860, spacing ≈135), confirm dialog (キャンセル ~540,510-525); white-node / acquired / locked / SP不足 / dead-zone state frames all recovered",
+        "NORMALIZED_GEOMETRY_PROFILE": "PARTIAL — some click_point_norm + zoom validated-with-box; NO per-node canonical box; display-scale drift 0.9/1.1 documented, requiring per-frame correction rather than fixed coordinate memory (RC-002: same coordinate changed class after chain unlock)",
+        "CROSS_SCALE_GENERALIZATION": "NO — zoomed-out vs per-node views have different geometry; 0.9/1.1 drift is unresolved; v0_3 still lists 8 skill_board_evidence_only_gaps and M01..M08 missing source frames for the acquire positive path",
+        "CROSS_SESSION_REPLICATION": "NO — entire corpus is single session sess_a87f3588 (45 frames RECOVERED_REVIEW_PENDING, review not yet completed)"
+      },
+      "residual": "CONTROL_GROUNDING_BLOCKED is too strong for geometry (raw evidence exists) but correct for Python authority (no cross-session replication, review pending, positive-path source frames for csm_015..019 still absent)",
+      "severity": "P1 (claim direction inverted: geometry weaker than 'zero' implies but authority equally blocked — readiness must use per-flag, not aggregate)"
+    },
+    {
+      "id": "STALE-C",
+      "contract": "audition_battle.json",
+      "claim_in_contract": "AUTO 'NEEDS_MORE_REPLICATION'; phases described from runtime evidence only; 'no normalized boxes' implied for all battle controls",
+      "current_evidence": "v0_3 review batch provides 5 durable annotated battle frames: VRB02_025 (ANIMATION_DISABLED, Auto dimmed, WOULD_NOT_CLICK), VRB02_026 (INPUT_READY → AUDITION_BATTLE:AUTO), VRB02_027 (INPUT_READY_AUTO_ON, NO_ACTION), VRB02_028 (BATTLE_ACTIVE, WOULD_NOT_CLICK_SPEED_DISPLAY), VRB02_029 (INPUT_READY_CANDIDATE, REVIEW_AUTO_ACTIONABILITY). NOTE: the task's '025/026/027/028/029' are VRB02 review-batch IDs; click samples live_csm_025..027 are SKILL_REPLACEMENT transactions and 028/029 are board-probe/three-choice — disambiguated here to prevent a future mis-link",
+      "reconciled_axes": {
+        "HAS_DURABLE_FRAME": "YES — Auto OFF+dimmed, OFF+enabled-at-INPUT_READY, ON, BATTLE_ACTIVE, and INPUT_READY_CANDIDATE phases each have a durable hash-bound frame",
+        "HAS_ACTION_AUTHORITY": "YES — phase+value+interactability+epoch contract (BTR-001/002/003) encoded, and VRB02_026/027 encode would-click vs no-action semantics",
+        "HAS_POSTCONDITION": "YES — fresh AUTO_ON verify in same epoch; result commit rules BTR-005/006/007",
+        "HAS_CROSS_SESSION_REPLICATION": "NO — all 4 AUTO successes are single-run (0905); LVT-02 open"
+      },
+      "residual": "AUTO classification stays NEEDS_REPLICATION (cross-session), but the 'no durable visual evidence' implication in the contract's MIGRATION_STATUS is superseded",
+      "severity": "P2",
+      "correction_20260907": "BATTLE_VISUAL_AUTHORITY_METADATA_CORRECTED — the VRB02_025/026/027 labels quoted above (ANIMATION_DISABLED / INPUT_READY→AUTO enabled / INPUT_READY_AUTO_ON) are appearance-based and SUPERSEDED: AUTO_OFF_ENABLED and AUTO_OFF_DISABLED are NOT_VISUALLY_ESTABLISHED from still frames (annotation overlay color is reviewer markup, not control evidence); VRB02_027 relabeled ANIMATION_WITH_AUTO_ON_VISIBLE (Appeal Start; AUTO_VALUE=ON retained, INPUT_READY not claimed); AUTO_CLICK_CAUSALLY_VERIFIED=NO. See audition_battle.json AUTO_VISUAL_AUTHORITY_CORRECTION and battle_reconciliation.json auto_visual_authority_correction"
+    },
+    {
+      "id": "STALE-D",
+      "contract": "dialogue.json",
+      "claim_in_contract": "authority: textbox primary per-tap; fastforward HOLD ranked below; FAILURE_MODES 'CHOICE_MISSED_THEN_BLIND_TAP — choice overlay overlaps textbox region'",
+      "current_evidence": "v0_3 review batch fixes + zcode_reaudit establish DIALOGUE_ACTION_PRIORITY: STORY:SKIP > DIALOGUE:FAST_FORWARD > STORY:TEXTBOX (operator-endorsed; VRB02_013 FAST_FORWARD primary with stale SKIP removed). CHOICE_PRESENT frames (VRB02_015/016/018) show textbox VISIBLE but its authority is SUPPRESSED by the choice overlay owner (overlay ownership rule: overlay-owned frames never render/recommend parent controls)",
+      "reconciled_axes": {
+        "authority_order": "SKIP > FAST_FORWARD_RIGHT > TEXTBOX — contract must express TEXTBOX as lowest-priority fallback, not primary",
+        "CHOICE_PRESENT_semantics": "textbox visible + authority suppressed by choice owner (overlay ownership), NOT 'overlap hazard'. The physical overlap remains a valid regression case (CLR-003) but the contract mechanism is owner suppression; the failure mode should be renamed e.g. CHOICE_OWNER_NOT_RESPECTED",
+        "FAST_FORWARD_status": "frame + ranking exist (rf_dl_afsoushi_rest, VRB02_013); zero click evidence persists — execution remains HOLD, but 'CANDIDATE with no evidence' wording is stale"
+      },
+      "residual": "FAST_FORWARD geometry still NEEDS_GEOMETRY (coverage matrix AFSOUSHI_X4 total 7)",
+      "severity": "P1 (authority ordering affects executor behavior)"
+    },
+    {
+      "id": "STALE-E",
+      "contract": "skill_board.json",
+      "claim_in_contract": "'zoomed_out_probing FORBIDDEN as selection method'",
+      "current_evidence": "evidence_coverage_matrix SKILL_BOARD:ZOOM_CONTROLS (12, 'zoom-out for overview; safe', validated-with-box, 2 zoom states recovered) — zoom-out itself is safe navigation; what is forbidden is coordinate-based SELECTION while zoomed out (VNC-001..003)",
+      "reconciled": "narrow the forbiddance to selection-by-coordinate on zoomed-out view; zoom navigation is authorized",
+      "severity": "P2"
+    },
+    {
+      "id": "STALE-F",
+      "contract": "ending.json",
+      "claim_in_contract": "evidence cited from run_completion_record/checkpoint (session_observed summaries)",
+      "current_evidence": "evidence_coverage_matrix ENDING rows: ending frames live in sess_a87 artifacts call_607-call_613 and are NOT RECOVERED into durable store; coverage scores VISUAL_EVIDENCE=2 with 'frames unrecovered' caveats",
+      "reconciled": "ENDING contract evidence class must be downgraded: DERIVED_SUMMARY_CONFIRMED with unrecovered primary frames; PERSISTENCE gap class (same family as NRG-013/F-03)",
+      "severity": "P1 (persistence)"
+    },
+    {
+      "id": "STALE-G",
+      "contract": "dialogue.json (persists in v0.2)",
+      "claim_in_contract": "FASTFORWARD 'no run-execution evidence yet' / 'ZERO click evidence' (SUBSTATES, VISIBLE_CONTROLS, ACTION_AUTHORITY, MIGRATION_STATUS)",
+      "current_evidence": "durable run evidence of exactly 1 validated execution exists: WINGRUN_20260905_01 weekly_trace.jsonl line 8 (S1W7, week_executed=7): '早送りON自动推进成功' with flag fastforward_rule='VALIDATED once → REPEATED_EVIDENCE候选'; regression_mining canonical_transitions T10 replication_count=1 positive_samples=1; mining_report §3 'fast-forward rule (1)'",
+      "reconciled_axes": {
+        "execution_evidence": "1/1 single session (LOW confidence) — not zero",
+        "authority": "HOLD unchanged: n=1 is far below promotion bar, geometry ungrounded (coverage matrix AFSOUSHI_X4 GEOMETRY=0), CANDIDATE rule status unchanged"
+      },
+      "residual": "reword 'zero click evidence' to '1 validated execution (S1W7); HOLD retained at n=1' wherever it appears (dialogue.json v0.2 still carries the zero-execution wording in 4 places)",
+      "severity": "P2 (factual wording; authority tier unaffected)",
+      "found_in": "verification pass 2026-09-07 (independent re-check of latest corpora)"
+    },
+    {
+      "id": "STALE-H",
+      "contract": "choice.json (persists in v0.2)",
+      "claim_in_contract": "TWO_CHOICE_BUSINESS '3/3 ごめん selections'; VISIBLE_CONTROLS 2_CHOICE_GOMEN 'success_fail 3/0'; PROMISE_LAYOUT_V1 'business rule いいよ/ごめん→ごめん confirmed at n=3 total two-choice occurrences'; PROMISE_EVENT 'evidence: n=1 subtype; FIXED_DECLINE ごめん'",
+      "current_evidence": "regression_mining choice_layout_regressions TWO_CHOICE geometry_replication success_count=4 fail_count=0 cross_session=true (0905: S2 transition, S2W5, S2W6 first-auto-PASS; 0906: S1W3/S1W4); canonical_transitions T12 replication_count=4 independent_runs=2. The '3' figure is the event_probability_summary WEEK-level count over 34 ELIGIBLE weeks (denominator rule excludes the 0905 S2-transition window), not the selection-success count. PROMISE: the only observed PROMISE instance (0905 S1W5) was operator-resolved いいよ (promise created, deferred S1W8; weekly_trace line 8 約束 badge); T12 failure_modes notes 'いいよ case was operator-resolved, never autonomous'. FIXED_DECLINE ごめん is the ACTIVE policy rule (wing_business_choice_fixed_policy rules.PROMISE_EVENT), not observed evidence",
+      "reconciled_axes": {
+        "selection_success_count": "4/0, cross-session — control_readiness.json already records '4/4 policy successes' + CROSS_SESSION true (readiness artifact is ahead of the contract text)",
+        "week_level_occurrences": "3/34 eligible weeks (denominator rule) — both numbers are correct per axis; contract must not mix them",
+        "promise_evidence": "n=1 observed = いいよ operator-resolved; ごめん fixed-decline = policy only, zero autonomous executions"
+      },
+      "residual": "update choice.json counts to per-axis values and split PROMISE_EVENT evidence (observed: いいよ operator) from policy (FIXED_DECLINE ごめん, never executed autonomously)",
+      "severity": "P1 (FACT/policy conflation — MODEL_GATE violation class)",
+      "found_in": "verification pass 2026-09-07 (independent re-check of latest corpora)"
+    },
+    {
+      "id": "STALE-I",
+      "contract": "skill_board.json v0.2 (internal inconsistency)",
+      "claim_in_contract": "VISIBLE_CONTROLS 'acquire/confirm geometry: UNKNOWN normalized' (pre-reconciliation remnants)",
+      "current_evidence": "control_regions.json holds fresh normalized visual boxes: FURIKAERI_SKILL:ACQUIRE_BUTTON CLICK_VALIDATED_WITH_BOX 5/0 (HIGH, box 0.8203-0.9766 x 0.8056-0.9444), CONFIRM_OK CLICK_VALIDATED_WITH_BOX 5/1 (HIGH), CONFIRM_CANCEL OBSERVED-with-box, ZOOM_OUT CLICK_VALIDATED_WITH_BOX 1/0 — all 'fresh live crop 2026-09-06 sess_a87f3588, not back-derived'",
+      "reconciled": "MIGRATION_STATUS four-axis NORMALIZED_GEOMETRY_PROFILE=PARTIAL is the accurate statement; VISIBLE_CONTROLS entries should reference the captured single-session boxes (still single-session/single-frame, so no authority change)",
+      "severity": "P2 (internal inconsistency inside v0.2; no authority impact)",
+      "found_in": "verification pass 2026-09-07"
+    }
+  ],
+  "confirmed_non_stale": [
+    "result.json commit ordering (capture → commit-or-preserve-UNKNOWN → advance): confirmed by BTR-005/006/007 and RC-005",
+    "audition_battle.json epoch invalidation and SPEED display-only HOLD: confirmed by BTR-003/004 and F-05/06/07 cross-links",
+    "home/schedule persistence boundaries: confirmed by RC-005 (NRG-013 remains required)",
+    "choice.json UNKNOWN_CARD_LAYOUT fail-closed STOP: confirmed by NRG-014",
+    "season_transition.json S3_START_PREP explicit check: confirmed by PLR-006/SBR-006 (LVT-09)"
+  ],
+  "concurrent_v021_reconciliation_repair_20260907": {
+    "context": "two offline tasks overlapped: sess_historical_frame_integration_20260907 (Task A) patched 6 room contracts + index to v0.2.1 using HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY (recovered_historical_frames/, 86 sha1-bound frames, 4 tool sessions) + RUN_STATE_CONTAMINATION_FIX (PERSIST-1 re-check); the earlier audit artifacts were authored against the 11/11-v0.2 snapshot. This repair records the mixed baseline and preserves every v0.2.1 evidence delta. CURRENT_CONTRACT_BASELINE: MIXED (0.2.1 x6 + index; 0.2 x5).",
+    "v021_evidence_deltas_preserved": [
+      "ENDING: direct recovered visual evidence for modal (x4 dc58a91a: フェスアイドル確認, SP 962, SP-wipe warning) + epilogue (x4 a87f3588) — RECOVERED_DURABLE; FINAL_RESULT_SEMANTICS remains PARTIAL/DERIVED (rank/evaluation/reward scenes still DERIVED_SUMMARY_CONFIRMED); staff roll NOT promoted (PARTIAL); long-press abandon unchanged",
+      "SEMIFINAL (season_transition v0.2.1): SEMIFINAL_PAGE_IDENTITY = VISUALLY_SUPPORTED/ESTABLISHED (準決勝 banner + 準決勝ライブ entry, pixel-confirmed); SEMIFINAL_RESULT_SEMANTICS = UNKNOWN; rule pinned: page identity must NOT imply WIN; FINAL identity MISSING, FINAL result UNKNOWN",
+      "BATTLE: recovered cross-session VISUAL replication (17 durable frames across sessions incl. 38712583 + dc58a91a; session-level breadth 2, run-level still NO); AUTO interactability/post-click authority NOT promoted (visual Auto OFF ≠ actionable; classification NEEDS_REPLICATION unchanged); SPEED HOLD unchanged; new NRH-001 STUCK P0",
+      "RESULT: explicit PASS visual evidence = YES (やったぁ + OK pixel-confirmed), explicit FAIL visual evidence = YES (不合格 banner pixel-confirmed); result scene != business commit boundary reaffirmed; announce preamble frames are NOT outcome evidence (NRH-002)",
+      "CHOICE: recovered timed 3-choice frame (countdown ring over staggered cards) — timing stays observation-only; 2-choice recovered historical frames are post-choice frames WITHOUT option boxes and do NOT prove geometry (layout corpus 0; LVT-04 DEDICATED unchanged)",
+      "AUDITION_SELECTION: recovered visual identity/geometry evidence retained (16 frames across 40K/50K/THE_LEGEND/list); normalized boxes still not captured; eligibility UNKNOWN unchanged; planner policy NOT elevated",
+      "PERSIST-1: RESOLVED_BY_RUN_STATE_PATCH — current-tree re-check verified: config.json carries no closed-run season3 audition flags; artifact_registry current_mainline.active_run=null; run_state.py fails closed on run_closed/resume_allowed=false. Invariant retained: closed-run state must never become current authority"
+    ],
+    "stale_residual_resolution": {
+      "STALE_G": "RESOLVED — dialogue.json metadata patched in place (kept v0.2): FAST_FORWARD_VISUAL_EVIDENCE=YES (durable frame + recovered OFF/ON indicator states), FAST_FORWARD_EXECUTION_EVIDENCE=1 validated execution (S1W7; T10 positive_samples=1), FAST_FORWARD_CROSS_SESSION_REPLICATION=NO (single session), FAST_FORWARD_ACTION_AUTHORITY=HOLD retained at n=1 + geometry ungrounded",
+      "STALE_H": "RESOLVED — choice.json metadata patched in place (kept v0.2.1): TWO_CHOICE_OCCURRENCE_COUNT=3/34 eligible weeks separated from selection replication 4/0 cross-session; TWO_CHOICE_GEOMETRY_EVIDENCE=NONE; PROMISE_POLICY_RULE=FIXED_DECLINE ごめん (ACTIVE policy); PROMISE_OBSERVED_EXECUTION=いいよ operator-resolved n=1 (zero autonomous ごめん executions)",
+      "STALE_I": "RESOLVED — skill_board.json metadata patched in place (kept v0.2): RAW_GEOMETRY_EVIDENCE=YES; NORMALIZED_GEOMETRY_PROFILE=YES (single-session captured boxes: ACQUIRE_BUTTON 5/0, CONFIRM_OK 5/1, CONFIRM_CANCEL box, ZOOM_OUT 1/0 per control_regions.json); CROSS_SESSION_REPLICATION=NO; ACTION_AUTHORITY unchanged (geometry evidence != purchase authority)"
+    },
+    "no_regression_check": "no v0.2.1 contract downgraded; no EVIDENCE_DELTA content altered; audit-time conflict records (T-01..T-05, STALE-A..F, LEAK-01..09) retained as history of the earlier snapshot"
+  }
+}

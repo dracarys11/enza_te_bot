@@ -1,0 +1,26 @@
+{
+  "observation_id": "OBS_20260903065025",
+  "timestamp": "2026-09-03T06:50:25Z",
+  "environment": {
+    "url": "https://shinycolors.enza.fun/produce"
+  },
+  "state": {
+    "label": "TRAINING_SETTINGS (研修設定)",
+    "classification": "INFERENCE",
+    "confidence": 0.95
+  },
+  "FACT": [
+    "overlay titled 研修設定",
+    "three columns ボーカル / ダンス / ビジュアル each showing counter 0/20 with - and + buttons",
+    "description text visible (training point allocation)",
+    "red 決定 button bottom-right"
+  ],
+  "INFERENCE": [
+    "this is the Vocal-baseline setting the planner referred to: 20 points allocatable across Vo/Da/Vi"
+  ],
+  "UNKNOWN": [
+    "whether allocation affects production params or is default profile",
+    "skill sub-panel semantics"
+  ],
+  "screenshot": "ai_decisions/observations/screenshots/OBS_20260903065025_P2_s7_training_settings.png"
+}

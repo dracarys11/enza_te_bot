@@ -1,0 +1,5 @@
+{
+  "oracle":{"season":1,"weeks_remaining":8,"fan_gap_to_target":999,"stamina_current":270,"stamina_max":300},
+  "actual_season_weeks":{"season":{"expected":1,"actual":null,"raw":"y-AYt","error":"no numeric candidate"},"weeks_remaining":{"expected":8,"actual":3,"method":"opencv_digit_template","confidence":0.9961947798728943}},
+  "actual_full":{"season":{"expected":1,"actual":null,"raw":"y-AYt","error":"no numeric candidate"},"weeks_remaining":{"expected":8,"actual":3},"fan_gap_to_target":{"expected":999,"actual":999,"raw":"m YAR °“ 999 A"},"stamina":{"expected":"270/300","actual":true,"note":"adequacy marker only; no current/max numeric parsing"}}
+}

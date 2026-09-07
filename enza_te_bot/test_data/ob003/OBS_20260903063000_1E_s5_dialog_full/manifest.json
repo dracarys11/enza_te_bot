@@ -1,0 +1,17 @@
+{
+  "case_id": "OBS_20260903063000_1E_s5_dialog_full",
+  "source": {
+    "file": "source_screenshot.png",
+    "sha256": "101e9265cce4e0d403ffd93c96f28cb6a6a2e70035fa1f0ccaca494074f795a6"
+  },
+  "providers": [
+    {"name": "Paddle", "artifact": "providers/paddle/vision_output.json"},
+    {"name": "Gemini", "artifact": "providers/gemini/v1/vision_output.json"}
+  ],
+  "unresolved_artifacts": [
+    {
+      "artifact": "agent_vision_output.json",
+      "reason": "provider_model_and_skill_not_recorded"
+    }
+  ]
+}

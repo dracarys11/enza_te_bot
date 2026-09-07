@@ -1,0 +1,58 @@
+{
+ "artifact_type": "OPERATOR_RECONCILED_BOUNDARY_FLUSH",
+ "run_id": "WINGRUN_20260906_01",
+ "written_at": "2026-09-06T07:05:00Z",
+ "event": {
+  "transaction": "NONE (closed)",
+  "week_committed": true,
+  "last_action": "VOCAL",
+  "post_state": "FRESH_HOME (WING_HOME / PRODUCE_HOME)",
+  "season": 3,
+  "weeks_before": 8,
+  "weeks_after": 7,
+  "result": "COMPLETED"
+ },
+ "provenance": {
+  "classification": "user_reported",
+  "producer": "operator (fresh visual evidence of live screen)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T07:05:00Z",
+  "note": "OPERATOR_PROVIDED_FRESH_VISUAL_EVIDENCE. This frame is NOT counted toward autonomous visual detector replication."
+ },
+ "context": {
+  "autonomous_clicks_this_week": [
+   {
+    "control_key": "HOME:SCHEDULE",
+    "click_point_viewport": [
+     150,
+     600
+    ],
+    "visual_box_screen": [
+     30,
+     430,
+     330,
+     700
+    ]
+   },
+   {
+    "control_key": "SCHEDULE:VOCAL",
+    "click_point_viewport": [
+     360,
+     500
+    ],
+    "visual_box_screen": [
+     280,
+     425,
+     445,
+     615
+    ]
+   }
+  ],
+  "incident": "SCREENSHOT_TIMEOUT_AFTER_TRANSACTION_PROGRESS: browser screenshot pipeline hung while the game transaction continued and committed the week. Tool observation failure must not be read as transaction-pending."
+ },
+ "runtime_candidate": "POST_TIMEOUT_STATE_MUST_BE_RECONCILED_BEFORE_RETRYING_PENDING_ACTION",
+ "unknowns": [
+  "autonomous screenshot detector not validated this frame",
+  "intermediate frames between VOCAL click and commit not captured (no fabricated frame IDs)"
+ ]
+}

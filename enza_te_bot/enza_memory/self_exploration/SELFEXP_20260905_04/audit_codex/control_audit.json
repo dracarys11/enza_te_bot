@@ -1,0 +1,15 @@
+{
+  "controls": [
+    {"id":"ikusei_category_tab","scope":"WING","evidence_status":"SUPPORTED","promotion":"TAUGHT_CONTROL_CANDIDATE","risk":"SAFE_NAVIGATION","evidence":"w1"},
+    {"id":"wizard_forward_next","scope":"WING","evidence_status":"SUPPORTED","promotion":"TAUGHT_CONTROL_CANDIDATE","risk":"SAFE_STAGE_ADVANCE","evidence":"w2,w3"},
+    {"id":"wizard_commit_kettei","scope":"WING","evidence_status":"SUPPORTED","promotion":"TAUGHT_CONTROL_CANDIDATE","risk":"SAFE_STAGE_ADVANCE","evidence":"w4"},
+    {"id":"produce_start_commit","scope":"WING","evidence_status":"SUPPORTED","promotion":"HOLD","risk":"FINAL_COMMIT","evidence":"w5; one authorized execution"},
+    {"id":"dialogue_skip","scope":"WING","evidence_status":"SUPPORTED","promotion":"TAUGHT_CONTROL_CANDIDATE","risk":"SAFE_NAVIGATION","evidence":"w6"},
+    {"id":"difficulty_subtabs","scope":"WING","evidence_status":"PARTIAL","promotion":"HOLD","risk":"REVERSIBLE_LOCAL","evidence":"visible in w1, never changed"},
+    {"id":"stamina_rate_tabs","scope":"WING","evidence_status":"PARTIAL","promotion":"HOLD","risk":"COMMIT","evidence":"1倍 visible in w3/w4, 2倍/3倍 not executed"},
+    {"id":"wing_schedule","scope":"WING","evidence_status":"PARTIAL","promotion":"HOLD","risk":"UNKNOWN_RISK","evidence":"listed in w6, not clicked"},
+    {"id":"wing_rest","scope":"WING","evidence_status":"PARTIAL","promotion":"HOLD","risk":"COMMIT","evidence":"listed in w6, not clicked"},
+    {"id":"wing_home_back","scope":"WING","evidence_status":"PARTIAL","promotion":"HOLD","risk":"UNKNOWN_RISK","evidence":"listed in w6, not clicked"}
+  ],
+  "geometry_rule":"Approximate regions without calibrated geometry are not PRODUCTION_EXECUTABLE."
+}

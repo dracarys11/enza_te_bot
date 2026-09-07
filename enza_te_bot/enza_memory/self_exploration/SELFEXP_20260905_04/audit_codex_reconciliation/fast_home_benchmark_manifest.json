@@ -1,0 +1,7 @@
+{
+  "benchmark":"WING_HOME_fast_observation",
+  "ready":"YES",
+  "source":"screenshots/w6_after_skip.png",
+  "expected_observation":{"scenario":"WING","season":"シーズン1","weeks_remaining":8,"fan_target":"あと999人(Eランク)","stamina_current":270,"stamina_max":300,"overlay_present":false},
+  "scope":"coarse benchmark input only; no production promotion"
+}

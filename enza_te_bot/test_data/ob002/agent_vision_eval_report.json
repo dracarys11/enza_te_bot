@@ -1,0 +1,67 @@
+{
+  "benchmark": "OB-002 Vision Self-Extraction Evaluation",
+  "agent_output": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob002/agent_vision_output.json",
+  "reference": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/gemini_output.json",
+  "iou_threshold": 0.5,
+  "text_recall": {
+    "reference_regions": 21,
+    "recovered": 21,
+    "recall": 1.0,
+    "missed": []
+  },
+  "interaction_recall": {
+    "reference_candidates": 14,
+    "recovered": 14,
+    "recall": 1.0,
+    "missed": []
+  },
+  "grounding_agreement": {
+    "matched_interactions": 14,
+    "full_agreement": 14,
+    "with_missing_links": []
+  },
+  "agent_extra_interactions": [
+    {
+      "bbox": [
+        612,
+        450,
+        596,
+        140
+      ],
+      "visual_description": "cream-colored event banner with decorative teal script text"
+    },
+    {
+      "bbox": [
+        612,
+        606,
+        598,
+        114
+      ],
+      "visual_description": "cream banner with a golden trophy and large stylized letters, partially clipped by the bottom edge"
+    }
+  ],
+  "disagreements": {
+    "text_missed": [],
+    "interactions_missed": [],
+    "interactions_extra": [
+      {
+        "bbox": [
+          612,
+          450,
+          596,
+          140
+        ],
+        "visual_description": "cream-colored event banner with decorative teal script text"
+      },
+      {
+        "bbox": [
+          612,
+          606,
+          598,
+          114
+        ],
+        "visual_description": "cream banner with a golden trophy and large stylized letters, partially clipped by the bottom edge"
+      }
+    ]
+  }
+}

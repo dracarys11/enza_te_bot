@@ -1,0 +1,159 @@
+{
+  "benchmark": "OB-002 Agent Reasoning Benchmark v0.1",
+  "source_observation_id": "VOBS_20260903052210",
+  "input": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob001/fused_observation.json",
+  "input_scope": "fused VisionObservation JSON only; no screenshot access",
+  "cases": [
+    {
+      "case_id": "C1_screen_understanding",
+      "decision_status": "EVIDENCE_REPORT",
+      "selected_element_id": null,
+      "confidence": 1.0,
+      "reasoning_evidence": [
+        "8 interaction candidates have MATCHED text evidence",
+        "6 interaction candidates remain text-evidence UNKNOWN: e01, e04, e05, e10, e11, e12",
+        "2 text regions fall below the 0.9 reporting threshold"
+      ],
+      "grounded_elements": [
+        {
+          "element_id": "e02",
+          "text": "育成プロデュース",
+          "confidence": 0.97
+        },
+        {
+          "element_id": "e03",
+          "text": "特化プロデュース",
+          "confidence": 0.97
+        },
+        {
+          "element_id": "e06",
+          "text": "攻略動画①(外部サイト)",
+          "confidence": 0.905282
+        },
+        {
+          "element_id": "e07",
+          "text": "ビギナー",
+          "confidence": 0.91
+        },
+        {
+          "element_id": "e08",
+          "text": "ミドル",
+          "confidence": 0.91
+        },
+        {
+          "element_id": "e09",
+          "text": "マスター",
+          "confidence": 0.91
+        },
+        {
+          "element_id": "e13",
+          "text": "研修設定",
+          "confidence": 0.99
+        },
+        {
+          "element_id": "e14",
+          "text": "次へ",
+          "confidence": 0.99
+        }
+      ],
+      "unresolved_uncertainty": [
+        {
+          "kind": "text_evidence_unknown",
+          "element_ids": [
+            "e01",
+            "e04",
+            "e05",
+            "e10",
+            "e11",
+            "e12"
+          ]
+        },
+        {
+          "kind": "low_confidence_text",
+          "regions": [
+            {
+              "text_region_id": "paddle_014",
+              "text": "3",
+              "confidence": 0.543792
+            },
+            {
+              "text_region_id": "paddle_016",
+              "text": "ファン感謝祭",
+              "confidence": 0.869149
+            }
+          ]
+        },
+        {
+          "kind": "screen_identity",
+          "detail": "screen name is not claimable from text regions alone; repeated text does not prove a title"
+        }
+      ]
+    },
+    {
+      "case_id": "C2_target_selection_proceed",
+      "goal": "proceed to the next step",
+      "decision_status": "GROUNDED_SELECTION",
+      "selected_element_id": "e14",
+      "confidence": 0.99,
+      "reasoning_evidence": [
+        "element e14 has MATCHED text evidence '次へ'",
+        "provenance visual=gemini, text=paddle",
+        "grounding_confidence=0.99 (min of visual and text confidence)"
+      ],
+      "unresolved_uncertainty": []
+    },
+    {
+      "case_id": "C3_target_selection_training",
+      "goal": "open training settings",
+      "decision_status": "GROUNDED_SELECTION",
+      "selected_element_id": "e13",
+      "confidence": 0.99,
+      "reasoning_evidence": [
+        "element e13 has MATCHED text evidence '研修設定'",
+        "provenance visual=gemini, text=paddle",
+        "grounding_confidence=0.99 (min of visual and text confidence)"
+      ],
+      "unresolved_uncertainty": []
+    },
+    {
+      "case_id": "C4_uncertainty_textless_navigation",
+      "goal": "navigate back",
+      "decision_status": "UNKNOWN_REQUIRES_HUMAN",
+      "selected_element_id": null,
+      "confidence": 0.0,
+      "reasoning_evidence": [
+        "candidates e11, e04, e05 exist visually but carry no MATCHED text evidence in the Vision JSON"
+      ],
+      "unresolved_uncertainty": [
+        {
+          "kind": "text_evidence_unknown",
+          "element_ids": [
+            "e11",
+            "e04",
+            "e05"
+          ],
+          "detail": "human verification required before any candidate can be promoted"
+        }
+      ]
+    },
+    {
+      "case_id": "C5_uncertainty_no_text_binding",
+      "goal": "use the auto-produce control",
+      "decision_status": "UNKNOWN_REQUIRES_HUMAN",
+      "selected_element_id": null,
+      "confidence": 0.0,
+      "reasoning_evidence": [
+        "candidates e12 exist visually but carry no MATCHED text evidence in the Vision JSON"
+      ],
+      "unresolved_uncertainty": [
+        {
+          "kind": "text_evidence_unknown",
+          "element_ids": [
+            "e12"
+          ],
+          "detail": "human verification required before any candidate can be promoted"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "report_type": "REGRESSION_REVIEW",
+  "status": "DRAFT",
+  "reviewed_artifacts": [],
+  "reviewed_changes": [],
+  "passed_checks": [],
+  "violations": [],
+  "potential_regressions": [],
+  "missing_tests": [],
+  "candidate_promotions_detected": [],
+  "verdict": "UNDETERMINED",
+  "code_modified": false
+}

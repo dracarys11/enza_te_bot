@@ -1,0 +1,7 @@
+{
+  "policy_id": "VOCAL_MVP_001",
+  "allowed_states": ["HOME", "WING_SELECTION", "TRAINING_SETTINGS"],
+  "allowed_actions": ["produce_open", "open_training_settings", "vocal_plus"],
+  "forbidden_actions": ["confirm", "start_produce", "resource_consume", "season_start"],
+  "max_goal": "TRAINING_SETTINGS vocal counter increase by exactly 1"
+}

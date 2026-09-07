@@ -1,0 +1,99 @@
+{
+ "artifact_type": "SKILL_BOARD_SESSION_RECORD_2",
+ "run_id": "WINGRUN_20260906_01",
+ "written_at": "2026-09-06T10:00:00Z",
+ "session_scope": "operator-directed: LEFT big block + RIGHT big block only, progressive unlock, bottom-up replacement skipping newly-learned",
+ "sp_before": 408,
+ "sp_after": 23,
+ "sp_spent": 385,
+ "acquisitions": [
+  {
+   "node": "Vocal&メンタル上限UP +150",
+   "sp": 40,
+   "zone": "LEFT"
+  },
+  {
+   "node": "Vocal180%UP",
+   "sp": 30,
+   "zone": "LEFT"
+  },
+  {
+   "node": "ある夏の日のあなたは (Vocal5倍)",
+   "sp": 30,
+   "zone": "LEFT",
+   "replaced": "メンタルキュアI"
+  },
+  {
+   "node": "ある夏の日のあなたは+ (Vocal6倍)",
+   "sp": 40,
+   "zone": "LEFT",
+   "replaced": "ビジュアルアピールI"
+  },
+  {
+   "node": "Vocal上限UP +50",
+   "sp": 15,
+   "zone": "RIGHT white #1"
+  },
+  {
+   "node": "Vocal上限UP +50",
+   "sp": 25,
+   "zone": "RIGHT white #2"
+  },
+  {
+   "node": "わかばの頃 (Vocal3倍)",
+   "sp": 25,
+   "zone": "RIGHT",
+   "replaced": "ダンスアピールI"
+  },
+  {
+   "node": "ビジュアルアピールIV (Visual2.5倍)",
+   "sp": 20,
+   "zone": "bottom-center (OUTSIDE zones — executed before zone rule clarified)",
+   "replaced": "ボーカルアピールI"
+  },
+  {
+   "node": "Vocal160%UP",
+   "sp": 35,
+   "zone": "RIGHT"
+  },
+  {
+   "node": "Vocal50%UP",
+   "sp": 35,
+   "zone": "RIGHT"
+  },
+  {
+   "node": "わかばの頃 group-bonus (orange arrow)",
+   "sp": 45,
+   "zone": "RIGHT"
+  },
+  {
+   "node": "Vocal220%UP",
+   "sp": 45,
+   "zone": "RIGHT (operator-highlighted chain goal)"
+  }
+ ],
+ "live_skills_final": [
+  "ある夏の日のあなたは (Vocal5倍)",
+  "ある夏の日のあなたは+ (Vocal6倍)",
+  "わかばの頃 (Vocal3倍)",
+  "ビジュアルアピールIV (Visual2.5倍)"
+ ],
+ "replacement_policy": {
+  "rule": "bottom-up among ORIGINAL skills; target moves one slot up per new skill; never replace just-learned skills",
+  "status": "OPERATOR_CONFIRMED, 4/4 executed successfully"
+ },
+ "board_color_model": {
+  "white_interior": "AVAILABLE",
+  "grey": "LOCKED",
+  "bright_colored_SP0": "ACQUIRED (習得済み — never re-click)",
+  "blue_gradient": "chain-marked, may still be locked",
+  "gold": "node-type coloring, NOT availability",
+  "note": "acquire button can render garbled/未解放-looking while functional; verify by clicking and watching for confirm dialog"
+ },
+ "termination": "INSUFFICIENT_SP (SP 23 < わかばの頃+ 45); returned fresh HOME",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run",
+  "provider_session_id": "sess_a87f3588-8212-4de7-b9ad-319825b4509e"
+ }
+}

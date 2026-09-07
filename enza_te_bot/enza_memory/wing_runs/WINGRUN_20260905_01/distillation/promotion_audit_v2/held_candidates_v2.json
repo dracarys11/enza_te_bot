@@ -1,0 +1,6 @@
+{
+  "hold":[
+    {"candidate":"BUSINESS_CHOICE detector","reason":"No new independent two-card runtime instance; only three-card advice discrimination evidence. Require card_count==2 AND dual-check structure; STOP/taught-choice lookup remains default."}
+  ],
+  "reject":[]
+}

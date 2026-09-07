@@ -1,0 +1,197 @@
+{
+  "artifact_type": "CANONICAL_STATE_CORPUS",
+  "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+  "created_at": "2026-09-06T23:30:00Z",
+  "status": "MINED_EVIDENCE_CORPUS — audit/regression-design ONLY. NOT executable policy. No raw artifact was modified.",
+  "honesty_rule": "Every state entry lists historical labels exactly as they appear in durable artifacts, the canonical label assigned by this mining pass, and the reason. Historical labels were never rewritten in source artifacts. identity_source follows state_hierarchy_review_001 SC1: 'title_text_read' | 'roundtrip_verified' | 'layout_anchor_read' | 'coordinate_only' (coordinate_only labels stay UNVERIFIED/UNKNOWN).",
+  "canonical_vocabulary": [
+    "HOME",
+    "SCHEDULE",
+    "DIALOGUE",
+    "CHOICE",
+    "AUDITION_SELECTION",
+    "AUDITION_BATTLE",
+    "RESULT",
+    "SEASON_TRANSITION",
+    "SKILL_BOARD",
+    "SKILL_REPLACEMENT",
+    "ENDING",
+    "LOADING_TRANSITION",
+    "UNKNOWN"
+  ],
+  "canonical_states": [
+    {
+      "canonical_label": "HOME",
+      "variants": ["WING_HOME", "PRODUCE_HOME", "MAIN_LOBBY (out-of-produce office)", "HOME_LOGIN_DIALOGUE (login bonus overlay on /home)"],
+      "observed_identity_evidence": "URL /produce + top status bar (シーズンN 残りN週 / ファン人数 あとN人 / 体力bar) + bottom produce controls (プロデュース/休む/振り返り/流行確認)",
+      "identity_source": "layout_anchor_read",
+      "replication": {"week_level_fresh_confirmations": ">=40 across 2 live runs + 1 validation run", "cross_session": true},
+      "hazard": "post-lesson dialogue over-tap can open 振り返り; SUPPORT_SKILL button (0.7695,0.9208 normalized in SCHEDULE) must never be used as transient skip",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl", "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/page_identity_distillation.json", "enza_memory/wing_runs/WINGRUN_20260906_01/checkpoint.json", "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json"]
+    },
+    {
+      "canonical_label": "SCHEDULE",
+      "variants": ["SCHEDULE_LOADED", "SCHEDULE_SELECTION", "スケジュール選択", "SCHEDULE_AUDITION_SUBTAB (lesson/audition sub-tab retains prior page)"],
+      "observed_identity_evidence": "スケジュール選択 header + 6 lesson/work cards + pink 決定 bottom-right + left オーディション tab + トラブル率 badge",
+      "identity_source": "layout_anchor_read",
+      "replication": {"appearances": "every week of 3 runs (>=34 weeks)", "cross_session": true},
+      "hazard": "reopens in audition sub-tab after audition weeks (observed S4W1); page-loaded anchor required before DECIDE (NO_EFFECT on slow load, n=1)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/distillation/page_identity_distillation.json", "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl"]
+    },
+    {
+      "canonical_label": "DIALOGUE",
+      "variants": ["SUPPORT_EVENT_DIALOGUE (SKIP present, ☆イベント header)", "COMMUNICATION_DIALOGUE (no SKIP; Auto/ログ/非表示 buttons)", "PLAIN_DIALOGUE", "PERSONAL_STORY", "STORY_TEXTBOX", "SUPPORT_STORY", "DIALOGUE_SLOW_SPEED (早送りx4 OFF indicator)"],
+      "observed_identity_evidence": "bottom textbox + presence/absence of SKIP; communication identified by Auto/ログ/非表示 column",
+      "identity_source": "layout_anchor_read",
+      "replication": {"textbox_advance_taps": 35, "cross_session": true},
+      "hazard": "terminal tap crosses into HOME controls; bottom-right chevron was NO_EFFECT; textbox must never be tapped while choice cards are present",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/distillation/interruption_distillation.json", "enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json", "enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl"]
+    },
+    {
+      "canonical_label": "CHOICE",
+      "variants": ["MORNING_3CHOICE", "LESSON_ADVICE (3-card)", "AUDITION_ADVICE (3-card)", "TWO_CHOICE / BUSINESS_CHOICE_MODAL (dual ✓-badge cards いいよ/ごめん)", "PROMISE_STORY choice"],
+      "observed_identity_evidence": "3 cards = advice family (middle selectable, check badge on selected); 2 dual-✓ cards = BUSINESS_CHOICE modal while dialogue remains",
+      "identity_source": "layout_anchor_read",
+      "replication": {"three_choice_middle_success": 8, "two_choice_gomen_success": 4, "two_choice_iiyo_operator_resolved": 1, "cross_session": true},
+      "hazard": "LAYOUT_FAMILY and EVENT_CONTEXT must not be conflated (systemic bug class E, VRB02_018..021); unsupported 2-card shape must STOP",
+      "evidence_refs": ["enza_memory/policies/wing_business_choice_fixed_policy.json", "enza_memory/migration/python_click_migration/review_batches/v0_2/zcode_audit/systemic_bug_classes.json", "enza_memory/migration/python_click_migration/event_occurrence/event_type_profiles.json"]
+    },
+    {
+      "canonical_label": "AUDITION_SELECTION",
+      "variants": ["AUDITION_LIST (multi-page candidate cards)", "CANDIDATE_SELECTED_AND_PAGE_LOADED"],
+      "observed_identity_evidence": "candidate cards with name/reward/eligibility; pagination; pink 決定 only when candidate selected",
+      "identity_source": "layout_anchor_read",
+      "replication": {"candidate_selection_to_battle": 10, "cross_session": true},
+      "hazard": "visible candidate may be locked/ineligible (決定 pink state is the eligibility evidence); candidate location varies by page",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json", "enza_memory/wing_runs/WINGRUN_20260905_01/s4_route_policy.json"]
+    },
+    {
+      "canonical_label": "AUDITION_BATTLE",
+      "sub_states": ["ANIMATION (controls visible but dimmed)", "INPUT_READY (player input wait frame; Auto clickable style)", "PAUSE_OVERLAY (再開)", "RESULT (合格/不合格 evidence frame)", "UNKNOWN"],
+      "observed_identity_evidence": "Auto button style (dimmed vs black/pink ON), speed badge OFF/X2/X3, turn/card UI",
+      "identity_source": "layout_anchor_read",
+      "replication": {"independent_live_battle_instances": 11, "auto_success_toggles": 4, "auto_no_effect_clicks": 4, "cross_session": true},
+      "hazard": "value OFF and interactability ENABLED are independent fields; resume/restart invalidates local control epoch; speed state may persist across battles",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json", "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json", "enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl"]
+    },
+    {
+      "canonical_label": "RESULT",
+      "variants": ["VOCAL_RESULT (RANKUP/stat overlay)", "RESULT_OVERLAY_OR_DIALOGUE (audition 合格/不合格)", "FAN_RESULT", "wk7-style ambiguous choice-or-result frame"],
+      "observed_identity_evidence": "RANKUP/stat overlay with +Vo/+SP/+fan bubbles over blurred schedule background; audition 合格/不合格 explicit text",
+      "identity_source": "layout_anchor_read",
+      "replication": {"advance_cycles": 6, "cross_session": true},
+      "hazard": "presentation numbers refresh between frames — read canonical numbers only at fresh HOME; advance before capture loses evidence",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/distilled/result_commit_examples.json", "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/page_identity_distillation.json"]
+    },
+    {
+      "canonical_label": "SEASON_TRANSITION",
+      "variants": ["SEASON_RESULT screen", "KNOWN_TRANSIENT_DIALOGUE (SKIP visible)", "KNOWN_TRANSITION_RESULT (次へ/OK)", "S2_END_CUTSCENE (crash-observed, unstable)"],
+      "observed_identity_evidence": "season result screens + SKIP/次へ controls; verified only as known transition frames + fresh next-season HOME",
+      "identity_source": "roundtrip_verified",
+      "replication": {"season_transitions_observed": 6, "stable_fresh_home_confirmed": 5, "crash_during_transition": 1},
+      "hazard": "transition can outlive tool cell; crash before persistence flush (WINGRUN_20260906_01 S2→S3); scene SKIP can consume a business week (semifinal)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json", "enza_memory/migration/python_click_migration/distilled/stable_transition_chains.json", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl"]
+    },
+    {
+      "canonical_label": "SKILL_BOARD",
+      "variants": ["FURIKAERI_SKILL board", "BOARD_STABLE", "BOARD_STABLE_ZOOMED_OUT", "REGION_VIEW", "NODE_SELECTED (pink ring)", "LOCKED_PANEL (未解放)", "ACQUIRE_CONFIRM (スキル習得確認)"],
+      "observed_identity_evidence": "node grid with color semantics (WHITE=purchasable, GREY=locked, BRIGHT_YELLOW_SP0/CYAN=owned, PINK_RING=selected, GOLD/BLUE not availability signals)",
+      "identity_source": "title_text_read (スキル習得確認 dialog) + recovered frames",
+      "replication": {"acquisitions": 17, "replacements_triggered": 4, "locked_misclicks": ">=4", "cross_session": false, "single_session": "sess_a87f3588-8212-4de7-b9ad-319825b4509e"},
+      "hazard": "acquire button can render garbled/未解放-looking while functional; color alone is NOT purchasable signal; display-scale drift 0.9/1.1 documented",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json", "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json", "enza_memory/migration/python_click_migration/recovered_frames/skill_board_visual_sequence.json"]
+    },
+    {
+      "canonical_label": "SKILL_REPLACEMENT",
+      "variants": ["SLOT_LIST (4 slots, full-screen)", "SLOT_LIST_PRESELECT", "CONFIRM_DIALOG (スキル入れ替え確認: 忘れる/新規)", "POST_COMMIT_BOARD", "PENDING_SELECTION_RING"],
+      "observed_identity_evidence": "スキル入れ替え確認 dialog with 忘れるスキル (left) / 新たに習得するスキル (right); slot column x~860, spacing ~135px",
+      "identity_source": "title_text_read",
+      "replication": {"transactions": 4, "all_successful": true, "cross_session": false},
+      "hazard": "replacement target must be bottom-up among ORIGINAL skills; never replace just-learned skills (operator corrected mid-transaction T2)",
+      "evidence_refs": ["enza_memory/migration/python_click_migration/recovered_frames/replacement_visual_sequence.json", "enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json"]
+    },
+    {
+      "canonical_label": "ENDING",
+      "variants": ["プロデュース評価 (produce end evaluation)", "フェスアイドル誕生 (fes idol born)", "clear reward screen", "ABANDON_FLOW (ホームに戻る・諦める dialog + long-press)", "ENDING_DIALOGUE (社長/はづき/智代子 textbox taps)"],
+      "observed_identity_evidence": "end-of-produce evaluation screen with 親愛度/SP/fans; abandon confirm dialog",
+      "identity_source": "title_text_read",
+      "replication": {"produce_endings": 2, "abandon_long_press": 1},
+      "hazard": "irreversible operator-gated; long-press automation semantics UNKNOWN; SP forfeited per standard flow (223 in 0906 run)",
+      "evidence_refs": ["enza_memory/wing_runs/WINGRUN_20260905_01/final_summary.json", "enza_memory/wing_runs/WINGRUN_20260906_01/run_completion_record.json", "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json"]
+    },
+    {
+      "canonical_label": "LOADING_TRANSITION",
+      "variants": ["NOW_LOADING overlay", "OPENING_SCENE (SKIP jumps directly to WING_HOME)", "TRANSITION_FRAME (no control geometry allowed)"],
+      "observed_identity_evidence": "Now Loading text overlay; opening scene SKIP",
+      "identity_source": "title_text_read",
+      "replication": {"loading_frames": 1, "opening_scene_skip": 1},
+      "hazard": "no control geometry may be projected onto transition frames (VRB02_006 systemic bug class B/C)",
+      "evidence_refs": ["enza_memory/wing_state_graph_v2.json", "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl", "enza_memory/migration/python_click_migration/review_batches/v0_2/zcode_audit/systemic_bug_classes.json"]
+    },
+    {
+      "canonical_label": "UNKNOWN",
+      "variants": ["UNKNOWN_WHITE_SELECTION_OVERLAY (073000/082000, title never read)", "UNKNOWN_BUSINESS_CHOICE (untaught 2-card, 0905 S1W5)", "SEMI_FINAL result state", "post-crash unreconciled frames", "UNKNOWN page during screenshot wedge (0905 S2W1)"],
+      "observed_identity_evidence": "identity could not be established from durable evidence; label preserved instead of guessed",
+      "identity_source": "coordinate_only / none",
+      "replication": {"unknown_events": ">=6 distinct"},
+      "hazard": "UNKNOWN must stop autonomous business action; fabricated descriptions under media-budget omission are forbidden",
+      "evidence_refs": ["enza_memory/wing_state_graph_v2.json", "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl", "enza_memory/state_hierarchy_review_001.json"]
+    }
+  ],
+  "historical_label_reclassifications": [
+    {
+      "historical_label": "WING_CONFIRMATION_DIALOG (production start prompt)",
+      "historical_source": "exploration_summary_1e_001 terminal_state; ai_decisions/observations/OBS_20260903060610",
+      "canonical_label": "UNIT_FORMATION_TUTORIAL_MODAL -> overlay over PRODUCE_PREP",
+      "reason_for_reclassification": "AGY reinspection showed frames 0610/063000 were the ユニット編成について (1/7) tutorial modal; WING_CONFIRMATION_DIALOG has 0 verified first-hand observations",
+      "historical_artifact_modified": false
+    },
+    {
+      "historical_label": "UNIT_FORMATION (OBS_20260903060520)",
+      "canonical_label": "LOADING_TRANSITION",
+      "reason_for_reclassification": "AGY reinspection: frame shows Now Loading overlay, not unit formation",
+      "historical_artifact_modified": false
+    },
+    {
+      "historical_label": "ITEM_SELECTION (OBS_20260903060545)",
+      "canonical_label": "UNIT_FORMATION_TUTORIAL_MODAL (overlay)",
+      "reason_for_reclassification": "AGY reinspection; prep-flow step labels superseded",
+      "historical_artifact_modified": false
+    },
+    {
+      "historical_label": "TRAINING_SETTINGS + vocal skill sub-panel (merged)",
+      "canonical_label": "TRAINING_SETTINGS_OVERLAY + UNIDENTIFIED_SKILL_RELATED_PANEL (identity UNKNOWN)",
+      "reason_for_reclassification": "state_hierarchy_review_001 M1/M2: only coordinate behavior proven (panel opens on allocation); semantic identity (技能解放/技能树/other) never proven",
+      "historical_artifact_modified": false
+    },
+    {
+      "historical_label": "support-selection overlay (memory_index wording)",
+      "canonical_label": "UNKNOWN_SELECTION_OVERLAY_073000",
+      "reason_for_reclassification": "M3: 'support-selection' was an unproven inference stated as description; only 戻る exit verified",
+      "historical_artifact_modified": false
+    },
+    {
+      "historical_label": "MORNING_3CHOICE (used for all 3-card frames)",
+      "canonical_label": "CHOICE:LAYOUT_FAMILY=THREE_CHOICE_LAYOUT_V1 with EVENT_CONTEXT ∈ {MORNING, LESSON_ADVICE, AUDITION_ADVICE, WEEK_3CHOICE}",
+      "reason_for_reclassification": "systemic bug class E (VRB02_018..021): AUDITION_ADVICE/LESSON_ADVICE 3-choice frames were labeled MORNING_3CHOICE; layout family and business context are independent fields",
+      "historical_artifact_modified": false
+    },
+    {
+      "historical_label": "weeks_remaining=1 (0905 S4 STOP trace entry)",
+      "canonical_label": "UNKNOWN (record error, later reconciled weeks=5)",
+      "reason_for_reclassification": "s4_reconciliation: STOP trace entry copied the final-week pattern; provenance-conflicting week labels must not be treated as state facts",
+      "historical_artifact_modified": false
+    },
+    {
+      "historical_label": "HOME fan totals during S4 (Congratulation banner)",
+      "canonical_label": "HOME with field_fans=UNREADABLE (banner occlusion)",
+      "reason_for_reclassification": "banner occlusion made fan value unreadable; estimates (~113000+) were recorded as estimates and must not become canonical numbers",
+      "historical_artifact_modified": false
+    }
+  ],
+  "canonical_extension_states_added_by_mining": [
+    {"canonical_extension": "PRODUCE_PREP", "covers": ["PRODUCE_SELECTION_WING", "UNIT_FORMATION (real wizard stage)", "KNOWHOW_SELECTION", "ITEM_SELECTION (never reached)", "TUTORIAL_OVERLAY"], "evidence": "SELFEXP_20260905_02/03/04 + cross_session_audit + wing_state_graph_v2", "note": "added because these pages genuinely occurred but are absent from the initial canonical vocabulary"},
+    {"canonical_extension": "MAIN_MENU_OUTSIDE_PRODUCE", "covers": ["IDOL_PORTAL", "IDOL_LIST", "WORK_ACTIVITY", "MENU_OVERLAY", "プレゼント/ミッション branches"], "evidence": "SELFEXP_20260905_01 summary page_sequence"},
+    {"canonical_extension": "OVERLAY_TUTORIAL", "covers": ["ユニット編成について 1/7 modal", "営業について 1/6 modal", "produce-mode info modal", "help overlay (ヘルプ)"], "hazard": "OVERLAY_OWNERSHIP: overlay invalidates parent-page control authority (VRB02_005)"}
+  ]
+}

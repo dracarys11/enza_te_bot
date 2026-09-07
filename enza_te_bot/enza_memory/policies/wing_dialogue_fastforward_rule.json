@@ -1,0 +1,15 @@
+{
+  "rule_id": "wing_dialogue_fastforward_auto",
+  "status": "CANDIDATE",
+  "scenario_scope": "WING",
+  "source": "operator_instruction_20260905 (WINGRUN_20260905_01 之后)",
+  "rule": "在 WING 对话/剧情界面看到 '早送りx4 OFF' 指示框时，自动点击该框切换为 ON，然后重新观察一次确认对话/流程是否在推进（画面变化或对话行前进）。",
+  "detection": "右下角 '早送りx4 OFF' 按钮几何特征（位于 SKIP 或对话框下方区域，约 (1105,655)-(1140,690)）",
+  "handler": "click(早送り框) → wait 1-2s → fresh check: 对话是否推进",
+  "if_no_progress": "若切 ON 后仍无推进：回退为手动逐行推进（点击文本框 640,610）；若出现双✓选项卡 → BUSINESS_CHOICE，STOP",
+  "risk_class": "SAFE_NAVIGATION（仅加速对话播放，不做业务选择、不消耗资源）",
+  "notes": [
+    "早送り ON 只加速自动播放，点击文本框仍可手动推进，两者可叠加",
+    "首次观察证据：WINGRUN_20260905_01 wk4/wk5 COMMUNICATION_DIALOGUE 出现早送りx4 OFF，当时未点击、改为手动推进（低效）"
+  ]
+}

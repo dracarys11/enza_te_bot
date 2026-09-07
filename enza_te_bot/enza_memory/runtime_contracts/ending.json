@@ -1,0 +1,168 @@
+{
+  "contract_version": "0.2.1",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): STALE-F evidence downgrade, PERSIST-1 closed-run config purge (F-03); 2026-09-07 evidence delta CONTRACT_EVIDENCE_DELTA_20260907: patched with recovered_historical_frames (HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY) + PERSIST-1 re-check against CURRENT run_state/config (RUN_STATE_CONTAMINATION_FIX); metadata only, no runtime/policy change",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract distilled from the single completed WING run (WINGRUN_20260906_01). n=1 for the whole flow — treat everything here as PARTIAL.",
+  "scenario_scope": "WING produce ending sequence: personal story → season end rank screen → ending dialogue → プロデュース評価 → fes idol birth → main lobby, 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "ENDING",
+    "identity_anchors_required": [
+      "season end rank screen (observed after S3 final week)",
+      "社長/はづき/智代子 ending dialogue (textbox taps)",
+      "プロデュース評価 screen (親愛度/SP/fans values)",
+      "フェスアイドル誕生 confirmation",
+      "clear reward screen",
+      "terminal MAIN_LOBBY_IDLE"
+    ],
+    "identity_source": "ENDING_MODAL_VISUAL_EVIDENCE + EPILOGUE_VISUAL_EVIDENCE RECOVERED_DURABLE (recovered_historical_frames/ending/, 8 frames from sess_dc58a91a + sess_a87f3588); rank screen / プロデュース評価 / clear reward scenes remain DERIVED_SUMMARY_CONFIRMED (not in recovered set); terminal MAIN_LOBBY_IDLE FRESH_LIVE_CONFIRMED",
+    "identity_status": "PARTIAL (single observation)"
+  },
+  "ENTRY_CONDITIONS": [
+    "final actionable week (weeks_remaining 1→0) completed via audition with explicit result evidence",
+    "transition frames begin (personal story event observed: 夏葉の母 scene, SKIP, Da+15)"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "scene subtype (story / rank screen / ending dialogue / evaluation / idol birth / reward / lobby)",
+      "evaluation values (fans final, SP final charge, 親愛度)",
+      "idol birth confirmation text",
+      "lobby idle state anchors (produce slot 300/300 free)"
+    ]
+  },
+  "SUBSTATES": [
+    {
+      "substate": "PERSONAL_STORY_SCENE",
+      "evidence": "SKIP handled, Da+15"
+    },
+    {
+      "substate": "SEASON_END_RANK_SCREEN",
+      "evidence": "rank D observed"
+    },
+    {
+      "substate": "ENDING_DIALOGUE",
+      "evidence": "textbox taps"
+    },
+    {
+      "substate": "PRODUCE_EVALUATION",
+      "evidence": "親愛度6 SP+6, fans 22672 SP+6"
+    },
+    {
+      "substate": "FES_IDOL_BIRTH",
+      "evidence": "confirmed; SP 223 forfeited per standard flow"
+    },
+    {
+      "substate": "CLEAR_REWARD",
+      "evidence": "silver training ticket x2"
+    },
+    {
+      "substate": "MAIN_LOBBY_IDLE",
+      "evidence": "fresh-confirmed terminal"
+    }
+  ],
+  "VISIBLE_CONTROLS": [
+    {
+      "control": "SKIP / textbox / advance cycle",
+      "geometry": "as in dialogue.json / result.json",
+      "visible_status": "VERIFIED_EVIDENCE (inherited cycle)"
+    },
+    {
+      "control": "evaluation/confirm screens",
+      "geometry": "UNKNOWN normalized",
+      "visible_status": "VISIBLE_ONLY"
+    }
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "ending SCENE visible != run CLOSED. Committing run completion requires fresh MAIN_LOBBY_IDLE + evaluation values captured before advancing. All advance actions follow result/ending capture.",
+    "advance": "authorized per bounded cycle after each scene's evidence captured",
+    "run_close": "run closure and resume authority are operator/policy territory; checkpoint run_closed=true must be backed by fresh lobby evidence"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/capture each ending substate",
+    "bounded advance cycle (SKIP/textbox/center)",
+    "capture evaluation values on fresh stable frame",
+    "flush run completion record"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "skipping ending dialogue before evaluation capture",
+    "declaring fes idol born without explicit confirmation frame",
+    "starting new produce from lobby without explicit operator mission (checkpoint note: closed run must not be resumed)"
+  ],
+  "POSTCONDITIONS": {
+    "ending_complete": "fresh MAIN_LOBBY_IDLE with produce slot free; run completion record durably flushed"
+  },
+  "EXIT_CONDITIONS": [
+    "MAIN_LOBBY_IDLE → session end / new operator mission"
+  ],
+  "FAILURE_MODES": [
+    {
+      "mode": "EVALUATION_VALUES_MISSED",
+      "class": "EVIDENCE_LOSS",
+      "note": "SP forfeit at idol birth is part of standard flow — capture expectations before advancing"
+    },
+    {
+      "mode": "TRANSITION_OUTLIVES_CELL",
+      "class": "TOOL_TIMEOUT"
+    },
+    {
+      "mode": "+5000_FAN_SOURCE_UNKNOWN",
+      "class": "UNMODELED",
+      "evidence": "S4 final evaluation 414414→419414 unexplained"
+    }
+  ],
+  "RECOVERY": [
+    "ending interrupted → fresh lobby/idle state supersedes; ending value gaps stay UNKNOWN, never inferred"
+  ],
+  "PERSISTENCE_BOUNDARY": "run completion is a top-level durable boundary: flush final state + evaluation + terminal screenshot digest before declaring run closed; closed-run run_state (e.g. season3 audition flags) MUST be purged/reset from live config at closure (PERSIST-1 / F-03: stale flags would silently skip required auditions on a new run); ending frames should be recovered into durable store before future runs; PERSIST-1/F-03 re-check 2026-09-07: closed-run flags UNREACHABLE in CURRENT tree (config.json carries no season3 flags; artifact_registry current_mainline.active_run=null; resolve_run_state returns clean state and closed-run resume raises) -> RESOLVED_BY_RUN_STATE_PATCH. Invariant retained: closed-run state must not become current authority.",
+  "MIGRATION_STATUS": {
+    "ending_flow": "NEEDS_REPLICATION (action-level; n=1 run) — BUT visual identity for modal/epilogue now RECOVERED_DURABLE (8 frames); rank/evaluation/reward scenes remain DERIVED_SUMMARY_CONFIRMED",
+    "target_not_met_semantics": "evidence-backed (rank C 50,000 未达, honest outcome recorded)",
+    "UNKNOWN": [
+      "non-WING ending variants",
+      "target-met ending variant"
+    ]
+  },
+  "sources": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/run_completion_record.json",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/checkpoint.json",
+    "enza_memory/migration/python_click_migration/distilled/result_commit_examples.json"
+  ],
+  "evidence_delta_source": [
+    "HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY",
+    "RUN_STATE_CONTAMINATION_FIX"
+  ],
+  "EVIDENCE_DELTA": {
+    "delta_id": "CONTRACT_EVIDENCE_DELTA_20260907",
+    "ENDING_VISUAL_IDENTITY": "SUPPORTED (upgraded from DERIVED_SUMMARY_CONFIRMED for modal/epilogue scenes only)",
+    "ENDING_MODAL_VISUAL_EVIDENCE": {
+      "status": "RECOVERED_DURABLE",
+      "frames": [
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_002015_dc58a91a_ending.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_002030_dc58a91a_ending.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_002044_dc58a91a_ending.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_002100_dc58a91a_ending.png"
+      ],
+      "note": "フェスアイドル誕生確認 modal visible: キャンセル / フェスアイドル誕生 buttons, 所持SP 962, 残りSP forfeit warning; subsequent birth-performance frames"
+    },
+    "EPILOGUE_VISUAL_EVIDENCE": {
+      "status": "RECOVERED_DURABLE",
+      "frames": [
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_170745_a87f3588_epilogue.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_170848_a87f3588_epilogue.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_171109_a87f3588_epilogue.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/ending/20260906_171142_a87f3588_epilogue.png"
+      ],
+      "note": "ending/epilogue dialogue textbox frames (S1 conclude run)"
+    },
+    "NOT_ELEVATED": [
+      "FINAL_RESULT_SEMANTICS — rank screen / evaluation values still DERIVED_SUMMARY_CONFIRMED only",
+      "staff roll completeness — UNKNOWN",
+      "long-press abandon flow — no recovered frame; prior observation stands unchanged"
+    ],
+    "still_UNKNOWN": [
+      "non-WING ending variants",
+      "target-met ending variant"
+    ]
+  }
+}

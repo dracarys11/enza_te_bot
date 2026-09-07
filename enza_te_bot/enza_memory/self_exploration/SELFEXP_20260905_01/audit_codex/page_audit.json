@@ -1,0 +1,8 @@
+[
+  {"page_class":"HOME","evidence_steps":["step1","step2","step3","step7","step8","step11","step13"],"example_screenshots":["screenshots/step1_before_home.png","screenshots/step13_after.png"],"audit_status":"SUPPORTED","issues":["URL and repeated visual anchors agree; no numeric HOME fields were audited here"],"promotion_recommendation":"PROMOTE"},
+  {"page_class":"PRODUCE_MENU","evidence_steps":["step1","step2"],"example_screenshots":["screenshots/step1_after_settled.png"],"audit_status":"SUPPORTED","issues":["single settled screenshot; controls are not geometrically calibrated"],"promotion_recommendation":"HOLD"},
+  {"page_class":"IDOL_PORTAL","evidence_steps":["step3","step6","step7"],"example_screenshots":["screenshots/step3_after.png","screenshots/step6_after.png"],"audit_status":"SUPPORTED","issues":[],"promotion_recommendation":"PROMOTE"},
+  {"page_class":"IDOL_LIST","evidence_steps":["step4","step5","step6"],"example_screenshots":["screenshots/step5_after.png"],"audit_status":"PARTIAL","issues":["step4 is IDOL_LIST+TUTORIAL_OVERLAY; overlay must remain separate from base page"],"promotion_recommendation":"HOLD"},
+  {"page_class":"WORK_ACTIVITY","evidence_steps":["step8","step9","step10","step11"],"example_screenshots":["screenshots/step8_after.png","screenshots/step10_after.png"],"audit_status":"PARTIAL","issues":["delayed 営業について 1/6 overlay proves interruption variance"],"promotion_recommendation":"HOLD"},
+  {"page_class":"MENU_OVERLAY","evidence_steps":["step12","step13"],"example_screenshots":["screenshots/step12_after.png"],"audit_status":"SUPPORTED","issues":["overlay is correctly tied to HOME URL; must not be treated as a new base page"],"promotion_recommendation":"PROMOTE"}
+]

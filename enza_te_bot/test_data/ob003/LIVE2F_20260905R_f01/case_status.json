@@ -1,0 +1,9 @@
+{
+  "case_id": "LIVE2F_20260905R_f01",
+  "terminal_state": "STARTED",
+  "stage": "CAPTURED",
+  "reason_code": "",
+  "source_sha256": "ed1e811e019fc15326388813c8c69e557591998b196adcd7d7ab56320aa2a639",
+  "started_at": "2026-09-05T04:57:59+00:00",
+  "finished_at": ""
+}

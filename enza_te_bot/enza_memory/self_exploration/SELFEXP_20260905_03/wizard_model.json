@@ -1,0 +1,12 @@
+{
+  "wizard": "PRODUCE_PREPARATION",
+  "url": "https://shinycolors.enza.fun/produceReady",
+  "stages": [
+    {"stage":"PRODUCE_SELECTION","stage_index":1,"active_tab":"プロデュース選択","locked_tabs":["ユニット編成","アイテム選択"],"forward_control":"次へ (bottom-right)","back_control":"← (exits wizard to HOME)","commit_level":"SAFE_STAGE_ADVANCE","identity":["标题 プロデュース選択","say \"Halo\"編 卡片","オートプロデュース/成長詳細/次へ"]},
+    {"stage":"UNIT_FORMATION","stage_index":2,"active_tab":"ユニット編成","locked_tabs":[],"forward_control":"次へ (bottom-right)","back_control":"← (to stage1)","commit_level":"SAFE_STAGE_ADVANCE","identity":["标题 ユニット編成+?","ユニット1-10 页签","2/20 计数","Produce Idol 1人/Support Idol/ゲスト 编成区","情報切替/おまかせ編成/別ユニットからコピー","Exスキル/サポートスキル/スキルパネル","次へ"],"first_visit_tutorial":{"title":"ユニット編成について","pages":5,"controls":["→","閉じる(末页)"]},"notes":"无需更换成员即可推进"},
+    {"stage":"KNOWHOW_SELECTION","stage_index":3,"active_tab":"ノウハウブック選択","locked_tabs":[],"forward_control":"決定 (disabled until 1 book selected)","back_control":"← (to stage2)","commit_level":"UNKNOWN (要求选择后行为未验证)","identity":["标题 ノウハウブック選択","プリセット/プリセット未設定","ノウハウブック1/2/3 空槽","提示文: ノウハウブックを1つ選択してください (シーズン1の終了時に継承)","おまかせ編成/設定履歴/ノウハウ一覧","決定(禁用态)"],"first_visit_tutorial":{"title":"ノウハウブックについて","pages":4,"controls":["→","閉じる(末页)"]},"notes":"强制选择 1 本ノウハウブック才能推进; 本轮禁止选择 → 安全边界"},
+    {"stage":"ITEM_SELECTION","stage_index":4,"active_tab":"アイテム選択","locked_tabs":[],"forward_control":"未确认","back_control":"未确认","commit_level":"UNKNOWN","identity":[],"notes":"未到达: 被 stage3 强制选择拦截。假设为最终 stage, 其 forward 极可能接近 プロデュース開始 (FINAL_COMMIT)"}
+  ],
+  "final_commit_boundary": "ITEM_SELECTION 内的最终開始/確認按钮(未观察到, 名称未知) 应视为 FINAL_COMMIT; 本轮在最远到达点为 stage3, 未接触任何 FINAL_COMMIT 控件",
+  "risk_classes": {"SAFE_NAVIGATION":["wizard_forward_next(stage1,2)","back_arrow(全部)","tutorial →/閉じる"],"REVERSIBLE_LOCAL":["Exスキル/サポートスキル/スキルパネル(仅推测可逆,未验证)","プリセット/設定履歴/ノウハウ一覧(观察类)"],"COMMIT":["決定(ノウハウブック選択)","プロデュース開始( tutorial 图示中出现, 位置未观察)","おまかせ編成","オートプロデュース"],"UNKNOWN_RISK":["成長詳細","情報切替","別ユニットからコピー","スキルパネル"]}
+}

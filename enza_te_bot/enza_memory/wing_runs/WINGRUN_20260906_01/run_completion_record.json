@@ -1,0 +1,31 @@
+{
+ "artifact_type": "RUN_COMPLETION_RECORD",
+ "run_id": "WINGRUN_20260906_01",
+ "written_at": "2026-09-06T10:50:00Z",
+ "result": "WING scenario COMPLETE (produce ended, fes idol born)",
+ "outcome": "TARGET NOT MET (rank C 50,000 未达成) — honest outcome; scenario concluded normally with おふたりは立派 ending",
+ "final_fans": 22672,
+ "season_rank": "D",
+ "fes_idol_rank": "C+",
+ "fes_idol_name": "【ちゃカワ】園田智代子",
+ "final_vocal": 913,
+ "season_flow_S3_final_weeks": {
+  "weeks_4_to_3": "VOCAL (trouble 0%), gap 31744->30544, event: MORNING_3CHOICE middle OK (captured geometry)",
+  "weeks_3_to_2": "VOCAL (trouble 0%), gap 30544->29536, no event",
+  "weeks_2_to_1": "VOCAL (trouble 0%), gap 29536->28336, no event",
+  "weeks_1_to_end": "VOCAL (trouble 0%) -> PERSONAL_STORY event (夏葉の母 scene, SKIP, Da+15) -> season end rank screen -> 社長/はづき/智代子 ending dialogue (textbox taps) -> プロデュース評価 (親愛度6 SP+6, fans 22672 SP+6) -> フェスアイドル誕生 confirmed (SP 223 forfeited per standard flow) -> clear reward (silver training ticket x2)"
+ },
+ "live_skills_built": [
+  "Vocal5倍",
+  "Vocal6倍",
+  "Vocal3倍",
+  "Visual2.5倍"
+ ],
+ "sp_final_charge": 223,
+ "note": "all S3 weeks event_present recorded; two screenshot pipeline hangs occurred post-commit, reconciled by next fresh stable state per POST_TIMEOUT candidate; final main lobby idle state recorded at 2026-09-06T11:00:00Z",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run",
+  "provider_session_id": "sess_a87f3588-8212-4de7-b9ad-319825b4509e"
+ }
+}

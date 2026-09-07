@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "provider": "gemini",
+    "model": "fixture",
+    "skill_version": "v1",
+    "source_image": "ai_decisions/observations/screenshots/OBS_20260903052210_calibration_produce_selection.png",
+    "screenshot_sha256": "8c507c508d56b698d978b849992622bad2a70535b4d736cb460e4fd2d9359169",
+    "created_at": "2026-09-04T00:00:00Z"
+  },
+  "observation_id": "ISOLATION_GEMINI_V1",
+  "capture": {
+    "timestamp": "2026-09-04T00:00:00Z",
+    "frame_id": "isolation_fixture",
+    "screenshot_digest": "sha256:fixture"
+  },
+  "viewport": {"width": 1280, "height": 720},
+  "text_regions": [
+    {"id": "v1_t01", "text": "次へ", "bbox": [1140, 640, 72, 40], "confidence": 0.99}
+  ],
+  "interaction_candidates": [
+    {
+      "id": "v1_e01",
+      "bbox": [1092, 623, 166, 78],
+      "appearance": {"shape": "rounded_rect", "color_hint": "pink"},
+      "linked_text_ids": ["v1_t01"],
+      "interaction_confidence": 0.99
+    }
+  ],
+  "numeric_regions": [],
+  "overlay_regions": [],
+  "uncertainties": [],
+  "detection_failures": []
+}

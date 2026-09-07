@@ -1,0 +1,7 @@
+{
+  "PROMOTE_CANDIDATE": ["HOME", "IDOL_PORTAL", "MENU_OVERLAY", "WORK_ACTIVITY→WORK_ACTIVITY+TUTORIAL_OVERLAY", "WORK_ACTIVITY+TUTORIAL_OVERLAY→WORK_ACTIVITY"],
+  "NEEDS_AGY_VISUAL_REVIEW": ["PRODUCE_MENU", "IDOL_LIST", "IDOL_PORTAL→IDOL_LIST"],
+  "NEEDS_MORE_SELF_EXPLORATION": ["HOME→PRODUCE_MENU", "PRODUCE_MENU→HOME", "HOME→IDOL_PORTAL", "IDOL_LIST→IDOL_PORTAL", "IDOL_PORTAL→HOME", "HOME→WORK_ACTIVITY", "WORK_ACTIVITY→HOME", "HOME→MENU_OVERLAY", "MENU_OVERLAY→HOME", "bottom_nav_produce", "bottom_nav_idol", "bottom_nav_work", "side_menu", "back_arrow", "modal_close", "idol_list_card"],
+  "REJECT": ["work_complete_buttons"],
+  "production_promotion_performed": false
+}

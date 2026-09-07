@@ -1,0 +1,157 @@
+{
+ "schema_version": 1,
+ "artifact_id": "event_probability_summary",
+ "artifact_type": "EVENT_PROBABILITY_SUMMARY",
+ "created_at": "2026-09-06T08:00:00Z",
+ "updated_at": "2026-09-06T11:00:00Z",
+ "status": "CANDIDATE",
+ "provenance": {
+  "classification": "inference",
+  "producer": "ZCode (Environment Agent)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T08:00:00Z",
+  "source_artifact_ids": [
+   "event_occurrences.jsonl",
+   "../../wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+   "../../wing_runs/WINGRUN_20260906_01/timings.jsonl"
+  ],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "denominator_rule": "only fully-observed week transactions count; crashed/recovered/operator-reconciled weeks excluded",
+ "eligible_observed_weeks": {
+  "total": 34,
+  "by_run_season": {
+   "WINGRUN_20260906_01": {
+    "S1": 6,
+    "S3": 7
+   },
+   "WINGRUN_20260905_01": {
+    "S1": 9,
+    "S2": 4,
+    "S3": 8
+   }
+  },
+  "excluded": [
+   {
+    "run": "WINGRUN_20260906_01",
+    "weeks": [
+     "S1W7",
+     "S1W8",
+     "S3W8->7"
+    ],
+    "reason": "crash-recovered / operator-reconciled, intermediate unobserved"
+   },
+   {
+    "run": "WINGRUN_20260905_01",
+    "weeks": [
+     "S2W1-W4"
+    ],
+    "reason": "screenshot wedge / WIP, partial observation"
+   }
+  ]
+ },
+ "global_rates": {
+  "PERSONAL_STORY": {
+   "occurrences": 3,
+   "eligible_weeks": 34,
+   "raw_rate": 0.0882,
+   "LOW_SAMPLE_COUNT": true
+  },
+  "SUPPORT_CARD_STORY": {
+   "occurrences": 1,
+   "eligible_weeks": 34,
+   "raw_rate": 0.0294,
+   "LOW_SAMPLE_COUNT": true
+  },
+  "MORNING_3CHOICE": {
+   "occurrences": 5,
+   "eligible_weeks": 34,
+   "raw_rate": 0.1471,
+   "LOW_SAMPLE_COUNT": true,
+   "note": "4 of 5 are unambiguous; the 0905 S1W6 LESSON_ADVICE entry overlaps EVENT_STORY_UNKNOWN"
+  },
+  "TWO_CHOICE": {
+   "occurrences": 3,
+   "eligible_weeks": 34,
+   "raw_rate": 0.0882,
+   "LOW_SAMPLE_COUNT": true
+  },
+  "PROMISE_STORY": {
+   "occurrences": 1,
+   "eligible_weeks": 34,
+   "raw_rate": 0.0294,
+   "LOW_SAMPLE_COUNT": true,
+   "note": "single PROMISE_TRUE_BUSINESS_CHOICE; subtypes not separable at n=1"
+  }
+ },
+ "by_season": {
+  "S1": {
+   "eligible_weeks": 15,
+   "events": {
+    "PERSONAL_STORY": 1,
+    "SUPPORT_CARD_STORY": 1,
+    "MORNING_3CHOICE": 4,
+    "TWO_CHOICE": 2,
+    "PROMISE_STORY": 1,
+    "EVENT_STORY_UNKNOWN_OVERLAP": "0905 S1W6 LESSON_ADVICE counted in MORNING_3CHOICE with caveat"
+   }
+  },
+  "S2": {
+   "eligible_weeks": 4,
+   "events": {
+    "TWO_CHOICE": 1
+   }
+  },
+  "S3": {
+   "eligible_weeks": 15,
+   "events": {
+    "PERSONAL_STORY": 2,
+    "MORNING_3CHOICE": 1
+   },
+   "note": "0905 S3 auditions-heavy; event logging did not exist then — absence of records is NOT evidence of absence, those weeks count in denominator only where trace shows full observation"
+  }
+ },
+ "by_preceding_action": {
+  "VOCAL": {
+   "eligible_weeks": 33,
+   "events": {
+    "PERSONAL_STORY": 2,
+    "SUPPORT_CARD_STORY": 1,
+    "MORNING_3CHOICE": 5,
+    "TWO_CHOICE": 3,
+    "PROMISE_STORY": 1
+   }
+  },
+  "REST": {
+   "eligible_weeks": 1,
+   "events": {
+    "PERSONAL_STORY": 1
+   },
+   "note": "n=1, no rate"
+  }
+ },
+ "eligibility_model": "UNKNOWN for all types — these are RAW_EMPIRICAL_RATE only, observation priors, NOT business inputs",
+ "blind_fast_candidates": [
+  {
+   "event": "THREE_CHOICE middle",
+   "blockers": [
+    "single-frame option-box geometry captured; cross-event replication still required"
+   ]
+  },
+  {
+   "event": "TWO_CHOICE gomen",
+   "blockers": [
+    "option box geometry never captured"
+   ]
+  },
+  {
+   "event": "plain story textbox",
+   "blockers": [
+    "PLAIN_DIALOGUE vs CHOICE_PRESENT detector not built"
+   ]
+  }
+ ]
+}

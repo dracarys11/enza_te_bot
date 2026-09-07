@@ -1,0 +1,22 @@
+{
+  "runtime_required": [
+    "WING_HOME coarse identity (每周末 fresh check)",
+    "weeks_remaining 读取 (周完成判据)",
+    "最终周 fan_gap 精读",
+    "dialogue 类型判定 (SKIP 有无 + 双选项卡检出)"
+  ],
+  "audit_only": [
+    "full HOME canonical projection (home_projection.json 全字段)",
+    "每 artifact 的 SHA-256 provenance 链",
+    "weekly_trace 中的 stats 明细 (Vo/Da/Vi 逐值)"
+  ],
+  "escalation_only": [
+    "AGY full perception — 正常路径 0 次需要, 仅 UNKNOWN/新页面/业务选择语义裁决时",
+    "Paddle 全屏 OCR — 同上, ROI 精读已足够"
+  ],
+  "rework_causes": [
+    "把 audit 级 evidence 要求套在 runtime 每周循环上",
+    "对稳定页面重复全量视觉理解而非复用 page_memory",
+    "把 transient(演出/气泡/剧情)当 planner state 读取"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "artifact_type": "REGRESSION_RECONCILIATION",
+  "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+  "created_at": "2026-09-07T00:20:00Z",
+  "session": "OFFLINE_RECONCILIATION_20260906 (offline only; no game operation, no AGY, no Harness/business-policy change, no raw evidence rewritten)",
+  "inputs": [
+    "enza_memory/migration/regression_mining/ (mining corpus OFFLINE_REGRESSION_MINING_20260906)",
+    "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, all RECOVERED_REVIEW_PENDING, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "enza_memory/migration/python_click_migration/review_batches/v0_3/ (review_summary.json: REVIEW_PENDING, missing_source_reviews still lists M01..M09)",
+    "enza_memory/audits/stale_reference_audit/ (F-01..F-12, 10 historical-raw safe-to-keep entries)"
+  ],
+  "reconciliations": [
+    {
+      "id": "RC-001",
+      "type": "SUPERSEDED_MISSING_FRAME",
+      "historical": "mining MVE-002..MVE-005 + VRB02_M02..M05: live_csm_020..023 source frames 'not durably persisted'",
+      "current_evidence": "recovered_frame_manifest.jsonl binds live_csm_020..023 to rf_sb_g1_misclick_590_145 / rf_sb_g2_misclick_585_200 / rf_sb_g3_misclick_465_115 / rf_sb_g4_misclick_645_205 (rooms FURIKAERI_SKILL, states LOCKED_MISCICK_NO_EFFECT / LOCKED_MISCICK_EMPTY_SPACE)",
+      "resolution": "live_csm_020..023 are NO LONGER MISSING_FRAME. Marked RECOVERED_VISUAL_EVIDENCE / RECOVERED_REVIEW_PENDING in missing_visual_evidence.json, skill_board_regressions.json, negative_regressions.json (original historical designations preserved in place; no raw evidence rewritten)",
+      "residual": "review batches v0_2/v0_3 still list M02..M05 as missing — v0_4 rebuild queued (offline); frames themselves need the RECOVERED_REVIEW_PENDING review completed"
+    },
+    {
+      "id": "RC-002",
+      "type": "NEWLY_VISUALIZED_NEGATIVE_CASES",
+      "resolution": "3 cases promoted into skill_board_regressions.json#visual_negative_cases: VNC-001 LOCKED_NODE_PROBE (csm_021+022 / g2+g3), VNC-002 WRONG_NODE_PROBE (csm_020 / g1), VNC-003 DEAD_ZONE_NO_PURCHASE (csm_023 / g4)",
+      "guard_pinned": "A click with no side effect (ring move / panel open / panel close) must never be recorded as available-target evidence. Availability requires positive purchase evidence: confirm dialog -> SP deduction -> owned node. Negative evidence is regression evidence, not geometry authority.",
+      "note": "csm_022 (Vocal240%UP locked at the time) later became purchasable after chain unlock — the same coordinate changing class is exactly why per-frame identity, not coordinate memory, is required"
+    },
+    {
+      "id": "RC-003",
+      "type": "PARTIAL_RECOVERY",
+      "historical": "MVE-001 (ACTIONABLE_NODE csm_015..019), MVE-006 (ACQUIRE_BUTTON), MVE-007 (CONFIRM_OK conflated)",
+      "current_evidence": "45-frame recovery includes rf_sb_acquire_confirm_dialog (CONFIRM_OK dialog identity) and full board-state set; the specific click-source frames for live_csm_015..019 remain absent",
+      "resolution": "marked PARTIALLY_RECOVERED; residual folded into next skill session (low priority, positive-path evidence)"
+    },
+    {
+      "id": "RC-004",
+      "type": "PLANNER_REGRESSION_STRENGTHENED",
+      "historical": "PLR-005 (P2, endgame futility not surfaced, 0906 S3 weeks 4→1)",
+      "added": "PLR-011 (P0): WINGRUN_20260906_01 S3 — fresh vocal failure_rate=0 on every remaining week, yet repeated VOCAL objective selection finished S3 at 22,672/50,000 fans (rank D) and S4 was never reached; the risk gate passed every week while the global objective failed permanently",
+      "required_regression_pinned": "risk_gate_allows(VOCAL) must NOT imply planner_selects(VOCAL). Planner objective selection must separately satisfy route/fan-target logic (projected max gain vs remaining gap, route prerequisites). PLR-005 merged into PLR-011.",
+      "relation_to_existing": "completes the PLR-001/002/007 triad with a second, fully-durable run: 0905 shows the deadline variant, 0906 shows the quiet-futility variant — same root distinction, two independent runs"
+    },
+    {
+      "id": "RC-005",
+      "type": "PRESERVED_VALID",
+      "finding": "NRG-013 PERSISTENCE_GAP remains valid and required: raw trace stopped at S1W6 while game progressed to S3 start; recovery backfill of 12 events. Required regression unchanged: durable flush at completed week / audition result / season transition / handoff boundary; refuse next transaction until flush succeeds.",
+      "reinforcement": "stale_reference_audit F-03 (closed-run S3 flags in live config.json) is the same durability class on the config path — queued as implementation dependency"
+    },
+    {
+      "id": "RC-006",
+      "type": "STALE_REFERENCE_CROSS_LINK",
+      "finding": "stale_reference_audit_20260906 intersects mining corpus: F-05/F-06/F-07 (speed toggle still ACTIVE/clickable in policy + distillation + dormant epoch module) affect NRG-006/007/008 triage; F-08 (MORNING_3CHOICE overreach in event_occurrence) confirms NRG-015/CLR-001; F-12 (gold=purchasable shorthand) confirms VNC guard; F-03 affects NRG-013",
+      "resolution": "recorded as dependencies in regression_implementation_queue.json; no stale file edited in this session"
+    }
+  ],
+  "honesty_rules": [
+    "45 recovered frames are RECOVERED_REVIEW_PENDING until the visual review completes — they ground the negative cases but do not yet count as reviewed detector training evidence.",
+    "Historical mining designations (MISSING_FRAME) are preserved verbatim inside the updated artifacts; only reconciliation overlays were added.",
+    "Raw evidence (rollout transcripts, artifact PNGs, run traces, manifests) untouched: RAW_EVIDENCE_CHANGED NO."
+  ]
+}

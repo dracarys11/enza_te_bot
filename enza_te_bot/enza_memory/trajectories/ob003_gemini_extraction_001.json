@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "artifact_id": "TRAJ_OB003_GEMINI_EXTRACTION_001",
+  "artifact_type": "TRAJECTORY",
+  "created_at": "2026-09-04T01:15:07+08:00",
+  "status": "CANDIDATE",
+  "mission": {
+    "description": "Independent raw visual-fact extraction from three stored OB-003 screenshots",
+    "authority_reference": "user request in Codex session on 2026-09-04",
+    "allowed_scope": [
+      "read the three named screenshot PNG files",
+      "write one gemini_output.json beside each OB-003 fixture",
+      "perform structural JSON and forbidden-field validation"
+    ],
+    "forbidden_scope": [
+      "read or compare agent_vision_output.json",
+      "read or compare paddle_reference.json",
+      "read or compare comparison_report.json",
+      "infer page state, strategy, action, or click intent",
+      "execute environment actions"
+    ]
+  },
+  "steps": [
+    {
+      "step_id": "OB003_GEMINI_001_STEP_01",
+      "timestamp": "2026-09-04T01:15:07+08:00",
+      "provenance": {
+        "classification": "session_observed",
+        "producer": "Codex Gemini Vision extraction evaluator",
+        "provider_session_id": "sess_codex_20260904_ob003_gemini_extraction",
+        "captured_at": "2026-09-04T01:15:07+08:00",
+        "source_artifact_ids": ["OBS_20260903063000_1E_s5_dialog_full"],
+        "integrity": {"algorithm": "sha256", "digest": "101e9265cce4e0d403ffd93c96f28cb6a6a2e70035fa1f0ccaca494074f795a6"}
+      },
+      "before_observation_id": "OBS_20260903063000_1E_s5_dialog_full",
+      "intent_id": null,
+      "gate_decision_id": null,
+      "permission_id": null,
+      "execution": {"performed": false, "provider_session_id": null, "permission_consumed": false, "result": "NO_ACTION", "evidence_ids": []},
+      "after_observation_id": null,
+      "verification": {"result": "VERIFIED", "independent": false, "evidence_ids": ["EVID_OB003_DIALOG_GEMINI_OUTPUT"]},
+      "claims": [
+        {"claim_id": "OB003_GEMINI_001_C01", "classification": "FACT", "confidence": 1.0, "statement": "The generated JSON parsed successfully and contained 17 text regions, 7 interaction candidates, 1 numeric region, 1 overlay region, and 3 uncertainty records.", "evidence_ids": ["EVID_OB003_DIALOG_GEMINI_OUTPUT"]}
+      ],
+      "unknowns": ["Visual extraction may omit or imperfectly bound small, occluded, or low-contrast facts; no semantic meaning or clickability was verified."]
+    },
+    {
+      "step_id": "OB003_GEMINI_001_STEP_02",
+      "timestamp": "2026-09-04T01:15:07+08:00",
+      "provenance": {
+        "classification": "session_observed",
+        "producer": "Codex Gemini Vision extraction evaluator",
+        "provider_session_id": "sess_codex_20260904_ob003_gemini_extraction",
+        "captured_at": "2026-09-04T01:15:07+08:00",
+        "source_artifact_ids": ["OBS_20260903064030_P2_s2_unit_formation"],
+        "integrity": {"algorithm": "sha256", "digest": "6224c0b605b1aba2fd24957d379bf6ea316f1a60bcb9206f770a33619f009f65"}
+      },
+      "before_observation_id": "OBS_20260903064030_P2_s2_unit_formation",
+      "intent_id": null,
+      "gate_decision_id": null,
+      "permission_id": null,
+      "execution": {"performed": false, "provider_session_id": null, "permission_consumed": false, "result": "NO_ACTION", "evidence_ids": []},
+      "after_observation_id": null,
+      "verification": {"result": "VERIFIED", "independent": false, "evidence_ids": ["EVID_OB003_FORMATION_GEMINI_OUTPUT"]},
+      "claims": [
+        {"claim_id": "OB003_GEMINI_001_C02", "classification": "FACT", "confidence": 1.0, "statement": "The generated JSON parsed successfully and contained 30 text regions, 30 interaction candidates, 1 numeric region, 0 overlay regions, and 3 uncertainty records.", "evidence_ids": ["EVID_OB003_FORMATION_GEMINI_OUTPUT"]}
+      ],
+      "unknowns": ["Visual extraction may omit or imperfectly bind small, occluded, or low-contrast facts; no semantic meaning or clickability was verified."]
+    },
+    {
+      "step_id": "OB003_GEMINI_001_STEP_03",
+      "timestamp": "2026-09-04T01:15:07+08:00",
+      "provenance": {
+        "classification": "session_observed",
+        "producer": "Codex Gemini Vision extraction evaluator",
+        "provider_session_id": "sess_codex_20260904_ob003_gemini_extraction",
+        "captured_at": "2026-09-04T01:15:07+08:00",
+        "source_artifact_ids": ["OBS_20260903064050_P2_s3_after_back1"],
+        "integrity": {"algorithm": "sha256", "digest": "2e80cd0cf6f15cf8e8a7839e9e3a871446c0c34d6f200093e6673a3f99a120eb"}
+      },
+      "before_observation_id": "OBS_20260903064050_P2_s3_after_back1",
+      "intent_id": null,
+      "gate_decision_id": null,
+      "permission_id": null,
+      "execution": {"performed": false, "provider_session_id": null, "permission_consumed": false, "result": "NO_ACTION", "evidence_ids": []},
+      "after_observation_id": null,
+      "verification": {"result": "VERIFIED", "independent": false, "evidence_ids": ["EVID_OB003_AFTER_BACK_GEMINI_OUTPUT"]},
+      "claims": [
+        {"claim_id": "OB003_GEMINI_001_C03", "classification": "FACT", "confidence": 1.0, "statement": "The generated JSON parsed successfully and contained 24 text regions, 17 interaction candidates, 0 numeric regions, 0 overlay regions, and 3 uncertainty records.", "evidence_ids": ["EVID_OB003_AFTER_BACK_GEMINI_OUTPUT"]}
+      ],
+      "unknowns": ["Visual extraction may omit or imperfectly bind small, occluded, or low-contrast facts; no semantic meaning or clickability was verified."]
+    }
+  ],
+  "provenance": {
+    "classification": "session_observed",
+    "producer": "Codex Gemini Vision extraction evaluator",
+    "provider_session_id": "sess_codex_20260904_ob003_gemini_extraction",
+    "captured_at": "2026-09-04T01:15:07+08:00",
+    "source_artifact_ids": [
+      "OBS_20260903063000_1E_s5_dialog_full",
+      "OBS_20260903064030_P2_s2_unit_formation",
+      "OBS_20260903064050_P2_s3_after_back1"
+    ],
+    "integrity": {"algorithm": null, "digest": null}
+  },
+  "evidence_references": [
+    {"evidence_id": "EVID_OB003_DIALOG_SCREENSHOT", "kind": "SCREENSHOT", "path": "ai_decisions/observations/screenshots/OBS_20260903063000_1E_s5_dialog_full.png", "captured_at": null, "source": "stored OB-003 source screenshot", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "101e9265cce4e0d403ffd93c96f28cb6a6a2e70035fa1f0ccaca494074f795a6"}},
+    {"evidence_id": "EVID_OB003_DIALOG_GEMINI_OUTPUT", "kind": "OTHER", "path": "test_data/ob003/OBS_20260903063000_1E_s5_dialog_full/gemini_output.json", "captured_at": "2026-09-04T01:15:07+08:00", "source": "independent Gemini Vision raw extraction", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "e588da57850d5f34c12374d8f48262e07b3e761f196247cc14d6e90094cb74fb"}},
+    {"evidence_id": "EVID_OB003_FORMATION_SCREENSHOT", "kind": "SCREENSHOT", "path": "ai_decisions/observations/screenshots/OBS_20260903064030_P2_s2_unit_formation.png", "captured_at": null, "source": "stored OB-003 source screenshot", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "6224c0b605b1aba2fd24957d379bf6ea316f1a60bcb9206f770a33619f009f65"}},
+    {"evidence_id": "EVID_OB003_FORMATION_GEMINI_OUTPUT", "kind": "OTHER", "path": "test_data/ob003/OBS_20260903064030_P2_s2_unit_formation/gemini_output.json", "captured_at": "2026-09-04T01:15:07+08:00", "source": "independent Gemini Vision raw extraction", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "bc6234d5f7642166ce19a96861312bb5bf490c1d85490a72977c7d9565099cdd"}},
+    {"evidence_id": "EVID_OB003_AFTER_BACK_SCREENSHOT", "kind": "SCREENSHOT", "path": "ai_decisions/observations/screenshots/OBS_20260903064050_P2_s3_after_back1.png", "captured_at": null, "source": "stored OB-003 source screenshot", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "2e80cd0cf6f15cf8e8a7839e9e3a871446c0c34d6f200093e6673a3f99a120eb"}},
+    {"evidence_id": "EVID_OB003_AFTER_BACK_GEMINI_OUTPUT", "kind": "OTHER", "path": "test_data/ob003/OBS_20260903064050_P2_s3_after_back1/gemini_output.json", "captured_at": "2026-09-04T01:15:07+08:00", "source": "independent Gemini Vision raw extraction", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "fdc1d4fa321b640f01e37e13c9b69169f7d934c52239aa74c1c0321982d0dd88"}}
+  ],
+  "unknowns": [
+    "Original capture timestamps and provider session identities were not supplied with the PNG-only inputs.",
+    "The extractions are candidate visual evidence and were not independently compared or semantically verified."
+  ]
+}

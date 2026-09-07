@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "artifact": "room_sop_candidates",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "common_contract": {
+    "start": "FRESH_VERIFIED_HOME",
+    "outputs": ["SUCCESS_HOME", "FAILED", "UNKNOWN"],
+    "success": "Objective evidence and fresh HOME are both verified.",
+    "forbidden": ["season strategy", "objective selection", "hidden planning", "automatic candidate promotion"]
+  },
+  "rooms": {
+    "VOCAL": {
+      "entry_condition": "HOME",
+      "goal": "Complete one vocal objective and return to fresh verified HOME.",
+      "intermediate_categories": ["VOCAL_ENTRY", "VOCAL_SELECTION", "RESULT", "DIALOGUE", "CONTINUE", "CHOICE", "ANIMATION"],
+      "shared_handlers": ["dialogue", "continue", "choice"],
+      "exit_condition": "FRESH_VERIFIED_HOME",
+      "confirmed": ["HOME entry", "production menu entry", "named vocal_lesson action"],
+      "needs_human_demonstration": ["Clean VOCAL HOME-to-HOME lifecycle", "Reliable result and post-result transitions"],
+      "unknown": ["Whether every vocal cycle consumes one week", "Whether audition transitions can occur inside the cycle"]
+    },
+    "REST": {
+      "entry_condition": "HOME",
+      "goal": "Complete one rest objective and return to fresh verified HOME.",
+      "intermediate_categories": ["REST_TRANSITION", "RESULT", "DIALOGUE", "CONTINUE", "CHOICE", "ANIMATION"],
+      "shared_handlers": ["dialogue", "continue", "choice"],
+      "exit_condition": "FRESH_VERIFIED_HOME",
+      "confirmed": ["Configured HOME-to-HOME boundary"],
+      "needs_human_demonstration": ["Complete REST lifecycle", "Observable evidence that rest completed"],
+      "unknown": ["Intermediate states", "Required completion effect", "Week consumption"]
+    },
+    "SKILL": {
+      "entry_condition": "HOME",
+      "goal": "Complete the supplied fixed skill objective, verify its effect, and return to fresh verified HOME.",
+      "intermediate_categories": ["SKILL_ENTRY", "SKILL_SELECTION", "SKILL_CONFIRMATION", "CHOICE", "RESULT", "ANIMATION"],
+      "shared_handlers": ["dialogue", "continue", "choice"],
+      "exit_condition": "FRESH_VERIFIED_HOME",
+      "confirmed": ["HOME entry to skill area", "named purchase evidence", "resource-decrease verification exists"],
+      "needs_human_demonstration": ["Complete SKILL HOME-to-HOME lifecycle", "Replacement and exit behavior"],
+      "unknown": ["Required skill list", "Operations per cycle", "Complete effect criteria"]
+    },
+    "AUDITION": {
+      "entry_condition": "HOME",
+      "goal": "Resolve the supplied fixed audition objective and return to fresh verified HOME.",
+      "intermediate_categories": ["AUDITION_ENTRY", "TARGET_SELECTION", "CHOICE", "BATTLE", "RESULT", "DIALOGUE", "CONTINUE", "ANIMATION"],
+      "shared_handlers": ["dialogue", "continue", "speed", "choice"],
+      "exit_condition": "FRESH_VERIFIED_HOME",
+      "confirmed": ["Target, battle, result-dialogue, and HOME categories exist", "battle_auto_on evidence", "bounded result cleanup exists"],
+      "needs_human_demonstration": ["Complete HOME-to-HOME lifecycle for every required target", "Success and failure result paths"],
+      "unknown": ["Completion meaning", "Required target list and order", "Eligibility", "Flag commit evidence"]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "wing_stages": ["PRODUCE_SELECTION", "UNIT_FORMATION", "ITEM_SELECTION"],
+  "stages": [
+    {"stage":"PRODUCE_SELECTION","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","evidence":"w1→w2"},
+    {"stage":"UNIT_FORMATION","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","evidence":"w2→w3; default P1+S4+ゲスト retained"},
+    {"stage":"ITEM_SELECTION","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","evidence":"w3→w4; no item selected, 1倍 retained"},
+    {"stage":"KNOWHOW_SELECTION","scope":"OUT_OF_SCOPE","evidence_status":"SUPPORTED","promotion":"REJECT","evidence":"SELFEXP_03:s5 is a separate say Halo/STEP path; absent from WING trace w1-w6"}
+  ],
+  "knowhow_for_wing":"NOT_APPLICABLE_TO_WING",
+  "guardrail":"Absence in the WING trace is not proof that the stage cannot exist in another scenario."
+}

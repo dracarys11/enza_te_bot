@@ -1,0 +1,121 @@
+{
+ "schema_version": 1,
+ "artifact_id": "python_click_migration_status",
+ "artifact_type": "MIGRATION_STATUS",
+ "created_at": "2026-09-06T06:32:32Z",
+ "updated_at": "2026-09-06T10:00:00Z",
+ "status": "CANDIDATE",
+ "provenance": {
+  "classification": "inference",
+  "producer": "ZCode (Environment Agent)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T06:32:32Z",
+  "source_artifact_ids": [
+   "enza_memory/migration/python_click_migration/control_regions.json",
+   "enza_memory/migration/python_click_migration/click_samples.jsonl",
+   "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json"
+  ],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "PYTHON_READY_CONTROLS": [],
+ "REPLICATED_CONTROLS": [
+  "RESULT:ADVANCE_CYCLE",
+  "SCHEDULE:DECIDE"
+ ],
+ "OBSERVED_CONTROLS": [
+  "HOME:FURIKAERI",
+  "SCHEDULE:SUPPORT_SKILL"
+ ],
+ "NEEDS_MORE_SAMPLES": [
+  "ALL — no control has multi-frame independent visual-box replication yet (PYTHON_READY_CANDIDATE requires stable boxes across independent fresh frames)",
+  "AUDITION_BATTLE:AUTO (phase/value/interactability per sample)",
+  "DIALOGUE:CHOICE_3_MIDDLE / DIALOGUE:CHOICE_2_GOMEN",
+  "HOME:REST, SCHEDULE:BACK, SCHEDULE:AUDITION, AUDITION_SELECTION:*, RESULT:ADVANCE box"
+ ],
+ "STATE_DETECTOR_BLOCKERS": [
+  "room/state detector relies on page-label observation; no normalized frame-based state detector exists yet for Python"
+ ],
+ "CONTROL_GROUNDING_BLOCKERS": [
+  "visual_box_norm captured for HOME:SCHEDULE and SCHEDULE:VOCAL (fresh 2026-09-06); all other controls still box-less",
+  "normalized left/top=0 assumption VERIFIED this session for MAC_CURRENT_V1 (tab viewport 1280x720 = screenshot pixels, game fills viewport)",
+  "only MAC_CURRENT_V1 @1280x720 validated; other viewports require re-teaching, never auto-scale"
+ ],
+ "PLATFORM_RECALIBRATION_REQUIRED": [
+  "any non-macOS platform",
+  "any viewport != 1280x720"
+ ],
+ "HAZARD_REGIONS": [
+  {
+   "region_norm": {
+    "x": 0.7695,
+    "y": 0.9208
+   },
+   "room": "SCHEDULE",
+   "hazard": "サポートスキル button — must not be used as transient skip target"
+  },
+  {
+   "region_norm": {
+    "x": 0.1602,
+    "y": 0.9097
+   },
+   "room": "HOME",
+   "hazard": "振り返り opens on over-tap after post-lesson dialogue ends"
+  }
+ ],
+ "reporting_triggers": [
+  "control reaches REPLICATED",
+  "control reaches PYTHON_READY",
+  "visual box and clickable region visibly disagree",
+  "dangerous overlap discovered"
+ ],
+ "CLICK_VALIDATED_WITH_BOX": [
+  "FURIKAERI_SKILL:ACQUIRE_BUTTON",
+  "FURIKAERI_SKILL:CONFIRM_OK",
+  "FURIKAERI_SKILL:ZOOM_OUT",
+  "HOME:FURIKAERI",
+  "HOME:SCHEDULE",
+  "SCHEDULE:VOCAL",
+  "SKILL_REPLACEMENT:CONFIRM_OK",
+  "SKILL_REPLACEMENT:SLOT_SELECT"
+ ],
+ "runtime_lessons": [
+  {
+   "lesson": "SCREENSHOT_TIMEOUT_AFTER_TRANSACTION_PROGRESS",
+   "meaning": "tool observation can fail while game state continues progressing; after screenshot timeout do not assume the transaction is still pending",
+   "runtime_candidate": "POST_TIMEOUT_STATE_MUST_BE_RECONCILED_BEFORE_RETRYING_PENDING_ACTION",
+   "harness_changed": false,
+   "evidence": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/operator_reconcile_20260906_s3w1.json"
+   ]
+  }
+ ],
+ "hazard_regions": [
+  {
+   "region_norm": null,
+   "room": "HOME_LOGIN_DIALOGUE",
+   "hazard": "SKIP badge on /home login bonus dialogue -> お知らせ overlay opened (causality UNKNOWN, see live_ttm_009)"
+  }
+ ],
+ "viewport_validation": {
+  "profile": "MAC_CURRENT_V1",
+  "status": "VERIFIED",
+  "method": "tab.viewportSize()=1280x720 and screenshot pixel dims=1280x720, game fills viewport, offsets 0,0",
+  "verified_at": "2026-09-06T07:05:00Z",
+  "session": "sess_a87f3588-8212-4de7-b9ad-319825b4509e"
+ },
+ "s3_start_prep": {
+  "status": "COMPLETED_LATE",
+  "record": "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json",
+  "sp_spent": 140,
+  "skills_acquired": 5,
+  "sp_remaining": 408
+ },
+ "skill_board_progress": {
+  "left_block": "COMPLETE",
+  "right_block": "chain advanced to Vocal220%UP; terminated INSUFFICIENT_SP (SP 23)",
+  "sp_remaining": 23
+ }
+}

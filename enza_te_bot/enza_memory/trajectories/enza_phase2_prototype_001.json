@@ -1,0 +1,38 @@
+{
+  "trajectory_id": "enza_phase2_prototype_001",
+  "generated_at": "2026-09-03T07:12:00Z",
+  "usage_status": "prototype run record — audit/benchmarking ONLY. NOT training data, NOT executable policy.",
+  "mission": {
+    "goal": "HOME -> Produce -> WING prep -> Vocal baseline -> first season (prototype)",
+    "contract": "Phase 2 prototype runner instruction (navigation + explicitly directed actions allowed; NO auto resource consumption, NO auto production confirm, NO auto strategy optimization)"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "dt": "DT_20260903064950_005",
+      "action": "cancel held confirmation dialog",
+      "verification": "PASS — first-hand: dialog -> PRODUCE_SELECTION, URL /produceReady -> /produce, ビギナー highlighted"
+    },
+    {
+      "step": 2,
+      "dt": "DT_20260903065015_006",
+      "action": "open 研修設定",
+      "verification": "PASS — TRAINING_SETTINGS overlay: ボーカル/ダンス/ビジュアル 0/20 + 決定"
+    },
+    {
+      "step": 3,
+      "dt": "DT_20260903070000_007",
+      "action": "probe vocal + click",
+      "verification": "ANOMALY — counter 1/20 AND skill-entry panel opened; operator corrected; 決定 NOT pressed; allocation uncommitted"
+    }
+  ],
+  "terminal_state": {
+    "label": "TRAINING_SETTINGS (vocal=1/20, skill panel open, uncommitted)",
+    "url": "/produce",
+    "held": true
+  },
+  "interaction_count": 3,
+  "verification_coverage": "3/3",
+  "anomalies": 1,
+  "contract_conflict_record": "goal 'enter first season' requires プロデュース開始 confirm (resource consumption) which the same contract forbids automating; agent held at the confirm boundary and will continue to hold until planner explicitly authorizes"
+}

@@ -1,0 +1,246 @@
+{
+ "artifact_type": "REGRESSION_IMPLEMENTATION_QUEUE",
+ "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+ "created_at": "2026-09-07T00:20:00Z",
+ "status": "DERIVED TRIAGE — an entry here is NOT authorization to implement. Each READY_TO_IMPLEMENT item still requires the normal SCOPE/MINIMALITY gates and a bounded FIX/FEATURE mode at implementation time.",
+ "triage_rule": "No blind test creation. ALREADY_COVERED items are verified against the existing suite (coverage verified 2026-09-06 by test-name/assertion inspection); READY_TO_IMPLEMENT items are offline-implementable with durable evidence; WAITING_* items name their specific blocker; SUPERSEDED items are dropped.",
+ "top20_triage": [
+  {
+   "rank": 1,
+   "id": "NRG-010",
+   "title": "screenshot timeout → reconcile-before-retry (POST_TIMEOUT)",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "pure state-machine contract; durable evidence (operator_reconcile + timeout_debug_report); no visual or policy dependency",
+   "suggested_target": "offline unit test around decision/executor reconciliation boundary"
+  },
+  {
+   "rank": 2,
+   "id": "NRG-013",
+   "title": "durable flush at week/audition-result/season/handoff boundaries, fail-closed on flush failure",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "runtime_recovery_requirements.json defines the boundaries; offline-simulable; reinforced by stale-audit F-03 (config residue)",
+   "dependencies": [
+    "F-03 cleanup or explicit isolation of closed-run flags"
+   ]
+  },
+  {
+   "rank": 3,
+   "id": "NRG-009",
+   "title": "capture explicit PASS/FAIL before advance",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "ordering contract offline-testable; two live loss incidents; no policy dependency"
+  },
+  {
+   "rank": 4,
+   "id": "NRG-004",
+   "title": "Auto disabled-during-animation no-click",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "phase/interactability contract offline-testable",
+   "dependencies": [
+    "F-07: dormant audition_control_epoch.py + its test carry stale X2→CLICK_SPEED rule — clean module first, never import the contaminated version as-is"
+   ]
+  },
+  {
+   "rank": 5,
+   "id": "NRG-015",
+   "title": "choice layout_family vs event_context separation",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "pure data-contract test; frames VRB02_018..021 durable; stale-audit F-08 confirms the drift is real",
+   "dependencies": [
+    "F-08/F-11 relabel or isolation when touching event_occurrence policy files"
+   ]
+  },
+  {
+   "rank": 6,
+   "id": "PLR-001",
+   "title": "route deadline model (remaining_weeks vs complete remaining_required_route_steps)",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "pure planner logic; both runs provide fixtures"
+  },
+  {
+   "rank": 7,
+   "id": "PLR-002",
+   "title": "deadline boundary replaces low-priority training",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "pure planner/goal-execution logic; postmortem defines the correction"
+  },
+  {
+   "rank": 8,
+   "id": "PLR-011",
+   "title": "risk_gate_allows(VOCAL) must not imply planner_selects(VOCAL) — quiet futility (0906 S3)",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "added by RC-004; planner-level unit test with 0906 S3 fixtures; requires no business-policy change (test pins the distinction, policy remains operator-owned)",
+   "note": "ENDGAME_FUTILE escalation behavior is policy territory — test only pins that gate-pass ≠ selection and that futility is surfaced, not what the escalation chooses"
+  },
+  {
+   "rank": 9,
+   "id": "NRG-021",
+   "title": "skill replacement never targets just-learned skill",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "pure slot-selection logic; recovered replacement frames provide fixture identity"
+  },
+  {
+   "rank": 10,
+   "id": "RCR-006",
+   "title": "scene-skip must not consume a business week without explicit result",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "commit-boundary logic offline-testable; semifinal incident is the fixture"
+  },
+  {
+   "rank": 11,
+   "id": "PLR-007",
+   "title": "decision trace separates consuming rule from permitting gates",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "schema-level test; supports PLR-001/002/011"
+  },
+  {
+   "rank": 12,
+   "id": "NRG-008",
+   "title": "resume/restart invalidates battle control epoch",
+   "triage": "READY_TO_IMPLEMENT",
+   "dependencies": [
+    "F-07 module cleanup (same as NRG-004)"
+   ]
+  },
+  {
+   "rank": 13,
+   "id": "NRG-012",
+   "title": "session handoff fail-closed (tabs=0)",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "executor-level fail-closed state test; zcode_execution_budget_profile defines classification"
+  },
+  {
+   "rank": 14,
+   "id": "NRG-016",
+   "title": "overlay ownership invalidates parent control authority",
+   "triage": "ALREADY_COVERED",
+   "covered_by": [
+    "test_python_shadow_executor.py::test_overlay_blocks_otherwise_authorized_control"
+   ],
+   "residual": "keep green; no new test"
+  },
+  {
+   "rank": 15,
+   "id": "NRG-006",
+   "title": "speed display is display-only",
+   "triage": "ALREADY_COVERED",
+   "covered_by": [
+    "test_audition_battle_identity.py::test_real_speed_feature_samples",
+    "test_harness_live_invariants.py (SPEED_FIRST_THEN_AUTO hold)",
+    "hazard_map + control_regions display-only entries"
+   ],
+   "residual": "stale-audit F-05/F-06/F-07 still describe the toggle as ACTIVE/clickable — cleanup queued to prevent re-contamination"
+  },
+  {
+   "rank": 16,
+   "id": "NRG-007",
+   "title": "SPEED_FIRST_THEN_AUTO ordering hold",
+   "triage": "ALREADY_COVERED",
+   "covered_by": [
+    "test_harness_live_invariants.py (asserts the rule is NOT promoted into GATES)",
+    "audition_battle_speed_handler.json ordering_rule"
+   ],
+   "residual": "same F-05/F-06/F-07 cleanup dependency"
+  },
+  {
+   "rank": 17,
+   "id": "NRG-001",
+   "title": "(985,663) SUPPORT_SKILL wrong-target guard",
+   "triage": "ALREADY_COVERED",
+   "covered_by": [
+    "test_python_shadow_executor.py::test_known_schedule_support_skill_region_is_hazard"
+   ]
+  },
+  {
+   "rank": 18,
+   "id": "NRG-002",
+   "title": "bounded dialogue burst + FURIKAERI over-tap guard",
+   "triage": "ALREADY_COVERED",
+   "covered_by": [
+    "test_blind_interaction_policy.py::test_dialogue_burst_uses_only_taught_center_neutral_zone + test_high_action_single_roi_mismatch_is_not_retried",
+    "test_python_shadow_executor.py::test_known_home_furikaeri_region_is_hazard"
+   ]
+  },
+  {
+   "rank": 19,
+   "id": "NRG-024",
+   "title": "UNKNOWN result → no commit (fail-closed pin)",
+   "triage": "ALREADY_COVERED",
+   "covered_by": [
+    "test_season3_audition.py::test_lock_and_commit_require_evidence",
+    "test_goal_execution.py::test_goal_commits_only_after_verified_home_boundary + test_executor_success_without_home_does_not_commit"
+   ]
+  },
+  {
+   "rank": 20,
+   "id": "NRG-023",
+   "title": "viewport profile change requires re-teaching",
+   "triage": "ALREADY_COVERED",
+   "covered_by": [
+    "test_python_shadow_executor.py viewport tests (exact-frame calibration, no zero-origin assumption, unknown fails closed)"
+   ]
+  },
+  {
+   "rank": 20,
+   "id": "CLR-004",
+   "title": "timed choice bounded handler + SKIP stop-at-choice",
+   "triage": "WAITING_FOR_VISUAL_REVIEW",
+   "blocker": "timed-choice indicator detection needs reviewed frame evidence; 3 recovered EVENT_THREE_CHOICE frames + live_csm_029 box exist but are RECOVERED_REVIEW_PENDING"
+  }
+ ],
+ "not_top20_but_affected": [
+  {
+   "id": "VNC-001/002/003",
+   "title": "visual negative cases (locked/wrong-node/dead-zone probes)",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "recovered frames g1..g4 ground detector-level assertions (ring-move-only, 未解放 panel, panel-close); guard: no side effect ≠ safe-target evidence",
+   "note": "RECOVERED_REVIEW_PENDING review is a quality gate, not a blocker for logic tests using recorded observations"
+  },
+  {
+   "id": "SBR-002",
+   "title": "replacement target validation",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "same logic family as NRG-021; implement together"
+  },
+  {
+   "id": "NRG-026",
+   "title": "result evidence persisted in the same boundary flush",
+   "triage": "READY_TO_IMPLEMENT",
+   "rationale": "extends NRG-013 implementation with evidence-ref assertions"
+  },
+  {
+   "id": "PLR-006",
+   "title": "fresh-season prep gate",
+   "triage": "WAITING_FOR_BUSINESS_POLICY",
+   "blocker": "prep-node selection policy is operator-owned (s4_route_operator_hints truncated); regression can only pin the gate-exists check, not the selection"
+  }
+ ],
+ "offline_review_queue": [
+  {
+   "item": "complete visual review of 45 RECOVERED_REVIEW_PENDING frames (28 FURIKAERI_SKILL, 10 SKILL_REPLACEMENT, 4 DIALOGUE, 3 EVENT_THREE_CHOICE)",
+   "unblocks": [
+    "CLR-004",
+    "VNC detector-level assertions",
+    "v0_4 rebuild"
+   ]
+  },
+  {
+   "item": "rebuild review batch v0_4 with recovered skill-board frames replacing M01..M09 gaps (v0_3 still lists them missing)",
+   "unblocks": [
+    "removal of remaining missing_source_review items"
+   ]
+  },
+  {
+   "item": "stale-reference cleanup dependencies from stale_reference_audit_20260906: F-05/F-06/F-07 (speed), F-08/F-11 (choice labels), F-12 (gold=purchasable shorthand), F-03 (config flags)",
+   "note": "each requires its own gated change; listed here only as dependencies"
+  }
+ ],
+ "counts": {
+  "READY_TO_IMPLEMENT": 13,
+  "ALREADY_COVERED": 7,
+  "WAITING_FOR_VISUAL_REVIEW": 1,
+  "WAITING_FOR_BUSINESS_POLICY": 0,
+  "SUPERSEDED": 0,
+  "note": "counts cover the original TOP20 exactly (13+7+1=20). PLR-006 (WAITING_FOR_BUSINESS_POLICY) and VNC/SBR-002/NRG-026 (READY) sit outside the original TOP20 — see not_top20_but_affected."
+ }
+}

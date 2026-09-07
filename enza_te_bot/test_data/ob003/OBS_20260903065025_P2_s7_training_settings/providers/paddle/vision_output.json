@@ -1,0 +1,1302 @@
+{
+  "metadata": {
+    "provider": "Paddle",
+    "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+    "skill_version": "not_applicable",
+    "case_id": "OBS_20260903065025_P2_s7_training_settings",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723",
+    "created_at": "2026-09-04T10:10:01+08:00"
+  },
+  "source_image": "ai_decisions/observations/screenshots/OBS_20260903065025_P2_s7_training_settings.png",
+  "method": "PaddleOCR",
+  "text_regions": [
+    {
+      "id": "paddle_001",
+      "text": "SP:40",
+      "bbox": [
+        450,
+        3,
+        53,
+        22
+      ],
+      "confidence": 0.999916
+    },
+    {
+      "id": "paddle_002",
+      "text": "Vo.",
+      "bbox": [
+        537,
+        8,
+        29,
+        22
+      ],
+      "confidence": 0.999603
+    },
+    {
+      "id": "paddle_003",
+      "text": "Vo.",
+      "bbox": [
+        702,
+        0,
+        39,
+        27
+      ],
+      "confidence": 0.999606
+    },
+    {
+      "id": "paddle_004",
+      "text": "SP:50",
+      "bbox": [
+        777,
+        3,
+        53,
+        22
+      ],
+      "confidence": 0.999928
+    },
+    {
+      "id": "paddle_005",
+      "text": "K",
+      "bbox": [
+        866,
+        4,
+        36,
+        37
+      ],
+      "confidence": 0.979113
+    },
+    {
+      "id": "paddle_006",
+      "text": "振り返り",
+      "bbox": [
+        49,
+        21,
+        100,
+        30
+      ],
+      "confidence": 0.999519
+    },
+    {
+      "id": "paddle_007",
+      "text": "?",
+      "bbox": [
+        375,
+        22,
+        21,
+        27
+      ],
+      "confidence": 0.991858
+    },
+    {
+      "id": "paddle_008",
+      "text": "上限",
+      "bbox": [
+        696,
+        26,
+        39,
+        23
+      ],
+      "confidence": 0.999611
+    },
+    {
+      "id": "paddle_009",
+      "text": "Vo",
+      "bbox": [
+        459,
+        54,
+        26,
+        21
+      ],
+      "confidence": 0.998063
+    },
+    {
+      "id": "paddle_010",
+      "text": "SP:30",
+      "bbox": [
+        532,
+        49,
+        53,
+        23
+      ],
+      "confidence": 0.999969
+    },
+    {
+      "id": "paddle_011",
+      "text": "SP:40",
+      "bbox": [
+        696,
+        50,
+        52,
+        22
+      ],
+      "confidence": 0.999947
+    },
+    {
+      "id": "paddle_012",
+      "text": "Vo.",
+      "bbox": [
+        796,
+        50,
+        17,
+        13
+      ],
+      "confidence": 0.991747
+    },
+    {
+      "id": "paddle_013",
+      "text": "SP:50",
+      "bbox": [
+        859,
+        50,
+        53,
+        22
+      ],
+      "confidence": 0.999962
+    },
+    {
+      "id": "paddle_014",
+      "text": "Vo.",
+      "bbox": [
+        958,
+        50,
+        17,
+        14
+      ],
+      "confidence": 0.863899
+    },
+    {
+      "id": "paddle_015",
+      "text": "上限",
+      "bbox": [
+        291,
+        72,
+        32,
+        19
+      ],
+      "confidence": 0.853197
+    },
+    {
+      "id": "paddle_016",
+      "text": "vi.",
+      "bbox": [
+        949,
+        64,
+        19,
+        14
+      ],
+      "confidence": 0.833103
+    },
+    {
+      "id": "paddle_017",
+      "text": "SP",
+      "bbox": [
+        21,
+        104,
+        30,
+        28
+      ],
+      "confidence": 0.708583
+    },
+    {
+      "id": "paddle_018",
+      "text": "Vo.",
+      "bbox": [
+        377,
+        95,
+        35,
+        25
+      ],
+      "confidence": 0.999828
+    },
+    {
+      "id": "paddle_019",
+      "text": "SP:30",
+      "bbox": [
+        449,
+        95,
+        54,
+        25
+      ],
+      "confidence": 0.999823
+    },
+    {
+      "id": "paddle_020",
+      "text": "Vo.",
+      "bbox": [
+        704,
+        95,
+        36,
+        25
+      ],
+      "confidence": 0.999749
+    },
+    {
+      "id": "paddle_021",
+      "text": "SP:40",
+      "bbox": [
+        777,
+        95,
+        53,
+        25
+      ],
+      "confidence": 0.999695
+    },
+    {
+      "id": "paddle_022",
+      "text": "Vo.S",
+      "bbox": [
+        863,
+        100,
+        37,
+        25
+      ],
+      "confidence": 0.814043
+    },
+    {
+      "id": "paddle_023",
+      "text": "SP:50",
+      "bbox": [
+        942,
+        97,
+        52,
+        22
+      ],
+      "confidence": 0.999712
+    },
+    {
+      "id": "paddle_024",
+      "text": "SP",
+      "bbox": [
+        139,
+        118,
+        26,
+        21
+      ],
+      "confidence": 0.999935
+    },
+    {
+      "id": "paddle_025",
+      "text": "4",
+      "bbox": [
+        280,
+        111,
+        22,
+        28
+      ],
+      "confidence": 0.999994
+    },
+    {
+      "id": "paddle_026",
+      "text": "上限",
+      "bbox": [
+        368,
+        121,
+        40,
+        22
+      ],
+      "confidence": 0.999238
+    },
+    {
+      "id": "paddle_027",
+      "text": "上限",
+      "bbox": [
+        696,
+        121,
+        39,
+        23
+      ],
+      "confidence": 0.999843
+    },
+    {
+      "id": "paddle_028",
+      "text": "SP:30",
+      "bbox": [
+        369,
+        144,
+        51,
+        23
+      ],
+      "confidence": 0.999978
+    },
+    {
+      "id": "paddle_029",
+      "text": "Vo.",
+      "bbox": [
+        458,
+        142,
+        36,
+        25
+      ],
+      "confidence": 0.999856
+    },
+    {
+      "id": "paddle_030",
+      "text": "SP:20",
+      "bbox": [
+        531,
+        142,
+        53,
+        25
+      ],
+      "confidence": 0.999842
+    },
+    {
+      "id": "paddle_031",
+      "text": "SP:30",
+      "bbox": [
+        697,
+        146,
+        49,
+        20
+      ],
+      "confidence": 0.999974
+    },
+    {
+      "id": "paddle_032",
+      "text": "Vo",
+      "bbox": [
+        787,
+        148,
+        26,
+        22
+      ],
+      "confidence": 0.995793
+    },
+    {
+      "id": "paddle_033",
+      "text": "SP:40",
+      "bbox": [
+        860,
+        144,
+        52,
+        22
+      ],
+      "confidence": 0.999713
+    },
+    {
+      "id": "paddle_034",
+      "text": "所持スキル",
+      "bbox": [
+        149,
+        165,
+        139,
+        28
+      ],
+      "confidence": 0.998137
+    },
+    {
+      "id": "paddle_035",
+      "text": "上限",
+      "bbox": [
+        451,
+        168,
+        39,
+        23
+      ],
+      "confidence": 0.999405
+    },
+    {
+      "id": "paddle_036",
+      "text": "SP:20",
+      "bbox": [
+        450,
+        192,
+        53,
+        22
+      ],
+      "confidence": 0.999908
+    },
+    {
+      "id": "paddle_037",
+      "text": "Vo.",
+      "bbox": [
+        538,
+        188,
+        39,
+        27
+      ],
+      "confidence": 0.999507
+    },
+    {
+      "id": "paddle_038",
+      "text": "Vo.",
+      "bbox": [
+        711,
+        190,
+        21,
+        17
+      ],
+      "confidence": 0.990716
+    },
+    {
+      "id": "paddle_039",
+      "text": "SP:30",
+      "bbox": [
+        778,
+        192,
+        52,
+        22
+      ],
+      "confidence": 0.999945
+    },
+    {
+      "id": "paddle_040",
+      "text": "Vo.",
+      "bbox": [
+        1032,
+        189,
+        35,
+        26
+      ],
+      "confidence": 0.999754
+    },
+    {
+      "id": "paddle_041",
+      "text": "上限",
+      "bbox": [
+        532,
+        215,
+        41,
+        23
+      ],
+      "confidence": 0.99913
+    },
+    {
+      "id": "paddle_042",
+      "text": "Vi.",
+      "bbox": [
+        704,
+        206,
+        17,
+        14
+      ],
+      "confidence": 0.835173
+    },
+    {
+      "id": "paddle_043",
+      "text": "上限",
+      "bbox": [
+        1024,
+        215,
+        40,
+        23
+      ],
+      "confidence": 0.999629
+    },
+    {
+      "id": "paddle_044",
+      "text": "パッシブスキルの削除を有効",
+      "bbox": [
+        65,
+        240,
+        244,
+        30
+      ],
+      "confidence": 0.999769
+    },
+    {
+      "id": "paddle_045",
+      "text": "SP:10",
+      "bbox": [
+        532,
+        239,
+        52,
+        22
+      ],
+      "confidence": 0.999957
+    },
+    {
+      "id": "paddle_046",
+      "text": "SP:20",
+      "bbox": [
+        696,
+        238,
+        52,
+        23
+      ],
+      "confidence": 0.999961
+    },
+    {
+      "id": "paddle_047",
+      "text": "Vo.",
+      "bbox": [
+        950,
+        236,
+        34,
+        26
+      ],
+      "confidence": 0.999789
+    },
+    {
+      "id": "paddle_048",
+      "text": "SP:45",
+      "bbox": [
+        1023,
+        239,
+        52,
+        22
+      ],
+      "confidence": 0.999972
+    },
+    {
+      "id": "paddle_049",
+      "text": "⊕",
+      "bbox": [
+        1203,
+        235,
+        49,
+        50
+      ],
+      "confidence": 0.551822
+    },
+    {
+      "id": "paddle_050",
+      "text": "间",
+      "bbox": [
+        943,
+        264,
+        36,
+        20
+      ],
+      "confidence": 0.605263
+    },
+    {
+      "id": "paddle_051",
+      "text": "SP:40",
+      "bbox": [
+        286,
+        286,
+        53,
+        22
+      ],
+      "confidence": 0.96656
+    },
+    {
+      "id": "paddle_052",
+      "text": "Vo.",
+      "bbox": [
+        377,
+        283,
+        35,
+        26
+      ],
+      "confidence": 0.887889
+    },
+    {
+      "id": "paddle_053",
+      "text": "Voo",
+      "bbox": [
+        867,
+        283,
+        35,
+        26
+      ],
+      "confidence": 0.806472
+    },
+    {
+      "id": "paddle_054",
+      "text": "SP:35",
+      "bbox": [
+        941,
+        286,
+        52,
+        22
+      ],
+      "confidence": 0.8854
+    },
+    {
+      "id": "paddle_055",
+      "text": "Vo",
+      "bbox": [
+        1033,
+        290,
+        26,
+        22
+      ],
+      "confidence": 0.998986
+    },
+    {
+      "id": "paddle_056",
+      "text": "上限",
+      "bbox": [
+        369,
+        310,
+        38,
+        23
+      ],
+      "confidence": 0.999708
+    },
+    {
+      "id": "paddle_057",
+      "text": "上限",
+      "bbox": [
+        860,
+        310,
+        39,
+        23
+      ],
+      "confidence": 0.999701
+    },
+    {
+      "id": "paddle_058",
+      "text": "SP:50",
+      "bbox": [
+        205,
+        336,
+        51,
+        19
+      ],
+      "confidence": 0.999397
+    },
+    {
+      "id": "paddle_059",
+      "text": "SP:30",
+      "bbox": [
+        368,
+        333,
+        53,
+        22
+      ],
+      "confidence": 0.999959
+    },
+    {
+      "id": "paddle_060",
+      "text": "Vo",
+      "bbox": [
+        459,
+        338,
+        26,
+        20
+      ],
+      "confidence": 0.999081
+    },
+    {
+      "id": "paddle_061",
+      "text": "Vo.",
+      "bbox": [
+        786,
+        330,
+        35,
+        26
+      ],
+      "confidence": 0.999885
+    },
+    {
+      "id": "paddle_062",
+      "text": "Vo",
+      "bbox": [
+        296,
+        340,
+        25,
+        17
+      ],
+      "confidence": 0.999452
+    },
+    {
+      "id": "paddle_063",
+      "text": "SP:25",
+      "bbox": [
+        860,
+        333,
+        52,
+        22
+      ],
+      "confidence": 0.99996
+    },
+    {
+      "id": "paddle_064",
+      "text": "Vo",
+      "bbox": [
+        952,
+        340,
+        24,
+        17
+      ],
+      "confidence": 0.999243
+    },
+    {
+      "id": "paddle_065",
+      "text": "SP:45",
+      "bbox": [
+        1023,
+        333,
+        53,
+        22
+      ],
+      "confidence": 0.999847
+    },
+    {
+      "id": "paddle_066",
+      "text": "上限",
+      "bbox": [
+        778,
+        357,
+        42,
+        23
+      ],
+      "confidence": 0.999579
+    },
+    {
+      "id": "paddle_067",
+      "text": "Vo",
+      "bbox": [
+        215,
+        387,
+        24,
+        17
+      ],
+      "confidence": 0.999102
+    },
+    {
+      "id": "paddle_068",
+      "text": "SP:40",
+      "bbox": [
+        286,
+        380,
+        53,
+        22
+      ],
+      "confidence": 0.999941
+    },
+    {
+      "id": "paddle_069",
+      "text": "Vo.",
+      "bbox": [
+        371,
+        385,
+        32,
+        24
+      ],
+      "confidence": 0.999163
+    },
+    {
+      "id": "paddle_070",
+      "text": "SP:20",
+      "bbox": [
+        450,
+        381,
+        52,
+        22
+      ],
+      "confidence": 0.999965
+    },
+    {
+      "id": "paddle_071",
+      "text": "SP:15",
+      "bbox": [
+        778,
+        380,
+        52,
+        22
+      ],
+      "confidence": 0.999945
+    },
+    {
+      "id": "paddle_072",
+      "text": "Vo.",
+      "bbox": [
+        861,
+        385,
+        34,
+        25
+      ],
+      "confidence": 0.999155
+    },
+    {
+      "id": "paddle_073",
+      "text": "SP:35",
+      "bbox": [
+        941,
+        380,
+        53,
+        22
+      ],
+      "confidence": 0.999962
+    },
+    {
+      "id": "paddle_074",
+      "text": "SP:50",
+      "bbox": [
+        204,
+        429,
+        53,
+        21
+      ],
+      "confidence": 0.999969
+    },
+    {
+      "id": "paddle_075",
+      "text": "Vo",
+      "bbox": [
+        296,
+        433,
+        26,
+        20
+      ],
+      "confidence": 0.998973
+    },
+    {
+      "id": "paddle_076",
+      "text": "SP:30",
+      "bbox": [
+        367,
+        425,
+        54,
+        25
+      ],
+      "confidence": 0.999961
+    },
+    {
+      "id": "paddle_077",
+      "text": "SP:25",
+      "bbox": [
+        859,
+        426,
+        53,
+        25
+      ],
+      "confidence": 0.999972
+    },
+    {
+      "id": "paddle_078",
+      "text": "Vo",
+      "bbox": [
+        951,
+        433,
+        26,
+        20
+      ],
+      "confidence": 0.998942
+    },
+    {
+      "id": "paddle_079",
+      "text": "SP:45",
+      "bbox": [
+        1023,
+        428,
+        52,
+        22
+      ],
+      "confidence": 0.999972
+    },
+    {
+      "id": "paddle_080",
+      "text": "Vo.",
+      "bbox": [
+        213,
+        472,
+        35,
+        26
+      ],
+      "confidence": 0.999758
+    },
+    {
+      "id": "paddle_081",
+      "text": "SP:40",
+      "bbox": [
+        286,
+        476,
+        53,
+        21
+      ],
+      "confidence": 0.999963
+    },
+    {
+      "id": "paddle_082",
+      "text": "Vo.",
+      "bbox": [
+        551,
+        475,
+        17,
+        14
+      ],
+      "confidence": 0.986044
+    },
+    {
+      "id": "paddle_083",
+      "text": "Vi.",
+      "bbox": [
+        703,
+        481,
+        26,
+        22
+      ],
+      "confidence": 0.927782
+    },
+    {
+      "id": "paddle_084",
+      "text": "SP:35",
+      "bbox": [
+        941,
+        476,
+        52,
+        21
+      ],
+      "confidence": 0.999887
+    },
+    {
+      "id": "paddle_085",
+      "text": "Da",
+      "bbox": [
+        541,
+        490,
+        17,
+        14
+      ],
+      "confidence": 0.998444
+    },
+    {
+      "id": "paddle_086",
+      "text": "Vo.",
+      "bbox": [
+        1028,
+        481,
+        30,
+        21
+      ],
+      "confidence": 0.999331
+    },
+    {
+      "id": "paddle_087",
+      "text": "上限",
+      "bbox": [
+        205,
+        499,
+        38,
+        24
+      ],
+      "confidence": 0.999391
+    },
+    {
+      "id": "paddle_088",
+      "text": "SP:50",
+      "bbox": [
+        204,
+        523,
+        53,
+        21
+      ],
+      "confidence": 0.999964
+    },
+    {
+      "id": "paddle_089",
+      "text": "Da.",
+      "bbox": [
+        454,
+        527,
+        31,
+        24
+      ],
+      "confidence": 0.999474
+    },
+    {
+      "id": "paddle_090",
+      "text": "SP:20",
+      "bbox": [
+        531,
+        520,
+        53,
+        25
+      ],
+      "confidence": 0.99989
+    },
+    {
+      "id": "paddle_091",
+      "text": "SP:20",
+      "bbox": [
+        695,
+        520,
+        53,
+        25
+      ],
+      "confidence": 0.999908
+    },
+    {
+      "id": "paddle_092",
+      "text": "Vo.",
+      "bbox": [
+        782,
+        527,
+        31,
+        24
+      ],
+      "confidence": 0.999629
+    },
+    {
+      "id": "paddle_093",
+      "text": "SP:45",
+      "bbox": [
+        1023,
+        523,
+        53,
+        21
+      ],
+      "confidence": 0.999736
+    },
+    {
+      "id": "paddle_094",
+      "text": "Vo.",
+      "bbox": [
+        385,
+        569,
+        20,
+        16
+      ],
+      "confidence": 0.971136
+    },
+    {
+      "id": "paddle_095",
+      "text": "SP:30",
+      "bbox": [
+        450,
+        570,
+        52,
+        22
+      ],
+      "confidence": 0.999966
+    },
+    {
+      "id": "paddle_096",
+      "text": "Vo.",
+      "bbox": [
+        537,
+        576,
+        29,
+        21
+      ],
+      "confidence": 0.999239
+    },
+    {
+      "id": "paddle_097",
+      "text": "Da.",
+      "bbox": [
+        698,
+        574,
+        34,
+        24
+      ],
+      "confidence": 0.999541
+    },
+    {
+      "id": "paddle_098",
+      "text": "SP:30",
+      "bbox": [
+        778,
+        571,
+        52,
+        21
+      ],
+      "confidence": 0.999968
+    },
+    {
+      "id": "paddle_099",
+      "text": "All",
+      "bbox": [
+        871,
+        574,
+        26,
+        21
+      ],
+      "confidence": 0.975785
+    },
+    {
+      "id": "paddle_100",
+      "text": "Da",
+      "bbox": [
+        377,
+        585,
+        17,
+        13
+      ],
+      "confidence": 0.999458
+    },
+    {
+      "id": "paddle_101",
+      "text": "Vo.",
+      "bbox": [
+        301,
+        616,
+        20,
+        17
+      ],
+      "confidence": 0.966001
+    },
+    {
+      "id": "paddle_102",
+      "text": "SP:40",
+      "bbox": [
+        368,
+        618,
+        53,
+        21
+      ],
+      "confidence": 0.999864
+    },
+    {
+      "id": "paddle_103",
+      "text": "Vo",
+      "bbox": [
+        459,
+        622,
+        26,
+        20
+      ],
+      "confidence": 0.99885
+    },
+    {
+      "id": "paddle_104",
+      "text": "SP:30",
+      "bbox": [
+        532,
+        618,
+        53,
+        21
+      ],
+      "confidence": 0.99996
+    },
+    {
+      "id": "paddle_105",
+      "text": "SP:30",
+      "bbox": [
+        696,
+        618,
+        52,
+        21
+      ],
+      "confidence": 0.999972
+    },
+    {
+      "id": "paddle_106",
+      "text": "SP:40",
+      "bbox": [
+        859,
+        618,
+        53,
+        21
+      ],
+      "confidence": 0.99994
+    },
+    {
+      "id": "paddle_107",
+      "text": "Da.",
+      "bbox": [
+        294,
+        632,
+        18,
+        13
+      ],
+      "confidence": 0.921372
+    },
+    {
+      "id": "paddle_108",
+      "text": "Vo.",
+      "bbox": [
+        947,
+        623,
+        29,
+        21
+      ],
+      "confidence": 0.999729
+    },
+    {
+      "id": "paddle_109",
+      "text": "SP:50",
+      "bbox": [
+        285,
+        662,
+        54,
+        26
+      ],
+      "confidence": 0.99984
+    },
+    {
+      "id": "paddle_110",
+      "text": "SP:40",
+      "bbox": [
+        450,
+        665,
+        53,
+        21
+      ],
+      "confidence": 0.999934
+    },
+    {
+      "id": "paddle_111",
+      "text": "All",
+      "bbox": [
+        707,
+        668,
+        26,
+        21
+      ],
+      "confidence": 0.99327
+    },
+    {
+      "id": "paddle_112",
+      "text": "Vo.",
+      "bbox": [
+        872,
+        659,
+        25,
+        17
+      ],
+      "confidence": 0.999658
+    },
+    {
+      "id": "paddle_113",
+      "text": "Da",
+      "bbox": [
+        541,
+        669,
+        27,
+        21
+      ],
+      "confidence": 0.999504
+    },
+    {
+      "id": "paddle_114",
+      "text": "SP:40",
+      "bbox": [
+        779,
+        669,
+        49,
+        15
+      ],
+      "confidence": 0.999724
+    },
+    {
+      "id": "paddle_115",
+      "text": "Da.Vi.",
+      "bbox": [
+        859,
+        674,
+        51,
+        18
+      ],
+      "confidence": 0.985841
+    },
+    {
+      "id": "paddle_116",
+      "text": "SP:50",
+      "bbox": [
+        941,
+        665,
+        53,
+        21
+      ],
+      "confidence": 0.999689
+    },
+    {
+      "id": "paddle_117",
+      "text": "上限",
+      "bbox": [
+        860,
+        689,
+        53,
+        22
+      ],
+      "confidence": 0.999633
+    }
+  ]
+}

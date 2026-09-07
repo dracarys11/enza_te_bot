@@ -1,0 +1,65 @@
+{
+  "observation_id": "VOBS_SKILL_EXAMPLE_001",
+  "capture": {
+    "timestamp": "2026-09-04T00:00:00+08:00",
+    "frame_id": "OBS_EXAMPLE_001",
+    "screenshot_digest": "sha256:example"
+  },
+  "viewport": {"width": 1280, "height": 720},
+  "text_regions": [
+    {"id": "t01", "text": "研修設定", "bbox": [922, 643, 119, 33], "confidence": 0.99},
+    {"id": "t02", "text": "次へ", "bbox": [1139, 638, 72, 43], "confidence": 0.99},
+    {"id": "t03", "text": "2/20", "bbox": [95, 162, 55, 28], "confidence": 0.93}
+  ],
+  "interaction_candidates": [
+    {
+      "id": "e01",
+      "bbox": [899, 623, 166, 78],
+      "appearance": {"shape": "rounded_rect", "color_hint": "light_gray"},
+      "linked_text_ids": ["t01"],
+      "interaction_confidence": 0.99
+    },
+    {
+      "id": "e02",
+      "bbox": [1092, 623, 166, 78],
+      "appearance": {"shape": "rounded_rect", "color_hint": "pink"},
+      "linked_text_ids": ["t02"],
+      "interaction_confidence": 0.99
+    },
+    {
+      "id": "e03",
+      "bbox": [1200, 18, 60, 57],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "light_gray",
+        "content_hint": "four_square_glyph"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.55,
+      "visibility": "partially_occluded"
+    }
+  ],
+  "numeric_regions": [
+    {
+      "id": "n01",
+      "raw_text": "2/20",
+      "value": 2,
+      "max_value": 20,
+      "bbox": [95, 162, 55, 28],
+      "confidence": 0.93
+    }
+  ],
+  "overlay_regions": [
+    {
+      "id": "o01",
+      "bbox": [55, 56, 1170, 608],
+      "linked_text_ids": [],
+      "blocked_element_ids": ["e03"]
+    }
+  ],
+  "uncertainties": [
+    {"bbox": [1195, 15, 70, 65], "reason": "occluded_by_overlay"},
+    {"bbox": [612, 450, 596, 137], "reason": "low_contrast_text"}
+  ],
+  "detection_failures": []
+}

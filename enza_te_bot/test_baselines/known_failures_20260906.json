@@ -1,0 +1,16 @@
+{
+  "baseline_id": "FULL_PYTEST_20260906_BEFORE_ROUTE_CAPACITY_HARDENING",
+  "source_command": ".venv/bin/pytest -q",
+  "expected_failure_count": 8,
+  "failures": [
+    "test_agy_cli_runner.py::RealAgyCliRunnerTests::test_malformed_json_is_left_for_bridge_validation",
+    "test_agy_cli_runner.py::RealAgyCliRunnerTests::test_timeout_maps_fail_closed_and_creates_no_canonical_artifact",
+    "test_agy_cli_runner.py::RealAgyCliRunnerTests::test_wrong_model_fails_in_bridge_and_never_publishes",
+    "test_agy_cli_runner.py::RealAgyCliRunnerTests::test_wrong_screenshot_digest_fails_and_never_publishes",
+    "test_agy_seam_integration.py::ExploreHomeLiveSeamIntegrationTests::test_malformed_json_leaves_no_canonical",
+    "test_agy_seam_integration.py::ExploreHomeLiveSeamIntegrationTests::test_nonzero_exit_leaves_no_canonical",
+    "test_agy_seam_integration.py::ExploreHomeLiveSeamIntegrationTests::test_timeout_leaves_no_canonical",
+    "test_cross_agent_integration_gate.py::CrossAgentIntegrationGateTests::test_cross_agent_integration_gate_passes_on_real_offline_evidence"
+  ],
+  "scope": "Known pre-existing AGY artifact-durability/canonical-directory failures; not accepted behavior and not ignored by new-regression classification."
+}

@@ -1,0 +1,119 @@
+{
+ "policy_id": "learned_constraints_v2",
+ "status": "AUDITED — approved as evaluation reference ONLY. NOT executable policy, NOT ground truth training data, NOT strategy source.",
+ "derived_from": [
+  "trajectories/zcode_baseline_001.json",
+  "failures/canvas_misclick_001.json"
+ ],
+ "updated_at": "2026-09-06T07:05:00Z",
+ "supersedes": "learned_constraints.json v1 (claims downgraded per audit, see memory_review_v2.json)",
+ "evidence_supported_findings": [
+  {
+   "id": "F1",
+   "finding": "shinycolors.enza.fun renders game UI on an opaque canvas; DOM/AI-ARIA grounding returned no interactive elements in observed passes",
+   "evidence": [
+    "OBS_20260903052210: domSnapshot = one generic node; visible-DOM = body#prim-body + 1 canvas",
+    "OBS_20260903053145: same result"
+   ],
+   "provenance": "session_observed",
+   "scope": "true for 5 observation passes on 2026-09-03 in ZCode iab 1280x720; not proven permanent"
+  },
+  {
+   "id": "F2",
+   "finding": "One click intended for 閉じる (estimated at (640,622)) resulted in a Help overlay at unchanged URL",
+   "evidence": [
+    "failures/canvas_misclick_001.json",
+    "screenshot sequence: ai_decisions/observations/screenshots/ (Phase 9 session, screenshots f833cd / dec03f artifacts), URL stayed /produceReady"
+   ],
+   "provenance": "session_observed",
+   "scope": "single occurrence (n=1)"
+  },
+  {
+   "id": "F3",
+   "finding": "URL did not change across modal/help overlay state changes on /produceReady (observed in the same pass as F2)",
+   "evidence": [
+    "tabs.list/url reads before and after: /produceReady both times"
+   ],
+   "provenance": "session_observed",
+   "scope": "true for the observed modal/help pair; not proven for all overlays"
+  },
+  {
+   "id": "F4",
+   "finding": "A produce-mode info modal appeared on entry to /produceReady in this session",
+   "evidence": [
+    "Phase 9 screenshot (f9c71f artifact), /produceReady"
+   ],
+   "provenance": "session_observed",
+   "scope": "single occurrence; trigger conditions unknown"
+  }
+ ],
+ "hypotheses": [
+  {
+   "id": "H1",
+   "was_constraint": "E3 (modal appears on first visit per session)",
+   "hypothesis": "the produce-mode modal may be a first-visit-per-session flag",
+   "status": "UNVERIFIED (n=1; planner reported it absent in the prior session's Phase 9 — user_reported, not first-hand)"
+  },
+  {
+   "id": "H2",
+   "was_constraint": "implicit in C1",
+   "hypothesis": "the modal auto-dismissed before the click and the coordinate hit an underlying help affordance",
+   "status": "UNVERIFIED — one of three candidate causes for F2"
+  },
+  {
+   "id": "H3",
+   "was_constraint": "C4 次へ initializes a produce session",
+   "hypothesis": "clicking 次へ may initialize a produce session / consume resources",
+   "status": "UNVERIFIED — based on user_reported Phase 9 prior attempt (confirmation dialog + error 9000). No first-hand evidence. Remains planner-decision territory."
+  }
+ ],
+ "unknowns_formerly_rules": [
+  {
+   "id": "U1",
+   "was_constraint": "C3: canvas click error tolerance is ±15px",
+   "now": "Exact click tolerance UNKNOWN. One canvas click produced unexpected navigation (F2). Possible causes: coordinate mismatch, hitbox uncertainty, state-transition timing. Exact tolerance never measured — a calibration pass is required before any number is stated."
+  },
+  {
+   "id": "U2",
+   "was_constraint": "C1: fresh-screenshot-before-click rule (stated as fact)",
+   "now": "Time-lapse between observation and click is a PLAUSIBLE contributing factor to F2 but was not isolated. The rule is a reasonable precaution, not an evidence-proven tolerance."
+  }
+ ],
+ "behavioral_reference_not_policy": [
+  {
+   "id": "R1",
+   "practice": "follow every action with a fresh observation and expected-state comparison before classification",
+   "basis": "this practice detected anomaly F2 immediately (verification PASS as a practice, in 3/3 actions this session)",
+   "note": "recorded as baseline behavior for audit comparison; binding force comes from Phase 1A architecture rules, not from this memory"
+  },
+  {
+   "id": "R2",
+   "practice": "do not retry an identical failed click; re-observe first",
+   "basis": "recovery from F2 used an unambiguous affordance and succeeded (n=1)"
+  },
+  {
+   "id": "R3",
+   "practice": "gate decisions require fresh observation, attached contract, threshold confidence, resolved resource unknowns",
+   "basis": "Phase 1A architecture + 1D-4 gate replay (offline record)"
+  }
+ ],
+ "audit_comparison_hooks": {
+  "risk_appetite": "count of actions taken without contract (baseline: 0)",
+  "verification_skipping": "actions followed by fresh observation (baseline: 3/3)",
+  "overconfidence": "failed action carried declared confidence 0.9 → treat high confidence on ungrounded canvas targets as an audit signal, not proof of error",
+  "anomaly_handling": "baseline reports anomalies and recovers via unambiguous affordances"
+ },
+ "runtime_candidates": [
+  {
+   "id": "C1",
+   "candidate": "POST_TIMEOUT_STATE_MUST_BE_RECONCILED_BEFORE_RETRYING_PENDING_ACTION",
+   "statement": "After a post-action observation tool failure (e.g. screenshot timeout), the pending transaction must be reconciled against the next fresh stable state before any retry of the pending action; observation-tool failure must not be read as transaction-pending and must not trigger a blind re-click.",
+   "origin": "2026-09-06 live run: screenshot pipeline hung after SCHEDULE:VOCAL click while the game committed the week (8->7); operator fresh visual evidence reconciled the boundary",
+   "evidence": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/operator_reconcile_20260906_s3w1.json"
+   ],
+   "provenance": "session_observed (failure) + user_reported (reconciled boundary)",
+   "status": "PROVISIONAL — n=1 occurrence; runtime candidate only, Harness NOT changed"
+  }
+ ]
+}

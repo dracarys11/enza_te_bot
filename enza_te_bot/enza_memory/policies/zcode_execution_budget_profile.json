@@ -1,0 +1,41 @@
+{
+  "profile_id": "zcode_cua_execution_budget_v1",
+  "status": "ACTIVE runtime profile (executor-level; 非 Harness 非 Skill)",
+  "recorded": "2026-09-05",
+  "source": "timeout_debug_report.json 实测 (enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json)",
+  "MEASURED_LATENCY_PROFILE": {
+    "click_cost_estimate_ms": 5500,
+    "click_cost_note": "实测恒定 ~5.0s/次 (5008/5078/5095); 5500 为保守估计; 按滚动实测 median/p90 持续更新, 不永久固定",
+    "screenshot_reserve_ms": 30000,
+    "screenshot_note": "静止帧 <2s; 动画/对话帧可 hang 至内部 30s 超时 — 动画帧禁止强制截图",
+    "cell_hard_limit_ms": 120000,
+    "cell_safe_budget_ms": 90000,
+    "wait_accuracy": "显式 wait 计时精确 (2006/10006)"
+  },
+  "BATCH_BUDGET_RULE": {
+    "formula": "estimated_ms = clicks*click_cost + explicit_waits + screenshot_reserve + safety_margin(15s)",
+    "constraint": "estimated_ms <= cell_safe_budget_ms; 超出则执行前拆 batch",
+    "practical_bound": "clicks_per_cell <= 8 (8*5.5+waits+30s 保留 <= 90s)",
+    "forbidden": "只统计显式 wait 的预算算法"
+  },
+  "CHUNKING_RULES": [
+    "一个 cell 最多一个游戏周",
+    "audition battle 独立 cell (決定/advice/battle/result 各自小 cell)",
+    "禁止双周 burst",
+    "高点击 dialogue chain 拆分为多个 cell (每 cell ≤8 clicks)",
+    "动画/transient 帧避免强制 screenshot; stable INPUT_READY/HOME/RESULT 帧优先截图",
+    "预算不足时在 stable boundary 结束当前 cell, 下一 cell fresh continuation"
+  ],
+  "SESSION_HANDOFF": {
+    "rule": "跨 cell/turn continuation 的游戏 tab 必须在每个 turn 结束前 markHandoff",
+    "note": "不把具体 tab id 写入长期知识; 恢复时经 registry→tabs.list 重新解析"
+  },
+  "FAILURE_CLASSIFICATION": {
+    "TOOL_LATENCY_BUDGET_EXCEEDED": "cell 真实运行超过声明 timeout (预算误判)",
+    "SCREENSHOT_TIMEOUT": "screenshot 30s 内部超时",
+    "PAGE_STATE_TIMEOUT": "waitFor/条件等待超时",
+    "CONTROL_FAILURE": "点击执行但 UI 无预期反应",
+    "SESSION_RELEASED": "tabs=0 / tab id 失效 (需重新解析, 禁止继续盲操作)"
+  },
+  "forbidden_mislabel": "cell timeout 不得记为游戏 state UNKNOWN"
+}

@@ -1,0 +1,58 @@
+{
+  "artifact_type": "CODE_AREA_MAPPING",
+  "planning_session": "IMPLEMENTATION_PLANNING_20260907",
+  "created_at": "2026-09-07T01:00:00Z",
+  "read_only_note": "paths below are READ-ONLY定位 for the implementing agent; this planning session modified none of them",
+  "areas": [
+    {
+      "batch": "CODEX_BATCH_1",
+      "files": ["home_policy.py (decide_home S3 base branch ~line 255-258: already fixed F-01, verify only; add _season_futility_check helper near apply_vocal_risk_guard line 158)", "decision_trace_schema.py (trace record fields)"],
+      "functions": ["decide_home", "apply_vocal_risk_guard (do not modify semantics)", "new: season_futility_check", "decision trace builder"],
+      "tests": ["test_home_policy.py (19 existing tests incl. test_planner_objective_is_not_replaced_by_vocal_risk_authorization line 67)", "test_decision_trace_schema.py"],
+      "policy_boundary": "enza_memory/policies/learned_constraints.json + planner_regressions.json are specs only; ENDGAME_FUTILE escalation CHOICE stays operator-owned — code may only surface the state"
+    },
+    {
+      "batch": "CODEX_BATCH_2",
+      "files": ["goal_execution.py (validate_goal_deadline line 56, resolve line 102)", "home_policy.py (route_capacity_from_state line 76, _validated_route_deadline, S4 branch line 262)", "test_route_deadline_policy.py"],
+      "functions": ["validate_goal_deadline", "route_capacity_from_state", "_validated_route_deadline"],
+      "tests": ["test_route_deadline_policy.py (10 existing tests)", "test_goal_execution.py (5 existing tests)"]
+    },
+    {
+      "batch": "CODEX_BATCH_3",
+      "files": ["new: run_checkpoint.py (or minimal main.py hook sites — main.py currently has NO checkpoint/durable-flush code: grep confirmed)", "config.json load site in main.py for F-03 guard", "spec: enza_memory/migration/python_click_migration/distilled/runtime_recovery_requirements.json", "artifact_registry.json (read for run status)"],
+      "functions": ["new: flush_week_boundary / flush_audition_result / flush_season_transition / flush_handoff / refuse_on_flush_failure", "config loader guard ignoring closed-run season3 flags when active_run is null"],
+      "tests": ["new: test_run_checkpoint.py"],
+      "dependency": "F-03 from enza_memory/audits/stale_reference_audit/stale_references.json"
+    },
+    {
+      "batch": "CODEX_BATCH_4",
+      "files": ["evidence_reconciliation.py (ObservationReconciliation class) or new small reconcile helper", "spec: enza_memory/policies/learned_constraints.json#C1", "operator record: enza_memory/wing_runs/WINGRUN_20260906_01/operator_reconcile_20260906_s3w1.json"],
+      "functions": ["new: reconcile_after_observation_failure (RECONCILE_PENDING state machine)", "validate_evidence_reconciliation (reuse hashing helpers)"],
+      "tests": ["test_evidence_reconciliation.py (extend)"]
+    },
+    {
+      "batch": "CODEX_BATCH_5",
+      "files": ["new result-commit handler (or wing_fast_handlers.py addition — current functions: vocal_failure_roi_status, parse_failure_rate_percent, morning_three_choice, promise_dialogue)", "perception spec: enza_memory/runtime_contracts/result.json", "do not refactor harness/vocal_harness.py beyond trivial reuse"],
+      "functions": ["new: classify_result_evidence / commit_or_preserve_unknown / guard_business_week_advance"],
+      "tests": ["new: test_result_commit_guard.py", "existing pins: test_season3_audition.py::test_lock_and_commit_require_evidence"]
+    },
+    {
+      "batch": "CODEX_BATCH_6",
+      "files": ["audition_control_epoch.py (speed_action line 140 — F-07 stale CLICK_SPEED; BattleControlLifecycle.handle line ~85-93 'speed may now own this frame')", "test_audition_control_epoch.py (test_speed_epoch_rules line 50)", "guard: test_harness_live_invariants.py (SPEED_FIRST_THEN_AUTO hold)"],
+      "functions": ["speed_action (HOLD default)", "BattleControlLifecycle.handle (speed branch)", "overlay_resume / new_epoch (already correct — keep)"],
+      "tests": ["test_audition_control_epoch.py (10 existing lifecycle tests stay green)"]
+    },
+    {
+      "batch": "CODEX_BATCH_7",
+      "files": ["shadow_executor/detectors.py (layout classification line ~108-196)", "shadow_executor/authority.py (authorize_action line 53)", "F-11 note: blind_interaction_policy.py MORNING_3CHOICE_GREEN_V1 fingerprint name (line ~255)"],
+      "functions": ["page/control detectors (add layout_family + event_context fields)", "authorize_action (handler gate requires both fields)"],
+      "tests": ["test_python_shadow_executor.py (choice tests line 97-130)", "test_blind_interaction_policy.py"]
+    },
+    {
+      "batch": "CODEX_BATCH_8",
+      "files": ["shadow_executor/executor.py (observe_skill_board line 159, plan_skill_action line 165)", "fixtures: enza_memory/migration/python_click_migration/recovered_frames/skill_board/rf_sb_g1_misclick_590_145.png .. g4, replacement/rf_rp_t2_slot_list.png, rf_rp_t2_slot_list_preselect.png", "spec: skill_board_regressions.json visual_negative_cases"],
+      "functions": ["plan_skill_action (probe classification + replacement target validation)", "SkillBoardObservation consumers"],
+      "tests": ["new: test_skill_board_probe_guards.py"]
+    }
+  ]
+}

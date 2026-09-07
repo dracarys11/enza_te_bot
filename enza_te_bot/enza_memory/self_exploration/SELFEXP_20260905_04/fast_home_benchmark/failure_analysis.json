@@ -1,0 +1,10 @@
+{
+  "failures":[
+    {"stage":"state_detection","reason_code":"home_state_not_confirmed","actual_state":"AUDITION_BATTLE","impact":"HOME fast path is UNKNOWN and escalation_required=true"},
+    {"stage":"field_projection","field":"season","reason_code":"missing_or_ambiguous:season","raw":"y-AYt","impact":"season is null"},
+    {"stage":"field_projection","field":"weeks_remaining","reason_code":"value_mismatch","expected_oracle":8,"actual":3,"impact":"not accepted as benchmark pass"}
+  ],
+  "non_failures":["fan_gap_to_target parsed 999","stamina adequacy marker true"],
+  "no_code_modified":true,
+  "no_agy_called":true
+}

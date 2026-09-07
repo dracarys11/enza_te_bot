@@ -1,0 +1,89 @@
+{
+  "benchmark": "OB-003 Vision Self-Extraction on Unseen Screenshots",
+  "observations": [
+    {
+      "observation_id": "AGENT_VISION_OBS_20260903064050_PRODUCE_SELECTION",
+      "screenshot": "OBS_20260903064050_P2_s3_after_back1",
+      "reference_instrument": "PaddleOCR raw sensor (paddle_reference.json)",
+      "reference_caveat": "reference bboxes are in processed-image space; comparison is string-level only",
+      "text_recall": {
+        "reference_strings": 26,
+        "recovered": 25,
+        "recall": 0.962,
+        "missed": [
+          "b"
+        ]
+      },
+      "agent_text_regions": 23,
+      "grounding_agreement": {
+        "linked_text_total": 14,
+        "supported_by_reference_ocr": 14,
+        "ratio": 1.0,
+        "unsupported_links": []
+      },
+      "interaction_inventory": {
+        "candidates": 16,
+        "unknown_no_linked_text": 5
+      },
+      "uncertainties_declared": 2
+    },
+    {
+      "observation_id": "AGENT_VISION_OBS_20260903064030_UNIT_FORMATION",
+      "screenshot": "OBS_20260903064030_P2_s2_unit_formation",
+      "reference_instrument": "PaddleOCR raw sensor (paddle_reference.json)",
+      "reference_caveat": "reference bboxes are in processed-image space; comparison is string-level only",
+      "text_recall": {
+        "reference_strings": 33,
+        "recovered": 24,
+        "recall": 0.727,
+        "missed": [
+          "as",
+          "sp",
+          "ss",
+          "★★★☆",
+          "☆☆☆☆",
+          "おまかせ編成",
+          "別ユニットからコピー",
+          "情報切替",
+          "王"
+        ]
+      },
+      "agent_text_regions": 28,
+      "grounding_agreement": {
+        "linked_text_total": 22,
+        "supported_by_reference_ocr": 22,
+        "ratio": 1.0,
+        "unsupported_links": []
+      },
+      "interaction_inventory": {
+        "candidates": 21,
+        "unknown_no_linked_text": 9
+      },
+      "uncertainties_declared": 2
+    },
+    {
+      "observation_id": "AGENT_VISION_OBS_20260903063000_DIALOG",
+      "screenshot": "OBS_20260903063000_1E_s5_dialog_full",
+      "reference_instrument": "PaddleOCR raw sensor (paddle_reference.json)",
+      "reference_caveat": "reference bboxes are in processed-image space; comparison is string-level only",
+      "text_recall": {
+        "reference_strings": 14,
+        "recovered": 14,
+        "recall": 1.0,
+        "missed": []
+      },
+      "agent_text_regions": 12,
+      "grounding_agreement": {
+        "linked_text_total": 4,
+        "supported_by_reference_ocr": 4,
+        "ratio": 1.0,
+        "unsupported_links": []
+      },
+      "interaction_inventory": {
+        "candidates": 5,
+        "unknown_no_linked_text": 2
+      },
+      "uncertainties_declared": 3
+    }
+  ]
+}

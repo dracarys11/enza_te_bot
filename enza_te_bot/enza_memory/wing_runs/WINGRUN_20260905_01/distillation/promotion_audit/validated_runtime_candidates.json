@@ -1,0 +1,7 @@
+{
+  "validated_runtime_candidates": [
+    {"candidate":"interruption dual-channel detection","scope":"WING","promotion":"PROMOTE","limit":"detection only; SKIP/textbox handler requires fresh identity"},
+    {"candidate":"stable WING_HOME entry identity","scope":"WING","promotion":"PROMOTE","limit":"identity memory only; no executable geometry implied"},
+    {"candidate":"weeks_remaining - 1","scope":"S1_ONLY","promotion":"PROMOTE","classification":"ROOM_COMPLETION_EVIDENCE","limit":"not ROOM_EFFECT_TRUTH"}
+  ]
+}

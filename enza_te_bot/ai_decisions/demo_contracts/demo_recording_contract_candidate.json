@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "artifact": "demo_recording_contract",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "scope": "offline governance and evidence collection",
+  "purpose": "Define the evidence that a passive demonstration recorder may collect without selecting strategy or controlling the application.",
+  "source_artifacts": [
+    "ai_decisions/architecture_contract.json",
+    "ai_decisions/room_sop_candidates.json",
+    "ai_decisions/unknown_registry_candidate.json"
+  ],
+  "recording_mode": {
+    "default": "PASSIVE_OBSERVATION_ONLY",
+    "injected_actions_allowed": false,
+    "game_clicks_by_recorder": false,
+    "listener_rule": "Event listeners enqueue raw input only; browser/perception work remains on the owning recorder thread."
+  },
+  "unit_model": {
+    "raw_event": "A timestamped input event retained for debugging; it is not a decision.",
+    "normalized_interaction": "A bounded aggregation of related human input paired with pre- and post-observations.",
+    "decision_point": "A stable HOME observation at which a human or later reviewed policy may make a strategic decision.",
+    "step": "An offline pairing of observation, human action, resulting observation, and effect evidence."
+  },
+  "recorded_layers": {
+    "raw_events": {
+      "required_fields": ["timestamp", "event_type", "screen_position", "application_identity"],
+      "retention": "debug_evidence",
+      "strategy_assertion": false
+    },
+    "normalized_interactions": {
+      "required_fields": [
+        "interaction_id",
+        "started_at",
+        "ended_at",
+        "input_events",
+        "normalized_points",
+        "before_observation_ref",
+        "after_observation_ref",
+        "state_transition",
+        "action_mapping"
+      ],
+      "aggregation_rule": "Compress contiguous related clicks only after a bounded stabilization observation; never discard the raw events.",
+      "unresolved_mapping": "UNKNOWN_CLICK or UNRESOLVED_ACTION; do not invent a named action."
+    },
+    "decision_points": {
+      "required_fields": [
+        "observation_ref",
+        "stable_state",
+        "home_facts",
+        "evidence_status"
+      ],
+      "creation_rule": "Mark only after a stable, verified HOME observation; do not infer a decision from a click alone.",
+      "policy_field": "not recorded as a recorder conclusion"
+    }
+  },
+  "observation_requirements": {
+    "pre_event": "Must be captured or selected from a rolling observation that precedes the human event.",
+    "post_event": "Must be captured on the recorder-owned perception thread after bounded stabilization.",
+    "evidence": ["screenshot_reference", "detected_state", "numeric_observations", "frame_change", "transition_result"],
+    "stability": "Transient animation frames may be retained as evidence but must not automatically become semantic steps."
+  },
+  "strategy_leakage_guards": [
+    "The recorder observes what the human did; it does not decide why the action was chosen.",
+    "A click-to-action match is an evidence mapping, not an authorization for production replay.",
+    "Human explanations are annotations and remain unpromoted until separately reviewed.",
+    "No season policy, route, threshold, or objective may be inferred by this contract."
+  ],
+  "session_status": {
+    "allowed": ["RECORDING", "COMPLETED", "FAILED"],
+    "completion_rule": "COMPLETED requires a clean recorder shutdown and a valid footer/metadata record.",
+    "failure_rule": "Listener, perception, or persistence errors produce FAILED/incomplete evidence; an episode file alone is insufficient."
+  },
+  "promotion": {
+    "automatic": false,
+    "required_sequence": ["ANNOTATION", "COMPILE", "VERIFY", "PROMOTE"],
+    "production_effect": "none"
+  },
+  "open_unknowns": [
+    {
+      "id": "demo_action_semantics",
+      "status": "UNKNOWN",
+      "description": "A human click may not identify its business intent without annotation or a unique reviewed control match.",
+      "required_evidence": "Repeated labeled demonstrations or explicit human annotation."
+    },
+    {
+      "id": "demo_decision_reasoning",
+      "status": "UNKNOWN",
+      "description": "Recorder evidence does not establish the human's strategic rationale.",
+      "required_evidence": "Explicit human explanation reviewed separately from interaction evidence."
+    }
+  ]
+}

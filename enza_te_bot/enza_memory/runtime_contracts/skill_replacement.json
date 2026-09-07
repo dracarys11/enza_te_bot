@@ -1,0 +1,86 @@
+{
+  "contract_version": "0.2",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): STALE-B four-axis geometry",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract. WHICH slot to replace is BUSINESS POLICY (operator bottom-up rule) — referenced only. Flow evidence: 4/4 successful live replacements.",
+  "scenario_scope": "WING skill replacement flow (post-acquisition), 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "SKILL_REPLACEMENT",
+    "identity_anchors_required": [
+      "triggered after acquiring a new skill when live slots are full (pending ring on new skill: rf_rp_t4_pending_ring)",
+      "slot list panel showing live skills (rf_rp_t*_slot_list)",
+      "confirm dialog (rf_rp_t*_confirm_dialog)"
+    ],
+    "identity_source": "session_observed frame sequence (replacement_visual_sequence.json)",
+    "identity_status": "PARTIAL"
+  },
+  "ENTRY_CONDITIONS": [
+    "just-acquired node shows pending replacement ring",
+    "operator/policy target slot designated (bottom-up among ORIGINAL skills; never replace just-learned skills — OPERATOR_CONFIRMED 4/4)",
+    "slot list freshly observed"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "pending ring state on newly learned skill",
+      "slot list contents and order (identify ORIGINAL vs just-learned)",
+      "target slot pre-select state",
+      "confirm dialog presence",
+      "post-commit live skills list"
+    ]
+  },
+  "SUBSTATES": [
+    {"substate": "PENDING_RING", "evidence": "rf_rp_t4_pending_ring"},
+    {"substate": "SLOT_LIST", "evidence": "rf_rp_t2/t3/t4_slot_list"},
+    {"substate": "SLOT_PRESELECTED", "evidence": "rf_rp_t2_slot_list_preselect"},
+    {"substate": "CONFIRM_DIALOG", "evidence": "rf_rp_t1/t2_confirm_dialog"},
+    {"substate": "POST_COMMIT", "evidence": "rf_rp_t1/t2_post_commit, rf_rp_t3_post_board_read"}
+  ],
+  "VISIBLE_CONTROLS": [
+    {"control": "slot entry", "geometry": "UNKNOWN normalized", "visible_status": "VISIBLE_ONLY"},
+    {"control": "confirm", "geometry": "UNKNOWN normalized", "visible_status": "VISIBLE_ONLY"}
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "slot VISIBLE != slot AVAILABLE for replacement; just-learned skills are never authorized targets (policy). Replacement is destructive to the replaced skill — treated as consumptive/semi-irreversible, requires policy designation.",
+    "replace": "authorized only with: policy-designated target slot + fresh slot list + confirm dialog + post-commit verification"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe slot list and pending ring",
+    "select policy-designated slot",
+    "confirm via dialog",
+    "verify post-commit live skills (fresh board read)"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "replace just-learned skills",
+    "re-select slots after commit",
+    "replace without operator/policy designation"
+  ],
+  "POSTCONDITIONS": {
+    "commit": "new skill in live slots, replaced skill removed; 4/4 verified via SP deltas and board state"
+  },
+  "EXIT_CONDITIONS": ["commit verified → back to board read (rf_rp_t3_post_board_read)"],
+  "FAILURE_MODES": [
+    {"mode": "WRONG_SLOT_DESIGNATION", "class": "POLICY_VIOLATION"},
+    {"mode": "PRESELECT_AMBIGUITY", "class": "AMBIGUOUS_VISUAL", "evidence": "preselect frame distinguishes selected/unselected"},
+    {"mode": "CONFIRM_DIALECT_RENDER_GARBLED", "class": "AMBIGUOUS_VISUAL", "evidence": "board color model caveat applies to dialog renders"}
+  ],
+  "RECOVERY": [
+    "commit uncertainty → fresh board read is authoritative; never assume commit without post-state",
+    "abort before confirm is the only safe undo point"
+  ],
+  "PERSISTENCE_BOUNDARY": "record replacement pair (in/out) inside acquisition flush; replacement is part of the acquisition transaction",
+  "MIGRATION_STATUS": {
+    "RAW_GEOMETRY_EVIDENCE": "YES — 10 recovered replacement frames (rf_rp_t1..t4 set) + visual sequence; slot column x≈860 spacing ≈135, confirm/cancel points documented (live_csm_024..027 SUCCESS)",
+    "NORMALIZED_GEOMETRY_PROFILE": "PARTIAL — click points recorded with box evidence in slots/confirm; no canonical per-slot box profile",
+    "CROSS_SCALE_GENERALIZATION": "NO — untested beyond the single board scale",
+    "CROSS_SESSION_REPLICATION": "NO — 4/4 transactions in single session sess_a87f3588; frames RECOVERED_REVIEW_PENDING",
+    "python_authority": "NEEDS_REPLICATION",
+    "flow_detector": "CANDIDATE (visual sequence documented; LIMIT_4 trigger predicate not formalized)",
+    "UNKNOWN": ["what happens on cancel mid-flow", "slot count semantics"]
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/recovered_frames/replacement/ (frames + replacement_visual_sequence.json)",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json"
+  ]
+}

@@ -1,0 +1,531 @@
+{
+ "schema_version": 1,
+ "artifact_id": "python_click_migration_control_regions",
+ "artifact_type": "CONTROL_REGIONS",
+ "created_at": "2026-09-06T06:32:32Z",
+ "status": "CANDIDATE",
+ "provenance": {
+  "classification": "inference",
+  "producer": "ZCode (Environment Agent)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T06:32:32Z",
+  "source_artifact_ids": [
+   "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl",
+   "enza_memory/wing_runs/WINGRUN_20260906_01/operator_reconcile_20260906_s3w1.json",
+   "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/promotion_audit_v2/control_promotion.json",
+   "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json"
+  ],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "honesty_note": "Seeded from prior-session records. Successful click coordinates are viewport-relative points from those sessions (FACT in the cited artifacts); normalized values here are derived (INFERENCE). visual_box_norm is UNKNOWN for every seeded control because no prior record captured a visual box. Promotion status is therefore capped at REPLICATED and every control still requires a fresh normalized re-verification before PYTHON_READY.",
+ "controls": [
+  {
+   "control_key": "HOME:SCHEDULE",
+   "room": "HOME",
+   "state": "WING_HOME",
+   "control_id": "SCHEDULE",
+   "visual_box_norm": {
+    "x1": 0.0234,
+    "y1": 0.5972,
+    "x2": 0.2578,
+    "y2": 0.9722
+   },
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.1172,
+    "y": 0.8333
+   },
+   "raw_taught_point_debug": {
+    "viewport_profile": "MAC_CURRENT_V1",
+    "x": 150,
+    "y": 600
+   },
+   "preconditions": [
+    "room = HOME (WING_HOME / PRODUCE_HOME page label observed)",
+    "local visual anchor: SCHEDULE calendar standee + プロデュース pink text, bottom-left"
+   ],
+   "expected_postcondition": "SCHEDULE page loads (allow >=2500ms load; verify before further clicks)",
+   "successful_samples": 3,
+   "failed_samples": 0,
+   "confidence": "MEDIUM",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "2/2 cross-session (WINGRUN_20260905_01 + WINGVAL_20260905_01), zero geometry drift. Anchor: SCHEDULE 日历立牌+プロデュース粉字 bottom-left.",
+   "visual_box_screen_debug": [
+    30,
+    430,
+    330,
+    700
+   ],
+   "visual_box_capture": "fresh live crop 2026-09-06 sess_a87f3588 (browser clip screenshot), not back-derived from taught point"
+  },
+  {
+   "control_key": "SCHEDULE:VOCAL",
+   "room": "SCHEDULE",
+   "state": "SCHEDULE",
+   "control_id": "VOCAL",
+   "visual_box_norm": {
+    "x1": 0.2188,
+    "y1": 0.5903,
+    "x2": 0.3477,
+    "y2": 0.8542
+   },
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.2813,
+    "y": 0.6944
+   },
+   "raw_taught_point_debug": {
+    "viewport_profile": "MAC_CURRENT_V1",
+    "x": 360,
+    "y": 500
+   },
+   "preconditions": [
+    "room = SCHEDULE (page loaded and verified; known slow-load false-tap risk)",
+    "local visual anchor: pink ボーカルレッスン card with 決定 selected badge",
+    "click authority (decision evidence): failure_rate <= 2 — click region and decision evidence are separate gates"
+   ],
+   "expected_postcondition": "vocal lesson starts (決定 -> lesson cutin ~2500ms -> auto lesson ~8000ms -> HOME dialogue)",
+   "successful_samples": 3,
+   "failed_samples": 0,
+   "confidence": "MEDIUM",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "Card content drifts with progress (Lv.1->Lv.4, Excellent!! badge) but position/border color stable. Failure gate stays separate from click-region evidence. 2026-09-06: トラブル率1% gate satisfied at click time; week commit (8->7) verified via OPERATOR_PROVIDED_FRESH_VISUAL_EVIDENCE.",
+   "visual_box_screen_debug": [
+    280,
+    425,
+    445,
+    615
+   ],
+   "visual_box_capture": "fresh live crop 2026-09-06 sess_a87f3588 (browser clip screenshot), not back-derived from taught point"
+  },
+  {
+   "control_key": "SCHEDULE:DECIDE",
+   "room": "SCHEDULE",
+   "state": "SCHEDULE",
+   "control_id": "DECIDE",
+   "visual_box_norm": null,
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.9258,
+    "y": 0.9167
+   },
+   "raw_taught_point_debug": {
+    "viewport_profile": "MAC_CURRENT_V1",
+    "x": 1185,
+    "y": 660
+   },
+   "preconditions": [
+    "room = SCHEDULE",
+    "candidate card selected (e.g. VOCAL card active)",
+    "local visual anchor: pink 決定 bottom-right",
+    "known transient: one no-op 決定 click observed on slow schedule load (S1W4); require page-loaded guard before click"
+   ],
+   "expected_postcondition": "lesson starts / pre-battle transition begins",
+   "successful_samples": 2,
+   "failed_samples": 1,
+   "confidence": "MEDIUM",
+   "migration_status": "REPLICATED",
+   "notes": "The failed sample (S1W4 決定空发) is attributed to slow page load, not coordinate error; kept as negative evidence with context."
+  },
+  {
+   "control_key": "RESULT:ADVANCE_CYCLE",
+   "room": "RESULT",
+   "state": "RESULT_OVERLAY_OR_DIALOGUE",
+   "control_id": "ADVANCE",
+   "visual_box_norm": null,
+   "proven_click_box_norm": null,
+   "preferred_click_point_sequence_norm": [
+    {
+     "label": "SKIP_badge",
+     "x": 0.9516,
+     "y": 0.0736,
+     "raw": [
+      1218,
+      53
+     ]
+    },
+    {
+     "label": "textbox",
+     "x": 0.5,
+     "y": 0.8472,
+     "raw": [
+      640,
+      610
+     ]
+    },
+    {
+     "label": "center",
+     "x": 0.5,
+     "y": 0.4861,
+     "raw": [
+      640,
+      350
+     ]
+    }
+   ],
+   "preconditions": [
+    "room = RESULT (result overlay / dialogue type identified from fresh frame)",
+    "cycle advances through the 3 points until expected transition"
+   ],
+   "expected_postcondition": "result presentation completes -> back to HOME dialogue / next state",
+   "successful_samples": 2,
+   "failed_samples": 0,
+   "confidence": "MEDIUM",
+   "migration_status": "REPLICATED",
+   "notes": "This is an advance CYCLE (multi-point), not a single semantic control. Related safe-transient candidates live in transient_timing.jsonl."
+  },
+  {
+   "control_key": "HOME:FURIKAERI",
+   "room": "HOME",
+   "state": "WING_HOME",
+   "control_id": "FURIKAERI",
+   "visual_box_norm": null,
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.1602,
+    "y": 0.9097
+   },
+   "raw_taught_point_debug": {
+    "viewport_profile": "MAC_CURRENT_V1",
+    "x": 205,
+    "y": 655
+   },
+   "preconditions": [
+    "room = HOME",
+    "intended activation only — see notes"
+   ],
+   "expected_postcondition": "振り返り (review) view opens",
+   "successful_samples": 0,
+   "failed_samples": 1,
+   "confidence": "LOW",
+   "migration_status": "OBSERVED",
+   "notes": "Point evidence is from an ACCIDENTAL activation (post-lesson over-tap, S1W1): the extra tap opened 振り返り. Valid as 'control exists near this point' (OBSERVED), NOT as an intentional successful click sample. Needs deliberate validation."
+  },
+  {
+   "control_key": "SCHEDULE:SUPPORT_SKILL",
+   "room": "SCHEDULE",
+   "state": "SCHEDULE",
+   "control_id": "SUPPORT_SKILL",
+   "visual_box_norm": null,
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.7695,
+    "y": 0.9208
+   },
+   "raw_taught_point_debug": {
+    "viewport_profile": "MAC_CURRENT_V1",
+    "x": 985,
+    "y": 663
+   },
+   "preconditions": [],
+   "expected_postcondition": "サポートスキル panel opens (UNINTENDED in recorded sample)",
+   "successful_samples": 0,
+   "failed_samples": 1,
+   "confidence": "LOW",
+   "migration_status": "OBSERVED",
+   "notes": "Recorded as WRONG_TARGET hazard: this point was clicked while intending dialogue advance and opened サポートスキル instead. Primary value is as a DO_NOT_CLICK region for transient skip on the SCHEDULE page."
+  },
+  {
+   "control_key": "HOME:FURIKAERI",
+   "room": "HOME",
+   "state": "WING_HOME",
+   "control_id": "FURIKAERI",
+   "visual_box_norm": {
+    "x1": 0.5391,
+    "y1": 0.8472,
+    "x2": 0.7734,
+    "y2": 1.0
+   },
+   "visual_box_screen_debug": [
+    690,
+    610,
+    990,
+    720
+   ],
+   "visual_box_capture": "fresh live crop 2026-09-06 sess_a87f3588, not back-derived",
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.6563,
+    "y": 0.9236
+   },
+   "preconditions": [
+    "room = HOME (WING_HOME)",
+    "anchor: 振り返り purple text on papers, bottom-center-right"
+   ],
+   "expected_postcondition": "振り返り skill board opens (page title 振り返り, SP counter top-left)",
+   "successful_samples": 2,
+   "failed_samples": 0,
+   "confidence": "MEDIUM",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "Opened twice 2026-09-06 (deliberate), both SUCCESS. Supersedes the S1W1 over-tap accidental evidence as geometry source."
+  },
+  {
+   "control_key": "FURIKAERI_SKILL:ACQUIRE_BUTTON",
+   "room": "FURIKAERI_SKILL",
+   "state": "NODE_SELECTED_PANEL_OPEN",
+   "control_id": "ACQUIRE",
+   "visual_box_norm": {
+    "x1": 0.8203,
+    "y1": 0.8056,
+    "x2": 0.9766,
+    "y2": 0.9444
+   },
+   "visual_box_screen_debug": [
+    1050,
+    580,
+    1250,
+    680
+   ],
+   "visual_box_capture": "fresh live crop 2026-09-06 sess_a87f3588, not back-derived",
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.8984,
+    "y": 0.9097
+   },
+   "preconditions": [
+    "skill board open",
+    "a node selected (detail panel visible)",
+    "button label 習得する (enabled) — if 未解放 the node is locked, do NOT click"
+   ],
+   "expected_postcondition": "スキル習得確認 dialog opens (SP cost shown, SP before -> after)",
+   "successful_samples": 5,
+   "failed_samples": 0,
+   "confidence": "HIGH",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "5/5 success this session (3x Vocal上限UP, Vocal&メンタル上限UP, Vocal240%UP). Earlier '未解放' reading was misread; enabled button label is 習得する."
+  },
+  {
+   "control_key": "FURIKAERI_SKILL:CONFIRM_OK",
+   "room": "FURIKAERI_SKILL",
+   "state": "ACQUIRE_CONFIRM_DIALOG",
+   "control_id": "OK",
+   "visual_box_norm": {
+    "x1": 0.5078,
+    "y1": 0.6875,
+    "x2": 0.6484,
+    "y2": 0.7778
+   },
+   "visual_box_screen_debug": [
+    650,
+    495,
+    830,
+    560
+   ],
+   "visual_box_capture": "fresh live crop 2026-09-06 sess_a87f3588, not back-derived",
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.5898,
+    "y": 0.6986
+   },
+   "preconditions": [
+    "習得確認 dialog visible",
+    "SP before -> after values sane"
+   ],
+   "expected_postcondition": "dialog closes, SP deducted, node becomes owned (bright colored, SP:0)",
+   "successful_samples": 5,
+   "failed_samples": 1,
+   "confidence": "HIGH",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "One OK click appeared not to register (display lag); retry succeeded — treat 'no SP change' as retry signal, verify SP before re-clicking acquire. Final SP 548->408 over 5 acquisitions verified."
+  },
+  {
+   "control_key": "FURIKAERI_SKILL:CONFIRM_CANCEL",
+   "room": "FURIKAERI_SKILL",
+   "state": "ACQUIRE_CONFIRM_DIALOG",
+   "control_id": "CANCEL",
+   "visual_box_norm": {
+    "x1": 0.3516,
+    "y1": 0.6875,
+    "x2": 0.4922,
+    "y2": 0.7778
+   },
+   "visual_box_screen_debug": [
+    450,
+    495,
+    630,
+    560
+   ],
+   "visual_box_capture": "fresh live crop 2026-09-06 sess_a87f3588, not back-derived",
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.4219,
+    "y": 0.6986
+   },
+   "preconditions": [
+    "習得確認 dialog visible"
+   ],
+   "expected_postcondition": "dialog closes, no SP change, selection retained",
+   "successful_samples": 0,
+   "failed_samples": 0,
+   "confidence": "LOW",
+   "migration_status": "OBSERVED",
+   "notes": "Box from dialog layout, not click-validated this session."
+  },
+  {
+   "control_key": "FURIKAERI_SKILL:ZOOM_OUT",
+   "room": "FURIKAERI_SKILL",
+   "state": "BOARD",
+   "control_id": "ZOOM_OUT",
+   "visual_box_norm": {
+    "x1": 0.9375,
+    "y1": 0.5972,
+    "x2": 0.9844,
+    "y2": 0.6667
+   },
+   "visual_box_screen_debug": [
+    1200,
+    430,
+    1260,
+    480
+   ],
+   "visual_box_capture": "fresh live crop 2026-09-06 sess_a87f3588, not back-derived",
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": {
+    "x": 0.9586,
+    "y": 0.6417
+   },
+   "preconditions": [
+    "skill board open"
+   ],
+   "expected_postcondition": "board zooms out (more hexes visible)",
+   "successful_samples": 1,
+   "failed_samples": 0,
+   "confidence": "MEDIUM",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "Used once to view full board; zoom-in counterpart at (1228,255) not yet validated."
+  },
+  {
+   "control_key": "FURIKAERI_SKILL:SKILL_NODE",
+   "room": "FURIKAERI_SKILL",
+   "state": "BOARD",
+   "control_id": "SKILL_NODE",
+   "visual_box_norm": null,
+   "proven_click_box_norm": null,
+   "preferred_click_point_norm": null,
+   "preconditions": [
+    "board open",
+    "target node visually identified (gold/purchasable or newly-unlocked)",
+    "node identity confirmed via bottom detail panel title BEFORE acquiring"
+   ],
+   "expected_postcondition": "detail panel shows node info; if purchasable, button = 習得する; if locked, 未解放 status",
+   "successful_samples": 9,
+   "failed_samples": 4,
+   "confidence": "LOW",
+   "migration_status": "OBSERVED",
+   "notes": "Node coordinates are per-node, NOT a fixed region (zoom-dependent). 4 stray clicks selected wrong nodes or empty space — geometry at zoomed-out level needs dedicated calibration before Python reuse. Purchase flow itself (ACQUIRE_BUTTON + CONFIRM_OK) is stable."
+  },
+  {
+   "control_key": "SKILL_REPLACEMENT:SLOT_SELECT",
+   "room": "SKILL_REPLACEMENT",
+   "state": "FORGET_SELECT_LIST",
+   "control_id": "SLOT_SELECT",
+   "visual_box_norm": {
+    "x1": 0.4844,
+    "y1": 0.0694,
+    "x2": 0.7266,
+    "y2": 0.9444
+   },
+   "visual_box_screen_debug": [
+    620,
+    50,
+    930,
+    680
+   ],
+   "slot_select_buttons_screen": [
+    {
+     "slot": 1,
+     "center": [
+      860,
+      135
+     ]
+    },
+    {
+     "slot": 2,
+     "center": [
+      860,
+      270
+     ]
+    },
+    {
+     "slot": 3,
+     "center": [
+      860,
+      405
+     ]
+    },
+    {
+     "slot": 4,
+     "center": [
+      860,
+      540
+     ]
+    }
+   ],
+   "preferred_click_point_norm": null,
+   "preconditions": [
+    "replacement dialog: 覚えられるライブスキルは4つまでです",
+    "fresh slot list read"
+   ],
+   "expected_postcondition": "スキル入れ替え確認 dialog",
+   "successful_samples": 4,
+   "failed_samples": 0,
+   "confidence": "HIGH",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "slot pitch ~135px @1280x720; dialog appears only when skill count at cap 4"
+  },
+  {
+   "control_key": "SKILL_REPLACEMENT:CONFIRM_OK",
+   "room": "SKILL_REPLACEMENT",
+   "state": "REPLACE_CONFIRM_DIALOG",
+   "control_id": "OK",
+   "visual_box_norm": {
+    "x1": 0.4063,
+    "y1": 0.8194,
+    "x2": 0.6563,
+    "y2": 0.9375
+   },
+   "visual_box_screen_debug": [
+    520,
+    590,
+    840,
+    675
+   ],
+   "preferred_click_point_norm": {
+    "x": 0.5781,
+    "y": 0.8819
+   },
+   "preconditions": [
+    "忘れるスキル matches operator bottom-up policy",
+    "irreversibility warning acknowledged"
+   ],
+   "expected_postcondition": "replacement committed; SP unchanged (charged at node acquire)",
+   "successful_samples": 4,
+   "failed_samples": 0,
+   "confidence": "HIGH",
+   "migration_status": "CLICK_VALIDATED_WITH_BOX",
+   "notes": "OK (740,635); CANCEL (540,635)"
+  }
+ ],
+ "pending_priority_controls_not_yet_observed": [
+  "HOME:REST",
+  "SCHEDULE:BACK",
+  "SCHEDULE:AUDITION",
+  "DIALOGUE:CHOICE_3_MIDDLE",
+  "DIALOGUE:CHOICE_2_GOMEN",
+  "DIALOGUE:SAFE_TEXTBOX_SKIP (semantic-safe region, separate from ADVANCE_CYCLE)",
+  "AUDITION_SELECTION:CANDIDATE_CARD",
+  "AUDITION_SELECTION:DECIDE",
+  "AUDITION_BATTLE:AUTO (must record phase/value/interactability per sample)",
+  "AUDITION_BATTLE:CARDS",
+  "SEASON_TRANSITION:NEXT_SKIP"
+ ],
+ "deferred_do_not_prioritize": [
+  "SPEED toggle (grounding unstable; display badge must not be promoted to clickable control)",
+  "long-press abandon",
+  "irreversible rare controls"
+ ],
+ "updated_at": "2026-09-06T10:00:00Z"
+}

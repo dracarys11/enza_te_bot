@@ -1,0 +1,53 @@
+{
+  "not_chain_of_thought": true,
+  "usage_status": "audit/benchmarking ONLY. NOT executable policy, NOT training data.",
+  "trajectory": "enza_phase2_prototype_001",
+  "decision_trace_id": "DT_20260903070000_007",
+  "action_index": 7,
+  "observation_id": "OBS_20260903065025",
+  "current_state": "TRAINING_SETTINGS (研修設定)",
+  "exploration_objective": "allocate Vocal baseline (probe single + first)",
+  "candidate_actions": [
+    {
+      "action": "click ボーカル + once (probe)",
+      "risk": "low",
+      "selected": true
+    },
+    {
+      "action": "batch 20 clicks",
+      "risk": "unverified coordinate — probe first",
+      "selected": false
+    },
+    {
+      "action": "click 決定",
+      "risk": "commits unverified allocation",
+      "selected": false
+    }
+  ],
+  "selected_action": "single probe click at (475,345)",
+  "expected_transition": "ボーカル counter 0/20 -> 1/20",
+  "risk_level": "LOW",
+  "unknowns_at_decision": [
+    "exact + hitbox at this zoom"
+  ],
+  "verification_criteria": [
+    "zoomed screenshot: counter increments by exactly 1, no other panel opens"
+  ],
+  "action_record": {
+    "performed": true,
+    "method": "cua.click (475,345)"
+  },
+  "transition_record": {
+    "from": "TRAINING_SETTINGS",
+    "to": "TRAINING_SETTINGS + UNIDENTIFIED_SKILL_RELATED_PANEL (identity UNKNOWN per state_hierarchy_review_001 M1/M2), counter 1/20",
+    "url": "/produce"
+  },
+  "verification_record": {
+    "result": "ANOMALY",
+    "evidence": "OBS_20260903071000: counter became 1/20 AND a skill-entry panel opened; expected criterion (no other panel) VIOLATED. User (operator) confirmed the click hit 技能入口."
+  },
+  "failure_record": {
+    "failure": "canvas_misclick_002",
+    "note": "coordinate estimate overlapped skill-entry affordance; allocation state currently vocal=1/20 with skill panel open; NOT committed (決定 not pressed)"
+  }
+}

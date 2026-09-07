@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "report_type": "REGRESSION_REVIEW",
+  "artifact": "phase1b2_rest_migration_report",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "reviewed_artifacts": [
+    "ai_decisions/architecture_contract.json",
+    "ai_decisions/room_sop_candidates.json",
+    "ai_decisions/unknown_registry_candidate.json",
+    "room_adapter.py",
+    "weekly_tools.py",
+    "home_tick.py",
+    "main.py",
+    "test_room_adapter.py",
+    "test_home_tick.py",
+    "test_weekly_tools.py"
+  ],
+  "phase_scope": "REST-only production dispatch migration through the Room adapter boundary.",
+  "dispatch_path": {
+    "before": "fresh HOME decision -> home_tick -> execute_goal -> legacy REST runner",
+    "after": "fresh verified HOME -> REST objective -> RestRoomAdapter -> legacy REST runner -> fresh HOME verification -> canonical RoomResult -> HomeTick commit mapping",
+    "unchanged": ["planner behavior", "home_policy.py", "legacy REST executor", "VOCAL/SKILL/AUDITION dispatch"]
+  },
+  "reviewed_changes": [
+    {
+      "path": "home_tick.py",
+      "change": "Live REST dispatch now constructs RestRoomAdapter; dry-run remains outside canonical RoomResult.",
+      "scope": "REST only"
+    },
+    {
+      "path": "main.py",
+      "change": "The validated committed HOME observation supplies home_verified=true and home_fresh=true to the tick context.",
+      "scope": "REST adapter entry evidence"
+    },
+    {
+      "path": "test_home_tick.py",
+      "change": "REST adapter dispatch, canonical success, and stale HOME rejection coverage.",
+      "scope": "offline regression"
+    },
+    {
+      "path": "test_room_adapter.py",
+      "change": "REST success, failure, UNKNOWN, stale-entry, and legacy delegation coverage.",
+      "scope": "offline parity"
+    }
+  ],
+  "passed_checks": [
+    {
+      "id": "room_contract_outputs",
+      "status": "CONFIRMED",
+      "evidence": "RestRoomAdapter canonicalizes only SUCCESS_HOME, FAILED, or UNKNOWN."
+    },
+    {
+      "id": "fixed_rest_objective",
+      "status": "CONFIRMED",
+      "evidence": "Adapter accepts objective REST and context goal REST only."
+    },
+    {
+      "id": "fresh_home_entry",
+      "status": "CONFIRMED",
+      "evidence": "Both home_verified and home_fresh are required before invoking the legacy runner."
+    },
+    {
+      "id": "home_commit_boundary",
+      "status": "CONFIRMED",
+      "evidence": "Legacy success plus fresh verified HOME is required for SUCCESS_HOME; FAILED/UNKNOWN never commit."
+    },
+    {
+      "id": "legacy_parity",
+      "status": "CONFIRMED",
+      "evidence": "Adapter delegates to execute_rest and the existing REST runner without changing its implementation."
+    },
+    {
+      "id": "focused_tests",
+      "status": "CONFIRMED",
+      "evidence": "42 focused tests passed: test_room_adapter, test_home_tick, test_weekly_tools."
+    },
+    {
+      "id": "full_offline_suite",
+      "status": "CONFIRMED",
+      "evidence": "251 offline tests passed. No live automation was run."
+    }
+  ],
+  "violations": [],
+  "potential_regressions": [],
+  "missing_tests": [],
+  "candidate_promotions_detected": [],
+  "evidence_gaps": [
+    {
+      "id": "prior_phase1b1_report_artifact",
+      "status": "UNKNOWN",
+      "description": "No persisted Phase 1B-1 PASS report artifact was present under ai_decisions/audit_reports when this report was created.",
+      "impact": "Governance migration_gate documentation treats missing predecessor reports as an evidence gap; runtime tests still cover the predecessor invariants.",
+      "required_follow_up": "Record or review the predecessor regression report before treating this migration as formally promoted."
+    }
+  ],
+  "verdict": "PASS_WITH_DOCUMENTATION_GAP",
+  "code_modified": false,
+  "promotion": {
+    "automatic": false,
+    "production_effect": "none",
+    "note": "This report records the current migration evidence; it does not promote candidate governance knowledge or alter runtime configuration."
+  }
+}

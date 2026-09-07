@@ -1,0 +1,23 @@
+{
+  "artifact_type": "PYTHON_RUNTIME_HAZARD_MAP",
+  "generated_at": "2026-09-06T06:22:51Z",
+  "count": 13,
+  "hazards": [
+    {"class":"WRONG_TARGET","state":"SCHEDULE","control_or_region":"(985,663), normalized (0.7695,0.9208)","evidence":"dialogue-advance intent opened サポートスキル; repeated in WINGRUN_20260906_01","guard":"never use as transient skip; verify state after every transition"},
+    {"class":"WRONG_TARGET","state":"WING_HOME","control_or_region":"(205,655), normalized (0.1602,0.9097)","evidence":"post-dialogue over-tap opened 振り返り","guard":"stop burst when textbox disappears; fresh owner before next click"},
+    {"class":"NO_EFFECT","state":"SCHEDULE_LOADING","control_or_region":"DECIDE (1185,660)","evidence":"one slow-load click did nothing; retry after load succeeded","guard":"require page-loaded and enabled anchor"},
+    {"class":"DISABLED_CONTROL","state":"AUDITION_BATTLE:ANIMATION","control_or_region":"AUTO dimmed","evidence":"three clicks had no effect during animation","guard":"value OFF is insufficient; require INPUT_READY+ENABLED"},
+    {"class":"NO_EFFECT","state":"AUDITION_BATTLE:DIALOGUE_TRANSITION","control_or_region":"AUTO","evidence":"one early click before INPUT_READY did nothing","guard":"wait for fresh actionable phase"},
+    {"class":"OVER_TAP","state":"HOME_POST_LESSON_DIALOGUE_END","control_or_region":"blind textbox burst","evidence":"extra tap activated FURIKAERI","guard":"bounded tap batch + fresh dialogue-presence check"},
+    {"class":"STALE_STATE","state":"AUDITION_BATTLE_AFTER_PAUSE_OR_RESTART","control_or_region":"AUTO/SPEED/turn/card","evidence":"resume/restart changed local battle state","guard":"new control epoch; invalidate and reobserve"},
+    {"class":"WRONG_TARGET","state":"AUDITION_BATTLE","control_or_region":"X2 speed badge","evidence":"badge readable, repeated clicks did not reach X3","guard":"treat display as display-only until toggle is separately grounded"},
+    {"class":"TOOL_TIMEOUT","state":"MULTI_ACTION_BATCH","control_or_region":"CUA batch","evidence":"~5s hidden latency per click made 22/56-click cells exceed 115s","guard":"batch from measured end-to-end latency; do not use logical action count alone"},
+    {"class":"SCREENSHOT_TIMEOUT","state":"ANIMATION_OR_DIALOGUE","control_or_region":"browser screenshot","evidence":"capture may hang to fixed 30s timeout; repeated incidents","guard":"capture stable/INPUT_READY frames; persist failure evidence"},
+    {"class":"SESSION_RELEASE","state":"HANDOFF","control_or_region":"browser tab","evidence":"tab disappeared when not handed off","guard":"explicit handoff/session ownership before ending"},
+    {"class":"PERSISTENCE_GAP","state":"S1W6_TO_S3_START","control_or_region":"durable event/checkpoint writes","evidence":"WINGRUN_20260906_01 raw timings stopped while server state advanced","guard":"flush after each week/season transition and before burst/handoff; refuse next transaction if flush fails"},
+    {"class":"RESULT_EVIDENCE_LOSS","state":"S3_40K_RETRY_AND_SEMIFINAL_SCENE","control_or_region":"advance/SKIP","evidence":"result dialogue advanced before capture; semifinal scene skipped without explicit WIN evidence","guard":"commit explicit PASS/FAIL before any advance; UNKNOWN remains uncommitted"}
+  ],
+  "display_only": ["AUDITION_BATTLE:SPEED_DISPLAY until toggle control is independently grounded"],
+  "visible_but_not_actionable": ["AUTO during ANIMATION", "DECIDE during page loading", "locked/ineligible audition candidate"],
+  "preserved_unknowns": ["speed toggle location", "cross-context safe skip region", "automated long-press semantics"]
+}

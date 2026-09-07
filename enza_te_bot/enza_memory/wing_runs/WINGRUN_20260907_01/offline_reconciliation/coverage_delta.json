@@ -1,0 +1,77 @@
+{
+ "artifact_type": "TWO_CHOICE_COVERAGE_DELTA",
+ "reconciliation_id": "OFFLINE_RECONCILIATION_WINGRUN_20260907_01",
+ "created_at": "2026-09-07",
+ "mode": "OFFLINE_ONLY — derived evidence metadata only; NO raw historical snapshot file modified",
+
+ "before": {
+  "true_two_choice_visual_corpus": 0,
+  "detail": {
+   "pre_click_full_frames": 0,
+   "option_box_geometry": "NEVER captured (blind_fast_candidate blocker)",
+   "autonomous_gomen_executions_project_wide": 0
+  },
+  "prior_state_refs": [
+   "enza_memory/migration/regression_mining/missing_visual_evidence.json#MVE-013 (TWO_CHOICE option-box geometry never captured)",
+   "enza_memory/migration/regression_mining/choice_layout_regressions.json#layout_families.TWO_CHOICE_LAYOUT_V1.geometry_replication (canonical_box UNKNOWN)"
+  ]
+ },
+
+ "after": {
+  "true_two_choice_pre_click_full_frame": 1,
+  "geometry": "1 live capture",
+  "autonomous_gomen_execution": 1,
+  "detail": {
+   "package": "S1W5 PROMISE occurrence — first complete TRUE TWO_CHOICE live evidence",
+   "components": [
+    "pre-click full frame (both options visible, undimmed, occlusion none)",
+    "pixel geometry (px boxes + centers) + normalized geometry (arithmetic re-verified)",
+    "event_context (智代子 PROMISE request)",
+    "executed option ごめん + verified post-click decline response"
+   ],
+   "marks": {
+    "TWO_CHOICE_LAYOUT_VISUAL_CORPUS": "NOW NONZERO",
+    "TWO_CHOICE_GEOMETRY": "LIVE_CAPTURED",
+    "PROMISE_AUTONOMOUS_GOMEN_EXECUTION": "n=1"
+   }
+  }
+ },
+
+ "supplementary_in_run_delta_not_counted_in_after": {
+  "second_pre_click_full_frame": 1,
+  "second_geometry_capture": "y-top 155 vs 160 (≤5px variance); rendering variance: dimmed background this occurrence vs undimmed at W5",
+  "cumulative_in_run_autonomous_gomen_declines": 2,
+  "refs": "two_choice_preclick_evidence_2.json + W7PROMISE pre/post frames (digests verified in two_choice_live_evidence_reconciliation.json)"
+ },
+
+ "kept_constraints": {
+  "cross_session_visual_replication": "NOT YET ESTABLISHED — all current captures are from the single run/session WINGRUN_20260907_01 (2026-09-07); current evidence does not independently support cross-session replication",
+  "universal_canonical_box": "not claimed (n=2 frames, 1 session, small variance)",
+  "empirical_rate_priors": "unchanged and still RAW_EMPIRICAL_RATE / ELIGIBILITY_MODEL=UNKNOWN"
+ },
+
+ "derived_index_updates_proposed_not_applied": [
+  {
+   "index": "enza_memory/migration/regression_mining/missing_visual_evidence.json",
+   "entry": "MVE-013",
+   "proposed": "reconciliation status LIVE_CAPTURED 2026-09-07: TWO_CHOICE pre-click full frame + option-box px/normalized geometry captured live (WINGRUN_20260907_01 S1W5 + supplementary W7PROMISE); historical 'never captured' designation preserved above per corpus convention",
+   "applied_by_this_session": false
+  },
+  {
+   "index": "enza_memory/migration/regression_mining/choice_layout_regressions.json",
+   "entry": "TWO_CHOICE_LAYOUT_V1.geometry_replication + regression case CLR-006",
+   "proposed": "canonical_box: first LIVE_CAPTURED capture exists (refs offline_reconciliation/two_choice_live_evidence_reconciliation.json); CLR-006 capture-on-first-sight satisfied for TWO_CHOICE within one session; cross-session replication still open",
+   "applied_by_this_session": false
+  }
+ ],
+ "proposal_note": "Existing mining corpora are owned by their mining session; this session only records the proposed patches here. A later integration session may apply them with the corpus-preserved-designation convention.",
+
+ "raw_artifacts_unchanged": [
+  {"path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_S1W5.png", "sha256": "75c65ce01eef74504f757a038ad126090ea93cd05de061375425268fce4a595d"},
+  {"path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_POSTCLICK_S1W5.png", "sha256": "b1ca403895b755d91183f14a1a32c81675e0cb1ffd6320d9577cfa16103302b9"},
+  {"path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_W7PROMISE.png", "sha256": "d53e5eec3bb008c414e7f6649241df9a887b54c41f83411b6f635b12a0c44a0a"},
+  {"path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_POSTCLICK_W7PROMISE.png", "sha256": "7a22e4604aa57b4b9175bc5a14f3dd725802626c21ad5a756b7ce15e6a328e6e"},
+  {"path": "enza_memory/wing_runs/WINGRUN_20260907_01/two_choice_preclick_evidence.json", "note": "unmodified"},
+  {"path": "enza_memory/wing_runs/WINGRUN_20260907_01/two_choice_preclick_evidence_2.json", "note": "unmodified"}
+ ]
+}

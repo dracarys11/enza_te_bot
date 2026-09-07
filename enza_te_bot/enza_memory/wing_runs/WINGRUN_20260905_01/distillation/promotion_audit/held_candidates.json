@@ -1,0 +1,7 @@
+{
+  "held_candidates": [
+    {"candidate":"VOCAL normal-week loop","reason":"policy evidence is repeated, but cheap HOME observation and control safety guards are not validated on this real frame; fixed coordinates remain non-production"},
+    {"candidate":"BUSINESS_CHOICE dual-check-card detection","reason":"only one concrete runtime occurrence; detection can stop, but lacks >=2 independent evidence"}
+  ],
+  "rejected": []
+}

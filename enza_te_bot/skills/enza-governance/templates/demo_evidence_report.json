@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "report_type": "DEMO_EVIDENCE",
+  "status": "DRAFT",
+  "source_demo": null,
+  "room": null,
+  "classification": "UNKNOWN",
+  "evidence": [],
+  "confidence": 0.0,
+  "entry": {
+    "home_verified": null,
+    "starting_state": null
+  },
+  "execution": {
+    "room_entry": [],
+    "intermediate_categories": [],
+    "shared_handlers": [],
+    "result": [],
+    "home_return": []
+  },
+  "missing_information": [],
+  "required_followup_demo": [],
+  "strategy_inferred": false,
+  "code_modified": false
+}

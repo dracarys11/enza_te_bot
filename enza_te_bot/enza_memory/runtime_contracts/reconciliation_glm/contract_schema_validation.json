@@ -1,0 +1,69 @@
+{
+  "artifact_type": "CONTRACT_SCHEMA_VALIDATION",
+  "audit_id": "CONTRACT_OFFLINE_AUDIT_20260906",
+  "generated_at": "2026-09-06T23:59:00Z",
+  "mode": "OFFLINE_ONLY (no game contact, no AGY, no runtime/policy/Harness/Skill change, no real clicks)",
+  "audited_dir": "enza_memory/runtime_contracts/",
+  "required_fields": [
+    "ROOM_IDENTITY", "ENTRY_CONDITIONS", "OBSERVATION_SCHEMA", "SUBSTATES",
+    "VISIBLE_CONTROLS", "ACTION_AUTHORITY", "ALLOWED_ACTIONS", "FORBIDDEN_ACTIONS",
+    "POSTCONDITIONS", "EXIT_CONDITIONS", "FAILURE_MODES", "RECOVERY",
+    "PERSISTENCE_BOUNDARY", "MIGRATION_STATUS"
+  ],
+  "results": [
+    {"contract": "home.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "schedule.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "dialogue.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "choice.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "audition_selection.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "audition_battle.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "result.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "skill_board.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "skill_replacement.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "season_transition.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true},
+    {"contract": "ending.json", "fields_present": 14, "fields_missing": [], "status": "PARTIAL", "schema_ok": true}
+  ],
+  "json_parse": "all 12 files (11 contracts + room_contract_index.json) parse with python3 -m json.tool",
+  "type_enum_consistency": {
+    "top_level_status": "all 11 = PARTIAL (uniform enum)",
+    "VISIBLE_CONTROLS_entry_shape": "{control, geometry/geometry_1280x720/box, visible_status, [success_fail]} — uniform; every entry carries visible_status; no entry without an explicit VISIBLE-vs-AUTHORITY status",
+    "FAILURE_MODES_entry_shape": "{mode, class, evidence[, note]} — uniform; every entry carries a failure class",
+    "ACTION_AUTHORITY_shape": "object with principle + per-control authority rules — uniform",
+    "MIGRATION_STATUS_shape": "object mapping control→classification — uniform; classification enums draw from {NEEDS_FRESH_VISUAL_BOX, NEEDS_MORE_REPLICATION, CONTROL_GROUNDING_BLOCKED, BUSINESS_POLICY_BLOCKED, REPLICATED, HOLD, OBSERVED_HAZARD_ONLY}",
+    "SUBSTATES_shape": "list of {substate, evidence[, note, status]} — uniform",
+    "inconsistencies_found": [
+      "MINOR: geometry key name varies (geometry vs geometry_1280x720 vs box_norm vs geometry+geometry_note) — cosmetic, no semantic divergence",
+      "MINOR: skill_board.json / skill_replacement.json MIGRATION_STATUS use 'CONTROL_GROUNDING_BLOCKED' for ALL controls, which is now SUPERSEDED by recovered-frame geometry evidence (see contract_evidence_reconciliation.json)",
+      "MINOR: dialogue.json MIGRATION_STATUS marks FASTFORWARD 'HOLD (CANDIDATE, zero execution evidence)' — superseded on two axes: (1) v0_3 dialogue authority ranking FAST_FORWARD is ranked #2 with a durable frame; (2) durable run evidence holds exactly 1 validated execution (WINGRUN_20260905_01 weekly_trace S1W7 '早送りON自动推进成功'; canonical_transitions T10 positive_samples=1). The HOLD on execution remains correct at n=1 — but the 'zero execution evidence' wording is factually stale (STALE-G)"
+    ],
+    "verification_pass_20260907": {
+      "scope": "re-validation after the sess_contract_reconciliation_writeback_20260907 v0.2 write-back",
+      "result": "all 11 contracts at contract_version 0.2; 14 required fields still present; one additive top-level key 'reconciled' present in all 11 (extra keys not forbidden by this schema); all 12 JSONs re-parse cleanly",
+      "residual_content_issues": ["STALE-G (dialogue zero-execution wording)", "STALE-H (choice 2-choice counts + PROMISE evidence/policy conflation)", "STALE-I (skill_board VISIBLE_CONTROLS vs control_regions boxes)"],
+      "verdict": "SCHEMA_STILL_VALID; residuals are content-level, tracked in contract_evidence_reconciliation.json",
+      "snapshot_note": "AUTHORED AGAINST THE 00:33-00:35 SNAPSHOT (11/11 v0.2). Superseded on the version axis by current_tree_version_check below — the concurrent sess_historical_frame_integration_20260907 v0.2.1 write landed after this artifact was written."
+    },
+    "current_tree_version_check_20260907": {
+      "scope": "exact contract_version values read from the CURRENT tree after sess_historical_frame_integration_20260907 (CONTRACT_EVIDENCE_DELTA_20260907) and the concurrent-reconciliation-repair metadata patches",
+      "CURRENT_CONTRACT_BASELINE": "MIXED — 6 room contracts + index at 0.2.1; 5 room contracts at 0.2",
+      "versions": {
+        "home.json": "0.2",
+        "schedule.json": "0.2",
+        "dialogue.json": "0.2 (STALE-G metadata patched in place; version intentionally unchanged)",
+        "choice.json": "0.2.1 (STALE-H axis separation patched in place; version unchanged)",
+        "audition_selection.json": "0.2.1",
+        "audition_battle.json": "0.2.1",
+        "result.json": "0.2.1",
+        "skill_board.json": "0.2 (STALE-I metadata patched in place; version intentionally unchanged)",
+        "skill_replacement.json": "0.2",
+        "season_transition.json": "0.2.1",
+        "ending.json": "0.2.1",
+        "room_contract_index.json": "0.2.1 (index, not a room contract)"
+      },
+      "no_normalization_note": "versions deliberately NOT normalized: v0.2.1 marks the HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY + RUN_STATE_CONTAMINATION_FIX delta on rooms where that delta applied; untouched rooms remain v0.2",
+      "schema_check_on_v021_files": "all 6 v0.2.1 contracts retain the 14 required fields plus additive keys (reconciled, evidence_delta_source, EVIDENCE_DELTA); no type/enum breakage; all parse cleanly",
+      "audit_artifact_version_note": "AUDIT ARTIFACT VERSION / SOURCE SNAPSHOT != CURRENT CONTRACT VERSION: reconciliation_glm artifacts authored against the v0.2 snapshot have been repaired in place (this repair) to state conclusions against the mixed baseline; per-artifact provenance is recorded in each file"
+    },
+    "verdict": "SCHEMA_VALID — no missing fields, no type/enum breakage; all content-level stale claims are handled in contract_evidence_reconciliation.json, not schema failures"
+  }
+}

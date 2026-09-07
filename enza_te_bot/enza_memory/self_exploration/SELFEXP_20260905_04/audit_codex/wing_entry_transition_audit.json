@@ -1,0 +1,12 @@
+{
+  "transitions": [
+    {"id":"w1","before":"PRODUCE_SELECTION(特化)","control":"ikusei_category_tab","action":"click","after":"PRODUCE_SELECTION_IKUSEI","result":"MATCHED","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","screenshot":"screenshots/w1_ikusei_tab.png"},
+    {"id":"w2","before":"PRODUCE_SELECTION_IKUSEI","control":"wizard_forward_next","action":"click","after":"UNIT_FORMATION","result":"MATCHED","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","screenshot":"screenshots/w2_after_next_wing.png"},
+    {"id":"w3","before":"UNIT_FORMATION","control":"wizard_forward_next","action":"click","after":"ITEM_SELECTION","result":"MATCHED","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","screenshot":"screenshots/w3_item_selection.png"},
+    {"id":"w4","before":"ITEM_SELECTION","control":"wizard_commit_kettei","action":"click","after":"FINAL_CONFIRM_MODAL","result":"MATCHED","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","screenshot":"screenshots/w4_after_kettei.png"},
+    {"id":"w5","before":"FINAL_CONFIRM_MODAL","control":"produce_start_commit","action":"click","after":"WING_INTRO_DIALOGUE","result":"MATCHED","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","screenshot":"screenshots/w5_after_produce_start.png"},
+    {"id":"w6","before":"WING_INTRO_DIALOGUE","control":"dialogue_skip","action":"click","after":"WING_HOME","result":"MATCHED","scope":"WING","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","screenshot":"screenshots/w6_wing_home_week1.png"}
+  ],
+  "closed_loop_required": true,
+  "direct_transition_unsafe": false
+}

@@ -1,0 +1,71 @@
+{
+ "schema_version": 1,
+ "artifact_id": "event_type_profiles",
+ "artifact_type": "EVENT_TYPE_PROFILES",
+ "created_at": "2026-09-06T08:00:00Z",
+ "status": "CANDIDATE",
+ "provenance": {
+  "classification": "inference",
+  "producer": "ZCode (Environment Agent)",
+  "provider_session_id": null,
+  "captured_at": "2026-09-06T08:00:00Z",
+  "source_artifact_ids": [],
+  "integrity": {
+   "algorithm": null,
+   "digest": null
+  }
+ },
+ "taxonomy": {
+  "PERSONAL_STORY": {
+   "definition": "偶像个人剧情/本人事件, 通常在 week transaction 后插入的对话演出",
+   "distinguishers": [
+    "dialogue presentation blocks return to HOME",
+    "speaker = idol (not 智代子/support)",
+    "no card/support UI anchor visible"
+   ],
+   "distinguisher_confidence": "LOW — current frames do not yet provide a cheap reliable marker; use EVENT_STORY_UNKNOWN when unsure",
+   "business_authority": "textbox advance only, no semantic choice unless choice overlay appears"
+  },
+  "SUPPORT_CARD_STORY": {
+   "definition": "支援卡剧情 / support event (e.g. サポートイベント auto-settle, サポートスキル related scenes)",
+   "distinguishers": [
+    "preceded by サポート caption",
+    "auto-settle variant adds stats without choices (0906 S1W2 Da+20)"
+   ],
+   "distinguisher_confidence": "MEDIUM (caption observed in prior run logs)"
+  },
+  "MORNING_3CHOICE": {
+   "definition": "3-option timed choice overlay (含 morning/advice 类)",
+   "business_rule": "middle option (CONFIRMED across S1W3-S1W5 of 0906 run: choco研究 middle OK, 猫 middle OK)",
+   "subtypes": [
+    "ADVICE_3CHOICE (audition pre-battle advice: middle CONFIRMED in 0905 S4 auditions)",
+    "WEEK_3CHOICE"
+   ]
+  },
+  "PROMISE_STORY": {
+   "definition": "约定/約束相关流程",
+   "subtypes": {
+    "PROMISE_PRESENTATION": "presentation only, no business choice",
+    "PROMISE_TRUE_BUSINESS_CHOICE": "real choice with lasting consequence (e.g. S1W5 智代子レッスン请求 いいよ → 約束事件后顺延, 0905 run)",
+    "PROMISE_MIOKURI": "promise/constraint miokuri (defer)",
+    "PROMISE_FAST_FORWARDABLE": "promise dialogue that SKIP/textbox can fast-forward"
+   },
+   "handler_ownership": "true BUSINESS_CHOICE owns frame; else promise/constraint Miokuri > fast-forward > textbox"
+  },
+  "TWO_CHOICE": {
+   "definition": "2-option choice overlay",
+   "business_rule": "含ごめん → ごめん (CONFIRMED 0906 S1W3/S1W4, 0905 S2W6)"
+  },
+  "EVENT_STORY_UNKNOWN": {
+   "definition": "story-type presentation that could not be classified from available frame evidence — use this instead of guessing"
+  }
+ },
+ "eligibility_models": {
+  "PERSONAL_STORY": "UNKNOWN — currently tracked as RAW_EMPIRICAL_RATE over observed post-action transitions",
+  "SUPPORT_CARD_STORY": "UNKNOWN",
+  "MORNING_3CHOICE": "UNKNOWN",
+  "PROMISE_STORY": "UNKNOWN",
+  "TWO_CHOICE": "UNKNOWN"
+ },
+ "honesty_note": "All probabilities are RAW_EMPIRICAL_RATE with ELIGIBILITY_MODEL=UNKNOWN. Do not use as business behavior inputs; observation priors and probe order only."
+}

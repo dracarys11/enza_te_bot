@@ -1,0 +1,68 @@
+{
+  "audit_id": "stale_reference_audit_20260906",
+  "purpose": "Historical raw artifacts that CONTAIN superseded conclusions but are safe to keep: they are raw traces, finalized/self-superseded records, or explicitly marked NOT-executable. None is treated as authoritative by a derived/current/runtime path. DO NOT delete or rewrite; the audit rule is 'do not mark historical raw as should-be-deleted'.",
+  "entries_count": 10,
+  "entries": [
+    {
+      "id": "H-01",
+      "file": "enza_memory/wing_runs/WINGRUN_20260905_01/s4_reconciliation.json",
+      "stale_content": "historical_te_reachability_assessment: 'YES_CONDITIONAL'; historical_scope.unsupported_claim 'weeks_remaining=1'",
+      "why_safe": "Self-superseded in place: status SUPERSEDED_BY_FINAL_RUN_EVIDENCE, usage HISTORICAL_AUDIT_ARTIFACT_ONLY, current_authority: false, superseded_by actual S4 outcome; also listed in artifact_registry.json historical_superseded. No runtime/test reference treats it as current. (Covers audit categories 4 and 5 — TE_REACHABLE / stale weeks=1.)"
+    },
+    {
+      "id": "H-02",
+      "file": "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+      "stale_content": "Entries containing superseded semantics as they were believed at the time: 'S3 milestones done → stamina adequate → VOCAL' (line 25), X3 toggle attempts (line 23), S4 weeks/The LEGEND decisions incl. '待执行' (line 33), semifinal week consumed by SKIP (line 41).",
+      "why_safe": "Raw live trace; memory_rules_considered entries are records of what was considered, not current policy. The authoritative chain (operator correction 2026-09-05, failure-rate gate) is recorded in later entries of the same file and in the registry. Deleting/rewriting would destroy provenance."
+    },
+    {
+      "id": "H-03",
+      "file": "enza_memory/wing_runs/WINGRUN_20260905_01/s4_route_policy.json + s4_route_activation.json",
+      "stale_content": "+200000/+300000 audition inventory rows; route candidates; 'dynamic replan after every audition'; run-scoped authority note superseding home_policy ROUTE_STATE_REQUIRED 'for this run'.",
+      "why_safe": "Closed-run exploration/planning snapshots. The activation file itself records max_eligible_reward=100000 (THE LEGEND), consistent with the final operator route; registry references s4_route_policy.json only as 's4_route_evidence'. Registry runtime_status: S4 NOT REACHED, scenario concluded — no current S4 planning authority exists. (Category 3: no derived/current artifact plans a +200k rescue.)"
+    },
+    {
+      "id": "H-04",
+      "file": "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json + distillation/audition_speed_handler_record.json",
+      "stale_content": "Earlier speed-handler expectations ('x3_reached: unknown(未再读)', 'final_state: READY … x3 路径待运行时观察').",
+      "why_safe": "Evidence records whose unknowns are honest and which are themselves the supersede-evidence for F-05/F-06. Preserve."
+    },
+    {
+      "id": "H-05",
+      "file": "enza_memory/wing_runs/WINGRUN_20260905_01/checkpoint.json",
+      "stale_content": "historical_provenance.obsolete_resume_state 'S4 THE LEGEND audition battle TURN1', obsolete_week_claims [1,5].",
+      "why_safe": "FINALIZED_CHECKPOINT with run_closed=true, resume_allowed=false, resume_point=null, and obsolete state explicitly labeled 'retained only as provenance … must not be resumed'."
+    },
+    {
+      "id": "H-06",
+      "file": "enza_memory/exploration_summary.json",
+      "stale_content": "1E states UNIT_FORMATION / ITEM_SELECTION / WING_CONFIRMATION_DIALOG recorded as first_hand — later superseded by AGY reinspection (they were tutorial-modal misreads, per wing_state_graph_v2.json conclusion).",
+      "why_safe": "usage_status banner: 'environment mapping / benchmarking / failure analysis ONLY. NOT training data, NOT executable policy.'; wing_state_graph_v2.json lists it under explicitly_not_used_as_ground_truth. Session summary = raw observation record."
+    },
+    {
+      "id": "H-07",
+      "file": "environment_map_progress.json (repo root) + enza_memory/environment_map_progress.json",
+      "stale_content": "Phase-1E state map incl. the same superseded 1E labels.",
+      "why_safe": "Registry historical_superseded: superseded_by enza_memory/wing_state_graph_v2.json. Both copies marked NOT executable policy."
+    },
+    {
+      "id": "H-08",
+      "file": "enza_memory/wing_state_graph_v2.json",
+      "stale_content": "Partially superseded by SELFEXP_03/04 first-hand evidence (per registry note).",
+      "why_safe": "usage_status: 'corrected WING preparation state graph — audit/benchmark ONLY. NOT executable policy.'; registry lists it as audit/benchmark-only with the supersede note inline. The corrected graph is itself the supersede record for H-06/H-07."
+    },
+    {
+      "id": "H-09",
+      "file": "enza_memory/memory_index.json",
+      "stale_content": "Historical session entries contain now-superseded beliefs as of their session dates (e.g. Visual2.5 zone deviation note at line ~427).",
+      "why_safe": "Append-only session log by protocol; entries are timestamped records, not current policy."
+    },
+    {
+      "id": "H-10",
+      "file": "docs/wingrun_20260905_01_postmortem.md",
+      "stale_content": "Recounts the run including the superseded interim states (e.g. line 62: semifinal advanced with SKIP, result UNKNOWN).",
+      "why_safe": "Postmortem of a closed run; records UNKNOWN honestly; no runtime consumer."
+    }
+  ],
+  "note_on_category_6": "No historical or current artifact was found to claim 'semifinal SKIP → WIN'. All occurrences record semifinal_result: UNKNOWN with explicit guards (migration distilled/result_commit_examples.json SEMIFINAL_SCENE_SKIP → commit 'no WIN'; hazard_map RESULT_EVIDENCE_LOSS guard). Nothing to repair."
+}

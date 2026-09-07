@@ -1,0 +1,12 @@
+{
+  "benchmark": "WING_HOME_fast_observation",
+  "source_screenshot": "../screenshots/w6_after_skip.png",
+  "screenshot_sha256": "sha256:89e439a195a610e1cd653342d62241cbaa7e4ae87af5d21560c87b452b1544d9",
+  "viewport": [1280, 720],
+  "runs": [
+    {"required_fields":["season","weeks_remaining"],"status":"UNKNOWN","state":"AUDITION_BATTLE","fields":{"season":null,"weeks_remaining":3},"escalation_required":true,"reason_codes":["home_state_not_confirmed","missing_or_ambiguous:season"]},
+    {"required_fields":["season","weeks_remaining","fan_gap_to_target","stamina"],"status":"UNKNOWN","state":"AUDITION_BATTLE","fields":{"season":null,"weeks_remaining":3,"fan_gap_to_target":999,"stamina":true},"escalation_required":true,"reason_codes":["home_state_not_confirmed","missing_or_ambiguous:season"]}
+  ],
+  "agy_calls": 0,
+  "result": "FAST_HOME_REAL_FRAME_FAIL"
+}

@@ -1,0 +1,10 @@
+{
+  "source": "enza_memory/wing_runs/WINGVAL_20260905_01",
+  "candidates": [
+    {"candidate":"VOCAL normal-week loop","status":"PROMOTE","scope":"WING known normal-week branch, validated viewport 1280x720 only","evidence_count":2,"independent_support":true,"evidence":["vA: S2 weeks 6→5 complete","vB: S2 weeks 5→4 complete","WINGRUN_01 S1 support"],"guards":["fresh WING_HOME state","fresh local anchor per control","viewport signature 1280x720","in-bounds coordinate","post-action expected transition","weeks decrement"],"limits":["not all resolutions","not audition/business-choice/unknown-room branches"]},
+    {"candidate":"BUSINESS_CHOICE detector","status":"HOLD","scope":"WING","evidence_count":1,"independent_support":false,"evidence":["vB three-card advice distinguishes from prior two-card choice; no new two-card instance"],"required_rule":"card_count == 2 AND dual-check/selectable-card structure","default_behavior":"STOP / taught-choice lookup","reason":"Detection discrimination improved, but promotion evidence lacks a new independent two-card runtime instance."},
+    {"candidate":"core taught-control runtime readiness","status":"PROMOTE_WITH_GUARDS","scope":"WING known normal-week, 1280x720 only","controls":["WING_HOME.produce_schedule","SCHEDULE.vocal_card","SCHEDULE.confirm","RESULT.advance/interruption_cycle"],"evidence":"Each 2/2 in independent WINGVAL session; stable anchors and zero geometry drift","guards":["fresh source_state","viewport signature equality","local anchor valid","coord/bbox in bounds","post-action expected transition"]},
+    {"candidate":"NORMAL_WEEK_NO_AGY","status":"VALIDATED","scope":"known WING normal-week path only","evidence":"vA and vB complete; AGY=0, Paddle=0, OCR=0; native coarse + taught controls","excluded":["audition","business choice","new page","season transition","unknown room"]}
+  ],
+  "latency":{"normal_week_total_ms":39000,"compute_ms":{"home_observation":1299,"decision":0,"guard":4469},"game_presentation_ms":{"execution":8099,"advance_cycle":25995},"compute_path_bottleneck":false}
+}

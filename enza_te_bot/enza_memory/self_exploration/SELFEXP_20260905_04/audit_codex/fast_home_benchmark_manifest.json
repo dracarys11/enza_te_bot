@@ -1,0 +1,8 @@
+{
+  "benchmark":"WING_HOME_coarse_identity",
+  "required":true,
+  "source_screenshot":"../screenshots/w6_wing_home_week1.png",
+  "expected_fields":{"scenario":"WING","season":"シーズン1","weeks_remaining":8,"fan_target":"あと999人(Eランク)","stamina_current":270,"stamina_max":300,"overlay_present":false},
+  "oracle_type":"replay evidence, not ground truth",
+  "note":"No training/rest/audition action was performed after reaching WING_HOME."
+}

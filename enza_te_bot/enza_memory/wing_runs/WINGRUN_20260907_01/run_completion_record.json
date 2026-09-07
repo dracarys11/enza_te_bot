@@ -1,0 +1,38 @@
+{
+ "artifact_type": "RUN_COMPLETION_RECORD",
+ "run_id": "WINGRUN_20260907_01",
+ "written_at": "2026-09-07T00:00:00Z",
+ "result": "WING S1 produce COMPLETE (REST recovery consumed final week; season ended; fes idol born)",
+ "outcome": "TARGET NOT MET (E rank 1000 fans, final 780) — explicit FAIL evidence captured (はづき season-end line + rank screen)",
+ "final_fans": 780,
+ "season_target_rank": "E",
+ "fes_idol_rank": "F+",
+ "fes_idol_name": "【ちゃカワ】園田智代子",
+ "sp_forfeited_at_birth": 83,
+ "final_stats": {
+  "Vo": "D 248",
+  "Da": "F 84",
+  "Vi": "E 124",
+  "mental": "F 95"
+ },
+ "clear_rewards": [
+  "bronze(3star) training ticket x1",
+  "FES ticket x1",
+  "ノウハウブック【智代子】x1"
+ ],
+ "risk_gate_incident": "S1W6 VOCAL executed at trouble 92% (recorded as policy violation; failure file exists)",
+ "wiring_verification": {
+  "planner_objective": "NEEDS_VOCAL_FAN_GAIN",
+  "executor_mapping": "NEEDS_VOCAL_FAN_GAIN -> VOCAL intent (home_tick sole semantic mapping)",
+  "phase1": "NEED_MORE_OBSERVATION VOCAL_FAILURE_RATE_FRESH_READ_REQUIRED (not UNSUPPORTED_DECISION)",
+  "fresh_trouble_rate": 8,
+  "phase2": "RISK_GATE_BLOCKED -> recovery objective REST (wiring-generated, not ZCode-invented)",
+  "counterfactual_allow_path": "verified (value=0 passes gate; offline no-tool outcome 'VOCAL tool is not registered')",
+  "risk_gate_bypassed": false
+ },
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB)",
+  "provider_session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780"
+ }
+}

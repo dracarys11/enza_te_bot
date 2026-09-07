@@ -1,0 +1,6 @@
+{
+  "status":"VALIDATED",
+  "scope":"known WING normal-week path",
+  "evidence":{"run":"WINGVAL_20260905_01","weeks":2,"complete_loops":2,"agy_calls":0,"paddle_calls":0,"ocr_calls":0,"native_coarse_vision":true,"taught_controls":true},
+  "not_validated_for":["audition","business_choice","new page","season transition","unknown room"]
+}

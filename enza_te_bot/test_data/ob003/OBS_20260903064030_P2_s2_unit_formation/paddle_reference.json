@@ -1,0 +1,487 @@
+{
+  "metadata": {
+    "provider": "paddle",
+    "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+    "skill_version": "not_applicable",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "6224c0b605b1aba2fd24957d379bf6ea316f1a60bcb9206f770a33619f009f65",
+    "created_at": "2026-09-04T01:00:49+08:00"
+  },
+  "source_image": "ai_decisions/observations/screenshots/OBS_20260903064030_P2_s2_unit_formation.png",
+  "method": "PaddleOCR",
+  "text_regions": [
+    {
+      "id": "paddle_001",
+      "text": "ユニット編成",
+      "bbox": [
+        50,
+        21,
+        152,
+        29
+      ],
+      "confidence": 0.999017
+    },
+    {
+      "id": "paddle_002",
+      "text": "プロデュース選択",
+      "bbox": [
+        487,
+        25,
+        164,
+        24
+      ],
+      "confidence": 0.999185
+    },
+    {
+      "id": "paddle_003",
+      "text": "ユニット編成",
+      "bbox": [
+        752,
+        25,
+        125,
+        24
+      ],
+      "confidence": 0.99751
+    },
+    {
+      "id": "paddle_004",
+      "text": "アイテム選択",
+      "bbox": [
+        992,
+        25,
+        125,
+        24
+      ],
+      "confidence": 0.999605
+    },
+    {
+      "id": "paddle_005",
+      "text": "ユニット1",
+      "bbox": [
+        26,
+        90,
+        92,
+        26
+      ],
+      "confidence": 0.998475
+    },
+    {
+      "id": "paddle_006",
+      "text": "ユニット2",
+      "bbox": [
+        140,
+        90,
+        93,
+        25
+      ],
+      "confidence": 0.998225
+    },
+    {
+      "id": "paddle_007",
+      "text": "ユニット3",
+      "bbox": [
+        253,
+        90,
+        93,
+        26
+      ],
+      "confidence": 0.998405
+    },
+    {
+      "id": "paddle_008",
+      "text": "ユニット4",
+      "bbox": [
+        364,
+        90,
+        94,
+        26
+      ],
+      "confidence": 0.998895
+    },
+    {
+      "id": "paddle_009",
+      "text": "ユニット5",
+      "bbox": [
+        478,
+        90,
+        93,
+        26
+      ],
+      "confidence": 0.998713
+    },
+    {
+      "id": "paddle_010",
+      "text": "ユニット6",
+      "bbox": [
+        590,
+        90,
+        93,
+        26
+      ],
+      "confidence": 0.999359
+    },
+    {
+      "id": "paddle_011",
+      "text": "ユニット7",
+      "bbox": [
+        703,
+        90,
+        92,
+        26
+      ],
+      "confidence": 0.981831
+    },
+    {
+      "id": "paddle_012",
+      "text": "ユニット8",
+      "bbox": [
+        816,
+        90,
+        92,
+        26
+      ],
+      "confidence": 0.999211
+    },
+    {
+      "id": "paddle_013",
+      "text": "ユニット9",
+      "bbox": [
+        928,
+        90,
+        93,
+        25
+      ],
+      "confidence": 0.999161
+    },
+    {
+      "id": "paddle_014",
+      "text": "ユニット10",
+      "bbox": [
+        1034,
+        90,
+        105,
+        25
+      ],
+      "confidence": 0.999495
+    },
+    {
+      "id": "paddle_015",
+      "text": "G2/20",
+      "bbox": [
+        30,
+        160,
+        98,
+        28
+      ],
+      "confidence": 0.90299
+    },
+    {
+      "id": "paddle_016",
+      "text": "ユニット1のコピー",
+      "bbox": [
+        154,
+        158,
+        202,
+        27
+      ],
+      "confidence": 0.999416
+    },
+    {
+      "id": "paddle_017",
+      "text": "情報切替",
+      "bbox": [
+        743,
+        160,
+        100,
+        28
+      ],
+      "confidence": 0.99919
+    },
+    {
+      "id": "paddle_018",
+      "text": "おまかせ編成",
+      "bbox": [
+        887,
+        161,
+        142,
+        28
+      ],
+      "confidence": 0.99975
+    },
+    {
+      "id": "paddle_019",
+      "text": "別ユニットからコピー",
+      "bbox": [
+        1063,
+        163,
+        191,
+        24
+      ],
+      "confidence": 0.998848
+    },
+    {
+      "id": "paddle_020",
+      "text": "Produce Idol",
+      "bbox": [
+        49,
+        211,
+        118,
+        21
+      ],
+      "confidence": 0.999915
+    },
+    {
+      "id": "paddle_021",
+      "text": "Support Idol",
+      "bbox": [
+        554,
+        210,
+        116,
+        24
+      ],
+      "confidence": 0.999798
+    },
+    {
+      "id": "paddle_022",
+      "text": "ゲスト",
+      "bbox": [
+        1114,
+        209,
+        55,
+        25
+      ],
+      "confidence": 0.996335
+    },
+    {
+      "id": "paddle_023",
+      "text": "SP",
+      "bbox": [
+        402,
+        252,
+        33,
+        30
+      ],
+      "confidence": 0.7887
+    },
+    {
+      "id": "paddle_024",
+      "text": "AS",
+      "bbox": [
+        539,
+        254,
+        31,
+        26
+      ],
+      "confidence": 0.564433
+    },
+    {
+      "id": "paddle_025",
+      "text": "SS",
+      "bbox": [
+        688,
+        255,
+        29,
+        25
+      ],
+      "confidence": 0.594187
+    },
+    {
+      "id": "paddle_026",
+      "text": "SS",
+      "bbox": [
+        836,
+        254,
+        31,
+        27
+      ],
+      "confidence": 0.643453
+    },
+    {
+      "id": "paddle_027",
+      "text": "S",
+      "bbox": [
+        985,
+        254,
+        30,
+        27
+      ],
+      "confidence": 0.838785
+    },
+    {
+      "id": "paddle_028",
+      "text": "SS",
+      "bbox": [
+        1131,
+        253,
+        34,
+        29
+      ],
+      "confidence": 0.511874
+    },
+    {
+      "id": "paddle_029",
+      "text": "☆☆☆☆",
+      "bbox": [
+        394,
+        284,
+        22,
+        74
+      ],
+      "confidence": 0.647738
+    },
+    {
+      "id": "paddle_030",
+      "text": "★★★☆",
+      "bbox": [
+        530,
+        281,
+        22,
+        77
+      ],
+      "confidence": 0.408748
+    },
+    {
+      "id": "paddle_031",
+      "text": "★★★☆",
+      "bbox": [
+        1121,
+        283,
+        25,
+        75
+      ],
+      "confidence": 0.471759
+    },
+    {
+      "id": "paddle_032",
+      "text": "Lv.80",
+      "bbox": [
+        591,
+        334,
+        53,
+        22
+      ],
+      "confidence": 0.999909
+    },
+    {
+      "id": "paddle_033",
+      "text": "Lv.80",
+      "bbox": [
+        739,
+        334,
+        54,
+        23
+      ],
+      "confidence": 0.999932
+    },
+    {
+      "id": "paddle_034",
+      "text": "Lv.80",
+      "bbox": [
+        891,
+        335,
+        49,
+        20
+      ],
+      "confidence": 0.999941
+    },
+    {
+      "id": "paddle_035",
+      "text": "Lv.80",
+      "bbox": [
+        1039,
+        335,
+        49,
+        20
+      ],
+      "confidence": 0.999908
+    },
+    {
+      "id": "paddle_036",
+      "text": "Lv.80",
+      "bbox": [
+        1186,
+        334,
+        52,
+        23
+      ],
+      "confidence": 0.999925
+    },
+    {
+      "id": "paddle_037",
+      "text": "王",
+      "bbox": [
+        628,
+        566,
+        22,
+        24
+      ],
+      "confidence": 0.830238
+    },
+    {
+      "id": "paddle_038",
+      "text": "王",
+      "bbox": [
+        774,
+        564,
+        27,
+        27
+      ],
+      "confidence": 0.663143
+    },
+    {
+      "id": "paddle_039",
+      "text": "王",
+      "bbox": [
+        925,
+        566,
+        23,
+        23
+      ],
+      "confidence": 0.398809
+    },
+    {
+      "id": "paddle_040",
+      "text": "Exスキル",
+      "bbox": [
+        568,
+        642,
+        106,
+        26
+      ],
+      "confidence": 0.999729
+    },
+    {
+      "id": "paddle_041",
+      "text": "サポートスキル",
+      "bbox": [
+        720,
+        639,
+        156,
+        31
+      ],
+      "confidence": 0.996733
+    },
+    {
+      "id": "paddle_042",
+      "text": "スキルパネル",
+      "bbox": [
+        910,
+        640,
+        133,
+        29
+      ],
+      "confidence": 0.999792
+    },
+    {
+      "id": "paddle_043",
+      "text": "次へ",
+      "bbox": [
+        1140,
+        639,
+        72,
+        43
+      ],
+      "confidence": 0.996236
+    }
+  ]
+}

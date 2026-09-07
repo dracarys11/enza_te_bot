@@ -1,0 +1,35 @@
+{
+  "failure_id": "gemini_v2_agy_timeout_001",
+  "trajectory_reference": "TRAJ_GEMINI_V2_AGY_EXTRACTION_001 step GEMINI_V2_AGY_EXTRACTION_001_STEP_01",
+  "occurrences": 1,
+  "intent": "generate one independent Gemini Vision v2 provider artifact",
+  "grounding_method": "AGY Vision Provider using only the specified v2 skill and source screenshot",
+  "action": "offline extraction only; no environment action",
+  "observed_result": {
+    "effect": "The initial 20-minute AGY job timed out waiting for a response and supplied a resumable conversation id.",
+    "evidence": ["AGY job staffer-mtmfgkovf"],
+    "provenance": "session_observed"
+  },
+  "verification": {
+    "expected": "provider writes the requested fixed-path artifact",
+    "result": "initial job timed out; same conversation resumed through staffer-mtmg6rfs6 and completed"
+  },
+  "unknown_cause": {
+    "classification": "PROVIDER_TIMEOUT",
+    "candidate_causes": [
+      "the completeness-first two-pass extraction exceeded the initial provider response deadline"
+    ]
+  },
+  "state_now": "resolved by continuing the same AGY conversation; final artifact passed the permitted validations",
+  "future_caution": [
+    "continue the exact provider conversation when the companion explicitly supplies a resumable id",
+    "preserve provider/model/skill isolation during timeout recovery"
+  ],
+  "policy_links": [],
+  "resolution": {
+    "resolved_at": "2026-09-04T12:24:38+08:00",
+    "root_cause": "provider response exceeded the initial job timeout",
+    "reclassified_as": "transient provider timeout with successful same-conversation continuation",
+    "lesson_update": "long two-pass extraction may require continuation while retaining the same model context"
+  }
+}

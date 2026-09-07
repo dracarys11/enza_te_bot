@@ -1,0 +1,23 @@
+{
+  "artifact_type":"PYTHON_MIGRATION_BUNDLE",
+  "version":"0.1",
+  "mode":"SHADOW_TEST_ONLY",
+  "viewport_prerequisite":{"profile":"MAC_CURRENT_V1","required":"verify game viewport origin/size, DPR and zoom; reject mismatch; never auto-scale"},
+  "items":[
+    {"control":"HOME:SCHEDULE","why_ready":"7 conservative successful uses across run/validation evidence; stable taught point and anchor","missing_piece":"normalized visual/proven click box","required_detector":"fresh WING_HOME + calendar/pink-label anchor","required_postcondition":"fresh loaded SCHEDULE","shadow_test_plan":"detect anchor and proposed box/point without clicking; compare across >=2 fresh frames"},
+    {"control":"SCHEDULE:VOCAL","why_ready":"6 conservative successes and cross-session anchor stability","missing_piece":"normalized card box and Python failure-rate ROI validation","required_detector":"loaded SCHEDULE + VOCAL card + fresh failure_rate<=2","required_postcondition":"VOCAL selected","shadow_test_plan":"read risk ROI, detect card box, emit proposed target; do not click"},
+    {"control":"SCHEDULE:DECIDE","why_ready":"6 successes; one useful no-effect sample defines load guard","missing_piece":"normalized enabled-button box","required_detector":"selected candidate + pink enabled DECIDE","required_postcondition":"lesson/audition transition","shadow_test_plan":"classify loading vs actionable and compare proposed point with taught point"},
+    {"control":"RESULT:ADVANCE","why_ready":"replicated 2/2 in independent validation and repeated run evidence","missing_piece":"per-phase boxes and terminal-condition detector","required_detector":"explicit result already captured + current result/dialogue subtype","required_postcondition":"fresh next state without evidence loss","shadow_test_plan":"predict cycle owner/target per frame; never issue advance"},
+    {"control":"DIALOGUE:SAFE_TEXTBOX","why_ready":"35 recorded advances and known wrong-target boundaries","missing_piece":"fresh textbox box plus reliable disappearance/choice detector","required_detector":"COMMUNICATION_DIALOGUE + no choice cards","required_postcondition":"next dialogue/choice/HOME","shadow_test_plan":"track textbox box and stop prediction as soon as it disappears"},
+    {"control":"DIALOGUE:3_CHOICE_MIDDLE","why_ready":"repeated successful operator-policy selections across sessions","missing_piece":"normalized three-card boxes","required_detector":"known context + option_count==3 + selectable middle","required_postcondition":"choice accepted/progression","shadow_test_plan":"detect all three boxes and identify middle without clicking"},
+    {"control":"SCHEDULE:BACK","why_ready":"live 27% risk -> BACK -> fresh HOME -> REST chain passed","missing_piece":"second independent replication and normalized box","required_detector":"SCHEDULE + current gated back-to-rest intent","required_postcondition":"fresh WING_HOME","shadow_test_plan":"detect back box and verify it is distinct from schedule hazards"},
+    {"control":"HOME:REST","why_ready":"live gated REST produced weeks-1 and stamina recovery","missing_piece":"click point/box and replication","required_detector":"fresh WING_HOME + current REST authorization","required_postcondition":"fresh HOME weeks-1 and stamina increased","shadow_test_plan":"detect REST target and postcondition fields without action"},
+    {"control":"AUDITION_BATTLE:AUTO","why_ready":"fresh OFF+ENABLED -> one click -> fresh ON succeeded in four current-epoch samples; hazards are known","missing_piece":"normalized enabled box and cross-session epoch replication","required_detector":"INPUT_READY + current epoch + OFF + ENABLED","required_postcondition":"fresh ON in current epoch","shadow_test_plan":"classify phase/value/interactability and predict CLICK/NO_OP/STOP; no battle action"}
+  ],
+  "excluded":[
+    {"control":"AUDITION_BATTLE:SPEED","reason":"toggle location unknown; X2 badge is display-only; X3 handler partial"},
+    {"control":"AUDITION_SELECTION:CANDIDATE","reason":"candidate/page geometry is route-specific and not normalized"},
+    {"control":"ABANDON:*","reason":"irreversible/operator-gated; long-press automation partial"},
+    {"control":"HOME:FURIKAERI","reason":"only accidental wrong-target evidence"}
+  ]
+}

@@ -1,0 +1,11 @@
+[
+  {"control_id":"bottom_nav_produce","page_class":"HOME","label":"プロデュース","approx_region":"bottom-right","normalized_bbox":null,"visual_anchor":"底部导航条 プロデュース 300/300 标签","expected_next_states":["PRODUCE_MENU"],"times_seen":2,"times_successful":1},
+  {"control_id":"bottom_nav_idol","page_class":"HOME","label":"アイドル","approx_region":"bottom-center-left","normalized_bbox":null,"visual_anchor":"底部导航条 NEW!! アイドル","expected_next_states":["IDOL_PORTAL"],"times_seen":1,"times_successful":1},
+  {"control_id":"bottom_nav_work","page_class":"HOME","label":"営業","approx_region":"bottom-center-right","normalized_bbox":null,"visual_anchor":"底部导航条 営業 NEW!! 3徽标","expected_next_states":["WORK_ACTIVITY"],"times_seen":1,"times_successful":1},
+  {"control_id":"side_menu","page_class":"HOME","label":"メニュー","approx_region":"left","normalized_bbox":null,"visual_anchor":"左侧竖栏 NEW!! メニュー","expected_next_states":["MENU_OVERLAY"],"times_seen":1,"times_successful":1},
+  {"control_id":"back_arrow","page_class":"*","label":"←","approx_region":"bottom-left","normalized_bbox":null,"visual_anchor":"左下白色方形 ← 按钮","expected_next_states":["上级页面"],"times_seen":6,"times_successful":5},
+  {"control_id":"modal_close","page_class":"*","label":"閉じる","approx_region":"bottom-center","normalized_bbox":null,"visual_anchor":"overlay 底部中央 閉じる 按钮","expected_next_states":["关闭 overlay"],"times_seen":3,"times_successful":3},
+  {"control_id":"idol_list_card","page_class":"IDOL_PORTAL","label":"アイドル一覧","approx_region":"bottom-right","normalized_bbox":null,"visual_anchor":"紫色 アイドル一覧 卡片","expected_next_states":["IDOL_LIST"],"times_seen":1,"times_successful":1},
+  {"control_id":"idol_portal_card_training","page_class":"IDOL_PORTAL","label":"トレーニング","approx_region":"top-center","normalized_bbox":null,"visual_anchor":"粉色 トレーニング 卡片+超成功発生中!","expected_next_states":[],"times_seen":1,"times_successful":0},
+  {"control_id":"work_complete_buttons","page_class":"WORK_ACTIVITY","label":"営業完了/一括営業/一括完了","approx_region":"cards-bottom/bottom-right","normalized_bbox":null,"visual_anchor":"粉色 営業完了 钮/一括営業/一括完了","expected_next_states":[],"times_seen":2,"times_successful":0}
+]

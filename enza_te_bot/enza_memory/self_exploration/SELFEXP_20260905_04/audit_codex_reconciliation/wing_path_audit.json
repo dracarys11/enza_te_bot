@@ -1,0 +1,15 @@
+{
+  "status": "SUPPORTED",
+  "path": [
+    {"step":"w1","before":"PRODUCE_SELECTION(特化)","action":"育成プロデュース tab","after":"PRODUCE_SELECTION_IKUSEI","result":"MATCHED","screenshot":"screenshots/w1_ikusei_tab.png"},
+    {"step":"w2","before":"PRODUCE_SELECTION_IKUSEI","action":"次へ","after":"UNIT_FORMATION","result":"MATCHED","screenshot":"screenshots/w2_after_next_wing.png"},
+    {"step":"w3","before":"UNIT_FORMATION","action":"次へ","after":"ITEM_SELECTION","result":"MATCHED","screenshot":"screenshots/w3_item_selection.png"},
+    {"step":"w4","before":"ITEM_SELECTION","action":"決定","after":"使用確認 / FINAL_CONFIRM_MODAL","result":"MATCHED","screenshot":"screenshots/w4_after_kettei.png"},
+    {"step":"w5","before":"使用確認 / FINAL_CONFIRM_MODAL","action":"プロデュース開始","after":"WING_INTRO_DIALOGUE","result":"MATCHED","screenshot":"screenshots/w5_after_produce_start.png"},
+    {"step":"w6","before":"WING_INTRO_DIALOGUE","action":"SKIP","after":"WING_HOME","result":"MATCHED","screenshot":"screenshots/w6_after_skip.png"}
+  ],
+  "knowhow_selection_for_wing": "NOT_APPLICABLE",
+  "intro_dialogue": "TRANSIENT_PRESENTATION",
+  "skip_stability": "SUPPORTED",
+  "direct_transition_unsafe": false
+}

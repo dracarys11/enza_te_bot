@@ -1,0 +1,365 @@
+{
+  "benchmark": "Vision Extraction Comparison",
+  "reference": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob001/gemini_output.json",
+  "candidate": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob002/agent_vision_output.json",
+  "settings": {
+    "interaction_iou_threshold": 0.5,
+    "text_normalization": "Unicode NFKC plus whitespace removal"
+  },
+  "text_recall": {
+    "reference_count": 21,
+    "candidate_count": 23,
+    "exact_match_count": 21,
+    "recall_against_reference": 1.0,
+    "matches": [
+      {
+        "reference_id": "t01",
+        "candidate_id": "candidate_text_001",
+        "reference_text": "プロデュース選択",
+        "candidate_text": "プロデュース選択",
+        "normalized_text": "プロデュース選択",
+        "bbox_iou": 0.738259,
+        "center_distance": 2.692582
+      },
+      {
+        "reference_id": "t02",
+        "candidate_id": "candidate_text_002",
+        "reference_text": "プロデュース選択",
+        "candidate_text": "プロデュース選択",
+        "normalized_text": "プロデュース選択",
+        "bbox_iou": 0.877976,
+        "center_distance": 0.707107
+      },
+      {
+        "reference_id": "t03",
+        "candidate_id": "candidate_text_003",
+        "reference_text": "ユニット編成",
+        "candidate_text": "ユニット編成",
+        "normalized_text": "ユニット編成",
+        "bbox_iou": 0.840336,
+        "center_distance": 7.017834
+      },
+      {
+        "reference_id": "t04",
+        "candidate_id": "candidate_text_004",
+        "reference_text": "アイテム選択",
+        "candidate_text": "アイテム選択",
+        "normalized_text": "アイテム選択",
+        "bbox_iou": 0.85034,
+        "center_distance": 8.514693
+      },
+      {
+        "reference_id": "t05",
+        "candidate_id": "candidate_text_005",
+        "reference_text": "プロデュースの種類",
+        "candidate_text": "プロデュースの種類",
+        "normalized_text": "プロデュースの種類",
+        "bbox_iou": 0.903569,
+        "center_distance": 1.0
+      },
+      {
+        "reference_id": "t06",
+        "candidate_id": "candidate_text_006",
+        "reference_text": "育成プロデュース",
+        "candidate_text": "育成プロデュース",
+        "normalized_text": "育成プロデュース",
+        "bbox_iou": 0.863753,
+        "center_distance": 3.807887
+      },
+      {
+        "reference_id": "t07",
+        "candidate_id": "candidate_text_007",
+        "reference_text": "特化プロデュース",
+        "candidate_text": "特化プロデュース",
+        "normalized_text": "特化プロデュース",
+        "bbox_iou": 0.86883,
+        "center_distance": 3.535534
+      },
+      {
+        "reference_id": "t08",
+        "candidate_id": "candidate_text_008",
+        "reference_text": "W.I.N.G.",
+        "candidate_text": "W.I.N.G.",
+        "normalized_text": "W.I.N.G.",
+        "bbox_iou": 0.698172,
+        "center_distance": 22.005681
+      },
+      {
+        "reference_id": "t09",
+        "candidate_id": "candidate_text_009",
+        "reference_text": "Wonder.Idol.Nova.Grandprix.",
+        "candidate_text": "Wonder.Idol.Nova.Grandprix.",
+        "normalized_text": "Wonder.Idol.Nova.Grandprix.",
+        "bbox_iou": 0.724638,
+        "center_distance": 4.123106
+      },
+      {
+        "reference_id": "t10",
+        "candidate_id": "candidate_text_010",
+        "reference_text": "ビギナー",
+        "candidate_text": "ビギナー",
+        "normalized_text": "ビギナー",
+        "bbox_iou": 0.736744,
+        "center_distance": 7.648529
+      },
+      {
+        "reference_id": "t11",
+        "candidate_id": "candidate_text_011",
+        "reference_text": "ミドル",
+        "candidate_text": "ミドル",
+        "normalized_text": "ミドル",
+        "bbox_iou": 0.572101,
+        "center_distance": 19.557607
+      },
+      {
+        "reference_id": "t12",
+        "candidate_id": "candidate_text_012",
+        "reference_text": "マスター",
+        "candidate_text": "マスター",
+        "normalized_text": "マスター",
+        "bbox_iou": 0.736434,
+        "center_distance": 8.381527
+      },
+      {
+        "reference_id": "t13",
+        "candidate_id": "candidate_text_013",
+        "reference_text": "W.I.N.G.編",
+        "candidate_text": "W.I.N.G.編",
+        "normalized_text": "W.I.N.G.編",
+        "bbox_iou": 0.819724,
+        "center_distance": 3.201562
+      },
+      {
+        "reference_id": "t14",
+        "candidate_id": "candidate_text_014",
+        "reference_text": "攻略動画①(外部サイト)",
+        "candidate_text": "攻略動画①(外部サイト)",
+        "normalized_text": "攻略動画1(外部サイト)",
+        "bbox_iou": 0.64811,
+        "center_distance": 10.606602
+      },
+      {
+        "reference_id": "t15",
+        "candidate_id": "candidate_text_015",
+        "reference_text": "レッスンやお仕事、オーディションを通してアイドルをプロデュースできます。ファンを集めて各シーズン目標を達成し、W.I.N.G.優勝を目指しましょう！",
+        "candidate_text": "レッスンやお仕事、オーディションを通してアイドルをプロデュースできます。ファンを集めて各シーズン目標を達成し、W.I.N.G.優勝を目指しましょう！",
+        "normalized_text": "レッスンやお仕事、オーディションを通してアイドルをプロデュースできます。ファンを集めて各シーズン目標を達成し、W.I.N.G.優勝を目指しましょう!",
+        "bbox_iou": 0.826531,
+        "center_distance": 11.768602
+      },
+      {
+        "reference_id": "t16",
+        "candidate_id": "candidate_text_016",
+        "reference_text": "283プロダクション",
+        "candidate_text": "283プロダクション",
+        "normalized_text": "283プロダクション",
+        "bbox_iou": 0.790204,
+        "center_distance": 3.905125
+      },
+      {
+        "reference_id": "t17",
+        "candidate_id": "candidate_text_017",
+        "reference_text": "ファン感謝祭",
+        "candidate_text": "ファン感謝祭",
+        "normalized_text": "ファン感謝祭",
+        "bbox_iou": 0.768868,
+        "center_distance": 4.031129
+      },
+      {
+        "reference_id": "t18",
+        "candidate_id": "candidate_text_018",
+        "reference_text": "～Thanks Flapping Day!!～",
+        "candidate_text": "～Thanks Flapping Day!!～",
+        "normalized_text": "~ThanksFlappingDay!!~",
+        "bbox_iou": 0.869565,
+        "center_distance": 1.581139
+      },
+      {
+        "reference_id": "t19",
+        "candidate_id": "candidate_text_019",
+        "reference_text": "オートプロデュース",
+        "candidate_text": "オートプロデュース",
+        "normalized_text": "オートプロデュース",
+        "bbox_iou": 0.693333,
+        "center_distance": 6.403124
+      },
+      {
+        "reference_id": "t20",
+        "candidate_id": "candidate_text_020",
+        "reference_text": "研修設定",
+        "candidate_text": "研修設定",
+        "normalized_text": "研修設定",
+        "bbox_iou": 0.85901,
+        "center_distance": 3.640055
+      },
+      {
+        "reference_id": "t21",
+        "candidate_id": "candidate_text_021",
+        "reference_text": "次へ",
+        "candidate_text": "次へ",
+        "normalized_text": "次へ",
+        "bbox_iou": 0.693756,
+        "center_distance": 3.807887
+      }
+    ],
+    "unmatched_reference": [],
+    "unmatched_candidate": [
+      {
+        "id": "candidate_text_022",
+        "text": "G.R"
+      },
+      {
+        "id": "candidate_text_023",
+        "text": "Grand.Repute.Audition."
+      }
+    ]
+  },
+  "normalized_text_match": {
+    "match_count": 21,
+    "match_rate_against_reference": 1.0,
+    "normalized_only_matches": [],
+    "unmatched_reference": [],
+    "unmatched_candidate": [
+      {
+        "id": "candidate_text_022",
+        "text": "G.R"
+      },
+      {
+        "id": "candidate_text_023",
+        "text": "Grand.Repute.Audition."
+      }
+    ]
+  },
+  "interaction_candidate_overlap": {
+    "reference_count": 14,
+    "candidate_count": 16,
+    "matched_count": 14,
+    "overlap_rate_against_reference": 1.0,
+    "mean_matched_iou": 0.919129,
+    "matches": [
+      {
+        "reference_index": 0,
+        "reference_id": "e01",
+        "candidate_index": 0,
+        "candidate_id": "candidate_interaction_001",
+        "iou": 0.721519,
+        "center_distance": 10.111874
+      },
+      {
+        "reference_index": 1,
+        "reference_id": "e02",
+        "candidate_index": 1,
+        "candidate_id": "candidate_interaction_002",
+        "iou": 0.94376,
+        "center_distance": 1.414214
+      },
+      {
+        "reference_index": 2,
+        "reference_id": "e03",
+        "candidate_index": 2,
+        "candidate_id": "candidate_interaction_003",
+        "iou": 1.0,
+        "center_distance": 0.0
+      },
+      {
+        "reference_index": 3,
+        "reference_id": "e04",
+        "candidate_index": 7,
+        "candidate_id": "candidate_interaction_008",
+        "iou": 0.861244,
+        "center_distance": 2.692582
+      },
+      {
+        "reference_index": 4,
+        "reference_id": "e05",
+        "candidate_index": 8,
+        "candidate_id": "candidate_interaction_009",
+        "iou": 0.885167,
+        "center_distance": 2.54951
+      },
+      {
+        "reference_index": 5,
+        "reference_id": "e06",
+        "candidate_index": 9,
+        "candidate_id": "candidate_interaction_010",
+        "iou": 0.940674,
+        "center_distance": 2.236068
+      },
+      {
+        "reference_index": 6,
+        "reference_id": "e07",
+        "candidate_index": 3,
+        "candidate_id": "candidate_interaction_004",
+        "iou": 0.97561,
+        "center_distance": 0.0
+      },
+      {
+        "reference_index": 7,
+        "reference_id": "e08",
+        "candidate_index": 4,
+        "candidate_id": "candidate_interaction_005",
+        "iou": 0.970502,
+        "center_distance": 0.5
+      },
+      {
+        "reference_index": 8,
+        "reference_id": "e09",
+        "candidate_index": 5,
+        "candidate_id": "candidate_interaction_006",
+        "iou": 0.97561,
+        "center_distance": 0.0
+      },
+      {
+        "reference_index": 9,
+        "reference_id": "e10",
+        "candidate_index": 6,
+        "candidate_id": "candidate_interaction_007",
+        "iou": 0.932646,
+        "center_distance": 1.0
+      },
+      {
+        "reference_index": 10,
+        "reference_id": "e11",
+        "candidate_index": 11,
+        "candidate_id": "candidate_interaction_012",
+        "iou": 0.912142,
+        "center_distance": 1.118034
+      },
+      {
+        "reference_index": 11,
+        "reference_id": "e12",
+        "candidate_index": 12,
+        "candidate_id": "candidate_interaction_013",
+        "iou": 0.912924,
+        "center_distance": 1.0
+      },
+      {
+        "reference_index": 12,
+        "reference_id": "e13",
+        "candidate_index": 13,
+        "candidate_id": "candidate_interaction_014",
+        "iou": 0.912924,
+        "center_distance": 1.0
+      },
+      {
+        "reference_index": 13,
+        "reference_id": "e14",
+        "candidate_index": 14,
+        "candidate_id": "candidate_interaction_015",
+        "iou": 0.923077,
+        "center_distance": 1.0
+      }
+    ],
+    "unmatched_reference_indices": [],
+    "unmatched_candidate_indices": [
+      10,
+      15
+    ]
+  },
+  "grounding_agreement": {
+    "compared_interactions": 14,
+    "exact_agreement_count": 14,
+    "agreement_rate": 1.0,
+    "differences": []
+  }
+}

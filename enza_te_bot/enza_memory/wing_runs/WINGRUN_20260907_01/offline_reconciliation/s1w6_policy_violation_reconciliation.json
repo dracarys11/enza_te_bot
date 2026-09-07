@@ -1,0 +1,95 @@
+{
+ "artifact_type": "S1W6_POLICY_VIOLATION_RECONCILIATION",
+ "reconciliation_id": "OFFLINE_RECONCILIATION_WINGRUN_20260907_01",
+ "run_id": "WINGRUN_20260907_01",
+ "mode": "OFFLINE_ONLY (reconstructed exclusively from durable artifacts; no environment contact)",
+ "created_at": "2026-09-07",
+ "live_browser_touched": false,
+
+ "canonical_violation": {
+  "statement": "fresh VOCAL trouble_rate ≈92% > authoritative threshold 2% (vocal_risk_gate_hard), yet the live executor emitted VOCAL 決定.",
+  "fresh_trouble_rate": {"value_pct": 92, "evidence": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/s1w6_schedule.png (トラブル率 92% badge, top-right, clearly visible on the same frame from which 決定 was clicked)", "classification": "FACT", "provenance": "session_observed"},
+  "authoritative_threshold": {"value_pct": 2, "authority": "enza_memory/policies/vocal_risk_gate_hard.json (operator HARD gate; >2% → DO NOT execute VOCAL → BACK → fresh HOME → REST; unknown → STOP)", "note": "gate artifact issued POST-HOC (after the click) as operator recovery instruction; operator classifies the execution as a policy violation and the record preserves that classification without reinterpretation"},
+  "emitted_action": "VOCAL 決定"
+ },
+
+ "reconstruction_sources": [
+  "enza_memory/wing_runs/WINGRUN_20260907_01/trajectory_WINGRUN_20260907_01.json (steps 9-12, handoff)",
+  "enza_memory/failures/s1w6_vocal_executed_above_risk_gate_001.json",
+  "enza_memory/failures/operator_cancel_pending_action_001.json",
+  "enza_memory/policies/vocal_risk_gate_hard.json",
+  "enza_memory/observations/OBS_004.json + screenshots/PAUSE_STATE_FRESH.png",
+  "enza_memory/observations/OBS_005.json + screenshots/recovery_06_home_check.png",
+  "enza_memory/observations/OBS_006.json + screenshots/rest_05_post_rest.png",
+  "enza_memory/wing_runs/WINGRUN_20260907_01/timings.jsonl (S1W6_COMMIT_RECONCILED, SESSION_PAUSE, S1W7_REST_EXECUTED boundaries)",
+  "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/s1w6_schedule.png (sha256 1e6676921546b26ae60e3e0d9b4e7ac5da772773d6a145873f7b0119e821b2b2)"
+ ],
+
+ "fresh_s1w6_state_at_decision": {
+  "schedule_frame": "VOCAL Lv.3 Excellent!! selected; トラブル率 92%; シーズン1 残り3週; ファン人数 あと220; Vo C/306, Da F/84, Vi E/124, 技 F/85, SP 82; 決定 bottom-right; BACK (←) bottom-left (the safe-path control existed on-frame)",
+  "classification": "FACT",
+  "provenance": "session_observed"
+ },
+
+ "planner_objective_evidence": {
+  "planner_objective_artifact_for_w6": "NONE EXISTS",
+  "recorded_intent": "continue baseline-VOCAL weekly execution (pre-gate run policy) — s1w6_vocal_executed_above_risk_gate_001.json#intent",
+  "authority_note": "weekly objectives belong to the Python planner per the operator handoff (trajectory step 11); at click time no planner objective was attached and the executor self-selected the weekly objective from prior-week continuation",
+  "classification": "FACT for artifact absence; the authority framing is the operator's recorded classification"
+ },
+
+ "action_actually_emitted": {
+  "action": "cua.click on 決定 (1175,660)",
+  "kettei_sent": true,
+  "evidence_of_send": "failure file records 'click fired before operator cancel'; PAUSE_STATE_FRESH.png shows the post-lesson event dialogue (プロデューサー「おはよう智代子、何書いてるんだ？」) consistent with the lesson having fired",
+  "cancellation": "the operator cancelled the pending tool call during the post-click wait — cancellation did NOT unsend the already-fired click",
+  "classification": "FACT",
+  "provenance": "session_observed"
+ },
+
+ "post_action_state_chain": [
+  {"stage": "last durable state at pause", "state": "POST_LESSON_EVENT_DIALOGUE; weeks_remaining UNKNOWN (top bar not visible in dialogue frame)", "evidence": "OBS_004 / PAUSE_STATE_FRESH.png", "classification": "FACT (state) + UNKNOWN (weeks)"},
+  {"stage": "reconciliation", "state": "dialogue advanced (no business action repeated) → Perfect Communication result → PROMISE two-choice declined per fixed policy → stable HOME", "evidence": "trajectory step 10; operator_cancel_pending_action_001.json#resolution_20260907", "classification": "FACT"},
+  {"stage": "first fresh post-action stable state", "state": "WING_HOME_IDLE S1 weeks=2 (W6 commit reconciled 3→2), stamina near-empty, mental purple, fans_remaining 220", "evidence": "OBS_005 / recovery_06_home_check.png (sha256 5dde5362528a30efab8b88bd20b35ad74344972a46f965caea0497577d831658)", "classification": "FACT"},
+  {"stage": "operator-authorized recovery after boundary", "state": "REST executed at weeks=2 (only authorized objective) → fresh post-rest HOME weeks=1, stamina partially recovered, mental still purple", "evidence": "OBS_006 / rest_05_post_rest.png (sha256 f3fc915d981593be6ac310dbef24e72c4bca64fb25b26d995fa8cecf013899c9); timings S1W7_REST_EXECUTED", "classification": "FACT"}
+ ],
+
+ "cancellation_handoff_boundary": {
+  "boundary_events": [
+   "operator cancelled pending post-click tool call (operator_cancel_pending_action_001)",
+   "recovery stop: S1W6_INTERRUPTED_ACTION_RECONCILED (timings RECOVERY_STOP)",
+   "IAB tab marked handoff; resume protocol: next weekly objective belongs to the Python planner",
+   "post-REST stop: RISK_GATE_RECOVERY_STOP, no additional weeks after REST"
+  ],
+  "state_at_final_stop": "WING_HOME_IDLE S1 weeks_remaining=1 (expected FINAL/本戦 audition week), stamina partially recovered, mental still exhausted, fans_remaining 220",
+  "next_objective": "reserved for Python planner; not executed"
+ },
+
+ "classification": {
+  "PLANNER_OBJECTIVE_AUTHORITY": {
+   "verdict": "VIOLATED",
+   "basis": "live executor selected and executed the weekly objective itself (baseline-VOCAL continuation) with no planner objective attached; weekly-objective authority is the planner's, and after the incident the operator explicitly reserved it for the Python planner"
+  },
+  "RISK_GATE_AUTHORITY": {
+   "verdict": "VIOLATED",
+   "basis": "fresh trouble_rate 92% vs authoritative threshold 2% (HARD gate, no reinterpretation); the >2% branch (BACK → fresh HOME → REST) was not taken; the gate's authority is operator/HARD and is not retro-created by the post-hoc issuance — the operator records the violation as of the declared rule"
+  },
+  "LIVE_EXECUTOR_ACTION": {
+   "verdict": "CONFIRMED",
+   "basis": "決定 click fired at (1175,660); the mid-wait tool cancellation did not retract the sent action"
+  }
+ },
+
+ "non_reinterpretation_clause": "The later progression (W6 commit 3→2, post-lesson chain, recovery REST reaching weeks=1) does NOT retro-validate the emitted action. The violation stands independently of the outcome. Recovery reconciled state; it neither retried the action nor rewrote history (failure files preserved unmodified).",
+
+ "w6_completion": {
+  "claimed": false,
+  "rationale": "Per incident directive: W6_COMPLETION_CLAIMED=NO. The week COMMIT is fresh-reconciled (weeks 3→2, OBS_005), but completion of a W6 objective is not claimed: the executed action was itself the policy violation, the safe-path objective for an over-threshold week (REST) was never the executed W6 action, and completion claims belong to the planner. Current durable end state is weeks=1 post-REST."
+ },
+
+ "provenance": {
+  "reconstruction": "offline_artifact_review — every claim above cites a durable artifact; no live session, browser, CDP, AGY, or runtime was contacted",
+  "original_evidence_provenance": "session_observed (live run) with operator-issued gate as user_reported (confidence cap 0.5 per gate policy provenance)",
+  "classification": "FACT unless marked otherwise inline"
+ }
+}

@@ -1,0 +1,36 @@
+{
+  "run_id": "WINGRUN_20260905_01",
+  "record_type": "FINALIZED_CHECKPOINT",
+  "run_closed": true,
+  "resume_allowed": false,
+  "final_status": "COMPLETED_ABANDONED",
+  "te_result": "FAILED",
+  "final_state": {
+    "S4": "ENDED",
+    "the_legend_results": {
+      "pass": 3,
+      "fail": 2
+    },
+    "s4_end_fans": 414414,
+    "final_evaluation_fans": 419414,
+    "semifinal_result": "UNKNOWN",
+    "fan_delta_5000_source": "UNKNOWN"
+  },
+  "resume_point": null,
+  "final_evidence": [
+    "weekly_trace.jsonl",
+    "screenshots/s4_end_rank_B_fans414414.png",
+    "screenshots/produce_end_evaluation.png",
+    "screenshots/abandoned_back_to_main_home.png"
+  ],
+  "historical_provenance": {
+    "status": "HISTORICAL_ONLY_NOT_RESUMABLE",
+    "original_checkpoint": "S2_W1_mid",
+    "original_time": "2026-09-05T06:50:00Z",
+    "obsolete_resume_state": "S4 THE LEGEND audition battle TURN1",
+    "obsolete_week_claims": [1, 5],
+    "note": "Previous S2/S4 resume instructions and week claims are retained only as provenance in raw history; they are not current state and must not be resumed."
+  },
+  "known_controls_ref": "distillation/control_distillation.json",
+  "interruption_handlers_ref": "distillation/interruption_distillation.json"
+}

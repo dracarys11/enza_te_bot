@@ -1,0 +1,62 @@
+{
+  "scenario_scope": "WING",
+  "interruptions": [
+    {
+      "interruption_type": "SUPPORT_EVENT_DIALOGUE",
+      "detection_rule": "SKIP 按钮 + ☆イベント 标题框",
+      "safe_handler": "SKIP",
+      "requires_business_choice": false,
+      "return_condition": "SKIP 至画面回到 WING_HOME",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "interruption_type": "COMMUNICATION_DIALOGUE",
+      "detection_rule": "右侧 Auto/ログ/非表示 按钮组 + 无 SKIP",
+      "safe_handler": "CONTINUE(点击文本框 640,610 逐行)",
+      "requires_business_choice": "false(直至出现双选项卡)",
+      "return_condition": "对话框消失回到 WING_HOME",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "interruption_type": "BUSINESS_CHOICE",
+      "detection_rule": "同时出现两个带✓角选项卡",
+      "safe_handler": "NONE — 禁止自动处理",
+      "requires_business_choice": true,
+      "return_condition": "需 memory taught choice 或人工裁决后手动点选",
+      "knowledge_tier": "REPEATED_EVIDENCE(检出规则)"
+    },
+    {
+      "interruption_type": "RESULT_ANIMATION",
+      "detection_rule": "RANKUP/统计 overlay",
+      "safe_handler": "CONTINUE(中心点击, 先 wait)",
+      "requires_business_choice": false,
+      "return_condition": "演出结束",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "interruption_type": "VOICE_BUBBLE",
+      "detection_rule": "右下小对话框+智代子名, 不阻塞输入",
+      "safe_handler": "WAIT/IGNORE",
+      "requires_business_choice": false,
+      "return_condition": "自动消失",
+      "knowledge_tier": "RUN_LOCAL"
+    },
+    {
+      "interruption_type": "NOW_LOADING",
+      "detection_rule": "Now Loading 文字",
+      "safe_handler": "WAIT",
+      "requires_business_choice": false,
+      "return_condition": "加载完成",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "interruption_type": "DIALOGUE_SLOW_SPEED",
+      "detection_rule": "看到 早送りx4 OFF 指示框",
+      "safe_handler": "CLICK(早送り框→ON) 后 fresh check 是否推进",
+      "requires_business_choice": false,
+      "return_condition": "对话自动加速播放直至结束; 若无推进→回退文本框逐行; 若出现双✓选项卡→BUSINESS_CHOICE STOP",
+      "knowledge_tier": "CANDIDATE (operator instruction, 尚无 run 内执行证据)",
+      "policy_ref": "enza_memory/policies/wing_dialogue_fastforward_rule.json"
+    }
+  ]
+}

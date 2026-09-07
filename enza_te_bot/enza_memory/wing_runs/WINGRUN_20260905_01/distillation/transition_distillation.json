@@ -1,0 +1,11 @@
+{
+  "scenario_scope": "WING",
+  "transitions": [
+    {"source_state":"WING_HOME","action":"produce_schedule","target_state":"SCHEDULE_SELECTION","times_observed":5,"success_rate":1.0,"intermediate_transients":["Now Loading(偶尔)"],"verification_rule":"URL=/produce + スケジュール選択 标题","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"source_state":"SCHEDULE_SELECTION","action":"vocal_card+confirm","target_state":"VOCAL_RESULT","times_observed":4,"success_rate":1.0,"intermediate_transients":[],"verification_rule":"RANKUP/统计演出出现","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"source_state":"VOCAL_RESULT","action":"center_advance","target_state":"WING_HOME","times_observed":4,"success_rate":1.0,"intermediate_transients":["COMMUNICATION_DIALOGUE(wk4)","SUPPORT_EVENT(wk3, 发生在 room 后)"],"verification_rule":"顶栏 weeks_remaining 递减1 + 底部主入口四件套","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"source_state":"WING_HOME(week consumed)","action":"(implicit)","target_state":"WING_HOME(fresh)","field_delta":{"weeks_remaining":-1,"fan_gap":"-32~-63/周(VOCAL)"},"times_observed":4,"success_rate":1.0,"verification_rule":"weeks 递减即本周完成","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"source_state":"ANY","action":"story_event","target_state":"SUPPORT_EVENT_DIALOGUE→WING_HOME","times_observed":1,"success_rate":1.0,"intermediate_transients":[],"verification_rule":"SKIP 后回 HOME","knowledge_tier":"RUN_LOCAL(1次)"}
+  ],
+  "not_state": ["RANKUP 演出", "voice bubble(智代子气泡)", "Now Loading", "剧情对话 — 均为 intermediate_transient/interruption, 不是 planner state"]
+}

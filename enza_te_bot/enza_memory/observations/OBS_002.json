@@ -1,0 +1,19 @@
+{
+ "obs_id": "OBS_002",
+ "artifact_type": "OBSERVATION",
+ "run_id": "WINGRUN_20260907_01",
+ "room": "MAIN_LOBBY",
+ "substate": "MAIN_LOBBY_IDLE",
+ "identity_anchors": [
+  "プロデュース 300/300 free",
+  "bottom menu bar",
+  "lobby voice bubble 結華 (idle, non-blocking)"
+ ],
+ "season_context": "between produce runs; previous WINGRUN_20260906_01 closed",
+ "execution_surface": "ZCode built-in browser (IAB), viewport 1280x720",
+ "screenshot": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/main_lobby_fresh.png",
+ "screenshot_sha256": "dd18792755fe45fa6b98fa5bfffb1791afbfe2611dbb2cbf5a7ec3bacf9cdb36",
+ "provenance": "session_observed",
+ "classification": "FACT",
+ "captured_at": "2026-09-07"
+}

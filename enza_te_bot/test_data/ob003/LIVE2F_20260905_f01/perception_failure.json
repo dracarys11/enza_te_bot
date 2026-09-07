@@ -1,0 +1,11 @@
+{
+  "reason_code": "AGY_COMMAND_FAILURE",
+  "detail": "AGY CLI exited 1",
+  "case_id": "LIVE2F_20260905_f01",
+  "provider": "AGY",
+  "model": "gemini-3.8-flash-medium",
+  "skill_version": "gemini_vision_v1",
+  "screenshot_sha256": "263535061e7b455fd1cf73669213121d5a0c29847d401b5b5daa02bf64cf9be1",
+  "paddle_region_count": 15,
+  "created_at": "2026-09-05T04:38:23+00:00"
+}

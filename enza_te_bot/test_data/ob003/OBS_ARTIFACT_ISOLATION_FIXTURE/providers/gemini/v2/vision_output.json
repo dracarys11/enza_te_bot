@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "provider": "Gemini",
+    "model": "shared-gemini-model-fixture",
+    "skill_version": "gemini_vision_v2",
+    "case_id": "OBS_ARTIFACT_ISOLATION_FIXTURE",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "8c507c508d56b698d978b849992622bad2a70535b4d736cb460e4fd2d9359169",
+    "created_at": "2026-09-04T00:00:01Z"
+  },
+  "observation_id": "ISOLATION_GEMINI_V2",
+  "capture": {
+    "timestamp": "2026-09-04T00:00:01Z",
+    "frame_id": "isolation_fixture",
+    "screenshot_digest": "sha256:fixture"
+  },
+  "viewport": {"width": 1280, "height": 720},
+  "text_regions": [
+    {"id": "v2_t01", "text": "次へ", "bbox": [1142, 641, 72, 40], "confidence": 0.99}
+  ],
+  "interaction_candidates": [
+    {
+      "id": "v2_e01",
+      "bbox": [1094, 624, 166, 78],
+      "appearance": {"shape": "rounded_rect", "color_hint": "pink"},
+      "linked_text_ids": ["v2_t01"],
+      "interaction_confidence": 0.99
+    }
+  ],
+  "numeric_regions": [],
+  "overlay_regions": [],
+  "uncertainties": [],
+  "detection_failures": []
+}

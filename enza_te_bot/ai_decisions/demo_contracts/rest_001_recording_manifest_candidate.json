@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "artifact": "rest_001_recording_manifest",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "manifest_id": "REST_001",
+  "demo_identity": {
+    "demo_id": "REST_001",
+    "target_room": "REST",
+    "purpose": "Bind one passive evidence-collection session to the REST room lifecycle contract."
+  },
+  "source_contracts": [
+    "ai_decisions/demo_contracts/demo_recording_contract_candidate.json",
+    "ai_decisions/demo_contracts/demo_metadata_schema_candidate.json",
+    "ai_decisions/demo_contracts/demo_evidence_contract_candidate.json"
+  ],
+  "evidence_scope": {
+    "lifecycle_count": 1,
+    "lifecycle": [
+      "FRESH_VERIFIED_HOME",
+      "REST_ROOM_INTERACTION",
+      "FRESH_VERIFIED_HOME"
+    ],
+    "scope_rule": "Capture only this single HOME-to-REST-to-HOME episode; do not infer what led to the choice of REST or what should happen next."
+  },
+  "required_evidence_captures": {
+    "home_entry": {
+      "required": true,
+      "items": [
+        "fresh HOME observation",
+        "HOME verification provenance",
+        "screenshot reference",
+        "available numeric observations when present"
+      ],
+      "status": "CANDIDATE_ONLY"
+    },
+    "room_entry": {
+      "required": true,
+      "items": [
+        "human interaction entering REST",
+        "pre-event observation",
+        "post-event observation",
+        "detected REST entry evidence when available"
+      ],
+      "status": "CANDIDATE_ONLY"
+    },
+    "intermediate_state_categories": {
+      "required": true,
+      "allowed_categories": [
+        "REST_TRANSITION",
+        "RESULT",
+        "DIALOGUE",
+        "CONTINUE",
+        "CHOICE",
+        "ANIMATION",
+        "OTHER_OBSERVED_TRANSIENT"
+      ],
+      "rule": "Record observed categories and screenshots; do not require or invent a complete state list.",
+      "status": "CANDIDATE_ONLY"
+    },
+    "shared_handlers": {
+      "required": true,
+      "items": ["dialogue", "continue", "choice"],
+      "rule": "Record a handler only when its human interaction and before/after evidence are present; choices remain protected evidence.",
+      "status": "CANDIDATE_ONLY"
+    },
+    "result_evidence": {
+      "required": true,
+      "items": [
+        "post-action observation",
+        "state or transition evidence",
+        "frame/effect evidence",
+        "human annotation if result meaning is unclear"
+      ],
+      "status": "CANDIDATE_ONLY"
+    },
+    "home_return": {
+      "required": true,
+      "items": [
+        "fresh HOME observation after REST interaction",
+        "HOME verification provenance",
+        "screenshot reference",
+        "before/after numeric observations when available"
+      ],
+      "status": "CANDIDATE_ONLY"
+    }
+  },
+  "unknown_linkage": [
+    {
+      "id": "vision_rest_progress_anchors",
+      "artifact": "ai_decisions/unknown_registry_candidate.json",
+      "status": "UNKNOWN",
+      "impact": "Intermediate REST progress or result cannot be assumed from a HOME return alone."
+    },
+    {
+      "id": "room_rest_home_to_home",
+      "artifact": "ai_decisions/unknown_registry_candidate.json",
+      "status": "UNKNOWN",
+      "impact": "A complete REST HOME-to-HOME lifecycle has not yet been established by this manifest."
+    },
+    {
+      "id": "completion_rest_effect",
+      "artifact": "ai_decisions/unknown_registry_candidate.json",
+      "status": "UNKNOWN",
+      "impact": "This manifest must not define whether REST completed successfully or which effect proves completion."
+    }
+  ],
+  "classification_rules": {
+    "FACT": {
+      "meaning": "Directly captured event or observation with an explicit evidence reference.",
+      "promotion": "Never automatically mapped to CONFIRMED."
+    },
+    "INFERENCE": {
+      "meaning": "Offline relationship derived from linked evidence, such as a unique configured action match.",
+      "promotion": "Requires review before any operational use."
+    },
+    "PROVISIONAL": {
+      "meaning": "Human or compiler hypothesis awaiting validation.",
+      "promotion": "Cannot be treated as runtime fact."
+    },
+    "UNKNOWN": {
+      "meaning": "Missing, ambiguous, conflicting, or unstable evidence.",
+      "promotion": "Blocks deterministic promotion until explicitly resolved."
+    },
+    "default_for_unresolved": "UNKNOWN"
+  },
+  "forbidden_content": [
+    "strategy",
+    "why REST was chosen",
+    "optimal policy",
+    "seasonal decisions",
+    "planner rules",
+    "REST success criteria",
+    "automatic production action or configuration promotion"
+  ],
+  "terminal_states": {
+    "allowed": ["COMPLETED_CAPTURE", "INCOMPLETE", "FAILED"],
+    "meaning": "Describe recording-package completeness only; terminal capture status is not a gameplay success verdict.",
+    "success_criteria_defined": false
+  },
+  "promotion": {
+    "automatic": false,
+    "required_sequence": ["ANNOTATION", "COMPILE", "VERIFY", "PROMOTE"],
+    "production_effect": "none"
+  }
+}

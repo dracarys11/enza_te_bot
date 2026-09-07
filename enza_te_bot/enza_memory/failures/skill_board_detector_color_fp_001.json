@@ -1,0 +1,56 @@
+{
+  "failure_id": "skill_board_detector_color_fp_001",
+  "trajectory_reference": "memory_index session sess_zcode_skill_board_detector_calibration_20260907 (offline calibration over recovered corpus, no live interaction)",
+  "occurrences": 2,
+  "intent": "shadow_executor.skill_board node state classification on the 45 recovered frames (offline evaluation only)",
+  "grounding_method": "programmatic 45-frame evaluation loop (observe_skill_board + observe_replacement) against recovered_frame_manifest.jsonl ground truth",
+  "action": "offline detector evaluation, no game interaction",
+  "observed_result": {
+    "effect": "two colour-only false-positive classes in the pre-calibration detector",
+    "classes": [
+      {
+        "class": "SELECTED_FP",
+        "detail": "ordinary pink skill-icon badges (Vocal-family icons, ~41px, magenta border share 0.2-0.34) satisfied the old rule width>=55 & magenta_border>=0.10; only the accidental small-candidate filtering kept them unselected. True selection rings are ~88-90px hollow magenta annuli (outer_frac>=0.99, inner_frac<=0.007).",
+        "risk": "wrong purchase target / phantom selection in plan_skill_action"
+      },
+      {
+        "class": "ACQUIRED_FP",
+        "detail": "solid cyan UI chips outside the skill board (dialogue frames rf_dl_skip_story_audition_fail x2, rf_dl_afsoushi_rest x1: inner-disc cyan fill 0.41-0.98) were classified ACQUIRED by cyan_border>=0.12 alone. The genuine owned-node signature is a cyan border ring with a hollow core (inner_disc_fill=0.0).",
+        "risk": "non-board screens producing owned-node claims; inflated acquired_visual_nodes evidence"
+      }
+    ],
+    "evidence": [
+      "/tmp/skill_board_detector_eval.json (pre-fix run, 2026-09-07)",
+      "review_batches/skill_board_v0_4 (post-fix annotated corpus)"
+    ],
+    "provenance": "session_observed"
+  },
+  "verification": {
+    "expected": "colour classes never act as sole authority (contract skill_board.json LEAK-03)",
+    "result": "criterion VIOLATED by pre-calibration detector -> anomaly, then fixed same session"
+  },
+  "unknown_cause": {
+    "classification": "DETECTOR_DEFECT_COLOR_AS_AUTHORITY",
+    "candidate_causes": [
+      "single colour-fraction threshold used as state classifier",
+      "no radial/structural verification of ring geometry",
+      "candidate extractor also proposes icon badges and UI chips as nodes"
+    ]
+  },
+  "state_now": "fixed in shadow_executor/skill_board.py: SELECTED requires size>=60x50 + hollow magenta annulus (outer>=0.90, inner<=0.12); ACQUIRED requires cyan border ring with cyan_annulus outer>=0.55 and inner-disc fill<=0.30",
+  "future_caution": [
+    "ICON_COLOR and SELECTION_RING/OWNERSHIP evidence must remain separate features",
+    "bright-yellow/gold ownership (rf_sb_d1 575,235; rf_rp_t2_post_commit 585,50; rf_sb_f6 930,320) still has no positive detector claim and stays UNKNOWN - do not 'fix' by colour threshold alone",
+    "node candidates include icon badges and UI chips; every state claim needs structural corroboration"
+  ],
+  "policy_links": [
+    "enza_memory/runtime_contracts/skill_board.json#LEAK-03",
+    "enza_memory/runtime_contracts/skill_board.json#board_color_model"
+  ],
+  "resolution": {
+    "resolved_at": "2026-09-07T00:00:00Z",
+    "root_cause": "colour fraction alone cannot separate icon art from state rings; radial annulus structure separates them cleanly on all 45 recovered frames",
+    "reclassified_as": "resolved detector calibration defect",
+    "lesson_update": "regression-locked in test_skill_board_detector_calibration.py (11 tests): pink!=SELECTED, gold/cyan!=ACQUIRED, SP23<45 fails closed, g1..g4 (live_csm_020..023) fail closed under full policy authorization"
+  }
+}

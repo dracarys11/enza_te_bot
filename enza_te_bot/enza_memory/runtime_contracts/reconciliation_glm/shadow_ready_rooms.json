@@ -1,0 +1,102 @@
+{
+  "artifact_type": "SHADOW_READY_ROOM_ASSESSMENT",
+  "audit_id": "CONTRACT_OFFLINE_AUDIT_20260906",
+  "generated_at": "2026-09-06T23:59:00Z",
+  "mode": "OFFLINE_ONLY; SHADOW_TEST scope = detect/predict without clicking; no shadow executor implemented in this audit",
+  "definition": "A room is SHADOW_READY when: (a) its identity anchors are evidenced, (b) >=1 core control is PYTHON_READY_CANDIDATE (all 5 positive flags + both replication flags tracked), (c) no unresolved authority-model conflict (T-01-class) on its primary path, (d) failure modes have negative evidence. PYTHON_READY_CANDIDATE rooms satisfy (a)+(b) but carry one documented gap.",
+  "version_note_20260907": "this artifact was authored against the 11/11-v0.2 contract snapshot; the CURRENT tree is MIXED (6 room contracts + index at 0.2.1 via CONTRACT_EVIDENCE_DELTA_20260907, 5 rooms at 0.2). Room verdicts below are unchanged by the repair; only evidence-availability caveats were refreshed (see ending room and control_readiness v021_delta_overlay).",
+  "rooms": [
+    {
+      "room": "HOME",
+      "identity_anchors": "evidenced (REPEATED_EVIDENCE)",
+      "core_controls_python_ready": ["SCHEDULE"],
+      "authority_model_conflicts": "none on primary path",
+      "verdict": "SHADOW_READY",
+      "caveats": ["REST geometry missing", "FURIKAERI single-session + operator gate (T-03 stale claim to fix)", "MAIN_LOBBY edges UNKNOWN"]
+    },
+    {
+      "room": "SCHEDULE",
+      "identity_anchors": "evidenced",
+      "core_controls_python_ready": ["VOCAL", "DECIDE"],
+      "authority_model_conflicts": "none (LEAK-01 threshold wording to fix)",
+      "verdict": "SHADOW_READY",
+      "caveats": ["AUDITION_ENTRY single-session", "SUPPORT_SKILL hazard-only"]
+    },
+    {
+      "room": "RESULT",
+      "identity_anchors": "evidenced (subtypes)",
+      "core_controls_python_ready": ["ADVANCE_CYCLE"],
+      "authority_model_conflicts": "none (T-02 OK-anchor enum to add)",
+      "verdict": "SHADOW_READY",
+      "caveats": ["PASS_FAIL frame detector pending (VRB02_032/034 exist as evidence)", "terminal-condition detector pending"]
+    },
+    {
+      "room": "SEASON_TRANSITION",
+      "identity_anchors": "evidenced",
+      "core_controls_python_ready": ["NEXT", "START_PREP"],
+      "authority_model_conflicts": "none (T-04 no-projection rule to add)",
+      "verdict": "SHADOW_READY",
+      "caveats": ["OK_SKIP geometry missing", "fresh S3/S4 transition frame unrecovered", "semifinal UNKNOWN (held)"]
+    },
+    {
+      "room": "DIALOGUE",
+      "identity_anchors": "evidenced (subtypes via SKIP presence/Auto group)",
+      "core_controls_python_ready": ["SAFE_TEXTBOX", "SKIP_CONTROL"],
+      "authority_model_conflicts": "T-01 RESOLVED in v0.2 (verified 2026-09-07): dialogue.json now carries ranked authority SKIP > FAST_FORWARD_RIGHT > TEXTBOX, choice_owner_suppression, and CHOICE_OWNER_NOT_RESPECTED failure mode",
+      "verdict": "SHADOW_READY (contingent on CROSS:FRAME_STATE_DETECTOR; upgraded from PYTHON_READY_CANDIDATE after v0.2 T-01 resolution was verified)",
+      "caveats": ["FAST_FORWARD geometry ungrounded; execution HOLD at n=1 (1 validated execution S1W7 — not zero, see STALE-G)", "PLAIN_DIALOGUE vs CHOICE_PRESENT detector not built"]
+    },
+    {
+      "room": "CHOICE",
+      "identity_anchors": "evidenced with taxonomy split (layout_family + event_context)",
+      "core_controls_python_ready": [],
+      "authority_model_conflicts": "LEAK-06 RESOLVED in v0.2 (verified 2026-09-07): badge_semantics split applied — badge is layout-identity signal, selection authority stays POSITION-based policy",
+      "verdict": "PYTHON_READY_CANDIDATE",
+      "caveats": ["THREE_CHOICE_MIDDLE 8/8 + 3-axis replication but NEEDS_DETECTOR", "TWO_CHOICE geometry never captured (LVT-04)", "STALE-H: 2-choice success count is 4/0 cross-session in latest corpus (contract text still says 3/3); PROMISE evidence/policy split pending"]
+    },
+    {
+      "room": "AUDITION_SELECTION",
+      "identity_anchors": "PARTIAL (page anchors never formalized into schema)",
+      "core_controls_python_ready": [],
+      "verdict": "NEEDS_REPLICATION",
+      "caveats": ["10/10 single-run 0905; eligibility model UNKNOWN"]
+    },
+    {
+      "room": "AUDITION_BATTLE",
+      "identity_anchors": "phase-level evidenced + 5 durable VRB02 frames",
+      "core_controls_python_ready": [],
+      "authority_model_conflicts": "none (epoch model confirmed by BTR corpus)",
+      "verdict": "NEEDS_REPLICATION",
+      "caveats": ["AUTO cross-session (LVT-02)", "SPEED toggle HOLD (LVT-01)", "manual card emergency-only"]
+    },
+    {
+      "room": "SKILL_BOARD",
+      "identity_anchors": "PARTIAL (45 recovered frames, review pending)",
+      "core_controls_python_ready": [],
+      "authority_model_conflicts": "LEAK-03 color→availability OPEN",
+      "verdict": "NEEDS_REPLICATION",
+      "caveats": ["single session", "cross-scale drift", "positive-path source frames csm_015..019 absent"]
+    },
+    {
+      "room": "SKILL_REPLACEMENT",
+      "identity_anchors": "PARTIAL (10 frames + visual sequence)",
+      "core_controls_python_ready": [],
+      "verdict": "NEEDS_REPLICATION",
+      "caveats": ["4/4 single session", "LIMIT_4 detector not formalized"]
+    },
+    {
+      "room": "ENDING",
+      "identity_anchors": "PARTIAL — modal (フェスアイドル確認 x4) + epilogue (x4) RECOVERED_DURABLE per ending.json v0.2.1; rank screen / プロデュース評価 / clear reward scenes remain DERIVED_SUMMARY_CONFIRMED; staff roll PARTIAL; terminal MAIN_LOBBY_IDLE FRESH_LIVE_CONFIRMED",
+      "core_controls_python_ready": [],
+      "verdict": "NEEDS_REPLICATION",
+      "caveats": ["FINAL_RESULT_SEMANTICS partial/derived — not promoted", "BIRTH_OK irreversible HOLD", "PERSIST-1 RESOLVED_BY_RUN_STATE_PATCH (invariant retained: closed-run state must not become current authority)", "long-press abandon BLOCKED/operator-only unchanged"]
+    }
+  ],
+  "summary": {
+    "SHADOW_READY_ROOMS": ["HOME", "SCHEDULE", "RESULT", "SEASON_TRANSITION", "DIALOGUE (upgraded after verified v0.2 T-01 resolution)"],
+    "PYTHON_READY_CANDIDATE_ROOMS": ["CHOICE"],
+    "NEEDS_REPLICATION_ROOMS": ["AUDITION_SELECTION", "AUDITION_BATTLE", "SKILL_BOARD", "SKILL_REPLACEMENT", "ENDING"],
+    "PRODUCTION_READY_ROOMS": [],
+    "global_blocker": "CROSS:FRAME_STATE_DETECTOR — no frame-based room/state detector exists for Python yet; every shadow-ready verdict is contingent on it"
+  }
+}

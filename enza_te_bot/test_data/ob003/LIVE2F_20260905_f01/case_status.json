@@ -1,0 +1,9 @@
+{
+  "case_id": "LIVE2F_20260905_f01",
+  "terminal_state": "UNKNOWN",
+  "stage": "AGY_COMMAND_FAILURE",
+  "reason_code": "AGY_COMMAND_FAILURE",
+  "source_sha256": "263535061e7b455fd1cf73669213121d5a0c29847d401b5b5daa02bf64cf9be1",
+  "started_at": "2026-09-05T04:37:05+00:00",
+  "finished_at": "2026-09-05T04:38:23+00:00"
+}

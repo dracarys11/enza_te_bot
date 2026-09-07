@@ -1,0 +1,111 @@
+{
+  "contract_version": "0.2",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): T-03 FURIKAERI evidence upgrade to NEEDS_REPLICATION",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract distilled from live memory evidence. NOT executable policy, NOT business strategy. Perception evidence is separated from action authority.",
+  "scenario_scope": "WING produce (MAC_CURRENT_V1 viewport 1280x720 only)",
+  "ROOM_IDENTITY": {
+    "room_id": "HOME",
+    "aliases": ["WING_HOME", "PRODUCE_HOME"],
+    "note_main_lobby": "A second identity exists after run end: MAIN_LOBBY / MAIN_LOBBY_IDLE (fresh-confirmed in WINGRUN_20260906_01 checkpoint). Its observation schema is PARTIAL — entry/exit edges from lobby are UNKNOWN.",
+    "identity_anchors_required": [
+      "URL == /produce",
+      "top status strip: シーズンN / 残りN週 / ファン(あとN人) / 体力bar",
+      "bottom entry quartet: プロデュース / 休む / 振り返り / 流行確認"
+    ],
+    "identity_source": "url_plus_layout (REPEATED_EVIDENCE, page_identity_distillation)",
+    "cheap_signals": ["top three-segment status strip template", "bottom quartet coarse vision"],
+    "must_not_require": ["full-screen OCR", "AGY call", "weekly goal panel deep read"],
+    "identity_status": "VERIFIED_EVIDENCE"
+  },
+  "ENTRY_CONDITIONS": [
+    "fresh stable screenshot (not during Now Loading / result animation)",
+    "identity anchors above all present",
+    "viewport MAC_CURRENT_V1 1280x720 (other viewports: RECALIBRATION_REQUIRED, never auto-scale)"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields_by_decision_context": {
+      "normal_week": ["season", "weeks_remaining"],
+      "final_week": ["season", "weeks_remaining", "fan_gap_to_target", "stamina"],
+      "season3": ["season", "weeks_remaining", "fan_gap_to_target", "stamina", "season3_flag_state (e.g. S3_START_PREP_DONE)"]
+    },
+    "minimal_observation_is_context_dependent": true,
+    "decision_source": "home_policy.py decide_home() — BUSINESS POLICY, outside this contract; outputs observed as VOCAL/REST/SKILL/AUDITION",
+    "forbidden_semantic_leakage": "perception layer must not decide business fields; policy declares required fresh fields (PLANNER_DECLARES_REQUIRED_OBSERVATION_FIELDS)",
+    "weeks_decrement_inference": "if previous frame freshly verified HOME and no anomaly, weeks_remaining decrement may be inferred for transition check (RUN_LOCAL, weak)"
+  },
+  "SUBSTATES": [
+    {"substate": "WING_HOME_ACTIONABLE", "evidence": "REPEATED_EVIDENCE", "note": "stable, bottom quartet present, no transient overlay"},
+    {"substate": "WING_HOME_WITH_TRANSIENT", "evidence": "REPEATED_EVIDENCE", "note": "voice bubble (智代子, auto-dismiss), Now Loading, result animation passing through — not planner states"},
+    {"substate": "MAIN_LOBBY_IDLE", "evidence": "FRESH_LIVE_CONFIRMED (run end)", "note": "produce slot free 300/300; schema PARTIAL"}
+  ],
+  "VISIBLE_CONTROLS": [
+    {"control": "SCHEDULE (プロデュース)", "geometry_1280x720": {"x": 150, "y": 600, "normalized": {"x": 0.1172, "y": 0.8333}}, "visual_identity": "bottom-left SCHEDULE calendar standee + pink プロデュース label", "success_fail": "7/0", "visible_status": "VERIFIED_EVIDENCE"},
+    {"control": "REST (休む)", "geometry": "UNKNOWN", "visual_identity": "休む HOME control", "success_fail": "1/0", "visible_status": "VERIFIED_SEMANTIC, GEOMETRY_UNKNOWN"},
+    {"control": "FURIKAERI (振り返り)", "geometry_1280x720": {"x": 205, "y": 655, "normalized": {"x": 0.1602, "y": 0.9097}}, "visual_identity": "振り返り papers bottom-center-right; white puff transition", "success_fail": "1 validated intentional session (S3 start prep, rf_sb_a1_board_entry + live_csm_015) + historical accidental activation", "visible_status": "VERIFIED_EVIDENCE — intentional use NEEDS_REPLICATION (single session) + operator authorization gate"},
+    {"control": "流行確認", "geometry": "UNKNOWN", "visible_status": "VISIBLE_ONLY, never clicked"},
+    {"control": "top status strip", "geometry": "top strip", "visible_status": "READ_ONLY observation surface (season/weeks/fan_gap/stamina)"}
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "VISIBLE != AUTHORIZED. Control value and interactability are separate evidence fields (INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE).",
+    "SCHEDULE": "AUTHORIZED only with: fresh WING_HOME identity + viewport 1280x720 + local anchor present + point in bounds + policy-selected intent",
+    "REST": "AUTHORIZED only when fresh business policy selects REST (e.g. gated BACK_TO_REST chain after fresh risk evidence); geometry must be grounded before first Python use",
+    "FURIKAERI": "VISIBLE != ACTIONABLE. Intentional activation requires operator policy authorization (skill-board entry; coverage matrix: safe at S-start, postcondition board opens); single-session evidence — NEEDS_REPLICATION, never autonomous authority",
+    "fresh_evidence_rule": "DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE — cached weeks/fan values never authorize a week-consuming action"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/classify (always)",
+    "click SCHEDULE with full guard set (PROVEN point, anchor check)",
+    "click REST only under fresh policy selection + grounded geometry (currently geometry UNKNOWN → effectively HOLD for Python)",
+    "click FURIKAERI only with explicit operator authorization (intentional skill flow; s4 hints say entry is 振り返り — PARTIAL)"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "blind tap bursts after any state transition (FURIKAERI wrong-target hazard)",
+    "click during Now Loading / result animation",
+    "stale-evidence REST/audition commits",
+    "auto-scaling coordinates to other viewports"
+  ],
+  "POSTCONDITIONS": {
+    "SCHEDULE_click": "fresh SCHEDULE page loaded (title スケジュール選択 anchors); natural duration ~2526ms (LOW confidence, n=1)",
+    "REST_click": "fresh HOME with weeks_remaining-1 and stamina recovery; possible dialogue interruption",
+    "week_committed": "weeks_remaining decremented by 1 on fresh HOME — this is the week-completion criterion"
+  },
+  "EXIT_CONDITIONS": [
+    "SCHEDULE clicked → room SCHEDULE",
+    "REST path → transient dialogue → back to HOME with weeks-1",
+    "run end → season transition / ENDING"
+  ],
+  "FAILURE_MODES": [
+    {"mode": "OVER_TAP_FURIKAERI", "evidence": "post-dialogue over-tap opened 振り返り (hazard_map)", "class": "WRONG_TARGET"},
+    {"mode": "STALE_STATE_COMMIT", "evidence": "harness invariant DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE", "class": "STATE_STALE"},
+    {"mode": "SCREENSHOT_TIMEOUT_AFTER_PROGRESS", "evidence": "twice in WINGRUN_20260906_01; week committed while capture hung (8->7 operator-reconciled)", "class": "TOOL_TIMEOUT"},
+    {"mode": "PERSISTENCE_GAP", "evidence": "S1W6→S3 crash: raw timings stopped while server state advanced", "class": "PERSISTENCE"}
+  ],
+  "RECOVERY": [
+    "after post-action observation failure: reconcile pending transaction against next fresh stable state before any retry (C1, PROVISIONAL); never blind re-click",
+    "after session loss: fresh stable state supersedes stale checkpoint; recovered transcript events stored separately, never forged into live timestamps",
+    "persistence failure is fail-closed: refuse next week-consuming transaction until durable write succeeds"
+  ],
+  "PERSISTENCE_BOUNDARY": {
+    "on_exit_of_room": "flush weeks_remaining / fan_gap / season with provenance after any week-consuming action completes",
+    "durable_boundaries": ["completed week", "before risky burst", "before handoff/session end"],
+    "authority_order": ["fresh stable state observation", "raw durable event with provenance", "checkpoint", "artifact registry", "derived summary"]
+  },
+  "MIGRATION_STATUS": {
+    "SCHEDULE_control": "NEEDS_FRESH_VISUAL_BOX (readiness 16/17; python_ready shadow candidate)",
+    "REST_control": "NEEDS_FRESH_VISUAL_BOX (11/17, replication=1)",
+    "FURIKAERI_control": "NEEDS_REPLICATION (coverage 15/17; visual+geometry+authority evidenced in one validated session; operator gate stays)",
+    "state_detector": "page-label based; no normalized frame-based Python detector yet",
+    "UNKNOWN": ["REST geometry", "流行確認 semantics", "MAIN_LOBBY edges", "exact weeks/fan ROI boxes for Python"]
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/page_identity_distillation.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/decision_distillation.json",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/checkpoint.json",
+    "enza_memory/policies/learned_constraints.json (C1)",
+    ".agent-harness/GATES.md runtime invariants"
+  ]
+}

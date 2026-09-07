@@ -1,0 +1,8 @@
+{
+  "promote":[
+    {"candidate":"VOCAL normal-week loop","scope":"WING known normal-week, 1280x720"},
+    {"candidate":"core taught controls","scope":"WING known normal-week, 1280x720, with guards"},
+    {"candidate":"NORMAL_WEEK_NO_AGY","scope":"known WING normal-week only"}
+  ],
+  "promotion_is_not_global":true
+}

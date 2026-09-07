@@ -1,0 +1,51 @@
+{
+  "not_chain_of_thought": true,
+  "usage_status": "audit/benchmarking ONLY. NOT executable policy, NOT training data.",
+  "trajectory": "enza_phase2_prototype_001",
+  "decision_trace_id": "DT_20260903065015_006",
+  "action_index": 6,
+  "observation_id": "OBS_20260903065000",
+  "current_state": "PRODUCE_SELECTION (/produce)",
+  "exploration_objective": "locate Vocal baseline setting (planner step '选择 Vocal baseline')",
+  "candidate_actions": [
+    {
+      "action": "click 研修設定",
+      "risk": "low — settings screen, no consumption visible",
+      "selected": true
+    },
+    {
+      "action": "click 次へ",
+      "risk": "advances toward confirm boundary prematurely",
+      "selected": false
+    },
+    {
+      "action": "click difficulty ビギナー/ミドル/マスター",
+      "risk": "unknown semantics",
+      "selected": false
+    }
+  ],
+  "selected_action": "click 研修設定 at (980,670)",
+  "expected_transition": "training settings panel",
+  "risk_level": "LOW",
+  "unknowns_at_decision": [
+    "panel contents"
+  ],
+  "verification_criteria": [
+    "fresh screenshot shows settings panel"
+  ],
+  "action_record": {
+    "performed": true,
+    "method": "cua.click (980,670)"
+  },
+  "transition_record": {
+    "from": "PRODUCE_SELECTION",
+    "to": "TRAINING_SETTINGS (研修設定 overlay)"
+  },
+  "verification_record": {
+    "result": "PASS",
+    "evidence": "OBS_20260903065025: Vo/Da/Vi 0/20 columns + 決定 button"
+  },
+  "failure_record": {
+    "failure": null
+  }
+}

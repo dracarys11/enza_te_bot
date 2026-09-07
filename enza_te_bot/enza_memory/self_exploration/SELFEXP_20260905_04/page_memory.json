@@ -1,0 +1,8 @@
+{
+  "scenario_scope": "WING",
+  "pages": [
+    {"page_class":"WING_INTRO_DIALOGUE","url":"https://shinycolors.enza.fun/produce","stable_visual_features":["左上 プロデュース☆イベント 标题框+偶像头像","底部 プロデューサー 对话框","右上 SKIP","右下 早送りx4 OFF"],"common_controls":["dialogue_skip"],"confidence":0.9,"example_screenshots":["screenshots/w5_after_produce_start.png"]},
+    {"page_class":"WING_HOME","url":"https://shinycolors.enza.fun/produce","stable_visual_features":["左上 プロデュース 标题+?","顶栏: シーズン1 残り8週 / ファン人数 あと999人(E rank) / 体力bar+テンション+Lv.0","左侧竖栏: ユニット確認/衣装変更/アイテム","右侧竖栏: 講める/ホームに戻る/オプション","底部: プロデュース(SCHEDULE 日历)/休む/振り返り/流行確認","右下 goal 面板: ダンスDa/ボーカルVo/ビジュアルVi"],"common_controls":["wing_produce_schedule","wing_rest","wing_review","wing_trend","wing_unit_check","wing_home_back","dialogue_advance(未学)"],"confidence":0.9,"example_screenshots":["screenshots/w6_after_skip.png"]}
+  ],
+  "wing_home_coarse_identity": {"season":"シーズン1","weeks_remaining":"8週(第1周,残り8)","fan_target":"あと999人(Eランク)","stamina":"消費后270/300 (bar 满-30)","tension":"页面显示 テンション indicator","goal_panel":["Da","Vo","Vi"],"dialogue_present":false,"overlay_present":false}
+}

@@ -1,0 +1,12 @@
+{
+  "source_audits": ["cross_session_audit.json", "agy_wing_review_manifest.json"],
+  "findings": [
+    {"finding":"没有 confirmed WING evidence","classification":"SUPERSEDED_BY_SELFEXP04","evidence":"w1 explicit labels and selected WING card"},
+    {"finding":"KNOWHOW_SELECTION unknown scope","classification":"OUT_OF_SCOPE","evidence":"SELFEXP03:s5 is not on SELFEXP04 WING path; classify as NON_WING/OTHER_SCENARIO_EVIDENCE"},
+    {"finding":"下一步继续走 KNOWHOW_SELECTION","classification":"SUPERSEDED_BY_SELFEXP04","evidence":"w2→w3 goes UNIT_FORMATION→ITEM_SELECTION"},
+    {"finding":"AGY 审 6 张旧截图","classification":"SUPERSEDED_BY_SELFEXP04","evidence":"SELFEXP04 raw trace + screenshots resolve scenario identity; old AGY attempt remains historical AGY_REVIEW_INCOMPLETE/RESULT_NOT_RECOVERABLE"},
+    {"finding":"SELFEXP02 两次无反应证明 wizard lock","classification":"UNRESOLVED","evidence":"No-op cause remains confounded (disabled, geometry, overlay, or hitbox)"}
+  ],
+  "old_audit_blocks_mainline": false,
+  "historical_preserved": true
+}

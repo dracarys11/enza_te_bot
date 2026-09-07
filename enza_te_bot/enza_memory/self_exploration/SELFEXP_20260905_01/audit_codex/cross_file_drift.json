@@ -1,0 +1,13 @@
+{
+  "session_id": "SELFEXP_20260905_01",
+  "drift_status": "WARN",
+  "findings": [
+    {"field":"summary.screenshots_total","summary":15,"trace_recomputed":16,"status":"DRIFT"},
+    {"field":"summary.valid_transitions","summary":11,"trace_MATCHED":12,"status":"DRIFT"},
+    {"field":"summary.new_pages","summary":3,"page_memory":6,"trace_distinct_page_classes":6,"status":"DRIFT"},
+    {"field":"summary.new_controls","summary":8,"control_memory":9,"status":"DRIFT"},
+    {"field":"control_memory.times_seen","status":"DRIFT","detail":"memory total=18; executed action occurrences=13; candidate sightings are not trace-countable"},
+    {"field":"transition_memory.step9","status":"CONSISTENT","detail":"MISMATCH retained; not counted as success"},
+    {"field":"overlay_parent","status":"WARN","detail":"IDOL_LIST+TUTORIAL_OVERLAY and WORK_ACTIVITY+TUTORIAL_OVERLAY are represented as page-like labels rather than a separate interruption field"}
+  ]
+}

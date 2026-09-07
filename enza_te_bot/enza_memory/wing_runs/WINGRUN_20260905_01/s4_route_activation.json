@@ -1,0 +1,14 @@
+{
+  "activated": "2026-09-05T09:10:00Z",
+  "authority": "operator prompt (supersedes home_policy ROUTE_STATE_REQUIRED for this run)",
+  "TE_FAN_TARGET": 500000,
+  "current_fans": 111150,
+  "te_fan_gap": 388850,
+  "max_eligible_reward_observed": 100000,
+  "max_eligible_source": "THE LEGEND (難19, B以上, 決定 pink, fresh evidence s4route_audition_p4b.png)",
+  "minimum_required_wins": 4,
+  "safety_margin_weeks": 1,
+  "week1_decision": "PREPARATION(VOCAL) — weeks 8 > 4+1",
+  "inventory_note": "audition inventory 每次 fresh observe; +200000(A以上)/+300000(S以上) 当前锁定, rank 提升后可能解锁",
+  "rules": ["dynamic replan after every audition (pass or fail)", "explicit success evidence only", "speed handler: 保持可用速度, 不阻塞", "business choices: fixed policy"]
+}

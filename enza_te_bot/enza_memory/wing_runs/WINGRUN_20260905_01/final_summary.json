@@ -1,0 +1,50 @@
+{
+  "run_id": "WINGRUN_20260905_01",
+  "result": "COMPLETED_ABANDONED",
+  "run_closed": true,
+  "resume_allowed": false,
+  "season_results": {
+    "S1": "CLEAR",
+    "S2": "CLEAR",
+    "S3": "CLEAR",
+    "S4": "ENDED"
+  },
+  "s4": {
+    "entry_weeks": 8,
+    "preparation_actions": {
+      "VOCAL": 3
+    },
+    "the_legend": {
+      "results": ["PASS", "FAIL", "PASS", "PASS", "FAIL"],
+      "pass_count": 3,
+      "fail_count": 2
+    },
+    "season_end_fans": 414414,
+    "te_target": 500000,
+    "te_result": "FAILED"
+  },
+  "semifinal_result": "UNKNOWN",
+  "final_evaluation": {
+    "fans": 419414,
+    "delta_from_s4_end": 5000,
+    "delta_source": "UNKNOWN"
+  },
+  "closure": {
+    "method": "ABANDONED_BY_OPERATOR",
+    "flow": [
+      "HOME",
+      "ホームに戻る・諦める",
+      "operator long-press 諦める",
+      "プロデュース評価",
+      "フェスアイドル誕生",
+      "reward",
+      "main HOME"
+    ]
+  },
+  "agy_calls": 0,
+  "authoritative_source": "weekly_trace.jsonl and referenced screenshots",
+  "uncertainties": [
+    "SEMIFINAL_RESULT",
+    "FAN_DELTA_5000_SOURCE"
+  ]
+}

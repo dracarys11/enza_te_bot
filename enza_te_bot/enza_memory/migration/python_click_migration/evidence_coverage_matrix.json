@@ -1,0 +1,1122 @@
+{
+ "artifact_type": "EVIDENCE_COVERAGE_MATRIX",
+ "generated_at": "2026-09-06T22:30:00+08:00",
+ "mode": "OFFLINE_ONLY (no game contact)",
+ "scope_note": "rows grounded in durable artifacts only; unrecovered sess_a87 frames cited as call ids, not treated as durable",
+ "scoring": {
+  "VISUAL_EVIDENCE": "0-3",
+  "GEOMETRY": "0-3",
+  "STATE_DETECTOR": "0-3",
+  "AUTHORITY": "0-3",
+  "POSTCONDITION": "0-3",
+  "CROSS_SESSION_REPLICATION": "0-3",
+  "NEGATIVE_EVIDENCE": "0-2"
+ },
+ "ready_rule": "total>=15 AND visual>=2 AND geometry>=2 AND detector>=2 AND authority>=2 AND replication>=2 (shadow-test ready, NOT production-authorized)",
+ "rows": [
+  {
+   "room": "HOME",
+   "state": "WING_HOME",
+   "control": "SCHEDULE",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 3,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 3,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 18,
+   "detector": "bottom-left SCHEDULE standee; page-label check /produce → schedule page",
+   "action_authority": "operator-authorized weekly action entry; guards: fresh WING_HOME + viewport",
+   "postcondition": "fresh SCHEDULE page loaded (trouble rate visible)",
+   "replication": "7 successes, cross-session (0906 run W1-W6 + WINGVAL)",
+   "negative_evidence": "over-tap hazard: 振り返り opens after dialogue end; サポートスキル mis-click recorded",
+   "source_frames": [
+    "enza_memory/migration/python_click_migration/click_samples.jsonl live_csm_012/013",
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "HOME",
+   "state": "WING_HOME",
+   "control": "REST",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 11,
+   "detector": "coffee mug visual anchor bottom-center",
+   "action_authority": "authorized when VOCAL gate fails or policy chooses REST",
+   "postcondition": "REST event dialogue → stat/week settle",
+   "replication": "2 successes (S1 + S3 5% week), single session each",
+   "negative_evidence": "REST triggers unexpected dialogue chain ( sweets event ) — timing unrecorded",
+   "source_frames": [
+    "recovered_frames/dialogue/rf_dl_afsoushi_rest.png",
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ],
+   "python_readiness": "NEEDS_GEOMETRY"
+  },
+  {
+   "room": "HOME",
+   "state": "WING_HOME",
+   "control": "FURIKAERI_ENTRY",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 15,
+   "detector": "振り返り papers bottom-center-right; white puff transition",
+   "action_authority": "operator-directed skill prep; safe at S-start",
+   "postcondition": "FURIKAERI_SKILL board opens",
+   "replication": "1 validated session (S3 start prep); 0 accidental entries (negative known)",
+   "negative_evidence": "over-tap opens it unintentionally (hazard); single replication",
+   "source_frames": [
+    "recovered_frames/skill_board/rf_sb_a1_board_entry_sp548.png",
+    "click_samples.jsonl live_csm_015"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SCHEDULE",
+   "state": "SCHEDULE_LOADED",
+   "control": "VOCAL",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 3,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 3,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 19,
+   "detector": "card list + トラブル率 read + 決定 badge",
+   "action_authority": "failure-rate gate: >2% → BACK→REST; ≤2% → VOCAL (strict >); unknown ≠ 0",
+   "postcondition": "lesson cutin → auto lesson → weeks-1 + fan gap committed",
+   "replication": "6+ successes across 2 runs; fresh trouble reads ×5 (1%,5%,0%×4)",
+   "negative_evidence": "決定 empty-fire on slow load (S1W4); 5% week correctly blocked",
+   "source_frames": [
+    "distilled/control_evidence_matrix.json",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "SCHEDULE",
+   "state": "SCHEDULE_LOADED",
+   "control": "AUDITION_ENTRY",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 12,
+   "detector": "audition card in schedule list",
+   "action_authority": "authorized on final week / gap-driven per policy",
+   "postcondition": "audition selection page loads",
+   "replication": "10 successes single-run (0905); 0906 run never reached audition",
+   "negative_evidence": "0906 S3 ended without any audition — entry unverified cross-session",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SCHEDULE",
+   "state": "CANDIDATE_SELECTED",
+   "control": "DECIDE",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 3,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 3,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 17,
+   "detector": "決定 button bottom-right",
+   "action_authority": "authorized after candidate select + page load",
+   "postcondition": "lesson/audition transition starts",
+   "replication": "6 successes across runs (REPLICATED)",
+   "negative_evidence": "empty-fire on slow load documented",
+   "source_frames": [
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "SCHEDULE",
+   "state": "SCHEDULE_LOADED",
+   "control": "BACK",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 11,
+   "detector": "戻る arrow bottom-left",
+   "action_authority": "safe cancel path",
+   "postcondition": "returns WING_HOME",
+   "replication": "1 success; also used in 5% gate week",
+   "negative_evidence": null,
+   "source_frames": [
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SCHEDULE",
+   "state": "SCHEDULE_LOADED",
+   "control": "SUPPORT_SKILL",
+   "scores": {
+    "VISUAL_EVIDENCE": 1,
+    "GEOMETRY": 0,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 0,
+    "POSTCONDITION": 1,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 6,
+   "detector": null,
+   "action_authority": "PROHIBITED as skip target (hazard)",
+   "postcondition": "n/a (mis-click opens panel)",
+   "replication": "1 mis-click recorded",
+   "negative_evidence": "hazard region normalized (0.7695,0.9208) — negative evidence strong",
+   "source_frames": [
+    "migration_status.json HAZARD_REGIONS"
+   ],
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ],
+   "python_readiness": "BUSINESS_UNKNOWN"
+  },
+  {
+   "room": "DIALOGUE",
+   "state": "COMMUNICATION",
+   "control": "SAFE_TEXTBOX",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 3,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 3,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 18,
+   "detector": "textbox present + advance arrow",
+   "action_authority": "tap anywhere on textbox; SKIP/早送り preferred when visible",
+   "postcondition": "dialogue ends ≤4 taps; extra tap opens 振り返り (hazard)",
+   "replication": "35+ successes across 3 sessions",
+   "negative_evidence": "over-tap hazard; SKIP→お知らせ overlay hazard on /home login",
+   "source_frames": [
+    "recovered_frames/dialogue/*.png (4 frames)",
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "DIALOGUE",
+   "state": "CONTINUOUS",
+   "control": "SKIP_CONTROL",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 3,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 17,
+   "detector": "SKIP badge top-right (1218,53)-ish",
+   "action_authority": "click directly when present (operator-endorsed priority SKIP>早送り>textbox)",
+   "postcondition": "jumps to choice stop-point or scene end",
+   "replication": "5+ season/story successes; S3-end season dialogue skipped",
+   "negative_evidence": "/home login SKIP opened お知らせ overlay (causality unknown)",
+   "source_frames": [
+    "recovered_frames/dialogue/rf_dl_skip_login.png",
+    "recovered_frames/dialogue/rf_dl_skip_story_audition_fail.png",
+    "recovered_frames/dialogue/rf_dl_skip_result_daplus15.png"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "DIALOGUE",
+   "state": "CONTINUOUS",
+   "control": "AFSOUSHI_X4",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 0,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 1,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 0,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 7,
+   "detector": "早送りx4 OFF toggle bottom-right (frame rf_dl_afsoushi_rest)",
+   "action_authority": "never clicked in evidence; priority below SKIP",
+   "postcondition": "unknown",
+   "replication": "0 click successes",
+   "negative_evidence": "toggle state OFF observed once",
+   "source_frames": [
+    "recovered_frames/dialogue/rf_dl_afsoushi_rest.png"
+   ],
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ],
+   "python_readiness": "NEEDS_GEOMETRY"
+  },
+  {
+   "room": "CHOICE",
+   "state": "THREE_CHOICE",
+   "control": "MIDDLE_OPTION",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 2,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 15,
+   "detector": "3 option boxes stacked (vbox live_csm_029: x1=0.359,y1=0.0625,x2=0.633,y2=0.3125)",
+   "action_authority": "middle per fixed policy",
+   "postcondition": "dialogue continues with NPC response",
+   "replication": "8 successes + S3 cross-context (recovered 3-frame chain)",
+   "negative_evidence": "middle-adjacent mis-hit not yet observed — untested edge",
+   "source_frames": [
+    "recovered_frames/event_choice/rf_ec1_three_choice_present.png",
+    "recovered_frames/event_choice/rf_ec2_middle_selected.png",
+    "click_samples.jsonl live_csm_029"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "CHOICE",
+   "state": "TWO_CHOICE",
+   "control": "GOMEN_OPTION",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 0
+   },
+   "score_total": 11,
+   "detector": "2 option boxes; ごめん lower option (vbox true)",
+   "action_authority": "fixed policy: ごめん when present; else fail-closed",
+   "postcondition": "dialogue continues",
+   "replication": "3 successes single-run",
+   "negative_evidence": "4-card detector promotion evidence incomplete",
+   "source_frames": [
+    "enza_memory/policies/wing_business_choice_fixed_policy.json",
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ],
+   "python_readiness": "BUSINESS_UNKNOWN"
+  },
+  {
+   "room": "CHOICE",
+   "state": "UNKNOWN_SHAPE",
+   "control": "ANY",
+   "scores": {
+    "VISUAL_EVIDENCE": 0,
+    "GEOMETRY": 0,
+    "STATE_DETECTOR": 0,
+    "AUTHORITY": 0,
+    "POSTCONDITION": 0,
+    "CROSS_SESSION_REPLICATION": 0,
+    "NEGATIVE_EVIDENCE": 0
+   },
+   "score_total": 0,
+   "detector": null,
+   "action_authority": "fail-closed STOP unsupported",
+   "postcondition": "n/a",
+   "replication": "0 — never safely resolved",
+   "negative_evidence": "detector blocked twice (BUSINESS_CHOICE_DETECTION blocker in registry)",
+   "source_frames": [
+    "enza_memory/artifact_registry.json blockers"
+   ],
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ],
+   "python_readiness": "BUSINESS_UNKNOWN"
+  },
+  {
+   "room": "AUDITION_SELECTION",
+   "state": "AUDITION_LIST",
+   "control": "CANDIDATE_SELECT",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 12,
+   "detector": "candidate card list; box true from 0905 teaching",
+   "action_authority": "authorized when audition route requires",
+   "postcondition": "candidate selected page",
+   "replication": "10 successes single-run (0905); none in 0906",
+   "negative_evidence": "0906 full season without audition — cross-session replication zero",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/season3_audition evidence"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "AUDITION_SELECTION",
+   "state": "TARGET_SELECTED",
+   "control": "DECIDE",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 12,
+   "detector": "決定 button; box true 0905",
+   "action_authority": "authorized after candidate select",
+   "postcondition": "battle or presentation loads",
+   "replication": "10 successes single-run",
+   "negative_evidence": null,
+   "source_frames": [
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "AUDITION_BATTLE",
+   "state": "INPUT_READY",
+   "control": "AUTO_TOGGLE",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 1,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 10,
+   "detector": "phase gate INPUT_READY vs ANIMATION (authoritative runtime rule); value ON/OFF/UNKNOWN; interactability ENABLED/DISABLED/UNKNOWN",
+   "action_authority": "click exactly once only if OFF+ENABLED; verify ON fresh; never in ANIMATION/DIMMED",
+   "postcondition": "AUTO ON verified fresh",
+   "replication": "4 successes single-run (0905)",
+   "negative_evidence": "phase misread risk: ANIMATION vs INPUT_READY not frame-anchored; no recovered battle frame in durable store",
+   "source_frames": [
+    "enza_memory/policies/audition_battle_speed_handler.json",
+    "registry runtime rules"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "AUDITION_BATTLE",
+   "state": "SPEED_PHASE",
+   "control": "SPEED_DISPLAY",
+   "scores": {
+    "VISUAL_EVIDENCE": 1,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 1,
+    "POSTCONDITION": 1,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 7,
+   "detector": "X1/X2/X3 badge readable fresh",
+   "action_authority": "keep current speed if toggle not safely grounded; do not blind-click badge",
+   "postcondition": "speed state read",
+   "replication": "0 clicks; display reads only",
+   "negative_evidence": "badge ≠ toggle: true control never grounded (CONTROL_GROUNDING_BLOCKED)",
+   "source_frames": [
+    "enza_memory/policies/audition_battle_speed_handler.json"
+   ],
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ],
+   "python_readiness": "NEEDS_GEOMETRY"
+  },
+  {
+   "room": "AUDITION_BATTLE",
+   "state": "PAUSE_OVERLAY",
+   "control": "PAUSE_RESUME",
+   "scores": {
+    "VISUAL_EVIDENCE": 1,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 1,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 0,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 8,
+   "detector": "pause overlay",
+   "action_authority": "resume only; pause use discouraged (cell budget)",
+   "postcondition": "overlay closes",
+   "replication": "1 success single-run",
+   "negative_evidence": null,
+   "source_frames": [
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "AUDITION_BATTLE",
+   "state": "TURN_INPUT",
+   "control": "ADVICE_OR_CARD",
+   "scores": {
+    "VISUAL_EVIDENCE": 0,
+    "GEOMETRY": 0,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 0,
+    "POSTCONDITION": 1,
+    "CROSS_SESSION_REPLICATION": 0,
+    "NEGATIVE_EVIDENCE": 0
+   },
+   "score_total": 2,
+   "detector": null,
+   "action_authority": "not formalized",
+   "postcondition": "unknown",
+   "replication": "0905 battle evidence incomplete (semifinal UNKNOWN)",
+   "negative_evidence": "0905 run had incomplete battle evidence → result interpretation ambiguity",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/checkpoint.json semifinal_result UNKNOWN"
+   ],
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ],
+   "python_readiness": "BUSINESS_UNKNOWN"
+  },
+  {
+   "room": "RESULT",
+   "state": "RESULT_OVERLAY",
+   "control": "ADVANCE_CYCLE",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 3,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 18,
+   "detector": "result overlay/dialogue → 次へ/OK cycle",
+   "action_authority": "advance until stable HOME; commit outcome ONLY on explicit PASS/FAIL",
+   "postcondition": "weeks-1 or outcome committed; REPLICATED",
+   "replication": "6 successes across runs",
+   "negative_evidence": "0905: result → fan reward +5000 source UNKNOWN — explicit-evidence rule adopted after",
+   "source_frames": [
+    "distilled/result_commit_examples.json",
+    "distilled/control_evidence_matrix.json"
+   ],
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ],
+   "python_readiness": "NEEDS_DETECTOR"
+  },
+  {
+   "room": "RESULT",
+   "state": "BATTLE_RESULT",
+   "control": "PASS_FAIL_DETECTOR",
+   "scores": {
+    "VISUAL_EVIDENCE": 1,
+    "GEOMETRY": 0,
+    "STATE_DETECTOR": 0,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 1,
+    "CROSS_SESSION_REPLICATION": 0,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 5,
+   "detector": null,
+   "action_authority": "commit only with explicit PASS/FAIL evidence (WIN/1st)",
+   "postcondition": "n/a detector absent",
+   "replication": "0 — two runs never produced explicit semifinal/final reading",
+   "negative_evidence": "0905 semifinal SKIP→final-shown misinterpretation explicitly banned by user rule",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/checkpoint.json",
+    "user task rule §5"
+   ],
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ],
+   "python_readiness": "BUSINESS_UNKNOWN"
+  },
+  {
+   "room": "SKILL_BOARD",
+   "state": "BOARD_OPEN",
+   "control": "ENTRY_OVERVIEW",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 15,
+   "detector": "hex grid + SP counter top-left; zoom controls right",
+   "action_authority": "operator-directed at season start; entry via 振り返り",
+   "postcondition": "board stable readable",
+   "replication": "1 full session (45 recovered frames); single produce",
+   "negative_evidence": "0.9/1.1 display-scale drift documented — coordinate mapping needs per-frame correction",
+   "source_frames": [
+    "recovered_frames/skill_board_visual_sequence.json",
+    "recovered_frames/recovered_frame_manifest.jsonl"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SKILL_BOARD",
+   "state": "NODE_AVAILABLE",
+   "control": "WHITE_NODE_BUY",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 16,
+   "detector": "WHITE hex = purchasable (operator-confirmed); panel 習得する enabled",
+   "action_authority": "buy 上限 priority per policy; white ring → 習得する → OK",
+   "postcondition": "SP decrement + node glow/bright SP:0",
+   "replication": "5 acquisitions + chain (click-validated-with-box ×4: live_csm_015-018)",
+   "negative_evidence": "gold ≠ purchasable (2 negative panels); grey locked; SP display lag after OK (live_csm_019)",
+   "source_frames": [
+    "recovered_frames/skill_board/rf_sb_f1_white_avail_before.png",
+    "recovered_frames/skill_board/rf_sb_d1_acquired_first_sp538.png",
+    "recovered_frames/skill_board/rf_sb_acquire_confirm_dialog.png"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SKILL_BOARD",
+   "state": "NODE_LOCKED",
+   "control": "NO_CLICK",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 12,
+   "detector": "grey hex OR 未解放 panel text — color alone insufficient",
+   "action_authority": "do not purchase; do not treat gold as available",
+   "postcondition": "no state change",
+   "replication": "4 deterministic negative samples (live_csm_020-023) + panel evidence ×3",
+   "negative_evidence": "strongest negative set in project",
+   "source_frames": [
+    "recovered_frames/skill_board/rf_sb_g1_misclick_590_145.png",
+    "…/rf_sb_g4_misclick_645_205.png"
+   ],
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ],
+   "python_readiness": "NEEDS_DETECTOR"
+  },
+  {
+   "room": "SKILL_BOARD",
+   "state": "BOARD_VIEW",
+   "control": "ZOOM_CONTROLS",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 12,
+   "detector": "minus (1228,462) / plus / magnifiers right edge",
+   "action_authority": "zoom-out for overview; safe",
+   "postcondition": "board zoomed-out stable",
+   "replication": "validated with box; 2 zoom states recovered",
+   "negative_evidence": null,
+   "source_frames": [
+    "recovered_frames/skill_board/rf_sb_a2_board_zoomed_out.png",
+    "migration_status.json CLICK_VALIDATED_WITH_BOX"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SKILL_BOARD",
+   "state": "SP_INSUFFICIENT",
+   "control": "STOP_RULE",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 11,
+   "detector": "button shows SP不足 text (frame recovered)",
+   "action_authority": "stop acquisition; return WING_HOME",
+   "postcondition": "session ended cleanly at SP 23",
+   "replication": "1 occurrence (S3 end)",
+   "negative_evidence": null,
+   "source_frames": [
+    "recovered_frames/skill_board/rf_sb_j_sp_insufficient.png"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SKILL_REPLACEMENT",
+   "state": "SLOT_LIST",
+   "control": "SLOT_SELECT",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 14,
+   "detector": "4 slots column x≈860 spacing ≈135; 選択 per slot; pink ring = selected",
+   "action_authority": "operator policy: replace bottom-up among ORIGINAL skills, never newly learned",
+   "postcondition": "target slot ringed",
+   "replication": "4 transactions; click-validated-with-box (live_csm_024-027)",
+   "negative_evidence": "slot order semantics (1=oldest) operator-asserted once",
+   "source_frames": [
+    "recovered_frames/replacement/rf_rp_t2_slot_list.png",
+    "recovered_frames/replacement_visual_sequence.json"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SKILL_REPLACEMENT",
+   "state": "CONFIRM_DIALOG",
+   "control": "CONFIRM_OK",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 14,
+   "detector": "スキル入れ替え確認: 忘れるスキル left / 新たに習得 right; warning 忘れたスキルは再度習得できません",
+   "action_authority": "OK commits; cancel safe (キャンセル ~540,510-525)",
+   "postcondition": "replacement committed SP decrement; board back",
+   "replication": "4 confirms; click-validated-with-box",
+   "negative_evidence": "irreversible warning — never OK without matching forget target",
+   "source_frames": [
+    "recovered_frames/replacement/rf_rp_t2_confirm_dialog.png",
+    "recovered_frames/replacement/rf_rp_t1_confirm_dialog.png"
+   ],
+   "gaps": [
+    "single-session/single-context evidence only"
+   ],
+   "python_readiness": "NEEDS_REPLICATION"
+  },
+  {
+   "room": "SKILL_REPLACEMENT",
+   "state": "TRIGGER",
+   "control": "LIMIT_4_DETECTOR",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 0,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 0
+   },
+   "score_total": 8,
+   "detector": "replacement screen appears automatically after acquiring 5th skill",
+   "action_authority": "expect after each acquire when slots full",
+   "postcondition": "slot list appears",
+   "replication": "4 natural occurrences single session",
+   "negative_evidence": "trigger predicate (slots_full) not formalized as detector",
+   "source_frames": [
+    "recovered_frames/replacement/rf_rp_t3_slot_list.png",
+    "recovered_frames/replacement/rf_rp_t4_slot_list.png"
+   ],
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ],
+   "python_readiness": "NEEDS_DETECTOR"
+  },
+  {
+   "room": "SEASON_TRANSITION",
+   "state": "RANK_RESULT",
+   "control": "NEXT",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 2,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 16,
+   "detector": "アイドルランク pyramid screen + fan count + 次へ (1170,660)",
+   "action_authority": "advance through",
+   "postcondition": "next screen (dialogue/loading)",
+   "replication": "2 season-ends (0905 S4, 0906 S3); fresh S3 frame exists in sess_a87 artifacts (not yet recovered)",
+   "negative_evidence": "0905 +5000 fan delta source UNKNOWN — read fan value explicitly before advancing",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/screenshots/s4_end_rank_B_fans414414.png",
+    "sess_a87 call_554 (mi554, unrecovered)"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "SEASON_TRANSITION",
+   "state": "END_DIALOGUE",
+   "control": "OK_SKIP",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 2,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 15,
+   "detector": "はづき season-end textbox",
+   "action_authority": "SKIP or OK",
+   "postcondition": "loading → next season or ending",
+   "replication": "2 occurrences",
+   "negative_evidence": "target-miss vs reach text varies — do not infer outcome from text alone",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01 (S3 end)",
+    "call_556 unrecovered"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "SEASON_TRANSITION",
+   "state": "NEW_SEASON_START",
+   "control": "START_PREP",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 3,
+    "POSTCONDITION": 3,
+    "CROSS_SESSION_REPLICATION": 2,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 16,
+   "detector": "fresh WING_HOME header weeks=8/残り8週",
+   "action_authority": "S-start prep: 振り返り skill board before first schedule",
+   "postcondition": "board session then S1 begins",
+   "replication": "2 season starts (S1 0906, S3 0906); S3 was late-detected (fix task exists)",
+   "negative_evidence": "S3 start prep was initially MISSED — start-prep check must be explicit",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "ENDING",
+   "state": "RESULT_SCREENS",
+   "control": "ADVANCE_CYCLE",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 0
+   },
+   "score_total": 9,
+   "detector": "次へ cycles reward screens (call_607 mi607)",
+   "action_authority": "advance until フェスアイドル誕生 offer",
+   "postcondition": "ending screens complete",
+   "replication": "1 full run-through (0906 S3 end); frames in sess_a87 NOT recovered",
+   "negative_evidence": null,
+   "source_frames": [
+    "sess_a87 artifacts call_607-call_613 (unrecovered)"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "ENDING",
+   "state": "FES_IDOL_CONFIRM",
+   "control": "BIRTH_OK",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 10,
+   "detector": "フェスアイドル確認 dialog: SP lost warning; キャンセル/誕生 (740,510-760)",
+   "action_authority": "operator-endorsed once run goals resolved",
+   "postcondition": "fes idol born; SP wiped",
+   "replication": "1 occurrence; unrecovered frames",
+   "negative_evidence": "SP-loss irreversible — confirm goals before OK",
+   "source_frames": [
+    "sess_a87 artifacts call_611 (unrecovered)"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "ENDING",
+   "state": "FES_DETAIL",
+   "control": "IDENTITY_RECORD",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 1,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 0
+   },
+   "score_total": 9,
+   "detector": "フェスアイドル詳細 card (stats, skills, rank)",
+   "action_authority": "record final identity + flush memory",
+   "postcondition": "run closure",
+   "replication": "1 occurrence",
+   "negative_evidence": null,
+   "source_frames": [
+    "sess_a87 artifacts call_637 (unrecovered)"
+   ],
+   "gaps": [
+    "second independent fresh frame with visual_box_norm"
+   ],
+   "python_readiness": "NEEDS_VISUAL_FRAME"
+  },
+  {
+   "room": "ENDING",
+   "state": "ABANDON_FLOW",
+   "control": "GIVE_UP",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 1,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 1,
+    "NEGATIVE_EVIDENCE": 2
+   },
+   "score_total": 11,
+   "detector": "諦める dialog + long-press confirm",
+   "action_authority": "business-blocked except operator-authorized abandon",
+   "postcondition": "back at main HOME",
+   "replication": "1 full flow (0905)",
+   "negative_evidence": "0905 only; policy says never use autonomously",
+   "source_frames": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/screenshots/abandoned_back_to_main_home.png"
+   ],
+   "gaps": [
+    "business rule not formalized; fail-closed"
+   ],
+   "python_readiness": "BUSINESS_UNKNOWN"
+  },
+  {
+   "room": "CROSS",
+   "state": "ANY",
+   "control": "VIEWPORT_DPR",
+   "scores": {
+    "VISUAL_EVIDENCE": 2,
+    "GEOMETRY": 2,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 1,
+    "POSTCONDITION": 1,
+    "CROSS_SESSION_REPLICATION": 0,
+    "NEGATIVE_EVIDENCE": 0
+   },
+   "score_total": 8,
+   "detector": "tab.viewportSize()==screenshot dims check",
+   "action_authority": "only MAC_CURRENT_V1 1280x720 authorized; others require re-teach",
+   "postcondition": "verified left/top=0",
+   "replication": "1 profile verified; 2 sessions",
+   "negative_evidence": "non-1280x720 or non-mac = PLATFORM_RECALIBRATION_REQUIRED",
+   "source_frames": [
+    "migration_status.json viewport_validation",
+    "viewport_profiles.json"
+   ],
+   "gaps": [
+    "no visual_box_norm; click point only or ungrounded"
+   ],
+   "python_readiness": "NEEDS_GEOMETRY"
+  },
+  {
+   "room": "CROSS",
+   "state": "ANY",
+   "control": "FRAME_STATE_DETECTOR",
+   "scores": {
+    "VISUAL_EVIDENCE": 1,
+    "GEOMETRY": 0,
+    "STATE_DETECTOR": 1,
+    "AUTHORITY": 0,
+    "POSTCONDITION": 1,
+    "CROSS_SESSION_REPLICATION": 0,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 4,
+   "detector": null,
+   "action_authority": "room/state currently from page-label observation, not frames",
+   "postcondition": "n/a",
+   "replication": "no frame-based detector exists",
+   "negative_evidence": "state detector = top blocker in migration_status",
+   "source_frames": [
+    "migration_status.json STATE_DETECTOR_BLOCKERS"
+   ],
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ],
+   "python_readiness": "NEEDS_DETECTOR"
+  },
+  {
+   "room": "CROSS",
+   "state": "ANY",
+   "control": "TRANSIENT_TIMING",
+   "scores": {
+    "VISUAL_EVIDENCE": 3,
+    "GEOMETRY": 1,
+    "STATE_DETECTOR": 2,
+    "AUTHORITY": 2,
+    "POSTCONDITION": 2,
+    "CROSS_SESSION_REPLICATION": 2,
+    "NEGATIVE_EVIDENCE": 1
+   },
+   "score_total": 13,
+   "detector": "9 timed transients (opening, schedule load, cutin, auto lesson, post-lesson dialogue, choice-skip, result advance, title, login hazard)",
+   "action_authority": "SKIP acceptable; early-click promotions case-by-case",
+   "postcondition": "transients settled safely",
+   "replication": "timings cross 2 sessions",
+   "negative_evidence": "login SKIP hazard recorded (ttm_009)",
+   "source_frames": [
+    "enza_memory/migration/python_click_migration/transient_timing.jsonl"
+   ],
+   "gaps": [
+    "no frame-based detector; semantics operator-asserted only"
+   ],
+   "python_readiness": "NEEDS_DETECTOR"
+  }
+ ]
+}

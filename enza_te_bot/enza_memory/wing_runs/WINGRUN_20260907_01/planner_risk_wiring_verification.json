@@ -1,0 +1,57 @@
+{
+ "artifact_type": "PLANNER_VERIFICATION_RECORD",
+ "run_id": "WINGRUN_20260907_01",
+ "captured_at": "2026-09-07",
+ "fresh_observation": {
+  "season": 1,
+  "weeks_remaining": 1,
+  "fan_gap_to_target": 220,
+  "source": "ZCode IAB fresh HOME screenshot planner_verify_00_fresh_home.png (ファン人数 あと220人)",
+  "stamina_note": "partially recovered bar; not a planner input at this boundary"
+ },
+ "policy_state": {
+  "season1_final_actionable_week": true,
+  "fresh_fields": [
+   "season",
+   "weeks_remaining",
+   "fan_gap_to_target"
+  ]
+ },
+ "planner_module": "home_policy.decide_home (PYTHON_PLANNER)",
+ "planner_output": {
+  "status": "DECISION",
+  "decision": "NEEDS_VOCAL_FAN_GAIN",
+  "reason_code": "season_1_final_week_small_positive_gap_requires_vocal_fan_gain",
+  "planner_objective": "NEEDS_VOCAL_FAN_GAIN",
+  "planner_reason": "season_1_final_week_small_positive_gap_requires_vocal_fan_gain",
+  "permitting_gates": []
+ },
+ "wiring_result": {
+  "module": "home_tick.execute_home_tick",
+  "status": "UNSUPPORTED_DECISION",
+  "detail": "no supported goal executor",
+  "note": "fail-closed BEFORE any executor dispatch; offline pure-logic invocation, zero clicks"
+ },
+ "verdict": {
+  "zcode_invented_objective": false,
+  "vocal_path_entered": false,
+  "vocal_trouble_rate_read": "NOT_READ (schedule not entered; objective != VOCAL)",
+  "risk_gate": "NOT_APPLICABLE (no VOCAL objective)",
+  "action_executed": "NONE",
+  "week_completed": false,
+  "gap_found": "S1 final week with 0 < fan_gap <= 300 produces NEEDS_VOCAL_FAN_GAIN which has no executor mapping in home_tick (VOCAL/REST/AUDITION only) — wiring stops fail-closed; requires code/policy owner decision (out of scope for this no-code-change task)"
+ },
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB) + local .venv planner invocation",
+  "provider_session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+  "captured_at": "2026-09-07T00:00:00Z",
+  "source_artifact_ids": [
+   "OBS_006"
+  ],
+  "integrity": {
+   "algorithm": "sha256",
+   "digest": "46696ce654b50498a32ce2d407591a27fbd4dc6f5c7f8d672e870fa15ae1160a"
+  }
+ }
+}

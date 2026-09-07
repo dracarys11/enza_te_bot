@@ -1,0 +1,16 @@
+{
+  "case_id": "OBS_ARTIFACT_ISOLATION_FIXTURE",
+  "source": {
+    "file": "source_screenshot.png",
+    "sha256": "8c507c508d56b698d978b849992622bad2a70535b4d736cb460e4fd2d9359169"
+  },
+  "providers": [
+    {"name": "Paddle", "artifact": "providers/paddle/vision_output.json"},
+    {"name": "AGY", "artifact": "providers/agy/vision_output.json"},
+    {"name": "ZCode", "artifact": "providers/zcode/vision_output.json"},
+    {"name": "Gemini", "artifact": "providers/gemini/v1/vision_output.json"},
+    {"name": "Gemini", "artifact": "providers/gemini/v1_1/vision_output.json"},
+    {"name": "Gemini", "artifact": "providers/gemini/v2/vision_output.json"}
+  ],
+  "unresolved_artifacts": []
+}

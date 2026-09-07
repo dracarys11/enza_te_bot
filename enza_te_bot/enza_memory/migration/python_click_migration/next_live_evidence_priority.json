@@ -1,0 +1,209 @@
+{
+ "artifact_type": "NEXT_LIVE_EVIDENCE_PRIORITY",
+ "generated_at": "2026-09-06T22:30:00+08:00",
+ "mode": "plan only — execution requires explicit live authorization",
+ "formula": "roi = expected_gain(1-5) × natural_occurrence(1-5) ÷ live_risk_cost(1-5)",
+ "budget_note": "cell budget per zcode_execution_budget_profile: ≤8 clicks/cell, ≤90s safe, battle independent cell",
+ "top_20": [
+  {
+   "id": "T01",
+   "target": "RESULT:ADVANCE_CYCLE second-frame visual box",
+   "room": "RESULT",
+   "expected_gain": 4,
+   "natural_occurrence": 5,
+   "live_risk_cost": 1,
+   "roi": 20.0,
+   "rationale": "every week; completes REPLICATED→box rule; zero risk (already authorized cycle)"
+  },
+  {
+   "id": "T02",
+   "target": "SCHEDULE:VOCAL fresh visual box + trouble-rate read",
+   "room": "SCHEDULE",
+   "expected_gain": 4,
+   "natural_occurrence": 5,
+   "live_risk_cost": 1,
+   "roi": 20.0,
+   "rationale": "every week; 5th-6th fresh gate read strengthens VOCAL gate evidence"
+  },
+  {
+   "id": "T03",
+   "target": "SCHEDULE:DECIDE second-frame visual box",
+   "room": "SCHEDULE",
+   "expected_gain": 4,
+   "natural_occurrence": 5,
+   "live_risk_cost": 1,
+   "roi": 20.0,
+   "rationale": "every week"
+  },
+  {
+   "id": "T06",
+   "target": "3-choice third-context replication (geometry re-read)",
+   "room": "CHOICE",
+   "expected_gain": 4,
+   "natural_occurrence": 4,
+   "live_risk_cost": 1,
+   "roi": 16.0,
+   "rationale": "S1/S2 events natural; validates live_csm_029 vbox across context"
+  },
+  {
+   "id": "T09",
+   "target": "SEASON_TRANSITION rank screen + end dialogue frame recovery→re-shoot (S1 end)",
+   "room": "SEASON_TRANSITION",
+   "expected_gain": 4,
+   "natural_occurrence": 4,
+   "live_risk_cost": 1,
+   "roi": 16.0,
+   "rationale": "S1 end arrives fast; frames durable this time"
+  },
+  {
+   "id": "T17",
+   "target": "S2 start prep detection (season-start prep must-fire check)",
+   "room": "SEASON_TRANSITION",
+   "expected_gain": 4,
+   "natural_occurrence": 4,
+   "live_risk_cost": 1,
+   "roi": 16.0,
+   "rationale": "S2 start was the missed one for skills? S3 was missed; start-prep explicit check each season"
+  },
+  {
+   "id": "T04",
+   "target": "HOME:SCHEDULE entry visual box",
+   "room": "HOME",
+   "expected_gain": 3,
+   "natural_occurrence": 5,
+   "live_risk_cost": 1,
+   "roi": 15.0,
+   "rationale": "every week entry"
+  },
+  {
+   "id": "T07",
+   "target": "SKILL_BOARD acquisition chain replication #2 (next produce S1 start prep)",
+   "room": "SKILL_BOARD",
+   "expected_gain": 5,
+   "natural_occurrence": 5,
+   "live_risk_cost": 2,
+   "roi": 12.5,
+   "rationale": "certain at every new produce; converts single-session skill evidence to cross-session"
+  },
+  {
+   "id": "T05",
+   "target": "DIALOGUE:SAFE_TEXTBOX tap-count + end detection frames",
+   "room": "DIALOGUE",
+   "expected_gain": 4,
+   "natural_occurrence": 5,
+   "live_risk_cost": 2,
+   "roi": 10.0,
+   "rationale": "post-lesson dialogue end detector kills 振り返り over-tap hazard"
+  },
+  {
+   "id": "T08",
+   "target": "SKILL_REPLACEMENT full transaction replication #2",
+   "room": "SKILL_REPLACEMENT",
+   "expected_gain": 5,
+   "natural_occurrence": 4,
+   "live_risk_cost": 2,
+   "roi": 10.0,
+   "rationale": "likely at S1 start prep (4-slot refill); T2 chain re-validated"
+  },
+  {
+   "id": "T16",
+   "target": "title→login→WING_HOME cold-start full frame chain",
+   "room": "CROSS",
+   "expected_gain": 2,
+   "natural_occurrence": 5,
+   "live_risk_cost": 1,
+   "roi": 10.0,
+   "rationale": "every session; cheap; completes ttm_008 series"
+  },
+  {
+   "id": "T11",
+   "target": "AUDITION_SELECTION candidate+decide cross-session replication",
+   "room": "AUDITION_SELECTION",
+   "expected_gain": 4,
+   "natural_occurrence": 3,
+   "live_risk_cost": 2,
+   "roi": 6.0,
+   "rationale": "same audition event; 0906 had zero"
+  },
+  {
+   "id": "T13",
+   "target": "2-choice ごめん replication with box",
+   "room": "CHOICE",
+   "expected_gain": 3,
+   "natural_occurrence": 4,
+   "live_risk_cost": 2,
+   "roi": 6.0,
+   "rationale": "common event; detector promotion evidence"
+  },
+  {
+   "id": "T10",
+   "target": "AUDITION_BATTLE AUTO: phase-anchored frames (INPUT_READY vs ANIMATION) + one ON toggle",
+   "room": "AUDITION_BATTLE",
+   "expected_gain": 5,
+   "natural_occurrence": 3,
+   "live_risk_cost": 3,
+   "roi": 5.0,
+   "rationale": "audition occurs at S1 final week if gap requires; highest-value control still battle-blocked"
+  },
+  {
+   "id": "T12",
+   "target": "SPEED X1/X2/X3 fresh read + locate true toggle",
+   "room": "AUDITION_BATTLE",
+   "expected_gain": 3,
+   "natural_occurrence": 3,
+   "live_risk_cost": 2,
+   "roi": 4.5,
+   "rationale": "same battle window"
+  },
+  {
+   "id": "T15",
+   "target": "support event (サポート☆イベント) auto-settle frames",
+   "room": "DIALOGUE",
+   "expected_gain": 3,
+   "natural_occurrence": 3,
+   "live_risk_cost": 2,
+   "roi": 4.5,
+   "rationale": "observed twice, zero frames"
+  },
+  {
+   "id": "T14",
+   "target": "早送りx4 toggle: first grounded click success/failure",
+   "room": "DIALOGUE",
+   "expected_gain": 2,
+   "natural_occurrence": 3,
+   "live_risk_cost": 2,
+   "roi": 3.0,
+   "rationale": "occurs in long dialogues; completes SKIP>早送り>textbox priority evidence"
+  },
+  {
+   "id": "T18",
+   "target": "promise/約束 event geometry (if occurs)",
+   "room": "CHOICE",
+   "expected_gain": 3,
+   "natural_occurrence": 2,
+   "live_risk_cost": 2,
+   "roi": 3.0,
+   "rationale": "low occurrence; handler exists (wing_fast_handlers) but no frame"
+  },
+  {
+   "id": "T19",
+   "target": "semifinal entry→result explicit WIN evidence reconstruction",
+   "room": "RESULT",
+   "expected_gain": 5,
+   "natural_occurrence": 1,
+   "live_risk_cost": 3,
+   "roi": 1.67,
+   "rationale": "only at S4 WING; both prior runs ended without it; must-do for TE route"
+  },
+  {
+   "id": "T20",
+   "target": "viewport/DPR second profile calibration (manual, non-game)",
+   "room": "CROSS",
+   "expected_gain": 2,
+   "natural_occurrence": 1,
+   "live_risk_cost": 4,
+   "roi": 0.5,
+   "rationale": "manual resize test offline-adjacent; unlocks generalization claim"
+  }
+ ]
+}

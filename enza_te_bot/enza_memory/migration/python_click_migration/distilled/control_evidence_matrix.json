@@ -1,0 +1,188 @@
+{
+  "artifact_type": "CONTROL_EVIDENCE_MATRIX",
+  "generated_at": "2026-09-06T06:22:51Z",
+  "scope": "existing live evidence for future local Python executor shadow tests",
+  "honesty_rule": "Geometry and action authority are independent. Counts are conservative minimums directly supported by cited durable artifacts; UNKNOWN is preserved.",
+  "concurrent_evidence_note": "WINGRUN_20260906_01 timings line 8 (S3W1 operator-reconciled VOCAL completion) appeared during this distillation. It supports the week-level transition outcome but is explicitly excluded from autonomous detector/control replication counts.",
+  "viewport_scope": "MAC_CURRENT_V1, 1280x720 only; left/top, DPR, browser zoom remain UNKNOWN",
+  "controls": [
+    {
+      "room": "HOME", "state": "WING_HOME", "control": "SCHEDULE",
+      "visual_identity": "bottom-left SCHEDULE calendar standee + pink プロデュース label",
+      "known_click_point": {"x":150,"y":600,"normalized":{"x":0.1172,"y":0.8333}},
+      "visual_box_known": false, "success_count": 7, "fail_count": 0,
+      "preconditions": ["fresh WING_HOME", "viewport=1280x720", "local anchor present", "point in bounds"],
+      "postcondition": "fresh SCHEDULE page loaded", "cross_session_replication": true,
+      "hazard_nearby": "HOME:FURIKAERI near lower-left; do not continue blind taps after state transition",
+      "geometry_confidence": "PROVEN_CLICK_POINT; VISUAL_BOX_UNKNOWN",
+      "action_authority_confidence": "HIGH_WITH_GUARDS", "current_status": "NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"HOME","state":"WING_HOME","control":"REST","visual_identity":"休む HOME control",
+      "known_click_point":null,"visual_box_known":false,"success_count":1,"fail_count":0,
+      "preconditions":["fresh WING_HOME","REST selected by current business policy","viewport and anchor valid"],
+      "postcondition":"fresh HOME with weeks-1 and stamina recovery","cross_session_replication":false,
+      "hazard_nearby":"UNKNOWN","geometry_confidence":"UNKNOWN","action_authority_confidence":"HIGH_WHEN_POLICY_SELECTS_REST",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"HOME","state":"WING_HOME","control":"FURIKAERI","visual_identity":"振り返り lower-left control",
+      "known_click_point":{"x":205,"y":655,"normalized":{"x":0.1602,"y":0.9097}},"visual_box_known":false,
+      "success_count":0,"fail_count":1,"preconditions":["intentional activation only"],"postcondition":"振り返り view opens",
+      "cross_session_replication":false,"hazard_nearby":"post-dialogue over-tap activates it unintentionally",
+      "geometry_confidence":"POINT_ONLY_FROM_WRONG_TARGET","action_authority_confidence":"LOW","current_status":"CONTROL_GROUNDING_BLOCKED"
+    },
+    {
+      "room":"SCHEDULE","state":"SCHEDULE_LOADED","control":"VOCAL","visual_identity":"pink ボーカルレッスン card; content level may drift",
+      "known_click_point":{"x":360,"y":500,"normalized":{"x":0.2813,"y":0.6944}},"visual_box_known":false,
+      "success_count":6,"fail_count":0,"preconditions":["fresh loaded SCHEDULE","failure_rate fresh and <=2","card anchor present","viewport=1280x720"],
+      "postcondition":"VOCAL selected and 決定 becomes actionable","cross_session_replication":true,
+      "hazard_nearby":"schedule sub-tab may reopen on audition page; verify lesson tab/card before click",
+      "geometry_confidence":"PROVEN_CLICK_POINT; VISUAL_BOX_UNKNOWN","action_authority_confidence":"HIGH_ONLY_AFTER_FRESH_FAILURE_RATE_GATE",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"SCHEDULE","state":"SCHEDULE_LOADED","control":"BACK","visual_identity":"bottom-left back arrow",
+      "known_click_point":{"x":57,"y":660,"normalized":{"x":0.0445,"y":0.9167}},"visual_box_known":false,
+      "success_count":1,"fail_count":0,"preconditions":["fresh SCHEDULE","policy selected BACK_TO_REST after fresh risk evidence"],
+      "postcondition":"fresh WING_HOME before REST","cross_session_replication":false,"hazard_nearby":"UNKNOWN",
+      "geometry_confidence":"POINT_ONLY; RUN_LOCAL_LIVE_SUCCESS","action_authority_confidence":"HIGH_FOR_GATED_BACK_TO_REST_CHAIN",
+      "current_status":"NEEDS_MORE_REPLICATION"
+    },
+    {
+      "room":"SCHEDULE","state":"SCHEDULE_LOADED","control":"AUDITION","visual_identity":"audition schedule tab/card entry",
+      "known_click_point":null,"visual_box_known":false,"success_count":10,"fail_count":0,
+      "preconditions":["fresh SCHEDULE","policy has selected an audition route","candidate identity resolved separately"],
+      "postcondition":"AUDITION_SELECTION","cross_session_replication":true,
+      "hazard_nearby":"lesson/audition sub-tabs retain prior page; tab state must be fresh",
+      "geometry_confidence":"CONTROL_SEEN; STABLE_CLICK_REGION_UNKNOWN","action_authority_confidence":"BUSINESS_ROUTE_DEPENDENT",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"SCHEDULE","state":"CANDIDATE_SELECTED_AND_PAGE_LOADED","control":"DECIDE","visual_identity":"pink 決定 bottom-right",
+      "known_click_point":{"x":1185,"y":660,"normalized":{"x":0.9258,"y":0.9167}},"visual_box_known":false,
+      "success_count":6,"fail_count":1,"preconditions":["fresh loaded page","candidate selected","pink enabled anchor","viewport=1280x720"],
+      "postcondition":"lesson or audition transition begins","cross_session_replication":true,
+      "hazard_nearby":"slow schedule load produced NO_EFFECT; never click solely from coordinate",
+      "geometry_confidence":"PROVEN_CLICK_POINT; VISUAL_BOX_UNKNOWN","action_authority_confidence":"HIGH_WITH_ACTIONABLE_PHASE_GUARD",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"DIALOGUE","state":"COMMUNICATION_DIALOGUE","control":"SAFE_TEXTBOX","visual_identity":"bottom dialogue box body; no SKIP",
+      "known_click_point":{"x":640,"y":610,"normalized":{"x":0.5,"y":0.8472}},"visual_box_known":false,
+      "success_count":35,"fail_count":0,"preconditions":["fresh dialogue state","no selectable choice cards","textbox still present"],
+      "postcondition":"dialogue advances or fresh next state","cross_session_replication":true,
+      "hazard_nearby":"continued taps after dialogue ends can activate HOME controls; bottom-right chevron was NO_EFFECT",
+      "geometry_confidence":"REPEATED_POINT; BOX_UNKNOWN","action_authority_confidence":"MEDIUM; REQUIRES EACH-FRAME OWNER/END CHECK",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"DIALOGUE","state":"KNOWN_THREE_CHOICE","control":"3_CHOICE_MIDDLE","visual_identity":"three selectable cards; middle option",
+      "known_click_point":null,"visual_box_known":true,"success_count":8,"fail_count":0,
+      "preconditions":["fresh known three-choice context","option_count==3","middle card selectable","operator policy authorizes middle"],
+      "postcondition":"choice accepted and dialogue/battle/lesson proceeds","cross_session_replication":true,
+      "hazard_nearby":"must not conflate with two-card BUSINESS_CHOICE",
+      "geometry_confidence":"VISUAL_BOX_OBSERVED_IN_SCREENSHOTS; CANONICAL_BOX_UNKNOWN","action_authority_confidence":"HIGH_ONLY_FOR_CONFIRMED_THREE_CHOICE",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"DIALOGUE","state":"KNOWN_TWO_CHOICE_BUSINESS_DIALOGUE","control":"2_CHOICE_GOMEN","visual_identity":"two selectable cards including ごめん",
+      "known_click_point":null,"visual_box_known":true,"success_count":3,"fail_count":0,
+      "preconditions":["fresh card_count==2","dual-check/selectable structure","taught-choice policy match"],
+      "postcondition":"choice accepted; dialogue exits or continues","cross_session_replication":false,
+      "hazard_nearby":"three-card advice is a different handler; unsupported two-card shape must STOP",
+      "geometry_confidence":"VISUAL_BOX_OBSERVED; CLICK_REGION_UNKNOWN","action_authority_confidence":"BUSINESS_POLICY_BLOCKED_UNLESS_EXACT_TAUGHT_SHAPE",
+      "current_status":"BUSINESS_POLICY_BLOCKED"
+    },
+    {
+      "room":"AUDITION_SELECTION","state":"AUDITION_LIST","control":"CANDIDATE","visual_identity":"candidate card with name/reward/eligibility; multiple pages",
+      "known_click_point":null,"visual_box_known":true,"success_count":10,"fail_count":0,
+      "preconditions":["fresh candidate list","exact target identity","eligibility/actionable evidence","route policy authorization"],
+      "postcondition":"target candidate selected","cross_session_replication":true,
+      "hazard_nearby":"candidate location changes by page and route; repeatability is audition-specific",
+      "geometry_confidence":"BOXES_VISIBLE_BUT_NOT_NORMALIZED_OR_CANDIDATE_STABLE","action_authority_confidence":"BUSINESS_ROUTE_DEPENDENT",
+      "current_status":"CONTROL_GROUNDING_BLOCKED"
+    },
+    {
+      "room":"AUDITION_SELECTION","state":"TARGET_CANDIDATE_SELECTED","control":"DECIDE","visual_identity":"enabled pink 決定",
+      "known_click_point":null,"visual_box_known":true,"success_count":10,"fail_count":0,
+      "preconditions":["fresh target candidate selected","enabled state observed","route authorization current"],
+      "postcondition":"advice/dialogue then AUDITION_BATTLE","cross_session_replication":true,
+      "hazard_nearby":"visible label alone does not prove enabled/actionable",
+      "geometry_confidence":"BOX_OBSERVED; CANONICAL_CLICK_REGION_UNKNOWN","action_authority_confidence":"HIGH_AFTER_CANDIDATE_AND_ENABLED_GUARDS",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"AUDITION_BATTLE","state":"INPUT_READY","control":"AUTO","visual_identity":"Auto value text and enabled/dimmed appearance; value and interactability are separate",
+      "known_click_point":null,"visual_box_known":true,"success_count":4,"fail_count":4,
+      "preconditions":["fresh INPUT_READY","current control epoch","AUTO_OFF","ENABLED","one-frame action ownership"],
+      "postcondition":"fresh AUTO_ON in same current epoch","cross_session_replication":false,
+      "hazard_nearby":"dialogue/ANIMATION clicks have NO_EFFECT; duplicate toggle can cancel; pause/resume invalidates state",
+      "geometry_confidence":"VISUAL_BOX_OBSERVED; PROVEN_REGION_NOT_NORMALIZED","action_authority_confidence":"HIGH_ONLY_FOR_FRESH_OFF+ENABLED",
+      "current_status":"NEEDS_MORE_REPLICATION"
+    },
+    {
+      "room":"AUDITION_BATTLE","state":"ANY_BATTLE_PHASE","control":"SPEED_DISPLAY","visual_identity":"OFF/X2/X3 badge near Auto",
+      "known_click_point":null,"visual_box_known":true,"success_count":0,"fail_count":0,
+      "preconditions":["fresh battle frame"],"postcondition":"none; display-only observation",
+      "cross_session_replication":true,"hazard_nearby":"badge was clicked as if toggle; X2 did not change",
+      "geometry_confidence":"DISPLAY_BOX_OBSERVED","action_authority_confidence":"NONE_DISPLAY_ONLY",
+      "current_status":"CONTROL_GROUNDING_BLOCKED"
+    },
+    {
+      "room":"AUDITION_BATTLE","state":"PAUSE_OVERLAY","control":"PAUSE_RESUME","visual_identity":"pause/effect overlay + 再開",
+      "known_click_point":null,"visual_box_known":true,"success_count":1,"fail_count":0,
+      "preconditions":["fresh pause overlay","再開 actionable","exclusive handler ownership"],
+      "postcondition":"fresh AUDITION_BATTLE and new control epoch; AUTO/SPEED/turn/card invalidated","cross_session_replication":false,
+      "hazard_nearby":"resume may reset/reinitialize local battle controls",
+      "geometry_confidence":"SCREENSHOT_OBSERVED; CLICK_REGION_NOT_NORMALIZED","action_authority_confidence":"MEDIUM_WITH_EXCLUSIVE_OWNER",
+      "current_status":"NEEDS_MORE_REPLICATION"
+    },
+    {
+      "room":"RESULT","state":"RESULT_OVERLAY_OR_DIALOGUE","control":"ADVANCE","visual_identity":"result/stat/rank overlay or result dialogue",
+      "known_click_point":{"sequence":[[1218,53],[640,610],[640,350]]},"visual_box_known":false,
+      "success_count":6,"fail_count":0,"preconditions":["fresh RESULT identity","no protected business choice","advance cycle bounded"],
+      "postcondition":"fresh HOME/season transition/next result state","cross_session_replication":true,
+      "hazard_nearby":"advancing before explicit result capture caused RESULT_EVIDENCE_LOSS",
+      "geometry_confidence":"REPLICATED_POINT_SEQUENCE; BOX_UNKNOWN","action_authority_confidence":"MEDIUM; RESULT MUST BE COMMITTED BEFORE ADVANCE",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"SEASON_TRANSITION","state":"KNOWN_TRANSIENT_DIALOGUE","control":"SKIP","visual_identity":"visible SKIP top-right",
+      "known_click_point":null,"visual_box_known":true,"success_count":5,"fail_count":0,
+      "preconditions":["fresh transition/dialogue identity","SKIP visible","no business choice"],
+      "postcondition":"next transition state or fresh HOME","cross_session_replication":true,
+      "hazard_nearby":"semifinal scene SKIP advanced route without explicit result evidence",
+      "geometry_confidence":"BOX_OBSERVED; CANONICAL_BOX_UNKNOWN","action_authority_confidence":"MEDIUM; TRANSITION TYPE MUST BE KNOWN",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"SEASON_TRANSITION","state":"KNOWN_TRANSITION_RESULT","control":"NEXT","visual_identity":"次へ/OK transition control",
+      "known_click_point":null,"visual_box_known":true,"success_count":4,"fail_count":0,
+      "preconditions":["fresh known transition screen","enabled control","expected next season/state known"],
+      "postcondition":"fresh next-season HOME or next transition frame","cross_session_replication":true,
+      "hazard_nearby":"transition may outlive tool cell; require durable flush after stable state",
+      "geometry_confidence":"BOX_OBSERVED; NORMALIZED_REGION_UNKNOWN","action_authority_confidence":"HIGH_FOR_KNOWN_TRANSITION_ONLY",
+      "current_status":"NEEDS_FRESH_VISUAL_BOX"
+    },
+    {
+      "room":"ABANDON","state":"WING_HOME_END_FLOW","control":"DIALOG","visual_identity":"ホームに戻る・諦める confirmation dialog",
+      "known_click_point":null,"visual_box_known":true,"success_count":1,"fail_count":0,
+      "preconditions":["explicit operator authorization","run closure intended","fresh exact dialog"],
+      "postcondition":"long-press abandon prompt/flow","cross_session_replication":false,
+      "hazard_nearby":"irreversible run closure",
+      "geometry_confidence":"SCREENSHOT_OBSERVED; CLICK_REGION_UNKNOWN","action_authority_confidence":"IRREVERSIBLE_OPERATOR_GATED",
+      "current_status":"BUSINESS_POLICY_BLOCKED"
+    },
+    {
+      "room":"ABANDON","state":"EXPLICIT_ABANDON_CONFIRMATION","control":"LONG_PRESS","visual_identity":"諦める long-press target",
+      "known_click_point":null,"visual_box_known":true,"success_count":1,"fail_count":0,
+      "preconditions":["explicit operator authorization","fresh exact confirmation","bounded long-press semantics known"],
+      "postcondition":"produce evaluation and run closure","cross_session_replication":false,
+      "hazard_nearby":"irreversible; recorded success was operator-assisted",
+      "geometry_confidence":"BOX_OBSERVED; AUTOMATION_REGION_UNKNOWN","action_authority_confidence":"IRREVERSIBLE_OPERATOR_ONLY",
+      "current_status":"CONTROL_GROUNDING_BLOCKED"
+    }
+  ],
+  "preserved_unknowns": ["all normalized visual boxes for core taught controls", "speed toggle clickable region", "semifinal result", "+5000 fan source", "automated long-press behavior"]
+}

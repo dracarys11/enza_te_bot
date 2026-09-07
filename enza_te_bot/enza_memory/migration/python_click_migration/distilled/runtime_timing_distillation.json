@@ -1,0 +1,25 @@
+{
+  "artifact_type":"RUNTIME_TIMING_DISTILLATION",
+  "generated_at":"2026-09-06T06:22:51Z",
+  "statistics_rule":"Median/p90 are emitted only for comparable numeric samples. Approximate source values remain approximate.",
+  "game_transition_timing":[
+    {"transition":"HOME SCHEDULE click -> SCHEDULE loaded","sample_count":1,"natural_duration_ms":2526,"optimized_duration_ms":null,"median_ms":null,"p90_ms":null,"safe_tap_timing":"after fresh loaded-page anchor","time_saved_ms":null,"false_trigger_count":1,"confidence":"LOW"},
+    {"transition":"DECIDE -> lesson cut-in","sample_count":1,"natural_duration_ms":"~2500","optimized_duration_ms":null,"median_ms":null,"p90_ms":null,"safe_tap_timing":"none established","time_saved_ms":null,"false_trigger_count":0,"confidence":"LOW"},
+    {"transition":"lesson cut-in -> HOME presentation","sample_count":1,"natural_duration_ms":"~8000","optimized_duration_ms":null,"median_ms":null,"p90_ms":null,"safe_tap_timing":"no skip probe; wait","time_saved_ms":null,"false_trigger_count":0,"confidence":"LOW"},
+    {"transition":"post-lesson dialogue -> idle HOME","sample_count":1,"natural_duration_ms":null,"optimized_duration_ms":"<=4 taps observed","median_ms":null,"p90_ms":null,"safe_tap_timing":"only while fresh textbox remains","time_saved_ms":null,"false_trigger_count":1,"confidence":"LOW"},
+    {"transition":"dialogue SKIP -> selectable choice","sample_count":1,"natural_duration_ms":null,"optimized_duration_ms":null,"median_ms":null,"p90_ms":null,"safe_tap_timing":"after SKIP visible and known dialogue identity","time_saved_ms":"SKIP stopped at choice","false_trigger_count":0,"confidence":"LOW"},
+    {"transition":"result/interruption advance cycle -> HOME","sample_count":2,"natural_duration_ms":null,"optimized_duration_ms":25995,"median_ms":null,"p90_ms":null,"safe_tap_timing":"after result committed; bounded SKIP/textbox/center cycle","time_saved_ms":null,"false_trigger_count":0,"confidence":"MEDIUM"},
+    {"transition":"known normal week total excluding no game animation","sample_count":2,"natural_duration_ms":null,"optimized_duration_ms":"~39000 total including presentation","median_ms":null,"p90_ms":null,"safe_tap_timing":"guarded control sequence","time_saved_ms":null,"false_trigger_count":0,"confidence":"MEDIUM"},
+    {"transition":"opening scene SKIP -> WING_HOME","sample_count":1,"natural_duration_ms":null,"optimized_duration_ms":null,"median_ms":null,"p90_ms":null,"safe_tap_timing":"only when exact opening-scene SKIP is visible","time_saved_ms":"direct jump observed; duration not recorded","false_trigger_count":0,"confidence":"LOW"},
+    {"transition":"season transition -> stable next-season HOME","sample_count":3,"natural_duration_ms":null,"optimized_duration_ms":null,"median_ms":null,"p90_ms":null,"safe_tap_timing":"known SKIP/NEXT frames only; fresh reconcile at HOME","time_saved_ms":null,"false_trigger_count":0,"confidence":"MEDIUM"}
+  ],
+  "tool_latency":[
+    {"operation":"CUA click","sample_count":4,"samples_ms":[5016,5008,5078,5095],"median_ms":5047,"p90_ms":5095,"behavior":"~5s implicit cost independent of explicit wait","confidence":"HIGH"},
+    {"operation":"stable screenshot/home observation","sample_count":3,"samples_ms":[330,339,1299],"median_ms":339,"p90_ms":1299,"behavior":"stable frames usually <2s","confidence":"MEDIUM"},
+    {"operation":"screenshot during animation/dialogue","sample_count":"multiple","samples_ms":[30000],"median_ms":null,"p90_ms":null,"behavior":"fixed internal timeout/hang observed repeatedly","confidence":"HIGH_FOR_HAZARD"},
+    {"operation":"explicit wait 2s","sample_count":1,"samples_ms":[2006],"median_ms":null,"p90_ms":null,"behavior":"tracks requested wait","confidence":"LOW"},
+    {"operation":"explicit wait 10s","sample_count":1,"samples_ms":[10006],"median_ms":null,"p90_ms":null,"behavior":"tracks requested wait","confidence":"LOW"},
+    {"operation":"JavaScript/tool cell","sample_count":2,"samples_ms":[115000,115000],"median_ms":115000,"p90_ms":115000,"behavior":"failed because estimated click+wait+capture duration exceeded budget; platform cap documented as ~120000ms","confidence":"HIGH"}
+  ],
+  "separation_note":"The ~39s normal-week wall time is dominated by game/presentation progression; Python compute decision latency is not the bottleneck. Browser-tool click latency must not be reused as native Python injection latency."
+}

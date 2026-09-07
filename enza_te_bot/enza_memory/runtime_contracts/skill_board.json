@@ -1,0 +1,105 @@
+{
+  "contract_version": "0.2",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): STALE-B four-axis geometry, STALE-E zoom narrowing, LEAK-03 color-as-prior-signal; 2026-09-07 STALE-I metadata correction (concurrent-reconciliation repair): acquire/confirm normalized boxes exist (control_regions.json, single-session); geometry evidence != purchase authority; version stays 0.2",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract distilled from two live skill-board sessions (S3_START_PREP x5 acquisitions; session_2 x12 acquisitions, SP 548→23). WHICH node to buy is BUSINESS POLICY (operator upper-limit priority / zone rules) and is referenced, not owned here.",
+  "scenario_scope": "WING skill board (振り返り entry), 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "SKILL_BOARD",
+    "identity_anchors_required": [
+      "entered via HOME 振り返り (S4 operator hint confirmed live: entry is 振り返り, right-lower HOME control)",
+      "board node grid with color-coded nodes",
+      "SP counter visible",
+      "acquire confirm dialog on selection"
+    ],
+    "identity_source": "session_observed (2 sessions), PARTIAL — no canonical title anchors formalized",
+    "identity_status": "PARTIAL"
+  },
+  "ENTRY_CONDITIONS": [
+    "fresh WING_HOME + policy/operator intent to spend SP",
+    "SP amount read fresh (consumptive action requires fresh resource evidence)",
+    "explicit authorization context — SP consumption is resource-consuming; s4 hints alone do NOT authorize consumption"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "SP counter value (fresh; lags exist — see rf_sb_confirm_sp_lag)",
+      "node availability color model",
+      "zone classification (LEFT / RIGHT / other)",
+      "selected node ring state",
+      "confirm dialog presence"
+    ],
+    "board_color_model": {
+      "white_interior": "AVAILABLE (prior visual signal only — never authoritative alone)",
+      "grey": "LOCKED",
+      "bright_colored_SP0": "ACQUIRED (習得済み — never re-click)",
+      "blue_gradient": "chain-marked, may still be locked",
+      "gold": "node-type coloring, NOT availability",
+      "caveat": "acquire button can render garbled/未解放-looking while functional — verify by clicking and watching for confirm dialog",
+      "authority_rule": "color class is a PRIOR_VISUAL_SIGNAL, not an authority predicate (LEAK-03 closed): availability authority requires the positive purchase chain — detail-panel identity → confirm dialog → SP deduction → owned node (guards VNC-001..003; same coordinate changed availability class after chain unlock, so per-frame identity beats coordinate memory)"
+    }
+  },
+  "SUBSTATES": [
+    {"substate": "BOARD_VIEW_ZOOMED_OUT", "evidence": "coordinate calibration misses (~8 harmless locked-node/empty selections) happened here"},
+    {"substate": "BOARD_VIEW_NODE_AVAILABLE", "evidence": "white interior panel observed (180px contexts)"},
+    {"substate": "NODE_SELECTED_PINK_RING", "evidence": "rf_sb_e2"},
+    {"substate": "ACQUIRE_CONFIRM_DIALOG", "evidence": "rf_sb_acquire_confirm_dialog, multiple live uses"},
+    {"substate": "POST_BUY_WHITE_GLOW", "evidence": "rf_sb_d2"},
+    {"substate": "TERMINATION_INSUFFICIENT_SP", "evidence": "SP 23 < 45 cost → clean exit to fresh HOME"}
+  ],
+  "VISIBLE_CONTROLS": [
+    {"control": "board node", "geometry": "UNKNOWN normalized — only coordinate-probing evidence; zoomed-out board caused repeated misclicks", "visible_status": "VISIBLE_ONLY"},
+    {"control": "acquire/confirm", "geometry": "normalized visual boxes captured single-session (control_regions.json: ACQUIRE_BUTTON 0.8203-0.9766 x 0.8056-0.9444 CLICK_VALIDATED_WITH_BOX 5/0 HIGH; CONFIRM_OK 0.5078-0.6484 x 0.6875-0.7778 CLICK_VALIDATED_WITH_BOX 5/1 HIGH; CONFIRM_CANCEL box OBSERVED; ZOOM_OUT box CLICK_VALIDATED_WITH_BOX 1/0) — STALE-I correction: geometry evidence exists, purchase authority unchanged (confirm-dialog + SP-delta chain still required)", "visible_status": "VISIBLE_WITH_BOX (single-session, RECOVERED_REVIEW_PENDING corpus)"},
+    {"control": "SP counter", "geometry": "UNKNOWN", "visible_status": "READ_ONLY"}
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "node VISIBLE != AVAILABLE; gold/blue coloring != availability; ACQUIRED bright nodes must never be re-clicked. Consumptive action requires fresh resource guard.",
+    "acquire": "authorized only with: fresh SP >= cost + availability-classified node + policy-selected node + confirm dialog verification",
+    "zoomed_out_probing": "FORBIDDEN as selection method — probing on the zoomed-out board produced stray selections (harmless but evidence of unstable grounding)"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe board, classify node colors/zones, read SP",
+    "click operator/policy-selected AVAILABLE node with fresh SP guard",
+    "confirm acquisition via dialog and verify by SP delta / board state (4+17 verified acquisitions across sessions)",
+    "exit cleanly to fresh HOME"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "re-click ACQUIRED (習得済み) nodes",
+    "treat gold/blue as available",
+    "auto-consume SP from operator hints alone (s4_route_operator_hints: 不据此自动消费 SP)",
+    "coordinate-based node SELECTION while zoomed out (stray selections VNC-001..003); zoom-out NAVIGATION itself remains authorized safe navigation (STALE-E narrowed)"
+  ],
+  "POSTCONDITIONS": {
+    "acquire": "SP reduced by node cost (verify via fresh read after lag), node state → ACQUIRED, optional pending-replacement ring appears (rf_rp_t4_pending_ring)"
+  },
+  "EXIT_CONDITIONS": ["insufficient SP for next node → return fresh HOME", "policy budget exhausted → return fresh HOME"],
+  "FAILURE_MODES": [
+    {"mode": "ZOOMED_OUT_CALIBRATION_MISS", "class": "WRONG_TARGET", "evidence": "~8 stray selections"},
+    {"mode": "SP_LAG_MISREAD", "class": "STALE_STATE", "evidence": "confirm SP lag frame"},
+    {"mode": "ZONE_DEVIATION", "class": "POLICY_DEVIATION", "evidence": "bottom-center Visual2.5倍 acquired before zone rule clarified"},
+    {"mode": "GARBLED_ACQUIRE_BUTTON_RENDER", "class": "AMBIGUOUS_VISUAL", "evidence": "color model caveat"}
+  ],
+  "RECOVERY": [
+    "stray selection on locked/empty space → harmless; re-verify board state, do not count as week",
+    "SP read ambiguous → fresh stable frame before next acquisition",
+    "zone outside policy → recorded as deviation, never silently retried"
+  ],
+  "PERSISTENCE_BOUNDARY": "flush per-acquisition record (node, SP cost, zone, replacement target if any) — session records skill_board_session_2_record / s3_start_prep_record are the exemplar format",
+  "MIGRATION_STATUS": {
+    "RAW_GEOMETRY_EVIDENCE": "YES — 28 recovered skill-board frames bound to live_csm_015..028 (click_point_norm for locked/dead-zone probes, zoom controls, SP不足; white/locked/acquired/confirm-dialog state frames all recovered)",
+    "NORMALIZED_GEOMETRY_PROFILE": "PARTIAL — some click_point_norm + zoom validated-with-box; NO per-node canonical box; display-scale drift 0.9/1.1 requires per-frame correction (RC-002)",
+    "CROSS_SCALE_GENERALIZATION": "NO — zoomed-out vs per-node geometry differ",
+    "CROSS_SESSION_REPLICATION": "NO — entire corpus is single session sess_a87f3588; frames RECOVERED_REVIEW_PENDING; positive-path source frames live_csm_015..019 absent",
+    "python_authority": "NEEDS_REPLICATION (blocked until recovered-frame review completes and cross-session replication exists)",
+    "color_detector": "CANDIDATE (documented from frames, not implemented)",
+    "SP_accumulation_rate": "UNKNOWN",
+    "full_board_unlock_chain": "PARTIAL (LEFT complete; RIGHT advanced to 220%UP)"
+  },
+  "sources": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json",
+    "enza_memory/migration/python_click_migration/recovered_frames/skill_board/ (manifest)",
+    "enza_memory/policies/s4_route_operator_hints.json"
+  ]
+}

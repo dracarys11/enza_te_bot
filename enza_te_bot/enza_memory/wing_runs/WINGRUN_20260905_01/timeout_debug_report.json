@@ -1,0 +1,31 @@
+{
+  "debug_session": "2026-09-05T15:30Z",
+  "TIMEOUT_LAYER": "B+D (browser tool long-cell timeout, 由 hidden per-click cost 导致预算误判)",
+  "FAILED_OPERATION_TRACE": [
+    {"operation":"s2_w1+w2 双周 burst cell","timeout_ms_declared":115000,"internal_actions":"2×(schedule+vocal+決定+6轮advance循环) ≈ 56 次 cua.click + 36s waits + 2 screenshots","estimated_real_runtime":"56×5s + 36s + screenshots ≈ 350s+ >> 115s","abort_by":"js tool timeout (timeout_ms)"},
+    {"operation":"s4_w1 burst cell","timeout_ms_declared":115000,"internal_actions":"4+18=22 次 cua.click + ~25s waits + screenshot","estimated_real_runtime":"22×5s+25s+30s(screenshot hang 风险) ≈ 165s >> 115s","abort_by":"js tool timeout"},
+    {"operation":"screenshot wedge (多次)","timeout":"内部固定 30000ms","trigger":"游戏页面重动画/对话帧时 capture 无法完成"}
+  ],
+  "RUNTIME_LIMITS_FOUND": {
+    "cua_click_hidden_cost_ms": 5000,
+    "cua_click_cost_pattern": "恒定 ~5.0s (5008/5078/5095), 与页面状态无关 — 疑为内部 implicit wait/ack budget",
+    "screenshot_internal_timeout_ms": 30000,
+    "screenshot_behavior": "页面静止→<2s; 游戏动画/对话帧→可 hang 至 30s 超时",
+    "js_cell_timeout_cap_ms": 120000,
+    "tab_release": "turn 结束未 markHandoff 的 tab 会被释放 (曾导致 tabs=0)"
+  },
+  "MINIMAL_TEST_RESULTS": {
+    "A_single_click": {"elapsed_ms":5016,"result":"PASS(但有 5s 隐性成本)"},
+    "B_independent_clicks_x3": [5008,5078,5095],
+    "C_wait_2s": {"elapsed_ms":2006,"result":"PASS"},
+    "D_wait_10s": {"elapsed_ms":10006,"result":"PASS"},
+    "E_screenshot": {"result":"TIMEOUT(30000ms) — 当时页面为对话帧"}
+  },
+  "ROOT_CAUSE_HYPOTHESIS": "每次 cua.click 有 ~5s 隐性固定成本。长 burst cell 的真实运行时间 = 5s×点击数 + 显式 wait + screenshot, 远超声明的 timeout_ms → tool 层 abort。非 CDP 卡死、非页面死锁。",
+  "SAFE_WORKAROUND": [
+    "每 cell 点击数 ≤12 (12×5s=60s), 或相应压缩 timeout_ms 声明值",
+    "禁止将 2 个游戏周封装进一个 cell",
+    "动画/对话帧不做 screenshot (30s hang 风险), 等 INPUT_READY 帧再截",
+    "游戏 tab 每次 turn 结束前 markHandoff 防释放"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "boundaries": [
+    {"stage":"UNIT_FORMATION","classification":"DEFAULT_CONTINUE","evidence":"w3 keeps default P1+S4+ゲスト; no forced business choice","scope":"WING"},
+    {"stage":"ITEM_SELECTION","classification":"SAFE_STAGE_ADVANCE","evidence":"w4 says item optional; 1倍 highlighted and unchanged","scope":"WING"},
+    {"stage":"FINAL_CONFIRM_MODAL","classification":"FINAL_PRECOMMIT","evidence":"w4 screenshot shows 使用確認 and stamina 300→270","scope":"WING"},
+    {"stage":"プロデュース開始","classification":"FINAL_COMMIT","evidence":"w5 explicitly records the sole authorized commit","scope":"WING"}
+  ],
+  "promotion_rule":"No business choice is promoted solely from a default; final commit requires explicit authorization."
+}

@@ -1,0 +1,11 @@
+{
+  "handler": "AUDITION_BATTLE_SPEED",
+  "target_state": "X3",
+  "current_state_history": [
+    {"battle": "S1 final audition", "observed": "倍速OFF", "clicks": 1, "after": "2倍速", "x3_reached": "unknown(未再读)"},
+    {"battle": "S2 final audition", "observed": "倍速OFF", "clicks": 1, "after": "2倍速", "x3_reached": "unknown"},
+    {"battle": "S3 40k audition x2", "observed": "OFF→点击", "clicks": "1-2(有一次重复点击抵消教训)", "after": "2倍速/未确认", "lesson": "点击后必须 fresh read, 避免重复点击抵消"}
+  ],
+  "final_state": "READY(handler 已实现, x3 路径待运行时观察)",
+  "result": "READY"
+}

@@ -1,0 +1,46 @@
+{
+  "failure_id": "canvas_misclick_002",
+  "trajectory_reference": "enza_phase2_prototype_001 step 7 (DT_20260903070000_007)",
+  "occurrences": 1,
+  "intent": "increment ボーカル allocation counter by 1 as a probe",
+  "grounding_method": "visual estimate from zoomed screenshot (clip, not calibrated); + hitbox inferred",
+  "action": "cua.click (475,345)",
+  "observed_result": {
+    "effect": "counter 0/20 -> 1/20 AND vocal skill-entry panel opened",
+    "url": "/produce (unchanged)",
+    "evidence": [
+      "OBS_20260903071000"
+    ],
+    "provenance": "session_observed"
+  },
+  "verification": {
+    "expected": "counter +1 only, no new panel",
+    "result": "criterion VIOLATED -> anomaly",
+    "operator_feedback": "user corrected: the screen context had changed after interruption; the click landed on 技能入口"
+  },
+  "unknown_cause": {
+    "classification": "AMBIGUOUS_EFFECT",
+    "candidate_causes": [
+      "+ button hitbox overlaps skill entry",
+      "skill panel opens automatically on first allocation point",
+      "screen had changed after interruption so the planned coordinate was stale"
+    ]
+  },
+  "state_now": "TRAINING_SETTINGS with vocal=1/20, skill panel open, 決定 NOT pressed (allocation uncommitted)",
+  "future_caution": [
+    "re-screenshot immediately before every click, especially after session interruptions (rule C1 reinforced)",
+    "zoom-crop coordinates are still canvas estimates; verify per-control hitboxes before batch operations",
+    "probe criteria must enumerate forbidden side effects (panel opening), not only the expected effect"
+  ],
+  "policy_links": [
+    "learned_constraints.json#U1",
+    "#R2",
+    "#F2"
+  ],
+  "resolution": {
+    "resolved_at": "2026-09-03T07:50:00Z",
+    "root_cause": "+ button allocation INHERENTLY opens the stat's skill-entry panel (calibration F5, n=2). The click did NOT miss.",
+    "reclassified_as": "expected-behavior-discovery, not a mis-click",
+    "lesson_update": "C1 stale-coordinate concern was not implicated; real lesson: unknown-control behavior must be verified by repeated experiment before classifying as failure (single-occurrence anomalies stay AMBIGUOUS)"
+  }
+}

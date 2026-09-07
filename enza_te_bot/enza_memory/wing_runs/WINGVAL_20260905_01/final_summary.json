@@ -1,0 +1,11 @@
+{
+  "run_id": "WINGVAL_20260905_01",
+  "vocal_loop_cross_session": "PASS",
+  "normal_week_no_agy": "PASS",
+  "business_choice_detector": "HOLD (未见新双卡实例; 获得 3卡/2卡判别证据)",
+  "control_geometry": "STABLE",
+  "controls_promotion_evidence": "READY",
+  "screenshots": 8,
+  "weeks_validated": 2,
+  "state_after_run": "S2 weeks=4, fan_gap=4610, fresh WING_HOME"
+}

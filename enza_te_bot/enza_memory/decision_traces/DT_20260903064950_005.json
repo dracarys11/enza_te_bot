@@ -1,0 +1,55 @@
+{
+  "not_chain_of_thought": true,
+  "usage_status": "audit/benchmarking ONLY. NOT executable policy, NOT training data.",
+  "trajectory": "enza_phase2_prototype_001",
+  "decision_trace_id": "DT_20260903064950_005",
+  "action_index": 5,
+  "observation_id": "OBS_20260903063000",
+  "current_state": "WING_CONFIRMATION_DIALOG (held ~24min)",
+  "exploration_objective": "Phase 2 flow requires returning to prep to locate Vocal baseline setting",
+  "candidate_actions": [
+    {
+      "action": "click プロデュース開始",
+      "risk": "FORBIDDEN — consumption",
+      "selected": false
+    },
+    {
+      "action": "click キャンセル",
+      "risk": "low-moderate, reversible navigation; Phase 2 contract authorizes explicitly directed navigation",
+      "selected": true
+    },
+    {
+      "action": "hold",
+      "risk": "none but blocks flow",
+      "selected": false
+    }
+  ],
+  "selected_action": "click キャンセル at (510,640)",
+  "expected_transition": "back to produce prep (predicted ITEM_SELECTION or PRODUCE_SELECTION)",
+  "risk_level": "LOW-MODERATE",
+  "unknowns_at_decision": [
+    "cancel target state (predicted only)"
+  ],
+  "verification_criteria": [
+    "fresh screenshot",
+    "dialog gone",
+    "prep-flow screen visible"
+  ],
+  "action_record": {
+    "performed": true,
+    "method": "cua.click (510,640)"
+  },
+  "transition_record": {
+    "from": "WING_CONFIRMATION_DIALOG",
+    "to": "PRODUCE_SELECTION",
+    "url_change": "/produceReady -> /produce"
+  },
+  "verification_record": {
+    "result": "PASS",
+    "evidence": "OBS_20260903065000: dialog gone, W.I.N.G. selection visible, ビギナー highlighted"
+  },
+  "failure_record": {
+    "failure": null,
+    "note": "cancel behavior now FIRST-HAND verified: dialog -> produce selection at /produce"
+  }
+}

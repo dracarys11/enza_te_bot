@@ -1,0 +1,17 @@
+{
+  "case_name": "invalid grounding",
+  "mode": "candidate_validation",
+  "observation": "test_data/ob001/fused_observation.json",
+  "candidate": {
+    "candidate_id": "AC_INVALID",
+    "target_element_id": "e404",
+    "action_type": "CLICK",
+    "evidence": [
+      "visual evidence: interaction candidate e404"
+    ],
+    "confidence": 0.9
+  },
+  "expected": {
+    "outcome": "REJECTED"
+  }
+}

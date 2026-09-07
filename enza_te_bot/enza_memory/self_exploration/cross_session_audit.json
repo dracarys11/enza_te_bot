@@ -1,0 +1,34 @@
+{
+  "sessions": ["SELFEXP_20260905_01", "SELFEXP_20260905_02", "SELFEXP_20260905_03"],
+  "scope_rule": "WING requires explicit scenario evidence; produceReady continuity alone is insufficient",
+  "pages": [
+    {"page_class":"PRODUCE_SELECTION","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","evidence":["SELFEXP_20260905_03:s1_before_produce_selection","SELFEXP_20260905_03:s7_back_to_selection"],"notes":["No screenshot proves WING scenario rather than generic produce entry"]},
+    {"page_class":"UNIT_FORMATION","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","evidence":["SELFEXP_20260905_03:s3_unit_formation_clean","SELFEXP_20260905_03:s6_back_to_unit"],"notes":["Wizard stage identity supported; WING scope not established"]},
+    {"page_class":"KNOWHOW_SELECTION","scope":"UNKNOWN_SCOPE","evidence_status":"SUPPORTED","promotion":"HOLD","evidence":["SELFEXP_20260905_03:s5_knowhow_clean"],"notes":["Visible stage is real, but no evidence ties it to WING"]},
+    {"page_class":"ITEM_SELECTION","scope":"UNKNOWN_SCOPE","evidence_status":"UNSUPPORTED","promotion":"HOLD","evidence":[],"notes":["Not reached; do not infer from wizard sequence"]},
+    {"page_class":"PRODUCE_MENU","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","evidence":["SELFEXP_20260905_02:t1_after_produce_menu","SELFEXP_20260905_02:t2b_after_unit_formation"],"notes":["Two tab clicks had no effect; lock/disabled/wrong geometry remain confounded"]},
+    {"page_class":"TUTORIAL_OVERLAY","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"PROMOTE_CANDIDATE","evidence":["SELFEXP_20260905_03:s1_after_next","SELFEXP_20260905_03:s4_after_next_knowhow"],"notes":["Model as transient interruption over parent produceReady page"]}
+  ],
+  "controls": [
+    {"control_id":"wizard_forward_next","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_03:s1","SELFEXP_20260905_03:s4"],"risk_class":"SAFE_NAVIGATION","notes":["Trace supports stage advance; no stable geometry"]},
+    {"control_id":"back_arrow","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_03:s6","SELFEXP_20260905_03:s7"],"risk_class":"SAFE_NAVIGATION","notes":["Repeated success, but wildcard page binding and no bbox"]},
+    {"control_id":"tutorial_next_page","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_03:s2","SELFEXP_20260905_03:s5"],"risk_class":"REVERSIBLE_LOCAL","notes":["Overlay-only control"]},
+    {"control_id":"modal_close","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_03:s3","SELFEXP_20260905_03:s5"],"risk_class":"REVERSIBLE_LOCAL","notes":["No calibrated geometry"]},
+    {"control_id":"tab_unit_formation","scope":"GENERIC_PRODUCE","evidence_status":"CONFLICT","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_02:t2","SELFEXP_20260905_02:t2b"],"risk_class":"SAFE_NAVIGATION","notes":["Two MISMATCH results do not prove wizard lock"]},
+    {"control_id":"tab_item_selection","scope":"UNKNOWN_SCOPE","evidence_status":"UNSUPPORTED","promotion":"HOLD","supporting_steps":[],"risk_class":"UNKNOWN_RISK","notes":["No closed-loop observation"]},
+    {"control_id":"knowhow_decide","scope":"UNKNOWN_SCOPE","evidence_status":"SUPPORTED","promotion":"REJECT","supporting_steps":["SELFEXP_20260905_03:s5"],"risk_class":"COMMIT","notes":["Disabled until book selection; action not executed"]}
+  ],
+  "transitions": [
+    {"transition":"PRODUCE_SELECTION→UNIT_FORMATION","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_03:s1"],"notes":["Stage advance observed; scenario scope unknown"]},
+    {"transition":"UNIT_FORMATION→KNOWHOW_SELECTION","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_03:s4"],"notes":["Stage advance observed; no WING proof"]},
+    {"transition":"KNOWHOW_SELECTION→ITEM_SELECTION","scope":"UNKNOWN_SCOPE","evidence_status":"UNSUPPORTED","promotion":"HOLD","supporting_steps":[],"notes":["Blocked by required book selection"]},
+    {"transition":"UNIT_FORMATION→PRODUCE_SELECTION","scope":"GENERIC_PRODUCE","evidence_status":"SUPPORTED","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_03:s7"],"notes":[]},
+    {"transition":"PRODUCE_MENU(tab_unit_formation)→UNIT_FORMATION","scope":"GENERIC_PRODUCE","evidence_status":"CONFLICT","promotion":"HOLD","supporting_steps":["SELFEXP_20260905_02:t2","SELFEXP_20260905_02:t2b"],"notes":["Both results MISMATCH; no transition occurred"]}
+  ],
+  "wing_confirmed": [],
+  "generic_produce": ["PRODUCE_SELECTION", "UNIT_FORMATION", "PRODUCE_MENU", "TUTORIAL_OVERLAY"],
+  "unknown_scope": ["KNOWHOW_SELECTION", "ITEM_SELECTION"],
+  "out_of_scope": [],
+  "runtime_readiness": "WING_SCOPE_NOT_YET_GROUNDED",
+  "production_promotion_performed": false
+}

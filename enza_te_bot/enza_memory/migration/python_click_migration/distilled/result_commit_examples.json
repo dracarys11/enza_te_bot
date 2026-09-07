@@ -1,0 +1,15 @@
+{
+  "artifact_type":"RESULT_COMMIT_EXAMPLES",
+  "generated_at":"2026-09-06T06:22:51Z",
+  "runtime_verifier_rule":"FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS",
+  "examples":[
+    {"case":"THE_LEGEND_FAIL","evidence":"explicit オーディション不合格 screenshots for #2 and #5","commit":"NO_SUCCESS","fan_effect":"+0 for confirmed failures","postcondition":"HOME weeks-1; retry/replan from fresh state"},
+    {"case":"S3_40K_FIRST_FAIL","evidence":"explicit failure dialogue","commit":"audition_40k_completed remains false","postcondition":"week consumed; route remains pending"},
+    {"case":"S3_40K_RESULT_EVIDENCE_LOSS","evidence":"result dialogue advanced before capture","commit":"none","result":"UNKNOWN","postcondition":"flag remains false despite week transition"},
+    {"case":"S3_40K_EXPLICIT_PASS","evidence":"やったぁ + rank-up + rank C","commit":"audition_40k_completed=true","postcondition":"route advances"},
+    {"case":"S3_50K_EXPLICIT_PASS","evidence":"explicit pass + exact fans 58270->108270 (+50000)","commit":"audition_50k_completed=true","postcondition":"route advances"},
+    {"case":"SEMIFINAL_SCENE_SKIP","evidence":"scene advanced to next label but no explicit match result","commit":"no WIN","result":"UNKNOWN"},
+    {"case":"S4_BELOW_500K","evidence":"S4 end fans 414414; final evaluation 419414","commit":"TE success=false","unknown":"source of +5000 remains UNKNOWN"}
+  ],
+  "ordering":"capture and classify explicit result -> commit or preserve UNKNOWN -> only then advance presentation"
+}

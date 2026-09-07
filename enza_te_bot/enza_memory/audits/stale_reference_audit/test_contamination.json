@@ -1,0 +1,45 @@
+{
+  "audit_id": "stale_reference_audit_20260906",
+  "purpose": "Tests (and test-pinned dormant modules) that encode or pin superseded knowledge, so a correct fix would 'break' them or a resume would inherit the stale expectation.",
+  "contaminated_test_files_count": 2,
+  "findings": [
+    {
+      "id": "F-02",
+      "test_file": "test_home_policy.py",
+      "lines": "52-60",
+      "test_name": "test_season_three_completed_milestones_stamina_policy",
+      "stale_statement_pinned": "decide_home(S3, milestones complete, stamina_adequate=False) must return ('REST', 'season_3_stamina_low_rest').",
+      "current_authoritative_replacement": "LOW_STAMINA_WARNING semantics: low fresh stamina makes the failure-rate read mandatory; failure rate 0-2 → VOCAL allowed, >2 → REST, unknown+low → fail closed (REST preferred). Current-correct tests already exist in test_wing_fast_handlers.py (StaminaGuardTest, case1-5).",
+      "linked_runtime_finding": "F-01 (home_policy.py:256-258)",
+      "impact_if_left": "The stale rule stays 'test-verified'; any future refactor that preserves these assertions re-cements the superseded semantics.",
+      "impact_if_fixed_alone": "Test fails — must be updated in the same change as F-01.",
+      "recommended_action": "Rewrite assertions to the guard semantics (three cases: low+no-read → NEED_MORE_OBSERVATION/REST-preferred fail-closed; low+rate<=2 → VOCAL; low+rate>2 → REST)."
+    },
+    {
+      "id": "F-07",
+      "test_file": "test_audition_control_epoch.py",
+      "lines": "51-54 (with test_auto_off_one_click_then_verify at 15)",
+      "test_name": "speed_action transitions",
+      "stale_statement_pinned": "speed_action(fresh X2 observation) → ('CLICK_SPEED', …) — pins the 'click the speed control toward X3' behavior whose target control is display-only / ungrounded.",
+      "current_authoritative_replacement": "GATES.md holds SPEED_FIRST_THEN_AUTO / CONTROL_ORDERING_DEPENDENCY_MUST_BE_RESPECTED as HOLD; hazard_map + control_regions:526 forbid promoting the display badge to a clickable control; the only evidenced path is OFF→X2 (one click, unknown further).",
+      "linked_runtime_finding": "F-05/F-06 (policy + distillation claims)",
+      "impact_if_left": "The dormant module (no production importer — verified) keeps a ready-made X3 click path that a future integration could inherit as 'tested'.",
+      "impact_if_fixed_alone": "n/a — module is not wired; fix is to re-scope the module when it is next touched.",
+      "recommended_action": "When audition_control_epoch is next revised, gate CLICK_SPEED behind an explicit grounded-toggle precondition and update the test to the evidenced OFF→X2 path; until then leave untouched (offline, no runtime contact)."
+    }
+  ],
+  "guard_tests_verified_current_NOT_contaminated": [
+    {
+      "file": "test_harness_live_invariants.py",
+      "evidence": "asserts 'stamina < 0.50' NOT in GATES.md (line 29), 'vocal failure rate >2%' NOT in GATES (line 30), SPEED_FIRST_THEN_AUTO stays in the HOLD section (lines 20, 26-28), INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE and CONTROL_ACTION_REQUIRES_ACTIONABLE_PHASE are promoted exactly once — this test is the active anti-regression guard for categories 1, 7, 8."
+    },
+    {
+      "file": "test_wing_fast_handlers.py",
+      "evidence": "StaminaGuardTest + case1-5 encode the CURRENT operator semantics (warning-only stamina, failure-rate gate, stale stamina treated as absent, config memory cannot create a warning)."
+    },
+    {
+      "file": "test_blind_interaction_policy.py",
+      "evidence": "Known-fingerprint path + escalate-on-unknown fail-closed behavior are current; only the fingerprint naming is a P2 issue (F-11)."
+    }
+  ]
+}

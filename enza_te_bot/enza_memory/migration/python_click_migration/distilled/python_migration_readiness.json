@@ -1,0 +1,30 @@
+{
+  "artifact_type":"PYTHON_MIGRATION_READINESS",
+  "generated_at":"2026-09-06T06:22:51Z",
+  "scoring":{"GEOMETRY":"0-3","STATE_DETECTOR":"0-3","PRECONDITION":"0-3","POSTCONDITION":"0-3","REPLICATION":"0-3","HAZARD_KNOWN":"0-2","max_total":17,"note":"Score orders shadow-test work; it does not authorize production execution."},
+  "controls":[
+    {"control":"HOME:SCHEDULE","scores":{"GEOMETRY":2,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":16,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"SCHEDULE:VOCAL","scores":{"GEOMETRY":2,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":16,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"SCHEDULE:DECIDE","scores":{"GEOMETRY":2,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":16,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"RESULT:ADVANCE","scores":{"GEOMETRY":2,"STATE_DETECTOR":2,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":15,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"AUDITION_SELECTION:DECIDE","scores":{"GEOMETRY":1,"STATE_DETECTOR":2,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":14,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"AUDITION_BATTLE:AUTO","scores":{"GEOMETRY":1,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":2,"HAZARD_KNOWN":2},"total":14,"classification":"NEEDS_MORE_REPLICATION"},
+    {"control":"DIALOGUE:SAFE_TEXTBOX","scores":{"GEOMETRY":2,"STATE_DETECTOR":2,"PRECONDITION":2,"POSTCONDITION":2,"REPLICATION":3,"HAZARD_KNOWN":2},"total":13,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"DIALOGUE:3_CHOICE_MIDDLE","scores":{"GEOMETRY":1,"STATE_DETECTOR":2,"PRECONDITION":3,"POSTCONDITION":2,"REPLICATION":3,"HAZARD_KNOWN":2},"total":13,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"AUDITION_SELECTION:CANDIDATE","scores":{"GEOMETRY":1,"STATE_DETECTOR":2,"PRECONDITION":2,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":13,"classification":"CONTROL_GROUNDING_BLOCKED"},
+    {"control":"SEASON_TRANSITION:SKIP","scores":{"GEOMETRY":1,"STATE_DETECTOR":2,"PRECONDITION":2,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":13,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"SEASON_TRANSITION:NEXT","scores":{"GEOMETRY":1,"STATE_DETECTOR":2,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":1},"total":13,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"ABANDON:DIALOG","scores":{"GEOMETRY":1,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":1,"HAZARD_KNOWN":2},"total":13,"classification":"BUSINESS_POLICY_BLOCKED"},
+    {"control":"SCHEDULE:BACK","scores":{"GEOMETRY":1,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":1,"HAZARD_KNOWN":1},"total":12,"classification":"NEEDS_MORE_REPLICATION"},
+    {"control":"SCHEDULE:AUDITION","scores":{"GEOMETRY":0,"STATE_DETECTOR":2,"PRECONDITION":2,"POSTCONDITION":3,"REPLICATION":3,"HAZARD_KNOWN":2},"total":12,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"ABANDON:LONG_PRESS","scores":{"GEOMETRY":1,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":0,"HAZARD_KNOWN":2},"total":12,"classification":"CONTROL_GROUNDING_BLOCKED"},
+    {"control":"HOME:REST","scores":{"GEOMETRY":0,"STATE_DETECTOR":3,"PRECONDITION":3,"POSTCONDITION":3,"REPLICATION":1,"HAZARD_KNOWN":1},"total":11,"classification":"NEEDS_FRESH_VISUAL_BOX"},
+    {"control":"AUDITION_BATTLE:SPEED_DISPLAY","scores":{"GEOMETRY":3,"STATE_DETECTOR":3,"PRECONDITION":0,"POSTCONDITION":0,"REPLICATION":3,"HAZARD_KNOWN":2},"total":11,"classification":"CONTROL_GROUNDING_BLOCKED"},
+    {"control":"AUDITION_BATTLE:PAUSE_RESUME","scores":{"GEOMETRY":1,"STATE_DETECTOR":2,"PRECONDITION":2,"POSTCONDITION":3,"REPLICATION":1,"HAZARD_KNOWN":2},"total":11,"classification":"NEEDS_MORE_REPLICATION"},
+    {"control":"DIALOGUE:2_CHOICE_GOMEN","scores":{"GEOMETRY":1,"STATE_DETECTOR":2,"PRECONDITION":2,"POSTCONDITION":2,"REPLICATION":1,"HAZARD_KNOWN":2},"total":10,"classification":"BUSINESS_POLICY_BLOCKED"},
+    {"control":"HOME:FURIKAERI","scores":{"GEOMETRY":1,"STATE_DETECTOR":3,"PRECONDITION":1,"POSTCONDITION":2,"REPLICATION":0,"HAZARD_KNOWN":2},"total":9,"classification":"CONTROL_GROUNDING_BLOCKED"}
+  ],
+  "python_ready_candidates_for_shadow_test":["HOME:SCHEDULE","SCHEDULE:VOCAL","SCHEDULE:DECIDE","RESULT:ADVANCE","DIALOGUE:SAFE_TEXTBOX","DIALOGUE:3_CHOICE_MIDDLE","SCHEDULE:BACK","HOME:REST","AUDITION_BATTLE:AUTO"],
+  "production_ready_controls":[],
+  "top_blockers":["No core control has normalized visual_box/proven_click_box evidence.","Viewport left/top, DPR, zoom and browser/game coordinate mapping are not verified.","Python-native state/anchor detectors are not yet demonstrated on these samples.","AUTO lacks cross-session replication under the current epoch/actionable-phase contract.","Speed toggle remains ungrounded; badge is display-only."]
+}

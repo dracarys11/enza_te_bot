@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "reconciliation_id": "PHASE_1E_R_20260903",
+  "created_at": "2026-09-03T00:00:00Z",
+  "source_audit": "AGY Phase 1E evidence audit, confirmed by offline reinspection of the saved screenshots",
+  "executable": false,
+  "original_artifacts_mutated": false,
+  "observations": [
+    {
+      "observation_id": "OBS_20260903060520",
+      "original_artifact": "ai_decisions/observations/OBS_20260903060520.json",
+      "original_artifact_sha256": "178ec61d6b6ba61d2308b4ab53374a3c76bcd978b02bca3aee64151133f56905",
+      "original_claim": {
+        "state": "UNIT_FORMATION",
+        "classification": "INFERENCE",
+        "confidence": 0.95,
+        "transition_claim": "PRODUCE_SELECTION -> UNIT_FORMATION"
+      },
+      "supporting_evidence": [
+        {
+          "type": "ORIGINAL_RECORD",
+          "reference": "ai_decisions/observations/OBS_20260903060520.json",
+          "claim": "The original annotation asserted a unit-formation breadcrumb and idol grid."
+        }
+      ],
+      "conflicting_evidence": [
+        {
+          "type": "SCREENSHOT_REINSPECTION",
+          "reference": "ai_decisions/observations/screenshots/OBS_20260903060520_1E_s2_after_next.png",
+          "sha256": "1f1cc30b06d4332162ab51e1baec399f593e255dedee1d5ce7ce72be01f52445",
+          "finding": "The Produce Selection page remains visible and a Now Loading overlay is present; UNIT_FORMATION is not established by this frame."
+        }
+      ],
+      "final_classification": {
+        "state": "LOADING_TRANSITION",
+        "classification": "UNKNOWN",
+        "superseded_state": "UNIT_FORMATION",
+        "reason": "The saved frame proves loading presentation but not the post-loading destination."
+      }
+    },
+    {
+      "observation_id": "OBS_20260903060545",
+      "original_artifact": "ai_decisions/observations/OBS_20260903060545.json",
+      "original_artifact_sha256": "06d346516625b417f604cf4b27692573aa487643fbb5175dbc3390565b1c783b",
+      "original_claim": {
+        "state": "ITEM_SELECTION",
+        "classification": "INFERENCE",
+        "confidence": 0.95,
+        "transition_claim": "UNIT_FORMATION -> ITEM_SELECTION"
+      },
+      "supporting_evidence": [
+        {
+          "type": "ORIGINAL_RECORD",
+          "reference": "ai_decisions/observations/OBS_20260903060545.json",
+          "claim": "The original annotation asserted the item-selection breadcrumb and item grid."
+        }
+      ],
+      "conflicting_evidence": [
+        {
+          "type": "SCREENSHOT_REINSPECTION",
+          "reference": "ai_decisions/observations/screenshots/OBS_20260903060545_1E_s3_after_next2.png",
+          "sha256": "e455f3cf6c570b4b31a60aed0e9a25cf6504ebfb1d1729990f0e973126f61f63",
+          "finding": "A Unit Formation tutorial modal titled ユニット編成について (1/7) covers the page; ITEM_SELECTION is not shown."
+        }
+      ],
+      "final_classification": {
+        "state": "UNIT_FORMATION_TUTORIAL_MODAL",
+        "classification": "UNKNOWN",
+        "superseded_state": "ITEM_SELECTION",
+        "reason": "The visible modal is identifiable, but no completed transition to ITEM_SELECTION is evidenced."
+      }
+    },
+    {
+      "observation_id": "OBS_20260903060610",
+      "original_artifact": "ai_decisions/observations/OBS_20260903060610.json",
+      "original_artifact_sha256": "4cb5bb755ca01900e46aefb7b44dd70f6ee97b83cb3de35044177a9d36e32063",
+      "original_claim": {
+        "state": "WING_CONFIRMATION_DIALOG",
+        "classification": "INFERENCE",
+        "confidence": 0.9,
+        "transition_claim": "ITEM_SELECTION -> WING_CONFIRMATION_DIALOG"
+      },
+      "supporting_evidence": [
+        {
+          "type": "ORIGINAL_RECORD",
+          "reference": "ai_decisions/observations/OBS_20260903060610.json",
+          "claim": "The original annotation asserted a production-start confirmation modal."
+        }
+      ],
+      "conflicting_evidence": [
+        {
+          "type": "SCREENSHOT_REINSPECTION",
+          "reference": "ai_decisions/observations/screenshots/OBS_20260903060610_1E_s4_confirm_boundary.png",
+          "sha256": "e7329e2b117c07e5751b7123a5b6199f5b70f21f67df0fcfd095fe5352522d9d",
+          "finding": "The frame still shows the Unit Formation tutorial modal (1/7), not a production confirmation dialog."
+        }
+      ],
+      "final_classification": {
+        "state": "UNIT_FORMATION_TUTORIAL_MODAL",
+        "classification": "UNKNOWN",
+        "superseded_state": "WING_CONFIRMATION_DIALOG",
+        "reason": "The claimed confirmation boundary is contradicted by the saved screenshot."
+      }
+    },
+    {
+      "observation_id": "OBS_20260903063000",
+      "original_artifact": "ai_decisions/observations/OBS_20260903063000.json",
+      "original_artifact_sha256": "b887e3c84fbbd6f9ec2700dbe4ddff6cd76838725403e2db6cf0b8f64830d90a",
+      "original_claim": {
+        "state": "WING_CONFIRMATION_DIALOG (detailed structure pass)",
+        "classification": "INFERENCE",
+        "confidence": 0.9,
+        "transition_claim": "confirmation dialog remained open and unchanged"
+      },
+      "supporting_evidence": [
+        {
+          "type": "ORIGINAL_RECORD",
+          "reference": "ai_decisions/observations/OBS_20260903063000.json",
+          "claim": "The original annotation asserted detailed confirmation-dialog structure."
+        }
+      ],
+      "conflicting_evidence": [
+        {
+          "type": "SCREENSHOT_REINSPECTION",
+          "reference": "ai_decisions/observations/screenshots/OBS_20260903063000_1E_s5_dialog_full.png",
+          "sha256": "101e9265cce4e0d403ffd93c96f28cb6a6a2e70035fa1f0ccaca494074f795a6",
+          "finding": "The frame shows the same Unit Formation tutorial modal (1/7); the claimed title, consumption row, and confirmation buttons are absent."
+        }
+      ],
+      "final_classification": {
+        "state": "UNIT_FORMATION_TUTORIAL_MODAL",
+        "classification": "UNKNOWN",
+        "superseded_state": "WING_CONFIRMATION_DIALOG",
+        "reason": "The detailed structural claim is contradicted by all retained screenshot evidence."
+      }
+    }
+  ],
+  "added_observed_states": [
+    {
+      "label": "LOADING_TRANSITION",
+      "classification": "INFERENCE",
+      "evidence_refs": [
+        "ai_decisions/observations/screenshots/OBS_20260903060520_1E_s2_after_next.png"
+      ],
+      "scope": "presentation/loading evidence only; destination remains UNKNOWN"
+    },
+    {
+      "label": "UNIT_FORMATION_TUTORIAL_MODAL",
+      "classification": "INFERENCE",
+      "evidence_refs": [
+        "ai_decisions/observations/screenshots/OBS_20260903060545_1E_s3_after_next2.png",
+        "ai_decisions/observations/screenshots/OBS_20260903060610_1E_s4_confirm_boundary.png",
+        "ai_decisions/observations/screenshots/OBS_20260903063000_1E_s5_dialog_full.png"
+      ],
+      "scope": "observed tutorial-modal candidate; non-executable and not promoted to a runtime state"
+    }
+  ],
+  "affected_trajectories": [
+    {
+      "trajectory_id": "enza_1e_environment_mapping_001",
+      "original_artifact": "enza_memory/trajectories/enza_1e_environment_mapping_001.json",
+      "original_artifact_sha256": "f1a2dfa2a6f4f987a4b59d28f87a97c7bb2df2941202dd1515b6941ebbfeac56",
+      "status": "AUDIT_FAILED_REQUIRES_RECONCILIATION",
+      "reason": "Steps 1-4 rely on observation labels contradicted by their saved screenshots."
+    }
+  ],
+  "audit_history": {
+    "original_observations_preserved": true,
+    "original_decision_traces_preserved": true,
+    "original_trajectory_preserved": true,
+    "usage": "This overlay supersedes the affected classifications for audit/replay; it does not rewrite source evidence or authorize actions."
+  }
+}

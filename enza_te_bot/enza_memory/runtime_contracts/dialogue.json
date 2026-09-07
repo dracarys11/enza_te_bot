@@ -1,0 +1,95 @@
+{
+  "contract_version": "0.2",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): T-01 authority ranking SKIP > FAST_FORWARD > TEXTBOX, choice-owner suppression replaces overlap-hazard framing; 2026-09-07 STALE-G metadata correction (concurrent-reconciliation repair): FAST_FORWARD execution evidence = 1 validated execution (S1W7 weekly_trace L8; canonical_transitions T10) — 'zero click evidence' wording replaced; HOLD retained at n=1; version stays 0.2",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract distilled from live memory evidence. NOT executable policy. Choice detection lives in choice.json; this room covers plain dialogue advance.",
+  "scenario_scope": "WING produce dialogue scenes (COMMUNICATION_DIALOGUE, SUPPORT_EVENT_DIALOGUE, result dialogue), 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "DIALOGUE",
+    "subtypes": [
+      {"subtype": "COMMUNICATION_DIALOGUE", "anchors": ["right-side Auto/ログ/非表示 vertical button group", "bottom textbox, NO SKIP"], "knowledge_tier": "REPEATED_EVIDENCE"},
+      {"subtype": "SUPPORT_EVENT_DIALOGUE", "anchors": ["top-left ☆イベント title frame + avatar", "top-right SKIP", "bottom textbox"], "knowledge_tier": "REPEATED_EVIDENCE"},
+      {"subtype": "RESULT_DIALOGUE", "anchors": ["textbox over result/stat presentation"], "knowledge_tier": "REPEATED_EVIDENCE (part of RESULT advance cycle)"}
+    ],
+    "identity_source": "layout_role (SKIP presence/absence + Auto group)",
+    "must_not_require": ["dialogue text OCR"]
+  },
+  "ENTRY_CONDITIONS": [
+    "fresh frame classified as a dialogue subtype (SKIP present or absent determines type)",
+    "no choice cards present — choice overlay must be excluded BEFORE any textbox tap (probe_order: choice-overlay detect > story textbox > SKIP badge)"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "subtype (SKIP / no-SKIP / Auto-group)",
+      "textbox presence and box",
+      "choice cards present (boolean gate)",
+      "早送りx4 OFF indicator (right-lower region ~ (1105,655)-(1140,690))",
+      "owner-of-frame (only one actionable surface may be acted on)"
+    ]
+  },
+  "SUBSTATES": [
+    {"substate": "PLAIN_TEXTBOX_ADVANCE", "evidence": "35 successful textbox advances, REPEATED_EVIDENCE"},
+    {"substate": "SKIP_AVAILABLE", "evidence": "SUPPORT_EVENT / transition / result contexts, REPEATED_EVIDENCE"},
+    {"substate": "FASTFORWARD_CANDIDATE", "evidence": "CANDIDATE rule; 1 validated execution (WINGRUN_20260905_01 weekly_trace L8 S1W7 '早送りON自动推进成功', canonical_transitions T10) + OFF/ON dual-state indicator frames; single-session"},
+    {"substate": "CHOICE_INTERRUPTED", "evidence": "REPEATED_EVIDENCE (dual ✓ cards appear) → hand off to choice.json"}
+  ],
+  "VISIBLE_CONTROLS": [
+    {"control": "SAFE_TEXTBOX", "geometry_1280x720": {"x": 640, "y": 610, "normalized": {"x": 0.5, "y": 0.8472}}, "box_norm": {"x1": 0.1758, "y1": 0.7361, "x2": 0.8086, "y2": 0.9722}, "success_fail": "35/0", "visible_status": "VERIFIED_EVIDENCE (authority rank 3 of 3 — fallback)"},
+    {"control": "SKIP badge", "geometry_1280x720": {"x": 1218, "y": 53}, "box_norm": {"x1": 0.9266, "y1": 0.0278, "x2": 0.9828, "y2": 0.1222}, "note": "absent in COMMUNICATION_DIALOGUE — clicking there is NO_EFFECT", "visible_status": "VERIFIED_EVIDENCE"},
+    {"control": "bottom-right chevron (1218,660)", "visible_status": "VISIBLE_ONLY — clicking was NO_EFFECT; must click textbox body"},
+    {"control": "早送りx4 OFF frame (FAST_FORWARD_RIGHT)", "geometry": "approx (1105,655)-(1140,690)", "visible_status": "VISIBLE, authority rank 2, execution HOLD (1 validated execution S1W7; durable frame rf_dl_afsoushi_rest + recovered OFF/ON indicator states)"},
+    {"control": "Auto/ログ/非表示 group", "geometry": "right side", "visible_status": "VISIBLE_ONLY in this room — battle Auto contract does NOT apply here"}
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "VISIBLE != AUTHORIZED. Ranked authority per v0_3 DIALOGUE_ACTION_PRIORITY: SKIP > FAST_FORWARD_RIGHT > TEXTBOX (textbox is the lowest-priority fallback).",
+    "SKIP": "rank 1 — click directly when visible AND dialogue subtype known AND no business choice; /home login-bonus SKIP is NOT promoted (hazard: opened お知らせ overlay)",
+    "fastforward": "rank 2 — durable frame exists (rf_dl_afsoushi_rest; VRB02_013 primary action) and 1 validated execution recorded (S1W7): execution HOLD retained at n=1, single session, geometry ungrounded; if used, requires ON-progress fresh check with textbox fallback",
+    "textbox": "rank 3 — authorized per-tap with bounded burst only when SKIP/早送り absent and no choice owner present; stop as soon as textbox disappears",
+    "choice_owner_suppression": "when CHOICE_PRESENT, the choice overlay OWNS the frame: textbox remains VISIBLE but its authority is SUPPRESSED (visible != authorized) — resolving the choice is the only valid action; the physical textbox/choice overlap is preserved separately as regression CLR-003",
+    "textbox_tap_interval": "~2000ms worked (REST scene, MEDIUM confidence)"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/classify subtype and overlays",
+    "tap textbox body per-tap guarded",
+    "click SKIP in validated contexts (event/result/in-lesson dialogue; 5 successes)",
+    "bounded tap batch with fresh dialogue-presence check between batches"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "blind textbox burst after dialogue ends (FURIKAERI wrong-target hazard)",
+    "chevron clicks",
+    "SKIP on /home login dialogue or unknown transition type",
+    "textbox tap when a choice overlay may be present",
+    "any semantic choice resolution inside this room (→ choice.json)"
+  ],
+  "POSTCONDITIONS": {
+    "textbox_tap": "dialogue advances or fresh next state (choice cards / HOME / lesson)",
+    "SKIP": "next transition state or fresh WING_HOME"
+  },
+  "EXIT_CONDITIONS": ["dialogue ends → HOME / RESULT / lesson", "choice cards appear → CHOICE room"],
+  "FAILURE_MODES": [
+    {"mode": "TERMINAL_TAP_CROSSES_INTO_HOME_CONTROL", "class": "OVER_TAP", "evidence": "FURIKAERI activated"},
+    {"mode": "CHEVRON_NO_EFFECT", "class": "NO_EFFECT"},
+    {"mode": "CHOICE_OWNER_NOT_RESPECTED", "class": "AUTHORITY_SUPPRESSION_VIOLATION", "evidence": "choice overlay owns the frame; textbox visible but authority suppressed (VRB02_015/016/018); physical overlap preserved as regression CLR-003"},
+    {"mode": "SCREENSHOT_TIMEOUT_DURING_DIALOGUE", "class": "TOOL_TIMEOUT", "evidence": "30s hang on animation/dialogue frames"}
+  ],
+  "RECOVERY": [
+    "stop burst on textbox disappearance; fresh owner check before next click",
+    "if stuck: classify subtype fresh; exit via SKIP only if validated context, else bounded textbox taps"
+  ],
+  "PERSISTENCE_BOUNDARY": "none inside room; flush after the wrapped transaction (week/event) completes",
+  "MIGRATION_STATUS": {
+    "SAFE_TEXTBOX": "PYTHON_READY_CANDIDATE with authority rank 3 (T-01 reconciliation applied)",
+    "SKIP": "PYTHON_READY_CANDIDATE — VALIDATED_CONTEXTS_ONLY (5 successes; /home login context excluded)",
+    "FASTFORWARD": "NEEDS_GEOMETRY + execution HOLD (authority rank 2 per v0_3; visual evidence YES, execution evidence 1/1 single-session S1W7, cross-session replication NO)",
+    "disappearance_detector": "BLOCKED — PLAIN_DIALOGUE vs CHOICE_PRESENT detector not built for Python"
+  },
+  "sources": [
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json",
+    "enza_memory/migration/python_click_migration/event_occurrence/event_click_regions.json",
+    "enza_memory/policies/wing_dialogue_fastforward_rule.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/interruption_distillation.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/distillation/control_distillation.json"
+  ]
+}

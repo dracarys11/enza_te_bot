@@ -1,0 +1,28 @@
+{
+  "collected": "2026-09-05T09:00:00Z",
+  "method": "read-only exploration (fresh observe per page, no 決定, no week consumed)",
+  "S4_HOME_STATE": {
+    "season": 4, "weeks_remaining": 8, "idol_rank": "B",
+    "fan_status": "Congratulation (B target already met)", "stamina": "full",
+    "available_strategic_entries": ["プロデュース(SCHEDULE): レッスン&お仕事/オーディション", "休む", "振り返り(技能点入口, operator hint)", "流行確認", "ユニット確認/衣装変更/アイテム/講める/ホームに戻る/オプション"],
+    "note": "Season target already CLEAR at entry; remaining 8 weeks appear to be for rank/fan push toward WING finals"
+  },
+  "S4_AUDITIONS": [
+    {"page":1,"name":"アイドルの★神様 (The Land of Dancing Goddess)","difficulty":16,"fan_reward":"+15000","condition":"F以上","eligible":true},
+    {"page":2,"name":"UNKNOWN (未截图)","difficulty":17,"fan_reward":"UNKNOWN","condition":"UNKNOWN","eligible":"UNKNOWN"},
+    {"page":3,"name":"オールアイドル感謝FESTIVAL","difficulty":18,"fan_reward":"+50000","condition":"F以上","eligible":true},
+    {"page":4,"name":"THE LEGEND","difficulty":19,"fan_reward":"+100000","condition":"B以上","eligible":true,"evidence":"決定 按钮为粉色可用态"},
+    {"page":5,"name":"UNKNOWN","difficulty":19,"fan_reward":"+200000","condition":"A以上","eligible":false},
+    {"page":6,"name":"UNKNOWN","difficulty":"UNKNOWN","fan_reward":"+300000","condition":"S以上","eligible":false}
+  ],
+  "has_100k_plus": true,
+  "S4_CLEAR_REQUIREMENT": "UNKNOWN — 季节目标(B)在进入时已达成(CLEAR 标); 剩余8周的作用(冲更高rank/决赛资格)未在页面明示",
+  "FINAL_WING_ENTRY_REQUIREMENT": "UNKNOWN — 未观察到 semifinal/final 入口; 假设与 rank/audition 战绩相关, 需 runtime 观察",
+  "ROUTE_CANDIDATES": [
+    {"candidate":"THE LEGEND (+100000) 路线","basis":"唯一已确认 eligible 的高额 audition; Vo A500 推荐值 vs 我们 Vo S 614","risk":"難19 battle 强度未知"},
+    {"candidate":"感謝FESTIVAL (+50000) 稳健路线","basis":"難18, F以上, 同样 eligible","risk":"收益减半但更稳"},
+    {"candidate":"operator skill-point route","basis":"vocal MAX 后经 振り返り 消费 SP(521 积压), 优先上限; 可能提升 battle 胜率后再打 THE LEGEND","status":"待 operator 补充细节"}
+  ],
+  "UNKNOWN": ["p2 名称/奖励","决赛/semifinal 进入条件","S4 8周的真正用途","WING 優勝条件"],
+  "constraints_respected": "无 決定 点击, 无周消耗, 全部 fresh observe"
+}

@@ -1,0 +1,110 @@
+{
+ "schema_version": 1,
+ "artifact_id": "OBS_007",
+ "artifact_type": "OBSERVATION",
+ "created_at": "2026-09-07T00:00:00Z",
+ "status": "CANDIDATE",
+ "run_id": "WINGRUN_20260907_01",
+ "environment": {
+  "provider": "ZCode IAB",
+  "provider_session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+  "viewport": {
+   "width": 1280,
+   "height": 720
+  },
+  "url": {
+   "value": "https://shinycolors.enza.fun/produce",
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "title": {
+   "value": "アイドルマスター シャイニーカラーズ",
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "canvas": {
+   "value": "canvas game",
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "dom_available": {
+   "value": false,
+   "classification": "FACT",
+   "evidence_ids": []
+  },
+  "accessibility_available": {
+   "value": false,
+   "classification": "FACT",
+   "evidence_ids": []
+  }
+ },
+ "page_state": {
+  "label": "WING_HOME_IDLE (S1 weeks=1) — planner verification boundary",
+  "classification": "FACT",
+  "confidence": 0.95,
+  "evidence_ids": [
+   "planner_verify_00_fresh_home.png"
+  ]
+ },
+ "numeric_observations": [
+  {
+   "field": "season",
+   "value": 1,
+   "classification": "FACT"
+  },
+  {
+   "field": "weeks_remaining",
+   "value": 1,
+   "classification": "FACT"
+  },
+  {
+   "field": "fan_gap_to_target",
+   "value": 220,
+   "classification": "FACT",
+   "note": "HOME あと220人; planner input"
+  },
+  {
+   "field": "planner_objective",
+   "value": "NEEDS_VOCAL_FAN_GAIN",
+   "classification": "FACT",
+   "note": "home_policy.decide_home output; explicit, well-formed"
+  },
+  {
+   "field": "wiring_status",
+   "value": "UNSUPPORTED_DECISION",
+   "classification": "FACT",
+   "note": "home_tick fail-closed; no executor for this objective"
+  }
+ ],
+ "screenshot": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/planner_verify_00_fresh_home.png",
+ "screenshot_sha256": "46696ce654b50498a32ce2d407591a27fbd4dc6f5c7f8d672e870fa15ae1160a",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB)",
+  "provider_session_id": "sess_0dba06ad-1e0f-4f1e-8440-6c756415d780",
+  "captured_at": "2026-09-07T00:00:00Z",
+  "source_artifact_ids": [],
+  "integrity": {
+   "algorithm": "sha256",
+   "digest": "46696ce654b50498a32ce2d407591a27fbd4dc6f5c7f8d672e870fa15ae1160a"
+  }
+ },
+ "evidence_references": [
+  {
+   "evidence_id": "planner_verify_00_fresh_home.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/planner_verify_00_fresh_home.png",
+   "captured_at": "2026-09-07T00:00:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {
+    "algorithm": "sha256",
+    "digest": "46696ce654b50498a32ce2d407591a27fbd4dc6f5c7f8d672e870fa15ae1160a"
+   }
+  }
+ ],
+ "unknowns": [
+  "exact stamina/mental numeric values",
+  "SP value"
+ ]
+}

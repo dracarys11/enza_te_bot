@@ -1,0 +1,160 @@
+{
+  "contract_version": "0.2.1",
+  "reconciled": "2026-09-07 CONTRACT_EVIDENCE_DELTA_20260907: evidence/status metadata delta from HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY (86 recovered historical frames) + RUN_STATE_CONTAMINATION_FIX (PERSIST-1 re-check); derived-artifact metadata only",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "ROOM_CONTRACT_INDEX",
+  "purpose": "Python executor consumption index for distilled per-room runtime contracts. Contracts are perception/authority boundaries; BUSINESS POLICY is never embedded (referenced by path only). Offline distillation — no environment contact.",
+  "separation_rules": {
+    "perception_vs_authority": "every VISIBLE entry is independent of its ACTION_AUTHORITY entry; visible/available/enabled/committed are four distinct evidence classes",
+    "policy_boundary": "business decisions (which option, which route, which node, when to REST, SP spending) live in enza_memory/policies/* and the planner; contracts only gate perception and control authority",
+    "execution_boundary": "contracts authorize nothing by themselves; execution still requires the ActionGate / permission stack"
+  },
+  "viewport_scope": "MAC_CURRENT_V1 1280x720 only; left/top=0 assumption VERIFIED for this profile; other viewports require re-teaching, never auto-scale",
+  "honesty_rule": "UNKNOWN/PARTIAL/HOLD statuses are copied from cited evidence; counts are conservative minimums; nothing is promoted to ground truth",
+  "rooms": {
+    "HOME": {
+      "file": "home.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "SCHEDULE": "PYTHON_READY_CANDIDATE (shadow)",
+        "REST": "geometry UNKNOWN",
+        "FURIKAERI": "NEEDS_REPLICATION (single validated session) + operator gate"
+      }
+    },
+    "SCHEDULE": {
+      "file": "schedule.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "VOCAL": "shadow-ready",
+        "DECIDE": "shadow-ready + REPLICATED",
+        "AUDITION_entry": "geometry UNKNOWN",
+        "SUPPORT_SKILL": "VISIBLE_HAZARD_ONLY"
+      }
+    },
+    "DIALOGUE": {
+      "file": "dialogue.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "SAFE_TEXTBOX": "PYTHON_READY_CANDIDATE (authority rank 3)",
+        "SKIP": "rank 1, validated contexts only",
+        "FASTFORWARD": "rank 2; execution HOLD (zero click evidence)"
+      }
+    },
+    "CHOICE": {
+      "file": "choice.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "3_CHOICE_MIDDLE": "NEEDS_DETECTOR (replication extended, timed subvariant observed)",
+        "2_CHOICE_GOMEN": "NEEDS_GEOMETRY + BUSINESS_POLICY_BLOCKED",
+        "event_eligibility": "UNKNOWN (observation priors only)"
+      }
+    },
+    "AUDITION_SELECTION": {
+      "file": "audition_selection.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "CANDIDATE": "CONTROL_GROUNDING_BLOCKED (raw frames recovered, normalization pending)",
+        "DECIDE": "NEEDS_FRESH_VISUAL_BOX (visible in recovered frames, unnormalized)",
+        "eligibility": "UNKNOWN",
+        "page_visual_identity": "RECOVERED_DURABLE"
+      }
+    },
+    "AUDITION_BATTLE": {
+      "file": "audition_battle.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "AUTO": "NEEDS_MORE_REPLICATION (visual ON/OFF pairs recovered; interactability cross-session unchanged)",
+        "SPEED_TOGGLE": "HOLD",
+        "SPEED_DISPLAY": "DISPLAY_ONLY",
+        "PAUSE_RESUME": "n=1",
+        "CROSS_SESSION_VISUAL_REPLICATION": "YES (visual-level, 17 recovered frames)"
+      }
+    },
+    "RESULT": {
+      "file": "result.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "ADVANCE": "shadow-ready; commit requires explicit PASS/FAIL evidence",
+        "EXPLICIT_PASS_VISUAL_EVIDENCE": "YES (recovered)",
+        "EXPLICIT_FAIL_VISUAL_EVIDENCE": "YES (recovered)"
+      }
+    },
+    "SKILL_BOARD": {
+      "file": "skill_board.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "geometry": "RAW=YES / NORMALIZED=PARTIAL / CROSS_SCALE=NO / CROSS_SESSION=NO (28 recovered frames, review pending)",
+        "color_detector": "CANDIDATE (prior visual signal only — LEAK-03 closed)",
+        "python_authority": "NEEDS_REPLICATION"
+      }
+    },
+    "SKILL_REPLACEMENT": {
+      "file": "skill_replacement.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "geometry": "RAW=YES / NORMALIZED=PARTIAL / CROSS_SESSION=NO (10 frames)",
+        "flow": "4/4 live, operator policy",
+        "python_authority": "NEEDS_REPLICATION"
+      }
+    },
+    "SEASON_TRANSITION": {
+      "file": "season_transition.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "SKIP": "known types only",
+        "NEXT": "known screens only",
+        "SEMIFINAL_PAGE_IDENTITY": "VISUALLY_SUPPORTED (2 frames)",
+        "SEMIFINAL_RESULT_SEMANTICS": "UNKNOWN",
+        "final": "UNKNOWN"
+      }
+    },
+    "ENDING": {
+      "file": "ending.json",
+      "status": "PARTIAL",
+      "key_controls": {
+        "ending_flow": "n=1 action replication; visual identity modal/epilogue RECOVERED_DURABLE (8 frames)",
+        "FINAL_RESULT_SEMANTICS": "DERIVED_SUMMARY_CONFIRMED only"
+      }
+    }
+  },
+  "global_unknowns": [
+    "normalized visual_box/proven_click_box for all core controls (only HOME:SCHEDULE and SCHEDULE:VOCAL have fresh box captures)",
+    "speed toggle clickable region; X3 transition path; SPEED_FIRST_THEN_AUTO x3/x1/unknown branches NOT_YET_OBSERVED",
+    "semifinal/final battle and transition result-evidence contract (semifinal SKIP lost WIN evidence once)",
+    "automated long-press abandon semantics",
+    "real event/audition eligibility model (empirical rates are observation priors, not business inputs)",
+    "cross-session AUTO epoch replication",
+    "any viewport/platform other than MAC_CURRENT_V1 1280x720"
+  ],
+  "cross_cutting_invariants_applied": [
+    "INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE",
+    "CONTROL_ACTION_REQUIRES_ACTIONABLE_PHASE",
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME",
+    "RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE",
+    "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG",
+    "DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE",
+    "BATCH_EXECUTION_MUST_RESPECT_MEASURED_TOOL_LATENCY"
+  ],
+  "sources_root": [
+    "enza_memory/migration/python_click_migration/distilled/ (control_evidence_matrix, stable_transition_chains, hazard_map, battle_runtime_distillation, result_commit_examples, runtime_recovery_requirements, runtime_timing_distillation, python_migration_bundle_v0_1, python_migration_readiness)",
+    "enza_memory/migration/python_click_migration/event_occurrence/",
+    "enza_memory/migration/python_click_migration/recovered_frames/",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/, WINGRUN_20260906_01/, WINGVAL_20260905_01/",
+    "enza_memory/policies/ (referenced as BUSINESS POLICY, not embedded)",
+    ".agent-harness/GATES.md"
+  ],
+  "evidence_delta_source": [
+    "HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY",
+    "RUN_STATE_CONTAMINATION_FIX"
+  ],
+  "evidence_delta_summary": {
+    "ENDING": "ENDING_VISUAL_IDENTITY SUPPORTED (modal x4 + epilogue x4 RECOVERED_DURABLE); FINAL_RESULT_SEMANTICS/staff-roll/long-press-abandon NOT elevated",
+    "SEASON_TRANSITION": "SEMIFINAL_PAGE_IDENTITY=VISUALLY_SUPPORTED (x2); SEMIFINAL_RESULT_SEMANTICS=UNKNOWN (no WIN derivation from page identity)",
+    "AUDITION_BATTLE": "HAS_DURABLE_VISUAL_FRAME YES extended (+17 frames); CROSS_SESSION_VISUAL_REPLICATION YES (visual-level); AUTO_INTERACTABILITY_CROSS_SESSION / AUTO_POST_CLICK_VERIFICATION / SPEED_ACTIONABILITY unchanged; SPEED_TOGGLE HOLD",
+    "RESULT": "EXPLICIT_PASS_VISUAL_EVIDENCE YES + EXPLICIT_FAIL_VISUAL_EVIDENCE YES (banners recovered); result scene != business commit unchanged",
+    "CHOICE": "3-choice replication extended (timed subvariant frame); 2-choice geometry still UNKNOWN (recovered two_option frames are post-choice, boxes invisible)",
+    "AUDITION_SELECTION": "page visual identity RECOVERED_DURABLE (40k x4 / 50k x4 / THE_LEGEND x4 / list x4); normalization + planner policy unchanged",
+    "PERSIST_1": "RESOLVED_BY_RUN_STATE_PATCH — closed-run flags unreachable in CURRENT tree (config.json has no season3 flags; registry active_run=null; closed-run resume raises); invariant retained: closed-run state must not become current authority"
+  }
+}

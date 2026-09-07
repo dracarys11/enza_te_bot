@@ -1,0 +1,10 @@
+{
+  "candidate_id": "AC_001",
+  "target_element_id": "e14",
+  "action_type": "CLICK",
+  "evidence": [
+    "text evidence: 次へ",
+    "visual evidence: interaction candidate e14"
+  ],
+  "confidence": 0.99
+}

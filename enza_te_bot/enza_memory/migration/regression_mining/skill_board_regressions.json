@@ -1,0 +1,296 @@
+{
+ "artifact_type": "SKILL_BOARD_REGRESSION_CORPUS",
+ "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+ "created_at": "2026-09-06T23:30:00Z",
+ "status": "MINED_EVIDENCE_CORPUS — regression-case design ONLY. NOT executable policy.",
+ "run_scope": "WINGRUN_20260906_01 only (single session sess_a87f3588-8212-4de7-b9ad-319825b4509e); NO cross-session replication exists for any skill-board state",
+ "state_corpus": [
+  {
+   "state": "AVAILABLE",
+   "definition": "WHITE interior node = purchasable (operator-confirmed 白色=可购买)",
+   "frames": [
+    "rf_sb_f1_white_avail_before (760,355 Vocal上限UP+50 SP15 enabled)",
+    "rf_sb_b1_available_panel_180",
+    "rf_sb_b1b_lefttop_white_avail"
+   ],
+   "replication": {
+    "acquisitions_from_available": 17
+   },
+   "guard": "white must be checked per-frame; display-scale drift 0.9/1.1 documented",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/recovered_frames/skill_board_visual_sequence.json#steps 9-13"
+   ]
+  },
+  {
+   "state": "LOCKED",
+   "definition": "grey interior OR 未解放 panel; click moves selection ring but never purchases",
+   "frames": [
+    "rf_sb_c1_locked_grey_left",
+    "rf_sb_c2_locked_panel_gold",
+    "rf_sb_c3_locked_585_60",
+    "rf_sb_c4_locked_right_885_425",
+    "rf_sb_g1_misclick_590_145",
+    "rf_sb_g2_misclick_585_200",
+    "rf_sb_g3_misclick_465_115",
+    "rf_sb_g4_misclick_645_205",
+    "rf_sb_i2_right_cluster_locked"
+   ],
+   "replication": {
+    "locked_misclicks": ">=4 (live_csm_020..023)",
+    "purchase_from_locked": 0
+   },
+   "guard": "grey 未解放 vs gold 未解放 both show 未解放 button — color alone is NOT purchasable signal; gold node-type coloring ≠ availability; blue gradient = chain-marked, may still be locked",
+   "MISSING_FRAME": null,
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/recovered_frames/skill_board_visual_sequence.json#detector_warnings",
+    "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#missing_source_reviews"
+   ],
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "RECOVERED_VISUAL_EVIDENCE",
+    "review_status": "RECOVERED_REVIEW_PENDING",
+    "supersedes": "MISSING_FRAME (historical mining designation, preserved above)",
+    "recovered_from": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "historical_designation_preserved": true,
+    "resolved_frames": [
+     "rf_sb_g1_misclick_590_145",
+     "rf_sb_g2_misclick_585_200",
+     "rf_sb_g3_misclick_465_115",
+     "rf_sb_g4_misclick_645_205"
+    ],
+    "resolved_click_samples": [
+     "live_csm_020",
+     "live_csm_021",
+     "live_csm_022",
+     "live_csm_023"
+    ],
+    "note": "historical MISSING_FRAME designation superseded; 4 misclick source frames recovered and manifest-bound"
+   }
+  },
+  {
+   "state": "ACQUIRED",
+   "definition": "bright yellow SP:0 / cyan owned node — 習得済み, never re-click",
+   "frames": [
+    "rf_sb_d1_acquired_first_sp538 (SP548→538)",
+    "rf_sb_f6_right_chain_sp23 (Vocal220%UP cyan-owned 930,320)",
+    "rf_sb_d2_white_glow_after_buy"
+   ],
+   "replication": {
+    "acquired_nodes_total": 17
+   },
+   "guard": "re-click on owned node must be a no-op guard; SP deduction is the commit evidence (548→538 observed)",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/s3_start_prep_record.json",
+    "enza_memory/migration/python_click_migration/recovered_frames/skill_board_visual_sequence.json#step8"
+   ]
+  },
+  {
+   "state": "CENTER_SKIP",
+   "definition": "no evidence of any center-skip affordance on the skill board was ever recorded",
+   "replication": {
+    "observations": 0
+   },
+   "MISSING_FRAME": true,
+   "note": "state is reserved from the task vocabulary; nothing in the evidence supports or refutes it — preserved UNKNOWN"
+  },
+  {
+   "state": "OUTSIDE_ALLOWED_ZONE",
+   "definition": "board zones LEFT / RIGHT defined by operator; bottom-center outside both",
+   "observed_violation": "ビジュアルアピールIV (Visual2.5倍, SP20, replaced ボーカルアピールI) acquired in bottom-center zone BEFORE the zone rule was clarified — recorded honestly in skill_board_session_2_record as out-of-zone execution",
+   "guard": "zone validation before ACQUIRE; out-of-zone attempt must require explicit operator authorization",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json#acquisitions[7]"
+   ]
+  },
+  {
+   "state": "INSUFFICIENT_SP",
+   "definition": "termination condition: node cost > current SP",
+   "observed": "session 2 terminated at SP 23 < わかばの頃+ 45; returned fresh HOME",
+   "frames": [
+    "rf_sb_j_sp_insufficient"
+   ],
+   "guard": "INSUFFICIENT_SP is a clean exit — no retry, no partial purchase",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json#termination"
+   ]
+  },
+  {
+   "state": "PROGRESSIVE_UNLOCK",
+   "definition": "purchase → adjacent grey nodes become newly WHITE (chain unlock)",
+   "frames": [
+    "rf_sb_d2_white_glow_after_buy (glow + adjacent grey→white)",
+    "rf_sb_f3_newwhite_selected (833,306)",
+    "rf_sb_f5_new_unlocks_875_440"
+   ],
+   "replication": {
+    "unlock_observations": 3
+   },
+   "guard": "newly-white node is the only legitimate next target in a chain; re-scan after every purchase",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/recovered_frames/skill_board_visual_sequence.json#steps 10-13"
+   ]
+  },
+  {
+   "state": "REPLACEMENT_REQUIRED",
+   "definition": "acquiring a 5th active skill triggers スキル入れ替え確認 flow",
+   "frames": [
+    "rf_rp_t1_confirm_dialog",
+    "rf_rp_t2_confirm_dialog"
+   ],
+   "replication": {
+    "transactions": 4
+   },
+   "guard": "confirm dialog must show 忘れる=expected ⇄ 新規=expected before OK",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/recovered_frames/replacement_visual_sequence.json"
+   ]
+  },
+  {
+   "state": "REPLACEMENT_SLOT_SELECT",
+   "definition": "full-screen slot list, x~860, ~135px spacing; 選択 button beside target slot",
+   "frames": [
+    "rf_rp_t2_slot_list (slots 1.Vocal1倍(860,135) 2.Dance1倍(860,270) 3.ビジュアルアピールI)",
+    "rf_rp_t2_slot_list_preselect (選択 slot3 870,375)",
+    "rf_rp_t3_slot_list",
+    "rf_rp_t4_slot_list"
+   ],
+   "replication": {
+    "slot_list_reads": 3
+   },
+   "guard": "bottom-up among ORIGINAL skills; never replace just-learned (T2 operator correction); slot list content shifts after each commit — always re-read",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/recovered_frames/replacement_visual_sequence.json#geometry_notes"
+   ]
+  },
+  {
+   "state": "REPLACEMENT_CONFIRM",
+   "definition": "スキル入れ替え確認 dialog; OK varies (740,525)-(740,635); cancel ~(540,510)-(540,525)",
+   "frames": [
+    "rf_rp_t1_confirm_dialog",
+    "rf_rp_t2_confirm_dialog"
+   ],
+   "replication": {
+    "confirm_ok_clicks": 4
+   },
+   "guard": "OK geometry varies per dialog layout — must be re-read per frame, never memorized",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/recovered_frames/replacement_visual_sequence.json#geometry_notes"
+   ]
+  }
+ ],
+ "regression_cases": [
+  {
+   "id": "SBR-001",
+   "severity": "P1",
+   "case": "locked-node click must be classified NO_PURCHASE (ring moves only); not retried, not counted as acquisition",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "MISSING_FRAME": null,
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "RECOVERED_VISUAL_EVIDENCE",
+    "review_status": "RECOVERED_REVIEW_PENDING",
+    "supersedes": "MISSING_FRAME (historical mining designation, preserved above)",
+    "recovered_from": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "historical_designation_preserved": true,
+    "resolved_frames": [
+     "rf_sb_g1_misclick_590_145",
+     "rf_sb_g2_misclick_585_200",
+     "rf_sb_g3_misclick_465_115",
+     "rf_sb_g4_misclick_645_205"
+    ],
+    "note": "case upgraded to visual negative regression corpus; see visual_negative_cases"
+   }
+  },
+  {
+   "id": "SBR-002",
+   "severity": "P0",
+   "case": "replacement target validation: forget-slot must be an ORIGINAL skill, bottom-up; violating this loses a learned multiplier permanently (no recovery evidence exists)",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "SBR-003",
+   "severity": "P1",
+   "case": "acquire button may render garbled/未解放-looking while functional — verify by clicking and watching for confirm dialog, not by button label",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json#board_color_model"
+   ]
+  },
+  {
+   "id": "SBR-004",
+   "severity": "P2",
+   "case": "display-scale drift 0.9/1.1: transcript-recorded screen coords need per-frame scale correction; coordinate-only memory is insufficient for the board",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "SBR-005",
+   "severity": "P2",
+   "case": "SP-lag on confirm (rf_sb_confirm_sp_lag): SP deduction may lag the visual commit — SP read must be fresh-stable, not immediate",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "SBR-006",
+   "severity": "P1",
+   "case": "S3_START_PREP_DONE gate: fresh-season HOME with weeks=8 must check prep status before weekly loop (late-prep regression PLR-006)",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  }
+ ],
+ "missing_visual_evidence_summary": {
+  "missing_source_frames": 9,
+  "details": "VRB02_M01..M09 — ACTIONABLE_NODE, LOCKED_NODE_HAZARD x4, ACQUIRE_BUTTON, CONFIRM_OK (acquire/OK conflated in point evidence), NAVIGATION_CONTROL, SUPPORT_CARD_STORY layout",
+  "note": "coordinates were never used to fabricate image evidence; missing frames are declared, not synthesized"
+ },
+ "visual_negative_cases": [
+  {
+   "id": "VNC-001",
+   "probe_class": "LOCKED_NODE_PROBE",
+   "click_samples": [
+    "live_csm_021",
+    "live_csm_022"
+   ],
+   "recovered_frames": [
+    "rf_sb_g2_misclick_585_200",
+    "rf_sb_g3_misclick_465_115"
+   ],
+   "observed": "click on locked node moves selection ring / opens 未解放 panel; purchase impossible; no confirm dialog appears",
+   "guard": "locked-node click must classify NO_EFFECT/NO_PURCHASE and must NEVER be recorded as available-target evidence; no side effect is not safe-target evidence",
+   "severity": "P1",
+   "status": "RECOVERED_VISUAL_EVIDENCE (RECOVERED_REVIEW_PENDING)"
+  },
+  {
+   "id": "VNC-002",
+   "probe_class": "WRONG_NODE_PROBE",
+   "click_samples": [
+    "live_csm_020"
+   ],
+   "recovered_frames": [
+    "rf_sb_g1_misclick_590_145"
+   ],
+   "observed": "click intended for gold node selected adjacent LOCKED node (hex adjacency error); ring moved, no purchase",
+   "guard": "node identity must come from per-frame panel/detail read, not from intended-target proximity; adjacency miss = NO_EFFECT, never purchase evidence",
+   "severity": "P0",
+   "status": "RECOVERED_VISUAL_EVIDENCE (RECOVERED_REVIEW_PENDING)"
+  },
+  {
+   "id": "VNC-003",
+   "probe_class": "DEAD_ZONE_NO_PURCHASE",
+   "click_samples": [
+    "live_csm_023"
+   ],
+   "recovered_frames": [
+    "rf_sb_g4_misclick_645_205"
+   ],
+   "observed": "click on off-board empty space closed the panel; no side effect",
+   "guard": "dead-zone click is NOT safe-target evidence; board hit detection requires an actual node anchor; ~8 further calibration probes (live_csm_028) all harmless but equally non-evidence",
+   "severity": "P1",
+   "status": "RECOVERED_VISUAL_EVIDENCE (RECOVERED_REVIEW_PENDING)"
+  }
+ ],
+ "reconciliation_note": "2026-09-06 reconciliation: live_csm_020..023 source frames recovered (rf_sb_g1..g4); historical MISSING_FRAME designations preserved and superseded; 3 visual negative cases promoted."
+}

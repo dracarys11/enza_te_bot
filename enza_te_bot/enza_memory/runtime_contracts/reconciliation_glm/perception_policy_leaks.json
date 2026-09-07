@@ -1,0 +1,88 @@
+{
+  "artifact_type": "PERCEPTION_POLICY_LEAK_AUDIT",
+  "audit_id": "CONTRACT_OFFLINE_AUDIT_20260906",
+  "generated_at": "2026-09-06T23:59:00Z",
+  "mode": "OFFLINE_ONLY",
+  "method": "Full-text scan of all 11 contracts + room_contract_index.json for perception-layer statements that embed business decisions, strategy thresholds as authority, or commit semantics from visual state. Each hit classified LEAK / BOUNDARY_OK / BORDERLINE.",
+  "leaks": [
+    {
+      "id": "LEAK-01",
+      "contract": "schedule.json",
+      "location": "ACTION_AUTHORITY.VOCAL — 'authorized only after: fresh loaded page + fresh failure_rate<=2 gate (policy owns threshold)' and OBSERVATION_SCHEMA note",
+      "pattern": "BAD: failure_rate<=2 → planner chooses VOCAL",
+      "assessment": "BORDERLINE_LEAK",
+      "detail": "The contract embeds the operator's <=2 threshold value inline, making the perception-side authority rule read as a strategy rule. The separation intent is stated ('policy owns threshold') and VRB02_010 is cited as the positive separation case, but the literal number invites copy into a Python authority check. RC-004/PLR-011 additionally proves the deeper failure: risk_gate_allows(VOCAL) must NOT imply planner_selects(VOCAL) — 0906 S3 passed the gate every week at 0% and still failed the objective permanently.",
+      "fix_direction": "authority text should reference the gate existence ('fresh action-specific risk evidence required, threshold owned by policy') without embedding 2; keep the numeric value only in the policy file"
+    },
+    {
+      "id": "LEAK-02",
+      "contract": "schedule.json + choice.json + result.json",
+      "location": "POSTCONDITIONS/OBSERVATION_SCHEMA business-policy references",
+      "pattern": "GOOD pattern check: planner objective + fresh action-specific evidence → authority",
+      "assessment": "BOUNDARY_OK",
+      "detail": "Business choices (middle-of-three, ごめん, routes) are consistently referenced by policy path with the contract owning only detection + authority guards. VRB02_010 (failure-rate gate separation) is explicitly cited. No unconditional 'visual state → action' phrasing found in these three."
+    },
+    {
+      "id": "LEAK-03",
+      "contract": "skill_board.json",
+      "location": "OBSERVATION_SCHEMA.board_color_model — 'white_interior: AVAILABLE' + ALLOWED_ACTIONS 'click operator/policy-selected AVAILABLE node'",
+      "pattern": "BAD: gold/white node → click",
+      "assessment": "LEAK (severity P1)",
+      "detail": "The color model maps a visual property directly onto the availability authority predicate inside the contract's own schema. Current evidence (RC-002 guard, skill_board_regressions, F-12) says the opposite: color alone is NOT purchasable signal (grey AND gold both show 未解放; blue may be locked; same coordinate changed class after chain unlock; acquire button can render garbled while functional). Availability requires positive purchase-path evidence: detail-panel identity → confirm dialog → SP deduction → owned node.",
+      "fix_direction": "color model must be relabeled as PRIOR_VISUAL_SIGNAL (per-frame, non-authoritative); authority requires the confirm-dialog + SP-delta positive evidence chain; the VNC-001..003 guard must be quoted in ACTION_AUTHORITY"
+    },
+    {
+      "id": "LEAK-04",
+      "contract": "result.json",
+      "location": "OBSERVATION_SCHEMA.commit_rule / ACTION_AUTHORITY.commit_authority",
+      "pattern": "GOOD: explicit PASS/FAIL evidence → commit",
+      "assessment": "BOUNDARY_OK",
+      "detail": "Commit requires explicit evidence classes (やったぁ / オーディション不合格 / exact fan delta); UNKNOWN cannot commit; ordering capture→commit→advance matches BTR-005/006/007 and VRB02_032/034 (explicit pass/fail frames). No scene-label→commit leakage."
+    },
+    {
+      "id": "LEAK-05",
+      "contract": "home.json",
+      "location": "OBSERVATION_SCHEMA.decision_source — 'home_policy.py decide_home() — BUSINESS POLICY, outside this contract; outputs observed as VOCAL/REST/SKILL/AUDITION'",
+      "pattern": "policy referenced, not embedded",
+      "assessment": "BOUNDARY_OK",
+      "detail": "Clean separation: fresh fields declared per decision context (PLANNER_DECLARES_REQUIRED_OBSERVATION_FIELDS), policy named by path. PLR-011 regression (gate-pass vs objective-selection) is a policy-layer bug, not a contract leak."
+    },
+    {
+      "id": "LEAK-06",
+      "contract": "choice.json",
+      "location": "CORRECTED on re-check: the 'business_rule' key with ✓-badge phrasing lives in the EVIDENCE file event_occurrence/event_click_regions.json, NOT in choice.json (which carried only geometry + caveat)",
+      "pattern": "BAD variant: ✓ badge (visual) → middle is correct choice",
+      "assessment": "BORDERLINE_LEAK (evidence-side copy-risk)",
+      "detail": "The ✓ badge is a VISUAL state (which card carries the check), while 'choose middle' is POSITION-based POLICY (option_index=2). The badge phrasing inside a business_rule key in the evidence file invites badge-driven selection if copied into a contract or executor. Badge also disambiguates layout identity (middle raised card), which is legitimate perception use. Resolution applied: choice.json v0.2 records badge as layout_identity_signal only; selection authority stays policy-referenced. Evidence file untouched (raw-evidence rule)."
+    },
+    {
+      "id": "LEAK-07",
+      "contract": "audition_selection.json",
+      "location": "OBSERVATION_SCHEMA note — 'eligibility rules are game-internal and UNMODELED — real event/target eligibility is UNKNOWN; policy supplies target'",
+      "pattern": "GOOD: visible candidate != eligible; target from policy",
+      "assessment": "BOUNDARY_OK"
+    },
+    {
+      "id": "LEAK-08",
+      "contract": "audition_battle.json",
+      "location": "ACTION_AUTHORITY.SPEED — operator handler state machine referenced with (1166,47) coordinate inline",
+      "pattern": "authority referencing a business procedure's coordinate",
+      "assessment": "BORDERLINE_LEAK (P2)",
+      "detail": "The contract correctly keeps SPEED = HOLD, but carries the stale F-05-class coordinate (1166,47) into VISIBLE_CONTROLS. stale_reference_audit F-05/F-06/F-07 mark this coordinate's 'toggle toward X3' semantics as superseded (badge display-only; X2 clicks did not reach X3). Keeping the number in the contract risks a future executor treating it as grounded.",
+      "fix_direction": "remove the coordinate from the contract or mark SUPERSEDED_BY_F05; keep SPEED as display-only read + HOLD"
+    },
+    {
+      "id": "LEAK-09",
+      "contract": "skill_replacement.json",
+      "location": "ACTION_AUTHORITY — 'policy-designated target slot' as sole authority source",
+      "pattern": "GOOD variant: visual state (slot list) + policy/zone designation → action candidate",
+      "assessment": "BOUNDARY_OK",
+      "detail": "Replacement authority = policy designation + fresh slot list + confirm dialog + post-commit verify. Slot-order semantics (1=oldest) is operator-asserted once and flagged as negative evidence in coverage matrix — correctly not promoted."
+    }
+  ],
+  "summary": {
+    "confirmed_leaks": ["LEAK-03 (P1, skill board color→availability)", "LEAK-01 (borderline, threshold inline)", "LEAK-06 (borderline, badge→business rule)", "LEAK-08 (borderline, stale speed coordinate)"],
+    "clean_boundaries": ["home decision fields", "choice policy paths", "result commit evidence", "audition selection policy target", "replacement policy designation"],
+    "note": "No leak is currently runtime-reachable (contracts are not loaded by any runtime); they are input-contract hygiene risks for the future Python executor."
+  }
+}

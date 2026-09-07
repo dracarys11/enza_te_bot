@@ -1,0 +1,12 @@
+{
+  "scenario_scope": "WING",
+  "weeks": [
+    {"season":1,"weeks_remaining":8,"required_observation_fields":["weeks_remaining","season"],"unused_visible_fields":["fan_gap_to_target","stamina","テンション","Vo/Da/Vi stats","goal_panel_order","SP"],"memory_rule":"season_1_default_vocal (home_policy.py, CONFIRMED)","decision":"VOCAL","minimal_decision_condition":"season==1 AND weeks_remaining>1 → VOCAL (fan/stamina reads unnecessary on non-final weeks)","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"season":1,"weeks_remaining":7,"required_observation_fields":["weeks_remaining","season"],"unused_visible_fields":["fan_gap_to_target","stamina","stats"],"memory_rule":"season_1_default_vocal","decision":"VOCAL","minimal_decision_condition":"同上","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"season":1,"weeks_remaining":6,"required_observation_fields":["weeks_remaining","season"],"unused_visible_fields":["fan_gap_to_target","stamina"],"memory_rule":"season_1_default_vocal","decision":"VOCAL","minimal_decision_condition":"同上","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"season":1,"weeks_remaining":5,"required_observation_fields":["weeks_remaining","season"],"unused_visible_fields":["fan_gap_to_target","stamina"],"memory_rule":"season_1_default_vocal","decision":"VOCAL","minimal_decision_condition":"同上","knowledge_tier":"REPEATED_EVIDENCE"},
+    {"season":1,"weeks_remaining":1,"required_observation_fields":["weeks_remaining","fan_gap_to_target","stamina"],"memory_rule":"season_1_final_week_fan_gap_requires_audition / NEEDS_VOCAL_FAN_GAIN","decision":"NOT_REACHED","minimal_decision_condition":"weeks_remaining==1 时才必须精读 fan_gap(阈值300)与 stamina","knowledge_tier":"RUN_LOCAL(未验证)"},
+    {"season":1,"weeks_remaining":4,"required_observation_fields":[],"memory_rule":"season_1_default_vocal","decision":"VOCAL","minimal_decision_condition":"若上一帧刚验证过 HOME 且无异常, weeks 递减可由 transition 规则推断, 无需重新精读","knowledge_tier":"RUN_LOCAL"}
+  ],
+  "finding": "S1 普通周决策最少只需 season+weeks_remaining 两个粗粒度字段; fan_gap 精读只在最终周被策略需要; stamina 在 S1 无规则消费"
+}

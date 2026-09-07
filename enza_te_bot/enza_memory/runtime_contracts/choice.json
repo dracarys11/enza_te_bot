@@ -1,0 +1,205 @@
+{
+  "contract_version": "0.2.1",
+  "reconciled": "2026-09-07 audit CONTRACT_OFFLINE_AUDIT_20260906 (reconciliation_glm/): STALE-A three-axis replication, LEAK-06 badge/position split; 2026-09-07 evidence delta CONTRACT_EVIDENCE_DELTA_20260907: recovered_historical_frames + PERSIST-1 re-check; metadata only; 2026-09-07 STALE-H axis separation (concurrent-reconciliation repair): two-choice occurrence count (3/34 eligible weeks) separated from selection replication (4/0 cross-session) and geometry (NONE); PROMISE observed execution (いいよ, operator) separated from policy rule (ごめん, zero autonomous); version stays 0.2.1",
+  "generated_at": "2026-09-06T22:30:00Z",
+  "artifact_type": "PYTHON_ROOM_CONTRACT",
+  "status": "PARTIAL",
+  "usage": "Python executor input contract. BUSINESS POLICY (which option) is owned by wing_business_choice_fixed policy and referenced, not re-specified here. This contract covers perception + control authority only.",
+  "scenario_scope": "WING choice overlays interrupting dialogue/lesson/result, 1280x720",
+  "ROOM_IDENTITY": {
+    "room_id": "CHOICE",
+    "layouts": [
+      {
+        "layout": "THREE_CHOICE_LAYOUT_V1",
+        "anchors": [
+          "three selectable cards, vertically staggered (middle raised)",
+          "middle carries green border + ✓ check badge"
+        ],
+        "geometry_status": "LAYOUT_REPLICATED (3-frame chain rf_ec1-ec3 + VRB02_018 staggered + middle check badge); EVENT_CONTEXT_REPLICATED (LESSON_ADVICE / AUDITION_ADVICE / MORNING / OTHER, 8 successes 0 fails); CROSS_SESSION_REPLICATED (0905 + 0906); canonical normalized box captured once (live_csm_029) — per_event_capture_rule stays in force"
+      },
+      {
+        "layout": "TWO_CHOICE_LAYOUT_V1",
+        "anchors": [
+          "two ✓-cornered option cards (e.g. いいよ/ごめん) simultaneously present over dialogue"
+        ],
+        "geometry_status": "GEOMETRY_UNKNOWN — boxes never captured; detection REPEATED_EVIDENCE"
+      },
+      {
+        "layout": "PROMISE_LAYOUT_V1",
+        "status": "NOT_YET_OBSERVED_AS_LAYOUT; PROMISE_POLICY_RULE=いいよ/ごめん→ごめん (FIXED_DECLINE, ACTIVE policy wing_business_choice_fixed); PROMISE_OBSERVED_EXECUTION=n=1 operator-resolved いいよ (0905 S1W5, promise deferred S1W8) — ごめん decline has ZERO autonomous executions; STALE-H axis separation (concurrent-reconciliation repair 2026-09-07)"
+      }
+    ],
+    "identity_status": "PARTIAL (3-choice replicated across layout/context/session axes with a single captured canonical box; 2-choice geometry unknown)"
+  },
+  "ENTRY_CONDITIONS": [
+    "choice overlay detected during any wrapped room (dialogue/lesson/result/audition advice)",
+    "option_count and structure observed on a fresh frame",
+    "overlay blocks everything else — must be resolved first in probe order"
+  ],
+  "OBSERVATION_SCHEMA": {
+    "fresh_fields": [
+      "layout_family (THREE / TWO / UNKNOWN)",
+      "option_count",
+      "all options fully visible (occlusion check)",
+      "target option clickable/selectable evidence",
+      "per-option boxes when captured (capture rule: EVENT_PAGE_VISUAL_REGION + ACTIONABLE_CONTROL_BOX before business click)"
+    ],
+    "known_3_choice_geometry_norm": {
+      "left": {
+        "x1": 0.0508,
+        "y1": 0.2292,
+        "x2": 0.3242,
+        "y2": 0.4722
+      },
+      "middle": {
+        "x1": 0.3594,
+        "y1": 0.0625,
+        "x2": 0.6328,
+        "y2": 0.3125
+      },
+      "right": {
+        "x1": 0.6641,
+        "y1": 0.2222,
+        "x2": 0.9375,
+        "y2": 0.4792
+      },
+      "middle_click_point_norm": {
+        "x": 0.4961,
+        "y": 0.1875
+      },
+      "badge_semantics": "✓ badge = layout identity signal only (which card is selected/raised); selection authority is POSITION-based policy (option_index=2) — never badge-driven",
+      "caveat": "canonical normalized box captured in one frame (live_csm_029); layout/context/session replication established — capture boxes on each new event per per_event_capture_rule before fast-path promotion"
+    }
+  },
+  "SUBSTATES": [
+    {
+      "substate": "THREE_CHOICE_ADVICE",
+      "evidence": "8/8 middle selections, cross-session",
+      "business_policy_ref": "THREE_CHOICE: middle (option_index=2), no semantic analysis, no AGY"
+    },
+    {
+      "substate": "TWO_CHOICE_BUSINESS",
+      "evidence": "4/0 ごめん selections, cross-session (0905: S2 transition/S2W5/S2W6 first-auto-PASS; 0906: S1W3/S1W4 per choice_layout_regressions + T12); week-level eligible occurrences 3/34 — do not mix occurrence count with replication count; taught shape only",
+      "evidence_axes": {
+        "TWO_CHOICE_OCCURRENCE_COUNT": "3 / 34 eligible weeks (event_probability_summary denominator rule; excludes 0905 S2-transition window)",
+        "TWO_CHOICE_LAYOUT_REPLICATION": "detection REPEATED_EVIDENCE; recovered 'two_option' frames are post-choice HOME frames — layout visual corpus 0 (integration NRH-003)",
+        "TWO_CHOICE_CROSS_SESSION_REPLICATION": "YES (0905 + 0906, selection-success axis)",
+        "TWO_CHOICE_GEOMETRY_EVIDENCE": "NONE — boxes never captured; recovered frames show no option boxes; LVT-04 DEDICATED unchanged"
+      },
+      "business_policy_ref": "TWO_CHOICE: ごめん if present else STOP=UNKNOWN_TWO_CHOICE"
+    },
+    {
+      "substate": "MORNING_3CHOICE",
+      "evidence": "5 occurrences / 34 eligible weeks (raw_rate 0.147, LOW_SAMPLE); timing model (week-start) UNRESOLVED"
+    },
+    {
+      "substate": "PROMISE_EVENT",
+      "evidence": "n=1 subtype; PROMISE_OBSERVED_EXECUTION = いいよ selected, operator-resolved (0905 S1W5 智代子レッスン请求; promise created, deferred S1W8; never autonomous); PROMISE_POLICY_RULE = FIXED_DECLINE ごめん (ACTIVE policy, zero autonomous executions)",
+      "status": "SUBTYPES_NOT_SEPARABLE"
+    }
+  ],
+  "VISIBLE_CONTROLS": [
+    {
+      "control": "3_CHOICE_MIDDLE",
+      "geometry": "see OBSERVATION_SCHEMA",
+      "success_fail": "8/0",
+      "visible_status": "VISIBLE + BOX (single frame)"
+    },
+    {
+      "control": "2_CHOICE_GOMEN card",
+      "geometry": "UNKNOWN",
+      "success_fail": "4/0",
+      "visible_status": "VISIBLE_SEMANTIC_ONLY"
+    }
+  ],
+  "ACTION_AUTHORITY": {
+    "principle": "option VISIBLE != option AVAILABLE; all options must be visible and target selectable before click (policy guard: 感知不确定仍 fail-closed).",
+    "3_choice_middle": "authorized when: known context + option_count==3 + middle selectable + policy authorization (middle rule active)",
+    "2_choice": "BUSINESS_POLICY_BLOCKED unless exact taught shape (dual-check/selectable structure + ごめん present); unsupported 2-card shape must STOP",
+    "other_counts": "STOP=UNKNOWN_BUSINESS_CHOICE (count != 2/3, uncertain structure, occluded options, middle not clickable)",
+    "blind_fast": "HOLD — blind-fast candidates exist (3-choice conditional YES if staggered-3+check-badge detector confirmed; 2-choice blocked: geometry never captured)"
+  },
+  "ALLOWED_ACTIONS": [
+    "observe/count/box options",
+    "click middle of confirmed 3-choice (policy: MIDDLE_OF_THREE)",
+    "click ごめん on exact taught 2-choice shape (policy: DECLINE_IF_GOMEN)",
+    "append event_occurrence record with captured boxes (per_event_capture_rule)"
+  ],
+  "FORBIDDEN_ACTIONS": [
+    "semantic option analysis / AGY calls inside runtime",
+    "clicking any option without full-visibility + selectability evidence",
+    "conflating 3-card advice with 2-card business choice",
+    "blind textbox taps while choice overlay present"
+  ],
+  "POSTCONDITIONS": {
+    "choice_accepted": "dialogue/lesson/battle proceeds; verified_transition=true required in trace"
+  },
+  "EXIT_CONDITIONS": [
+    "choice resolved → wrapped room continues (dialogue/battle/lesson/HOME)"
+  ],
+  "FAILURE_MODES": [
+    {
+      "mode": "OPTION_COUNT_UNCERTAIN",
+      "class": "FAIL_CLOSED_STOP"
+    },
+    {
+      "mode": "MIDDLE_NOT_CLICKABLE",
+      "class": "FAIL_CLOSED_STOP"
+    },
+    {
+      "mode": "TIMED_CHOICE_PRESSURE",
+      "class": "TIME_LIMIT",
+      "evidence": "morning 3-choice has time limit; bounded fast handler candidate"
+    },
+    {
+      "mode": "OVERLAPPING_TEXTBOX_TAP",
+      "class": "WRONG_TARGET"
+    }
+  ],
+  "RECOVERY": [
+    "STOP=UNKNOWN_BUSINESS_CHOICE and defer to operator/taught memory on any shape mismatch",
+    "INTERRUPTION_FAST_PATH_MUST_NOT_OVERRIDE_BUSINESS_CHOICE (harness candidate)"
+  ],
+  "PERSISTENCE_BOUNDARY": "append to event_occurrences.jsonl with layout family + boxes + result; part of week flush boundary",
+  "MIGRATION_STATUS": {
+    "3_CHOICE_MIDDLE": "NEEDS_DETECTOR (layout/context/session replication REPLICATED + timed subvariant frame recovered; detector still not implemented)",
+    "2_CHOICE_GOMEN": "BUSINESS_POLICY_BLOCKED; geometry still UNKNOWN (recovered two_option frames are post-choice, boxes not visible)",
+    "event_eligibility": "UNKNOWN for all event types — empirical rates are observation priors only, NOT business inputs",
+    "timing_model": "WEEK_START_MORNING_EVENT observed_samples=0; TIMED 3-choice visual subvariant observed once (no action timing data)"
+  },
+  "sources": [
+    "enza_memory/policies/wing_business_choice_fixed_policy.json",
+    "enza_memory/migration/python_click_migration/event_occurrence/event_click_regions.json",
+    "enza_memory/migration/python_click_migration/event_occurrence/event_probability_summary.json",
+    "enza_memory/migration/python_click_migration/event_occurrence/cold_start_event_policy.json",
+    "enza_memory/wing_runs/WINGVAL_20260905_01/business_choice_validation.json",
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json"
+  ],
+  "evidence_delta_source": [
+    "HISTORICAL_ZCODE_VISUAL_ARCHAEOLOGY",
+    "RUN_STATE_CONTAMINATION_FIX"
+  ],
+  "EVIDENCE_DELTA": {
+    "delta_id": "CONTRACT_EVIDENCE_DELTA_20260907",
+    "THREE_CHOICE_LAYOUT_V1": {
+      "update": "additional RECOVERED_DURABLE frame incl. TIMED subvariant (countdown ring over middle-raised staggered three cards, numeric '5' visible)",
+      "frames": [
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/choice/20260906_012546_dc58a91a_three_choice.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/choice/20260905_152801_38712583_advice.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/choice/20260905_170508_38712583_advice.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/choice/20260905_235420_dc58a91a_advice.png"
+      ],
+      "timing_note": "timed 3-choice visual state observed; no action-timing data — timing model stays observation-only",
+      "separation": "LAYOUT_FAMILY != EVENT_CONTEXT retained; VISIBLE != ACTIONABLE retained"
+    },
+    "TWO_CHOICE_LAYOUT_V1": {
+      "update": "recovered 'two_option' frames are post-choice HOME frames — option boxes NOT visible in any recovered frame; geometry stays GEOMETRY_UNKNOWN",
+      "frames": [
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/choice/20260905_142730_38712583_two_option.png",
+        "enza_memory/migration/python_click_migration/recovered_historical_frames/choice/20260906_012640_dc58a91a_two_option.png"
+      ],
+      "separation": "NEEDS_GEOMETRY unchanged; いいよ/ごめん business policy unchanged"
+    },
+    "CROSS_SESSION_VISUAL_REPLICATION": "EXTENDED — choice frames recovered from 0905 Phase-A session, 0905 WINGRUN resume session, 0906 crash-recovery session (visual-level)"
+  }
+}

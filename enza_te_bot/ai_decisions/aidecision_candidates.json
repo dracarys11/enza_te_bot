@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "artifact": "ai_decision_candidates",
+  "status": "CANDIDATE_ONLY",
+  "executable": false,
+  "sources": [
+    {
+      "demo_id": "s3_manual_test_20260902_194409",
+      "episode": "logs/demos/s3_manual_test_20260902_194409/episode.jsonl",
+      "scope": "season_1"
+    },
+    {
+      "demo_id": "s3_manual_test_20260902_194409",
+      "episode": "logs/demos/s3_manual_test_20260902_194409/episode.jsonl",
+      "scope": "repeated_decision_patterns"
+    }
+  ],
+  "decision_points": [
+    {
+      "id": "s3_manual_test_20260902_194409_s1_w3_home",
+      "observation": {
+        "state": "HOME",
+        "season": 1,
+        "weeks_remaining": 3,
+        "fan_gap_to_target": 999,
+        "fan_target_achieved": false,
+        "stamina_adequate": true,
+        "available_actions": [
+          "produce_start",
+          "reflection_open",
+          "rest"
+        ]
+      },
+      "selected_action": "produce_start",
+      "execution_pattern": {
+        "action_sequence": [
+          "produce_start"
+        ],
+        "state_sequence": [
+          "HOME",
+          "PRODUCE_MENU"
+        ],
+        "next_home_observation_step": 179
+      },
+      "confidence": 1.0,
+      "evidence_count": 1,
+      "evidence": [
+        {
+          "human_level_occurrence": 1,
+          "observation_steps": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "supporting_transition_steps": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "transition": "HOME -> PRODUCE_MENU",
+          "inference": "Exactly one available action declares PRODUCE_MENU as an expected next state."
+        }
+      ],
+      "missing_information": [
+        "The action selected after entering PRODUCE_MENU is not deterministically recoverable.",
+        "VOCAL_RESULT is not observed.",
+        "No Season 1 Week 2 HOME observation is present before the next HOME decision."
+      ]
+    },
+    {
+      "id": "s3_manual_test_20260902_194409_s1_w1_home",
+      "observation": {
+        "state": "HOME",
+        "season": 1,
+        "weeks_remaining": 1,
+        "fan_gap_to_target": 24,
+        "fan_target_achieved": false,
+        "stamina_adequate": true,
+        "available_actions": [
+          "produce_start",
+          "reflection_open",
+          "rest"
+        ]
+      },
+      "selected_action": "produce_start",
+      "execution_pattern": {
+        "action_sequence": [
+          "produce_start",
+          "vocal_lesson"
+        ],
+        "state_sequence": [
+          "HOME",
+          "PRODUCE_MENU",
+          "HOME"
+        ],
+        "next_home_observation_step": 310
+      },
+      "confidence": 1.0,
+      "evidence_count": 1,
+      "evidence": [
+        {
+          "human_level_occurrence": 1,
+          "observation_steps": [
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201
+          ],
+          "supporting_transition_steps": [
+            196,
+            197,
+            198,
+            199,
+            200,
+            201
+          ],
+          "transition": "HOME -> PRODUCE_MENU",
+          "inference": "Exactly one available action declares PRODUCE_MENU as an expected next state."
+        },
+        {
+          "human_level_occurrence": 1,
+          "supporting_step_range": [
+            253,
+            309
+          ],
+          "action": "vocal_lesson",
+          "recording_evidence": "NAMED_ACTION records occur within the duplicate observation run."
+        }
+      ],
+      "missing_information": [
+        "VOCAL_RESULT is not observed between PRODUCE_MENU and HOME.",
+        "Repeated recorder events do not identify the single committed vocal_lesson click.",
+        "The next numeric HOME observation belongs to Season 2, so the Season 1 terminal values are unavailable."
+      ]
+    }
+  ],
+  "candidate_rules": [
+    {
+      "id": "season_1_home_produce_start_when_target_unmet_and_stamina_adequate",
+      "observation": {
+        "state": "HOME",
+        "season": 1,
+        "weeks_remaining_observed": [
+          3,
+          1
+        ],
+        "fan_gap_to_target_observed": [
+          999,
+          24
+        ],
+        "fan_target_achieved": false,
+        "stamina_adequate": true,
+        "available_actions": [
+          "produce_start",
+          "reflection_open",
+          "rest"
+        ]
+      },
+      "selected_action": "produce_start",
+      "execution_pattern": {
+        "state_sequence": [
+          "HOME",
+          "PRODUCE_MENU"
+        ]
+      },
+      "confidence": 1.0,
+      "evidence_count": 2,
+      "independent_occurrences": 2,
+      "contradicting_examples": [],
+      "confidence_detail": {
+        "evidence_confidence": 1.0,
+        "policy_confidence": 0.5,
+        "evidence_basis": "Two independent HOME decisions have a unique declared transition match to produce_start.",
+        "policy_basis": "Both observations come from one demo; Week 2 and alternative-action examples are absent."
+      },
+      "status": "CANDIDATE_ONLY",
+      "executable_sop": false,
+      "evidence_refs": [
+        "s3_manual_test_20260902_194409_s1_w3_home",
+        "s3_manual_test_20260902_194409_s1_w1_home"
+      ],
+      "missing_information": [
+        "There is no Season 1 Week 2 decision observation.",
+        "The demo does not establish whether fan gap or weeks remaining caused the choice.",
+        "No alternative Season 1 HOME action is observed for comparison."
+      ]
+    },
+    {
+      "id": "audition_battle_auto_on_when_available",
+      "observation": {
+        "state": "AUDITION_BATTLE",
+        "season": {
+          "observed_values": [
+            2,
+            3
+          ],
+          "known_context_occurrences": 3,
+          "unknown_context_occurrences": 4
+        },
+        "weeks_remaining": {
+          "observed_values": [
+            4,
+            1
+          ],
+          "known_context_occurrences": 3,
+          "unknown_context_occurrences": 4
+        },
+        "stamina": {
+          "observed_values": [
+            "adequate"
+          ],
+          "known_context_occurrences": 3,
+          "unknown_context_occurrences": 4
+        },
+        "fan_target": {
+          "observed_achieved_values": [
+            false,
+            true
+          ],
+          "observed_gap_values": [
+            7547,
+            0
+          ],
+          "known_context_occurrences": 3,
+          "unknown_context_occurrences": 4
+        },
+        "available_actions": [
+          "battle_speed_cycle",
+          "battle_auto_on"
+        ]
+      },
+      "selected_action": "battle_auto_on",
+      "execution_pattern": {
+        "action_sequence": [
+          "battle_auto_on"
+        ],
+        "start_state": "AUDITION_BATTLE",
+        "observed_end_states": [
+          "AUDITION_BATTLE",
+          "AUDITION_CHOICE",
+          "UNKNOWN"
+        ]
+      },
+      "confidence": 1.0,
+      "evidence_count": 7,
+      "independent_occurrences": 7,
+      "evidence": [
+        {
+          "steps": [
+            558
+          ],
+          "season_context": 2,
+          "weeks_remaining_context": 4
+        },
+        {
+          "steps": [
+            559,
+            560
+          ],
+          "season_context": 2,
+          "weeks_remaining_context": 4,
+          "note": "Steps 559 and 560 collapse to one click occurrence."
+        },
+        {
+          "steps": [
+            846,
+            847
+          ],
+          "season_context": 3,
+          "weeks_remaining_context": 1,
+          "note": "Steps 846 and 847 collapse to one click occurrence."
+        },
+        {
+          "steps": [
+            1094
+          ],
+          "season_context": null,
+          "weeks_remaining_context": null
+        },
+        {
+          "steps": [
+            1106
+          ],
+          "season_context": null,
+          "weeks_remaining_context": null
+        },
+        {
+          "steps": [
+            1151
+          ],
+          "season_context": null,
+          "weeks_remaining_context": null
+        },
+        {
+          "steps": [
+            1195
+          ],
+          "season_context": null,
+          "weeks_remaining_context": null
+        }
+      ],
+      "contradicting_examples": [],
+      "confidence_detail": {
+        "evidence_confidence": 1.0,
+        "policy_confidence": 0.4,
+        "evidence_basis": "Seven independent click occurrences were recorded as NAMED_ACTION battle_auto_on inside its declared action box.",
+        "policy_basis": "Four occurrences lack season, week, stamina, and fan-target context, and no confirmed alternative battle action is available for comparison."
+      },
+      "status": "CANDIDATE_ONLY",
+      "executable_sop": false,
+      "missing_information": [
+        "Season, week, stamina, and fan-target context are unavailable for four occurrences.",
+        "The demo has no confirmed battle_speed_cycle selection as a comparison.",
+        "Observed end states vary because action and animation snapshots overlap."
+      ]
+    }
+  ],
+  "uncertain_cases": [
+    {
+      "id": "s3_manual_test_20260902_194409_s1_w3_produce_menu_follow_up",
+      "observation": {
+        "state": "PRODUCE_MENU",
+        "season_context": 1,
+        "preceding_home_weeks_remaining": 3,
+        "available_actions": [
+          "vocal_lesson"
+        ]
+      },
+      "selected_action": null,
+      "possible_action": "vocal_lesson",
+      "execution_pattern": {
+        "state_sequence": [
+          "PRODUCE_MENU",
+          "UNKNOWN"
+        ]
+      },
+      "confidence": 0.0,
+      "evidence_count": 1,
+      "missing_information": [
+        "The recorded action is UNKNOWN_CLICK.",
+        "The after state is UNKNOWN rather than VOCAL_RESULT.",
+        "The mechanical action cannot be confirmed from the transition contract."
+      ]
+    },
+    {
+      "id": "s3_manual_test_20260902_194409_s1_w2_home_missing",
+      "observation": null,
+      "selected_action": null,
+      "execution_pattern": null,
+      "confidence": 0.0,
+      "evidence_count": 0,
+      "missing_information": [
+        "No Season 1 Week 2 HOME observation exists in the demo, so no decision point can be extracted."
+      ]
+    },
+    {
+      "id": "reflection_purchase_repetition_within_one_session",
+      "observation": {
+        "state": "REFLECTION",
+        "season_context": 2,
+        "weeks_remaining_context": 4,
+        "stamina_context": "adequate",
+        "fan_target_achieved_context": false,
+        "available_actions": [
+          "reflection_zoom_out",
+          "reflection_skill_1",
+          "reflection_purchase"
+        ]
+      },
+      "selected_action": "reflection_purchase",
+      "execution_pattern": {
+        "supporting_steps": [
+          382,
+          450,
+          453
+        ]
+      },
+      "confidence": 1.0,
+      "evidence_count": 1,
+      "independent_occurrences": 1,
+      "contradicting_examples": [],
+      "confidence_detail": {
+        "evidence_confidence": 1.0,
+        "policy_confidence": 0.2
+      },
+      "status": "INSUFFICIENT_INDEPENDENT_OCCURRENCES",
+      "executable_sop": false,
+      "missing_information": [
+        "All named clicks occur within one continuous REFLECTION session.",
+        "The selected skill and purchase preconditions are not recoverable."
+      ]
+    },
+    {
+      "id": "vocal_lesson_repetition_within_one_decision",
+      "observation": {
+        "state": "PRODUCE_MENU",
+        "season_context": 1,
+        "weeks_remaining_context": 1,
+        "stamina_context": "adequate",
+        "fan_target_achieved_context": false,
+        "available_actions": [
+          "vocal_lesson"
+        ]
+      },
+      "selected_action": "vocal_lesson",
+      "execution_pattern": {
+        "supporting_step_range": [
+          253,
+          309
+        ]
+      },
+      "confidence": 1.0,
+      "evidence_count": 1,
+      "independent_occurrences": 1,
+      "contradicting_examples": [],
+      "confidence_detail": {
+        "evidence_confidence": 1.0,
+        "policy_confidence": 0.2
+      },
+      "status": "INSUFFICIENT_INDEPENDENT_OCCURRENCES",
+      "executable_sop": false,
+      "missing_information": [
+        "Repeated NAMED_ACTION records belong to one continuous PRODUCE_MENU decision episode.",
+        "VOCAL_RESULT is not observed."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{"run":"WINGRUN_20260907_02","event":"RUN_START","surface":"ZCode_IAB_1280x720","authority":"home_policy.decide_home (PYTHON_PLANNER)","prior_run":"WINGRUN_20260907_01 CLOSED","at":"2026-09-07"}
+{"boundary": "RUN_STARTED", "state": "WING_HOME S1 weeks=8 gap=999 stamina_full", "planner_objective": "NEED_MORE_OBSERVATION", "planner_reason": "FAILURE_RATE_READ_REQUIRED", "next": "fresh schedule trouble read for gate"}
+{"boundary": "S1W1_COMMIT", "action": "VOCAL(trouble 0)", "weeks": "8->7", "fans_remaining": "999->967", "gate": "ALLOW", "provenance": "session_observed"}
+{"event": "SCREENSHOT_PIPELINE_STALL", "where": "S1W2 schedule open (post-click pre-shot)", "detail": "3 consecutive capture timeouts on tab 3b70c547; tab alive (title/url ok); pipeline wedged", "recovery": "new IAB tab f409b167 -> game reload -> error dialog (再読み込み) -> title -> TOUCH TO START -> lobby -> プロデュース再開 dialog (server: S1 weeks=7 MATCHES durable state) -> resumed via 振り返り board -> back -> WING_HOME", "classification": "RECOVERED_TIMEOUT", "post": "WING_HOME S1 weeks=7 gap=967"}
+{"boundary": "S1W2_GATE", "trouble_rate": 0, "gate": "ALLOW", "objective": "VOCAL", "note": "includes recovery-from-pipeline-stall event (see failures/iab_screenshot_pipeline_stall_001)"}
+{"boundary": "S1W2_COMMIT", "action": "VOCAL(trouble 0)", "weeks": "7->6", "fans_remaining": "967->841", "gate": "ALLOW", "event": "support 1と3の境界 (SKIP, Da+20/other)", "provenance": "session_observed", "note": "includes screenshot-pipeline stall recovery (new tab)"}
+{"boundary": "S1W3_GATE", "trouble_rate": 0, "gate": "ALLOW", "objective": "VOCAL"}
+{"boundary": "S1W3_COMMIT", "action": "VOCAL(trouble 0)", "weeks": "6->5", "fans_remaining": "841->691", "gate": "ALLOW", "vo": "200", "sp": 112, "event": "support ステージ。あの日の (SKIP)", "note": "long result animation tail; advanced via tap", "provenance": "session_observed"}
+{"boundary": "S1W4_GATE", "trouble_rate": 0, "gate": "ALLOW", "objective": "VOCAL"}
+{"boundary": "S1W4_COMMIT", "action": "VOCAL(trouble 0)", "weeks": "5->4", "fans_remaining": "691->391", "gate": "ALLOW", "vo": "274", "sp": 128, "event": "support できるわ！ (SKIP, Vo+30/Vi+15)", "provenance": "session_observed"}
+{"boundary": "S1W5_GATE", "trouble_rate": 0, "gate": "ALLOW", "objective": "VOCAL"}
+{"boundary": "S1W5_COMMIT", "action": "VOCAL(trouble 0, retry after one no-op 決定)", "weeks": "4->3", "fans_remaining": "391->241", "gate": "ALLOW", "vo": "335", "sp": 228, "event": "produce event チョコレート迷宮 THREE_CHOICE -> middle (policy)", "provenance": "session_observed"}
+{"boundary": "S1W6_GATE", "trouble_rate": 0, "gate": "ALLOW", "objective": "VOCAL"}
+{"boundary": "S1W6_COMMIT", "action": "VOCAL(trouble 0)", "weeks": "3->2", "fans_remaining": "241->115", "gate": "ALLOW", "vo": "359", "sp": 243, "provenance": "session_observed"}
+{"boundary": "S1W7_GATE", "trouble_rate": 0, "gate": "ALLOW", "objective": "VOCAL"}
+{"boundary": "S1W7_COMMIT", "action": "VOCAL(trouble 0, one no-op 決定 retry)", "weeks": "2->1", "fans": "1169 (E target 1000 CLEARED -> rank up D)", "gate": "ALLOW", "event": "support event SKIP + morning 3-choice middle (policy)", "provenance": "session_observed"}
+{"event": "SCREENSHOT_PIPELINE_STALL_2", "where": "S1W8 home dialogue advance", "recovery": "new tab a6b72e75 -> reload -> title -> login-bonus/task popups dismissed -> プロデュース再開 (server: S1 weeks=1 matches durable) -> resumed mid-chain", "classification": "RECOVERED_TIMEOUT"}
+{"boundary": "S1W8_PROMISE_DECLINED", "event": "TWO_CHOICE いいよ/ごめん (ビジュアルレッスン request)", "action": "clicked ごめん per fixed policy (n=3 project-wide)", "weeks": "still 1 (week not yet consumed; dialogue chain continuing)", "provenance": "session_observed"}
+{"boundary": "S1_MILESTONE", "season1_target": "E 1000 fans ACHIEVED at W7 (1169)", "planner_loop": "7 planner calls, 7 gate ALLOWs (all trouble 0%), 0 violations", "provenance": "session_observed"}

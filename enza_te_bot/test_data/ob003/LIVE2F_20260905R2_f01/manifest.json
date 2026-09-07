@@ -1,0 +1,19 @@
+{
+  "case_id": "LIVE2F_20260905R2_f01",
+  "source": {
+    "file": "source_screenshot.png",
+    "sha256": "ed1e811e019fc15326388813c8c69e557591998b196adcd7d7ab56320aa2a639"
+  },
+  "providers": [
+    {
+      "name": "Paddle",
+      "artifact": "providers/paddle/vision_output.json",
+      "artifact_sha256": "3e58fe3d946fbfa29c1cd82d6bc03fbfc17bec60420fecdcc5abe538326db668",
+      "provider": "Paddle",
+      "model": "PP-OCRv6_medium_det+PP-OCRv6_medium_rec",
+      "skill_version": "not_applicable",
+      "screenshot_sha256": "ed1e811e019fc15326388813c8c69e557591998b196adcd7d7ab56320aa2a639"
+    }
+  ],
+  "unresolved_artifacts": []
+}

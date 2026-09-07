@@ -1,0 +1,11 @@
+{
+  "scenario_scope": "WING",
+  "pages": [
+    {"page_class":"WING_HOME","minimal_positive_anchors":["左上标题 プロデュース+?","顶栏 シーズンN 残りN週 / ファン人数 あとN人 / 体力bar","底部 プロデュース(SCHEDULE)/休む/振り返り/流行確認"],"cheap_signals":["URL==/produce","顶部三段状态条模板","coarse native vision"],"must_not_require":["full-screen OCR","AGY","goal panel 每周精读"],"knowledge_tier":"REPEATED_EVIDENCE"},
+    {"page_class":"SCHEDULE_SELECTION","minimal_positive_anchors":["左上 スケジュール選択+?","6张课程/工作卡片(ボーカルレッスン带決定选中标)","右下 決定","左侧 オーディション"],"cheap_signals":["URL==/produce","卡片网格 coarse vision"],"must_not_require":["每张卡片文字 OCR(仅 ボーカル 位置需要)"],"knowledge_tier":"REPEATED_EVIDENCE"},
+    {"page_class":"VOCAL_RESULT","minimal_positive_anchors":["RANKUP/統計演出 overlay","+Vo/+SP/+fan 绿色气泡","背景为 schedule 卡片模糊态"],"cheap_signals":["coarse vision: 演出动画特征"],"must_not_require":["数字精读(演出中的数字会随后续帧刷新, 精读应留给 fresh HOME)"],"knowledge_tier":"REPEATED_EVIDENCE"},
+    {"page_class":"SUPPORT_EVENT_DIALOGUE","minimal_positive_anchors":["左上 ☆イベント 标题框+头像","右上 SKIP","底部对话框"],"cheap_signals":["SKIP 按钮存在性"],"must_not_require":["剧情文本 OCR"],"knowledge_tier":"REPEATED_EVIDENCE"},
+    {"page_class":"COMMUNICATION_DIALOGUE","minimal_positive_anchors":["右侧 Auto/ログ/非表示 竖排按钮组","底部对话框(无 SKIP)"],"cheap_signals":["SKIP 缺失 + Auto 按钮组存在"],"must_not_require":["文本 OCR"],"knowledge_tier":"REPEATED_EVIDENCE"},
+    {"page_class":"BUSINESS_CHOICE_MODAL","minimal_positive_anchors":["同时出现两个带✓角的选项卡(いいよ/ごめん 类)","对话框仍在"],"cheap_signals":["双选项卡几何特征"],"must_not_require":["文本 OCR 即可检出, 但选项语义必须人工/AGY 裁决"],"knowledge_tier":"REPEATED_EVIDENCE(检出) + RUN_LOCAL(语义)"}
+  ]
+}

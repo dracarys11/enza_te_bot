@@ -1,0 +1,58 @@
+{
+  "summary_id": "exploration_summary_1e_001",
+  "trajectory": "enza_1e_environment_mapping_001",
+  "generated_at": "2026-09-03T06:10:00Z",
+  "usage_status": "environment mapping / benchmarking / failure analysis ONLY. NOT training data, NOT executable policy.",
+
+  "mission_result": "BOUNDARY_REACHED_AND_HELD",
+  "terminal_state": {
+    "label": "WING_CONFIRMATION_DIALOG (production start prompt, unconfirmed, uncanceled)",
+    "url": "https://shinycolors.enza.fun/produceReady",
+    "screenshot": "ai_decisions/observations/screenshots/OBS_20260903060610_1E_s4_confirm_boundary.png"
+  },
+
+  "states_mapped": [
+    { "state": "PRODUCE_SELECTION", "observation_id": "OBS_20260903060500", "url": "/produceReady", "first_hand": true },
+    { "state": "UNIT_FORMATION", "observation_id": "OBS_20260903060520", "url": "/produceReady (unchanged)", "first_hand": true },
+    { "state": "ITEM_SELECTION", "observation_id": "OBS_20260903060545", "url": "/produceReady (unchanged)", "first_hand": true },
+    { "state": "WING_CONFIRMATION_DIALOG", "observation_id": "OBS_20260903060610", "url": "/produceReady (unchanged)", "first_hand": true }
+  ],
+
+  "states_not_reached": [
+    "FIRST_PRODUCTION_STATE", "WEEK_STATUS_STATE", "LESSON_SELECTION_STATE", "AUDITION_SELECTION_STATE", "RESULT_STATE"
+  ],
+  "states_not_reached_reason": "behind the confirmation dialog; entering requires resource consumption — forbidden by Phase 1E contract",
+
+  "stop_condition_triggered": "resource consumption pending (production start confirm dialog); mission boundary reached simultaneously",
+
+  "metrics": {
+    "observations_collected": 4,
+    "actions_executed": 3,
+    "verification_coverage": "3/3 actions verified by fresh screenshot",
+    "anomalies": 0,
+    "resource_consumption": 0,
+    "forbidden_action_violations": 0
+  },
+
+  "hypothesis_updates": [
+    "H3 PARTIALLY RESOLVED (first-hand): 次へ through the three prep steps is pure navigation; no consumption prompt at any prep step. Consumption is gated behind the explicit production-start confirm dialog.",
+    "still UNKNOWN: what the confirm button does (user_reported error 9000 after confirm in prior run — never first-hand tested)."
+  ],
+
+  "artifacts": {
+    "observations": [
+      "OBS_20260903060500 (PRODUCE_SELECTION)",
+      "OBS_20260903060520 (UNIT_FORMATION)",
+      "OBS_20260903060545 (ITEM_SELECTION)",
+      "OBS_20260903060610 (WING_CONFIRMATION_DIALOG)"
+    ],
+    "trajectory": "enza_memory/trajectories/enza_1e_environment_mapping_001.json",
+    "screenshots_dir": "ai_decisions/observations/screenshots/"
+  },
+
+  "open_questions_for_planner": [
+    "authorize (or not) pressing confirm to map production states — requires explicit resource-spend authorization",
+    "the dialog is being held open: planner may direct cancel (safe exit) as next action",
+    "calibration pass still needed for hitboxes (U1) — this session used fresh-screenshot coordinates with 0 mis-fires"
+  ]
+}

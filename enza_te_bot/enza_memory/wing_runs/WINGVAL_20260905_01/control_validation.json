@@ -1,0 +1,12 @@
+{
+  "run_id": "WINGVAL_20260905_01",
+  "session": "new browser session, fresh screenshots, no reuse of prior run frames",
+  "controls": [
+    {"control_id":"WING_HOME.produce_schedule","source_state_fresh_check":"v0_state_check.png / vA_home_verify.png anchors verified before click","viewport_signature":"1280x720 @ /produce","taught_coordinate":"(150,600)","local_visual_anchor":"SCHEDULE 日历立牌+プロデュース粉字 bottom-left","times_used":2,"times_successful":2,"sessions_seen":2,"geometry_drift_observed":false,"knowledge_tier":"PROMOTION_EVIDENCE_READY"},
+    {"control_id":"SCHEDULE.vocal_card","source_state_fresh_check":"vA_schedule_guard.png / vB_schedule_guard.png","viewport_signature":"1280x720 @ /produce","taught_coordinate":"(360,500)","local_visual_anchor":"粉色ボーカルレッスン卡片(带決定选中标)","times_used":2,"times_successful":2,"sessions_seen":2,"geometry_drift_observed":false,"content_drift_note":"卡片内容随进度变化(Lv.1→Lv.4, Excellent!!徽章) 但位置/边框色稳定","knowledge_tier":"PROMOTION_EVIDENCE_READY"},
+    {"control_id":"SCHEDULE.confirm","source_state_fresh_check":"同上 guard 帧","viewport_signature":"1280x720 @ /produce","taught_coordinate":"(1185,660)","local_visual_anchor":"右下粉色決定","times_used":2,"times_successful":2,"sessions_seen":2,"geometry_drift_observed":false,"knowledge_tier":"PROMOTION_EVIDENCE_READY"},
+    {"control_id":"RESULT.advance/interruption_cycle","source_state_fresh_check":"vA_after_confirm.png(result 演出确认)","viewport_signature":"1280x720 @ /produce","taught_coordinate":"cycle: SKIP(1218,53)/textbox(640,610)/center(640,350)","times_used":2,"times_successful":2,"sessions_seen":2,"geometry_drift_observed":false,"knowledge_tier":"PROMOTION_EVIDENCE_READY"}
+  ],
+  "controls_promotion_evidence": "READY (all 4 core controls: 2/2 success in independent session, zero geometry drift)",
+  "caveat": "跨 session 数=2 (WINGRUN_20260905_01 + WINGVAL_20260905_01); viewport 一直为 1280x720, 其他分辨率未验证"
+}

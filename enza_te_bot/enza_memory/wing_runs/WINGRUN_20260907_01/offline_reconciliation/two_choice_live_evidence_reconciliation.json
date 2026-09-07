@@ -1,0 +1,118 @@
+{
+ "artifact_type": "TWO_CHOICE_LIVE_EVIDENCE_RECONCILIATION",
+ "reconciliation_id": "OFFLINE_RECONCILIATION_WINGRUN_20260907_01",
+ "run_id": "WINGRUN_20260907_01",
+ "mode": "OFFLINE_ONLY (artifact review; no environment contact)",
+ "created_at": "2026-09-07",
+ "live_browser_touched": false,
+ "purpose": "Validate the first complete TRUE TWO_CHOICE live evidence package and mark the resulting coverage state.",
+
+ "validated_artifacts": [
+  {
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_S1W5.png",
+   "sha256": "75c65ce01eef74504f757a038ad126090ea93cd05de061375425268fce4a595d",
+   "digest_match_vs_claim": true,
+   "digest_source_claim": "enza_memory/wing_runs/WINGRUN_20260907_01/two_choice_preclick_evidence.json#screenshot_sha256",
+   "visually_confirmed": "1280x720 full frame; いいよ (green border, green ✓ badge bottom-right, left) + ごめん (pink border, pink ✓ badge bottom-right, right); both cards fully visible; speaker 智代子「今週にレッスンさせてください！」; scene undimmed; textbox visible below cards"
+  },
+  {
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_POSTCLICK_S1W5.png",
+   "sha256": "b1ca403895b755d91183f14a1a32c81675e0cb1ffd6320d9577cfa16103302b9",
+   "digest_source_claim": "post_click reference in two_choice_preclick_evidence.json (no digest recorded there; digest computed this session)",
+   "visually_confirmed": "choice cards gone; 智代子「うっ……だ、だめですか？ わかりました、仕方ないです……！」 = recorded post_click_response"
+  },
+  {
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_01/two_choice_preclick_evidence.json",
+   "validation": "internally consistent; all normalized values re-derived this session and match (62/1280=0.0484, 160/720=0.2222, 418/1280=0.3266, 340/720=0.4722, 850/1280=0.6641, 1205/1280=0.9414)"
+  }
+ ],
+
+ "layout_validation": {
+  "layout_family": "TWO",
+  "layout_identity": "TWO_CHOICE_LAYOUT_V1 — two simultaneous ✓-cornered option cards over dialogue",
+  "options_confirmed": [
+   {"index": 1, "text": "いいよ", "border": "green", "badge": "green check bottom-right", "side": "left"},
+   {"index": 2, "text": "ごめん", "border": "pink", "badge": "pink check bottom-right", "side": "right"}
+  ],
+  "pre_click_both_option_visibility": true,
+  "occlusion": "none"
+ },
+
+ "pixel_geometry": {
+  "viewport": "1280x720 (ZCode IAB)",
+  "recorded_boxes_px": {
+   "iiyo": {"x1": 62, "y1": 160, "x2": 418, "y2": 340},
+   "gomen": {"x1": 850, "y1": 160, "x2": 1205, "y2": 340}
+  },
+  "recorded_centers_px": {"iiyo": {"x": 240, "y": 250}, "gomen": {"x": 1027, "y": 250}},
+  "offline_pixel_probe_20260907": {
+   "method": "RGB color-threshold scan of border/badge/center samples (PIL, offline)",
+   "measured_green_extent_rows_at_x240": [159, 342],
+   "measured_green_extent_cols_at_y250": [68, 416],
+   "measured_pink_extent_rows_at_x1027": [159, 342],
+   "measured_pink_extent_cols_at_y250": [849, 1204],
+   "sampled_colors": {
+    "green_border_top_mid_240_162": [61, 179, 120],
+    "pink_border_top_mid_1027_162": [243, 125, 173],
+    "green_badge_area_385_318": [199, 255, 224],
+    "pink_badge_area_1172_318": [255, 208, 225],
+    "iiyo_center_240_250": [245, 248, 249],
+    "gomen_center_1027_250": [82, 73, 70, "note: text glyph pixel inside card"]
+   },
+   "agreement": "recorded boxes agree with measured extents within ≤6px per edge (edge convention: recorded values are visual estimates; probe threshold differs) — GEOMETRY CLAIM SUPPORTED"
+  }
+ },
+
+ "normalized_geometry": {
+  "status": "VERIFIED (arithmetic re-derivation this session)",
+  "iiyo_box_norm": {"x1": 0.0484, "y1": 0.2222, "x2": 0.3266, "y2": 0.4722},
+  "gomen_box_norm": {"x1": 0.6641, "y1": 0.2222, "x2": 0.9414, "y2": 0.4722}
+ },
+
+ "event_context": {
+  "week": "S1W5 post-lesson home dialogue",
+  "speaker": "智代子",
+  "line": "今週にレッスンさせてください！",
+  "family": "PROMISE_EVENT (いいよ/ごめん)"
+ },
+
+ "executed_option": {
+  "text": "ごめん",
+  "index": 2,
+  "click_px": {"x": 1027, "y": 250},
+  "policy": "wing_business_choice_fixed TWO_CHOICE (ごめん -> FIXED_DECLINE)",
+  "authority_at_execution": "ACTIVE policy + layout certain + both options fully visible + fresh INPUT frame",
+  "post_click_semantic_confirmation": "decline response 智代子「うっ……だ、だめですか？ わかりました、仕方ないです……！」 verified on TWO_CHOICE_POSTCLICK_S1W5.png; verified_transition: true (recorded) — post-click frame re-confirmed visually this session",
+  "autonomous_decline_execution_count": "n=1 (first project-wide autonomous ごめん execution)"
+ },
+
+ "marks": {
+  "TWO_CHOICE_LAYOUT_VISUAL_CORPUS": "NOW NONZERO",
+  "TWO_CHOICE_GEOMETRY": "LIVE_CAPTURED",
+  "PROMISE_AUTONOMOUS_GOMEN_EXECUTION": "n=1"
+ },
+
+ "supplementary_same_run_occurrence_not_counted_above": {
+  "occurrence": "2nd true two-choice of the same run/session (post-W6-interrupt reconciliation, W7PROMISE)",
+  "evidence": [
+   "enza_memory/wing_runs/WINGRUN_20260907_01/two_choice_preclick_evidence_2.json",
+   "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_PRECLICK_FULLFRAME_W7PROMISE.png (sha256 d53e5eec3bb008c414e7f6649241df9a887b54c41f83411b6f635b12a0c44a0a, digest match)",
+   "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/TWO_CHOICE_POSTCLICK_W7PROMISE.png (sha256 7a22e4604aa57b4b9175bc5a14f3dd725802626c21ad5a756b7ce15e6a328e6e)"
+  ],
+  "visually_confirmed": "same いいよ/ごめん layout; speaker line 今週にボーカルレッスンをやらせてください！; same decline response post-click; recorded y-top 155 vs 160 (≤5px variance) and dimmed vs undimmed background (rendering variance noted in source JSON)",
+  "cumulative_in_run_autonomous_declines": 2,
+  "counting_rule": "supplementary only — the instructed n=1 mark refers to the first complete live evidence package (S1W5)"
+ },
+
+ "limits_and_kept_constraints": {
+  "cross_session_visual_replication": "NOT ESTABLISHED — all current TWO_CHOICE captures originate from the single run/session WINGRUN_20260907_01 (2026-09-07); no cross-session layout replication is inferred from one live capture",
+  "canonical_universal_box": "still not claimed — 2 frames, 1 session, ≤5px inter-occurrence variance; no cross-event/cross-session replication",
+  "rate_priors": "unchanged; TWO_CHOICE empirical rates remain RAW_EMPIRICAL_RATE with ELIGIBILITY_MODEL=UNKNOWN"
+ },
+
+ "provenance": {
+  "original_captures": "session_observed (WINGRUN_20260907_01 live session, producer ZCode live run IAB, provider_session_id sess_0dba06ad-1e0f-4f1e-8440-6c756415d780)",
+  "this_reconciliation": "offline_artifact_review (digest recomputation, JSON re-derivation, image inspection, pixel probe); no new environment observation",
+  "classification": "FACT for artifact contents and digest matches; the ≤6px geometry agreement is FACT of the probe; cross-session replication status is FACT of absence (no supporting artifact exists)"
+ }
+}

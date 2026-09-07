@@ -1,0 +1,501 @@
+{
+ "artifact_type": "NEGATIVE_REGRESSION_CORPUS",
+ "mining_session": "OFFLINE_REGRESSION_MINING_20260906",
+ "created_at": "2026-09-06T23:30:00Z",
+ "status": "MINED_EVIDENCE_CORPUS — regression-case design ONLY. NOT executable policy. No business policy, runtime, harness, or skill was changed.",
+ "test_coverage_basis": "already_covered_by_test was assessed against the test suite inventory (76 test_*.py) and docs/KNOWN_ISSUES.md. 'partial' means the invariant exists in some layer but the live failure mode is not directly replayed. 'no' means no located test reproduces the scenario.",
+ "cases": [
+  {
+   "id": "NRG-001",
+   "class": "WRONG_TARGET",
+   "state": "SCHEDULE",
+   "precondition": "schedule page just loaded; operator/agent intends dialogue-advance or generic continue",
+   "bad_action": "click (985,663) normalized (0.7695,0.9208)",
+   "observed_consequence": "サポートスキル panel opened instead of advancing dialogue; occurred twice in WINGRUN_20260906_01 (S1W1 and S1W6)",
+   "required_guard": "never use (985,663) as transient skip target; after every transition verify page identity before next click; SCHEDULE geometry requires schedule identity evidence (cards/trouble badge/決定) before projecting schedule controls",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W1",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W6",
+    "enza_memory/migration/python_click_migration/distilled/hazard_map.json#WRONG_TARGET",
+    "enza_memory/migration/python_click_migration/review_batches/v0_2/zcode_audit/regression_candidates.json#VRB02_012"
+   ],
+   "severity": "P1",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-002",
+   "class": "OVER_TAP",
+   "state": "HOME post-lesson dialogue end",
+   "precondition": "post-lesson dialogue ends (<=4 taps observed); bounded blind tap batch continues",
+   "bad_action": "extra textbox tap beyond dialogue end",
+   "observed_consequence": "tap landed near (205,655) and opened 振り返り view",
+   "required_guard": "stop burst when textbox disappears; per-tap dialogue-presence check; fresh owner before next click; bounded tap batch",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W1",
+    "enza_memory/migration/python_click_migration/distilled/hazard_map.json#OVER_TAP"
+   ],
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-003",
+   "class": "NO_EFFECT",
+   "state": "SCHEDULE_LOADING (slow load)",
+   "precondition": "schedule page still loading; 決定 visually present",
+   "bad_action": "click 決定 (1185,660) before page-loaded anchor",
+   "observed_consequence": "one slow-load click did nothing; retry after load succeeded (WINGRUN_20260906_01 S1W4)",
+   "required_guard": "require page-loaded + enabled anchor (actionable phase) before semantic control action",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/timings.jsonl#S1W4",
+    "enza_memory/migration/python_click_migration/distilled/hazard_map.json#NO_EFFECT"
+   ],
+   "severity": "P2",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-004",
+   "class": "DISABLED_CONTROL",
+   "state": "AUDITION_BATTLE:ANIMATION",
+   "precondition": "Auto visible but dimmed during idol dance animation",
+   "bad_action": "click Auto during animation",
+   "observed_consequence": "3 clicks had no effect (0905 S4 THE LEGEND first battle; frozen inspection confirmed dimmed style)",
+   "required_guard": "value OFF is insufficient; require INPUT_READY phase + ENABLED interactability + current control epoch (INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE, CONTROL_ACTION_REQUIRES_ACTIONABLE_PHASE)",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#AUDITION_IN_PROGRESS",
+    "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#VRB02_025"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-005",
+   "class": "NO_EFFECT",
+   "state": "AUDITION_BATTLE:DIALOGUE_TRANSITION",
+   "precondition": "battle intro/advice dialogue still transitioning",
+   "bad_action": "early Auto click before INPUT_READY",
+   "observed_consequence": "one early click had no effect (0905 S4)",
+   "required_guard": "wait for fresh actionable phase; transition identity verified before any control click",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json#ACTUAL_ORDERING",
+    "enza_memory/migration/python_click_migration/distilled/hazard_map.json#NO_EFFECT"
+   ],
+   "severity": "P2",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-006",
+   "class": "WRONG_TARGET",
+   "state": "AUDITION_BATTLE",
+   "precondition": "X2 speed badge visible near Auto",
+   "bad_action": "click X2 badge (1166,47) expecting toggle to X3",
+   "observed_consequence": "badge readable but repeated clicks did not reach X3; X2 held (S3 50k audition)",
+   "required_guard": "SPEED_DISPLAY is display-only until toggle control is separately grounded; display read must never become a click target",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S3_W5_speed_handler",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl#AUTO_LOCKS_SPEED_ORDERING",
+    "enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json#speed"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-007",
+   "class": "WRONG_TARGET",
+   "state": "AUDITION_BATTLE:AUTO_ON",
+   "precondition": "Auto already ON; speed below X3",
+   "bad_action": "click speed control after Auto ON",
+   "observed_consequence": "2 clicks (1166,47) no effect; speed stayed X2; Auto locks speed ordering",
+   "required_guard": "SPEED_FIRST_THEN_AUTO ordering (runtime knowledge); after Auto ON treat speed as locked until new epoch",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl#AUTO_LOCKS_SPEED_ORDERING",
+    "enza_memory/policies/audition_battle_speed_handler.json#ordering_rule"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-008",
+   "class": "STALE_GEOMETRY",
+   "state": "AUDITION_BATTLE after pause/resume or battle restart",
+   "precondition": "local AUTO/SPEED/turn/card observations carried from before pause",
+   "bad_action": "act on stale local control state after resume",
+   "observed_consequence": "resume reinitialized battle controls; speed state observed persisting across battles (X2 at new battle start), refuting 'reset to OFF each battle' assumption",
+   "required_guard": "new control epoch on resume; invalidate and reobserve AUTO/SPEED/turn/selected card (CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME, TRANSIENT_OVERLAY_INVALIDATES_LOCAL_CONTROL_STATE)",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json#additional_findings",
+    "enza_memory/migration/python_click_migration/distilled/battle_runtime_distillation.json#pause_resume"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-009",
+   "class": "RESULT_EVIDENCE_LOSS",
+   "state": "AUDITION_BATTLE:RESULT → result dialogue",
+   "precondition": "result dialogue on screen; advance applied before capture",
+   "bad_action": "advance/SKIP result dialogue before explicit PASS/FAIL evidence captured",
+   "observed_consequence": "S3 40k retry result lost (flag stayed false despite week consumed); S4 semifinal scene skipped without WIN evidence (week consumed, result UNKNOWN)",
+   "required_guard": "commit explicit PASS/FAIL before any advance; UNKNOWN remains uncommitted; RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE; FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S3W3_retry",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S4_END_SEMIFINAL",
+    "enza_memory/migration/python_click_migration/distilled/result_commit_examples.json"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-010",
+   "class": "SCREENSHOT_TIMEOUT",
+   "state": "ANY (animation/dialogue frames)",
+   "precondition": "browser screenshot called while game page animating",
+   "bad_action": "force screenshot on animation frame, or treat screenshot timeout as transaction-pending",
+   "observed_consequence": "capture hangs to fixed 30s internal timeout (repeated incidents); in S3W1 0906 the screenshot hung AFTER the week had committed — observation tool failure while game progressed",
+   "required_guard": "POST_TIMEOUT_STATE_MUST_BE_RECONCILED_BEFORE_RETRYING_PENDING_ACTION: reconcile against next fresh stable state before any retry; no blind re-click; capture stable/INPUT_READY frames only; persist failure evidence",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/operator_reconcile_20260906_s3w1.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json",
+    "enza_memory/policies/learned_constraints.json#C1"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-011",
+   "class": "TOOL_LATENCY_BUDGET_EXCEEDED",
+   "state": "MULTI_ACTION_BATCH (CUA cell)",
+   "precondition": "cell timeout declared from logical action count / explicit waits only",
+   "bad_action": "batch 22-56 clicks + waits + screenshots into one 115s cell",
+   "observed_consequence": "hidden ~5s per-click cost made real runtime 165s-350s+; 2 cells aborted by js tool timeout (S2W1+W2 burst, S4W1 burst)",
+   "required_guard": "BATCH_EXECUTION_MUST_RESPECT_MEASURED_TOOL_LATENCY: estimated_ms = clicks*measured_cost + waits + screenshot_reserve + margin; split batch at stable boundary; <=1 game week per cell",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json",
+    "enza_memory/policies/zcode_execution_budget_profile.json",
+    "enza_memory/migration/python_click_migration/distilled/runtime_timing_distillation.json#tool_latency"
+   ],
+   "severity": "P2",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-012",
+   "class": "SESSION_RELEASE",
+   "state": "HANDOFF between turns/cells",
+   "precondition": "game tab not marked for handoff before turn end",
+   "bad_action": "end turn without explicit handoff/ownership",
+   "observed_consequence": "tab disappeared when not handed off (tabs=0 incident); session had to re-resolve registry",
+   "required_guard": "explicit session ownership/handoff before ending a turn; on tabs=0 stop and re-resolve, never blind-continue",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json#tab_release",
+    "enza_memory/policies/zcode_execution_budget_profile.json#SESSION_HANDOFF",
+    "enza_memory/migration/python_click_migration/distilled/hazard_map.json#SESSION_RELEASE"
+   ],
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-013",
+   "class": "PERSISTENCE_GAP",
+   "state": "WING run transaction boundaries",
+   "precondition": "durable event/checkpoint write not part of each transaction completion boundary",
+   "bad_action": "continue executing weeks while persistence lags; crash before sync",
+   "observed_consequence": "PERSISTENCE_DURABILITY_FAILURE: raw timings.jsonl last boundary S1W6 (weeks=2) while server state advanced through S1 end + all of S2 to S3 start; 12 events required crash-recovery backfill from session transcript",
+   "required_guard": "flush after every completed week, after every season transition reaches fresh stable state, before risky long burst, before handoff; refuse next week-consuming action until durable write succeeds (fail-closed)",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json",
+    "enza_memory/migration/python_click_migration/distilled/runtime_recovery_requirements.json"
+   ],
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-014",
+   "class": "UNKNOWN_STATE",
+   "state": "DIALOGUE (untaught 2-card business choice)",
+   "precondition": "智代子 request いいよ/ごめん modal appears with no taught choice in memory",
+   "bad_action": "auto-select a business option without policy authority",
+   "observed_consequence": "run correctly STOPPED as GLOBAL_UNKNOWN (0905 S1W5); week resolution required operator authorization (いいよ)",
+   "required_guard": "UNKNOWN business choice → STOP; fixed policy may only handle ごめん-present 2-card and 3-card middle; everything else fail-closed",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl#UNKNOWN_BUSINESS_CHOICE",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#week5",
+    "enza_memory/policies/wing_business_choice_fixed_policy.json"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "yes",
+   "new_test_candidate": false
+  },
+  {
+   "id": "NRG-015",
+   "class": "WRONG_TARGET",
+   "state": "DIALOGUE with choice overlay (layout taxonomy conflation)",
+   "precondition": "3-card advice frame mislabeled as MORNING_3CHOICE business context, or 2-card choice treated as advice",
+   "bad_action": "apply advice handler to a business-choice frame (or vice versa)",
+   "observed_consequence": "systemic bug class E found in review batch VRB02_018..021: AUDITION_ADVICE/LESSON_ADVICE 3-choice labeled MORNING_3CHOICE; semantics differ (auto-pick middle vs business STOP/fixed policy)",
+   "required_guard": "LAYOUT_FAMILY and EVENT_CONTEXT are separate required fields; choice handler selected by both; count+structure check (dual-✓) before any selection",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/review_batches/v0_2/zcode_audit/systemic_bug_classes.json#E",
+    "enza_memory/wing_runs/WINGVAL_20260905_01/business_choice_validation.json"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-016",
+   "class": "OVERLAY_OWNERSHIP",
+   "state": "any parent page with foreground overlay",
+   "precondition": "tutorial/help/info overlay covers parent page",
+   "bad_action": "click parent-page control behind overlay",
+   "observed_consequence": "UNIT_FORMATION tutorial modal (1/7) intercepted 次へ clicks for ~25min across 3 frames (1E phase); WORK_ACTIVITY delayed tutorial intercepted return (SELFEXP_01 step9); canvas_misclick_001: modal-click opened Help overlay; login-dialogue SKIP opened お知らせ overlay (causality UNKNOWN, live_ttm_009)",
+   "required_guard": "overlay-present invalidates parent-page control authority (VRB02_005 guard); identify + dismiss overlay first; SKIP badge is not a universal safe region",
+   "evidence_refs": [
+    "enza_memory/wing_state_graph_v2.json#UNIT_FORMATION_TUTORIAL_MODAL",
+    "enza_memory/self_exploration/SELFEXP_20260905_01/summary.json#mismatches",
+    "enza_memory/failures/canvas_misclick_001.json",
+    "enza_memory/migration/python_click_migration/migration_status.json#hazard_regions",
+    "enza_memory/migration/python_click_migration/review_batches/v0_2/zcode_audit/regression_candidates.json#VRB02_005"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-017",
+   "class": "STALE_GEOMETRY",
+   "state": "SCHEDULE after audition week",
+   "precondition": "schedule reopens in audition sub-tab",
+   "bad_action": "assume lesson card geometry valid on reopened schedule",
+   "observed_consequence": "S4W1 (0905): schedule recovered in audition sub-tab; レッスン&お仕事 switch required first (new control fact)",
+   "required_guard": "verify lesson sub-tab/card anchor before VOCAL click; tab state must be fresh",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S4W1",
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#SCHEDULE:AUDITION#hazard_nearby"
+   ],
+   "severity": "P2",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-018",
+   "class": "DISABLED_CONTROL",
+   "state": "PRODUCE_PREP wizard (PRODUCE_MENU tabs / KNOWHOW決定)",
+   "precondition": "produce selection not yet committed via 次へ; KNOWHOW book not selected",
+   "bad_action": "click ユニット編成/アイテム選択 tabs or KNOWHOW 決定",
+   "observed_consequence": "2 tab clicks produced MISMATCH/no transition (SELFEXP_02 → session stop); KNOWHOW 決定 disabled until book selection (SELFEXP_03 stop)",
+   "required_guard": "wizard flow is sequential; tab/two-step branches locked until commit; detect disabled control and stop instead of retrying",
+   "evidence_refs": [
+    "enza_memory/self_exploration/SELFEXP_20260905_02/summary.json",
+    "enza_memory/self_exploration/SELFEXP_20260905_03/summary.json",
+    "enza_memory/self_exploration/cross_session_audit.json#transitions"
+   ],
+   "severity": "P2",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-019",
+   "class": "DISABLED_CONTROL",
+   "state": "TRAINING_SETTINGS_OVERLAY (研修設定)",
+   "precondition": "skill sub-panel open or allocation incomplete",
+   "bad_action": "click 決定 to commit training settings",
+   "observed_consequence": "決定 produced no observed effect (gated); mechanism UNKNOWN (state_hierarchy_review U6)",
+   "required_guard": "do not treat 決定 as enabled without explicit enabled anchor; unresolved gating must remain UNKNOWN",
+   "evidence_refs": [
+    "enza_memory/wing_state_graph_v2.json#TRAINING_SETTINGS_OVERLAY",
+    "enza_memory/state_hierarchy_review_001.json#unknowns_added"
+   ],
+   "severity": "P2",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-020",
+   "class": "WRONG_TARGET",
+   "state": "SKILL_BOARD locked node",
+   "precondition": "grey/gold node displayed 未解放; agent attempts purchase",
+   "bad_action": "click locked node expecting acquire",
+   "observed_consequence": "selection ring moved, NO purchase, no confirm dialog (live_csm_020..023 + off-board/dead-zone misclicks g1-g4 recovered frames)",
+   "required_guard": "availability requires WHITE interior evidence (color alone insufficient — gold/blue can be locked); locked click must be classified NO_EFFECT not retry-looped",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/recovered_frames/skill_board_visual_sequence.json#detector_warnings",
+    "enza_memory/migration/python_click_migration/recovered_frames/skill_board/rf_sb_g1_misclick_590_145.png",
+    "enza_memory/migration/python_click_migration/review_batches/v0_2/review_summary.json#missing_source_reviews VRB02_M02..M05",
+    "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl#rf_sb_g1..g4 (associated_click_sample_ids live_csm_020..023)"
+   ],
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true,
+   "reconciliation": {
+    "reconciliation_id": "REGRESSION_RECONCILIATION_20260906",
+    "status": "RECOVERED_VISUAL_EVIDENCE",
+    "review_status": "RECOVERED_REVIEW_PENDING",
+    "supersedes": "MISSING_FRAME (historical mining designation, preserved above)",
+    "recovered_from": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl (45 frames, provenance ZCODE_SESSION_ARTIFACT_RECOVERED, source session sess_a87f3588-8212-4de7-b9ad-319825b4509e)",
+    "historical_designation_preserved": true,
+    "resolved_frames": [
+     "rf_sb_g1_misclick_590_145",
+     "rf_sb_g2_misclick_585_200",
+     "rf_sb_g3_misclick_465_115",
+     "rf_sb_g4_misclick_645_205"
+    ],
+    "promoted_visual_cases": [
+     "VNC-001",
+     "VNC-002",
+     "VNC-003"
+    ],
+    "note": "MISSING_FRAME superseded; case now visually grounded"
+   }
+  },
+  {
+   "id": "NRG-021",
+   "class": "WRONG_TARGET",
+   "state": "SKILL_REPLACEMENT slot selection",
+   "precondition": "new skill acquired; 5th skill triggers replacement dialog",
+   "bad_action": "replace the just-learned skill (or arbitrary slot)",
+   "observed_consequence": "T2 transaction: operator corrected target mid-transaction; fixed rule = bottom-up among ORIGINAL skills, one slot up per new skill, never replace just-learned (4/4 executed successfully after correction)",
+   "required_guard": "REPLACEMENT_SLOT_SELECT must validate target is an ORIGINAL skill; confirm dialog must show 忘れる=expected ⇄ 新規=expected before OK",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/skill_board_session_2_record.json#replacement_policy",
+    "enza_memory/migration/python_click_migration/recovered_frames/replacement_visual_sequence.json#T2"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-022",
+   "class": "UNKNOWN_STATE",
+   "state": "ANY (operator channel media omission)",
+   "precondition": "screenshot/crop omitted from operator visual input ('Media omitted from provider request')",
+   "bad_action": "produce a page description from partial input",
+   "observed_consequence": "unreliable descriptions were the leading root cause of the 1E phase state mislabels later reversed by AGY reinspection",
+   "required_guard": "if a screenshot/crop is omitted, observation MUST record 'title not read, identity UNKNOWN'; fabricating descriptions forbidden",
+   "evidence_refs": [
+    "enza_memory/wing_state_graph_v2.json#operator_channel_limitation_DISCLOSED",
+    "enza_memory/state_hierarchy_review_001.json#downgraded_claims_principle"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-023",
+   "class": "WRONG_TARGET",
+   "state": "PRODUCE_ENTRY (window/viewport mapping)",
+   "precondition": "viewport/window geometry or DPR changed; coordinates from old profile reused",
+   "bad_action": "apply 1280x720 taught coordinates at a different viewport or unverified left/top",
+   "observed_consequence": "no live incident under MAC_CURRENT_V1, but WINGVAL caveat: other viewports unvalidated; historical log shows ROOM_INVALID_ENTRY incidents (20260829) from window-mapping era; left/top=0,0 assumed-then-verified only for current profile",
+   "required_guard": "never auto-scale geometry across viewport profiles; new profile requires re-teaching; viewport signature verified before coordinate use",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/viewport_profiles.json#rules",
+    "enza_memory/wing_runs/WINGVAL_20260905_01/control_validation.json#caveat",
+    "logs/20260829_224244_804184_ROOM_INVALID_ENTRY.png (pattern inventory)"
+   ],
+   "severity": "P1",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-024",
+   "class": "FAILED_ACTION_NO_COMMIT",
+   "state": "AUDITION_BATTLE:UNKNOWN result",
+   "precondition": "result evidence absent/unreadable (occluded, advanced, unreadable frame)",
+   "bad_action": "commit audition flag or business progress from non-explicit evidence",
+   "observed_consequence": "correct fail-closed behavior observed: S3 40k evidence-loss case left flag false; semifinal remained UNKNOWN; no false commits recorded",
+   "required_guard": "regression must pin this: UNKNOWN result → NO commit + route replan from fresh state; fan-delta inference alone is not commit evidence",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/distilled/result_commit_examples.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl#S3W3"
+   ],
+   "severity": "P0",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-025",
+   "class": "NO_EFFECT",
+   "state": "DIALOGUE bottom-right chevron",
+   "precondition": "COMMUNICATION_DIALOGUE advancing",
+   "bad_action": "click bottom-right chevron expecting advance",
+   "observed_consequence": "NO_EFFECT; textbox body (640,610) is the working advance target",
+   "required_guard": "chevron excluded from advance affordances; textbox owner check per frame",
+   "evidence_refs": [
+    "enza_memory/migration/python_click_migration/distilled/control_evidence_matrix.json#DIALOGUE:SAFE_TEXTBOX#hazard_nearby"
+   ],
+   "severity": "P2",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-026",
+   "class": "PERSISTENCE_GAP",
+   "state": "RESULT capture durability (week evidence)",
+   "precondition": "week result observed transiently but screenshot/capture not durably persisted before next action",
+   "bad_action": "advance to next week relying on memory of the result",
+   "observed_consequence": "recovered weeks lack per-event wall-clock timestamps and frame identifiers (crash_recovery_backfill unknowns); S3W1 0906 required operator reconciliation because no autonomous frame existed",
+   "required_guard": "RESULT_EVIDENCE first-class: fresh post-state + screenshot reference + digest persisted in the same boundary flush as the week commit",
+   "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260906_01/crash_recovery_backfill.json#unknowns",
+    "enza_memory/wing_runs/WINGRUN_20260906_01/operator_reconcile_20260906_s3w1.json"
+   ],
+   "severity": "P1",
+   "already_covered_by_test": "no",
+   "new_test_candidate": true
+  },
+  {
+   "id": "NRG-027",
+   "class": "NO_EFFECT",
+   "state": "PRODUCE_MENU tabs (locked)",
+   "precondition": "produce selection uncommitted",
+   "bad_action": "retry tab click after first MISMATCH",
+   "observed_consequence": "second click also MISMATCH → session stop (SELFEXP_02 stop rule triggered correctly); retries would have been waste",
+   "required_guard": "no retry of identical failed click without re-observation (R2); disabled-control detection before retry",
+   "evidence_refs": [
+    "enza_memory/self_exploration/SELFEXP_20260905_02/summary.json#stop_reasons",
+    "enza_memory/policies/learned_constraints.json#R2"
+   ],
+   "severity": "P3",
+   "already_covered_by_test": "partial",
+   "new_test_candidate": false
+  }
+ ],
+ "summary": {
+  "total_cases": 27,
+  "by_class": {
+   "WRONG_TARGET": 8,
+   "NO_EFFECT": 4,
+   "DISABLED_CONTROL": 3,
+   "OVER_TAP": 1,
+   "STALE_GEOMETRY": 2,
+   "OVERLAY_OWNERSHIP": 1,
+   "UNKNOWN_STATE": 2,
+   "SCREENSHOT_TIMEOUT": 1,
+   "SESSION_RELEASE": 1,
+   "PERSISTENCE_GAP": 2,
+   "FAILED_ACTION_NO_COMMIT": 1,
+   "RESULT_EVIDENCE_LOSS": 1,
+   "TOOL_LATENCY_BUDGET_EXCEEDED": 1
+  },
+  "by_severity": {
+   "P0": 10,
+   "P1": 7,
+   "P2": 8,
+   "P3": 2
+  }
+ },
+ "reconciliation_note": "2026-09-06: NRG-020 now visually grounded via recovered frames; all other cases unchanged. NRG-013 (persistence gap) remains valid and required."
+}

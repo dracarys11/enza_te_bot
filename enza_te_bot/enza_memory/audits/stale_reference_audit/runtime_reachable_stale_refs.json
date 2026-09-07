@@ -1,0 +1,41 @@
+{
+  "audit_id": "stale_reference_audit_20260906",
+  "purpose": "Subset of stale_references.json findings that sit on a path the runtime can execute (now, or on a documented resume/new-run path).",
+  "runtime_reachable_count": 2,
+  "runtime_reachable_findings": [
+    {
+      "id": "F-01",
+      "file": "home_policy.py",
+      "line_key": "lines 256-258 (season==3 base branch)",
+      "stale_statement": "S3 milestone-complete + stamina_adequate=False → REST ('season_3_stamina_low_rest') decided at base level, bypassing apply_vocal_risk_guard.",
+      "current_authoritative_replacement": "LOW_STAMINA is WARNING_ONLY (home_policy.py:12-16; artifact_registry.json runtime_patch_20260905.authoritative_rule); VOCAL authority is the fresh failure rate (VOCAL_FAILURE_RATE_GATE >2 → REST / <=2 → VOCAL).",
+      "execution_path": "main.py decide_home_diagnostic() main.py:563; home tick main.py:683, main.py:895 → home_policy.decide_home → _decide_home_base(season==3)",
+      "runtime_reachable": "yes (executes on any fresh S3 HOME decision with stamina_adequate=False)",
+      "blast_radius": "A live S3 week with low stamina and failure rate 0-2 would REST instead of the operator-authorized VOCAL; conversely it can REST without ever consulting the failure-rate authority. No unsafe-click risk (REST is conservative); it is a business-decision authority violation.",
+      "quarantine_status": "NOT quarantined — live policy code",
+      "recommended_action": "Smallest fix: S3 milestone-complete branch returns VOCAL unconditionally; apply_vocal_risk_guard owns stamina/failure-rate semantics. Update test_home_policy.py:52-60 in the same change. Requires explicit authorization only if a live run is used to verify; fix itself is offline."
+    },
+    {
+      "id": "F-03",
+      "file": "config.json",
+      "line_key": "run_state.season3 (line 1073): reflection_opening_completed/audition_40k_completed/audition_50k_completed all true",
+      "stale_statement": "Closed-run S3 milestone flags persist in the config file that main.py loads at startup.",
+      "current_authoritative_replacement": "artifact_registry.json: WINGRUN_20260906_01 CLOSED, resume_allowed=false, no resume point; README Known Blockers #5: legacy flags must not pollute a new run; season3_audition.py semantics: flags=true ⇒ 40k/50k auditions treated as done.",
+      "execution_path": "main.py (config loaded at startup) → decide_home/home_policy._decide_home_base(season==3) and season3_audition.required_reward(run_state); a NEW produce run reaching S3 without an explicit flag reset would skip both required auditions",
+      "runtime_reachable": "yes-on-resume (dormant while runtime_status is MAIN_LOBBY_IDLE / CLOSED; becomes live the moment a new run reuses this config)",
+      "blast_radius": "Wrong route on a future S3: 40k/50k auditions skipped, fan target missed silently — exactly the contamination README warns about.",
+      "quarantine_status": "Partially mitigated by documentation only (README #5); no code guard",
+      "recommended_action": "Reset run_state.season3 flags to false (or remove) now that the run is closed, and/or add a startup check: if registry active_run is null and run_state carries season flags → require explicit operator reset. Offline change; no live interaction needed."
+    }
+  ],
+  "excluded_from_this_file": [
+    {
+      "ids": ["F-05", "F-06", "F-07", "F-08"],
+      "reason": "Superseded statements live in policy/reference/distillation artifacts or dormant modules that no production code path loads today (grep-verified for audition_control_epoch, blind_interaction_policy, and the speed-handler policy file). They become runtime-reachable only if wired into an executor, which is blocked by CONTROLS_PRODUCTION_EXECUTABLE=NO and GATES HOLD."
+    },
+    {
+      "ids": ["F-02", "F-04", "F-09", "F-10", "F-11", "F-12"],
+      "reason": "Test-only or documentation-only contamination; see test_contamination.json and stale_references.json."
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "scenario_scope": "WING",
+  "controls": [
+    {
+      "control_id": "WING_HOME.produce_schedule",
+      "source_state": "WING_HOME",
+      "recognition_method": "fixed coordinate (150,600) + 底部左1标签 coarse check",
+      "geometry": "bottom-left",
+      "local_visual_anchor": "SCHEDULE 日历立牌+プロデュース 粉字",
+      "times_used": 5,
+      "times_successful": 5,
+      "expected_next_states": [
+        "SCHEDULE_SELECTION",
+        "(若触发事件)EVENT_DIALOGUE"
+      ],
+      "failure_modes_seen": [],
+      "reuse_class": "A taught control",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "control_id": "SCHEDULE.vocal_card",
+      "source_state": "SCHEDULE_SELECTION",
+      "recognition_method": "fixed coordinate (360,500)",
+      "geometry": "card row left-1",
+      "local_visual_anchor": "粉色 ボーカルレッスン Lv.1 卡",
+      "times_used": 4,
+      "times_successful": 4,
+      "expected_next_states": [
+        "vocal selected(決定 badge)"
+      ],
+      "failure_modes_seen": [],
+      "reuse_class": "A",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "control_id": "SCHEDULE.confirm",
+      "source_state": "SCHEDULE_SELECTION",
+      "recognition_method": "fixed coordinate (1185,660)",
+      "geometry": "bottom-right",
+      "local_visual_anchor": "粉色 決定",
+      "times_used": 4,
+      "times_successful": 4,
+      "expected_next_states": [
+        "VOCAL_RESULT 或事件剧情"
+      ],
+      "failure_modes_seen": [],
+      "reuse_class": "A",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "control_id": "RESULT.advance",
+      "source_state": "VOCAL_RESULT",
+      "recognition_method": "center tap (640,350)",
+      "geometry": "center",
+      "local_visual_anchor": "演出 overlay",
+      "times_used": 4,
+      "times_successful": 4,
+      "expected_next_states": [
+        "WING_HOME 或 COMMUNICATION_DIALOGUE"
+      ],
+      "failure_modes_seen": [
+        "演出未结束时点击无效——需 wait 后再点"
+      ],
+      "reuse_class": "A",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "control_id": "DIALOGUE.skip",
+      "source_state": "SUPPORT_EVENT_DIALOGUE",
+      "recognition_method": "fixed (1218,53)",
+      "geometry": "top-right",
+      "local_visual_anchor": "SKIP 按钮存在",
+      "times_used": 1,
+      "times_successful": 1,
+      "expected_next_states": [
+        "WING_HOME"
+      ],
+      "failure_modes_seen": [
+        "COMMUNICATION_DIALOGUE 无此按钮, 点击无效"
+      ],
+      "reuse_class": "A (但需先判定 dialogue 类型)",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "control_id": "DIALOGUE.advance_textbox",
+      "source_state": "COMMUNICATION_DIALOGUE",
+      "recognition_method": "fixed (640,610)",
+      "geometry": "bottom text box",
+      "local_visual_anchor": "对话框主体",
+      "times_used": 35,
+      "times_successful": "partial(逐行推进, 终点检测未自动化)",
+      "expected_next_states": [
+        "WING_HOME 或 BUSINESS_CHOICE_MODAL"
+      ],
+      "failure_modes_seen": [
+        "右下 ˅ 小按钮 (1218,660) 点击无效; 必须点文本框本体"
+      ],
+      "reuse_class": "A",
+      "knowledge_tier": "REPEATED_EVIDENCE"
+    },
+    {
+      "control_id": "HOME.back_arrow",
+      "source_state": "SCHEDULE_SELECTION 等",
+      "recognition_method": "fixed (57,660)",
+      "geometry": "bottom-left",
+      "risk_class": "SAFE_NAVIGATION",
+      "times_used": 0,
+      "times_successful": 0,
+      "expected_next_states": [
+        "WING_HOME"
+      ],
+      "failure_modes_seen": [],
+      "reuse_class": "A (来自 SELFEXP_03, 本 run 未用)",
+      "knowledge_tier": "REPEATED_EVIDENCE(跨 run)"
+    },
+    {
+      "control_id": "AUDITION_BATTLE.speed",
+      "page_class": "AUDITION_BATTLE",
+      "label": "倍速",
+      "approx_region": "top-right",
+      "normalized_bbox": null,
+      "visual_anchor": "倍速OFF/2倍速/3倍速 文本, Auto 右侧",
+      "expected_next_states": [
+        "battle 倍率提升"
+      ],
+      "times_seen": 3,
+      "times_successful": 2,
+      "risk_class": "SAFE_NAVIGATION",
+      "handler_ref": "enza_memory/policies/audition_battle_speed_handler.json",
+      "note": "state machine: fresh read → X3 目标, bounded toggle ≤3; Auto 与 Speed 状态分离维护",
+      "ordering": "SPEED_FIRST_THEN_AUTO — Auto ON 后倍速锁定, live 证实; handler 已修正"
+    },
+    {
+      "control_id": "AUDITION_BATTLE.auto",
+      "page_class": "AUDITION_BATTLE",
+      "label": "Auto",
+      "approx_region": "top-right",
+      "normalized_bbox": null,
+      "visual_anchor": "Auto OFF/ON 文本",
+      "expected_next_states": [
+        "auto play"
+      ],
+      "times_seen": 4,
+      "times_successful": 3,
+      "risk_class": "SAFE_NAVIGATION",
+      "note": "与 speed 分离; OFF→点击一次→fresh check"
+    }
+  ],
+  "note": "本轮全部成功点击均为 fixed-coordinate fast path, 无一需要重新定位; C 类(漂移重定位)未触发"
+}

@@ -1,0 +1,45 @@
+# Finder metadata anywhere in the repository
+.DS_Store
+
+# Local Python environments and caches
+enza_te_bot/.venv/
+enza_te_bot/**/__pycache__/
+enza_te_bot/.pytest_cache/
+enza_te_bot/.mypy_cache/
+enza_te_bot/.ruff_cache/
+
+# Runtime output and temporary files
+enza_te_bot/logs/
+enza_te_bot/**/*.log
+enza_te_bot/tmp/
+enza_te_bot/temp/
+enza_te_bot/*.tmp
+enza_te_bot/**/*.tmp
+enza_te_bot/*.bak
+enza_te_bot/**/*.bak
+enza_te_bot/.DS_Store
+enza_te_bot/**/.DS_Store
+
+# Browser, ZCode, and generated session artifacts
+enza_te_bot/**/screenshots/
+enza_te_bot/**/browser_artifacts/
+enza_te_bot/**/zcode_sessions/
+enza_te_bot/**/session_dumps/
+enza_te_bot/test_data/**/source_screenshot.png
+
+# Image-heavy recovered/review fixtures; retain their JSON manifests and reports
+enza_te_bot/enza_memory/migration/python_click_migration/recovered_frames/
+enza_te_bot/enza_memory/migration/python_click_migration/recovered_historical_frames/
+enza_te_bot/enza_memory/migration/python_click_migration/review_batches/
+
+# Generated memory-run media; retain run metadata, traces, and JSON evidence
+enza_te_bot/enza_memory/wing_runs/**/screenshots/
+enza_te_bot/enza_memory/self_exploration/**/screenshots/
+
+# Timestamped config backups are local mutation artifacts; config.json is kept
+enza_te_bot/config_backups/
+
+# Generated media outside the source template set
+enza_te_bot/**/*.mp4
+enza_te_bot/**/*.webm
+enza_te_bot/**/*.mov

@@ -1,0 +1,82 @@
+{
+  "calibration_id": "canvas_grounding_calibration_001",
+  "date": "2026-09-03T07:50:00Z",
+  "environment": {
+    "url": "https://shinycolors.enza.fun/produce",
+    "viewport": "1280x720",
+    "browser": "ZCode iab"
+  },
+  "usage_status": "grounding calibration record — audit/benchmarking ONLY. NOT executable policy. Coordinates are for this viewport/layout signature only (browser_target.py fallback rule applies on resize).",
+  "method": "observe (full + zoom) -> target estimate -> single click -> verify -> record; no blind retries (one corrected re-click allowed after zoom re-grounding)",
+  "calibrations": [
+    {
+      "control": "次へ (prep flow advance)",
+      "screens": [
+        "PRODUCE_SELECTION/UNIT_FORMATION/ITEM_SELECTION bottom-right"
+      ],
+      "tested_point": "(1170, 670)",
+      "samples": 4,
+      "result": "PASS 4/4",
+      "effective_hitbox_note": "large pink button; estimate has never missed across 4 screens/sessions",
+      "confidence": 0.95
+    },
+    {
+      "control": "キャンセル (confirm dialog dismiss)",
+      "screens": [
+        "WING_CONFIRMATION_DIALOG left button"
+      ],
+      "tested_point": "(510, 640)",
+      "samples": 2,
+      "result": "PASS 2/2",
+      "effective_hitbox_note": "grey/white button; both dismissals returned to produce selection",
+      "confidence": 0.9
+    },
+    {
+      "control": "+ (training allocation, per-stat column)",
+      "screens": [
+        "研修設定 ボーカル/ダンス/ビジュアル columns"
+      ],
+      "tested_points": {
+        "ボーカル": "(475, 345)",
+        "ダンス": "(695, 350)"
+      },
+      "samples": 2,
+      "result": "PASS 2/2",
+      "side_effect_discovered": "allocating a point ALSO auto-opens that column's skill-entry panel — this is NORMAL behavior, not a mis-click",
+      "confidence": 0.9
+    },
+    {
+      "control": "決定 (training settings commit)",
+      "screens": [
+        "研修設定 bottom-right"
+      ],
+      "tested_points_failed": [
+        "(1060, 660) — ~65px below actual button (visual mislead by open skill panel)"
+      ],
+      "tested_point_corrected": "(1070, 595) — zoom-verified button center",
+      "result": "GATED — no effect at correct coordinates while skill-entry panel is open; 決定 appears disabled/blocked until the sub-panel is closed (requires skill selection = gameplay decision, out of Phase 2.5 scope)",
+      "hitbox_confidence": "0.85 (zoom-verified visual)",
+      "action_confidence": "0 (never successfully actuated)"
+    }
+  ],
+  "key_findings": [
+    "F5: + button allocation auto-opens the skill-entry panel for that stat column (n=2, both columns behaved identically)",
+    "F6: 決定 is gated while a skill-entry sub-panel is open (n=1 screen-state)",
+    "F7: training allocation (counter values) persists across dialog cancel, navigation away and back, and session interruptions (vocal=1/20 survived ~40min of navigation)",
+    "CALIBRATION METHOD VALIDATED: one miss (決定 first attempt) was diagnosed by zoom re-grounding + single corrected click, not blind retries"
+  ],
+  "resolved_records": [
+    "canvas_misclick_002 ROOT CAUSE RESOLVED: the vocal+ click did NOT miss; opening the skill panel is inherent + button behavior (F5). The 'failure' is reclassified as expected-behavior-discovery. The stale-coordinate concern (C1) was NOT implicated here."
+  ],
+  "current_game_state": {
+    "screen": "研修設定 overlay, ダンス skill-entry panel open",
+    "allocation": "ボーカル 1/20, ダンス 1/20, uncommitted (決定 gated)",
+    "url": "/produce",
+    "resource_consumption": 0,
+    "next_required_decision": "planner must specify skill selection policy (or panel-close action) before 決定 can be calibrated as actuated"
+  },
+  "audit_annotation": {
+    "reviewed_by": "state_hierarchy_review_001",
+    "note": "F5/F6 wording 'skill-entry panel' describes COORDINATE behavior only; panel semantic identity (技能解放/技能樹/other) UNKNOWN (U5); F6 mechanism UNKNOWN (U6)"
+  }
+}

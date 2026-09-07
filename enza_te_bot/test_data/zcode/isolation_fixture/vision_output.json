@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "provider": "zcode",
+    "model": "not_applicable",
+    "skill_version": "not_applicable",
+    "source_image": "ai_decisions/observations/screenshots/OBS_20260903052210_calibration_produce_selection.png",
+    "screenshot_sha256": "8c507c508d56b698d978b849992622bad2a70535b4d736cb460e4fd2d9359169",
+    "created_at": "2026-09-04T00:00:00Z"
+  },
+  "capture": {
+    "frame_id": "isolation_fixture",
+    "viewport": {"width": 1280, "height": 720}
+  }
+}

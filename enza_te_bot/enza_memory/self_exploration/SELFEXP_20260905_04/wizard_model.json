@@ -1,0 +1,24 @@
+{
+  "scenario_scope": "WING",
+  "wizard": "PRODUCE_PREPARATION (W.I.N.G.)",
+  "scenario_identification": {
+    "category_tab": "育成プロデュース",
+    "visible_name": "W.I.N.G. / Wonder.Idol.Nova.Grandprix.",
+    "left_panel_label": "W.I.N.G.編",
+    "difficulty_subtabs": ["ビギナー", "ミドル(默认,保持)", "マスター"],
+    "classification": "WING"
+  },
+  "stages": [
+    {"stage":"PRODUCE_SELECTION","stage_index":1,"active_tab":"プロデュース選択","required_for_wing":true,"forward_control":"次へ","risk_class":"SAFE_STAGE_ADVANCE","notes":["难度保持默认ミドル"]},
+    {"stage":"UNIT_FORMATION","stage_index":2,"active_tab":"ユニット編成","required_for_wing":true,"forward_control":"次へ","risk_class":"SAFE_STAGE_ADVANCE","notes":["保持默认编成 P1+S4+ゲスト, 无强制改动", "无首次教程 overlay (复用已看过的教程状态)"]},
+    {"stage":"ITEM_SELECTION","stage_index":3,"active_tab":"アイテム選択","required_for_wing":true,"forward_control":"決定","risk_class":"SAFE_STAGE_ADVANCE","notes":["标题为 プロデュースアイテム準備","道具可选: 不选也可決定","スタミナ消費倍率默认1倍(不点2倍/3倍)","決定后弹出 使用確認 最终确认"]}
+  ],
+  "knowhow_stage": "NOT_APPLICABLE_TO_WING — WING 向导只有3 stage, 无ノウハウブック選択 (SELFEXP_03 的 knowhow stage 属于 say \"Halo\" 线)",
+  "final_commit": {"control":"プロデュース開始","location":"使用確認 modal (スタミナ300→270, 消費倍率1倍)","authorized":"YES (本轮唯一授权 commit)","executed":true},
+  "compare_with_selfexp03": {
+    "PRODUCE_SELECTION": "属于 WING (stage1 相同)",
+    "UNIT_FORMATION": "属于 WING (stage2 相同, 页面 identity 一致)",
+    "KNOWHOW_SELECTION": "不属于 WING — OUT_OF_SCOPE for WING (say \"Halo\"/STEP 线专属)",
+    "ITEM_SELECTION": "属于 WING (stage3), 与 say \"Halo\" 线的 stage4 对应但 stage_index 不同"
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {"source_state":"HOME","control_id":"bottom_nav_produce","target_state":"PRODUCE_MENU","times_observed":1,"times_successful":1,"example_steps":["step1"]},
+  {"source_state":"PRODUCE_MENU","control_id":"back_arrow","target_state":"HOME","times_observed":1,"times_successful":1,"example_steps":["step2"]},
+  {"source_state":"HOME","control_id":"bottom_nav_idol","target_state":"IDOL_PORTAL","times_observed":1,"times_successful":1,"example_steps":["step3"]},
+  {"source_state":"IDOL_PORTAL","control_id":"idol_list_card","target_state":"IDOL_LIST","times_observed":1,"times_successful":1,"example_steps":["step4"]},
+  {"source_state":"IDOL_LIST","control_id":"modal_close","target_state":"IDOL_LIST","times_observed":1,"times_successful":1,"example_steps":["step5"]},
+  {"source_state":"IDOL_LIST","control_id":"back_arrow","target_state":"IDOL_PORTAL","times_observed":1,"times_successful":1,"example_steps":["step6"]},
+  {"source_state":"IDOL_PORTAL","control_id":"back_arrow","target_state":"HOME","times_observed":1,"times_successful":1,"example_steps":["step7"]},
+  {"source_state":"HOME","control_id":"bottom_nav_work","target_state":"WORK_ACTIVITY","times_observed":1,"times_successful":1,"example_steps":["step8"]},
+  {"source_state":"WORK_ACTIVITY","control_id":"back_arrow","target_state":"WORK_ACTIVITY+TUTORIAL_OVERLAY","times_observed":1,"times_successful":0,"example_steps":["step9"]},
+  {"source_state":"WORK_ACTIVITY+TUTORIAL_OVERLAY","control_id":"modal_close","target_state":"WORK_ACTIVITY","times_observed":1,"times_successful":1,"example_steps":["step10"]},
+  {"source_state":"WORK_ACTIVITY","control_id":"back_arrow","target_state":"HOME","times_observed":1,"times_successful":1,"example_steps":["step11"]},
+  {"source_state":"HOME","control_id":"side_menu","target_state":"MENU_OVERLAY","times_observed":1,"times_successful":1,"example_steps":["step12"]},
+  {"source_state":"MENU_OVERLAY","control_id":"modal_close","target_state":"HOME","times_observed":1,"times_successful":1,"example_steps":["step13"]}
+]

@@ -1,0 +1,12 @@
+{
+  "page":"WING_HOME",
+  "scope":"WING",
+  "evidence_status":"SUPPORTED",
+  "promotion":"PROMOTE_CANDIDATE",
+  "screenshot":"screenshots/w6_wing_home_week1.png",
+  "fields":{"season":"シーズン1","weeks_remaining":"8","fan_target":"あと999人(Eランク)","stamina":"270/300","tension":"visible indicator","goal_panel":["Da","Vo","Vi"]},
+  "overlay_present":false,
+  "dialogue_present":false,
+  "benchmark_input":"YES",
+  "note":"Coarse visual/memory evidence only; values are not an execution authorization."
+}

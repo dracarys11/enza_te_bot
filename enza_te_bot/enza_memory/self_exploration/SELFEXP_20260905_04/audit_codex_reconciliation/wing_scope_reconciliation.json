@@ -1,0 +1,12 @@
+{
+  "old_conclusion": "WING_SCOPE_NOT_YET_GROUNDED",
+  "old_conclusion_status": "SUPERSEDED",
+  "wing_scenario_identity": "SUPPORTED",
+  "evidence": {
+    "step": "w1",
+    "screenshot": "screenshots/w1_ikusei_tab.png",
+    "labels": ["育成プロデュース", "W.I.N.G.", "Wonder.Idol.Nova.Grandprix.", "W.I.N.G.編"],
+    "other_scenarios_same_view": ["ファン感謝祭", "G.R.A.D."]
+  },
+  "basis": "Explicit labels plus selected WING card and subsequent matched transitions; not recency alone."
+}

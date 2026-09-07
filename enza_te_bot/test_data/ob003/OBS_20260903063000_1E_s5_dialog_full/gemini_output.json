@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "provider": "gemini",
+    "model": "UNKNOWN",
+    "skill_version": "v1",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "101e9265cce4e0d403ffd93c96f28cb6a6a2e70035fa1f0ccaca494074f795a6",
+    "created_at": "2026-09-04T01:14:27+08:00"
+  },
+  "observation_id": "OBS_20260903063000_1E_s5_dialog_full",
+  "text_regions": [
+    {"id": "gemini_t01", "text": "ユニット編成", "bbox": [53, 25, 213, 31], "confidence": 0.99},
+    {"id": "gemini_t02", "text": "プロデュース選択", "bbox": [488, 27, 181, 25], "confidence": 0.98},
+    {"id": "gemini_t03", "text": "ユニット編成", "bbox": [754, 27, 166, 25], "confidence": 0.99},
+    {"id": "gemini_t04", "text": "アイテム選択", "bbox": [997, 27, 158, 25], "confidence": 0.98},
+    {"id": "gemini_t05", "text": "ユニット編成について", "bbox": [190, 80, 313, 43], "confidence": 0.99},
+    {"id": "gemini_t06", "text": "プロデュースアイドルとサポートアイドルで、ユニットを組みましょう", "bbox": [211, 155, 901, 34], "confidence": 0.98},
+    {"id": "gemini_t07", "text": "プロデュースアイドル1人", "bbox": [87, 220, 268, 31], "confidence": 0.98},
+    {"id": "gemini_t08", "text": "サポートアイドル5人（ゲスト1人）", "bbox": [445, 220, 361, 31], "confidence": 0.98},
+    {"id": "gemini_t09", "text": "Lv.1", "bbox": [198, 307, 34, 15], "confidence": 0.82},
+    {"id": "gemini_t10", "text": "Lv.1", "bbox": [438, 307, 34, 15], "confidence": 0.83},
+    {"id": "gemini_t11", "text": "Lv.1", "bbox": [518, 307, 34, 15], "confidence": 0.83},
+    {"id": "gemini_t12", "text": "Lv.1", "bbox": [600, 307, 34, 15], "confidence": 0.83},
+    {"id": "gemini_t13", "text": "Lv.1", "bbox": [679, 307, 34, 15], "confidence": 0.83},
+    {"id": "gemini_t14", "text": "Lv.1", "bbox": [761, 307, 34, 15], "confidence": 0.83},
+    {"id": "gemini_t15", "text": "プロデュース開始", "bbox": [975, 341, 191, 78], "confidence": 0.98},
+    {"id": "gemini_t16", "text": "ゲストに配置したサポートアイドルは、ライブに参加できないので注意しましょう", "bbox": [183, 501, 913, 32], "confidence": 0.98},
+    {"id": "gemini_t17", "text": "閉じる", "bbox": [606, 584, 74, 32], "confidence": 0.99}
+  ],
+  "interaction_candidates": [
+    {"id": "gemini_e01", "bbox": [366, 16, 50, 43], "appearance": {"shape": "circle", "color_hint": "light_gray", "content_hint": "question_mark_glyph"}, "linked_text_ids": [], "interaction_confidence": 0.92},
+    {"id": "gemini_e02", "bbox": [1201, 14, 79, 58], "appearance": {"shape": "rounded_rect", "color_hint": "light_gray", "content_hint": "four_square_glyph"}, "linked_text_ids": [], "interaction_confidence": 0.94},
+    {"id": "gemini_e03", "bbox": [20, 83, 39, 45], "appearance": {"shape": "rounded_rect", "color_hint": "light_gray", "visibility": "partially_occluded"}, "linked_text_ids": [], "interaction_confidence": 0.70},
+    {"id": "gemini_e04", "bbox": [1223, 82, 39, 47], "appearance": {"shape": "rounded_rect", "color_hint": "light_gray", "content_hint": "right_chevron", "visibility": "partially_occluded"}, "linked_text_ids": [], "interaction_confidence": 0.78},
+    {"id": "gemini_e05", "bbox": [408, 563, 80, 77], "appearance": {"shape": "rounded_rect", "color_hint": "gray", "content_hint": "left_arrow"}, "linked_text_ids": [], "interaction_confidence": 0.98},
+    {"id": "gemini_e06", "bbox": [558, 562, 166, 78], "appearance": {"shape": "rounded_rect", "color_hint": "light_lavender"}, "linked_text_ids": ["gemini_t17"], "interaction_confidence": 0.99},
+    {"id": "gemini_e07", "bbox": [794, 563, 80, 77], "appearance": {"shape": "rounded_rect", "color_hint": "light_lavender", "content_hint": "right_arrow"}, "linked_text_ids": [], "interaction_confidence": 0.98}
+  ],
+  "numeric_regions": [
+    {"id": "gemini_n01", "raw_text": "1/7", "value": 1, "max_value": 7, "bbox": [1132, 79, 74, 39], "confidence": 0.99}
+  ],
+  "overlay_regions": [
+    {"id": "gemini_o01", "bbox": [55, 56, 1170, 608], "linked_text_ids": ["gemini_t05", "gemini_t06", "gemini_t07", "gemini_t08", "gemini_t09", "gemini_t10", "gemini_t11", "gemini_t12", "gemini_t13", "gemini_t14", "gemini_t15", "gemini_t16", "gemini_t17"], "blocked_element_ids": ["gemini_e03", "gemini_e04"]}
+  ],
+  "uncertainties": [
+    {"bbox": [0, 56, 1280, 664], "reason": "large foreground panel obscures most background content and geometry"},
+    {"bbox": [157, 254, 674, 226], "reason": "small card badges and fine character-card markings are visible but not reliably readable"},
+    {"bbox": [0, 650, 1280, 70], "reason": "background controls at the bottom edge are partially covered by the foreground panel"}
+  ]
+}

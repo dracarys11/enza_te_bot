@@ -1,0 +1,30 @@
+{
+  "scenario_scope": "WING",
+  "WING_HOME_LOOP": {
+    "observe": {
+      "identity": "URL=/produce + 顶部三段状态条(シーズン/残り週/ファン/体力) + 底部 プロデュース/休む/振り返り/流行確認",
+      "required_fields_by_decision": {
+        "S1_normal_week": ["season", "weeks_remaining"],
+        "S1_final_week": ["season", "weeks_remaining", "fan_gap_to_target"],
+        "S2": ["season", "weeks_remaining", "fan_gap_to_target(final week)"],
+        "S3": ["season", "run_state.season3 flags", "fan_gap(50k unlock)", "stamina"],
+        "S4": "ROUTE_STATE_REQUIRED — 不执行"
+      }
+    },
+    "decide": {"policy_source": "home_policy.py decide_home()", "outputs": ["VOCAL","REST","SKILL","AUDITION"]},
+    "execute": {
+      "known_controls": [
+        "WING_HOME.produce_schedule (150,600)",
+        "SCHEDULE.vocal_card (360,500)",
+        "SCHEDULE.confirm (1185,660)",
+        "RESULT.advance (640,350)",
+        "DIALOGUE.skip (1218,53)",
+        "DIALOGUE.advance_textbox (640,610)"
+      ]
+    },
+    "verify": {
+      "expected_transitions": ["WING_HOME→SCHEDULE→VOCAL_RESULT→WING_HOME", "weeks_remaining-=1 为周完成判据"]
+    },
+    "interruptions": ["SUPPORT_EVENT→SKIP", "COMMUNICATION→textbox CONTINUE", "BUSINESS_CHOICE→STOP", "RESULT_ANIMATION→advance", "NOW_LOADING→wait"]
+  }
+}

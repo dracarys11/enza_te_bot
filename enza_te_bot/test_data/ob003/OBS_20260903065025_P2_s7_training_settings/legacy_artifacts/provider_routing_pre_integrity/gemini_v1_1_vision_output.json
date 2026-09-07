@@ -1,0 +1,608 @@
+{
+  "metadata": {
+    "provider": "Gemini",
+    "model": "gemini-3.8-flash-medium",
+    "skill_version": "gemini_vision_v1_1",
+    "case_id": "OBS_20260903065025_P2_s7_training_settings",
+    "source_image": "source_screenshot.png",
+    "screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723",
+    "created_at": "2026-09-04T11:14:11+08:00"
+  },
+  "observation_id": "",
+  "capture": {
+    "timestamp": "",
+    "frame_id": "",
+    "screenshot_digest": ""
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "text_regions": [
+    {
+      "id": "t1",
+      "text": "振り返り",
+      "bbox": [
+        54,
+        26,
+        72,
+        23
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t2",
+      "text": "?",
+      "bbox": [
+        375,
+        20,
+        30,
+        35
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t3",
+      "text": "SP",
+      "bbox": [
+        105,
+        155,
+        30,
+        30
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t4",
+      "text": "4",
+      "bbox": [
+        215,
+        160,
+        25,
+        30
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t5",
+      "text": "所持スキル",
+      "bbox": [
+        110,
+        225,
+        95,
+        35
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t6",
+      "text": "パッシブスキルの削除を有効",
+      "bbox": [
+        71,
+        249,
+        174,
+        17
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t7",
+      "text": "40",
+      "bbox": [
+        318,
+        134,
+        16,
+        12
+      ],
+      "confidence": 0.85
+    },
+    {
+      "id": "t8",
+      "text": "SP: 10",
+      "bbox": [
+        543,
+        333,
+        37,
+        22
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t9",
+      "text": "SP: 20",
+      "bbox": [
+        710,
+        333,
+        38,
+        22
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t10",
+      "text": "SP: 15",
+      "bbox": [
+        788,
+        533,
+        38,
+        22
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t11",
+      "text": "SP: 20",
+      "bbox": [
+        465,
+        533,
+        38,
+        22
+      ],
+      "confidence": 0.99
+    },
+    {
+      "id": "t12",
+      "text": "SP: 20",
+      "bbox": [
+        543,
+        733,
+        38,
+        22
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t13",
+      "text": "SP: 20",
+      "bbox": [
+        710,
+        733,
+        38,
+        22
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t14",
+      "text": "SP: 30",
+      "bbox": [
+        543,
+        203,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t15",
+      "text": "SP: 30",
+      "bbox": [
+        622,
+        263,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t16",
+      "text": "SP: 30",
+      "bbox": [
+        865,
+        463,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t17",
+      "text": "SP: 30",
+      "bbox": [
+        865,
+        583,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t18",
+      "text": "SP: 35",
+      "bbox": [
+        865,
+        343,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t19",
+      "text": "SP: 35",
+      "bbox": [
+        944,
+        403,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t20",
+      "text": "SP: 35",
+      "bbox": [
+        944,
+        523,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t21",
+      "text": "SP: 35",
+      "bbox": [
+        944,
+        643,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t22",
+      "text": "SP: 40",
+      "bbox": [
+        622,
+        143,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t23",
+      "text": "SP: 40",
+      "bbox": [
+        710,
+        203,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t24",
+      "text": "SP: 40",
+      "bbox": [
+        543,
+        83,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t25",
+      "text": "SP: 45",
+      "bbox": [
+        1023,
+        283,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t26",
+      "text": "SP: 45",
+      "bbox": [
+        1023,
+        403,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t27",
+      "text": "SP: 45",
+      "bbox": [
+        1023,
+        523,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t28",
+      "text": "SP: 45",
+      "bbox": [
+        1023,
+        643,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t29",
+      "text": "SP: 50",
+      "bbox": [
+        710,
+        83,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t30",
+      "text": "SP: 50",
+      "bbox": [
+        788,
+        143,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t31",
+      "text": "SP: 50",
+      "bbox": [
+        162,
+        463,
+        38,
+        22
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t32",
+      "text": "SP: 40",
+      "bbox": [
+        609,
+        715,
+        38,
+        22
+      ],
+      "confidence": 0.95
+    },
+    {
+      "id": "t33",
+      "text": "Vo.",
+      "bbox": [
+        555,
+        275,
+        24,
+        16
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t34",
+      "text": "上限",
+      "bbox": [
+        551,
+        301,
+        32,
+        16
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t35",
+      "text": "Vo.",
+      "bbox": [
+        795,
+        475,
+        24,
+        16
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t36",
+      "text": "上限",
+      "bbox": [
+        791,
+        501,
+        32,
+        16
+      ],
+      "confidence": 0.98
+    },
+    {
+      "id": "t37",
+      "text": "上限",
+      "bbox": [
+        701,
+        700,
+        32,
+        18
+      ],
+      "confidence": 0.7
+    }
+  ],
+  "interaction_candidates": [
+    {
+      "id": "e1",
+      "bbox": [
+        366,
+        18,
+        50,
+        50
+      ],
+      "appearance": {
+        "shape": "circle",
+        "color_hint": "white"
+      },
+      "linked_text_ids": [
+        "t2"
+      ],
+      "interaction_confidence": 0.99
+    },
+    {
+      "id": "e2",
+      "bbox": [
+        107,
+        221,
+        130,
+        40
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white"
+      },
+      "linked_text_ids": [
+        "t5"
+      ],
+      "interaction_confidence": 0.99
+    },
+    {
+      "id": "e3",
+      "bbox": [
+        14,
+        235,
+        34,
+        34
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "pink"
+      },
+      "linked_text_ids": [
+        "t6"
+      ],
+      "interaction_confidence": 0.99
+    },
+    {
+      "id": "e4",
+      "bbox": [
+        19,
+        624,
+        78,
+        78
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.99
+    },
+    {
+      "id": "e5",
+      "bbox": [
+        1194,
+        315,
+        66,
+        66
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.99
+    },
+    {
+      "id": "e6",
+      "bbox": [
+        1194,
+        425,
+        66,
+        66
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white"
+      },
+      "linked_text_ids": [],
+      "interaction_confidence": 0.99
+    }
+  ],
+  "numeric_regions": [],
+  "overlay_regions": [
+    {
+      "id": "o1",
+      "bbox": [
+        0,
+        12,
+        414,
+        52
+      ],
+      "appearance": {
+        "shape": "pill",
+        "color_hint": "white"
+      },
+      "confidence": 0.99
+    },
+    {
+      "id": "o2",
+      "bbox": [
+        0,
+        120,
+        252,
+        175
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "white"
+      },
+      "confidence": 0.99
+    },
+    {
+      "id": "o3",
+      "bbox": [
+        0,
+        232,
+        260,
+        40
+      ],
+      "appearance": {
+        "shape": "rounded_rect",
+        "color_hint": "cyan"
+      },
+      "confidence": 0.99
+    }
+  ],
+  "uncertainties": [
+    {
+      "bbox": [
+        318,
+        134,
+        16,
+        12
+      ],
+      "reason": "occluded_by_overlay"
+    },
+    {
+      "bbox": [
+        701,
+        700,
+        48,
+        20
+      ],
+      "reason": "text_clipped_by_viewport_edge"
+    },
+    {
+      "bbox": [
+        162,
+        380,
+        70,
+        70
+      ],
+      "reason": "occluded_by_overlay"
+    }
+  ],
+  "detection_failures": [
+    {
+      "field": "capture",
+      "reason": "metadata_omitted_by_caller"
+    }
+  ]
+}

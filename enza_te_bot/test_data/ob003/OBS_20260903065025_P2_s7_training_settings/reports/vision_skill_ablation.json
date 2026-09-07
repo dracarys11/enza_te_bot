@@ -1,0 +1,758 @@
+{
+  "benchmark": "Training Settings Vision Skill Ablation",
+  "case_id": "OBS_20260903065025_P2_s7_training_settings",
+  "integrity_gate": {
+    "status": "PASS",
+    "manifest": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob003/OBS_20260903065025_P2_s7_training_settings/manifest.json",
+    "case_id": "OBS_20260903065025_P2_s7_training_settings",
+    "source_screenshot": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob003/OBS_20260903065025_P2_s7_training_settings/source_screenshot.png",
+    "source_screenshot_sha256": "900e260bccab2618ac29e3b499a046725d60c65ab87bb3c414669bc884819723",
+    "source_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "artifact_hashes_verified": true,
+    "manifest_filesystem_consistent": true,
+    "agy_schema_valid": true,
+    "provenance_consistent": true
+  },
+  "comparison_roles": {
+    "text_reference_proxy": "PaddleOCR",
+    "text_reference_is_ground_truth": false,
+    "ablation_provider": "AGY",
+    "ablation_model": "gemini-3.8-flash-medium",
+    "ablation_variable": "skill_version",
+    "zcode_included": false
+  },
+  "settings": {
+    "interaction_iou_threshold": 0.5,
+    "text_normalization": "Unicode NFKC plus whitespace removal"
+  },
+  "inputs": {
+    "paddle": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob003/OBS_20260903065025_P2_s7_training_settings/providers/paddle/vision_output.json",
+    "gemini_vision_v1": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob003/OBS_20260903065025_P2_s7_training_settings/providers/agy/gemini_vision_v1/vision_output.json",
+    "gemini_vision_v1_1": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob003/OBS_20260903065025_P2_s7_training_settings/providers/agy/gemini_vision_v1_1/vision_output.json",
+    "gemini_vision_v2": "/Users/koents/Documents/ChatGPT/enza/enza_te_bot/test_data/ob003/OBS_20260903065025_P2_s7_training_settings/providers/agy/gemini_vision_v2/vision_output.json"
+  },
+  "variants": {
+    "gemini_vision_v1": {
+      "provider": "AGY",
+      "model": "gemini-3.8-flash-medium",
+      "skill_version": "gemini_vision_v1",
+      "text_region_count": 123,
+      "paddle_text_proxy": {
+        "reference_count": 117,
+        "exact_agreement_count": 37,
+        "exact_agreement_rate": 0.316239,
+        "normalized_agreement_count": 83,
+        "text_coverage_proxy": 0.709402,
+        "note": "Directional agreement against PaddleOCR; PaddleOCR is not ground truth."
+      },
+      "interaction_candidate_count": 52,
+      "grounding": {
+        "interaction_count": 52,
+        "interactions_with_text_links": 41,
+        "interaction_link_coverage": 0.788462,
+        "linked_text_reference_count": 92,
+        "dangling_link_count": 0,
+        "dangling_links": []
+      },
+      "uncertainty": {
+        "count": 3,
+        "viewport_union_area_pixels": 921600.0,
+        "viewport_area_coverage": 1.0
+      },
+      "out_of_viewport_bbox": {
+        "count": 0,
+        "entries": []
+      },
+      "suspicious_unsupported_extra": {
+        "count": 40,
+        "items": [
+          {
+            "id": "t8",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t14",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t21",
+            "text": "Vo."
+          },
+          {
+            "id": "t23",
+            "text": "Vo."
+          },
+          {
+            "id": "t24",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t26",
+            "text": "Vo."
+          },
+          {
+            "id": "t27",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t29",
+            "text": "Vo."
+          },
+          {
+            "id": "t30",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t31",
+            "text": "SP: 50"
+          },
+          {
+            "id": "t33",
+            "text": "Vi."
+          },
+          {
+            "id": "t36",
+            "text": "Vi."
+          },
+          {
+            "id": "t38",
+            "text": "Vo."
+          },
+          {
+            "id": "t42",
+            "text": "Vi."
+          },
+          {
+            "id": "t44",
+            "text": "Vo."
+          },
+          {
+            "id": "t45",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t48",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t52",
+            "text": "Vo."
+          },
+          {
+            "id": "t54",
+            "text": "Vo."
+          },
+          {
+            "id": "t57",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t59",
+            "text": "Vo."
+          },
+          {
+            "id": "t60",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t61",
+            "text": "SP: 40"
+          },
+          {
+            "id": "t63",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t67",
+            "text": "Vo."
+          },
+          {
+            "id": "t70",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t74",
+            "text": "Vo."
+          },
+          {
+            "id": "t76",
+            "text": "Vo."
+          },
+          {
+            "id": "t92",
+            "text": "Da."
+          },
+          {
+            "id": "t93",
+            "text": "Vi."
+          },
+          {
+            "id": "t94",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t95",
+            "text": "Da."
+          },
+          {
+            "id": "t97",
+            "text": "Da."
+          },
+          {
+            "id": "t100",
+            "text": "Vo."
+          },
+          {
+            "id": "t102",
+            "text": "Vo."
+          },
+          {
+            "id": "t104",
+            "text": "SP: 40"
+          },
+          {
+            "id": "t107",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t109",
+            "text": "Vo."
+          },
+          {
+            "id": "t121",
+            "text": "Vo."
+          },
+          {
+            "id": "t122",
+            "text": "上限⇧"
+          }
+        ],
+        "definition": "Normalized candidate text with no one-to-one Paddle proxy match; diagnostic only, not a false-positive judgment."
+      },
+      "timing": {
+        "artifact_latency_ms": null,
+        "successful_latency_ms": null,
+        "successful_latency_status": "not_recorded",
+        "timeout_event_count": 0,
+        "timeout_events": []
+      }
+    },
+    "gemini_vision_v1_1": {
+      "provider": "AGY",
+      "model": "gemini-3.8-flash-medium",
+      "skill_version": "gemini_vision_v1_1",
+      "text_region_count": 37,
+      "paddle_text_proxy": {
+        "reference_count": 117,
+        "exact_agreement_count": 11,
+        "exact_agreement_rate": 0.094017,
+        "normalized_agreement_count": 35,
+        "text_coverage_proxy": 0.299145,
+        "note": "Directional agreement against PaddleOCR; PaddleOCR is not ground truth."
+      },
+      "interaction_candidate_count": 6,
+      "grounding": {
+        "interaction_count": 6,
+        "interactions_with_text_links": 3,
+        "interaction_link_coverage": 0.5,
+        "linked_text_reference_count": 3,
+        "dangling_link_count": 0,
+        "dangling_links": []
+      },
+      "uncertainty": {
+        "count": 3,
+        "viewport_union_area_pixels": 6052.0,
+        "viewport_area_coverage": 0.006567
+      },
+      "out_of_viewport_bbox": {
+        "count": 3,
+        "entries": [
+          {
+            "collection": "text_regions",
+            "id": "t12"
+          },
+          {
+            "collection": "text_regions",
+            "id": "t13"
+          },
+          {
+            "collection": "text_regions",
+            "id": "t32"
+          }
+        ]
+      },
+      "suspicious_unsupported_extra": {
+        "count": 2,
+        "items": [
+          {
+            "id": "t7",
+            "text": "40"
+          },
+          {
+            "id": "t21",
+            "text": "SP: 35"
+          }
+        ],
+        "definition": "Normalized candidate text with no one-to-one Paddle proxy match; diagnostic only, not a false-positive judgment."
+      },
+      "timing": {
+        "artifact_latency_ms": null,
+        "successful_latency_ms": null,
+        "successful_latency_status": "not_recorded",
+        "timeout_event_count": 1,
+        "timeout_events": [
+          {
+            "failure_id": "gemini_v1_1_agy_timeout_001",
+            "duration_minutes": 12.0,
+            "status": "resolved by continuing the same AGY conversation; requested output path exists",
+            "evidence_path": "enza_memory/failures/gemini_v1_1_agy_timeout_001.json"
+          }
+        ]
+      }
+    },
+    "gemini_vision_v2": {
+      "provider": "AGY",
+      "model": "gemini-3.8-flash-medium",
+      "skill_version": "gemini_vision_v2",
+      "text_region_count": 119,
+      "paddle_text_proxy": {
+        "reference_count": 117,
+        "exact_agreement_count": 36,
+        "exact_agreement_rate": 0.307692,
+        "normalized_agreement_count": 82,
+        "text_coverage_proxy": 0.700855,
+        "note": "Directional agreement against PaddleOCR; PaddleOCR is not ground truth."
+      },
+      "interaction_candidate_count": 71,
+      "grounding": {
+        "interaction_count": 71,
+        "interactions_with_text_links": 54,
+        "interaction_link_coverage": 0.760563,
+        "linked_text_reference_count": 116,
+        "dangling_link_count": 0,
+        "dangling_links": []
+      },
+      "uncertainty": {
+        "count": 17,
+        "viewport_union_area_pixels": 158118.0,
+        "viewport_area_coverage": 0.171569
+      },
+      "out_of_viewport_bbox": {
+        "count": 6,
+        "entries": [
+          {
+            "collection": "interaction_candidates",
+            "id": "h_sse_3"
+          },
+          {
+            "collection": "interaction_candidates",
+            "id": "h_sse_5"
+          },
+          {
+            "collection": "interaction_candidates",
+            "id": "h_sse_6"
+          },
+          {
+            "collection": "interaction_candidates",
+            "id": "h_ssw_5"
+          },
+          {
+            "collection": "interaction_candidates",
+            "id": "h_ssw_6"
+          },
+          {
+            "collection": "interaction_candidates",
+            "id": "h_ssw_7"
+          }
+        ]
+      },
+      "suspicious_unsupported_extra": {
+        "count": 37,
+        "items": [
+          {
+            "id": "t11",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t14",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t16",
+            "text": "Vo."
+          },
+          {
+            "id": "t22",
+            "text": "Vo."
+          },
+          {
+            "id": "t23",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t25",
+            "text": "Vo."
+          },
+          {
+            "id": "t26",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t27",
+            "text": "SP: 40"
+          },
+          {
+            "id": "t33",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t36",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t40",
+            "text": "Vo."
+          },
+          {
+            "id": "t41",
+            "text": "Vi."
+          },
+          {
+            "id": "t43",
+            "text": "Vo."
+          },
+          {
+            "id": "t47",
+            "text": "Vi."
+          },
+          {
+            "id": "t50",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t52",
+            "text": "Vo."
+          },
+          {
+            "id": "t53",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t58",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t60",
+            "text": "Vo."
+          },
+          {
+            "id": "t62",
+            "text": "Vo."
+          },
+          {
+            "id": "t65",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t67",
+            "text": "Vo."
+          },
+          {
+            "id": "t84",
+            "text": "SP: 40"
+          },
+          {
+            "id": "t86",
+            "text": "Da."
+          },
+          {
+            "id": "t87",
+            "text": "Vi."
+          },
+          {
+            "id": "t88",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t90",
+            "text": "Da."
+          },
+          {
+            "id": "t97",
+            "text": "Da."
+          },
+          {
+            "id": "t99",
+            "text": "Vo."
+          },
+          {
+            "id": "t105",
+            "text": "Da."
+          },
+          {
+            "id": "t106",
+            "text": "SP: 40"
+          },
+          {
+            "id": "t107",
+            "text": "Vo."
+          },
+          {
+            "id": "t110",
+            "text": "Vo."
+          },
+          {
+            "id": "t111",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t113",
+            "text": "Vo."
+          },
+          {
+            "id": "t121",
+            "text": "上限⇧"
+          },
+          {
+            "id": "t122",
+            "text": "SP: 40"
+          }
+        ],
+        "definition": "Normalized candidate text with no one-to-one Paddle proxy match; diagnostic only, not a false-positive judgment."
+      },
+      "timing": {
+        "artifact_latency_ms": null,
+        "successful_latency_ms": null,
+        "successful_latency_status": "not_recorded",
+        "timeout_event_count": 1,
+        "timeout_events": [
+          {
+            "failure_id": "gemini_v2_agy_timeout_001",
+            "duration_minutes": 20.0,
+            "status": "resolved by continuing the same AGY conversation; final artifact passed the permitted validations",
+            "evidence_path": "enza_memory/failures/gemini_v2_agy_timeout_001.json"
+          }
+        ]
+      }
+    }
+  },
+  "pairwise": {
+    "v1_to_v1_1": {
+      "direction": "candidate against reference",
+      "text": {
+        "reference_count": 123,
+        "candidate_count": 37,
+        "exact_agreement_count": 32,
+        "exact_agreement_rate": 0.260163,
+        "normalized_agreement_count": 32,
+        "normalized_agreement_rate": 0.260163
+      },
+      "interaction_overlap": {
+        "reference_count": 52,
+        "candidate_count": 6,
+        "matched_count": 3,
+        "overlap_rate_against_reference": 0.057692,
+        "mean_matched_iou": 0.843889,
+        "unmatched_reference_count": 49,
+        "unmatched_candidate_count": 3
+      },
+      "grounding_agreement": {
+        "compared_interactions": 3,
+        "exact_agreement_count": 3,
+        "agreement_rate": 1.0,
+        "differences": []
+      }
+    },
+    "v1_1_to_v2": {
+      "direction": "candidate against reference",
+      "text": {
+        "reference_count": 37,
+        "candidate_count": 119,
+        "exact_agreement_count": 31,
+        "exact_agreement_rate": 0.837838,
+        "normalized_agreement_count": 31,
+        "normalized_agreement_rate": 0.837838
+      },
+      "interaction_overlap": {
+        "reference_count": 6,
+        "candidate_count": 71,
+        "matched_count": 3,
+        "overlap_rate_against_reference": 0.5,
+        "mean_matched_iou": 0.781205,
+        "unmatched_reference_count": 3,
+        "unmatched_candidate_count": 68
+      },
+      "grounding_agreement": {
+        "compared_interactions": 3,
+        "exact_agreement_count": 2,
+        "agreement_rate": 0.666667,
+        "differences": [
+          {
+            "reference_id": "e1",
+            "candidate_id": "e2",
+            "shared_normalized_text": [],
+            "reference_only_normalized_text": [
+              "?"
+            ],
+            "candidate_only_normalized_text": [],
+            "agreement": false
+          }
+        ]
+      }
+    },
+    "v1_to_v2": {
+      "direction": "candidate against reference",
+      "text": {
+        "reference_count": 123,
+        "candidate_count": 119,
+        "exact_agreement_count": 115,
+        "exact_agreement_rate": 0.934959,
+        "normalized_agreement_count": 115,
+        "normalized_agreement_rate": 0.934959
+      },
+      "interaction_overlap": {
+        "reference_count": 52,
+        "candidate_count": 71,
+        "matched_count": 9,
+        "overlap_rate_against_reference": 0.173077,
+        "mean_matched_iou": 0.618519,
+        "unmatched_reference_count": 43,
+        "unmatched_candidate_count": 62
+      },
+      "grounding_agreement": {
+        "compared_interactions": 9,
+        "exact_agreement_count": 3,
+        "agreement_rate": 0.333333,
+        "differences": [
+          {
+            "reference_id": "e1",
+            "candidate_id": "e2",
+            "shared_normalized_text": [],
+            "reference_only_normalized_text": [
+              "?"
+            ],
+            "candidate_only_normalized_text": [],
+            "agreement": false
+          },
+          {
+            "reference_id": "e23",
+            "candidate_id": "h_nne_1",
+            "shared_normalized_text": [
+              "Vo."
+            ],
+            "reference_only_normalized_text": [
+              "SP:40",
+              "Vi."
+            ],
+            "candidate_only_normalized_text": [
+              "SP:30",
+              "上限⇧"
+            ],
+            "agreement": false
+          },
+          {
+            "reference_id": "e24",
+            "candidate_id": "h_nne_4",
+            "shared_normalized_text": [
+              "SP:40",
+              "Vo."
+            ],
+            "reference_only_normalized_text": [],
+            "candidate_only_normalized_text": [
+              "Vi."
+            ],
+            "agreement": false
+          },
+          {
+            "reference_id": "e26",
+            "candidate_id": "h_nne_5",
+            "shared_normalized_text": [
+              "Vo."
+            ],
+            "reference_only_normalized_text": [
+              "SP:50",
+              "Vi."
+            ],
+            "candidate_only_normalized_text": [
+              "SP:40"
+            ],
+            "agreement": false
+          },
+          {
+            "reference_id": "e31",
+            "candidate_id": "h_ene_1",
+            "shared_normalized_text": [
+              "Vo.",
+              "上限⇧"
+            ],
+            "reference_only_normalized_text": [
+              "SP:35"
+            ],
+            "candidate_only_normalized_text": [
+              "SP:25"
+            ],
+            "agreement": false
+          },
+          {
+            "reference_id": "e35",
+            "candidate_id": "h_ene_4",
+            "shared_normalized_text": [
+              "Vo."
+            ],
+            "reference_only_normalized_text": [
+              "SP:45"
+            ],
+            "candidate_only_normalized_text": [
+              "SP:35"
+            ],
+            "agreement": false
+          }
+        ]
+      }
+    }
+  },
+  "assessment": {
+    "v1_to_v1_1": {
+      "classification": "REGRESSION",
+      "basis": [
+        "Paddle text coverage proxy 0.709402 -> 0.299145",
+        "interaction candidates 52 -> 6",
+        "out-of-viewport bboxes 0 -> 3"
+      ]
+    },
+    "v1_1_to_v2": {
+      "classification": "RECOVERY_WITH_SIGNIFICANT_EXPANSION",
+      "basis": [
+        "Paddle text coverage proxy 0.299145 -> 0.700855",
+        "interaction candidates 6 -> 71",
+        "unmatched candidate interactions 68",
+        "uncertainty records 3 -> 17"
+      ]
+    },
+    "v2_vs_v1": {
+      "classification": "NO_DEMONSTRATED_NET_GAIN_ON_THIS_CASE",
+      "basis": [
+        "Paddle text coverage proxy 0.709402 -> 0.700855",
+        "normalized text agreement with v1 0.934959",
+        "interaction overlap with v1 0.173077",
+        "grounding agreement on matched interactions 0.333333",
+        "out-of-viewport bboxes 0 -> 6"
+      ],
+      "observed_change": "Broader interaction and uncertainty enumeration, without a validated coverage or grounding gain."
+    },
+    "recommended_default": {
+      "selection": "NO_PROMOTION",
+      "retain_baseline": "gemini_vision_v1",
+      "reason": "One-case evidence shows v1.1 regression and v2 expansion without demonstrated net gain; successful latency is also unrecorded and v2 required a recorded 20-minute timeout continuation."
+    }
+  },
+  "limitations": [
+    "Single observation case; results do not establish general extraction quality.",
+    "PaddleOCR is a text agreement proxy, not ground truth.",
+    "Successful end-to-end latency was not recorded for these artifacts.",
+    "Unmatched text is a suspicious-extra diagnostic, not proof of a false positive."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "HOME": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "UNIT_FORMATION": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "WING_DIFFICULTY_SELECTION": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "WING_CONFIRMATION_DIALOG": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "FIRST_PRODUCTION_STATE": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "WEEK_STATUS_STATE": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "LESSON_SELECTION_STATE": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "AUDITION_SELECTION_STATE": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  },
+  "RESULT_STATE": {
+    "state_available": false,
+    "reason": "not currently reachable without interaction"
+  }
+}

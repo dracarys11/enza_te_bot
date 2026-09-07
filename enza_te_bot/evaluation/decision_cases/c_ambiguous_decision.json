@@ -1,0 +1,21 @@
+{
+  "case_name": "ambiguous decision",
+  "mode": "decision",
+  "observation": "test_data/ob001/fused_observation.json",
+  "user_goal": "开始 W.I.N.G production",
+  "target_text_options": [
+    "W.I.N.G.",
+    "育成プロデュース",
+    "特化プロデュース",
+    "次へ"
+  ],
+  "expected": {
+    "candidate_id": "AC_UNKNOWN",
+    "target_element_id": null,
+    "action_type": "UNKNOWN",
+    "evidence": [
+      "missing evidence: multiple GroundedElements match ['W.I.N.G.', '育成プロデュース', '特化プロデュース', '次へ']"
+    ],
+    "confidence": 0.0
+  }
+}

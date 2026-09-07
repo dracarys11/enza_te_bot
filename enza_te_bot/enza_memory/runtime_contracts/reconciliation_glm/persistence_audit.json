@@ -1,0 +1,86 @@
+{
+  "artifact_type": "PERSISTENCE_AUDIT",
+  "audit_id": "CONTRACT_OFFLINE_AUDIT_20260906",
+  "generated_at": "2026-09-06T23:59:00Z",
+  "mode": "OFFLINE_ONLY",
+  "audited_boundaries": ["completed week", "audition result", "season transition", "skill acquisition", "replacement commit", "handoff/session end"],
+  "rule": "A boundary requires a durable persistence requirement (flush before next transaction; fail-closed on flush failure — NRG-013/RC-005). Finding 'derived progress > durable evidence' is P0/P1.",
+  "findings": [
+    {
+      "boundary": "completed week",
+      "contracts": ["home.json", "schedule.json", "result.json"],
+      "requires_durable_persistence": true,
+      "contract_coverage": "OK — home PERSISTENCE_BOUNDARY flush on week-consuming completion; result durable record before advance; schedule defers to HOME-side flush",
+      "evidence": "NRG-013: raw timings stopped at S1W6 while game advanced to S3 start (PERSISTENCE_DURABILITY_FAILURE, crash backfill of 12 events); two SCREENSHOT_TIMEOUT_AFTER_TRANSACTION_PROGRESS incidents (0906) reconciled via C1",
+      "derived_vs_durable": "P1 — during the 0906 crash window, derived run-progress (fresh live state) exceeded durable evidence (last persisted boundary S1W6). Backfill preserved class separation (LIVE_SCREEN_CONFIRMED vs DERIVED) and never forged timestamps — acceptable recovery, but the gap itself is the P1 finding",
+      "verdict": "CONSISTENT_WITH_HISTORY_VIOLATION_Closed"
+    },
+    {
+      "boundary": "audition result",
+      "contracts": ["audition_battle.json", "result.json", "audition_selection.json"],
+      "requires_durable_persistence": true,
+      "contract_coverage": "OK — battle flush (attempt + explicit result) before advancing; result durable record; selection records intent before DECIDE",
+      "evidence": "BTR-005/006/007; result_commit_examples (FAIL no-commit, UNKNOWN no-commit); S3 semifinal scene skip without WIN evidence",
+      "derived_vs_durable": "P1 (historical) — S3 40K evidence-loss instance: week transition observed (derived progress) without captured result evidence; flag correctly stayed uncommitted. Contract ordering now prevents recurrence",
+      "verdict": "CONSISTENT"
+    },
+    {
+      "boundary": "season transition",
+      "contracts": ["season_transition.json", "home.json"],
+      "requires_durable_persistence": true,
+      "contract_coverage": "OK — flush old-season result then fresh new-season HOME with provenance; refuse next transaction on flush failure",
+      "evidence": "RC-005 (durable-boundary requirement restated); S2→S3 crash mid-transition (SESSION_TRANSCRIPT_CONFIRMED boundary)",
+      "derived_vs_durable": "P1 (historical, same 0906 crash window) — recovered S1W7..S2W8 events were transcript-confirmed, not live-persisted; handled by separate backfill artifact",
+      "verdict": "CONSISTENT_WITH_HISTORY_VIOLATION_Closed"
+    },
+    {
+      "boundary": "skill acquisition",
+      "contracts": ["skill_board.json"],
+      "requires_durable_persistence": true,
+      "contract_coverage": "OK — flush per-acquisition record (node, SP cost, zone) exemplified by s3_start_prep_record / skill_board_session_2_record",
+      "evidence": "17 acquisitions + 5 prep acquisitions recorded; SP display lag documented (live_csm_019) with fresh-read guard",
+      "derived_vs_durable": "OK — session records written per transaction",
+      "residual": "SP value itself lives in game state; contract correctly demands fresh SP read per consumptive action",
+      "verdict": "CONSISTENT"
+    },
+    {
+      "boundary": "replacement commit",
+      "contracts": ["skill_replacement.json"],
+      "requires_durable_persistence": true,
+      "contract_coverage": "OK — replacement pair recorded inside acquisition flush (transaction unity)",
+      "evidence": "live_csm_024..027 SUCCESS records with node pairs; 4/4 post-commit verified",
+      "derived_vs_durable": "OK",
+      "verdict": "CONSISTENT"
+    },
+    {
+      "boundary": "handoff / session end",
+      "contracts": ["home.json (boundary list)", "ending.json", "season_transition.json"],
+      "requires_durable_persistence": true,
+      "contract_coverage": "PARTIAL — home/season list handoff flush; ending requires completion flush; BUT ending.json omits closed-run CONFIG state cleanup",
+      "evidence": "F-03: WINGRUN_20260906_01 closed-run season3 flags (audition_40k/50k_completed=true) persist in live config.json loaded by main.py — on a new run they would silently skip both required auditions (README Known Blockers #5; no code guard). Checkpoint itself is correct (run_closed=true, resume_allowed=false)",
+      "derived_vs_durable": "P0-relevant CONTAMINATION — this is the inverse direction: DURABLE-but-STALE config exceeds fresh evidence authority. A fresh run would inherit false progress flags",
+      "verdict": "CONFLICT_P1 (F-03): ending.json PERSISTENCE_BOUNDARY must require closed-run run_state purge/reset on run closure; also F-04 README resume-guide staleness feeds the same handoff path"
+    }
+  ],
+  "global_requirements_confirmed": [
+    "durable flush at: completed week / audition result / season transition / risky burst / handoff (NRG-013, RC-005)",
+    "fail-closed: refuse next week-consuming transaction until flush succeeds",
+    "authority order: fresh stable state > raw durable event > checkpoint > registry > derived summary",
+    "UNKNOWN intermediates stay UNKNOWN even when later boundary is fresh-confirmed"
+  ],
+  "summary": {
+    "boundaries_audited": 6,
+    "consistent": 5,
+    "conflicts": ["PERSIST-1 (P1): ending/handoff boundary missing closed-run config-state purge requirement (F-03)"],
+    "historical_violations_closed": ["0906 persistence gap (week/season, backfilled with class separation)", "S3 40K + semifinal result evidence loss (ordering rules adopted)"],
+    "p0_findings": 0,
+    "p1_findings": ["PERSIST-1", "historical derived>durable windows documented and closed"]
+  },
+  "post_audit_resolution_20260907": {
+    "PERSIST-1": "RESOLVED_BY_RUN_STATE_PATCH — re-checked against the CURRENT tree after sess_historical_frame_integration_20260907: (1) live config.json carries no closed-run season3 audition flags (only post_audition_cleanup capability config); (2) artifact_registry current_mainline.active_run=null with latest_run pointing at the completed WINGRUN_20260906_01; (3) run_state.py fails closed on run_closed=true / resume_allowed=false including after restart. The F-03 contamination path (stale closed-run flags silently skipping required auditions on a new run) is UNREACHABLE in the current tree. ending.json v0.2.1 records this as RESOLVED_BY_RUN_STATE_PATCH in PERSISTENCE_BOUNDARY.",
+    "invariant_retained": "closed-run state must never become current authority — the fail-closed resume rule and the flush-before-close requirement remain binding; only the specific contamination instance is closed",
+    "reinforcement_verified": "canonical_transitions T24 independently confirms the flush rule at scale: >=34 week boundaries + 5 season boundaries replicated across >=4 sessions with the 0906 S1W6→S3 crash as the single negative sample",
+    "residuals_open": [],
+    "p1_findings_after_repair": ["historical derived>durable windows documented and closed (PERSIST-1 superseded by RESOLVED_BY_RUN_STATE_PATCH)"]
+  }
+}
