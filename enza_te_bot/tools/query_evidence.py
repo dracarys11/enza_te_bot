@@ -130,11 +130,17 @@ def resolve_evidence_contract(metadata: dict[str, Any]) -> dict[str, Any]:
 
     conflicts: list[dict[str, Any]] = []
     for field in EVENT_FIELDS:
-        if field in nested_event and field in metadata and nested_event[field] != metadata[field]:
+        legacy_value = metadata.get(field)
+        event_value = nested_event.get(field)
+        if (
+            legacy_value is not None
+            and event_value is not None
+            and legacy_value != event_value
+        ):
             conflicts.append({
                 "field": field,
-                "legacy": metadata[field],
-                "event": nested_event[field],
+                "legacy": legacy_value,
+                "event": event_value,
             })
 
     return {

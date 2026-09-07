@@ -19,3 +19,10 @@ def test_conflict_detection():
     output = resolve_evidence_contract({"result": "FAIL", "event": {"result": "PASS"}})
 
     assert {"field": "result", "legacy": "FAIL", "event": "PASS"} in output["provenance"]["conflicts"]
+
+
+def test_null_legacy_value_is_not_a_conflict():
+    output = resolve_evidence_contract({"result": None, "event": {"result": "PASS"}})
+
+    assert output["event"]["result"] == "PASS"
+    assert output["provenance"]["conflicts"] == []
