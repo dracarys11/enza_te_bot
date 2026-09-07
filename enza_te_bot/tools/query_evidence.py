@@ -37,6 +37,7 @@ except ModuleNotFoundError as error:
 
 
 SIMILARITY_EPSILON = 1e-4
+ENRICHED_METADATA_FILE = "metadata_enriched.jsonl"
 
 
 def _load_faiss() -> Any:
@@ -123,6 +124,36 @@ def _evidence_package(row: dict[str, Any], similarity: float) -> dict[str, Any]:
     }
 
 
+def _load_enriched_metadata(root: Path, base_rows: dict[int, dict[str, Any]]) -> dict[int, dict[str, Any]] | None:
+    """Load optional enrichment without changing the source metadata/index."""
+
+    path = root / INDEX_DIRECTORY / ENRICHED_METADATA_FILE
+    if not path.is_file():
+        return None
+    rows = load_metadata(path)
+    enriched: dict[int, dict[str, Any]] = {}
+    for offset, row in enumerate(rows):
+        vector_id = row.get("vector_id", offset)
+        if not isinstance(vector_id, int) or vector_id not in base_rows:
+            raise RuntimeError(f"invalid enriched metadata vector_id: {vector_id!r}")
+        if vector_id in enriched:
+            raise RuntimeError(f"duplicate enriched metadata vector_id: {vector_id}")
+        enriched[vector_id] = row
+    return enriched
+
+
+def _evidence_v2(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "state": row.get("state"),
+        "phase": row.get("phase"),
+        "action": row.get("action"),
+        "result": row.get("result"),
+        "failure_type": row.get("failure_type"),
+        "trajectory_ref": row.get("trajectory_ref"),
+        "observation_ref": row.get("observation_ref"),
+    }
+
+
 def query_evidence(
     root: Path,
     image_path: Path,
@@ -139,6 +170,7 @@ def query_evidence(
         raise FileNotFoundError(f"query image is missing: {query_image}")
 
     index, rows_by_vector, state = load_evidence_index(root, faiss_module=faiss_module)
+    enriched_by_vector = _load_enriched_metadata(root, rows_by_vector)
     embedder = embedder_factory(str(state["model_id"]), device=device)
     vector = l2_normalize(embedder.embed_images([query_image], batch_size=1))
     if getattr(vector, "ndim", None) != 2 or vector.shape[0] != 1 or vector.shape[1] != int(index.d):
@@ -150,14 +182,20 @@ def query_evidence(
         identifier = int(vector_id)
         if identifier < 0:
             continue
-        row = rows_by_vector.get(identifier)
-        if row is None:
+        base_row = rows_by_vector.get(identifier)
+        if base_row is None:
             raise RuntimeError(f"FAISS returned unknown vector_id: {identifier}")
+        row = dict(base_row)
+        if enriched_by_vector is not None:
+            row.update(enriched_by_vector.get(identifier, {}))
         similarity = float(score)
         if similarity > 1.0 + SIMILARITY_EPSILON or similarity < -1.0 - SIMILARITY_EPSILON:
             raise RuntimeError(f"similarity outside cosine bounds: {similarity}")
         similarity = max(-1.0, min(1.0, similarity))
-        results.append(_evidence_package(row, similarity))
+        package = _evidence_package(row, similarity)
+        if enriched_by_vector is not None:
+            package["evidence"] = _evidence_v2(row)
+        results.append(package)
     return {"query_image": str(query_image), "results": results}
 
 
