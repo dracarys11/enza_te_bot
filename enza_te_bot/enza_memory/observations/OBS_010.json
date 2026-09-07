@@ -1,0 +1,77 @@
+{
+ "schema_version": 1,
+ "artifact_id": "OBS_010",
+ "artifact_type": "OBSERVATION",
+ "created_at": "2026-09-07T02:55:00Z",
+ "status": "CANDIDATE",
+ "run_id": "WINGRUN_20260907_02",
+ "environment": {
+  "provider": "ZCode IAB",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "viewport": {"width": 1280, "height": 720},
+  "url": {"value": "https://shinycolors.enza.fun/produce", "classification": "FACT", "evidence_ids": ["tab_url_read_s1w8_planner"]},
+  "title": {"value": "アイドルマスター シャイニーカラーズ", "classification": "FACT", "evidence_ids": ["tab_title_read_recover4"]},
+  "canvas": {"value": "canvas game", "classification": "FACT", "evidence_ids": ["r04_s1w8_planner_fresh_home.png"]},
+  "dom_available": {"value": false, "classification": "FACT", "evidence_ids": ["r04_s1w8_planner_fresh_home.png"]},
+  "accessibility_available": {"value": false, "classification": "FACT", "evidence_ids": ["r04_s1w8_planner_fresh_home.png"]}
+ },
+ "page_state": {
+  "label": "WING_HOME S1 weeks=1 (planner decision task; stable, no dialogue/choice)",
+  "classification": "FACT",
+  "confidence": 0.95,
+  "evidence_ids": ["r04_s1w8_planner_fresh_home.png"]
+ },
+ "numeric_observations": [
+  {"field": "weeks_remaining", "value": "1 (taught OpenCV digit template: score 0.9976, margin 0.5348 over next candidate)", "classification": "FACT"},
+  {"field": "fan_target_achieved", "value": "true (CLEAR marker visible: red_fraction=0.0598>=0.03, component_count=7>=4)", "classification": "FACT"},
+  {"field": "fan_gap_to_target", "value": "0 (policy consequence of fan_target_achieved per parse_home_sample)", "classification": "FACT"},
+  {"field": "stamina", "value": "adequate=true (taught stamina marker; overall_fill=0.342)", "classification": "FACT"},
+  {"field": "season", "value": "1 — season OCR ROI FAILED on this frame (tesseract 'no numeric candidate', raw 'y-AYt'); value from server プロデュース再開 dialog earlier this session (r03_recover4_resume_dialog.png: シーズン1/残り1週) + visible シーズン 1 label", "classification": "FACT"},
+  {"field": "planner_objective", "value": "VOCAL (planner_reason=season_1_final_week_fan_gap_met)", "classification": "FACT"},
+  {"field": "risk_gate_status", "value": "VOCAL_FAILURE_RATE BLOCK / FAILURE_RATE_READ_REQUIRED (no fresh schedule trouble read; SCHEDULE entry out of scope this task)", "classification": "FACT"},
+  {"field": "detect_state_limitation", "value": "detect_state returned AUDITION_BATTLE conf=1.0 page_layout_presence — FALSE POSITIVE on WING_HOME (top-right regions mean 180-208 / std 49-60 far exceed thresholds mean>=70 std>=12); taught HOME template scores 0.1948 on this IAB surface (threshold 0.85) — HOME identity established visually/structurally instead; detector limitation recorded as candidate failure", "classification": "FACT"}
+ ],
+ "screenshot": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png",
+ "screenshot_sha256": "f2ab6993770614fc7bc2eb0004e16c9c86bbe1c1b8b411e9395ade48f11eea3d",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live observation + offline perception/planner (IAB)",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "captured_at": "2026-09-07T02:55:00Z",
+  "source_artifact_ids": ["OBS_009"],
+  "integrity": {"algorithm": "sha256", "digest": "f2ab6993770614fc7bc2eb0004e16c9c86bbe1c1b8b411e9395ade48f11eea3d"}
+ },
+ "evidence_references": [
+  {
+   "evidence_id": "r04_s1w8_planner_fresh_home.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png",
+   "captured_at": "2026-09-07T02:47:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {"algorithm": "sha256", "digest": "f2ab6993770614fc7bc2eb0004e16c9c86bbe1c1b8b411e9395ade48f11eea3d"}
+  },
+  {
+   "evidence_id": "r03_recover4_resume_dialog.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png",
+   "captured_at": "2026-09-07T02:30:00Z",
+   "source": "IAB tab.screenshot (server-side season/weeks/fans evidence)",
+   "classification": "FACT",
+   "integrity": {"algorithm": "sha256", "digest": "57edd710d24b4428cdc32d61bdf021889a0b23b43e42084cceee34b1ced1cb37"}
+  },
+  {
+   "evidence_id": "tab_url_read_s1w8_planner",
+   "kind": "URL_READ",
+   "path": null,
+   "captured_at": "2026-09-07T02:47:00Z",
+   "source": "IAB tab.url -> https://shinycolors.enza.fun/produce",
+   "classification": "FACT",
+   "integrity": {"algorithm": null, "digest": null}
+  }
+ ],
+ "unknowns": [
+  "fresh SCHEDULE trouble rate (VOCAL failure rate) NOT read this task — risk gate remains BLOCK until a future authorized SCHEDULE read",
+  "detect_state WING_HOME identity on IAB surface is unsupported by taught templates (HOME 0.19 < 0.85); identity here rests on layout/visual + URL + server-dialog evidence, not on detect_state"
+ ]
+}

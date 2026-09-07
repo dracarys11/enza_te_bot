@@ -1,0 +1,70 @@
+{
+ "failure_id": "detect_state_winghome_false_positive_001",
+ "artifact_type": "FAILURE",
+ "schema_version": 1,
+ "created_at": "2026-09-07T02:55:00Z",
+ "status": "CANDIDATE",
+ "trajectory_id": "TRAJ_WINGRUN_20260907_02",
+ "step_id": "r02_s1w8_planner_decision_only",
+ "before_observation_id": "OBS_009",
+ "intent_id": null,
+ "execution_evidence_ids": [],
+ "after_observation_id": "OBS_010",
+ "description": {
+  "value": "vision.detect_state classified a stable WING_HOME IAB frame as AUDITION_BATTLE with confidence 1.0 via page_layout_presence; the taught HOME template scored 0.1948 (threshold 0.85) on the same frame",
+  "classification": "FACT",
+  "confidence": 0.95,
+  "evidence_ids": ["r04_s1w8_planner_fresh_home.png"]
+ },
+ "cause": {
+  "value": "UNKNOWN (two independent mismatches: AUDITION_BATTLE layout-presence thresholds are satisfied by WING_HOME top-right buttons; HOME template does not match the IAB 1280x720 surface)",
+  "classification": "UNKNOWN",
+  "confidence": 0.6,
+  "evidence_ids": []
+ },
+ "hypotheses": [
+  {
+   "hypothesis": "page_layout_presence regions (top-right brightness/stddev heuristic, min mean 70 / min std 12) are non-discriminative: WING_HOME top-right (諦める/ホームに戻る, オプション buttons) measured mean 179-208, std 49-60, satisfying all three regions",
+   "classification": "FACT",
+   "confidence": 0.9,
+   "evidence_ids": ["r04_s1w8_planner_fresh_home.png"],
+   "contradicting_evidence_ids": []
+  },
+  {
+   "hypothesis": "home_marker.png was taught on a different surface/geometry than the ZCode IAB 1280x720 surface, so it cannot identify WING_HOME there (score 0.1948)",
+   "classification": "INFERENCE",
+   "confidence": 0.7,
+   "evidence_ids": ["r04_s1w8_planner_fresh_home.png"],
+   "contradicting_evidence_ids": []
+  }
+ ],
+ "recovery": {
+  "performed": true,
+  "trajectory_step_ids": ["r02_s1w8_planner_decision_only"],
+  "observed_result": "HOME identity for the planner task was established from layout/visual + URL /produce + server 再開 dialog evidence; field values read by the project's own OCR pipeline (weeks template 0.9976, CLEAR marker visible, stamina marker adequate); no runtime/policy/Harness change made",
+  "hidden_state_integrity": "NO_GAME_STATE_IMPACT (observation-only task)"
+ },
+ "candidate_constraint_ids": [],
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode offline perception diagnostic",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "captured_at": "2026-09-07T02:55:00Z",
+  "source_artifact_ids": [],
+  "integrity": {"algorithm": null, "digest": null}
+ },
+ "evidence_references": [
+  {
+   "evidence_id": "r04_s1w8_planner_fresh_home.png",
+   "kind": "SCREENSHOT",
+   "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png",
+   "captured_at": "2026-09-07T02:47:00Z",
+   "source": "IAB tab.screenshot",
+   "classification": "FACT",
+   "integrity": {"algorithm": "sha256", "digest": "f2ab6993770614fc7bc2eb0004e16c9c86bbe1c1b8b411e9395ade48f11eea3d"}
+  }
+ ],
+ "unknowns": [
+  "whether detect_state misclassifies ALL WING_HOME IAB frames this way (single-frame evidence; prior weekly frames not re-tested)"
+ ]
+}

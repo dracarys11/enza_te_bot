@@ -1,6 +1,6 @@
 {
  "index_version": 1,
- "updated_at": "2026-09-07T02:39:09Z",
+ "updated_at": "2026-09-07T02:58:00Z",
  "protocol": "enza_memory/MEMORY_PROTOCOL.md",
  "sessions": [
   {
@@ -1037,7 +1037,7 @@
    "session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
    "date": "2026-09-07",
    "continuation_of": "WINGRUN_20260907_02",
-   "mission": "RECOVER stuck live WING session from durable state (chat cleared, ZCode process restarted, browser tabs lost). Reconstruct authority ONLY from durable state + fresh browser evidence; recovery-only scope",
+   "mission": "RECOVER stuck live WING session from durable state (chat cleared, ZCode process restarted, browser tabs lost). Reconstruct authority ONLY from durable state + fresh browser evidence; recovery-only scope + S1W8 FINAL-WEEK PLANNER DECISION ONLY (fresh observation + pure planner call, no execution)",
    "interactions": "reopen game in IAB at /home (boot to lobby), dismiss auto-opened news page (back arrow), open プロデュース再開 dialog, click 再開 (recovery navigation). NO business action: W8 weekly objective NOT executed, no 決定/REST/Auto/skill clicks",
    "verification_coverage": "durable run registry read (4 run dirs; only WINGRUN_20260907_02 lacks run_completion_record); server-side 再開 dialog reconciled EXACTLY against durable boundary (S1 weeks=1, fans=1169, Vo417/SP274); stable WING_HOME confirmed across two frames; all new JSON validated",
    "evidence_highlights": {
@@ -1047,7 +1047,10 @@
     "PRIOR_ACTION_REPEATED": "NO",
     "FRESH_HOME_REACHED": "YES (WING_HOME stable, URL /produce)",
     "NEXT_WEEK_EXECUTED": "NO",
-    "NEW_PRODUCE_STARTED": "NO"
+    "NEW_PRODUCE_STARTED": "NO",
+    "S1W8_PLANNER_OBJECTIVE": "VOCAL (season_1_final_week_fan_gap_met; gap=0 via CLEAR marker)",
+    "S1W8_GATE": "VOCAL_FAILURE_RATE BLOCK / FAILURE_RATE_READ_REQUIRED (schedule read out of scope)",
+    "DETECT_STATE_ANOMALY": "AUDITION_BATTLE false positive on WING_HOME IAB frame (failure file created; no runtime change)"
    },
    "files": {
     "created": [
@@ -1058,15 +1061,21 @@
      "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png",
      "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome.png",
      "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_winghome_stable.png",
-     "ai_decisions/observations/screenshots/OBS_20260907_recover4_winghome_stable.png"
+     "ai_decisions/observations/screenshots/OBS_20260907_recover4_winghome_stable.png",
+     "enza_memory/observations/OBS_010.json",
+     "enza_memory/failures/detect_state_winghome_false_positive_001.json",
+     "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png",
+     "ai_decisions/observations/screenshots/OBS_20260907_s1w8_planner_fresh_home.png"
     ],
     "updated": [
      "enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl (4 recovery entries appended)",
-     "enza_memory/memory_index.json (this entry)"
+     "enza_memory/memory_index.json (this entry)",
+     "enza_memory/trajectories/TRAJ_WINGRUN_20260907_02.json (step r02_s1w8_planner_decision_only appended)",
+     "enza_memory/wing_runs/WINGRUN_20260907_02/timings.jsonl (S1W8_PLANNER_DECISION_ONLY appended)"
     ]
    },
    "gate_outcomes": "RECOVERY-mode live session; scope bounded to observation/resume/persist; LIVE business authority NOT exercised; runtime/business-policy/Harness unchanged; no policy violation",
-   "terminal_state": "WINGRUN_20260907_02 RECOVERED_TO_STABLE_WING_HOME_BOUNDARY (S1 weeks=1 fans=1169 E-CLEAR, W8 pending, handoff persisted); run remains ACTIVE"
+   "terminal_state": "WINGRUN_20260907_02 ACTIVE at WING_HOME S1 weeks=1 fans=1169 E-CLEAR; planner objective VOCAL declared, risk gate pending fresh schedule read; nothing executed"
   }
  ]
 }
