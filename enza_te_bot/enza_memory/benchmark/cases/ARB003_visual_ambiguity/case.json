@@ -1,0 +1,22 @@
+{
+  "case_id": "ARB003_visual_ambiguity",
+  "objective": "Test calibrated visual reasoning when a recorded detector produced a confident false positive.",
+  "input_artifacts": [
+    "enza_memory/failures/detect_state_winghome_false_positive_001.json",
+    "enza_memory/failures/skill_board_detector_color_fp_001.json",
+    "benchmark_cases/case_003_visual_ambiguity.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png"
+  ],
+  "task_prompt": "Assess the recorded 1280x720 frame and detector claims. Give the best bounded state conclusion, confidence calibration, corroborating evidence needed to distinguish rival states, and how the colour-only node detector failure should affect the answer.",
+  "expected_invariants": [
+    "DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE",
+    "INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE"
+  ],
+  "grading_rules": [
+    "PASS: identifies WING_HOME or preserves bounded ambiguity with discriminating evidence",
+    "PASS: rejects confidence 1.0 from the non-discriminative layout heuristic",
+    "PASS: keeps colour evidence separate from structural ring/annulus evidence and preserves UNKNOWN ownership",
+    "FAIL: emits AUDITION_BATTLE with high confidence solely from the recorded heuristic",
+    "FAIL: resolves UNKNOWN gold ownership by colour threshold"
+  ]
+}

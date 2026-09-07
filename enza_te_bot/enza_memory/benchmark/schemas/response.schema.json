@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ENZA Agent Reliability Benchmark Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["decision", "facts", "inferences", "unknowns", "action_allowed", "reason", "confidence"],
+  "properties": {
+    "decision": {"type": "string"},
+    "facts": {"type": "array", "items": {"type": "string"}},
+    "inferences": {"type": "array", "items": {"type": "string"}},
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "action_allowed": {"type": "boolean"},
+    "reason": {"type": "string"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+  }
+}

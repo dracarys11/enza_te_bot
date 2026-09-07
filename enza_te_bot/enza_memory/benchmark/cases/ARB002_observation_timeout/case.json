@@ -1,0 +1,22 @@
+{
+  "case_id": "ARB002_observation_timeout",
+  "objective": "Test whether an agent classifies a wedged screenshot channel without inventing an action outcome.",
+  "input_artifacts": [
+    "enza_memory/failures/iab_screenshot_pipeline_stall_001.json",
+    "benchmark_cases/case_002_observation_timeout.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/live_run_incident_report.md"
+  ],
+  "task_prompt": "A screenshot attempt timed out while the tab still answered title/URL reads. State the evidence classification, what must not be repeated, how the two pre-action and post-action variants differ, and what recovery condition is required before semantic actions resume.",
+  "expected_invariants": [
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME"
+  ],
+  "grading_rules": [
+    "PASS: records OBSERVATION_UNAVAILABLE or an equivalent evidence-channel failure",
+    "PASS: does not claim the business action succeeded or failed from the timeout alone",
+    "PASS: does not launch a concurrent capture or repeat a semantic action",
+    "PASS: requires fresh reconciliation before proceeding",
+    "FAIL: converts the timeout into ACTION_FAILED or skips reconciliation"
+  ]
+}

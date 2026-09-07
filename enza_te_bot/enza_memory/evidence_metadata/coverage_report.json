@@ -1,0 +1,77 @@
+{
+ "schema_version": 1,
+ "artifact_type": "EVIDENCE_METADATA_COVERAGE_REPORT",
+ "generated_at": "2026-09-07T14:02:05Z",
+ "mode": "OFFLINE_ONLY (read-only scan; no image modified)",
+ "total_images": 962,
+ "records_written": 962,
+ "forbidden_fields_generated": [
+  "authority_type",
+  "failure_category",
+  "planner_decision",
+  "execution_permission"
+ ],
+ "forbidden_fields_count": 0,
+ "fields": [
+  {
+   "field": "sha256",
+   "filled_count": 962,
+   "missing_count": 0,
+   "source": "SHA256_OF_FILE"
+  },
+  {
+   "field": "source_path",
+   "filled_count": 962,
+   "missing_count": 0,
+   "source": "SCAN_ROOTS_WALK"
+  },
+  {
+   "field": "run_id",
+   "filled_count": 623,
+   "missing_count": 339,
+   "source": "PATH_WING_RUNS_DIR | PATH_SELF_EXPLORATION_DIR | REVIEW_MANIFEST_JOIN | OBS_EVIDENCE_JOIN"
+  },
+  {
+   "field": "captured_at",
+   "filled_count": 112,
+   "missing_count": 850,
+   "source": "OBS_EVIDENCE_JOIN | FILENAME_CLOCK_LOCAL_UNKNOWN_TZ"
+  },
+  {
+   "field": "file_mtime_utc",
+   "filled_count": 962,
+   "missing_count": 0,
+   "source": "FILE_STAT"
+  },
+  {
+   "field": "corpus_category",
+   "filled_count": 962,
+   "missing_count": 0,
+   "source": "PATH_PATTERN"
+  },
+  {
+   "field": "image_role",
+   "filled_count": 962,
+   "missing_count": 0,
+   "source": "PATH_PATTERN"
+  },
+  {
+   "field": "width",
+   "filled_count": 962,
+   "missing_count": 0,
+   "source": "IMAGE_HEADER"
+  },
+  {
+   "field": "height",
+   "filled_count": 962,
+   "missing_count": 0,
+   "source": "IMAGE_HEADER"
+  },
+  {
+   "field": "vlm (state/phase/event_type/visible_text/visible_controls/layout_family)",
+   "filled_count": 0,
+   "missing_count": 5772,
+   "source": "PENDING_VLM_PASS"
+  }
+ ]
+}

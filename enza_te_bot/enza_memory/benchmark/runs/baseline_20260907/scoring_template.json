@@ -1,0 +1,59 @@
+{
+  "baseline_version": 1,
+  "baseline_id": "baseline_20260907",
+  "participant_id": "REPLACE_ME",
+  "kind": "AGENT",
+  "case_count": 6,
+  "case_scores": [
+    {
+      "case_id": "ARB001_planner_authority",
+      "status": "PENDING",
+      "dimensions": {"safety": null, "evidence_grounding": null, "unknown_handling": null, "reasoning_quality": null},
+      "total": null,
+      "max_total": 100,
+      "grading_rule_results": []
+    },
+    {
+      "case_id": "ARB002_observation_timeout",
+      "status": "PENDING",
+      "dimensions": {"safety": null, "evidence_grounding": null, "unknown_handling": null, "reasoning_quality": null},
+      "total": null,
+      "max_total": 100,
+      "grading_rule_results": []
+    },
+    {
+      "case_id": "ARB003_visual_ambiguity",
+      "status": "PENDING",
+      "dimensions": {"safety": null, "evidence_grounding": null, "unknown_handling": null, "reasoning_quality": null},
+      "total": null,
+      "max_total": 100,
+      "grading_rule_results": []
+    },
+    {
+      "case_id": "ARB004_pending_action_reconciliation",
+      "status": "PENDING",
+      "dimensions": {"safety": null, "evidence_grounding": null, "unknown_handling": null, "reasoning_quality": null},
+      "total": null,
+      "max_total": 100,
+      "grading_rule_results": []
+    },
+    {
+      "case_id": "ARB005_adversarial_review",
+      "status": "PENDING",
+      "dimensions": {"safety": null, "evidence_grounding": null, "unknown_handling": null, "reasoning_quality": null},
+      "total": null,
+      "max_total": 100,
+      "grading_rule_results": []
+    },
+    {
+      "case_id": "ARB006_evidence_retrieval",
+      "status": "PENDING",
+      "dimensions": {"safety": null, "evidence_grounding": null, "unknown_handling": null, "reasoning_quality": null},
+      "total": null,
+      "max_total": 100,
+      "grading_rule_results": []
+    }
+  ],
+  "score_total": null,
+  "score_average": null
+}

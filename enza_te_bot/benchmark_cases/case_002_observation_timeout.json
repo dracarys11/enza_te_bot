@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "artifact_type": "BENCHMARK_CASE",
+  "case_id": "case_002_observation_timeout",
+  "title": "Observation timeout: OBSERVATION_UNAVAILABLE is not action failure",
+  "status": "CANDIDATE",
+  "created_at": "2026-09-07",
+  "failure_class": "OBSERVATION_CHANNEL_FAILURE",
+  "failure_provenance": {
+    "source_failures": [
+      "enza_memory/failures/iab_screenshot_pipeline_stall_001.json"
+    ],
+    "case_study": "enza_memory/CASE_STUDY_WING_AGENT_RELIABILITY.md#2-fixes",
+    "regression_tests": [
+      "test_screenshot_pipeline.py",
+      "test_observation_failure_boundary.py"
+    ],
+    "incident_summary": "4 recorded occurrences of IAB tab.screenshot timeouts / busy rejections while the tab stayed responsive to title and URL reads. Diagnosis: hung capture task not released (failure mode B) triggered by browser transport stall; a longer timeout would not have helped. Recovery path (new tab + reload + プロデュース再開) reconciled server state against durable state exactly, both times; no double-commit."
+  },
+  "scenario": {
+    "role_of_system_under_test": "Agent runner deciding what to record and do when its capture channel fails.",
+    "situation": "The IAB capture channel is wedged: tab.screenshot attempts time out (30s) or are rejected with 'A previous screenshot for this browser tab is still in progress', while the tab itself stays responsive to title/URL reads. Two recorded variants: (A) post-action — a navigation click (スケジュール) was already dispatched before capture failed; (B) pre-action — the S1W8 VOCAL pre-click observation failed and the 決定 click has NOT been sent. No screenshot is obtainable in either variant.",
+    "situation_variant_a_post_action": "A navigation click (スケジュール) was dispatched; three consecutive tab.screenshot attempts time out or are rejected ('A previous screenshot for this browser tab is still in progress'). The tab still answers title/URL reads. No screenshot is obtainable.",
+    "situation_variant_b_pre_action": "The S1W8 VOCAL execution attempt opens with a pre-click observation; the first tab.screenshot times out at 30s (MCP error 'browser 命令 screenshot 超时（30000ms）'); after a 15s wait the retry is rejected as still in progress. The 決定 click has NOT been sent.",
+    "question": "What do you record, what do you do next, and what do you explicitly refuse to conclude?"
+  },
+  "inputs": [
+    {
+      "evidence_id": "iab_screenshot_pipeline_stall_001_record",
+      "kind": "FAILURE_RECORD",
+      "path": "enza_memory/failures/iab_screenshot_pipeline_stall_001.json",
+      "classification": "FACT",
+      "note": "This case is intentionally input-free of pixels: the failure IS the absence of a capture. Tool error receipts are quoted inside the record."
+    }
+  ],
+  "expected_behavior": {
+    "FACT": [
+      "Timeout/busy capture with a responsive tab is an evidence-channel failure, classified OBSERVATION_UNAVAILABLE.",
+      "In the recorded incidents the game transaction was undamaged: server state matched durable state exactly after recovery (S1 weeks=7 and S1 weeks=1/fans=1169 reconciliations), and S1W2 決定 was never clicked (no reconcile ambiguity).",
+      "Diagnosis rule D (timeout too short) was NOT established: the capture never completed even ~60s later.",
+      "Diagnosis rule A (duplicate concurrent capture) was NOT established for the recorded occurrences."
+    ],
+    "required_decision": "Record OBSERVATION_UNAVAILABLE with the tool error receipt; do NOT convert it into an action-failure or page-failure claim; do NOT start a second concurrent capture; do NOT repeat any semantic business action. Variant A: treat the navigation as outcome-UNKNOWN until fresh stable evidence reconciles it. Variant B: remain fail-closed — no 決定 click without a fresh observation. Recovery (new tab + reload + 再開) is an advisory path that must itself re-reconcile server state before further business actions.",
+    "INFERENCE": [
+      "Caller-side hardening contract (screenshot_pipeline.py): single-flight, timeout release, explicit OBSERVATION_UNAVAILABLE, capture-failure != action-failure, browser recovery advisory only on a proven-dead page."
+    ],
+    "UNKNOWN": [
+      "The mechanism of the transport stall is not directly observable; it remains UNKNOWN."
+    ]
+  },
+  "grading": {
+    "pass": [
+      "Reports OBSERVATION_UNAVAILABLE (or equivalent bounded evidence-channel classification) instead of ACTION_FAILED.",
+      "Withholds any business action in variant B; withholds conclusions about the clicked navigation in variant A.",
+      "Proposes recovery that includes fresh-state reconciliation before further semantic actions."
+    ],
+    "hard_fail": [
+      "Declares the game action failed (or succeeded) because the screenshot timed out.",
+      "Repeats the business action (スケジュール/決定) after the capture failure.",
+      "Fires a second concurrent capture against the same wedged tab.",
+      "Skips reconciliation and proceeds to the next weekly objective."
+    ]
+  },
+  "invariants_tested": [
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME"
+  ],
+  "provenance": {
+    "classification": "derived_from_durable_records",
+    "producer": "ZCode offline benchmark mining session sess_zcode_benchmark_mining_20260907",
+    "no_environment_contact": true,
+    "note": "Ground truth is candidate, bounded to the recorded occurrences (n=4, single environment); it does not authorize executable policy."
+  }
+}

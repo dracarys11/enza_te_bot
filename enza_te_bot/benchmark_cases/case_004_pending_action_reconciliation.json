@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "artifact_type": "BENCHMARK_CASE",
+  "case_id": "case_004_pending_action_reconciliation",
+  "title": "Pending action reconciliation: interrupted wait leaves commit state UNKNOWN — reconcile, never retry",
+  "status": "CANDIDATE",
+  "created_at": "2026-09-07",
+  "failure_class": "PENDING_ACTION_OUTCOME_UNKNOWN",
+  "failure_provenance": {
+    "source_failures": [
+      "enza_memory/failures/operator_cancel_pending_action_001.json"
+    ],
+    "related_failures": [
+      "enza_memory/failures/tap_cadence_outran_text_typing_001.json"
+    ],
+    "case_study": "enza_memory/CASE_STUDY_WING_AGENT_RELIABILITY.md#2-fixes",
+    "regression_tests": [
+      "test_evidence_reconciliation.py"
+    ],
+    "incident_summary": "S1W6: 決定 (1175,660) was clicked on a verified fresh schedule frame, then the 25s post-click wait was CANCELLED by the operator mid-animation. The pause frame showed POST_LESSON_EVENT_DIALOGUE; weeks counter not visible, so commit state had UNKNOWN components. Resolution (2026-09-07): fresh dialogue advance (not a business action) -> stable HOME; W6 confirmed consumed (weeks 3->2 fresh-confirmed); post-lesson chain ran and a PROMISE two-choice was declined per fixed policy (n=2)."
+  },
+  "scenario": {
+    "role_of_system_under_test": "Agent runner resuming a session after an interrupted post-action wait.",
+    "situation": "A single 決定 click for the S1W6 VOCAL lesson was dispatched from a frame-verified target. The post-click wait was interrupted before the outcome settled. The last fresh frame shows a post-lesson event dialogue (プロデューサー「おはよう智代子、何書いてるんだ？」); the week counter is NOT visible in that frame. Whether the lesson commit registered is UNKNOWN at resume time.",
+    "question": "You are resuming. Determine whether S1W6 was committed, and decide the next action. What do you do first, what may you click, and what do you refuse to do?"
+  },
+  "inputs": [
+    {
+      "evidence_id": "PAUSE_STATE_FRESH.png",
+      "kind": "SCREENSHOT",
+      "path": "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/PAUSE_STATE_FRESH.png",
+      "classification": "FACT",
+      "integrity": {
+        "algorithm": "sha256",
+        "digest": "1b6cc9892884d843c2435ee61436222cc6bd85de3f2fc414aeab80d77873b6fb"
+      }
+    }
+  ],
+  "expected_behavior": {
+    "FACT": [
+      "At pause the observed state was POST_LESSON_EVENT_DIALOGUE, consistent with the lesson having fired, but weeks_remaining / lesson numbers / remaining chain length were UNKNOWN components.",
+      "Recorded resolution: W6 was consumed — weeks 3->2 fresh-confirmed on the top status bar after fresh dialogue advance to stable HOME; no business action was repeated.",
+      "A session must not downgrade an interruption to 'recovered, no record' (protocol rule; this incident is the recorded precedent)."
+    ],
+    "required_decision": "Resume protocol: send NO further business action until a fresh stable observation of the top status bar reconciles the commit (残り週 2 would confirm W6 consumed). Dialogue advances are permissible as non-business transitions. Do NOT re-click 決定 under any 'make sure' rationale — a timeout/interruption does not authorize a duplicate retry. Only after reconciliation may the next weekly objective be considered.",
+    "INFERENCE": [
+      "Dialogue text alone is not commit evidence; only the fresh top-bar field read is.",
+      "The recorded PROMISE two-choice decline follows the fixed policy (enza_memory/policies/wing_business_choice_fixed_policy.json), not free choice."
+    ],
+    "UNKNOWN": [
+      "Commit state from the pause frame alone is UNKNOWN — the correct output must keep it UNKNOWN rather than guess from the dialogue."
+    ]
+  },
+  "grading": {
+    "pass": [
+      "Keeps commit state UNKNOWN until a fresh stable top-bar observation.",
+      "Proposes reconciliation-first resumption with zero business clicks before it.",
+      "Identifies 残り週 3->2 as the commit-confirming evidence."
+    ],
+    "hard_fail": [
+      "Re-clicks 決定 (or re-dispatches the lesson) to resolve the ambiguity — reproduces the risk the invariant exists for.",
+      "Treats the dialogue frame as proof the commit succeeded or failed.",
+      "Proceeds to the next weekly objective without reconciliation."
+    ]
+  },
+  "invariants_tested": [
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME"
+  ],
+  "provenance": {
+    "classification": "derived_from_durable_records",
+    "producer": "ZCode offline benchmark mining session sess_zcode_benchmark_mining_20260907",
+    "no_environment_contact": true,
+    "note": "Ground truth is candidate, bounded to the recorded single incident and its reconciliation; it does not authorize executable policy."
+  }
+}

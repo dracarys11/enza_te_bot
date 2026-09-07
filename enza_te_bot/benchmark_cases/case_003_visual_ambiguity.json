@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "artifact_type": "BENCHMARK_CASE",
+  "case_id": "case_003_visual_ambiguity",
+  "title": "Visual ambiguity: automatic state classification emitted confidence 1.0 for the wrong label",
+  "status": "CANDIDATE",
+  "created_at": "2026-09-07",
+  "failure_class": "VISUAL_STATE_CLASSIFICATION_AMBIGUITY",
+  "failure_provenance": {
+    "source_failures": [
+      "enza_memory/failures/detect_state_winghome_false_positive_001.json",
+      "enza_memory/failures/skill_board_detector_color_fp_001.json"
+    ],
+    "case_study": "enza_memory/CASE_STUDY_WING_AGENT_RELIABILITY.md#4-engineering-lessons",
+    "incident_summary": "vision.detect_state classified a stable WING_HOME IAB frame as AUDITION_BATTLE with confidence 1.0 via page_layout_presence, while the taught HOME template scored 0.1948 (threshold 0.85) on the same frame. Ground truth WING_HOME was later established independently (layout/visual + URL /produce + server 再開 dialog + own OCR: weeks template 0.9976, CLEAR marker visible). Scenario B (same class, node level): the pre-calibration skill_board detector produced colour-only SELECTED/ACQUIRED false positives on ordinary pink icon badges across the 45 recovered frames."
+  },
+  "scenario": {
+    "role_of_system_under_test": "Visual state classifier (VLM or detector) producing a page-state label with confidence.",
+    "situation": "Input frame: a stable 1280x720 IAB WING_HOME surface (canvas game, DOM/accessibility unavailable). Known detector failure modes on this exact frame: page_layout_presence top-right regions (min mean 70 / min std 12) are non-discriminative — the WING_HOME top-right buttons (諦める/ホームに戻る, オプション) measured mean 179-208 / std 49-60, satisfying all three regions; a taught home_marker.png scored 0.1948 against its own 0.85 threshold on this surface.",
+    "question": "Classify the page state. State your label, confidence, which evidence supports it, what evidence would discriminate rival hypotheses, and whether your confidence is calibrated."
+  },
+  "inputs": [
+    {
+      "evidence_id": "r04_s1w8_planner_fresh_home.png",
+      "kind": "SCREENSHOT",
+      "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png",
+      "captured_at": "2026-09-07T02:47:00Z",
+      "classification": "FACT",
+      "integrity": {
+        "algorithm": "sha256",
+        "digest": "f2ab6993770614fc7bc2eb0004e16c9c86bbe1c1b8b411e9395ade48f11eea3d",
+        "binding_check": "digest matches the evidence_reference recorded in detect_state_winghome_false_positive_001.json"
+      }
+    },
+    {
+      "evidence_id": "recovered_frame_manifest",
+      "kind": "GROUND_TRUTH_MANIFEST",
+      "path": "enza_memory/migration/python_click_migration/recovered_frames/recovered_frame_manifest.jsonl",
+      "classification": "FACT",
+      "note": "Scenario B (skill_board node state) evaluates against this 45-frame manifest; see skill_board_detector_color_fp_001.json for the SELECTED_FP / ACQUIRED_FP classes."
+    }
+  ],
+  "expected_behavior": {
+    "FACT": [
+      "The frame's true state is WING_HOME (established post hoc by layout/visual + URL /produce + server dialog + OCR field reads).",
+      "The recorded detector output — AUDITION_BATTLE at confidence 1.0 from layout-presence alone — was a false positive.",
+      "home_marker.png scoring 0.1948 < 0.85 on this surface is a recorded measurement."
+    ],
+    "required_decision": "Label WING_HOME, or an explicitly bounded multi-hypothesis answer that keeps WING_HOME vs AUDITION_BATTLE unresolved and names the discriminating evidence required (URL read, top status bar weeks/CLEAR markers, layout discriminators beyond brightness heuristics). Confidence must reflect single-frame, low-discriminability conditions rather than assert 1.0 from a non-discriminative heuristic.",
+    "INFERENCE": [
+      "home_marker.png was likely taught on a different surface/geometry than the IAB 1280x720 surface (recorded INFERENCE, confidence 0.7) — a correct answer may cite template-surface mismatch but should not assert it as fact."
+    ],
+    "UNKNOWN": [
+      "Whether detect_state misclassifies ALL WING_HOME IAB frames this way remains UNKNOWN (single-frame evidence; prior weekly frames were not re-tested)."
+    ]
+  },
+  "grading": {
+    "pass": [
+      "Labels WING_HOME, or preserves explicit ambiguity with named discriminating evidence.",
+      "Does not emit maximal confidence from a heuristic that cannot separate the rival states.",
+      "Scenario B: keeps colour-class evidence separate from structural ring/annulus evidence (LEAK-03 contract); gold ownership stays UNKNOWN rather than thresholded into a claim."
+    ],
+    "hard_fail": [
+      "Emits AUDITION_BATTLE (or any wrong label) with high confidence and no corroboration plan (reproduces the incident).",
+      "Treats a single non-discriminative layout heuristic as conclusive.",
+      "Resolves the recorded gold-ownership UNKNOWN via a colour threshold."
+    ]
+  },
+  "invariants_tested": [
+    "DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE",
+    "INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE"
+  ],
+  "provenance": {
+    "classification": "derived_from_durable_records",
+    "producer": "ZCode offline benchmark mining session sess_zcode_benchmark_mining_20260907",
+    "no_environment_contact": true,
+    "note": "Ground truth for this single frame is FACT (post-hoc multi-source reconciliation); generalization to all WING_HOME frames is UNKNOWN."
+  }
+}

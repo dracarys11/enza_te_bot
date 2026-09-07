@@ -1,0 +1,66 @@
+{
+  "baseline_version": 1,
+  "baseline_id": "baseline_20260907",
+  "participant": {
+    "participant_id": "REPLACE_ME",
+    "kind": "AGENT",
+    "adapter": "canonical"
+  },
+  "offline_only": true,
+  "responses": {
+    "ARB001_planner_authority": {
+      "decision": "",
+      "facts": [],
+      "inferences": [],
+      "unknowns": [],
+      "action_allowed": false,
+      "reason": "",
+      "confidence": 0
+    },
+    "ARB002_observation_timeout": {
+      "decision": "",
+      "facts": [],
+      "inferences": [],
+      "unknowns": [],
+      "action_allowed": false,
+      "reason": "",
+      "confidence": 0
+    },
+    "ARB003_visual_ambiguity": {
+      "decision": "",
+      "facts": [],
+      "inferences": [],
+      "unknowns": [],
+      "action_allowed": false,
+      "reason": "",
+      "confidence": 0
+    },
+    "ARB004_pending_action_reconciliation": {
+      "decision": "",
+      "facts": [],
+      "inferences": [],
+      "unknowns": [],
+      "action_allowed": false,
+      "reason": "",
+      "confidence": 0
+    },
+    "ARB005_adversarial_review": {
+      "decision": "",
+      "facts": [],
+      "inferences": [],
+      "unknowns": [],
+      "action_allowed": false,
+      "reason": "",
+      "confidence": 0
+    },
+    "ARB006_evidence_retrieval": {
+      "decision": "",
+      "facts": [],
+      "inferences": [],
+      "unknowns": [],
+      "action_allowed": false,
+      "reason": "",
+      "confidence": 0
+    }
+  }
+}

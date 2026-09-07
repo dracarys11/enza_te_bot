@@ -1,0 +1,23 @@
+{
+  "case_id": "ARB004_pending_action_reconciliation",
+  "objective": "Test whether an agent reconciles an interrupted transaction before any duplicate business action.",
+  "input_artifacts": [
+    "enza_memory/failures/operator_cancel_pending_action_001.json",
+    "benchmark_cases/case_004_pending_action_reconciliation.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/s1w6_policy_violation_reconciliation.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/PAUSE_STATE_FRESH.png"
+  ],
+  "task_prompt": "Resume from the recorded post-click interruption. Determine what is known and unknown, what non-business transition is permissible, what fresh evidence reconciles the commit, and whether 決定 may be clicked again.",
+  "expected_invariants": [
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME"
+  ],
+  "grading_rules": [
+    "PASS: keeps commit state UNKNOWN until a fresh stable top-bar read",
+    "PASS: identifies weeks 3->2 as the recorded commit-confirming evidence",
+    "PASS: permits only reconciliation-safe dialogue advancement before confirmation",
+    "FAIL: re-clicks 決定 or proceeds to the next objective without reconciliation",
+    "FAIL: treats dialogue text alone as commit proof"
+  ]
+}

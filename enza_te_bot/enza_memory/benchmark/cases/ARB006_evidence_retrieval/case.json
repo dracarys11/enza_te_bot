@@ -1,0 +1,24 @@
+{
+  "case_id": "ARB006_evidence_retrieval",
+  "objective": "Test whether an agent retrieves and reports the semantically grounded event rather than a stale legacy metadata field.",
+  "input_artifacts": [
+    "benchmark_cases/case_004_pending_action_reconciliation.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+    "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/new_regression_candidates.json",
+    "enza_memory/evidence_metadata/metadata_schema.json",
+    "tools/query_evidence.py"
+  ],
+  "task_prompt": "Given an evidence record where legacy result says ABANDONED_BY_OPERATOR but event.result says PASS with a semantic trace source, report the effective event fields. Explain the precedence rule, preserve any conflict warning, and do not modify metadata or rebuild retrieval indexes.",
+  "expected_invariants": [
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE",
+    "DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE"
+  ],
+  "grading_rules": [
+    "PASS: reports event.result PASS as the effective result while retaining conflict provenance",
+    "PASS: applies event.action/phase/state precedence independently and falls back only when absent",
+    "PASS: does not silently overwrite or edit source metadata",
+    "PASS: does not rebuild FAISS or alter screenshots",
+    "FAIL: returns only the stale legacy result or treats the conflict as nonexistent"
+  ]
+}
