@@ -7,6 +7,7 @@ from pathlib import Path
 
 from tools.run_vlm_benchmark import (
     LocalQwenVLM,
+    _coerce_observation_payload,
     check_environment,
     evaluate_records,
     normalize_prediction,
@@ -146,6 +147,20 @@ def test_qwen_loader_uses_transformers_516_official_class(monkeypatch) -> None:
         "/models/Qwen2.5-VL-7B-Instruct",
         {"torch_dtype": "auto", "device_map": "auto", "local_files_only": True},
     )
+
+
+def test_qwen_flat_observation_is_nested_without_authority_fields() -> None:
+    prediction = _coerce_observation_payload({
+        "state": "UNKNOWN",
+        "phase": "UNKNOWN",
+        "visible_controls": ["START"],
+        "layout_family": "UNKNOWN",
+        "confidence": 0.5,
+        "vlm_status": "OBSERVED",
+    })
+    assert prediction["observation"]["state"] == "UNKNOWN"
+    assert prediction["confidence"] == 0.5
+    assert "authority_type" not in prediction
 
 
 def test_jsonl_output_is_a_file_not_a_directory(tmp_path: Path) -> None:

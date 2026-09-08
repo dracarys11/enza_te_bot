@@ -96,6 +96,18 @@ def unknown_prediction(status: str = "UNKNOWN") -> dict[str, Any]:
     return {"observation": dict(UNKNOWN_OBSERVATION), "confidence": 0.0, "vlm_status": status}
 
 
+def _coerce_observation_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    """Accept Qwen's flat observation JSON while keeping the runner contract nested."""
+    if isinstance(payload.get("observation"), dict):
+        return payload
+    observation = {field: payload[field] for field in OBSERVATION_FIELDS if field in payload}
+    return {
+        "observation": observation,
+        "confidence": payload.get("confidence", 0.0),
+        "vlm_status": payload.get("vlm_status", "UNKNOWN"),
+    }
+
+
 def _resolve(root: Path, image: str) -> Path:
     path = Path(image)
     return path if path.is_absolute() else root / path
@@ -174,7 +186,10 @@ class LocalQwenVLM:
         start, end = response.find("{"), response.rfind("}")
         if start < 0 or end < start:
             raise ValueError("local VLM did not return JSON")
-        return normalize_prediction(json.loads(response[start : end + 1]))
+        payload = json.loads(response[start : end + 1])
+        if not isinstance(payload, dict):
+            raise ValueError("local VLM JSON must be an object")
+        return normalize_prediction(_coerce_observation_payload(payload))
 
 
 def evaluate_records(records: list[dict[str, Any]], state_gold: dict[str, str] | None = None) -> dict[str, Any]:
