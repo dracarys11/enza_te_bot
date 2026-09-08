@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import sys
 import types
+import pytest
 from pathlib import Path
 
 from tools.run_vlm_benchmark import (
@@ -56,6 +57,7 @@ class _FakeModel:
 
     def generate(self, **inputs):
         assert inputs["input_ids"] == [[1, 2]]
+        assert inputs["max_new_tokens"] == 128
         return [[1, 2, 3]]
 
 
@@ -174,3 +176,97 @@ def test_jsonl_output_is_a_file_not_a_directory(tmp_path: Path) -> None:
     assert not output.is_dir()
     assert result["output"] == str(output)
     assert (tmp_path / "qwen_predictions.scores.json").is_file()
+
+
+def _manifest(tmp_path, count=3):
+    source = tmp_path / "inputs.jsonl"
+    for i in range(count):
+        (tmp_path / f"{i}.png").write_bytes(str(i).encode())
+    source.write_text("".join(json.dumps({"image": f"{i}.png"}) + "\n" for i in range(count)))
+    return source
+
+
+def test_interrupt_stream_resume_and_progress(tmp_path):
+    source = _manifest(tmp_path)
+    output = tmp_path / "out"
+    def interrupted(path):
+        if path.name == "1.png":
+            rows = (output / "predictions.jsonl").read_text().splitlines()
+            assert len(rows) == 1  # available before next inference completes
+            progress = json.loads((output / "run_progress.json").read_text())
+            assert progress["completed"] == 1
+            raise KeyboardInterrupt()
+        return {"observation": {}, "vlm_status": "UNKNOWN"}
+    with pytest.raises(KeyboardInterrupt):
+        run_benchmark(source, output, tmp_path, interrupted)
+    before = (output / "predictions.jsonl").read_bytes()
+    calls = []
+    def remaining(path):
+        calls.append(path.name)
+        raise ValueError("mock inference failure")
+    run_benchmark(source, output, tmp_path, remaining, resume=True)
+    assert calls == ["1.png", "2.png"]
+    assert (output / "predictions.jsonl").read_bytes().startswith(before)
+    progress = json.loads((output / "run_progress.json").read_text())
+    assert (progress["total"], progress["completed"], progress["failed"], progress["remaining"]) == (3, 1, 2, 0)
+    run_benchmark(source, output, tmp_path, remaining, resume=True)
+    assert calls == ["1.png", "2.png"]
+
+
+def test_limit_and_changed_artifact_checkpoint(tmp_path):
+    source = _manifest(tmp_path)
+    output = tmp_path / "out"
+    run_benchmark(source, output, tmp_path, limit=1)
+    assert json.loads((output / "run_progress.json").read_text())["remaining"] == 2
+    with pytest.raises(FileExistsError):
+        run_benchmark(source, output, tmp_path)
+    (tmp_path / "0.png").write_bytes(b"changed")
+    with pytest.raises(ValueError, match="checksum"):
+        run_benchmark(source, output, tmp_path, resume=True)
+
+
+def test_preflight_before_model_loading_even_with_limit(tmp_path, monkeypatch):
+    import tools.run_vlm_benchmark as runner
+    source = _manifest(tmp_path)
+    (tmp_path / "2.png").unlink()
+    def forbidden(*args, **kwargs):
+        pytest.fail("model must not load before preflight")
+    monkeypatch.setattr(runner, "LocalQwenVLM", forbidden)
+    with pytest.raises(FileNotFoundError, match="missing artifacts"):
+        run_benchmark(source, tmp_path / "out", tmp_path, model_path=str(tmp_path), limit=1)
+    with pytest.raises(FileNotFoundError, match="manifest"):
+        run_benchmark(tmp_path / "missing", tmp_path / "out", tmp_path)
+
+
+def test_preflight_model_and_writable_output(tmp_path, monkeypatch):
+    import tools.run_vlm_benchmark as runner
+    source = _manifest(tmp_path)
+    with pytest.raises(FileNotFoundError, match="model path"):
+        run_benchmark(source, tmp_path / "out", tmp_path, model_path=str(tmp_path / "missing"))
+    def denied(**kwargs):
+        raise PermissionError("not writable")
+    monkeypatch.setattr(runner.tempfile, "TemporaryFile", denied)
+    with pytest.raises(PermissionError):
+        run_benchmark(source, tmp_path / "out", tmp_path)
+
+
+def test_custom_tokens_and_root_independent_of_cwd(tmp_path, monkeypatch):
+    import tools.run_vlm_benchmark as runner
+    source = _manifest(tmp_path)
+    calls = []
+    def factory(model_path, *, max_new_tokens):
+        calls.append(max_new_tokens)
+        return lambda path: {"observation": {}, "vlm_status": "UNKNOWN"}
+    monkeypatch.setattr(runner, "LocalQwenVLM", factory)
+    monkeypatch.chdir(tmp_path.parent)
+    run_benchmark(source, tmp_path / "out", tmp_path, model_path=str(tmp_path), max_new_tokens=77)
+    assert calls == [77]
+
+
+def test_corrupt_checkpoint_preserved(tmp_path):
+    source = _manifest(tmp_path)
+    output = tmp_path / "result.jsonl"
+    output.write_text('{"image":')
+    with pytest.raises(ValueError):
+        run_benchmark(source, output, tmp_path, resume=True)
+    assert output.read_text() == '{"image":'

@@ -12,6 +12,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import tempfile
+from datetime import datetime, timezone
 from collections import Counter
 from pathlib import Path
 from typing import Any, Callable, Iterable
@@ -125,14 +128,17 @@ def iter_images(input_path: Path, project_root: Path) -> Iterable[tuple[str, Pat
         source = json.loads(line)
         image = source.get("image")
         if not isinstance(image, str) or not image:
-            continue
+            raise ValueError("manifest entry requires an image path")
         yield image, _resolve(project_root, image)
 
 
 class LocalQwenVLM:
     """Local-only Qwen2.5-VL adapter using the Transformers chat contract."""
 
-    def __init__(self, model_name: str, *, processor: Any = None, model: Any = None, torch_module: Any = None):
+    def __init__(self, model_name: str, *, max_new_tokens: int = 128, processor: Any = None, model: Any = None, torch_module: Any = None):
+        if max_new_tokens < 1:
+            raise ValueError("max_new_tokens must be positive")
+        self.max_new_tokens = max_new_tokens
         if processor is not None and model is not None and torch_module is not None:
             self.processor = processor
             self.model = model
@@ -178,7 +184,7 @@ class LocalQwenVLM:
         if hasattr(inputs, "to"):
             inputs = inputs.to(self.model.device)
         with self.torch.no_grad():
-            output = self.model.generate(**inputs, max_new_tokens=256)
+            output = self.model.generate(**inputs, max_new_tokens=self.max_new_tokens)
         input_ids = inputs.get("input_ids") if hasattr(inputs, "get") else None
         if input_ids is not None:
             output = [generated[len(prompt_ids):] for prompt_ids, generated in zip(input_ids, output)]
@@ -221,6 +227,43 @@ def evaluate_records(records: list[dict[str, Any]], state_gold: dict[str, str] |
     }
 
 
+def preflight(input_path: Path, output_dir: Path, project_root: Path,
+              model_path: str | None = None) -> list[tuple[str, Path]]:
+    """Validate the whole manifest before loading a model, even with a limit."""
+    if not input_path.exists():
+        raise FileNotFoundError(f"manifest does not exist: {input_path}")
+    images = list(iter_images(input_path.resolve(), project_root.resolve()))
+    if len({image for image, _ in images}) != len(images):
+        raise ValueError("duplicate image IDs in manifest")
+    missing = [str(path) for _, path in images if not path.is_file()]
+    if missing:
+        raise FileNotFoundError(f"missing artifacts ({len(missing)}): " + ", ".join(missing))
+    if model_path and not Path(model_path).expanduser().is_dir():
+        raise FileNotFoundError(f"model path does not exist: {model_path}")
+    directory = output_dir.parent if output_dir.suffix.lower() == ".jsonl" else output_dir
+    directory.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryFile(dir=directory) as probe:
+        probe.write(b"preflight")
+        probe.flush()
+    return images
+
+
+def _progress(path: Path, total: int, records: list[dict[str, Any]]) -> None:
+    failed = sum(record["vlm_status"] == "FAILED" for record in records)
+    data = {"total": total, "completed": len(records) - failed, "failed": failed,
+            "remaining": total - len(records),
+            "last_updated": datetime.now(timezone.utc).isoformat()}
+    with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, delete=False) as handle:
+        temporary = Path(handle.name)
+        json.dump(data, handle)
+        handle.flush()
+        os.fsync(handle.fileno())
+    try:
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
 def run_benchmark(
     input_path: Path,
     output_dir: Path,
@@ -228,16 +271,15 @@ def run_benchmark(
     predictor: Callable[[Path], dict[str, Any]] | None = None,
     state_gold: dict[str, str] | None = None,
     environment: dict[str, Any] | None = None,
+    *, resume: bool = False, limit: int | None = None,
+    model_path: str | None = None, max_new_tokens: int = 128,
 ) -> dict[str, Any]:
+    if limit is not None and limit < 1:
+        raise ValueError("limit must be positive")
+    if max_new_tokens < 1:
+        raise ValueError("max_new_tokens must be positive")
+    images = preflight(input_path, output_dir, project_root, model_path)
     records: list[dict[str, Any]] = []
-    for image, path in iter_images(input_path, project_root):
-        try:
-            digest = sha256_file(path)
-            prediction = normalize_prediction(predictor(path)) if predictor else unknown_prediction()
-        except Exception:
-            digest = sha256_file(path) if path.is_file() else None
-            prediction = unknown_prediction("FAILED")
-        records.append({"image": image, "sha256": digest, **prediction})
     if output_dir.suffix.lower() == ".jsonl":
         predictions_path = output_dir
         scores_path = output_dir.with_name(f"{output_dir.stem}.scores.json")
@@ -250,9 +292,50 @@ def run_benchmark(
         scores_path = output_dir / "scores.json"
         leaderboard_path = output_dir / "leaderboard.md"
         run_name = output_dir.name
-    predictions_path.write_text(
-        "".join(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n" for record in records), encoding="utf-8"
-    )
+    progress_path = predictions_path.parent / "run_progress.json"
+    done = set()
+    if predictions_path.exists():
+        if not resume:
+            raise FileExistsError("output already exists; use --resume or a new output")
+        paths = dict(images)
+        # Reject corrupt or foreign checkpoints without altering their bytes.
+        with predictions_path.open(encoding="utf-8") as handle:
+            for line in handle:
+                record = json.loads(line)
+                identity = record["image"]
+                normalize_prediction(record)
+                if identity not in paths or identity in done:
+                    raise ValueError("checkpoint contains foreign or duplicate image IDs")
+                if record["sha256"] != sha256_file(paths[identity]):
+                    raise ValueError(f"checkpoint checksum mismatch: {identity}")
+                records.append(record)
+                done.add(identity)
+    pending = [(image, path) for image, path in images if image not in done]
+    if limit is not None:
+        pending = pending[:limit]
+    with predictions_path.open("a" if resume else "x", encoding="utf-8") as output:
+        # A valid final JSON object may lack its newline after interruption.
+        if predictions_path.stat().st_size:
+            with predictions_path.open("rb") as check:
+                check.seek(-1, os.SEEK_END)
+                if check.read(1) != b"\n":
+                    output.write("\n")
+                    output.flush()
+        _progress(progress_path, len(images), records)
+        if pending and model_path:
+            predictor = LocalQwenVLM(str(Path(model_path).expanduser()), max_new_tokens=max_new_tokens)
+        for image, path in pending:
+            digest = sha256_file(path)
+            try:
+                prediction = normalize_prediction(predictor(path)) if predictor else unknown_prediction()
+            except Exception:
+                prediction = unknown_prediction("FAILED")
+            record = {"image": image, "sha256": digest, **prediction}
+            output.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
+            output.flush()
+            os.fsync(output.fileno())
+            records.append(record)
+            _progress(progress_path, len(images), records)
     scores = evaluate_records(records, state_gold)
     scores_path.write_text(json.dumps(scores, indent=2) + "\n", encoding="utf-8")
     statuses = Counter(record["vlm_status"] for record in records)
@@ -286,14 +369,18 @@ def main() -> None:
     parser.add_argument("--model", "--model-path", dest="model", default=None,
                         help=f"local Transformers model/cache path (default: {DEFAULT_MODEL})")
     parser.add_argument("--state-gold", type=Path, help="optional JSON object mapping image paths to expected states")
+    parser.add_argument("--max-new-tokens", type=int, default=128)
+    parser.add_argument("--limit", type=int, help="maximum new images processed this invocation")
+    parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
     state_gold = json.loads(args.state_gold.read_text(encoding="utf-8")) if args.state_gold else None
     environment = check_environment(args.model)
     if args.model and not environment["model_path_exists"]:
         raise SystemExit(f"model path does not exist: {environment['model_path']}")
-    predictor = LocalQwenVLM(args.model) if args.model else None
-    print(json.dumps(run_benchmark(args.input, args.output, args.project_root, predictor,
-                                   state_gold, environment), indent=2))
+    print(json.dumps(run_benchmark(args.input, args.output, args.project_root,
+                                   state_gold=state_gold, environment=environment,
+                                   model_path=args.model, max_new_tokens=args.max_new_tokens,
+                                   limit=args.limit, resume=args.resume), indent=2))
 
 
 if __name__ == "__main__":

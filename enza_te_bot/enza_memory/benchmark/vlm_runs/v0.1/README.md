@@ -16,6 +16,47 @@ Output records contain only image, sha256, observation, confidence, and
 vlm_status. Authority, planner, execution, permission, and next-action fields
 are forbidden. The runner never connects to ENZA runtime or operates the game.
 
+## Long-running inference reliability (runner v0.4)
+
+Predictions are appended as individual JSONL records, flushed and synced after
+each image. The existing prediction schema is unchanged. `run_progress.json`
+in the output directory is atomically updated at startup and after every
+record, including failures. `completed` counts non-FAILED records, `failed`
+counts FAILED records, and `remaining = total - completed - failed`.
+`last_updated` is a UTC timestamp. Scores and the leaderboard are generated
+when the invocation finishes; the JSONL file is the resume checkpoint.
+
+Use an explicit project root and a new output directory for each run:
+
+```sh
+python tools/run_vlm_benchmark.py \
+  --input /path/to/inputs_full.jsonl \
+  --project-root /path/to/project \
+  --model-path /path/to/local/Qwen2.5-VL-7B-Instruct \
+  --output /path/to/run-output \
+  --max-new-tokens 128 --limit 100
+```
+
+Repeat with `--resume` to process the remaining images. `--limit` caps new
+attempts per invocation; omitting it processes all remaining images.
+`--max-new-tokens` defaults to 128. Model loading, prompting, placement, and
+response normalization otherwise retain their existing behavior.
+
+Resume identifies records by their existing `image` field and verifies their
+SHA-256 against the current artifact. All saved terminal statuses, including
+FAILED and UNKNOWN, are skipped. Use a separate output for intentional retries
+or changed model/settings. Foreign IDs, duplicate IDs, changed artifacts, and
+malformed checkpoint lines are rejected without rewriting the checkpoint;
+an interrupted partial JSON line requires explicit operator repair. Existing
+output requires `--resume`, preventing accidental replacement. Use one writer
+per output directory; a JSONL output path shares its parent's progress file.
+
+Preflight validates the entire manifest and every image before model loading,
+even when `--limit` is set. It also checks the local model directory when
+supplied and probes output-directory writability. Relative image paths resolve
+against `--project-root`. Validation and regression tests use local fixtures;
+real RTX5080 inference remains a separate execution check.
+
 ## Benchmark Artifact Bundle Contract
 
 A reproducible benchmark run includes cases, gold, and the input manifest,
