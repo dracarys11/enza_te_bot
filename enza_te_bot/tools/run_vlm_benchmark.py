@@ -118,25 +118,26 @@ def iter_images(input_path: Path, project_root: Path) -> Iterable[tuple[str, Pat
 
 
 class LocalQwenVLM:
-    """Minimal local-only adapter; importing Transformers is deferred until used."""
+    """Local-only Qwen2.5-VL adapter using the Transformers chat contract."""
 
-    def __init__(self, model_name: str):
+    def __init__(self, model_name: str, *, processor: Any = None, model: Any = None, torch_module: Any = None):
+        if processor is not None and model is not None and torch_module is not None:
+            self.processor = processor
+            self.model = model
+            self.torch = torch_module
+            return
         try:
-            from transformers import AutoProcessor
-            try:
-                from transformers import AutoModelForImageTextToText as ModelClass
-            except ImportError:
-                from transformers import AutoModelForVision2Seq as ModelClass
+            from transformers import AutoModelForVision2Seq, AutoProcessor
             import torch
         except ImportError as exc:
             raise RuntimeError("--model requires locally installed transformers and torch") from exc
         self.processor = AutoProcessor.from_pretrained(model_name, local_files_only=True)
-        self.model = ModelClass.from_pretrained(model_name, local_files_only=True)
+        self.model = AutoModelForVision2Seq.from_pretrained(model_name, local_files_only=True)
         self.torch = torch
 
     def __call__(self, image_path: Path) -> dict[str, Any]:
         from PIL import Image
-        image = Image.open(image_path)
+        image = Image.open(image_path).convert("RGB")
         prompt = (
             "Describe only visible pixels. Return JSON with observation containing exactly "
             "state, phase, visible_controls, layout_family; confidence 0..1; and "
@@ -144,14 +145,31 @@ class LocalQwenVLM:
             "Visible controls are SEEN affordances only, never permission or enabled state. "
             "Never emit authority, action, or permission fields."
         )
-        inputs = self.processor(images=image, text=prompt, return_tensors="pt")
+        messages = [{
+            "role": "user",
+            "content": [
+                {"type": "image", "image": str(image_path)},
+                {"type": "text", "text": prompt},
+            ],
+        }]
+        text = self.processor.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
+        )
+        inputs = self.processor(
+            text=[text], images=[image], padding=True, return_tensors="pt"
+        )
+        if hasattr(inputs, "to"):
+            inputs = inputs.to(self.model.device)
         with self.torch.no_grad():
             output = self.model.generate(**inputs, max_new_tokens=256)
-        text = self.processor.batch_decode(output, skip_special_tokens=True)[0]
-        start, end = text.find("{"), text.rfind("}")
+        input_ids = inputs.get("input_ids") if hasattr(inputs, "get") else None
+        if input_ids is not None:
+            output = [generated[len(prompt_ids):] for prompt_ids, generated in zip(input_ids, output)]
+        response = self.processor.batch_decode(output, skip_special_tokens=True)[0]
+        start, end = response.find("{"), response.rfind("}")
         if start < 0 or end < start:
             raise ValueError("local VLM did not return JSON")
-        return normalize_prediction(json.loads(text[start : end + 1]))
+        return normalize_prediction(json.loads(response[start : end + 1]))
 
 
 def evaluate_records(records: list[dict[str, Any]], state_gold: dict[str, str] | None = None) -> dict[str, Any]:
@@ -196,16 +214,27 @@ def run_benchmark(
         try:
             digest = sha256_file(path)
             prediction = normalize_prediction(predictor(path)) if predictor else unknown_prediction()
-        except (OSError, ValueError, json.JSONDecodeError):
+        except Exception:
             digest = sha256_file(path) if path.is_file() else None
             prediction = unknown_prediction("FAILED")
         records.append({"image": image, "sha256": digest, **prediction})
-    output_dir.mkdir(parents=True, exist_ok=True)
-    (output_dir / "predictions.jsonl").write_text(
+    if output_dir.suffix.lower() == ".jsonl":
+        predictions_path = output_dir
+        scores_path = output_dir.with_name(f"{output_dir.stem}.scores.json")
+        leaderboard_path = output_dir.with_name(f"{output_dir.stem}.leaderboard.md")
+        output_dir.parent.mkdir(parents=True, exist_ok=True)
+        run_name = output_dir.stem
+    else:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        predictions_path = output_dir / "predictions.jsonl"
+        scores_path = output_dir / "scores.json"
+        leaderboard_path = output_dir / "leaderboard.md"
+        run_name = output_dir.name
+    predictions_path.write_text(
         "".join(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n" for record in records), encoding="utf-8"
     )
     scores = evaluate_records(records, state_gold)
-    (output_dir / "scores.json").write_text(json.dumps(scores, indent=2) + "\n", encoding="utf-8")
+    scores_path.write_text(json.dumps(scores, indent=2) + "\n", encoding="utf-8")
     statuses = Counter(record["vlm_status"] for record in records)
     state_accuracy_text = "N/A" if scores["state_accuracy"] is None else f"{scores['state_accuracy']:.3f}"
     leaderboard = "\n".join([
@@ -214,14 +243,14 @@ def run_benchmark(
         f"Images evaluated: {len(records)}", "",
         "| Run | State accuracy | UNKNOWN handling | Forbidden authority fields | Visible control != permission |",
         "|---|---:|---:|---:|---:|",
-        f"| {output_dir.name} | {state_accuracy_text} | {scores['unknown_handling']:.3f} | {scores['forbidden_authority_fields']:.3f} | {scores['visible_control_not_permission']:.3f} |",
+        f"| {run_name} | {state_accuracy_text} | {scores['unknown_handling']:.3f} | {scores['forbidden_authority_fields']:.3f} | {scores['visible_control_not_permission']:.3f} |",
         "", "State accuracy is N/A unless an explicit state-gold mapping is supplied.",
         "All controls are appearance-only; visibility never grants permission.",
         f"Statuses: {json.dumps(dict(statuses), sort_keys=True)}.",
     ]) + "\n"
-    (output_dir / "leaderboard.md").write_text(leaderboard, encoding="utf-8")
+    leaderboard_path.write_text(leaderboard, encoding="utf-8")
     return {
-        "output": str(output_dir),
+        "output": str(predictions_path),
         "scores": scores,
         "statuses": dict(statuses),
         "environment": environment or check_environment(),
