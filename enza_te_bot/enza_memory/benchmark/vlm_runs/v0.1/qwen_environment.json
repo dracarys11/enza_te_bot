@@ -1,0 +1,9 @@
+{
+  "model": "Qwen2.5-VL-7B-Instruct",
+  "gpu": "RTX 5080",
+  "cuda": true,
+  "transformers_version": "5.16.1",
+  "torch_version": "",
+  "adapter_commit": "688bc22",
+  "status": "SMOKE_TEST_PASS"
+}
