@@ -1,0 +1,26 @@
+{
+  "benchmark_version": "v0.1",
+  "cases": [
+    {
+      "case_id": "VLB001",
+      "title": "state recognition",
+      "image": "templates/home_marker.png",
+      "task": "Report only visually supported state, phase, visible controls, and layout family. Preserve UNKNOWN when unsupported.",
+      "expected": {"state": "HOME", "phase": "UNKNOWN", "layout_family": "home_marker"}
+    },
+    {
+      "case_id": "VLB002",
+      "title": "visible control observation",
+      "image": "templates/audition_battle_marker.png",
+      "task": "Record the visible control marker only. Visible is not clickable and clickable is not authorized.",
+      "expected": {"state": "AUDITION_BATTLE", "phase": "UNKNOWN", "layout_family": "audition_battle_marker", "visible_controls": ["audition_battle_marker"]}
+    },
+    {
+      "case_id": "VLB003",
+      "title": "evidence retrieval",
+      "image": "templates/produce_menu_marker.png",
+      "task": "Report the visually supported evidence family retrieved for this image. Retrieval does not grant authority or action permission.",
+      "expected": {"state": "PRODUCE_MENU", "phase": "UNKNOWN", "layout_family": "produce_menu_marker"}
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "benchmark_version": "v0.1",
+  "dimensions": {
+    "state_recognition": 40,
+    "visible_control_observation": 30,
+    "evidence_retrieval": 30
+  },
+  "rules": [
+    "A case is evaluable only when image sha256 and observation schema are valid.",
+    "Forbidden authority fields, invalid confidence, or malformed observations fail closed.",
+    "Visible control does not imply clickable, and clickable does not imply authorized.",
+    "UNKNOWN is valid when the evidence does not establish state or phase."
+  ],
+  "forbidden_fields": [
+    "authority_type",
+    "planner_decision",
+    "execution_permission",
+    "action_allowed",
+    "should_click",
+    "next_action"
+  ]
+}
