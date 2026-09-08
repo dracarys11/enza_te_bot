@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import sys
+import types
 from pathlib import Path
 
 from tools.run_vlm_benchmark import (
@@ -113,6 +115,37 @@ def test_qwen_adapter_one_image_smoke(tmp_path: Path) -> None:
     assert prediction["vlm_status"] == "OBSERVED"
     assert prediction["observation"]["state"] == "MENU"
     assert set(prediction) == {"observation", "confidence", "vlm_status"}
+
+
+def test_qwen_loader_uses_transformers_516_official_class(monkeypatch) -> None:
+    calls = {}
+
+    class FakeProcessorLoader:
+        @staticmethod
+        def from_pretrained(model_name, **kwargs):
+            calls["processor"] = (model_name, kwargs)
+            return object()
+
+    class FakeQwenLoader:
+        @staticmethod
+        def from_pretrained(model_name, **kwargs):
+            calls["model"] = (model_name, kwargs)
+            return object()
+
+    fake_transformers = types.ModuleType("transformers")
+    fake_transformers.AutoProcessor = FakeProcessorLoader
+    fake_transformers.Qwen2_5_VLForConditionalGeneration = FakeQwenLoader
+    fake_torch = types.ModuleType("torch")
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+
+    LocalQwenVLM("/models/Qwen2.5-VL-7B-Instruct")
+
+    assert calls["processor"] == ("/models/Qwen2.5-VL-7B-Instruct", {"local_files_only": True})
+    assert calls["model"] == (
+        "/models/Qwen2.5-VL-7B-Instruct",
+        {"torch_dtype": "auto", "device_map": "auto", "local_files_only": True},
+    )
 
 
 def test_jsonl_output_is_a_file_not_a_directory(tmp_path: Path) -> None:

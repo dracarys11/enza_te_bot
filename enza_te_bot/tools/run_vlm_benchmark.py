@@ -127,12 +127,17 @@ class LocalQwenVLM:
             self.torch = torch_module
             return
         try:
-            from transformers import AutoModelForVision2Seq, AutoProcessor
+            from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration
             import torch
         except ImportError as exc:
             raise RuntimeError("--model requires locally installed transformers and torch") from exc
         self.processor = AutoProcessor.from_pretrained(model_name, local_files_only=True)
-        self.model = AutoModelForVision2Seq.from_pretrained(model_name, local_files_only=True)
+        self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+            model_name,
+            torch_dtype="auto",
+            device_map="auto",
+            local_files_only=True,
+        )
         self.torch = torch
 
     def __call__(self, image_path: Path) -> dict[str, Any]:
