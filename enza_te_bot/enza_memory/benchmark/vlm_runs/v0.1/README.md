@@ -15,3 +15,50 @@ Cases:
 Output records contain only image, sha256, observation, confidence, and
 vlm_status. Authority, planner, execution, permission, and next-action fields
 are forbidden. The runner never connects to ENZA runtime or operates the game.
+
+## Benchmark Artifact Bundle Contract
+
+A reproducible benchmark run includes cases, gold, and the input manifest,
+as well as all referenced artifacts, artifact metadata, and environment
+information. Shipping a manifest alone does not establish that its image
+references are available on another machine.
+
+Before inference, the harness should validate:
+
+1. Manifest completeness: the manifest exists, parses, and contains the
+   expected number of valid entries for the declared run.
+2. Artifact existence: every referenced image resolves to an available file
+   on the consumer environment.
+3. Deterministic path resolution: use an explicit project root and declared
+   artifact root, independent of the current working directory. The same
+   reference must resolve to the same artifact within the declared bundle.
+4. Optional checksum validation: compare available artifact bytes with the
+   declared checksum and report mismatches when this validation is enabled.
+
+Missing artifacts must fail preflight before model execution. Report missing
+paths and counts as infrastructure failures; they do not measure model or
+adapter capability. Validate the full manifest on the consumer even when a
+single-image smoke test has passed.
+
+The Mac producer and RTX5080 WSL consumer must share the same bundle contract;
+machine-specific absolute roots may differ, but relative references and
+artifact identities must remain consistent. Record producer/consumer
+environment information and the model identifier with the run.
+
+See the [full manifest artifact distribution failure](../../../failures/failure_vlm_artifact_distribution.md)
+for the incident in which 883 entries had zero resolvable image references.
+
+## Future Harness Improvements
+
+These are documentation-only requirements; no export or preflight command is
+implemented by this change.
+
+- Portable benchmark bundle export containing the referenced artifacts and
+  the metadata required to validate them on another machine.
+- An artifact manifest declaring `artifact_id`, `relative_path`, `checksum`,
+  and `artifact_root`. The consumer explicitly binds the declared root to its
+  local bundle location.
+- A proposed `benchmark doctor` preflight command reporting manifest count,
+  artifact count, missing files, and invalid references, with deterministic
+  resolution and optional checksum checks. An incomplete bundle must produce
+  a failed preflight result before model execution.

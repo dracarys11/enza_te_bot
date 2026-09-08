@@ -59,3 +59,18 @@ outputs into the seven-field `schemas/response.schema.json` contract. Adapters
 only parse JSON and provider envelopes; they do not call models. Missing action
 authority or malformed fields fail closed with `AdapterError` instead of being
 inferred from prose.
+
+## Benchmark Artifact Bundle Contract
+
+Benchmark distribution includes cases, gold, manifests, referenced artifacts,
+artifact metadata, and environment information. Before model execution,
+validate manifest completeness, artifact existence on the consumer,
+deterministic resolution from an explicit root, and optionally checksums.
+Missing artifacts must fail preflight before inference.
+
+The [vision benchmark bundle contract](vlm_runs/v0.1/README.md#benchmark-artifact-bundle-contract)
+documents cross-environment requirements and proposed bundle export and
+`benchmark doctor` checks. These improvement notes do not implement code or
+change scoring. The associated
+[failure record](../failures/failure_vlm_artifact_distribution.md)
+documents the 883-entry manifest whose images were unavailable on the consumer.
