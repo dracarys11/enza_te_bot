@@ -94,7 +94,8 @@ def test_mocked_api_response_creates_markdown(tmp_path: Path):
     request_body = json.loads(calls[1][3])
     assert request_body["model"] == "Qwen3.8-27B-GGUF"
     assert request_body["stream"] is True
-    assert request_body["max_tokens"] == DEFAULT_MAX_TOKENS == 8192
+    assert request_body["max_tokens"] == DEFAULT_MAX_TOKENS == 4096
+    assert request_body["chat_template_kwargs"] == {"enable_thinking": False}
     assert "Attack the benchmark design" in request_body["messages"][0]["content"]
     assert "After reasoning, provide the final Markdown review in the answer field." in request_body["messages"][0]["content"]
     assert "Do not stop after analysis." in request_body["messages"][0]["content"]
@@ -211,7 +212,7 @@ def test_multiple_stream_chunks_report_client_side_metrics(tmp_path: Path, capsy
     assert "elapsed:" in progress
 
 
-def test_reasoning_stream_reports_thinking_without_persisting_reasoning(tmp_path: Path, capsys):
+def test_mixed_stream_stays_answering_without_persisting_reasoning(tmp_path: Path, capsys):
     root = _context_root(tmp_path)
     reasoning = "PRIVATE_REASONING_MUST_NOT_BE_WRITTEN"
 
@@ -227,7 +228,7 @@ def test_reasoning_stream_reports_thinking_without_persisting_reasoning(tmp_path
     output = tmp_path / "review.md"
     run_review(root, output_path=output, opener=opener)
     progress = capsys.readouterr().out
-    assert "phase: THINKING" in progress
+    assert "phase: THINKING" not in progress
     assert "phase: ANSWERING" in progress
     assert "reasoning tokens: ~" in progress
     assert "answer tokens: 4" in progress

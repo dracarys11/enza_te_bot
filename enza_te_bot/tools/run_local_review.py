@@ -14,7 +14,7 @@ from typing import Any, Callable
 
 DEFAULT_ENDPOINT = "http://localhost:8080/v1"
 DEFAULT_MODEL = "Qwen3.8-27B-GGUF"
-DEFAULT_MAX_TOKENS = 8192
+DEFAULT_MAX_TOKENS = 4096
 CONTEXT_FILES = (
     "enza_memory/benchmark/RELEASE_v0.3.md",
     "enza_memory/benchmark/reviews/v0.3_committee_review.md",
@@ -255,6 +255,7 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0.2,
         "max_tokens": max_tokens,
+        "chat_template_kwargs": {"enable_thinking": False},
         "stream": True,
     }
     request = urllib.request.Request(
@@ -287,7 +288,7 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
                     content_parts.append(answer_text)
                     answer_tokens = _approximate_token_count("".join(content_parts))
                 if reasoning_text or answer_text:
-                    phase = "ANSWERING" if answer_text else "THINKING"
+                    phase = "ANSWERING"
                     elapsed = clock() - started_at
                     speed = (reasoning_tokens + answer_tokens) / elapsed if elapsed > 0 else 0.0
                     progress(
@@ -348,7 +349,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--timeout", type=float, default=600, help="chat completion timeout in seconds")
     parser.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_TOKENS,
-                        help="maximum completion budget, including model reasoning (default: 8192)")
+                        help="maximum completion budget (default: 4096)")
     args = parser.parse_args()
     try:
         output = run_review(args.project_root, endpoint=args.endpoint, model=args.model, output_path=args.output,
