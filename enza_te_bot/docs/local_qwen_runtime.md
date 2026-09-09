@@ -159,6 +159,17 @@ Management path:    MacBook -> Tailscale SSH -> RTX5080 WSL
 
 ## Troubleshooting
 
+### Reasoning tokens increase but answer tokens remain zero
+
+This indicates that the model is generating `reasoning_content` without final
+Markdown in `content`. The ENZA reviewer explicitly sends
+`chat_template_kwargs.enable_thinking=false`; do not remove that setting or
+write reasoning into the review as a fallback. Confirm the runtime checkout
+contains the non-thinking-mode change and rerun the harness.
+
+The full diagnosis and resolution are recorded in
+`enza_memory/failures/failure_local_qwen_review_reasoning_budget.md`.
+
 ### `llama-server` command not found
 
 Use the full binary path shown above, or add its containing directory to
