@@ -107,6 +107,56 @@ started. On the RTX5080 checkout, use the project virtual-environment Python
 instead of `python3` if the system interpreter does not contain the review
 tool dependencies.
 
+## Remote synchronization
+
+The RTX5080 WSL runtime machine is accessed through Tailscale SSH. Do not
+assume or use a local SSH alias such as `enza-wsl`; aliases depend on one
+Mac's SSH configuration and do not identify the Tailscale node contract.
+
+Discover the runtime node before synchronization. On the RTX5080 WSL host,
+the operator can obtain its address and peer name with:
+
+```bash
+tailscale ip -4
+tailscale status
+```
+
+On the Mac, run `tailscale status` and select the RTX5080 WSL node by its
+Tailscale hostname or `100.x.x.x` address. Connect explicitly as the WSL
+administrator:
+
+```bash
+ssh administrator@<tailscale-hostname-or-IP>
+```
+
+Before pulling, inspect the remote checkout. Do not pull over uncommitted
+remote changes:
+
+```bash
+ssh administrator@<tailscale-hostname-or-IP> \
+  "git -C ~/projects/enza_te_bot/enza_te_bot status --porcelain=v1"
+```
+
+If the result is empty, synchronize with a fast-forward-only pull and verify
+the commit:
+
+```bash
+ssh administrator@<tailscale-hostname-or-IP> \
+  "git -C ~/projects/enza_te_bot/enza_te_bot pull --ff-only origin main && \
+   git -C ~/projects/enza_te_bot/enza_te_bot rev-parse HEAD"
+```
+
+The verified remote commit must equal the commit pushed to `origin/main`.
+Report `REMOTE_SYNC_STATUS`, `REMOTE_HOST`, and `REMOTE_COMMIT`. If Tailscale
+node discovery, SSH authentication, the clean-check check, pull, or commit
+verification fails, stop without changing remote state and report the failed
+stage.
+
+```text
+Code distribution:  MacBook -> GitHub -> RTX5080 WSL
+Management path:    MacBook -> Tailscale SSH -> RTX5080 WSL
+```
+
 ## Troubleshooting
 
 ### `llama-server` command not found
