@@ -25,6 +25,7 @@ from typing import Any, Callable, Iterable
 
 
 DEFAULT_MODEL = "Qwen2.5-VL-7B-Instruct"
+ADAPTER_VERSION = "LocalQwenVLM/v0.4"
 ARTIFACT_VALIDATION_FAILED = "ARTIFACT_VALIDATION_FAILED"
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp"}
 OBSERVATION_FIELDS = {"state", "phase", "visible_controls", "layout_family"}
@@ -141,7 +142,7 @@ def _new_run_manifest(input_path: Path, output_dir: Path, project_root: Path,
         "model": {
             "name": Path(model_resolved).name if model_resolved else "UNKNOWN_MODE",
             "path": model_resolved,
-            "adapter": "LocalQwenVLM" if model_path else "none",
+            "adapter": ADAPTER_VERSION if model_path else "none",
         },
         "dataset": {
             "input_manifest": str(resolved_input),

@@ -71,6 +71,21 @@ preflight infrastructure failure exits before inference with
 `ARTIFACT_VALIDATION_FAILED`. Validation and regression tests use local fixtures;
 real RTX5080 inference remains a separate execution check.
 
+## Run Manifest Contract
+
+Every benchmark output includes `run_manifest.json` so the result can be
+traced to the model, dataset, execution environment, code revision, and run
+duration. The manifest records the model name and path, versioned adapter,
+input manifest and image count, Python/torch/Transformers versions, CUDA and
+GPU details, Git commit, start/completion timestamps, and elapsed seconds.
+
+The runner writes the manifest atomically with `status: RUNNING` before
+preflight or inference. A successful invocation finishes with
+`status: COMPLETE`, `completed_at`, and `duration_seconds`. An exception or
+interruption finishes with `status: FAILED` and an `error_summary`, while
+preserving the generated prediction records. Resume keeps the run ID and
+original start timestamp. No environment lookup requires network access.
+
 ## Benchmark Artifact Bundle Contract
 
 A reproducible benchmark run includes cases, gold, and the input manifest,

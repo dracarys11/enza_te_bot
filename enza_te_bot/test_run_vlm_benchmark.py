@@ -7,9 +7,11 @@ import pytest
 from pathlib import Path
 
 from tools.run_vlm_benchmark import (
+    ADAPTER_VERSION,
     ARTIFACT_VALIDATION_FAILED,
     ArtifactValidationError,
     LocalQwenVLM,
+    _runtime_environment,
     _coerce_observation_payload,
     check_environment,
     evaluate_records,
@@ -319,6 +321,19 @@ def test_run_manifest_created_and_completed(tmp_path):
     assert manifest["execution"]["duration_seconds"] >= 0
     assert isinstance(manifest["environment"]["python"], str)
     assert "commit" in manifest["git"]
+    assert set(manifest) == {
+        "benchmark", "version", "run_id", "status", "model", "dataset",
+        "environment", "execution", "git",
+    }
+    assert set(manifest["model"]) == {"name", "path", "adapter"}
+    assert set(manifest["dataset"]) == {"input_manifest", "total_images"}
+    assert set(manifest["environment"]) == {
+        "python", "torch", "transformers", "cuda_available", "gpu",
+    }
+    assert set(manifest["execution"]) == {
+        "started_at", "completed_at", "duration_seconds",
+    }
+    assert set(manifest["git"]) == {"commit"}
 
 
 def test_run_manifest_is_running_during_inference(tmp_path):
@@ -348,3 +363,36 @@ def test_run_manifest_failed_update(tmp_path):
     assert "KeyboardInterrupt" in manifest["error_summary"]
     assert manifest["execution"]["completed_at"]
     assert manifest["execution"]["duration_seconds"] >= 0
+
+
+def test_run_manifest_records_adapter_version(tmp_path, monkeypatch):
+    import tools.run_vlm_benchmark as runner
+    source = _manifest(tmp_path, count=1)
+    output = tmp_path / "out"
+    monkeypatch.setattr(runner, "LocalQwenVLM", lambda *_args, **_kwargs: lambda _path: {
+        "observation": {}, "vlm_status": "UNKNOWN",
+    })
+    run_benchmark(source, output, tmp_path, model_path=str(tmp_path))
+    manifest = json.loads((output / "run_manifest.json").read_text())
+    assert manifest["model"]["adapter"] == ADAPTER_VERSION
+
+
+def test_runtime_environment_fields_collected(monkeypatch):
+    fake_torch = types.ModuleType("torch")
+    fake_torch.__version__ = "2.test"
+    fake_torch.cuda = types.SimpleNamespace(
+        is_available=lambda: True,
+        get_device_name=lambda index: "Test GPU" if index == 0 else "",
+    )
+    fake_transformers = types.ModuleType("transformers")
+    fake_transformers.__version__ = "5.test"
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+
+    environment = _runtime_environment()
+
+    assert environment["python"]
+    assert environment["torch"] == "2.test"
+    assert environment["transformers"] == "5.test"
+    assert environment["cuda_available"] is True
+    assert environment["gpu"] == "Test GPU"
