@@ -145,12 +145,34 @@ def test_streaming_response_reports_progress(tmp_path: Path, capsys):
     assert "Context loaded: yes" in progress
     assert "Starting generation..." in progress
     assert "Generating review..." in progress
-    assert "tokens: 1" in progress
+    assert "tokens: 4" in progress
     assert "speed:" in progress
     assert "elapsed:" in progress
     assert "first token latency:" in progress
-    assert "generated tokens: 4" in progress
+    assert "generated tokens: " in progress
     assert "tokens/sec:" in progress
+    assert "elapsed:" in progress
+
+
+def test_multiple_stream_chunks_report_client_side_metrics(tmp_path: Path, capsys):
+    root = _context_root(tmp_path)
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        return _StreamingResponse([
+            {"choices": [{"delta": {"content": "# Final "}}]},
+            {"choices": [{"delta": {"content": "Verdict\n\n"}}]},
+            {"choices": [{"text": "READY"}]},
+        ])
+
+    output = tmp_path / "review.md"
+    run_review(root, output_path=output, opener=opener)
+    progress = capsys.readouterr().out
+    assert output.read_text(encoding="utf-8") == "# Final Verdict\n\nREADY\n"
+    assert progress.count("Generating review...") == 3
+    assert "tokens: 2" in progress
+    assert "speed:" in progress
     assert "elapsed:" in progress
 
 

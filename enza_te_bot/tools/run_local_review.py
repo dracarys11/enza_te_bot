@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import time
 import urllib.error
 import urllib.request
@@ -193,14 +194,20 @@ def _stream_content(event: dict[str, Any]) -> str:
         delta = choice.get("delta")
     except (KeyError, IndexError, TypeError) as exc:
         raise LocalReviewError("local reviewer returned invalid streaming choice") from exc
-    if delta is None:
-        return _content_from_choice(choice) or ""
-    content = delta.get("content", "") if isinstance(delta, dict) else ""
+    if isinstance(delta, dict) and "content" in delta:
+        content = delta["content"]
+    else:
+        content = _content_from_choice(choice) or ""
     if isinstance(content, str):
         return content
     if isinstance(content, list):
         return "".join(part.get("text", "") for part in content if isinstance(part, dict))
     return ""
+
+
+def _approximate_token_count(text: str) -> int:
+    """Estimate generated tokens without depending on server-side usage data."""
+    return len(re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE))
 
 
 def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..., Any] = urllib.request.urlopen,
@@ -223,7 +230,6 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
     first_token_at = None
     content_parts = []
     generated_tokens = 0
-    completion_usage = None
     progress(f"model: {model}")
     try:
         with opener(request, timeout=600) as response:
@@ -234,7 +240,7 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
                         first_token_at = clock()
                         progress(f"first token latency: {first_token_at - started_at:.2f}s")
                     content_parts.append(text)
-                    generated_tokens += 1
+                    generated_tokens = _approximate_token_count("".join(content_parts))
                     elapsed = clock() - started_at
                     speed = generated_tokens / elapsed if elapsed > 0 else 0.0
                     progress(
@@ -243,13 +249,9 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
                         f"speed: {speed:.1f} tok/s\n"
                         f"elapsed: {elapsed:.0f}s"
                     )
-                usage = event.get("usage")
-                if isinstance(usage, dict) and isinstance(usage.get("completion_tokens"), int):
-                    completion_usage = usage["completion_tokens"]
     except (OSError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
         raise LocalReviewError("local reviewer request failed") from exc
-    if completion_usage is not None:
-        generated_tokens = completion_usage
+    generated_tokens = _approximate_token_count("".join(content_parts))
     elapsed = clock() - started_at
     tokens_per_second = generated_tokens / elapsed if elapsed > 0 else 0.0
     progress(f"generated tokens: {generated_tokens}")
