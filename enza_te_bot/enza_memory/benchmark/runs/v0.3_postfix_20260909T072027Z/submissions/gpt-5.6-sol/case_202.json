@@ -1,0 +1,29 @@
+{
+  "decision": "Retain only provenance-qualified evidence classes. The pre-crash durable timings entry may be cited as the last persisted boundary; the crash transcript may be cited by transcript hash and exact message ranges as SESSION_TRANSCRIPT_CONFIRMED; the fresh recovery screenshot may support only the fresh observed boundary when cited by its source and SHA-256; the operator reconciliation remains USER_REPORTED operator evidence and is not autonomous visual-detector evidence; and the link from the crash endpoint to the fresh boundary remains DERIVED inference. Reconstructed claims must not be presented as original-frame evidence.",
+  "facts": [
+    "The crash-recovery artifact explicitly states that it is recovered session evidence rather than an original real-time raw trace.",
+    "The run screenshot corpus contains zero durable frames for WINGRUN_20260906_01, and the gap audit says its backfill cites non-durable call identifiers.",
+    "The original timings.jsonl remained unmodified by recovery and records the last persisted boundary at S1W6 with two weeks remaining.",
+    "The crash transcript is identified by a session identifier, filesystem path, and SHA-256 digest, and recovered events cite specific transcript message ranges.",
+    "The S2-to-S3 transition at the crash endpoint is classified in the backfill as SESSION_TRANSCRIPT_CONFIRMED rather than live-screen confirmed.",
+    "A separate fresh recovery-session screenshot is recorded with SHA-256 a209ef85ba5fd051ca7593dce7fe734bf7f823120038af8224be079fff8c9fd3 and supports a fresh S3 WING_HOME boundary with eight weeks remaining.",
+    "The continuity link between the crash-session endpoint and the fresh S3 boundary is explicitly classified as DERIVED.",
+    "The operator reconciliation classifies its provenance as user_reported and states that the operator-provided frame is not counted toward autonomous visual-detector replication."
+  ],
+  "inferences": [
+    "Transcript-backed event claims can remain usable as SESSION_TRANSCRIPT_CONFIRMED when cited to the transcript digest and exact message ranges, but they have lower durability than preserved original frames.",
+    "The fresh S3 boundary is consistent with continuation of the crash session, based on the single produce entry, the crash endpoint, the fresh unconsumed S3 state, and the absence of evidence of abandonment or a second entry.",
+    "Registry statements about the recovered continuation are summaries of the recovery record, not independent original-frame corroboration."
+  ],
+  "unknowns": [
+    "The original pixel content and original frame identifiers for the recovered weeks are UNKNOWN.",
+    "The original per-event wall-clock timestamps for the recovered weeks are UNKNOWN.",
+    "The exact instant when the S2-to-S3 transition became stable is UNKNOWN.",
+    "Intermediate visual states between the S3W1 VOCAL interaction and its reconciled commit are UNKNOWN.",
+    "Autonomous screenshot-detector validation of the operator-provided reconciliation frame is UNKNOWN.",
+    "Independent original-frame confirmation of the transcript-reconstructed week-by-week claims is UNKNOWN."
+  ],
+  "action_allowed": false,
+  "reason": "The evidence supports a provenance-aware reconstruction, not restoration of missing raw frames or independent authorization. Transcript, fresh-screen, operator-reported, and derived claims must remain separately labeled and cited to their actual sources; unresolved visual and timing details remain UNKNOWN.",
+  "confidence": 0.97
+}

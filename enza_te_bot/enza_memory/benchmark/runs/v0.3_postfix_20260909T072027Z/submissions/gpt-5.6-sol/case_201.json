@@ -1,0 +1,26 @@
+{
+  "decision": "Classify the event as OBSERVATION_UNAVAILABLE caused by an environment screenshot-pipeline failure. The responsive title and URL reads establish tab liveness, so the timeout does not establish page, game, or business-action failure. Only observation-scope handling is supported; no semantic business action is allowed without fresh reliable state evidence.",
+  "facts": [
+    "The recorded incident contains repeated screenshot capture timeouts and a later busy rejection for a capture still completing after timeout.",
+    "Independent title and URL reads remained responsive on the affected tab.",
+    "No screenshot image was obtainable during the recorded failure window.",
+    "The failure artifact classifies the incident as ENVIRONMENT_TOOL_FAILURE and the screenshot contract represents capture timeout as OBSERVATION_UNAVAILABLE with scope OBSERVATION.",
+    "The screenshot contract sets is_game_failure to false and leaves pending_action_failed unset for observation failures.",
+    "The screenshot contract requires proof that the page is dead before advising a new capture surface; repeated capture failures on a live page do not satisfy that condition.",
+    "For the recorded pre-click occurrence, the decision control was never clicked and the week was not committed at that boundary."
+  ],
+  "inferences": [
+    "The evidence is consistent with a hung backend per-tab screenshot task or transport stall while the page itself remained alive.",
+    "Because liveness was positively observed, automatic browser or game recovery is not supported by the caller-side recovery contract for this failure window.",
+    "A fresh trustworthy observation is required before any semantic state-dependent conclusion could be made."
+  ],
+  "unknowns": [
+    "The page's visual and semantic state during the screenshot-unavailable interval is UNKNOWN.",
+    "The contents of the missing screenshot are UNKNOWN.",
+    "Whether or when the backend capture task would eventually complete is UNKNOWN.",
+    "The host backend's underlying implementation-level root cause is not directly established by the provided repository evidence."
+  ],
+  "action_allowed": false,
+  "reason": "Tab liveness evidence narrows the failure to observation/capture scope, but it supplies no fresh semantic state and no authorization. A screenshot timeout cannot be converted into an action outcome or permission for a business action.",
+  "confidence": 0.98
+}

@@ -1,0 +1,23 @@
+{
+  "decision": "OBSERVATION_UNAVAILABLE; business recovery is not established by the timeout",
+  "facts": [
+    "The recorded screenshot attempts timed out or returned a busy rejection while title and URL reads remained responsive.",
+    "No screenshot image was obtained during the failure window.",
+    "The failure record classifies the event as an environment tool failure and records the tab as alive.",
+    "The caller-side contract separates observation failure from action failure and permits a new capture surface only when an independent liveness probe proves the page dead.",
+    "A later observation record preserves an UNKNOWN presentation position and records no pending business action at that wedge."
+  ],
+  "inferences": [
+    "The timeout is evidence of an unavailable capture channel, not evidence that the page or a business action failed.",
+    "Because liveness was observed, opening a new surface, reloading the game, or resuming the produce is not an automatic consequence supported by this evidence.",
+    "Any later semantic state conclusion requires a fresh trustworthy observation and, where applicable, reconciliation against the durable state."
+  ],
+  "unknowns": [
+    "The visual and semantic page state during the unavailable interval is unknown.",
+    "The exact mechanism of the browser transport stall is unknown.",
+    "The outcome of any business action that might have been in flight is unknown unless separately reconciled."
+  ],
+  "action_allowed": false,
+  "reason": "A live tab with a failed screenshot channel supports only the OBSERVATION_UNAVAILABLE classification. The timeout does not establish page failure, action failure, or a basis for automatic business recovery.",
+  "confidence": 0.99
+}

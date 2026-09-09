@@ -1,0 +1,43 @@
+{
+  "benchmark_version": "v0.3",
+  "run_id": "v0.3_postfix_20260909T072027Z",
+  "run_type": "post_evaluator_and_evidence_fix_rescore",
+  "source_run": "v0.3_baseline_20260908",
+  "offline_only": true,
+  "model_calls": false,
+  "gold_included_in_prompts": false,
+  "execution_commit": "8efa334553f1ce69676d7f5d0a4b18ac8ba2d767",
+  "case_ids": [
+    "case_201",
+    "case_202"
+  ],
+  "case_sha256": {
+    "case_201": "766338d40bdb18d86b2d6ce2473637aecdba6f4c075acf30e3a15a6254eba1a8",
+    "case_202": "87fe9139fb7a4c46674e324bf28c89d11615369d5e337ae84f11ea4d75207a17"
+  },
+  "participants": [
+    "gemini_3.8-flash",
+    "gpt-5.6-sol",
+    "zcode-5.3-flash"
+  ],
+  "evidence_manifest": "enza_memory/benchmark/evidence/v0.3/manifest.json",
+  "evidence_manifest_sha256": "c2fb7a90c7ea6b8e744c5435c6eeb10a384b2f0a92f5f209eb3e7dfe3551d1a2",
+  "evidence_refs_validated": true,
+  "input_provenance": "prompts and submissions copied byte-for-byte from v0.3_baseline_20260908",
+  "prompt_layout": "prompts/<participant>/case_<id>.md",
+  "submission_layout": "submissions/<participant>/case_<id>.json",
+  "score_layout": "scores/<participant>.json",
+  "rule_audit": {
+    "case_201": {
+      "parsed_rules_count": 4,
+      "ignored_rules_count": 0,
+      "warnings": []
+    },
+    "case_202": {
+      "parsed_rules_count": 4,
+      "ignored_rules_count": 0,
+      "warnings": []
+    }
+  },
+  "scores_status": "COMPLETE"
+}
