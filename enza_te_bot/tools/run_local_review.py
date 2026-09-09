@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -121,12 +122,63 @@ def _content_from_chat_response(payload: dict[str, Any]) -> str:
     raise LocalReviewError("local reviewer content was not text")
 
 
-def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..., Any] = urllib.request.urlopen) -> str:
+def _stream_events(response: Any):
+    """Yield JSON events from an OpenAI-compatible Server-Sent Events response."""
+    if hasattr(response, "readline"):
+        lines = iter(response.readline, b"")
+    else:
+        body = _read_response(response)
+        lines = iter(body.splitlines())
+    completed = False
+    for raw_line in lines:
+        line = raw_line.decode("utf-8") if isinstance(raw_line, bytes) else raw_line
+        line = line.strip()
+        if not line or line.startswith(":"):
+            continue
+        if not line.startswith("data:"):
+            continue
+        data = line[5:].strip()
+        if data == "[DONE]":
+            completed = True
+            break
+        try:
+            event = json.loads(data)
+        except json.JSONDecodeError as exc:
+            raise LocalReviewError("local reviewer returned invalid streaming JSON") from exc
+        if not isinstance(event, dict):
+            raise LocalReviewError("local reviewer returned invalid streaming event")
+        yield event
+    if not completed:
+        raise LocalReviewError("local reviewer streaming response interrupted")
+
+
+def _stream_content(event: dict[str, Any]) -> str:
+    try:
+        choices = event.get("choices", [])
+        if not choices:
+            return ""
+        if not isinstance(choices, list) or not isinstance(choices[0], dict):
+            raise TypeError("choices must contain objects")
+        delta = choices[0].get("delta", {})
+    except (KeyError, IndexError, TypeError) as exc:
+        raise LocalReviewError("local reviewer returned invalid streaming choice") from exc
+    content = delta.get("content", "") if isinstance(delta, dict) else ""
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        return "".join(part.get("text", "") for part in content if isinstance(part, dict))
+    return ""
+
+
+def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..., Any] = urllib.request.urlopen,
+                  clock: Callable[[], float] = time.monotonic,
+                  progress: Callable[[str], None] = print) -> str:
     request_payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
         "temperature": 0.2,
         "max_tokens": 4000,
+        "stream": True,
     }
     request = urllib.request.Request(
         _endpoint_url(endpoint, "chat/completions"),
@@ -134,18 +186,58 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
         headers={"Content-Type": "application/json"},
         method="POST",
     )
+    started_at = clock()
+    first_token_at = None
+    content_parts = []
+    generated_tokens = 0
+    completion_usage = None
+    progress(f"model: {model}")
     try:
         with opener(request, timeout=600) as response:
-            payload = json.loads(_read_response(response))
+            for event in _stream_events(response):
+                text = _stream_content(event)
+                if text:
+                    if first_token_at is None:
+                        first_token_at = clock()
+                        progress(f"first token latency: {first_token_at - started_at:.2f}s")
+                    content_parts.append(text)
+                    generated_tokens += 1
+                    elapsed = clock() - started_at
+                    speed = generated_tokens / elapsed if elapsed > 0 else 0.0
+                    progress(
+                        f"Generating review...\n"
+                        f"tokens: {generated_tokens}\n"
+                        f"speed: {speed:.1f} tok/s\n"
+                        f"elapsed: {elapsed:.0f}s"
+                    )
+                usage = event.get("usage")
+                if isinstance(usage, dict) and isinstance(usage.get("completion_tokens"), int):
+                    completion_usage = usage["completion_tokens"]
     except (OSError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
         raise LocalReviewError("local reviewer request failed") from exc
-    return _content_from_chat_response(payload)
+    if completion_usage is not None:
+        generated_tokens = completion_usage
+    elapsed = clock() - started_at
+    tokens_per_second = generated_tokens / elapsed if elapsed > 0 else 0.0
+    progress(f"generated tokens: {generated_tokens}")
+    progress(f"tokens/sec: {tokens_per_second:.2f}")
+    progress(f"elapsed: {elapsed:.2f}s")
+    review = "".join(content_parts).strip()
+    if not review:
+        raise LocalReviewError("local reviewer returned empty Markdown")
+    return review
 
 
 def run_review(project_root: Path, *, endpoint: str = DEFAULT_ENDPOINT, model: str = DEFAULT_MODEL,
                output_path: Path | None = None, opener: Callable[..., Any] = urllib.request.urlopen) -> Path:
     check_llama_server(endpoint, opener=opener)
+    print("ENZA Local Qwen Review")
+    print(f"Model: {model}")
+    print(f"Endpoint: {endpoint}")
+    print("Context loaded: loading...")
     context = build_context_bundle(project_root)
+    print(f"Context loaded: yes ({len(context)} chars)")
+    print("Starting generation...")
     review = call_reviewer(endpoint, model, build_review_prompt(context), opener=opener)
     if not review:
         raise LocalReviewError("local reviewer returned empty Markdown")
