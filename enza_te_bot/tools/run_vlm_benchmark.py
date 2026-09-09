@@ -21,6 +21,7 @@ from typing import Any, Callable, Iterable
 
 
 DEFAULT_MODEL = "Qwen2.5-VL-7B-Instruct"
+ARTIFACT_VALIDATION_FAILED = "ARTIFACT_VALIDATION_FAILED"
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp"}
 OBSERVATION_FIELDS = {"state", "phase", "visible_controls", "layout_family"}
 FORBIDDEN_FIELDS = {
@@ -35,6 +36,12 @@ UNKNOWN_OBSERVATION = {
     "visible_controls": [],
     "layout_family": "UNKNOWN_LAYOUT",
 }
+
+
+class ArtifactValidationError(RuntimeError):
+    """Pre-inference infrastructure failure that must not become a model result."""
+
+    status = ARTIFACT_VALIDATION_FAILED
 
 
 def check_environment(model_path: str | Path | None = None) -> dict[str, Any]:
@@ -113,7 +120,7 @@ def _coerce_observation_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
 def _resolve(root: Path, image: str) -> Path:
     path = Path(image)
-    return path if path.is_absolute() else root / path
+    return path.resolve() if path.is_absolute() else (root / path).resolve()
 
 
 def iter_images(input_path: Path, project_root: Path) -> Iterable[tuple[str, Path]]:
@@ -230,29 +237,37 @@ def evaluate_records(records: list[dict[str, Any]], state_gold: dict[str, str] |
 def preflight(input_path: Path, output_dir: Path, project_root: Path,
               model_path: str | None = None) -> list[tuple[str, Path]]:
     """Validate the whole manifest before loading a model, even with a limit."""
-    if not input_path.exists():
-        raise FileNotFoundError(f"manifest does not exist: {input_path}")
-    images = list(iter_images(input_path.resolve(), project_root.resolve()))
-    if len({image for image, _ in images}) != len(images):
-        raise ValueError("duplicate image IDs in manifest")
-    missing = [str(path) for _, path in images if not path.is_file()]
-    if missing:
-        raise FileNotFoundError(f"missing artifacts ({len(missing)}): " + ", ".join(missing))
-    if model_path and not Path(model_path).expanduser().is_dir():
-        raise FileNotFoundError(f"model path does not exist: {model_path}")
-    directory = output_dir.parent if output_dir.suffix.lower() == ".jsonl" else output_dir
-    directory.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryFile(dir=directory) as probe:
-        probe.write(b"preflight")
-        probe.flush()
-    return images
+    try:
+        root = project_root.resolve()
+        manifest = input_path.resolve() if input_path.is_absolute() else (root / input_path).resolve()
+        if not manifest.exists():
+            raise FileNotFoundError(f"manifest does not exist: {manifest}")
+        images = list(iter_images(manifest, root))
+        if len({image for image, _ in images}) != len(images):
+            raise ValueError("duplicate image IDs in manifest")
+        missing = [str(path) for _, path in images if not path.is_file()]
+        if missing:
+            raise FileNotFoundError(f"missing artifacts ({len(missing)}): " + ", ".join(missing))
+        if model_path and not Path(model_path).expanduser().is_dir():
+            raise FileNotFoundError(f"model path does not exist: {model_path}")
+        if output_dir.suffix.lower() == ".jsonl" and output_dir.is_dir():
+            raise IsADirectoryError(f"JSONL output path is a directory: {output_dir}")
+        directory = output_dir.parent if output_dir.suffix.lower() == ".jsonl" else output_dir
+        directory.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryFile(dir=directory) as probe:
+            probe.write(b"preflight")
+            probe.flush()
+        return images
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        raise ArtifactValidationError(str(exc)) from exc
 
 
-def _progress(path: Path, total: int, records: list[dict[str, Any]]) -> None:
+def _progress(path: Path, total: int, records: list[dict[str, Any]], started_at: str) -> None:
     failed = sum(record["vlm_status"] == "FAILED" for record in records)
+    updated_at = datetime.now(timezone.utc).isoformat()
     data = {"total": total, "completed": len(records) - failed, "failed": failed,
             "remaining": total - len(records),
-            "last_updated": datetime.now(timezone.utc).isoformat()}
+            "started_at": started_at, "updated_at": updated_at}
     with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, delete=False) as handle:
         temporary = Path(handle.name)
         json.dump(data, handle)
@@ -293,6 +308,14 @@ def run_benchmark(
         leaderboard_path = output_dir / "leaderboard.md"
         run_name = output_dir.name
     progress_path = predictions_path.parent / "run_progress.json"
+    started_at = datetime.now(timezone.utc).isoformat()
+    if resume and progress_path.is_file():
+        try:
+            previous_progress = json.loads(progress_path.read_text(encoding="utf-8"))
+            if isinstance(previous_progress.get("started_at"), str):
+                started_at = previous_progress["started_at"]
+        except (OSError, ValueError, json.JSONDecodeError):
+            pass
     done = set()
     if predictions_path.exists():
         if not resume:
@@ -321,7 +344,7 @@ def run_benchmark(
                 if check.read(1) != b"\n":
                     output.write("\n")
                     output.flush()
-        _progress(progress_path, len(images), records)
+        _progress(progress_path, len(images), records, started_at)
         if pending and model_path:
             predictor = LocalQwenVLM(str(Path(model_path).expanduser()), max_new_tokens=max_new_tokens)
         for image, path in pending:
@@ -335,7 +358,7 @@ def run_benchmark(
             output.flush()
             os.fsync(output.fileno())
             records.append(record)
-            _progress(progress_path, len(images), records)
+            _progress(progress_path, len(images), records, started_at)
     scores = evaluate_records(records, state_gold)
     scores_path.write_text(json.dumps(scores, indent=2) + "\n", encoding="utf-8")
     statuses = Counter(record["vlm_status"] for record in records)
@@ -375,12 +398,15 @@ def main() -> None:
     args = parser.parse_args()
     state_gold = json.loads(args.state_gold.read_text(encoding="utf-8")) if args.state_gold else None
     environment = check_environment(args.model)
-    if args.model and not environment["model_path_exists"]:
-        raise SystemExit(f"model path does not exist: {environment['model_path']}")
-    print(json.dumps(run_benchmark(args.input, args.output, args.project_root,
-                                   state_gold=state_gold, environment=environment,
-                                   model_path=args.model, max_new_tokens=args.max_new_tokens,
-                                   limit=args.limit, resume=args.resume), indent=2))
+    try:
+        result = run_benchmark(args.input, args.output, args.project_root,
+                               state_gold=state_gold, environment=environment,
+                               model_path=args.model, max_new_tokens=args.max_new_tokens,
+                               limit=args.limit, resume=args.resume)
+    except ArtifactValidationError as exc:
+        print(json.dumps({"status": exc.status, "error": str(exc)}, ensure_ascii=False))
+        raise SystemExit(2) from exc
+    print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":

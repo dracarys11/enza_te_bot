@@ -7,6 +7,8 @@ import pytest
 from pathlib import Path
 
 from tools.run_vlm_benchmark import (
+    ARTIFACT_VALIDATION_FAILED,
+    ArtifactValidationError,
     LocalQwenVLM,
     _coerce_observation_payload,
     check_environment,
@@ -195,11 +197,14 @@ def test_interrupt_stream_resume_and_progress(tmp_path):
             assert len(rows) == 1  # available before next inference completes
             progress = json.loads((output / "run_progress.json").read_text())
             assert progress["completed"] == 1
+            assert progress["started_at"]
+            assert progress["updated_at"]
             raise KeyboardInterrupt()
         return {"observation": {}, "vlm_status": "UNKNOWN"}
     with pytest.raises(KeyboardInterrupt):
         run_benchmark(source, output, tmp_path, interrupted)
     before = (output / "predictions.jsonl").read_bytes()
+    started_at = json.loads((output / "run_progress.json").read_text())["started_at"]
     calls = []
     def remaining(path):
         calls.append(path.name)
@@ -209,6 +214,8 @@ def test_interrupt_stream_resume_and_progress(tmp_path):
     assert (output / "predictions.jsonl").read_bytes().startswith(before)
     progress = json.loads((output / "run_progress.json").read_text())
     assert (progress["total"], progress["completed"], progress["failed"], progress["remaining"]) == (3, 1, 2, 0)
+    assert progress["started_at"] == started_at
+    assert progress["updated_at"]
     run_benchmark(source, output, tmp_path, remaining, resume=True)
     assert calls == ["1.png", "2.png"]
 
@@ -232,22 +239,47 @@ def test_preflight_before_model_loading_even_with_limit(tmp_path, monkeypatch):
     def forbidden(*args, **kwargs):
         pytest.fail("model must not load before preflight")
     monkeypatch.setattr(runner, "LocalQwenVLM", forbidden)
-    with pytest.raises(FileNotFoundError, match="missing artifacts"):
+    with pytest.raises(ArtifactValidationError, match="missing artifacts") as error:
         run_benchmark(source, tmp_path / "out", tmp_path, model_path=str(tmp_path), limit=1)
-    with pytest.raises(FileNotFoundError, match="manifest"):
+    assert error.value.status == ARTIFACT_VALIDATION_FAILED
+    with pytest.raises(ArtifactValidationError, match="manifest"):
         run_benchmark(tmp_path / "missing", tmp_path / "out", tmp_path)
 
 
 def test_preflight_model_and_writable_output(tmp_path, monkeypatch):
     import tools.run_vlm_benchmark as runner
     source = _manifest(tmp_path)
-    with pytest.raises(FileNotFoundError, match="model path"):
+    with pytest.raises(ArtifactValidationError, match="model path"):
         run_benchmark(source, tmp_path / "out", tmp_path, model_path=str(tmp_path / "missing"))
     def denied(**kwargs):
         raise PermissionError("not writable")
     monkeypatch.setattr(runner.tempfile, "TemporaryFile", denied)
-    with pytest.raises(PermissionError):
+    with pytest.raises(ArtifactValidationError, match="not writable"):
         run_benchmark(source, tmp_path / "out", tmp_path)
+
+
+def test_preflight_rejects_jsonl_directory(tmp_path):
+    source = _manifest(tmp_path)
+    output = tmp_path / "predictions.jsonl"
+    output.mkdir()
+    with pytest.raises(ArtifactValidationError, match="is a directory"):
+        run_benchmark(source, output, tmp_path)
+
+
+def test_cli_reports_artifact_validation_failed(tmp_path, monkeypatch, capsys):
+    import tools.run_vlm_benchmark as runner
+
+    monkeypatch.setattr(sys, "argv", [
+        "run_vlm_benchmark.py",
+        "--input", str(tmp_path / "missing.jsonl"),
+        "--output", str(tmp_path / "out"),
+        "--project-root", str(tmp_path),
+    ])
+    with pytest.raises(SystemExit) as error:
+        runner.main()
+    assert error.value.code == 2
+    report = json.loads(capsys.readouterr().out)
+    assert report["status"] == ARTIFACT_VALIDATION_FAILED
 
 
 def test_custom_tokens_and_root_independent_of_cwd(tmp_path, monkeypatch):

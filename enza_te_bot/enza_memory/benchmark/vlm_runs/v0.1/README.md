@@ -23,7 +23,8 @@ each image. The existing prediction schema is unchanged. `run_progress.json`
 in the output directory is atomically updated at startup and after every
 record, including failures. `completed` counts non-FAILED records, `failed`
 counts FAILED records, and `remaining = total - completed - failed`.
-`last_updated` is a UTC timestamp. Scores and the leaderboard are generated
+`started_at` and `updated_at` are UTC timestamps; `started_at` is preserved
+across resume invocations. Scores and the leaderboard are generated
 when the invocation finishes; the JSONL file is the resume checkpoint.
 
 Use an explicit project root and a new output directory for each run:
@@ -42,6 +43,12 @@ attempts per invocation; omitting it processes all remaining images.
 `--max-new-tokens` defaults to 128. Model loading, prompting, placement, and
 response normalization otherwise retain their existing behavior.
 
+Recommended runtime profiles:
+
+- Fast iteration: Qwen2.5-VL-3B with `--max-new-tokens 128`.
+- Quality baseline: Qwen2.5-VL-7B with `--max-new-tokens 128`; confirm that
+  available VRAM avoids unacceptable CPU offload before a long run.
+
 Resume identifies records by their existing `image` field and verifies their
 SHA-256 against the current artifact. All saved terminal statuses, including
 FAILED and UNKNOWN, are skipped. Use a separate output for intentional retries
@@ -54,7 +61,9 @@ per output directory; a JSONL output path shares its parent's progress file.
 Preflight validates the entire manifest and every image before model loading,
 even when `--limit` is set. It also checks the local model directory when
 supplied and probes output-directory writability. Relative image paths resolve
-against `--project-root`. Validation and regression tests use local fixtures;
+against `--project-root`, independent of the current working directory. Any
+preflight infrastructure failure exits before inference with
+`ARTIFACT_VALIDATION_FAILED`. Validation and regression tests use local fixtures;
 real RTX5080 inference remains a separate execution check.
 
 ## Benchmark Artifact Bundle Contract
