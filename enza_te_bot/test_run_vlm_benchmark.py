@@ -302,3 +302,49 @@ def test_corrupt_checkpoint_preserved(tmp_path):
     with pytest.raises(ValueError):
         run_benchmark(source, output, tmp_path, resume=True)
     assert output.read_text() == '{"image":'
+
+
+def test_run_manifest_created_and_completed(tmp_path):
+    source = _manifest(tmp_path, count=2)
+    output = tmp_path / "out"
+    run_benchmark(source, output, tmp_path)
+    manifest = json.loads((output / "run_manifest.json").read_text())
+    assert manifest["benchmark"] == "ENZA_VLM"
+    assert manifest["version"] == "v0.1"
+    assert manifest["run_id"]
+    assert manifest["status"] == "COMPLETE"
+    assert manifest["dataset"]["total_images"] == 2
+    assert manifest["execution"]["started_at"]
+    assert manifest["execution"]["completed_at"]
+    assert manifest["execution"]["duration_seconds"] >= 0
+    assert isinstance(manifest["environment"]["python"], str)
+    assert "commit" in manifest["git"]
+
+
+def test_run_manifest_is_running_during_inference(tmp_path):
+    source = _manifest(tmp_path, count=1)
+    output = tmp_path / "out"
+
+    def inspect_manifest(_path):
+        manifest = json.loads((output / "run_manifest.json").read_text())
+        assert manifest["status"] == "RUNNING"
+        assert manifest["dataset"]["total_images"] == 1
+        return {"observation": {}, "vlm_status": "UNKNOWN"}
+
+    run_benchmark(source, output, tmp_path, inspect_manifest)
+
+
+def test_run_manifest_failed_update(tmp_path):
+    source = _manifest(tmp_path, count=1)
+    output = tmp_path / "out"
+
+    def interrupted(_path):
+        raise KeyboardInterrupt("test interruption")
+
+    with pytest.raises(KeyboardInterrupt):
+        run_benchmark(source, output, tmp_path, interrupted)
+    manifest = json.loads((output / "run_manifest.json").read_text())
+    assert manifest["status"] == "FAILED"
+    assert "KeyboardInterrupt" in manifest["error_summary"]
+    assert manifest["execution"]["completed_at"]
+    assert manifest["execution"]["duration_seconds"] >= 0

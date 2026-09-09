@@ -13,7 +13,11 @@ import argparse
 import hashlib
 import json
 import os
+import platform
+import subprocess
 import tempfile
+import time
+import uuid
 from datetime import datetime, timezone
 from collections import Counter
 from pathlib import Path
@@ -64,6 +68,102 @@ def check_environment(model_path: str | Path | None = None) -> dict[str, Any]:
         "torch_status": "available",
         "inference_started": False,
     }
+
+
+def _runtime_environment() -> dict[str, Any]:
+    """Capture environment metadata without loading a model."""
+    environment: dict[str, Any] = {
+        "python": platform.python_version(),
+        "torch": "",
+        "transformers": "",
+        "cuda_available": False,
+        "gpu": "",
+    }
+    try:
+        import torch
+        environment["torch"] = str(torch.__version__)
+        environment["cuda_available"] = bool(torch.cuda.is_available())
+        if environment["cuda_available"]:
+            environment["gpu"] = str(torch.cuda.get_device_name(0))
+    except (ImportError, RuntimeError):
+        pass
+    try:
+        import transformers
+        environment["transformers"] = str(transformers.__version__)
+    except (ImportError, AttributeError):
+        pass
+    return environment
+
+
+def _git_commit(project_root: Path) -> str:
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=project_root,
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return ""
+    return result.stdout.strip() if result.returncode == 0 else ""
+
+
+def _manifest_path(output_dir: Path) -> Path:
+    return (output_dir.parent if output_dir.suffix.lower() == ".jsonl" else output_dir) / "run_manifest.json"
+
+
+def _write_manifest(path: Path, manifest: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(mode="w", dir=path.parent, encoding="utf-8", delete=False) as handle:
+        temporary = Path(handle.name)
+        json.dump(manifest, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    try:
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _new_run_manifest(input_path: Path, output_dir: Path, project_root: Path,
+                      model_path: str | None, total_images: int,
+                      started_at: str) -> dict[str, Any]:
+    resolved_input = input_path.resolve() if input_path.is_absolute() else (project_root.resolve() / input_path).resolve()
+    model_resolved = str(Path(model_path).expanduser().resolve()) if model_path else ""
+    return {
+        "benchmark": "ENZA_VLM",
+        "version": "v0.1",
+        "run_id": datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8],
+        "status": "RUNNING",
+        "model": {
+            "name": Path(model_resolved).name if model_resolved else "UNKNOWN_MODE",
+            "path": model_resolved,
+            "adapter": "LocalQwenVLM" if model_path else "none",
+        },
+        "dataset": {
+            "input_manifest": str(resolved_input),
+            "total_images": total_images,
+        },
+        "environment": _runtime_environment(),
+        "execution": {
+            "started_at": started_at,
+            "completed_at": "",
+            "duration_seconds": 0,
+        },
+        "git": {"commit": _git_commit(project_root.resolve())},
+    }
+
+
+def _finish_manifest(manifest: dict[str, Any], status: str, started_monotonic: float,
+                     *, error_summary: str | None = None) -> None:
+    manifest["status"] = status
+    manifest["execution"]["completed_at"] = datetime.now(timezone.utc).isoformat()
+    manifest["execution"]["duration_seconds"] = round(max(0.0, time.monotonic() - started_monotonic), 3)
+    if error_summary:
+        manifest["error_summary"] = error_summary[:1000]
 
 
 def sha256_file(path: Path) -> str:
@@ -279,7 +379,7 @@ def _progress(path: Path, total: int, records: list[dict[str, Any]], started_at:
         temporary.unlink(missing_ok=True)
 
 
-def run_benchmark(
+def _run_benchmark_impl(
     input_path: Path,
     output_dir: Path,
     project_root: Path,
@@ -288,12 +388,17 @@ def run_benchmark(
     environment: dict[str, Any] | None = None,
     *, resume: bool = False, limit: int | None = None,
     model_path: str | None = None, max_new_tokens: int = 128,
+    run_manifest: dict[str, Any] | None = None,
+    run_manifest_path: Path | None = None,
 ) -> dict[str, Any]:
     if limit is not None and limit < 1:
         raise ValueError("limit must be positive")
     if max_new_tokens < 1:
         raise ValueError("max_new_tokens must be positive")
     images = preflight(input_path, output_dir, project_root, model_path)
+    if run_manifest is not None and run_manifest_path is not None:
+        run_manifest["dataset"]["total_images"] = len(images)
+        _write_manifest(run_manifest_path, run_manifest)
     records: list[dict[str, Any]] = []
     if output_dir.suffix.lower() == ".jsonl":
         predictions_path = output_dir
@@ -382,6 +487,60 @@ def run_benchmark(
         "environment": environment or check_environment(),
         "inference_started": predictor is not None,
     }
+
+
+def run_benchmark(
+    input_path: Path,
+    output_dir: Path,
+    project_root: Path,
+    predictor: Callable[[Path], dict[str, Any]] | None = None,
+    state_gold: dict[str, str] | None = None,
+    environment: dict[str, Any] | None = None,
+    *, resume: bool = False, limit: int | None = None,
+    model_path: str | None = None, max_new_tokens: int = 128,
+) -> dict[str, Any]:
+    """Run the benchmark while maintaining an atomic lifecycle manifest."""
+    predictions_path = output_dir if output_dir.suffix.lower() == ".jsonl" else output_dir / "predictions.jsonl"
+    manifest_path = _manifest_path(output_dir)
+    if predictions_path.exists() and not predictions_path.is_dir() and not resume:
+        raise FileExistsError("output already exists; use --resume or a new output")
+
+    started_at = datetime.now(timezone.utc).isoformat()
+    manifest: dict[str, Any]
+    if resume and manifest_path.is_file():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            if not isinstance(manifest, dict):
+                raise ValueError("run manifest must be an object")
+            previous_started = manifest.get("execution", {}).get("started_at")
+            if isinstance(previous_started, str) and previous_started:
+                started_at = previous_started
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            raise ValueError(f"invalid run manifest: {manifest_path}") from exc
+        manifest["status"] = "RUNNING"
+        manifest["execution"]["completed_at"] = ""
+        manifest["execution"]["duration_seconds"] = 0
+        manifest.pop("error_summary", None)
+    else:
+        manifest = _new_run_manifest(input_path, output_dir, project_root, model_path, 0, started_at)
+
+    _write_manifest(manifest_path, manifest)
+    started_monotonic = time.monotonic()
+    try:
+        result = _run_benchmark_impl(
+            input_path, output_dir, project_root, predictor, state_gold, environment,
+            resume=resume, limit=limit, model_path=model_path,
+            max_new_tokens=max_new_tokens, run_manifest=manifest,
+            run_manifest_path=manifest_path,
+        )
+    except BaseException as exc:
+        _finish_manifest(manifest, "FAILED", started_monotonic,
+                         error_summary=f"{type(exc).__name__}: {exc}")
+        _write_manifest(manifest_path, manifest)
+        raise
+    _finish_manifest(manifest, "COMPLETE", started_monotonic)
+    _write_manifest(manifest_path, manifest)
+    return result
 
 
 def main() -> None:

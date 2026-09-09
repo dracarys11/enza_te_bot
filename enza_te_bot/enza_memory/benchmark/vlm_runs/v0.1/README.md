@@ -26,6 +26,11 @@ counts FAILED records, and `remaining = total - completed - failed`.
 `started_at` and `updated_at` are UTC timestamps; `started_at` is preserved
 across resume invocations. Scores and the leaderboard are generated
 when the invocation finishes; the JSONL file is the resume checkpoint.
+The same output directory also contains `run_manifest.json`, which records
+the model path and adapter, dataset manifest and count, Python/torch/
+Transformers/CUDA/GPU environment, harness commit, run ID, and lifecycle
+timestamps. It is written as `RUNNING` before inference, then `COMPLETE` or
+`FAILED` with an error summary.
 
 Use an explicit project root and a new output directory for each run:
 
