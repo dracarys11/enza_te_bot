@@ -5,7 +5,12 @@ from pathlib import Path
 
 import pytest
 
-from tools.run_local_review import CONTEXT_FILES, LocalReviewError, build_context_bundle, run_review
+from tools.run_local_review import (
+    CONTEXT_FILES,
+    LocalReviewError,
+    build_context_bundle,
+    run_review,
+)
 
 
 class _Response:
@@ -88,6 +93,38 @@ def test_mocked_api_response_creates_markdown(tmp_path: Path):
     assert request_body["model"] == "Qwen3.8-27B-GGUF"
     assert request_body["stream"] is True
     assert "Attack the benchmark design" in request_body["messages"][0]["content"]
+
+
+@pytest.mark.parametrize(
+    "choice",
+    [
+        {"message": {"role": "assistant", "content": "# Final Verdict\n\nREADY", "reasoning_content": "ignore me"}},
+        {"text": "# Final Verdict\n\nREADY", "reasoning_content": "ignore me"},
+    ],
+)
+def test_nonstream_chat_response_formats_create_markdown(tmp_path: Path, choice):
+    root = _context_root(tmp_path)
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        return _Response({"choices": [choice]})
+
+    output = tmp_path / "review.md"
+    run_review(root, output_path=output, opener=opener)
+    assert output.read_text(encoding="utf-8") == "# Final Verdict\n\nREADY\n"
+
+
+def test_empty_chat_content_is_clear_error(tmp_path: Path):
+    root = _context_root(tmp_path)
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        return _Response({"choices": [{"message": {"content": "", "reasoning_content": "not output"}}]})
+
+    with pytest.raises(LocalReviewError, match="empty Markdown"):
+        run_review(root, output_path=tmp_path / "review.md", opener=opener)
 
 
 def test_streaming_response_reports_progress(tmp_path: Path, capsys):
