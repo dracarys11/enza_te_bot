@@ -1,0 +1,61 @@
+{
+ "schema_version": 1,
+ "artifact_id": "OBS_0012",
+ "artifact_type": "OBSERVATION",
+ "created_at": "2026-09-07T06:55:00Z",
+ "status": "CANDIDATE",
+ "run_id": "WINGRUN_20260907_02",
+ "environment": {
+  "provider": "ZCode IAB",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "viewport": {"width": 1280, "height": 720},
+  "url": {"value": "https://shinycolors.enza.fun/produce", "classification": "FACT", "evidence_ids": ["tab_url_read_s1w8_exec"]},
+  "title": {"value": "アイドルマスター シャイニーカラーズ", "classification": "FACT", "evidence_ids": ["tab_title_read_recover4"]},
+  "canvas": {"value": "canvas game", "classification": "FACT", "evidence_ids": ["r07_s1w8_exec_rank_screen_final_1453.png"]},
+  "dom_available": {"value": false, "classification": "FACT", "evidence_ids": ["r07_s1w8_exec_rank_screen_final_1453.png"]},
+  "accessibility_available": {"value": false, "classification": "FACT", "evidence_ids": ["r07_s1w8_exec_rank_screen_final_1453.png"]}
+ },
+ "page_state": {
+  "label": "SEASON_RESULT (アイドルランク): S1 target rank E ACHIEVED, final fans 1453, W8 VOCAL committed",
+  "classification": "FACT",
+  "confidence": 0.97,
+  "evidence_ids": ["r07_s1w8_exec_rank_screen_final_1453.png", "r07_s1w8_exec_schedule_preclick.png"]
+ },
+ "numeric_observations": [
+  {"field": "precondition_selected_lesson", "value": "ボーカルレッスン Lv.3 (pink selected card, 決定 badge on card)", "classification": "FACT"},
+  {"field": "precondition_trouble_rate", "value": "0% (badge zoom, single digit 0 confirmed) at click time", "classification": "FACT"},
+  {"field": "kettei_clicks", "value": "exactly 1 (no retry; transition observed accepting the click)", "classification": "FACT"},
+  {"field": "fans_final", "value": "1453 (rank screen count-up settled; 1169 -> 1453, +284)", "classification": "FACT"},
+  {"field": "season_target_rank", "value": "E (シーズン目標ランク E; E tier 1,000人以上以上 highlighted achieved; シーズン目標ランクまで '-')", "classification": "FACT"},
+  {"field": "season_result", "value": "EXPLICIT PASS (E target achieved); 一次審査突破 dialogue corroborates", "classification": "FACT"},
+  {"field": "lesson_gains_visible", "value": "Vo B 417->433 (上限↑), SP 274->277 during lesson animation", "classification": "FACT"},
+  {"field": "produce_continuation", "value": "produce CONTINUES after S1 pass (ノーマルコミュニケーション banner followed ending dialogues; precedent run 0907_01: fail ended produce)", "classification": "INFERENCE"},
+  {"field": "pipeline_stall", "value": "occurrence #5: both capture surfaces (59f1d5f7, ad8b9b80) wedged; presentation position UNKNOWN at wedge; no business action pending", "classification": "FACT"}
+ ],
+ "screenshot": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_rank_screen_final_1453.png",
+ "screenshot_sha256": "eb8e63f9a24f153d2bacd9277a1b0510fe21fbc0f84bd9a77eb9fc833d99582f",
+ "provenance": {
+  "classification": "session_observed",
+  "producer": "ZCode live run (IAB)",
+  "provider_session_id": "sess_73c67a82-7093-45a6-97a4-6f0aa6409593",
+  "captured_at": "2026-09-07T06:20:00Z",
+  "source_artifact_ids": ["OBS_011"],
+  "integrity": {"algorithm": "sha256", "digest": "eb8e63f9a24f153d2bacd9277a1b0510fe21fbc0f84bd9a77eb9fc833d99582f"}
+ },
+ "evidence_references": [
+  {"evidence_id": "r07_s1w8_exec_schedule_preclick.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_schedule_preclick.png", "captured_at": "2026-09-07T06:12:00Z", "source": "IAB tab.screenshot", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "910e7178412cf68e1861c04b006d42f06e4d9d45628decbfc199d12e237056a9"}},
+  {"evidence_id": "r07_s1w8_exec_badge_zoom.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_badge_zoom.png", "captured_at": "2026-09-07T06:13:00Z", "source": "IAB tab.screenshot clip", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "1fbddaf1330c388a082e31a1b7bbe14f0295ae392bf2083922eb262d18b97709"}},
+  {"evidence_id": "r07_s1w8_exec_kettei_sent.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_kettei_sent.png", "captured_at": "2026-09-07T06:15:00Z", "source": "IAB tab.screenshot (8s after single 決定 click)", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "28a8aba2c092d7681e3a36184cf9f082a06b7915907446a169c129aba1f30ab4"}},
+  {"evidence_id": "r07_s1w8_exec_transition.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_transition.png", "captured_at": "2026-09-07T06:16:00Z", "source": "IAB tab.screenshot (transition accepting the click)", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "6d9c2c158bbd1667a2cf45740fb1b20206e158e023d75ff89ff209ae7790dd26"}},
+  {"evidence_id": "r07_s1w8_exec_lesson_gains.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_lesson_gains.png", "captured_at": "2026-09-07T06:17:00Z", "source": "IAB tab.screenshot (lesson animation, gains visible)", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "a44df49df4d04bcc5b66ce38d4f8326c2eeaee7c4cc8a38830bf804891aae3d8"}},
+  {"evidence_id": "r07_s1w8_exec_rank_screen_counting.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_rank_screen_counting.png", "captured_at": "2026-09-07T06:19:00Z", "source": "IAB tab.screenshot (rank screen, counter mid-count 1169)", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "9d156a511cc782181f70ea9d8d5471bc275893009690d39f9eecff470582ccb3"}},
+  {"evidence_id": "r07_s1w8_exec_rank_screen_final_1453.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_rank_screen_final_1453.png", "captured_at": "2026-09-07T06:20:00Z", "source": "IAB tab.screenshot (rank screen settled: 1453, E achieved sparkle)", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "eb8e63f9a24f153d2bacd9277a1b0510fe21fbc0f84bd9a77eb9fc833d99582f"}},
+  {"evidence_id": "r07_s1w8_exec_audition_pass_dialogue.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_audition_pass_dialogue.png", "captured_at": "2026-09-07T06:22:00Z", "source": "IAB tab.screenshot (一次審査突破 line)", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "8c7cec1a97d2ebf71bd6076432308fe75fdb8683d115dd97322bb4244ff24b9d"}},
+  {"evidence_id": "r07_s1w8_exec_normal_comm.png", "kind": "SCREENSHOT", "path": "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r07_s1w8_exec_normal_comm.png", "captured_at": "2026-09-07T06:24:00Z", "source": "IAB tab.screenshot (ノーマルコミュニケーション banner, fast-forward ON)", "classification": "FACT", "integrity": {"algorithm": "sha256", "digest": "245cd6dcfc1ac878ab97689abced12d03729dffb8ffaba62c17cb2e795322266"}},
+  {"evidence_id": "tab_url_read_s1w8_exec", "kind": "URL_READ", "path": null, "captured_at": "2026-09-07T06:10:00Z", "source": "IAB tab.url reads", "classification": "FACT", "integrity": {"algorithm": null, "digest": null}}
+ ],
+ "unknowns": [
+  "presentation position when capture wedged (communication scene with fast-forward ON) is UNKNOWN; no business action was pending at wedge time",
+  "exact S2 opening state not yet observed"
+ ]
+}

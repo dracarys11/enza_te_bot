@@ -73,15 +73,37 @@ records offline operation, excludes gold from prompts, validates evidence
 references, and marks scoring complete. The archived leaderboard reports all
 three participants at `170 / 200` using the unchanged evaluator.
 
+### Evidence dependency policy
+
+v0.3 uses Option B: an immutable external evidence bundle. Case specifications
+retain repository-relative references to evidence owned outside the benchmark
+directory. Every evidence artifact that was not already part of the committed
+repository baseline is a committed bundle member bound by
+`evidence/v0.3/manifest.json`.
+
+The manifest declares the repository root as the deterministic artifact root
+and records each bundle member's path, SHA-256 digest, source, and
+version/revision. For v0.3, the bundle contains
+`enza_memory/observations/OBS_012.json`, which is required by `case_201`.
+The manifest and artifact must be checked out from the same release commit;
+substitution, regeneration, or retrieval from mutable workspace state is not
+permitted during reproduction.
+
 To validate a checkout without modifying artifacts:
 
 1. Check out the release commit containing this file.
 2. Verify all JSON files in the release paths parse successfully.
-3. Recalculate SHA-256 for the two v0.3 case files and two v0.3 gold files and
+3. Run the offline evidence-bundle validation from the repository root:
+
+   ```bash
+   python -c 'from pathlib import Path; from enza_memory.benchmark.evidence_bundle import validate_evidence_bundle; errors = validate_evidence_bundle(Path.cwd(), Path("enza_memory/benchmark/evidence/v0.3/manifest.json")); print("\n".join(errors)); raise SystemExit(bool(errors))'
+   ```
+
+4. Recalculate SHA-256 for the two v0.3 case files and two v0.3 gold files and
    compare them with this document.
-4. Confirm `runs/v0.3_baseline_20260908/run_manifest.json` lists exactly
+5. Confirm `runs/v0.3_baseline_20260908/run_manifest.json` lists exactly
    `case_201` and `case_202` and the three archived participants.
-5. Re-score copies of the archived submissions with the existing evaluator if
+6. Re-score copies of the archived submissions with the existing evaluator if
    independent score reproduction is required. Do not overwrite the archive.
 
 ## Known limitations
@@ -90,10 +112,6 @@ To validate a checkout without modifying artifacts:
   v0.2.
 - v0.3 does not have a standalone `gold/v0.3/freeze_manifest.json`; this
   release document provides direct case/gold hashes only.
-- `case_201` references `enza_memory/observations/OBS_012.json`. That evidence
-  record exists in the release workspace but is not part of this benchmark
-  package or its committed baseline, so a clean-checkout evidence-availability
-  check will report that external dependency missing.
 - The v0.2 archive contains six promoted ARB packages and six gold answers,
   while its normalized baseline run contains five cases and omits `case_103`.
   This historical structure is preserved rather than normalized during the

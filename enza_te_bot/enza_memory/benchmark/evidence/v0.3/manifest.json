@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "benchmark_version": "v0.3",
+  "ownership_model": "immutable_external_evidence_bundle",
+  "artifact_root": "repository_root",
+  "artifacts": [
+    {
+      "artifact_path": "enza_memory/observations/OBS_012.json",
+      "sha256": "0b91ba40c0f81f3cfbbcb9d05fa418315495ae6601cf997a7169bc0806e551c9",
+      "source": "WINGRUN_20260907_02 / ZCode IAB session observation",
+      "revision": "OBS_0012 schema_version=1; ENZA Benchmark v0.3"
+    }
+  ]
+}
