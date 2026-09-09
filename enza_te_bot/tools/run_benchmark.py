@@ -16,6 +16,13 @@ from typing import Any, Sequence
 
 
 BENCHMARK_VERSION = "v0.1"
+V02_BENCHMARK_VERSION = "v0.2"
+V02_PARTICIPANTS = (
+    "gemini_3.8-flash",
+    "gpt-5.6-sol",
+    "zcode-5.3-flash",
+)
+SAFE_PARTICIPANT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*$")
 REQUIRED_RESPONSE_FIELDS = {
     "decision",
     "facts",
@@ -43,6 +50,154 @@ DIMENSION_MAX = {
 
 class BenchmarkValidationError(ValueError):
     """A submission or benchmark input violates the v0.1 contract."""
+
+
+def load_v02_cases(cases_dir: Path) -> dict[str, dict[str, Any]]:
+    """Load only normalized v0.2 ``case_*.json`` contracts.
+
+    The v0.2 directory also contains older ``ARB*.json`` drafts.  They are
+    deliberately excluded so the promoted five-case contract is explicit and
+    cannot collide with the draft corpus.
+    """
+    if not cases_dir.is_dir():
+        raise BenchmarkValidationError(f"benchmark cases directory is missing: {cases_dir}")
+    cases: dict[str, dict[str, Any]] = {}
+    required = {
+        "case_id", "failure_source", "objective", "task_prompt",
+        "evidence_refs", "expected_behavior", "hard_fail_conditions",
+        "grading_rules",
+    }
+    paths = sorted(cases_dir.glob("case_*.json"))
+    if not paths:
+        raise BenchmarkValidationError(f"no normalized v0.2 cases found in {cases_dir}")
+    for path in paths:
+        case = _read_json(path)
+        if not isinstance(case, dict):
+            raise BenchmarkValidationError(f"invalid case object: {path}")
+        missing = sorted(required - case.keys())
+        if missing:
+            raise BenchmarkValidationError(f"{path.name}: missing fields: {', '.join(missing)}")
+        case_id = case["case_id"]
+        if not isinstance(case_id, str) or not case_id.startswith("case_"):
+            raise BenchmarkValidationError(f"invalid v0.2 case_id: {path}")
+        if case_id in cases:
+            raise BenchmarkValidationError(f"duplicate v0.2 case_id: {case_id}")
+        if not isinstance(case["evidence_refs"], list):
+            raise BenchmarkValidationError(f"{case_id}: evidence_refs must be an array")
+        if not isinstance(case["grading_rules"], list):
+            raise BenchmarkValidationError(f"{case_id}: grading_rules must be an array")
+        cases[case_id] = case
+    return dict(sorted(cases.items()))
+
+
+def _v02_prompt(participant: str, case: dict[str, Any]) -> str:
+    """Build a model-neutral, grading-hidden v0.2 prompt."""
+    refs = "\n".join(f"- `{ref}`" for ref in case["evidence_refs"])
+    return f"""# ENZA Benchmark v0.2 — {case['case_id']}
+
+- benchmark: v0.2
+- participant: {participant}
+- mode: OFFLINE ONLY
+
+Do not operate the game, call tools, call models, browse, execute actions,
+or infer execution permission. This is a recorded-evidence reasoning task.
+
+## Task
+
+{case['task_prompt']}
+
+## Objective
+
+{case['objective']}
+
+## Evidence references
+
+Read only the following repository-relative evidence artifacts:
+
+{refs}
+
+Ground every claim in those records. Preserve UNKNOWN when the records do
+not establish an outcome, authority, interactability, or permission. Do not
+invent failures or convert observation into action permission.
+
+## Required response
+
+Return exactly one JSON object with these fields and no others:
+
+{{
+  "decision": "...",
+  "facts": ["..."],
+  "inferences": ["..."],
+  "unknowns": ["..."],
+  "action_allowed": false,
+  "reason": "...",
+  "confidence": 0.0
+}}
+
+`action_allowed` must remain false for this offline benchmark. The prompt
+does not include gold answers or evaluator-owned grading rules.
+"""
+
+
+def _validate_participant_id(participant: str) -> None:
+    if not SAFE_PARTICIPANT_ID.fullmatch(participant):
+        raise BenchmarkValidationError(f"unsafe participant id: {participant!r}")
+
+
+def prepare_v02_run(
+    run_dir: Path,
+    *,
+    cases_dir: Path | None = None,
+    participants: Sequence[str] = V02_PARTICIPANTS,
+) -> Path:
+    """Create an isolated, prompt-only v0.2 benchmark run.
+
+    This function never reads submissions, gold answers, or runtime modules.
+    It refuses an existing run directory to prevent accidental participant
+    or prompt directory collisions.
+    """
+    run_dir = run_dir.expanduser().resolve()
+    if run_dir.exists():
+        raise BenchmarkValidationError(f"refusing to overwrite existing run directory: {run_dir}")
+    unique_participants = tuple(participants)
+    if not unique_participants or len(set(unique_participants)) != len(unique_participants):
+        raise BenchmarkValidationError("participants must be non-empty and unique")
+    for participant in unique_participants:
+        _validate_participant_id(participant)
+
+    project_root = _project_root(run_dir)
+    cases = load_v02_cases(cases_dir or (project_root / "enza_memory" / "benchmark" / "cases" / "v0.2"))
+    prompts_dir = run_dir / "prompts"
+    submissions_dir = run_dir / "submissions"
+    prompts_dir.mkdir(parents=True, exist_ok=False)
+    submissions_dir.mkdir(parents=True, exist_ok=False)
+    for participant in unique_participants:
+        participant_prompts = prompts_dir / participant
+        participant_submissions = submissions_dir / participant
+        participant_prompts.mkdir(exist_ok=False)
+        participant_submissions.mkdir(exist_ok=False)
+        for case_id, case in cases.items():
+            (participant_prompts / f"{case_id}.md").write_text(
+                _v02_prompt(participant, case), encoding="utf-8"
+            )
+        # Empty directories are intentional: submissions are participant-owned
+        # inputs and must never be copied or shared across participants.
+
+    manifest = {
+        "benchmark_version": V02_BENCHMARK_VERSION,
+        "run_id": run_dir.name,
+        "offline_only": True,
+        "model_calls": False,
+        "game_interaction": False,
+        "case_ids": list(cases),
+        "participants": list(unique_participants),
+        "prompt_layout": "prompts/<participant>/case_<id>.md",
+        "submission_layout": "submissions/<participant>/case_<id>.json",
+    }
+    (run_dir / "run_manifest.json").write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    return run_dir
 
 
 def _read_json(path: Path) -> Any:
@@ -253,12 +408,18 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_dir", type=Path)
     parser.add_argument("--cases-dir", type=Path)
+    parser.add_argument("--prepare-v02", action="store_true",
+                        help="create an isolated prompt/submission v0.2 run")
     return parser
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     try:
         args = _parser().parse_args(argv)
+        if args.prepare_v02:
+            prepare_v02_run(args.run_dir, cases_dir=args.cases_dir)
+            print("ENZA_BENCHMARK_V0.2_RUNNER_READY")
+            return 0
         result = run_benchmark(args.run_dir, cases_dir=args.cases_dir)
     except BenchmarkValidationError as error:
         print(f"error: {error}")

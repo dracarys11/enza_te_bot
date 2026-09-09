@@ -105,6 +105,31 @@ class RuntimeTimeoutReconciliationTests(unittest.TestCase):
         self.assertTrue(result.pending_action.stale)
         self.assertFalse(result.pending_action.retry_eligible)
 
+    def test_action_sent_observation_timeout_does_not_retry(self):
+        """A dispatched action remains outcome-UNKNOWN until reconciliation.
+
+        Observation timeout is not evidence that the action failed, and must
+        not create a second dispatch opportunity.
+        """
+        result = self.reconciler.timeout("PAGE_STATE_TIMEOUT")
+
+        self.assertEqual(result.status, "RECONCILIATION_REQUIRED")
+        self.assertEqual(result.reason, "PAGE_STATE_TIMEOUT")
+        self.assertIsNotNone(result.pending_action)
+        self.assertTrue(result.pending_action.stale)
+        self.assertFalse(result.pending_action.retry_eligible)
+        self.assertEqual(result.pending_action.action, "VOCAL")
+        self.assertEqual(result.pending_action.observation_id, "OBS_BEFORE")
+
+        # The same pre-action observation cannot authorize a retry; a fresh
+        # post-timeout observation is required before retry can even become
+        # eligible.
+        unresolved = self.reconciler.reconcile(
+            state="HOME", stable=True, observation_id="OBS_BEFORE",
+        )
+        self.assertEqual(unresolved.status, "RECONCILIATION_REQUIRED")
+        self.assertFalse(unresolved.pending_action.retry_eligible)
+
     def test_transition_after_timeout_clears_pending_without_duplicate_action(self):
         self.reconciler.timeout("SCREENSHOT_TIMEOUT")
         result = self.reconciler.reconcile(
