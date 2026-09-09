@@ -179,6 +179,61 @@ def test_multiple_stream_chunks_report_client_side_metrics(tmp_path: Path, capsy
     assert "elapsed:" in progress
 
 
+def test_reasoning_stream_reports_thinking_without_persisting_reasoning(tmp_path: Path, capsys):
+    root = _context_root(tmp_path)
+    reasoning = "PRIVATE_REASONING_MUST_NOT_BE_WRITTEN"
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        return _StreamingResponse([
+            {"choices": [{"delta": {"reasoning_content": reasoning}}]},
+            {"choices": [{"delta": {"reasoning_content": " more reasoning"}}]},
+            {"choices": [{"delta": {"content": "# Final Verdict\n\nREADY"}}]},
+        ])
+
+    output = tmp_path / "review.md"
+    run_review(root, output_path=output, opener=opener)
+    progress = capsys.readouterr().out
+    assert "phase: THINKING" in progress
+    assert "phase: ANSWERING" in progress
+    assert "reasoning tokens: ~" in progress
+    assert "answer tokens: 4" in progress
+    assert reasoning not in output.read_text(encoding="utf-8")
+    assert output.read_text(encoding="utf-8") == "# Final Verdict\n\nREADY\n"
+
+
+def test_reasoning_only_stream_fails_without_creating_review(tmp_path: Path):
+    root = _context_root(tmp_path)
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        return _StreamingResponse([
+            {"choices": [{"delta": {"reasoning_content": "thinking only"}}]},
+        ])
+
+    output = tmp_path / "review.md"
+    with pytest.raises(LocalReviewError, match="empty Markdown"):
+        run_review(root, output_path=output, opener=opener)
+    assert not output.exists()
+
+
+def test_content_only_stream_writes_answer(tmp_path: Path):
+    root = _context_root(tmp_path)
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        return _StreamingResponse([
+            {"choices": [{"delta": {"content": "# Final Verdict\n\nREADY"}}]},
+        ])
+
+    output = tmp_path / "review.md"
+    run_review(root, output_path=output, opener=opener)
+    assert output.read_text(encoding="utf-8") == "# Final Verdict\n\nREADY\n"
+
+
 def test_interrupted_stream_is_explicit(tmp_path: Path):
     root = _context_root(tmp_path)
 

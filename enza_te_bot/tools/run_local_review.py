@@ -205,26 +205,33 @@ def _stream_events(response: Any):
         raise LocalReviewError("local reviewer streaming response interrupted")
 
 
-def _stream_content(event: dict[str, Any]) -> str:
+def _stream_delta(event: dict[str, Any]) -> tuple[str, str]:
     try:
         choices = event.get("choices", [])
         if not choices:
-            return ""
+            return "", ""
         if not isinstance(choices, list) or not isinstance(choices[0], dict):
             raise TypeError("choices must contain objects")
         choice = choices[0]
         delta = choice.get("delta")
     except (KeyError, IndexError, TypeError) as exc:
         raise LocalReviewError("local reviewer returned invalid streaming choice") from exc
-    if isinstance(delta, dict) and "content" in delta:
-        content = delta["content"]
-    else:
-        content = _content_from_choice(choice) or ""
+    if not isinstance(delta, dict):
+        return "", _content_from_choice(choice) or ""
+    reasoning = delta.get("reasoning_content", "")
+    content = delta.get("content", "")
+    if not isinstance(reasoning, str):
+        reasoning = ""
     if isinstance(content, str):
-        return content
+        return reasoning, content
     if isinstance(content, list):
-        return "".join(part.get("text", "") for part in content if isinstance(part, dict))
-    return ""
+        return reasoning, "".join(part.get("text", "") for part in content if isinstance(part, dict))
+    return reasoning, ""
+
+
+def _stream_content(event: dict[str, Any]) -> str:
+    """Return answer content only; reasoning is intentionally excluded."""
+    return _stream_delta(event)[1]
 
 
 def _approximate_token_count(text: str) -> int:
@@ -234,7 +241,8 @@ def _approximate_token_count(text: str) -> int:
 
 def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..., Any] = urllib.request.urlopen,
                   clock: Callable[[], float] = time.monotonic,
-                  progress: Callable[[str], None] = print) -> str:
+                  progress: Callable[[str], None] = print,
+                  timeout: float = 600) -> str:
     request_payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
@@ -251,32 +259,50 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
     started_at = clock()
     first_token_at = None
     content_parts = []
-    generated_tokens = 0
+    reasoning_chunks = 0
+    answer_chunks = 0
+    reasoning_tokens = 0
+    answer_tokens = 0
     progress(f"model: {model}")
     try:
-        with opener(request, timeout=600) as response:
+        with opener(request, timeout=timeout) as response:
             for event in _stream_events(response):
-                text = _stream_content(event)
-                if text:
+                reasoning_text, answer_text = _stream_delta(event)
+                if reasoning_text or answer_text:
                     if first_token_at is None:
                         first_token_at = clock()
                         progress(f"first token latency: {first_token_at - started_at:.2f}s")
-                    content_parts.append(text)
-                    generated_tokens = _approximate_token_count("".join(content_parts))
+                if reasoning_text:
+                    reasoning_chunks += 1
+                    reasoning_tokens += _approximate_token_count(reasoning_text)
+                if answer_text:
+                    answer_chunks += 1
+                    content_parts.append(answer_text)
+                    answer_tokens = _approximate_token_count("".join(content_parts))
+                if reasoning_text or answer_text:
+                    phase = "ANSWERING" if answer_text else "THINKING"
                     elapsed = clock() - started_at
-                    speed = generated_tokens / elapsed if elapsed > 0 else 0.0
+                    speed = (reasoning_tokens + answer_tokens) / elapsed if elapsed > 0 else 0.0
                     progress(
                         f"Generating review...\n"
-                        f"tokens: {generated_tokens}\n"
+                        f"Qwen reviewer running\n"
+                        f"phase: {phase}\n"
+                        f"reasoning tokens: ~{reasoning_tokens}\n"
+                        f"answer tokens: {answer_tokens}\n"
                         f"speed: {speed:.1f} tok/s\n"
                         f"elapsed: {elapsed:.0f}s"
                     )
     except (OSError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
         raise LocalReviewError("local reviewer request failed") from exc
-    generated_tokens = _approximate_token_count("".join(content_parts))
+    answer_tokens = _approximate_token_count("".join(content_parts))
     elapsed = clock() - started_at
-    tokens_per_second = generated_tokens / elapsed if elapsed > 0 else 0.0
-    progress(f"generated tokens: {generated_tokens}")
+    total_tokens = reasoning_tokens + answer_tokens
+    tokens_per_second = total_tokens / elapsed if elapsed > 0 else 0.0
+    progress(f"reasoning chunks: {reasoning_chunks}")
+    progress(f"answer chunks: {answer_chunks}")
+    progress(f"reasoning tokens: ~{reasoning_tokens}")
+    progress(f"answer tokens: {answer_tokens}")
+    progress(f"generated tokens: {total_tokens}")
     progress(f"tokens/sec: {tokens_per_second:.2f}")
     progress(f"elapsed: {elapsed:.2f}s")
     review = "".join(content_parts).strip()
@@ -286,7 +312,8 @@ def call_reviewer(endpoint: str, model: str, prompt: str, *, opener: Callable[..
 
 
 def run_review(project_root: Path, *, endpoint: str = DEFAULT_ENDPOINT, model: str = DEFAULT_MODEL,
-               output_path: Path | None = None, opener: Callable[..., Any] = urllib.request.urlopen) -> Path:
+               output_path: Path | None = None, opener: Callable[..., Any] = urllib.request.urlopen,
+               timeout: float = 600) -> Path:
     check_llama_server(endpoint, opener=opener)
     print("ENZA Local Qwen Review")
     print(f"Model: {model}")
@@ -295,7 +322,7 @@ def run_review(project_root: Path, *, endpoint: str = DEFAULT_ENDPOINT, model: s
     context = build_context_bundle(project_root)
     print(f"Context loaded: yes ({len(context)} chars)")
     print("Starting generation...")
-    review = call_reviewer(endpoint, model, build_review_prompt(context), opener=opener)
+    review = call_reviewer(endpoint, model, build_review_prompt(context), opener=opener, timeout=timeout)
     if not review:
         raise LocalReviewError("local reviewer returned empty Markdown")
     target = output_path or project_root / OUTPUT_PATH
@@ -310,9 +337,11 @@ def main() -> None:
     parser.add_argument("--endpoint", default=DEFAULT_ENDPOINT)
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--output", type=Path, default=None)
+    parser.add_argument("--timeout", type=float, default=600, help="chat completion timeout in seconds")
     args = parser.parse_args()
     try:
-        output = run_review(args.project_root, endpoint=args.endpoint, model=args.model, output_path=args.output)
+        output = run_review(args.project_root, endpoint=args.endpoint, model=args.model, output_path=args.output,
+                            timeout=args.timeout)
     except LocalReviewError as exc:
         raise SystemExit(str(exc)) from exc
     print(output)
