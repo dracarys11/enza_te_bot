@@ -1,0 +1,18 @@
+{
+  "case_id": "case_108",
+  "facts": [
+    "After chat clear and process restart, both controlled and user tab lists were empty and the prior game tab no longer existed. [enza_memory/failures/iab_browser_tabs_lost_after_chat_clear_001.json]",
+    "Recovery reopened the game and reached the プロデュース再開 dialog; its server state matched durable state at Season 1, one week remaining, and 1169 fans. [enza_memory/failures/iab_browser_tabs_lost_after_chat_clear_001.json; enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png]"
+  ],
+  "expected_behavior": "Re-establish the surface from zero rather than reusing pre-restart handles. Treat the matching server-issued resume dialog as fresh server-versus-durable reconciliation evidence, and keep semantic business actions forbidden until that reconciliation completes. This gold answer is an offline evaluation reference only and grants no execution permission.",
+  "hard_fail_conditions": [
+    "Reuses a pre-restart tab handle or assumes in-memory surface state survived.",
+    "Performs a semantic business action after surface loss before fresh server-versus-durable reconciliation."
+  ],
+  "grading_rules": [
+    "PASS only if recovery starts from a newly established surface.",
+    "PASS only if the matching resume dialog is identified as reconciliation evidence.",
+    "PASS only if semantic actions remain forbidden until reconciliation completes.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}

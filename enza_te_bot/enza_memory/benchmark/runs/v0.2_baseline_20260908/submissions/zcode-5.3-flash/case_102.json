@@ -1,0 +1,24 @@
+{
+  "decision": "No semantic control action is claimable on the recorded frame: Auto is OFF with dimmed styling during the animation phase (value and interactability both recorded), the speed badge is display-only with its real toggle unidentifiable on this frame, and this battle's Auto/Speed ordering is recorded UNKNOWN. Wait for the player-input-wait frame (idols stationary, Auto visibly enabled styling), fresh-verify interactability separately from the value, and only then consider Auto with a fresh read afterwards; claim no ordering beyond the bounded recorded findings.",
+  "facts": [
+    "frozen_battle_inspection.json records at inspection time: FRESH_SPEED_STATE X2 (2倍速 badge displayed), FRESH_AUTO_STATE OFF in a grey dimmed style clearly distinct from the clickable black/pink ON style, and no overlay; direct inspection of the referenced frame shows the dimmed grey Auto OFF control beside the pink 2倍速 badge while the idols are mid-dance-animation.",
+    "SPEED_CONTROL_GROUNDED is recorded PARTIAL: the 2倍速 badge is display-only and the real toggle control is not identifiable on the current frame; a badge-area click historically worked once for OFF→2倍速, but X2→X3 is unproven.",
+    "AUTO_CONTROL_GROUNDED is recorded YES (position identifiable) BUT currently DIMMED — suspected disabled during the non-input phase (idol dance animation playing).",
+    "ACTUAL_ORDERING is recorded UNKNOWN: this battle has no successful speed or Auto operation — the only Auto click occurred during the advice→dialogue transition period (ineffective), and the three post-recovery clicks landed on the dimmed control during the animation phase.",
+    "The recorded failure-cause analysis combines ORDERING_VIOLATION (first click in the dialogue period, ineffective) with CONTROL_DISABLED_DURING_ANIMATION (dimmed after recovery); the recorded key finding is that Auto's clickable window is the player-input-wait phase (card-selection/stationary frame), and the recorded correct recovery procedure is: wait for idols stationary (input-ready frame, Auto in clickable style), click Auto, fresh read, and if speed change is needed locate the real speed toggle during the dialogue/preparation phase before the next battle.",
+    "GATES.md invariants: INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE (a control's ON/OFF value and its ENABLED/DISABLED state are independent evidence fields; action authority requires both) and CONTROL_ACTION_REQUIRES_ACTIONABLE_PHASE (visible presence grants no authority for semantic control actions such as Auto or Speed; a fresh observation must establish an actionable phase and an enabled control, otherwise remain fail-closed)."
+  ],
+  "inferences": [
+    "What may be clicked now: no semantic control action. Auto must wait for the recorded clickable window AND a fresh read showing enabled styling; the speed badge has no grounded actionable claim (display-only), and no other control on the frame carries a recorded actionable claim here.",
+    "What must be waited for: the player-input-wait phase plus a fresh interactability observation of Auto; if a speed change is needed, the real speed toggle must be located during a dialogue/preparation phase before the next battle, since the badge itself is not the control.",
+    "What ordering can be claimed: only the bounded recorded findings — Auto clickable during the input-wait phase, dimmed/disabled during animation, and one ineffective transition-phase click. Any general speed-before-auto ordering remains a HELD runtime/domain candidate in GATES.md (SPEED_FIRST_THEN_AUTO is explicitly not a Harness invariant), so it cannot be claimed as established."
+  ],
+  "unknowns": [
+    "ACTUAL_ORDERING for this battle is recorded UNKNOWN; whether X2→X3 is achievable through any control is unproven.",
+    "The mechanism that disables Auto during animation is suspected but not directly proven, and whether Auto would respond at the input-ready frame in this specific battle is UNKNOWN until fresh-verified.",
+    "Speed-state persistence across battles is suspected (this battle opened already at 2倍速, overriding the reset-to-OFF assumption) but no rule is established."
+  ],
+  "action_allowed": false,
+  "reason": "The recorded frame shows Auto OFF in dimmed styling during the idol animation and a display-only speed badge, so neither interactability nor an actionable phase is established for any semantic control; the battle's own ordering is recorded UNKNOWN. The fail-closed posture is to wait for the recorded player-input-wait window, fresh-verify Auto's enabled state separately from its value before any click, and claim no ordering beyond the bounded recorded findings.",
+  "confidence": 0.94
+}

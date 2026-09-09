@@ -1,0 +1,26 @@
+{
+  "decision": "REESTABLISH_A_NEW_SURFACE_THEN_RECONCILE_SERVER_AND_DURABLE_STATE_BEFORE_BUSINESS_ACTIONS",
+  "facts": [
+    "At recovery start, both the controlled-tab list and user-tab list were empty, and the prior game tab no longer existed.",
+    "The incident was classified as environment session-surface loss after a process restart associated with chat clearing.",
+    "The recorded recovery opened the game in a new IAB surface at /home, booted to the lobby, and reached a プロデュース再開 dialog.",
+    "The resume dialog displayed season 1, one week remaining, 1,169 fans, and the recorded character state.",
+    "Those server fields matched the durable boundary, and a later fresh stable WING_HOME observation was persisted.",
+    "The recorded reconciliation found no week double-commit and left W8 unconsumed."
+  ],
+  "inferences": [
+    "Recovery requires establishing a new browser surface and reopening the game because there is no surviving tab to attach to.",
+    "The visible resume dialog is evidence of server-held state but is not by itself permission to resume semantic business actions.",
+    "Before semantic business actions resume, server fields must match the durable checkpoint and a fresh stable post-resume state must be observed.",
+    "A mismatch, unavailable field, or unstable state requires remaining fail-closed rather than selecting a business objective."
+  ],
+  "unknowns": [
+    "The direct mechanism that removed the tabs is unknown.",
+    "Whether an action was in flight at the exact restart moment is unknown.",
+    "Before reconciliation, the integrity of the server-side business boundary is unknown.",
+    "A future reopened session's state is unknown until its own fresh reconciliation."
+  ],
+  "action_allowed": false,
+  "reason": "Total client-surface loss removes continuity evidence; the recorded recovery is safe only as a reconciliation pattern, with server-to-durable agreement and a fresh stable boundary required before business semantics resume.",
+  "confidence": 0.97
+}

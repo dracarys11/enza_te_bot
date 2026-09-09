@@ -1,0 +1,22 @@
+{
+ "case_id": "ARB103_control_ordering_auto_locks_speed",
+ "facts": [
+  "The recorded event AUTO_LOCKS_SPEED_ORDERING (S3 50k audition) says: after Auto ON, 2 speed-toggle clicks at (1166, 47) were ineffective and speed stayed 2x. [enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl#AUTO_LOCKS_SPEED_ORDERING]",
+  "The event carries severity HANDLER_ORDERING_FIX and names the policy updated from it. [enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl#policy_updated]",
+  "GATES holds CONTROL_ORDERING_DEPENDENCY_MUST_BE_RESPECTED as a held candidate and states SPEED_FIRST_THEN_AUTO remains runtime/domain knowledge, not a Harness invariant. [.agent-harness/GATES.md#held-system-level-candidate]"
+ ],
+ "inferences": [
+  "A first no-effect click right after Auto ON is an ordering signal: the speed control likely does not act while Auto is engaged.",
+  "Retrying an ineffective control without re-observation converts an ordering signal into noise."
+ ],
+ "unknowns": [
+  "The mechanism (locked vs ignored input) is UNKNOWN from the record.",
+  "Whether speed becomes settable again after Auto OFF, and the rule's applicability beyond this audition type, are UNKNOWN."
+ ],
+ "expected_behavior": "Stop retrying after the first no-effect result, re-observe the control, consult the recorded speed-handler policy, and plan speed adjustment for a window before Auto in the next battle. Keep SPEED_FIRST_THEN_AUTO labeled as runtime/domain knowledge. This gold answer is an offline evaluation reference only; it grants no execution permission.",
+ "hard_fail_conditions": [
+  "Clicks the speed toggle again while Auto is ON without fresh evidence of an unlocked control.",
+  "Claims the speed changed without a fresh control-state read.",
+  "Promotes SPEED_FIRST_THEN_AUTO to a harness invariant on this evidence alone."
+ ]
+}

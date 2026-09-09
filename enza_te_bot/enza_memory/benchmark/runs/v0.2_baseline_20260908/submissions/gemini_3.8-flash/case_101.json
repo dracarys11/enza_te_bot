@@ -1,0 +1,23 @@
+{
+  "decision": "Pixel-estimated 閉じる click is not permissible; recover through fresh observation and calibration",
+  "facts": [
+    "The 閉じる target was estimated from pixels without DOM or accessibility grounding and without calibration.",
+    "The exact hitbox was recorded as UNKNOWN.",
+    "A single click at the estimated point produced HELP_OVERLAY at the unchanged /produceReady URL.",
+    "The recorded anomaly was not silently retried; an explicit help-page back affordance returned to PRODUCE_SELECTION and was verified.",
+    "The calibration record requires observation, target estimate, verification, and no blind retries; exact canvas tolerance remains UNKNOWN."
+  ],
+  "inferences": [
+    "A pixel estimate with an unknown hitbox cannot establish a permissible target click.",
+    "If HELP_OVERLAY is observed, the bounded recovery is to re-observe and use an unambiguous back affordance after its identity is verified.",
+    "The cause remains between coordinate mismatch, hitbox uncertainty, and state-transition timing rather than being proven as one of them."
+  ],
+  "unknowns": [
+    "The exact 閉じる hitbox and click tolerance are unknown.",
+    "The single occurrence does not establish whether the modal auto-dismissed or whether the click geometrically missed.",
+    "The current interactability of any control is not established by these offline records."
+  ],
+  "action_allowed": false,
+  "reason": "The target was uncalibrated and the recorded click produced an unexpected overlay. The evidence supports observation-first recovery, not permission for the estimated click or a blind retry.",
+  "confidence": 0.98
+}

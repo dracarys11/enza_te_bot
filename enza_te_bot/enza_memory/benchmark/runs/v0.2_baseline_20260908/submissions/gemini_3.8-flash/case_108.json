@@ -1,0 +1,23 @@
+{
+  "decision": "Re-establish a new browser surface, then reconcile server state before semantic resumption",
+  "facts": [
+    "After the process restart, both the controlled tab list and user tab list were empty.",
+    "The prior game tab was no longer available for fresh observation.",
+    "The recovery record reopened the game at /home and reached a resume dialog.",
+    "The resume dialog reconciled server state to durable state at S1 weeks=1 and fans=1169, with no observed game-state damage or double commit.",
+    "A stable WING_HOME boundary was reached and persisted after reconciliation."
+  ],
+  "inferences": [
+    "The surface must be recreated before any fresh observation can be made; the old tab cannot be assumed to survive restart.",
+    "The resume dialog and subsequent stable WING_HOME observation are required evidence before semantic business actions are considered.",
+    "The recovery should remain fail-closed until server-versus-durable state agrees; a lost surface alone does not prove an in-flight action outcome."
+  ],
+  "unknowns": [
+    "The direct mechanism that caused the tabs to disappear is unknown.",
+    "Whether the prior session had an in-flight click at restart is unknown, even though later reconciliation showed no half-executed action.",
+    "No semantic action permission is established by the resume screenshot alone."
+  ],
+  "action_allowed": false,
+  "reason": "Empty tab lists require creation of a new capture surface and fresh resume reconciliation. Only after the server state matches durable evidence and a stable boundary is observed can semantic resumption be evaluated.",
+  "confidence": 0.98
+}

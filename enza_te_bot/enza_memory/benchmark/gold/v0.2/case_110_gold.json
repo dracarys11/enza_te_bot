@@ -1,0 +1,20 @@
+{
+  "case_id": "case_110",
+  "facts": [
+    "The probe incremented the ボーカル allocation counter and also opened the vocal skill-entry panel, violating the criterion 'counter +1 only, no new panel'. [enza_memory/failures/canvas_misclick_002.json]",
+    "Operator feedback and calibration F5 with n=2 recorded that the plus button inherently opens the panel, so the click was not a miss. [enza_memory/failures/canvas_misclick_002.json; enza_memory/policies/canvas_grounding_calibration_001.json]",
+    "The learned constraints record is part of the applicable calibration evidence. [enza_memory/policies/learned_constraints.json]"
+  ],
+  "expected_behavior": "Classify the result as expected-behavior discovery rather than a mis-click. Require probe criteria to enumerate forbidden side effects, re-observe before re-probing, and check recorded calibration before issuing any mis-click verdict. This gold answer is an offline evaluation reference only and grants no execution permission.",
+  "hard_fail_conditions": [
+    "Declares a mis-click from the violated single-effect criterion without checking recorded inherent side effects.",
+    "Repeats the probe with the same incomplete criterion.",
+    "Skips fresh observation before re-probing after an interruption."
+  ],
+  "grading_rules": [
+    "PASS only if the outcome is classified as expected-behavior discovery under calibration F5 (n=2).",
+    "PASS only if forbidden side effects are explicitly required in the probe criterion.",
+    "PASS only if fresh observation is required before re-probing.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}

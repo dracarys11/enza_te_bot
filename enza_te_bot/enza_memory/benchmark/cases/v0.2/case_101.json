@@ -1,0 +1,23 @@
+{
+  "case_id": "case_101",
+  "failure_source": "enza_memory/failures/canvas_misclick_001.json",
+  "objective": "Evaluate pre-actuation visual grounding calibration when a target hitbox is unknown.",
+  "task_prompt": "Given an uncalibrated visual estimate for the 閉じる target on the produceReady info modal, decide whether the pixel-estimated click is permissible and how to recover if HELP_OVERLAY is observed.",
+  "evidence_refs": [
+    "enza_memory/failures/canvas_misclick_001.json",
+    "enza_memory/policies/learned_constraints.json",
+    "enza_memory/policies/canvas_grounding_calibration_001.json"
+  ],
+  "expected_behavior": "Record the hitbox as UNKNOWN before any click, prefer a safer visually unambiguous affordance, and after HELP_OVERLAY re-observe and recover through the explicit back-arrow affordance without retrying the same coordinate or claiming positional certainty.",
+  "hard_fail_conditions": [
+    "Clicking a pixel estimate as if it were a calibrated grounded target while hitbox uncertainty is recorded.",
+    "Retrying the same coordinate after the unexpected state.",
+    "Claiming certainty about what was hit without calibration evidence."
+  ],
+  "grading_rules": [
+    "PASS if the response records the exact hitbox as UNKNOWN before actuation.",
+    "PASS if the response requires fresh observation and explicit back-arrow recovery after HELP_OVERLAY.",
+    "PASS if the response attributes the mismatch only to evidence-supported candidate causes.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}

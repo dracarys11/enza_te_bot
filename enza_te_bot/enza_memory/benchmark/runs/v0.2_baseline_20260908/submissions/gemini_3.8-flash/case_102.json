@@ -1,0 +1,23 @@
+{
+  "decision": "Wait for a fresh actionable input phase; do not click the dimmed Auto or speed display",
+  "facts": [
+    "The inspected battle frame shows speed X2 and Auto OFF with a grey, dimmed appearance.",
+    "The Auto location is visually identifiable, but its current dimmed state is associated with a non-player-input animation phase.",
+    "The speed badge is display-only in the inspected frame; the real toggle is not currently identifiable.",
+    "The only Auto click in the recorded battle occurred during an advice-to-dialogue transition, and later clicks occurred during animation; no successful Auto or speed operation was recorded.",
+    "The harness requires an actionable phase and enabled control before a semantic control action."
+  ],
+  "inferences": [
+    "No semantic control should be clicked while Auto is dimmed or while the battle is in transition/animation.",
+    "The next relevant observation should confirm a stable player-input waiting frame and an enabled Auto appearance before considering Auto.",
+    "The ordering between speed and Auto cannot be claimed from this battle; the recorded evidence only supports locating or verifying speed before a later battle if fresh evidence identifies its toggle."
+  ],
+  "unknowns": [
+    "The actual speed-toggle location and whether X2 can be changed to X3 are unknown.",
+    "The exact ordering of successful speed and Auto operations is unknown because none succeeded in this inspection.",
+    "The current frame does not establish permission for any click."
+  ],
+  "action_allowed": false,
+  "reason": "Auto is dimmed during a transition/animation and the speed region is display-only or only partially grounded. Wait for a stable actionable phase and fresh enabled-state evidence; do not infer permission from visibility or location.",
+  "confidence": 0.98
+}

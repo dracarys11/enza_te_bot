@@ -1,0 +1,25 @@
+{
+  "decision": "Retain provenance-qualified recovered evidence and downgrade reconstructed claims",
+  "facts": [
+    "The crash-recovery artifact explicitly states that it is recovered session evidence, not an original real-time raw trace.",
+    "The crashed run has no durable original screenshot frames, and the evidence audit records that the backfill cites non-durable session call identifiers.",
+    "The backfill distinguishes live-screen-confirmed, session-transcript-confirmed, and derived claims, with the recovered transition and continuity claims carrying their respective classifications.",
+    "The operator reconciliation is labeled user_reported and is explicitly excluded from autonomous visual-detector replication counts.",
+    "The records state that original per-event timestamps and original frame identifiers for the recovered weeks were not durably persisted."
+  ],
+  "inferences": [
+    "Transcript-derived claims remain usable only as transcript-level or recovered evidence when cited to the transcript digest and relevant message ranges; they must not be presented as original frame observations.",
+    "Fresh recovery screenshots may support the fresh boundary only when cited to their own source and digest, while continuity from the crash endpoint remains derived rather than an original-frame fact.",
+    "Call identifiers cannot substitute for missing original frames, and missing provenance must not be silently upgraded."
+  ],
+  "unknowns": [
+    "The original pixel content and original frame identifiers for the recovered weeks are unknown.",
+    "The original per-event wall-clock timestamps are unknown.",
+    "The exact instant at which the reconstructed transition became stable is unknown.",
+    "Independent detector validation of the operator-provided reconciliation frame is unknown.",
+    "Intermediate visual states that were not captured remain unknown."
+  ],
+  "action_allowed": false,
+  "reason": "The evidence supports a provenance-aware reconstruction with explicit downgrades, not restoration of missing raw frames. Each claim must retain its actual evidence class and citation, while absent frame identity, timing, and intermediate visual facts remain unknown.",
+  "confidence": 0.98
+}

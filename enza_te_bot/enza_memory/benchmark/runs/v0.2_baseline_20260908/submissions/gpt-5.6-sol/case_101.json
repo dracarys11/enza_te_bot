@@ -1,0 +1,24 @@
+{
+  "decision": "WITHHOLD_THE_PIXEL_ESTIMATED_CLOSE_CLICK_AND_USE_OBSERVED_RECOVERY_EVIDENCE_ONLY",
+  "facts": [
+    "The 閉じる location was estimated from pixels without DOM, accessibility grounding, or calibration, and its exact hitbox was recorded as unknown.",
+    "A single click at the estimate produced HELP_OVERLAY while the URL remained /produceReady.",
+    "The unexpected state was detected by a fresh screenshot rather than by the unchanged URL.",
+    "In the recorded incident, an explicit back-arrow affordance on the help page was used and a subsequent screenshot verified PRODUCE_SELECTION.",
+    "The calibration record contains no successful calibration for the 閉じる target."
+  ],
+  "inferences": [
+    "The uncalibrated pixel estimate is insufficient to support a click because target identity and interactability at that location are not established.",
+    "If HELP_OVERLAY is observed, recovery should begin with a fresh observation and use only a visually unambiguous isolated affordance; success requires a fresh expected-state comparison.",
+    "The unchanged URL cannot distinguish the modal, help overlay, and recovered selection state."
+  ],
+  "unknowns": [
+    "The exact cause of the unexpected help overlay is unknown.",
+    "The actual 閉じる hitbox and click tolerance are unknown.",
+    "Whether the modal changed state between screenshot and click is unknown.",
+    "A future recovery outcome is unknown until verified by a fresh observation."
+  ],
+  "action_allowed": false,
+  "reason": "The target estimate is uncalibrated, and one observed attempt reached a different state; offline evidence supports fail-closed re-observation and verified recovery, not actuation.",
+  "confidence": 0.98
+}

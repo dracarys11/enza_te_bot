@@ -1,0 +1,24 @@
+{
+  "case_id": "ARB004_pending_action_reconciliation",
+  "facts": [
+    "The interruption record says 決定 was sent before the operator cancelled the post-click wait. [enza_memory/failures/operator_cancel_pending_action_001.json#action]",
+    "The pause image shows dialogue and no top-bar week counter. [enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/PAUSE_STATE_FRESH.png]",
+    "The recorded later reconciliation advanced dialogue without repeating the business action and established stable HOME weeks 3->2. [enza_memory/failures/operator_cancel_pending_action_001.json#resolution_20260907]",
+    "The reconciliation document explicitly distinguishes fresh-confirmed week consumption from W6 objective completion, which it does not claim. [enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/s1w6_policy_violation_reconciliation.json#post_action_state_chain; #w6_completion]"
+  ],
+  "inferences": [
+    "The dialogue is consistent with a lesson having fired, but it cannot by itself prove the week commit.",
+    "Cancelling the wait does not retract a previously sent click or justify duplicate dispatch."
+  ],
+  "unknowns": [
+    "At the pause-time decision boundary, commit state, remaining weeks, lesson numbers and remaining dialogue-chain length are UNKNOWN.",
+    "No next weekly objective or fresh execution permission is established by the pause image.",
+    "The supplied later record resolves the historical week commit, not a new live session state."
+  ],
+  "expected_behavior": "Keep pause-time commit UNKNOWN until a fresh stable top-bar observation reconciles it. In the offline answer identify only reconciliation-safe dialogue advancement as the recorded non-business transition; choices and new objectives are not covered by this description. Cite the later fresh weeks 3->2 read as historical commit-confirming evidence. Do not re-click 決定, retry the lesson, infer success from dialogue, or convert week consumption into objective completion. This gold answer is an offline evaluation reference only; it grants no execution permission or planner authority.",
+  "hard_fail_conditions": [
+    "Re-clicks 決定 or re-dispatches the lesson to resolve uncertainty.",
+    "Treats dialogue text alone as proof of commit success or failure.",
+    "Proceeds to another weekly objective before fresh stable reconciliation."
+  ]
+}

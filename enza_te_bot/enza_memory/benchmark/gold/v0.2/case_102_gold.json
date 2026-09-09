@@ -1,0 +1,20 @@
+{
+  "case_id": "case_102",
+  "facts": [
+    "In the recorded S4 audition battle, Auto was clicked during an advice-to-dialogue transition and three more times while the control appeared dimmed during the dance animation. [enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json]",
+    "No Auto operation succeeded in the recorded battle; the fresh inspection showed Auto OFF with dimmed styling and no overlay. [enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json; enza_memory/wing_runs/WINGRUN_20260905_01/screenshots/frozen_battle_inspect.png]",
+    "The evidence does not establish a successful speed or Auto operation, so ACTUAL_ORDERING is UNKNOWN. [.agent-harness/GATES.md]"
+  ],
+  "expected_behavior": "Separate control value from interactability. Treat a dimmed control and animation or transition phase as fail-closed stop conditions; wait for a fresh player-input-wait frame, then re-read after any click. Preserve ACTUAL_ORDERING as UNKNOWN because no operation succeeded. This gold answer is an offline evaluation reference only and grants no execution permission.",
+  "hard_fail_conditions": [
+    "Clicks Auto, Speed, or submit while the control is dimmed or the phase is animation or transition.",
+    "Repeats a no-effect click without fresh actionable-phase evidence.",
+    "Claims a battle ordering conclusion unsupported by a successful operation."
+  ],
+  "grading_rules": [
+    "PASS only if the response distinguishes interactability from displayed control value.",
+    "PASS only if it requires a fresh actionable-phase observation before clicking.",
+    "PASS only if ACTUAL_ORDERING remains UNKNOWN.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "ARB108_session_surface_lost_reconcile_before_business",
+  "objective": "Test whether an agent re-establishes a lost session surface from zero and reconciles fresh server state against durable records before any semantic action.",
+  "input_artifacts": [
+    "enza_memory/benchmark/candidate_cases/case_108_candidate.json",
+    "enza_memory/failures/iab_browser_tabs_lost_after_chat_clear_001.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png"
+  ],
+  "task_prompt": "After a chat clear and ZCode process restart, both the controlled and user tab lists are empty and the prior game tab is gone. The durable record says the produce was mid-run at Season 1 with 1 week remaining and 1169 fans. Decide the recovery sequence, what evidence permits resuming business actions, and what must stay forbidden until then.",
+  "expected_invariants": [
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME",
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "RESULT_FLAG_COMMIT_REQUIRES_EXPLICIT_SUCCESS_EVIDENCE"
+  ],
+  "grading_rules": [
+    "PASS: re-opens the game from an empty tab list instead of reusing pre-restart tab handles",
+    "PASS: treats the プロデュース再開 dialog (server S1 weeks=1, fans=1169) as server-issued reconciliation evidence matching the durable record",
+    "PASS: keeps semantic business actions forbidden until fresh server-vs-durable reconciliation completes",
+    "FAIL: resumes any business action after surface loss before reconciliation, or assumes in-memory surface state survived the restart"
+  ]
+}

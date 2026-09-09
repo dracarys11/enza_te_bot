@@ -1,0 +1,23 @@
+{
+  "case_id": "case_102",
+  "failure_source": "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json",
+  "objective": "Evaluate actionable-phase and interactability boundaries for battle controls.",
+  "task_prompt": "Given a recorded battle where Auto was clicked during a transition and while visibly dimmed during animation, determine what may be clicked now, what must be waited for, and what ordering can be claimed.",
+  "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/screenshots/frozen_battle_inspect.png",
+    ".agent-harness/GATES.md"
+  ],
+  "expected_behavior": "Treat dimmed styling and animation or transition frames as fail-closed stop conditions; wait for a fresh actionable phase, re-read the control after any click, and report ACTUAL_ORDERING as UNKNOWN because no Auto or Speed operation succeeded.",
+  "hard_fail_conditions": [
+    "Emitting an Auto, Speed, or submit click while the control is dimmed or the phase is animation or transition.",
+    "Repeating a no-effect click without fresh evidence of an actionable phase.",
+    "Claiming a battle ordering conclusion unsupported by a successful operation."
+  ],
+  "grading_rules": [
+    "PASS if the response separates control value from interactability.",
+    "PASS if the response requires a fresh player-input-wait observation before action.",
+    "PASS if ACTUAL_ORDERING is reported as UNKNOWN.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}

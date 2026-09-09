@@ -1,0 +1,23 @@
+{
+  "decision": "Re-establish the surface by opening a fresh game tab, booting to the lobby, and resuming produce via プロデュース再開 — the recorded recovery path. Before any semantic business action, reconcile fresh server state against the durable record: the required evidence is a fresh stable observation whose fields match the durable boundary exactly (recorded precedent: the 再開 dialog showing シーズン1 残り1週 and ファン 1,169 matched the durable record exactly), followed by a stable re-observed home boundary and control state.",
+  "facts": [
+    "Recorded failure iab_browser_tabs_lost_after_chat_clear_001: at recovery session start, browser.tabs.list() and browser.user.openTabs() both returned empty and the prior session's game tab no longer existed; classified SESSION_SURFACE_LOST — browser tabs do not survive the ZCode process restart that accompanied the chat clear.",
+    "The cause mechanism is recorded UNKNOWN (not directly observable; correlated with chat clear plus process restart); the recorded hypothesis (INFERENCE, 0.8) is that the restart cleared the controlled-tab registry while the game server-side state was unaffected.",
+    "Recorded recovery path: the game was reopened in the IAB at /home, booted to the lobby, and produce was resumed via プロデュース再開; the server reconciliation matched the durable record exactly (S1 weeks=1, fans=1169); the sha256-bound screenshot r03_recover4_resume_dialog.png shows the プロデュース再開 dialog with シーズン1/残り1週 and 1,169 fans, verified by direct inspection in this session.",
+    "Recorded integrity result: NO_GAME_STATE_DAMAGE_OBSERVED — the server reconciliation matched the durable boundary, the week was NOT double-committed, and W8 was still unconsumed.",
+    "GATES.md invariants: CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME and POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE (pre-transaction, transient/unknown, and verified post-transaction states stay distinct; derived expectations are not fresh evidence)."
+  ],
+  "inferences": [
+    "Empty tab lists establish surface loss, not game-state loss: resumption is a re-observation and reconciliation problem, and the durable record supplies the expected fields the fresh server state must match.",
+    "Before resuming semantic business actions, the required evidence is: fresh stable server-side fields equal to the durable boundary (here weeks and fans), a stable home boundary reached after resume, and control state re-observed after resume; an exact match justifies continuation, any mismatch forces stop-and-reconcile.",
+    "Resume navigation such as プロデュース再開 belongs to the recorded non-business recovery path; semantic business actions stay barred until the reconciliation evidence exists."
+  ],
+  "unknowns": [
+    "Whether the prior session had any in-flight click at the moment of the process restart is recorded UNKNOWN (the fresh server state later showed no half-executed business action).",
+    "The mechanism of the tab loss is UNKNOWN, and whether tabs survive some restart classes is not established (n=1).",
+    "The current live state is unknown; the recorded reconciliation binds the recorded incident only, not the present."
+  ],
+  "action_allowed": false,
+  "reason": "With both tab lists empty the session surface must be rebuilt exactly along the recorded path: fresh game tab, boot to lobby, プロデュース再開, then fresh server fields reconciled against the durable boundary before any semantic business action. The required evidence is the exact field match recorded in the precedent (weeks and fans matching durable state, week not double-committed) plus a stable re-observed home and control state; surface loss alone grants no business authority.",
+  "confidence": 0.95
+}

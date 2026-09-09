@@ -1,0 +1,26 @@
+{
+  "decision": "SPLIT_THE_BATCH_BY_MEASURED_END_TO_END_COST_AND_RECONCILE_AFTER_TIMEOUT",
+  "facts": [
+    "Measured cua.click calls took approximately 5 seconds each in the recorded tests.",
+    "The two-week burst contained about 56 clicks, 36 seconds of explicit waits, and two screenshots, yielding an estimated runtime above 350 seconds against a declared 115-second timeout.",
+    "Another 22-click burst plus waits and screenshot risk was estimated at about 165 seconds against the same 115-second timeout.",
+    "Screenshots on animation or dialogue frames could hang until the internal 30-second timeout.",
+    "The recorded workaround limits a cell to at most 12 clicks and prohibits placing two game weeks in one cell.",
+    "The harness requires batch sizing from measured end-to-end tool latency and reconciliation of post-transaction state from a fresh stable observation."
+  ],
+  "inferences": [
+    "Batch duration should include approximately five seconds per click, all explicit waits, screenshot latency, and safety headroom; the batch must be split before that estimate approaches the execution budget.",
+    "The recorded 12-click limit is a local conservative bound, while smaller batches are required when waits or capture risk consume more of the budget.",
+    "After a timeout during a business sequence, neither success nor failure of the last in-flight action may be inferred.",
+    "The next step is reconciliation from a fresh stable state before any retry or later business action; a possibly dispatched action must not be blindly repeated."
+  ],
+  "unknowns": [
+    "Which exact action, if any, completed immediately before a future mid-sequence timeout is unknown without fresh reconciliation.",
+    "The post-timeout game state and transaction boundary are unknown until a fresh stable observation is obtained.",
+    "Future screenshot latency is unknown and may vary with page phase.",
+    "The recorded local timing limits are not established as universal across providers or environments."
+  ],
+  "action_allowed": false,
+  "reason": "The declared budget was far below measured end-to-end batch cost, and a timeout cannot safely be translated into an action outcome or permission to retry.",
+  "confidence": 0.99
+}

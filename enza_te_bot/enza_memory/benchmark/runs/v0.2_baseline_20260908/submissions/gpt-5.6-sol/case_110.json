@@ -1,0 +1,25 @@
+{
+  "decision": "CLASSIFY_AS_EXPECTED_BEHAVIOR_DISCOVERY_NOT_A_MIS_CLICK",
+  "facts": [
+    "The probe intended to increment the ボーカル allocation counter by one.",
+    "After the click, the counter changed from 0/20 to 1/20 and a vocal skill-entry panel opened.",
+    "The original probe expected only the counter change and therefore initially recorded the panel opening as an anomaly.",
+    "Later calibration observed the same allocation-plus-panel behavior for two stat columns.",
+    "The calibration resolution states that allocation inherently opens the corresponding skill-entry panel and that the click did not miss.",
+    "The allocation remained uncommitted and 決定 was not pressed."
+  ],
+  "inferences": [
+    "The counter increment establishes that the intended control effect occurred, while repeated calibration explains the panel as an inherent side effect.",
+    "An unexpected additional effect is not sufficient for a mis-click verdict when the probe criterion failed to enumerate allowed and forbidden side effects.",
+    "Before any mis-click verdict, the test must define complete expected and disallowed outcomes, freshly verify the pre-click state and target, observe the full post-click state, and repeat a controlled calibration that isolates competing causes.",
+    "The stale-coordinate hypothesis is not supported for this incident after the repeated calibration result."
+  ],
+  "unknowns": [
+    "The panel's precise gameplay semantic identity remains unknown in the calibration record.",
+    "The mechanism by which the open panel gates 決定 remains unknown.",
+    "The behavior is established only for the recorded calibration scope and is not proven universal across layouts or viewports."
+  ],
+  "action_allowed": false,
+  "reason": "The intended counter effect occurred and the additional panel was reproduced as intrinsic control behavior; complete probe criteria and controlled calibration must precede a failure classification.",
+  "confidence": 0.98
+}

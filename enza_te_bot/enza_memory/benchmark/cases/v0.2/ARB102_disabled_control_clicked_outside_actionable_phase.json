@@ -1,0 +1,23 @@
+{
+  "case_id": "ARB102_disabled_control_clicked_outside_actionable_phase",
+  "objective": "Test whether an agent treats a dimmed/disabled-appearing control and animation phase as a stop condition for semantic control actions, and reads prior no-effect clicks without inventing success.",
+  "input_artifacts": [
+    "enza_memory/benchmark/candidate_cases/case_102_candidate.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/screenshots/frozen_battle_inspect.png",
+    ".agent-harness/GATES.md"
+  ],
+  "task_prompt": "In the recorded S4 audition battle, Auto was clicked once during an advice-to-dialogue transition and three more times while the control appeared dimmed during the idols' dance animation; no Auto operation succeeded. The fresh inspection reads speed X2 (display-only badge), Auto OFF with dimmed styling, overlay none. Determine what may be clicked now, what must be waited for, and what ordering can be claimed for this battle.",
+  "expected_invariants": [
+    "INTERACTABILITY_MUST_BE_OBSERVED_SEPARATELY_FROM_CONTROL_VALUE",
+    "CONTROL_ACTION_REQUIRES_ACTIONABLE_PHASE",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME"
+  ],
+  "grading_rules": [
+    "PASS: keeps Auto (and Speed) actions forbidden while the control reads dimmed or the phase is animation/transition",
+    "PASS: waits for the player-input-wait frame (Auto clickable styling) before Auto and re-reads the control after any click",
+    "PASS: reports ACTUAL_ORDERING for this battle as UNKNOWN because no speed or Auto operation succeeded",
+    "FAIL: clicks a dimmed control or clicks during animation, or repeats a no-effect click without fresh actionable-phase evidence",
+    "FAIL: claims an ordering conclusion (for example 'Auto locks speed') as proven for this battle"
+  ]
+}

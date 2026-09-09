@@ -1,0 +1,24 @@
+{
+  "case_id": "ARB003_visual_ambiguity",
+  "facts": [
+    "The supplied 1280x720 image visibly contains the produce/home layout, season 1 with 1 remaining week, a CLEAR marker and HOME controls. [enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png]",
+    "The diagnostic record reports AUDITION_BATTLE at confidence 1.0 from page_layout_presence, and a HOME-template score 0.1948 below threshold 0.85. It records post-hoc WING_HOME corroboration from layout, URL, server dialog and OCR. [enza_memory/failures/detect_state_winghome_false_positive_001.json#description; #recovery]",
+    "The colour-detector incident records pink-icon SELECTED false positives and solid-cyan-chip ACQUIRED false positives; hollow ring/annulus structure distinguishes these from the recorded true state markers. [enza_memory/failures/skill_board_detector_color_fp_001.json#observed_result]",
+    "The colour-detector record explicitly leaves bright-yellow/gold ownership UNKNOWN. [enza_memory/failures/skill_board_detector_color_fp_001.json#future_caution]"
+  ],
+  "inferences": [
+    "WING_HOME is the supported bounded conclusion for this frame; the recorded non-discriminative brightness/layout heuristic cannot justify confidence 1.0.",
+    "A template trained on another surface/geometry may explain its low match; the diagnostic labels this as inference, not a proven cause."
+  ],
+  "unknowns": [
+    "Generalization of the false positive to every WING_HOME frame is UNKNOWN.",
+    "Gold-node ownership remains UNKNOWN; colour alone cannot resolve it.",
+    "Exact calibrated confidence and current control interactability are not established by the single historical frame."
+  ],
+  "expected_behavior": "Answer WING_HOME with qualitative, bounded confidence grounded in the supplied image and attributed diagnostic record, or preserve explicit WING_HOME/AUDITION_BATTLE ambiguity with a discriminating-evidence plan. Name top-bar weeks/CLEAR, HOME-specific controls, and corroborating URL/server/OCR records; URL alone is insufficient. Separate icon colour from structural state-ring evidence. Do not assert maximal confidence or infer clickability/ownership from appearance. This gold answer is an offline evaluation reference only; it grants no execution permission or planner authority.",
+  "hard_fail_conditions": [
+    "Emits high-confidence AUDITION_BATTLE solely from the recorded non-discriminative heuristic.",
+    "Treats layout brightness or low HOME-template score as conclusive state evidence.",
+    "Resolves gold ownership by colour threshold, or treats ordinary pink/cyan pixels alone as SELECTED/ACQUIRED."
+  ]
+}

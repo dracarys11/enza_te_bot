@@ -1,0 +1,23 @@
+{
+  "decision": "Split the burst into bounded cells and reconcile the in-flight action before any continuation or retry",
+  "facts": [
+    "The declared 115000 ms burst contained approximately 56 clicks, explicit waits, and screenshots, with an estimated real runtime above 350 seconds.",
+    "A single click has an observed hidden cost of about 5000 ms; screenshot capture has an internal timeout of 30000 ms and may hang on animation or dialogue frames.",
+    "The JavaScript cell timeout cap is 120000 ms, so the declared burst could be aborted by the tool layer before completion.",
+    "The recorded safe workaround limits a cell to at most 12 clicks, prohibits two game weeks in one cell, and avoids screenshots during animation/dialogue frames.",
+    "The harness requires measured end-to-end latency budgeting and fresh stable reconciliation after a post-transaction uncertainty."
+  ],
+  "inferences": [
+    "A 115000 ms declaration does not make the burst safe; the batch must be split so measured click, wait, and screenshot costs remain within the budget.",
+    "After a mid-business-sequence timeout, the unsettled action outcome is UNKNOWN and must not be treated as failure or success.",
+    "Continuation must stop until a fresh stable state reconciles the last dispatched action; the action must not be blindly repeated."
+  ],
+  "unknowns": [
+    "The exact game state at the tool abort boundary is unknown.",
+    "Whether the last in-flight business action committed is unknown until fresh stable evidence is obtained.",
+    "The screenshot hang mechanism is not established beyond the recorded timing and tool-layer observations."
+  ],
+  "action_allowed": false,
+  "reason": "Measured latency makes the burst exceed its cell budget, and a timeout does not resolve the state of an in-flight business action. Use bounded cells, then reconcile from a fresh stable observation before continuing.",
+  "confidence": 0.99
+}

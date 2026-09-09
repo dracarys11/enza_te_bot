@@ -1,0 +1,23 @@
+{
+  "decision": "Classify as AMBIGUOUS_EFFECT / expected-behavior discovery, not a proven mis-click",
+  "facts": [
+    "The probe changed the ボーカル counter from 0/20 to 1/20 and opened the vocal skill-entry panel.",
+    "The URL remained /produce and the allocation was uncommitted because 決定 was not pressed.",
+    "The calibration record observed the same panel-opening behavior for both tested stat columns and classifies it as normal behavior of allocating a point.",
+    "The initial probe used a visual estimate from a zoomed but uncalibrated clip, and the candidate causes included stale state, hitbox overlap, and inherent panel opening.",
+    "The calibration resolution reclassified the event as expected-behavior discovery and states that the click did not miss."
+  ],
+  "inferences": [
+    "The panel opening is a documented side effect of allocation, so it cannot alone support a mis-click verdict.",
+    "A mis-click classification should follow repeated controlled observations that enumerate both expected and forbidden side effects, with fresh per-control grounding.",
+    "The correct current interpretation is bounded ambiguity/behavior discovery rather than a proven coordinate failure."
+  ],
+  "unknowns": [
+    "The semantic identity of the skill-entry panel remains unknown.",
+    "The exact canvas hitbox and tolerance remain unknown.",
+    "A single probe does not establish whether all similar layouts behave identically outside the tested calibration samples."
+  ],
+  "action_allowed": false,
+  "reason": "Both the expected counter increment and panel opening were observed, and repeated calibration identified panel opening as inherent behavior. More controlled evidence must precede any mis-click verdict; no action is permitted in this offline evaluation.",
+  "confidence": 0.97
+}

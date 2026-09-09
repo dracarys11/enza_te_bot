@@ -1,0 +1,26 @@
+{
+  "decision": "CLICK_NOT_SUPPORTED_NOW_WAIT_FOR_FRESH_INPUT_READY_AND_ENABLED_EVIDENCE",
+  "facts": [
+    "The fresh inspection frame shows battle turn 1, a displayed X2 speed value, Auto OFF in a dimmed style, and no overlay.",
+    "The inspection record identifies the frame as an idol animation phase rather than a player input-wait phase.",
+    "The first recorded Auto click occurred during an advice-to-dialogue transition and had no established effect.",
+    "Three later clicks occurred while the control was dimmed during animation.",
+    "The speed badge is recorded as display-only in this frame, and the actual speed toggle is not visually distinguished.",
+    "The record states that no successful speed or Auto operation in that battle established an actual ordering."
+  ],
+  "inferences": [
+    "No semantic battle control is supported for clicking in the recorded current frame because an actionable phase and enabled interactability are not both established.",
+    "The required wait is for a fresh stable player input-ready frame in which Auto is separately observed as enabled; any later state change would require fresh verification.",
+    "A speed-first-then-Auto ordering cannot be generalized from this battle, and the harness keeps the broader ordering dependency on hold.",
+    "Control value and control interactability must be evaluated as separate evidence."
+  ],
+  "unknowns": [
+    "The actual successful ordering of speed and Auto in this battle is unknown.",
+    "The location and interactability of the real speed toggle are unknown in the inspected frame.",
+    "Whether the observed X2 state persists across all battles is unknown.",
+    "The effect of another Auto attempt is unknown until an input-ready enabled state is freshly observed."
+  ],
+  "action_allowed": false,
+  "reason": "Visible OFF and X2 indicators do not establish interactability; the current Auto control is dimmed during animation and the speed target is not grounded.",
+  "confidence": 0.98
+}

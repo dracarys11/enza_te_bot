@@ -1,0 +1,80 @@
+{
+  "dataset": "ENZA Benchmark v0.1 Gold Evaluation Set",
+  "version": "v0.1",
+  "created_date": "2026-09-08",
+  "mode": "OFFLINE_ONLY",
+  "case_count": 6,
+  "cases": [
+    {
+      "case_id": "ARB001_planner_authority",
+      "gold_file": "case_001_gold.json",
+      "gold_sha256": "a72b7dc34f9f03e1264ff571d3dca9fb5dd2cbc10358543ebfb8dc2b34458a94",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/ARB001_planner_authority/case.json": "afed7c2e99ebdc2e9fb4541c7fe298a15c909cbbc647a6aabe7d20aa3014f9aa",
+        "enza_memory/failures/s1w6_vocal_executed_above_risk_gate_001.json": "d45b87fc68c1881e26559cf815b79274faf84076af584624d3afceaeb33a1f5b",
+        "benchmark_cases/case_001_planner_authority.json": "aeae48879277952b2b39f70e76d18687d4e5cfa8c8d965b1c91c14b2daa34544",
+        "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/s1w6_schedule.png": "1e6676921546b26ae60e3e0d9b4e7ac5da772773d6a145873f7b0119e821b2b2"
+      }
+    },
+    {
+      "case_id": "ARB002_observation_timeout",
+      "gold_file": "case_002_gold.json",
+      "gold_sha256": "1ee015c95cc0d813291612af757107abac64ef4e31d8555a91c4fdb498c4f4ac",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/ARB002_observation_timeout/case.json": "51d698fa19ebe9e03f1372ced3bdd3f116f37f426a11fb9d982f1bcfde0d5b10",
+        "enza_memory/failures/iab_screenshot_pipeline_stall_001.json": "1e55d85d5f74c5cbfe68d53bdf00770ec260407a1e0fa758a22fc524290c4750",
+        "benchmark_cases/case_002_observation_timeout.json": "dc402cd5d80a3c5088b4e8d7d2eb233f013fd125a2335735dcf61bf8e5a8e396",
+        "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/live_run_incident_report.md": "c83bbad0a619ac4e409251232c408251cbc426a3df22ab192ffa61ebeef0422a"
+      }
+    },
+    {
+      "case_id": "ARB003_visual_ambiguity",
+      "gold_file": "case_003_gold.json",
+      "gold_sha256": "b8337a20887b2c92f86d3397fa0aea2ab3d1bb0a262d94fde0d0686d0ba7aade",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/ARB003_visual_ambiguity/case.json": "fc6c5b746a91c9d47679d11f4851cf754fd3165a85b8d479c81d9cf83afacba8",
+        "enza_memory/failures/detect_state_winghome_false_positive_001.json": "861c57a987bfdc5921ca9ba1fda7571a8e6943aa50aa279299b0cc0b14dc5f4d",
+        "enza_memory/failures/skill_board_detector_color_fp_001.json": "82565a8853788f1f3cd2d356141b1805833dabbf15af60187fdda25f2fc9d084",
+        "benchmark_cases/case_003_visual_ambiguity.json": "7f8c0eddb9da63f4ad2703506788b75c9833ffb47ca34189985ea41d48fd86c2",
+        "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r04_s1w8_planner_fresh_home.png": "f2ab6993770614fc7bc2eb0004e16c9c86bbe1c1b8b411e9395ade48f11eea3d"
+      }
+    },
+    {
+      "case_id": "ARB004_pending_action_reconciliation",
+      "gold_file": "case_004_gold.json",
+      "gold_sha256": "0d33c53d4a943d324ad6e0a978f9fb92165eec2b70b7bcc4225ba0a1cd94962e",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/ARB004_pending_action_reconciliation/case.json": "a5800b869625d4927aacd0eb8e896fdd6ffc9abf9cd4cd96705a936c6b51b008",
+        "enza_memory/failures/operator_cancel_pending_action_001.json": "213607394b2c8f6ce4eb7f5bcc3adb677bd5e28a5f244d069345d2937ba2bc16",
+        "benchmark_cases/case_004_pending_action_reconciliation.json": "3d3062276a6100a8c534176f39a90e36e95a68d2e4c89869394628c6898c6db6",
+        "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/s1w6_policy_violation_reconciliation.json": "f4aeb94e679bb313ad71ebc3ffac3b6dd6f46397ba23c2a7e147f88dbe86f7d6",
+        "enza_memory/wing_runs/WINGRUN_20260907_01/screenshots/PAUSE_STATE_FRESH.png": "1b6cc9892884d843c2435ee61436222cc6bd85de3f2fc414aeab80d77873b6fb"
+      }
+    },
+    {
+      "case_id": "ARB005_adversarial_review",
+      "gold_file": "case_005_gold.json",
+      "gold_sha256": "44b2e204ed951d11cd579546d6f4db782590e61dc23f013d4bd6fd33cea4b1f7",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/ARB005_adversarial_review/case.json": "4688535ba065a0f8ed85738404edac6272c613b98465964ece6f967dc38ff993",
+        "enza_memory/migration/python_click_migration/review_batches/v0_3/review_sheet.md": "783bf3023458ffc6cf505a841c5de57d8b178fb147035dcf24b80a960b09e576",
+        "enza_memory/migration/python_click_migration/review_batches/v0_3/review_manifest.jsonl": "a6adbcd768f7698b1c43ec0abd75d6b4487289536a9a83468aa2ad9fd04d37df",
+        "enza_memory/audits/stale_reference_audit/audit_report.md": "f4fd077c247b316c5b5bef12ccee85a7a33a05b1b7d7737684a6ec8272fa7346",
+        "benchmark_cases/case_003_visual_ambiguity.json": "7f8c0eddb9da63f4ad2703506788b75c9833ffb47ca34189985ea41d48fd86c2"
+      }
+    },
+    {
+      "case_id": "ARB006_evidence_retrieval",
+      "gold_file": "case_006_gold.json",
+      "gold_sha256": "49d5e9f1167c596de067b6b0d481bd47f8c8b055e5b8d675edcd0d4a5076cf98",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/ARB006_evidence_retrieval/case.json": "c9188d7865cb259eb7f49ea993d7984db6fd9cf7b17968328ac2d99f29950052",
+        "benchmark_cases/case_004_pending_action_reconciliation.json": "3d3062276a6100a8c534176f39a90e36e95a68d2e4c89869394628c6898c6db6",
+        "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl": "86f8c96dcadd8fabfc9ccc1ded96f41c25f20dfff22a1b3a25738cd31973527d",
+        "enza_memory/wing_runs/WINGRUN_20260907_01/offline_reconciliation/new_regression_candidates.json": "8d24daf58af6308fda265ce8f39048121cce2e4c7f40774a64888a04e7df4784",
+        "enza_memory/evidence_metadata/metadata_schema.json": "061e927f6635a8905476f924d8f51115377c718e3c0e5cfd72e39719ea8d1d37",
+        "tools/query_evidence.py": "ebb70ce1d2ad9ad8a1585ff9fbcde3fcbf57dede514f463157cfb41fb17e1e73"
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "dataset": "ENZA Benchmark v0.2 Promoted Cases Gold Set",
+  "version": "v0.2",
+  "created_date": "2026-09-08",
+  "mode": "OFFLINE_ONLY",
+  "case_count": 6,
+  "promoted_from_review": "enza_memory/benchmark/reviews/candidate_review_v0.2.md",
+  "cases": [
+    {
+      "case_id": "ARB101_uncalibrated_visual_grounding_click",
+      "gold_file": "case_101_gold.json",
+      "gold_sha256": "47b8545755c64936f6e5c7e08fb7952cafd088ee0242cad257051b318ed0622e",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/v0.2/ARB101_uncalibrated_visual_grounding_click/case.json": "3c4c433db92e7632c8f6e685f91e17da74cf574014471b5b652e3093a1e46c92",
+        "enza_memory/benchmark/candidate_cases/case_101_candidate.json": "8c0bbb1b094322a47010da90c88474773230926457179cb8c4de1c20d5eec610",
+        "enza_memory/failures/canvas_misclick_001.json": "e5b57ffc8e83c2f83001d59a5586478e3b36b3b2ad5607ae73346a985ece1f13",
+        "enza_memory/policies/canvas_grounding_calibration_001.json": "89f3fdc0f09dd553437945f2bbdc02b2531fd758e75a340c8f70966c2b2881e6",
+        "enza_memory/policies/learned_constraints.json": "177a2603e52e6483cf9fd39e449f62a2052c64631ca83e1ac4b02a4ed4d3a363"
+      }
+    },
+    {
+      "case_id": "ARB102_disabled_control_clicked_outside_actionable_phase",
+      "gold_file": "case_102_gold.json",
+      "gold_sha256": "0c179f45e3bfa3f6de24c5ee8990b5b4482392d4d6ed38ba43267cf8a6a2ee94",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/v0.2/ARB102_disabled_control_clicked_outside_actionable_phase/case.json": "e4e02aceb22c5cfd7a39b763b46442cf06ba99fc05e33598d75ef3f3c6ff76a3",
+        "enza_memory/benchmark/candidate_cases/case_102_candidate.json": "a2ce18850e513bd4e4669a61ae572b6e982916ff689454e228c7a0662990a89c",
+        "enza_memory/wing_runs/WINGRUN_20260905_01/frozen_battle_inspection.json": "002f113aced947cea69ef4e08179ca03f1680cf684d821ebf5dc339ddcbb30bc",
+        "enza_memory/wing_runs/WINGRUN_20260905_01/screenshots/frozen_battle_inspect.png": "a8f8b915672b4bd6b3af27dd50804d5ecafa6de0bb845fab3effe3fd5c041590",
+        ".agent-harness/GATES.md": "9dd0b85f8cb3fe3696dd2ef96dd56e55c4e0e7f88bf6b5a37392f7fe40ece072"
+      }
+    },
+    {
+      "case_id": "ARB103_control_ordering_auto_locks_speed",
+      "gold_file": "case_103_gold.json",
+      "gold_sha256": "bdd29fa247f168d08ab1cdf7c4c30288d78fffa1d110f2335917775669db6565",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/v0.2/ARB103_control_ordering_auto_locks_speed/case.json": "9c5d39695f52ff8e25e73625ca66456e9ea0edaf2f5688b928eb981dc8676297",
+        "enza_memory/benchmark/candidate_cases/case_103_candidate.json": "bd59dc0ba2266ea7e9b4b06fcd01006a50f0a4866c4c4a91586f37cd9c5d0813",
+        "enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl": "e17d3cf697abd6fc68083cf3e470941a34fd8be4d1c68b15f1edbd63d4119ddc",
+        "enza_memory/policies/audition_battle_speed_handler.json": "6cf898aabda38ea6275e15730d7501898843a023f39f0cacb34c68405e9895b5",
+        ".agent-harness/GATES.md": "9dd0b85f8cb3fe3696dd2ef96dd56e55c4e0e7f88bf6b5a37392f7fe40ece072"
+      }
+    },
+    {
+      "case_id": "ARB105_burst_cell_timeout_mid_batch",
+      "gold_file": "case_105_gold.json",
+      "gold_sha256": "9e835899b92e4dde999637cbce02c105aea56f7dd9deb07b4d62407ddef47669",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/v0.2/ARB105_burst_cell_timeout_mid_batch/case.json": "f709e3db432b27aa4e1fd414be5d93512b1f17016e8d97e40ac53f721615207d",
+        "enza_memory/benchmark/candidate_cases/case_105_candidate.json": "4c14664792595ff9e7f4c85e964fc5ff002bc2b3cc5c7074057bd3704a63436d",
+        "enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json": "fc7b5f591d6d1068df99b7d80cf2dd2e5827ffb0738ea2ee28acc6383dae073c",
+        "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl": "86f8c96dcadd8fabfc9ccc1ded96f41c25f20dfff22a1b3a25738cd31973527d",
+        ".agent-harness/GATES.md": "9dd0b85f8cb3fe3696dd2ef96dd56e55c4e0e7f88bf6b5a37392f7fe40ece072"
+      }
+    },
+    {
+      "case_id": "ARB108_session_surface_lost_reconcile_before_business",
+      "gold_file": "case_108_gold.json",
+      "gold_sha256": "9318fc1acfae5cecdfbe816933a21138d9acffe7dcd3f5b519e02220775bcf73",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/v0.2/ARB108_session_surface_lost_reconcile_before_business/case.json": "4bcf38ed964a90f662c400a2f336e75aabdc9c5f3647825cee11722f9e80ac01",
+        "enza_memory/benchmark/candidate_cases/case_108_candidate.json": "844e7dc0a7943244ea03d40abddc7434e05248ef41548d2355dd7efa0ce5490d",
+        "enza_memory/failures/iab_browser_tabs_lost_after_chat_clear_001.json": "9ad04bff79db02ec5c571628b66840119deededd5e38086406fb422aab4d3039",
+        "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png": "57edd710d24b4428cdc32d61bdf021889a0b23b43e42084cceee34b1ced1cb37"
+      }
+    },
+    {
+      "case_id": "ARB110_probe_side_effect_criteria_incomplete",
+      "gold_file": "case_110_gold.json",
+      "gold_sha256": "ee06059b43721a3245b6d88afb82effd781350d86e37b780c0fc63bd9f55eb6e",
+      "inputs_sha256": {
+        "enza_memory/benchmark/cases/v0.2/ARB110_probe_side_effect_criteria_incomplete/case.json": "f78e1a60043ce07cdce1c782c03063a0429989c708c8c119f8c975db8b9bcfea",
+        "enza_memory/benchmark/candidate_cases/case_110_candidate.json": "d88a3d4ff27d1a64890b6d1178b95e71b34bb65f38aa5b6a816f2acbac4eacb6",
+        "enza_memory/failures/canvas_misclick_002.json": "b8993e63e1dce97157932160e7e8d0cc409e66b96a3ba91d24f7cf658d866764",
+        "enza_memory/policies/canvas_grounding_calibration_001.json": "89f3fdc0f09dd553437945f2bbdc02b2531fd758e75a340c8f70966c2b2881e6",
+        "enza_memory/policies/learned_constraints.json": "177a2603e52e6483cf9fd39e449f62a2052c64631ca83e1ac4b02a4ed4d3a363"
+      }
+    }
+  ]
+}

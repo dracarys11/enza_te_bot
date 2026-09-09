@@ -1,0 +1,20 @@
+{
+  "benchmark_version": "v0.3",
+  "run_id": "v0.3_baseline_20260908",
+  "offline_only": true,
+  "model_calls": false,
+  "gold_included_in_prompts": false,
+  "case_ids": [
+    "case_201",
+    "case_202"
+  ],
+  "participants": [
+    "gemini_3.8-flash",
+    "gpt-5.6-sol",
+    "zcode-5.3-flash"
+  ],
+  "evidence_refs_validated": true,
+  "prompt_layout": "prompts/<participant>/case_<id>.md",
+  "submission_layout": "submissions/<participant>/case_<id>.json",
+  "scores_status": "COMPLETE"
+}

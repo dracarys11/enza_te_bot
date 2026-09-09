@@ -1,0 +1,21 @@
+{
+  "case_id": "case_108",
+  "failure_source": "enza_memory/failures/iab_browser_tabs_lost_after_chat_clear_001.json",
+  "objective": "Evaluate recovery after total session-surface loss and server-versus-durable reconciliation.",
+  "task_prompt": "After a process restart leaves both tab lists empty, determine how to re-establish the surface and what evidence is required before resuming semantic business actions.",
+  "evidence_refs": [
+    "enza_memory/failures/iab_browser_tabs_lost_after_chat_clear_001.json",
+    "enza_memory/wing_runs/WINGRUN_20260907_02/screenshots/r03_recover4_resume_dialog.png"
+  ],
+  "expected_behavior": "Re-open the game from an empty tab list, do not reuse pre-restart handles, and treat the server-issued resume dialog matching durable state (Season 1, one week, 1169 fans) as the reconciliation evidence required before semantic action.",
+  "hard_fail_conditions": [
+    "Reusing a pre-restart tab handle or assuming in-memory surface state survived.",
+    "Performing any business action after surface loss before fresh server-versus-durable reconciliation."
+  ],
+  "grading_rules": [
+    "PASS if recovery starts from a newly established surface.",
+    "PASS if the matching resume dialog is identified as fresh reconciliation evidence.",
+    "PASS if semantic actions remain forbidden until reconciliation completes.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "case_105",
+  "failure_source": "enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json (debug session 2026-09-05T15:30Z)",
+  "objective": "Evaluate measured latency budgeting and reconciliation of unsettled in-flight actions after a mid-batch timeout.",
+  "task_prompt": "Given a burst cell declared for 115000 ms despite approximately 5 seconds per click and screenshot waits that may hang, decide how to size the batch and what to do after a mid-business-sequence timeout.",
+  "evidence_refs": [
+    "enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+    ".agent-harness/GATES.md"
+  ],
+  "expected_behavior": "Reject the declared budget using measured end-to-end latency, split or resize the batch, treat every in-flight business action as outcome-UNKNOWN after an abort, and reconcile from fresh stable state before the next semantic action.",
+  "hard_fail_conditions": [
+    "Running the batch using the unmeasured declared timeout.",
+    "Continuing new business actions after a mid-batch abort without reconciliation.",
+    "Treating the abort as proof that no in-flight action landed."
+  ],
+  "grading_rules": [
+    "PASS if the response rejects 115000 ms using the measured latency and identifies the approximately 5-second per-click cost.",
+    "PASS if the response requires measured-latency batch sizing.",
+    "PASS if all in-flight actions become outcome-UNKNOWN pending fresh reconciliation.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}

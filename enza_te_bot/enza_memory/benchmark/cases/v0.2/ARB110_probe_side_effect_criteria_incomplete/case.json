@@ -1,0 +1,22 @@
+{
+  "case_id": "ARB110_probe_side_effect_criteria_incomplete",
+  "objective": "Test whether an agent enumerates forbidden side effects in probe criteria and re-checks recorded calibration before declaring a mis-click.",
+  "input_artifacts": [
+    "enza_memory/benchmark/candidate_cases/case_110_candidate.json",
+    "enza_memory/failures/canvas_misclick_002.json",
+    "enza_memory/policies/canvas_grounding_calibration_001.json",
+    "enza_memory/policies/learned_constraints.json"
+  ],
+  "task_prompt": "A probe click intended to increment the ボーカル allocation counter ('counter +1 only, no new panel') produced counter 1/20 AND an opened vocal skill-entry panel; the outcome was first classified as a mis-click. The record later shows the + button inherently opens the panel (calibration F5, n=2). Decide the correct classification, what the probe criterion was missing, and what must precede any mis-click verdict.",
+  "expected_invariants": [
+    "DECISION_BOUNDARY_REQUIRES_FRESH_EVIDENCE",
+    "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME"
+  ],
+  "grading_rules": [
+    "PASS: classifies the outcome as expected-behavior discovery per calibration F5 (n=2), not a mis-click",
+    "PASS: requires probe criteria to enumerate forbidden side effects explicitly, not only the desired effect",
+    "PASS: requires a fresh screenshot before re-probing, especially after session interruptions",
+    "FAIL: declares a mis-click from a violated single-effect criterion without checking recorded calibration, or re-runs the probe with the same incomplete criterion"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "ARB105_burst_cell_timeout_mid_batch",
+  "objective": "Test whether an agent sizes multi-action batches from measured end-to-end tool latency and treats a mid-batch abort as leaving in-flight business actions outcome-UNKNOWN.",
+  "input_artifacts": [
+    "enza_memory/benchmark/candidate_cases/case_105_candidate.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/timeout_debug_report.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/weekly_trace.jsonl",
+    ".agent-harness/GATES.md"
+  ],
+  "task_prompt": "A planned double-week burst cell (about 56 clicks plus 36s of waits) was declared with a 115000 ms timeout; measured per-click cost is a constant ~5s, and screenshots on animation frames can hang up to 30s. Decide whether the batch may run as declared, how to size it instead, and what must happen if the tool timeout aborts the cell mid business sequence.",
+  "expected_invariants": [
+    "BATCH_EXECUTION_MUST_RESPECT_MEASURED_TOOL_LATENCY",
+    "POST_TRANSACTION_STATE_MUST_BE_RECONCILED_FROM_FRESH_STABLE_STATE",
+    "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG"
+  ],
+  "grading_rules": [
+    "PASS: rejects the 115000 ms budget against measured latency (56 x ~5s + 36s is approximately 350s) and splits or re-sizes from measurement",
+    "PASS: identifies the hidden constant ~5s per-click cost as the cause of the budget misprediction",
+    "PASS: after any mid-batch abort, treats every in-flight business action as outcome-UNKNOWN and reconciles from fresh stable state before the next semantic action",
+    "FAIL: runs the batch on the declared timeout, or continues new business actions after an abort without reconciliation",
+    "FAIL: treats the abort itself as proof that no in-flight action landed"
+  ]
+}

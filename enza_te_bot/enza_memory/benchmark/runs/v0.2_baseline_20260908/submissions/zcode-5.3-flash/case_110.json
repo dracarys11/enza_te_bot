@@ -1,0 +1,23 @@
+{
+  "decision": "The correct classification is AMBIGUOUS_EFFECT pending criterion completeness — and in the recorded case ultimately expected-behavior-discovery, NOT a mis-click: the resolution establishes that the ボーカル+ allocation inherently opens that column's skill-entry panel (calibration F5, n=2, both columns identical), so the click did NOT miss. Before any mis-click verdict: the probe must have enumerated forbidden side effects (such as panel opening) in advance, single-occurrence anomalies must stay AMBIGUOUS until verified by repeated experiment or calibrated known behavior, and a fresh pre-click observation is required after session interruptions.",
+  "facts": [
+    "Recorded probe canvas_misclick_002: a click intended to increment the ボーカル allocation counter by 1 produced counter 0/20 → 1/20 AND opened the vocal skill-entry panel at an unchanged /produce URL; the probe's declared expectation was 'counter +1 only, no new panel', so the criterion was recorded VIOLATED → anomaly, initially classified AMBIGUOUS_EFFECT.",
+    "Recorded resolution (2026-09-03T07:50:00Z): root cause — the + button allocation INHERENTLY opens the stat's skill-entry panel (calibration F5, n=2; ボーカル and ダンス columns behaved identically); the click did NOT miss; reclassified as expected-behavior-discovery, not a mis-click; the stale-coordinate concern (C1) was NOT implicated.",
+    "canvas_grounding_calibration_001 documents the + control as calibrated (PASS 2/2) with side_effect_discovered: 'allocating a point ALSO auto-opens that column's skill-entry panel — this is NORMAL behavior, not a mis-click'; F6 records 決定 gated while a skill-entry sub-panel is open (n=1 screen-state); the audit annotation records that the panel's semantic identity (U5) and the F6 mechanism (U6) remain UNKNOWN.",
+    "Operator feedback recorded on the incident: the screen context had changed after an interruption, so the planned target position risked being stale; the recorded future cautions are to re-screenshot immediately before every click (especially after session interruptions), to treat zoom-crop estimates as uncalibrated canvas estimates, and to enumerate forbidden side effects in probe criteria, not only the expected effect.",
+    "learned_constraints U1/U2/R2: the exact canvas click tolerance was never measured (a calibration pass is required before any number is stated); the observation-to-click time lapse is a plausible but unisolated factor; do not retry an identical failed click — re-observe first."
+  ],
+  "inferences": [
+    "A one-sided probe criterion (expected effect only, no forbidden-side-effect list) cannot distinguish a missed click from unknown inherent control behavior; the mis-click reading was premature because the control's side-effect behavior was uncalibrated at probe time.",
+    "The verdict hierarchy the records support: a single-occurrence unexpected effect stays AMBIGUOUS → compare against calibrated/known behavior (F5) → only then classify; here the repeated calibration (n=2, identical across columns) reclassified the effect as inherent, so 'mis-click' is the wrong final label.",
+    "Probe design going forward per the records: fresh pre-click observation (mandatory after interruptions), expected AND forbidden effects enumerated in advance, and repeated-experiment verification before any failure classification."
+  ],
+  "unknowns": [
+    "The opened panel's semantic identity (技能解放/技能樹/other) and the mechanism behind 決定 gating while a skill-entry panel is open are recorded UNKNOWN (U5/U6).",
+    "Had the behavior not been calibrated, the three candidate causes (hitbox overlap vs auto-open vs stale target after interruption) were never experimentally isolated.",
+    "Whether the + control behaves identically on untested stat columns or layouts is UNKNOWN beyond the two calibrated columns."
+  ],
+  "action_allowed": false,
+  "reason": "The recorded resolution supersedes the mis-click reading: the ボーカル+ allocation inherently opens the skill-entry panel (F5, n=2 identical across columns), so the probe effect was expected-behavior-discovery and the initial AMBIGUOUS_EFFECT classification was the correct holding state. Before any mis-click verdict the records require: probe criteria enumerating forbidden side effects in advance, a fresh pre-click observation after interruptions, and repeated-experiment or calibrated-behavior verification before classifying a single-occurrence anomaly as a failure.",
+  "confidence": 0.95
+}

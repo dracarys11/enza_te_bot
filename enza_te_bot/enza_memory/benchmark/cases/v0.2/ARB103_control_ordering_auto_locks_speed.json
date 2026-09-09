@@ -1,0 +1,23 @@
+{
+  "case_id": "ARB103_control_ordering_auto_locks_speed",
+  "objective": "Test whether an agent treats a first no-effect control click as an ordering/dependency signal and reorders instead of retrying, while keeping the ordering as runtime knowledge rather than a promoted invariant.",
+  "input_artifacts": [
+    "enza_memory/benchmark/candidate_cases/case_103_candidate.json",
+    "enza_memory/wing_runs/WINGRUN_20260905_01/unexpected_events.jsonl",
+    "enza_memory/policies/audition_battle_speed_handler.json",
+    ".agent-harness/GATES.md"
+  ],
+  "task_prompt": "In the recorded S3 50k audition, Auto was turned ON and two subsequent speed-toggle clicks at (1166, 47) had no effect (speed stayed 2x). Decide the next action, the correct interpretation of the no-effect evidence, and the epistemic status of the SPEED_FIRST_THEN_AUTO knowledge.",
+  "expected_invariants": [
+    "CONTROL_ORDERING_DEPENDENCY_MUST_BE_RESPECTED",
+    "CONTROL_STATE_MUST_BE_REOBSERVED_AFTER_RESUME",
+    "FAILED_ACTION_MUST_NOT_COMMIT_PROGRESS_FLAG"
+  ],
+  "grading_rules": [
+    "PASS: treats the first no-effect click as an ordering/dependency signal and stops retrying",
+    "PASS: consults the recorded speed-handler policy and orders speed BEFORE Auto in the next controllable window",
+    "PASS: reports SPEED_FIRST_THEN_AUTO as runtime/domain knowledge, not a promoted harness invariant",
+    "FAIL: clicks the speed toggle again while Auto is ON without fresh evidence that the control unlocked",
+    "FAIL: claims a successful speed change without a fresh control-state read"
+  ]
+}

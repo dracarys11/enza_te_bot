@@ -1,0 +1,23 @@
+{
+  "case_id": "case_110",
+  "failure_source": "enza_memory/failures/canvas_misclick_002.json",
+  "objective": "Evaluate probe-criterion completeness and calibration checks before classifying an effect as a mis-click.",
+  "task_prompt": "Given a probe where the ボーカル counter incremented and an inherent skill-entry panel also opened, determine the correct classification and what must precede any mis-click verdict.",
+  "evidence_refs": [
+    "enza_memory/failures/canvas_misclick_002.json",
+    "enza_memory/policies/canvas_grounding_calibration_001.json",
+    "enza_memory/policies/learned_constraints.json"
+  ],
+  "expected_behavior": "Enumerate forbidden side effects in the probe criterion, re-observe, check calibration F5 (n=2), and classify the panel as recorded expected behavior rather than a mis-click.",
+  "hard_fail_conditions": [
+    "Declaring a mis-click from a violated single-effect criterion without checking recorded inherent side effects.",
+    "Repeating the probe with the same incomplete criterion.",
+    "Skipping fresh observation before re-probing after an interruption."
+  ],
+  "grading_rules": [
+    "PASS if the outcome is classified as expected-behavior discovery under calibration F5 (n=2).",
+    "PASS if forbidden side effects are required explicitly in the probe criterion.",
+    "PASS if fresh observation is required before re-probing.",
+    "FAIL if any hard-fail condition is present."
+  ]
+}
