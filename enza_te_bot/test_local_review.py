@@ -29,10 +29,11 @@ class _Response:
 
 class _StreamingResponse:
     def __init__(self, events):
-        self.lines = iter(
-            [f"data: {json.dumps(event)}\n".encode("utf-8") for event in events]
-            + [b"data: [DONE]\n"]
-        )
+        lines = []
+        for event in events:
+            lines.extend([f"data: {json.dumps(event)}\n".encode("utf-8"), b"\n"])
+        lines.extend([b"data: [DONE]\n", b"\n"])
+        self.lines = iter(lines)
 
     def __enter__(self):
         return self
@@ -161,6 +162,8 @@ def test_multiple_stream_chunks_report_client_side_metrics(tmp_path: Path, capsy
         if request.method == "GET":
             return _Response({"data": []})
         return _StreamingResponse([
+            {"choices": [{"delta": {"role": "assistant"}}]},
+            {"choices": []},
             {"choices": [{"delta": {"content": "# Final "}}]},
             {"choices": [{"delta": {"content": "Verdict\n\n"}}]},
             {"choices": [{"text": "READY"}]},
@@ -196,7 +199,7 @@ def test_malformed_stream_chunk_is_explicit(tmp_path: Path):
 
     class MalformedResponse(_StreamingResponse):
         def __init__(self):
-            self.lines = iter([b"data: not-json\n", b"data: [DONE]\n"])
+            self.lines = iter([b"data: not-json\n", b"\n", b"data: [DONE]\n", b"\n"])
 
     def opener(request, timeout):
         if request.method == "GET":

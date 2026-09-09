@@ -149,27 +149,49 @@ def _stream_events(response: Any):
         lines = iter(body.splitlines())
     completed = False
     plain_lines = []
+    data_lines = []
     saw_sse = False
-    for raw_line in lines:
-        line = raw_line.decode("utf-8") if isinstance(raw_line, bytes) else raw_line
-        line = line.strip()
-        if not line or line.startswith(":"):
-            continue
-        if not line.startswith("data:"):
-            plain_lines.append(line)
-            continue
-        saw_sse = True
-        data = line[5:].strip()
-        if data == "[DONE]":
-            completed = True
-            break
+
+    def decode_event(data: str) -> dict[str, Any]:
         try:
             event = json.loads(data)
         except json.JSONDecodeError as exc:
             raise LocalReviewError("local reviewer returned invalid streaming JSON") from exc
         if not isinstance(event, dict):
             raise LocalReviewError("local reviewer returned invalid streaming event")
-        yield event
+        return event
+
+    for raw_line in lines:
+        line = raw_line.decode("utf-8") if isinstance(raw_line, bytes) else raw_line
+        line = line.rstrip("\r\n")
+        if not line:
+            if data_lines:
+                data = "\n".join(data_lines).strip()
+                data_lines = []
+                if data == "[DONE]":
+                    completed = True
+                    break
+                yield decode_event(data)
+            continue
+        if line.startswith(":"):
+            continue
+        if line.startswith("data:"):
+            saw_sse = True
+            data_lines.append(line[5:].lstrip())
+            continue
+        if saw_sse and data_lines:
+            # Accept pretty-printed JSON payloads in mocked or non-standard SSE.
+            data_lines.append(line)
+            continue
+        if not line.startswith("data:"):
+            plain_lines.append(line)
+            continue
+    if data_lines and not completed:
+        data = "\n".join(data_lines).strip()
+        if data == "[DONE]":
+            completed = True
+        else:
+            yield decode_event(data)
     if not saw_sse and plain_lines:
         try:
             payload = json.loads("".join(plain_lines))
