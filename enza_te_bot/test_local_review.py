@@ -7,6 +7,7 @@ import pytest
 
 from tools.run_local_review import (
     CONTEXT_FILES,
+    DEFAULT_MAX_TOKENS,
     LocalReviewError,
     build_context_bundle,
     run_review,
@@ -93,7 +94,38 @@ def test_mocked_api_response_creates_markdown(tmp_path: Path):
     request_body = json.loads(calls[1][3])
     assert request_body["model"] == "Qwen3.8-27B-GGUF"
     assert request_body["stream"] is True
+    assert request_body["max_tokens"] == DEFAULT_MAX_TOKENS == 8192
     assert "Attack the benchmark design" in request_body["messages"][0]["content"]
+    assert "After reasoning, provide the final Markdown review in the answer field." in request_body["messages"][0]["content"]
+    assert "Do not stop after analysis." in request_body["messages"][0]["content"]
+
+
+def test_configurable_max_tokens_is_passed_to_request(tmp_path: Path):
+    root = _context_root(tmp_path)
+    captured = {}
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        captured.update(json.loads(request.data))
+        return _StreamingResponse([
+            {"choices": [{"delta": {"content": "# Final Verdict\n\nREADY"}}]},
+        ])
+
+    run_review(root, output_path=tmp_path / "review.md", opener=opener, max_tokens=12288)
+    assert captured["max_tokens"] == 12288
+
+
+def test_nonpositive_max_tokens_fails_before_generation(tmp_path: Path):
+    root = _context_root(tmp_path)
+
+    def opener(request, timeout):
+        if request.method == "GET":
+            return _Response({"data": []})
+        raise AssertionError("completion request must not be sent")
+
+    with pytest.raises(LocalReviewError, match="max_tokens must be positive"):
+        run_review(root, output_path=tmp_path / "review.md", opener=opener, max_tokens=0)
 
 
 @pytest.mark.parametrize(
