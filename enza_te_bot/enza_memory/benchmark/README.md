@@ -74,3 +74,9 @@ documents cross-environment requirements and proposed bundle export and
 change scoring. The associated
 [failure record](../failures/failure_vlm_artifact_distribution.md)
 documents the 883-entry manifest whose images were unavailable on the consumer.
+
+## Local reviewer runtime
+
+The local Qwen adversarial reviewer runs through the RTX5080 WSL llama.cpp
+server. Read the [ENZA Local Qwen Runtime Guide](../../docs/local_qwen_runtime.md)
+before starting the server or running `tools/run_local_review.py`.
