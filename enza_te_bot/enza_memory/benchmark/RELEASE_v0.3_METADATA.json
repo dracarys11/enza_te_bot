@@ -1,0 +1,25 @@
+{
+  "release_version": "v0.3",
+  "release_source_commit_sha": "bc35a25f949508a908d014dd4274014bf42eeff6",
+  "evaluator": {
+    "version": "v0.3-post-fix-rule-schema",
+    "commit_sha": "37c6cf3a6a4959b7ea0944b4085d659f41718470"
+  },
+  "evidence_bundle": {
+    "manifest_path": "enza_memory/benchmark/evidence/v0.3/manifest.json",
+    "manifest_version": 1,
+    "manifest_sha256": "c2fb7a90c7ea6b8e744c5435c6eeb10a384b2f0a92f5f209eb3e7dfe3551d1a2",
+    "fix_commit_sha": "4dac035198ca9d46b4ae3191578defa95114e0c4"
+  },
+  "baseline": {
+    "run_id": "v0.3_postfix_20260909T072027Z",
+    "status": "CURRENT VALID BASELINE",
+    "previous_run_id": "v0.3_baseline_20260908",
+    "previous_status": "SUPERSEDED",
+    "previous_score": "170/200",
+    "current_score": "200/200",
+    "score_change_source": "UNKNOWN handling: 10 -> 40",
+    "submissions_changed": false,
+    "model_calls_rerun": false
+  }
+}

@@ -43,11 +43,36 @@ four hashes above are the release-level bindings for its cases and gold.
 
 ## Evaluator status
 
-The existing deterministic, model-free evaluator is the evaluator for this
-release. Evaluator source and scoring behavior are outside this freeze commit
-and remain unchanged. The archived v0.3 baseline reports the current scoring
-behavior explicitly, including the rule-prefix limitation that assigns five
-unknown-handling points for these case contracts.
+The v0.3 post-fix deterministic, model-free evaluator is the evaluator for
+this release. It parses the supported `PASS:`, `PASS only if`, and `FAIL if`
+grading-rule forms. The post-fix rule audit reports:
+
+| Case | parsed_rules_count | ignored_rules_count |
+|---|---:|---:|
+| `case_201` | 4 | 0 |
+| `case_202` | 4 | 0 |
+
+The evaluator fix is recorded in commit
+`37c6cf3a6a4959b7ea0944b4085d659f41718470`.
+
+## Baseline status
+
+The previous baseline is retained as historical evidence but is superseded
+for release scoring:
+
+- Previous baseline: `v0.3_baseline_20260908`
+- Status: `SUPERSEDED`
+- Reason: it used the evaluator before the v0.3 grading-rule schema fix.
+
+The current valid baseline is:
+
+- Current baseline: `v0.3_postfix_20260909T072027Z`
+- Status: `CURRENT VALID BASELINE`
+
+Using the unchanged submissions, the score changed from `170/200` to
+`200/200` for every participant. The entire change came from UNKNOWN
+handling, which changed from `10` to `40` across the two-case run. No
+submissions changed and no model calls were rerun.
 
 ## Specification and generated results
 
@@ -61,6 +86,7 @@ Generated, immutable baseline material is kept separately under:
 
 - `runs/v0.2_baseline_20260908/`
 - `runs/v0.3_baseline_20260908/`
+- `runs/v0.3_postfix_20260909T072027Z/`
 
 Each run directory contains its run manifest, prompts, raw submissions,
 per-participant scores, and leaderboard. Generated run artifacts are retained
@@ -68,10 +94,12 @@ as recorded and are not benchmark specifications or gold inputs.
 
 ## Reproducibility
 
-The v0.3 baseline manifest declares two case IDs and three participants. It
-records offline operation, excludes gold from prompts, validates evidence
-references, and marks scoring complete. The archived leaderboard reports all
-three participants at `170 / 200` using the unchanged evaluator.
+The current v0.3 post-fix baseline manifest declares two case IDs and three
+participants. It records offline operation, excludes gold from prompts,
+validates evidence references, binds the evidence manifest, and marks scoring
+complete. The current leaderboard reports all three participants at
+`200 / 200` using the post-fix evaluator. The earlier `170 / 200` leaderboard
+is retained only as the superseded historical baseline.
 
 ### Evidence dependency policy
 
@@ -91,7 +119,9 @@ permitted during reproduction.
 
 To validate a checkout without modifying artifacts:
 
-1. Check out the release commit containing this file.
+1. Check out the release source commit
+   `bc35a25f949508a908d014dd4274014bf42eeff6` or the final metadata-update
+   commit recorded by the release process.
 2. Verify all JSON files in the release paths parse successfully.
 3. Run the offline evidence-bundle validation from the repository root:
 
@@ -101,10 +131,12 @@ To validate a checkout without modifying artifacts:
 
 4. Recalculate SHA-256 for the two v0.3 case files and two v0.3 gold files and
    compare them with this document.
-5. Confirm `runs/v0.3_baseline_20260908/run_manifest.json` lists exactly
-   `case_201` and `case_202` and the three archived participants.
-6. Re-score copies of the archived submissions with the existing evaluator if
-   independent score reproduction is required. Do not overwrite the archive.
+5. Confirm `runs/v0.3_postfix_20260909T072027Z/run_manifest.json` lists
+   exactly `case_201` and `case_202`, the three archived participants, the
+   evidence manifest, and the post-fix execution commit.
+6. Re-score copies of the current baseline submissions with the post-fix
+   evaluator if independent score reproduction is required. Do not overwrite
+   either baseline archive.
 
 ## Known limitations
 
@@ -116,6 +148,8 @@ To validate a checkout without modifying artifacts:
   while its normalized baseline run contains five cases and omits `case_103`.
   This historical structure is preserved rather than normalized during the
   v0.3 freeze.
+- `runs/v0.3_baseline_20260908/` remains an archived superseded result and is
+  not deleted.
 - Baseline submissions and scores are archived outputs. Their inclusion does
   not imply independent reruns or model calls during release preparation.
 
